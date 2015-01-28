@@ -1,0 +1,77 @@
+{% include default %}
+<!-- @include ../partials/top.html -->
+<head>
+    <!-- @include ../partials/head.html -->
+</head>
+<body class="{% if page.layout_fluid != true %}page-boxed {% endif %}page-header-fixed page-container-bg-solid page-sidebar-closed-hide-logo page-sidebar-fixed page-sidebar-closed-hide-logo">
+<div class="page-header navbar navbar-fixed-top">
+    <div class="page-header-inner {% if page.layout_fluid != true %}container {% endif %}">
+        <!-- @include ../partials/logo.html -->
+        <!-- @include ../partials/page-top.html -->
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+{% if page.layout_fluid != true %}<div class="container">{% endif %}
+    <div class="page-container">
+        <div class="page-sidebar-wrapper">
+            <div class="page-sidebar navbar-collapse collapse">
+                <ul class="page-sidebar-menu page-sidebar-menu-compact " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                    <!-- @include ../partials/sidebar-navigation.html -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper">
+
+
+            <div class="page-content">
+                {% if page.title and page.hide-title != true %}
+                <h3 class="page-title">
+                    {{ page.title }} <small>{{ page.subtitle }}</small>
+                </h3>
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light">
+                            <div class="portlet-body">
+                                {% if page.minify_content == false %}
+                                    {{ content }}
+                                {% else %}
+                                    {% include minify content=content %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        {% if page.comments == true and site.data.social.disqus %}
+                        <div class="portlet light bordered">
+                            {% if page.comments-title %}
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icon-note font-yellow-casablanca"></i>
+                                    <span class="caption-subject font-yellow-casablanca bold uppercase">{{ page.comments-title }}</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="portlet-body">
+                                <section id="disqus_thread"></section>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @include ../partials/footer.html -->
+    {% if page.layout_fluid != true %}</div>{% endif %}
+
+<!-- @include ../partials/scripts.html -->
+<!-- @include ../partials/widgets.html -->
+<!-- @include ../disqus_comments.html -->
+
+</body>
+
+<!-- @include ../partials/bottom.html -->

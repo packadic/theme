@@ -1,0 +1,25 @@
+{% for widget in page.widgets %}
+
+    {% if site.data.widgets contains widget.name %}
+
+        {% assign widget_data = site.data.widgets[widget.name] %}
+
+        {% if widget_data contains 'tpl' %}
+            {% capture tmp_path %}widgets/{{ site.data.widgets[widget.name].tpl }}{% endcapture %}
+            {% include {{tmp_path}} %}
+        {% endif %}
+
+        <script>
+            $(function(){
+                var config = {};
+                {% if widget contains 'config' %}
+                config = {{ widget.options | jsonify }}
+                {% endif %}
+                $('{{ widget.selector }}').{{ widget_data.func }}(config);
+            });
+        </script>
+
+    {% endif %}
+
+{% endfor %}
+

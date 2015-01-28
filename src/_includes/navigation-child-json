@@ -1,0 +1,14 @@
+---
+---
+[
+{% for item in items %}
+{% include navigation-child-json%}
+{
+    "name": "{{ item.name }}",
+    "href": {{ item.href| jsonify }},
+    "icon": "{{ item.icon }}",
+    "children": {% include navigation-child-json item=children %}
+},
+{% endfor %}
+false
+]

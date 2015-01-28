@@ -1,0 +1,315 @@
+topmenu:
+  - name: Home
+    href: /
+    icon: fa fa-home
+
+  - name: About me
+    href: /about-me
+    icon: fa fa-user
+
+  - name: Login
+    href: /contact
+    icon: fa fa-key
+
+  - name: Contact
+    href: /contact
+    icon: fa fa-pencil-o
+
+sidemenu:
+  - name: Overview
+    href: /
+    icon: fa fa-home
+
+  - name: Documentation
+    icon: fa fa-cubes
+    children:
+      - name: Gettings started
+        href: /docs/gettings-started
+
+      - name: Customizing
+        href: /docs/gettings-started
+
+      - name: Setting up projects
+        href: /docs/gettings-started
+
+      - name: Grunt tasks
+        href: /docs/gettings-started
+
+  - name: Components
+    icon: fa fa-cubes
+    children:
+      - name: Forms
+        href: /components/forms
+
+      - name: Portlets
+        href: /components/portlets
+
+      - name: Tables
+        href: /components/tables
+
+      - name: Tabs
+        href: /components/tabs
+
+      - name: Panels
+        href: /components/panels
+
+  - name: Plugins
+    icon: fa fa-puzzle-piece
+    children:
+      - name: Bootbox
+        href: /plugins/forms
+
+      - name: Switches
+        href: /plugins/portlets
+
+      - name: Toastr
+        href: /plugins/tables
+
+      - name: Code highlight
+        href: /plugins/tabs
+
+      - name: Select2
+        href: /plugins/panels
+
+
+
+sidemenu2:
+  - name: Home
+    href: /
+    icon: fa fa-home
+
+  - name: About me
+    href: /about
+    icon: fa fa-user
+
+  - name: Portfolio
+    href: /portfolio
+    icon: fa fa-picture-o
+
+  - name: Projects
+    href: /projects
+    icon: fa fa-cubes
+    children:
+      - name: Blade Extensions
+        href: /blade-extensions
+        icon: fa fa-puzzle-piece fa-green
+
+      - name: Node radic
+        href: /node-radic
+        icon: fa fa-jsfiddle fa-green
+
+      - name: Yo Radic generator
+        href: /generator-radic
+        icon: fa fa-yahoo fa-green
+
+      - name: Github JS Widgets
+        href: /github-jquery-widgets
+        icon: fa fa-git fa-orange
+
+      - name: SwiftApi 2
+        href: /swiftapi
+        icon: fa fa-stack-overflow
+
+      - name: Grunt
+        href: /projects
+        icon: fa fa-css3
+        children:
+          - name: Radical
+            href: /grunt-radical
+            icon: fa fa-css3 fa-green
+
+          - name: R.js modular builder
+            href: /rjs-modular-builder
+            icon: fa fa-css3 fa-green
+
+      - name: Miscellaneous
+        href: /projects
+        icon: fa fa-slack
+        children:
+          - name: WoW Raid Icons
+            href: /wow-raid-icons
+            icon: fa fa-gamepad fa-orange
+
+          - name: RadicOS
+            href: /RadicOS
+            icon: fa fa-linux
+
+
+
+  - name: Posts
+    href: /posts
+    icon: fa fa-pencil-square-o
+
+  - name: Repositories
+    href: /repositories
+    icon: fa fa-github
+
+  - name: Contact
+    href: /contact
+    icon: fa fa-bullhorn
+
+
+
+  # SIMPLE LINE ICONS, CAN AALSO USE FONTAWESOME
+  # icon-user-unfollow
+  # icon-user-friends
+  # icon-user-following
+  # icon-user-follow
+  # icon-trophy
+  # icon-speedometer
+  # icon-social-youtube
+  # icon-social-twitter
+  # icon-social-tumblr
+  # icon-social-facebook
+  # icon-social-dropbox
+  # icon-social-dribbble
+  # icon-shield
+  # icon-screen-tablet
+  # icon-screen-smartphone
+  # icon-screen-desktop
+  # icon-plane
+  # icon-notebook
+  # icon-moustache
+  # icon-mouse
+  # icon-magnet
+  # icon-magic-wand
+  # icon-hourglass
+  # icon-graduation
+  # icon-ghost
+  # icon-game-controller
+  # icon-fire
+  # icon-eyeglasses
+  # icon-envelope-open
+  # icon-envelope-letter
+  # icon-energy
+  # icon-emoticon-smile
+  # icon-disc
+  # icon-cursor-move
+  # icon-crop
+  # icon-credit-card
+  # icon-chemistry
+  # icon-bell
+  # icon-badge
+  # icon-anchor
+  # icon-action-redo
+  # icon-action-undo
+  # icon-bag
+  # icon-basket
+  # icon-basket-loaded
+  # icon-book-open
+  # icon-briefcase
+  # icon-bubbles
+  # icon-calculator
+  # icon-call-end
+  # icon-call-in
+  # icon-call-out
+  # icon-compass
+  # icon-cup
+  # icon-diamond
+  # icon-direction
+  # icon-directions
+  # icon-docs
+  # icon-drawer
+  # icon-drop
+  # icon-earphones
+  # icon-earphones-alt
+  # icon-feed
+  # icon-film
+  # icon-folder-alt
+  # icon-frame
+  # icon-globe
+  # icon-globe-alt
+  # icon-handbag
+  # icon-layers
+  # icon-map
+  # icon-picture
+  # icon-pin
+  # icon-playlist
+  # icon-present
+  # icon-printer
+  # icon-puzzle
+  # icon-speech
+  # icon-vector
+  # icon-wallet
+  # icon-arrow-down
+  # icon-arrow-left
+  # icon-arrow-right
+  # icon-arrow-up
+  # icon-bar-chart
+  # icon-bulb
+  # icon-calendar
+  # icon-control-end
+  # icon-control-forward
+  # icon-control-pause
+  # icon-control-play
+  # icon-control-rewind
+  # icon-control-start
+  # icon-cursor
+  # icon-dislike
+  # icon-equalizer
+  # icon-graph
+  # icon-grid
+  # icon-home
+  # icon-like
+  # icon-list
+  # icon-login
+  # icon-logout
+  # icon-loop
+  # icon-microphone
+  # icon-music-tone
+  # icon-music-tone-alt
+  # icon-note
+  # icon-pencil
+  # icon-pie-chart
+  # icon-question
+  # icon-rocket
+  # icon-share
+  # icon-share-alt
+  # icon-shuffle
+  # icon-size-actual
+  # icon-size-fullscreen
+  # icon-support
+  # icon-tag
+  # icon-trash
+  # icon-umbrella
+  # icon-wrench
+  # icon-ban
+  # icon-bubble
+  # icon-camcorder
+  # icon-camera
+  # icon-check
+  # icon-clock
+  # icon-close
+  # icon-cloud-download
+  # icon-cloud-upload
+  # icon-doc
+  # icon-envelope
+  # icon-eye
+  # icon-flag
+  # icon-folder
+  # icon-heart
+  # icon-info
+  # icon-key
+  # icon-link
+  # icon-lock
+  # icon-lock-open
+  # icon-magnifier
+  # icon-magnifier-add
+  # icon-magnifier-remove
+  # icon-paper-clip
+  # icon-paper-plane
+  # icon-plus
+  # icon-pointer
+  # icon-power
+  # icon-refresh
+  # icon-reload
+  # icon-settings
+  # icon-star
+  # icon-symbol-female
+  # icon-symbol-male
+  # icon-target
+  # icon-user-female
+  # icon-user-male
+  # icon-volume-1
+  # icon-volume-2
+  #icon-volume-off

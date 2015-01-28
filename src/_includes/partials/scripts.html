@@ -1,0 +1,47 @@
+<!--[if lt IE 9]>
+<!-- build:js /assets/oldieshim.js -->
+<script src="/assets/vendor/respond/dest/respond.min.js"></script>
+<script src="/assets/vendor/excanvas/excanvas.js"></script>
+<!-- endbuild -->
+<!--[endif]-->
+<!-- build:js /assets/vendor.js -->
+<script src="/assets/vendor/modernizr/modernizr.js"></script>
+<script src="/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+<script src="/assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+<script src="/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="/assets/vendor/lodash/lodash.min.js"></script>
+<script src="/assets/vendor/moment/min/moment.min.js"></script>
+
+
+<script src="/assets/vendor/jquery.uniform/jquery.uniform.min.js"></script>
+<script src="/assets/vendor/bootbox/bootbox.js"></script>
+<script src="/assets/vendor/toastr/toastr.js"></script>
+
+
+<script src="/assets/vendor/async-each/index.js"></script>
+<script src="/assets/vendor/async-waterfall/index.js"></script>
+<script src="/assets/vendor/eventemitter2/lib/eventemitter2.js"></script>
+<script src="/assets/vendor/handlebars/handlebars.runtime.min.js"></script>
+<!-- endbuild -->
+
+
+<script src="/assets/js/theme.js"></script>
+<script>
+    $(document).ready(function () {
+        var packadic = Packadic.init({
+            jekyll: {
+                main: {{ site.data.main | jsonify }},
+                author: {{ site.data.author | jsonify }},
+                social: {{ site.data.social | jsonify }},
+                navigation: {{ site.data.navigation | jsonify }},
+                widgets: {{ site.data.widgets | jsonify }},
+                github: {{ site.github | jsonify }}
+            },
+            {% if site.debug %}debug: {{ site.debug }}{% endif %}
+        });
+
+        console.log('window.packadic', packadic);
+    });
+</script>
+

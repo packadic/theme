@@ -1,0 +1,1 @@
+{% capture transformed %}{{ str | replace: '[[alert{% endcapture %}
