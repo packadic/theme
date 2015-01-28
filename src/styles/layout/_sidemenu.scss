@@ -87,7 +87,8 @@
                         span.sidemenu-nav-item {
                             display: none;
                             position: absolute;
-                            padding: 20px 20px 0 20px;
+                            white-space: nowrap;
+                            padding: 15px 20px 0 15px;
                             top: 0;
                             width: auto;
                             left: 50px;

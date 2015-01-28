@@ -1,10 +1,10 @@
 /* jshint camelcase: false */
 
-var radic = require('radic'),
-    _     = require('lodash'),
-    jsyaml  = require('js-yaml'),
-    fs = require('fs-extra'),
-    path = require('path');
+var radic  = require('radic'),
+    _      = require('lodash'),
+    jsyaml = require('js-yaml'),
+    fs     = require('fs-extra'),
+    path   = require('path');
 
 
 module.exports = function( grunt ){
@@ -20,10 +20,21 @@ module.exports = function( grunt ){
         cleanJsdev.push('dev/assets/js/' + fileName + '.js');
     });
 
+    var getJadeData = function(){
+        function getyml( fileName ){
+            return jsyaml.safeLoad(fs.readFileSync(path.resolve(__dirname, 'src/data', fileName + '.yml'), 'utf-8'));
+        }
 
+        var site = getyml('site');
+        site.data = {};
+        [ 'navigation', 'author', 'main', 'social', 'widgets' ].forEach(function( fileName ){
+            site.data[ fileName ] = getyml(fileName);
+        });
+        return {site_json: JSON.stringify(site), site: site};
+    };
 
     var cfg = {
-        copy  : {
+        copy            : {
             dev: {
                 files: [
                     {expand: true, cwd: 'src/vendor/bootstrap/fonts', src: '**', dest: 'dev/assets/fonts'},
@@ -33,65 +44,71 @@ module.exports = function( grunt ){
                 ]
             }
         },
-        clean : {
-            dev: { src: 'dev/*' },
-            dev_fonts: { src: 'dev/assets/fonts' },
-            dev_images: { src: 'dev/assets/images' },
-            dev_scripts: { src: 'dev/assets/scripts' },
-            dev_styles: { src: 'dev/assets/styles' },
-            dev_vendor: { src: 'dev/assets/vendor' },
-            dev_views: { src: 'dev/**/*.html' },
-            jsdev: { src: cleanJsdev }
+        clean           : {
+            dev        : {src: 'dev/*'},
+            dev_fonts  : {src: 'dev/assets/fonts'},
+            dev_images : {src: 'dev/assets/images'},
+            dev_scripts: {src: 'dev/assets/scripts'},
+            dev_styles : {src: 'dev/assets/styles'},
+            dev_vendor : {src: 'dev/assets/vendor'},
+            dev_tpls   : {src: 'dev/assets/tpls'},
+            dev_views  : {src: 'dev/**/*.html'},
+            jsdev      : {src: cleanJsdev}
         },
-        concat: {
+        concat          : {
             jsdev: {
                 files: [
                     {src: concatJsdev, dest: 'dev/assets/scripts/theme.js'}
                 ]
             }
         },
-        jade  : {
-            dev: {
+        jade            : {
+            options: {
+                pretty: true,
+                data  : getJadeData
+            },
+            dev    : {
+                files: [
+                    {expand: true, cwd: 'src/views/pages', src: '**/*.jade', ext: '.html', dest: 'dev'}
+                ]
+            },
+            tpls   : {
                 options: {
-                    pretty: true,
-                    data: function(){
-                        function getyml(fileName){
-                            return jsyaml.safeLoad(fs.readFileSync(path.resolve(__dirname, 'src/data', fileName + '.yml'), 'utf-8'));
-                        }
-                        var site = getyml('site');
-                        site.data = {};
-                        ['navigation', 'author', 'main', 'social', 'widgets' ].forEach(function(fileName){
-                            site.data[fileName] = getyml(fileName);
-                        });
-                        return { site_json: JSON.stringify(site), site: site };
-                    }
+                    client   : true,
+                    pretty   : false,
+                    namespace: 'tpls'
                 },
-                files: [ {
-
-                             cwd   : 'src/views/pages',
-                             expand: true,
-                             src   : '**/*.jade',
-                             ext   : '.html',
-                             dest  : 'dev'
-                         } ]
+                files  : [
+                    {expand: true, cwd: 'src/views/tpls', src: '**/*.jade', ext: '.js', dest: 'dev/assets/tpls'}
+                ]
             }
         },
-        sass  : {
+        'string-replace': {
+            tpls: {
+                files  : {
+                    'dev/assets/tpls/': 'dev/assets/tpls/**'
+                },
+                options: {
+                    replacements: [
+                        {
+                            pattern    : 'src/views/tpls/',
+                            replacement: ''
+                        }
+                    ]
+                }
+            }
+        },
+        sass            : {
             options: {
                 sourcemap: 'none'
             },
             dev    : {
-                files: [ {
-                             cwd   : 'src/styles',
-                             expand: true,
-                             src   : '*.scss',
-                             ext   : '.css',
-                             dest  : 'dev/assets/styles'
-                         } ]
+                files: [
+                    {expand: true, cwd: 'src/styles', src: '*.scss', ext: '.css', dest: 'dev/assets/styles'}
+                ]
             }
         },
-
-        useminPrepare: {
+        useminPrepare   : {
             build: {
                 options: {
                     root : 'dev',
@@ -106,8 +123,7 @@ module.exports = function( grunt ){
                 }
             }
         },
-
-        usemin: {
+        usemin          : {
             options: {
                 assetsDirs: [ 'dev/assets' ]
             },
@@ -116,10 +132,10 @@ module.exports = function( grunt ){
             }
         },
         watch           : {
-            options: {
+            options      : {
                 livereload: true
             },
-            styles : {
+            styles       : {
                 files: [ 'src/styles/**' ],
                 tasks: [ 'clean:dev_styles', 'sass:dev' ]
             },
@@ -127,15 +143,19 @@ module.exports = function( grunt ){
                 files: [ 'src/scripts/*.js' ],
                 tasks: [ 'clean:jsdev', 'concat:jsdev' ]
             },
-            views: {
-                files: ['src/views/**/*.jade'],
-                tasks: ['clean:dev_views', 'jade:dev']
+            views        : {
+                files: [ 'src/views/**/*.jade', '!src/views/tpls/**' ],
+                tasks: [ 'clean:dev_views', 'jade:dev' ]
             },
-            copy: {
-                files: ['src/{images,fonts,vendor/**'],
-                tasks: ['clean:dev_images', 'clean:dev_fonts', 'clean:dev_vendor', 'copy:dev']
+            tpls         : {
+                files: [ 'src/views/tpls/**/*.jade' ],
+                tasks: [ 'dev_tpls' ]
             },
-            livereload: {
+            copy         : {
+                files: [ 'src/{images,fonts,vendor/**' ],
+                tasks: [ 'clean:dev_images', 'clean:dev_fonts', 'clean:dev_vendor', 'copy:dev' ]
+            },
+            livereload   : {
                 options: {
                     livereload: '<%= connect.options.livereload %>'
                 },
@@ -175,7 +195,9 @@ module.exports = function( grunt ){
     grunt.initConfig(cfg);
 
     grunt.registerTask('default', []);
-    grunt.registerTask('build', ['clean:dev', 'copy:dev', 'concat:jsdev', 'sass:dev', 'jade:dev', 'clean:jsdev' ]);
+
+    grunt.registerTask('dev_tpls', ['clean:dev_tpls', 'jade:tpls', 'string-replace:tpls']);
+    grunt.registerTask('build', [ 'clean:dev', 'copy:dev', 'concat:jsdev', 'sass:dev', 'jade:dev', 'dev_tpls', 'clean:jsdev' ]);
 
     grunt.registerTask('minify', function(){
         if( target === 'dist' ){

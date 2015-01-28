@@ -263,7 +263,9 @@
             }
             this._destroy();
             this.element.html('');
-            loopItems(json, this.element, 0);
+            var rendered = tpls.sidemenu({ items: json });
+            console.log('creatformjson rendere', rendered);
+            this.element.html(rendered);
             this._create();
         }
     });

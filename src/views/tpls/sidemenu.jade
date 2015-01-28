@@ -1,0 +1,31 @@
+
+mixin sidemenu(item, level)
+    - item.href = item.href || '#';
+    - level++;
+    if item.name
+        li
+            if !item.icon
+                a(href=item.href)
+                    | !{item.name}
+                    if item.children
+                        span.fa.arrow
+            else
+                a(href=item.href)
+                    span(class="sidemenu-nav-item-icon fa " + item.icon)
+                    span.sidemenu-nav-item=item.name
+                    if item.children
+                        span.fa.arrow
+
+            if item.children
+                ul(data-level=level)
+                    each child, index in item.children
+                        +sidemenu(child, level)
+
+// display menu toggle first
+li
+    a.sidemenu-toggle(href="#")
+        span(class="sidemenu-nav-item-icon fa fa-chevron-left")
+
+// now loop over the items and call the mixin for each
+each item, index in items
+    +sidemenu(item, 0)

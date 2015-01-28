@@ -71,6 +71,26 @@ sidemenu:
       - name: Select2
         href: /plugins/panels
 
+  - name: Multi-level menu
+    icon: fa fa-tasks
+    children:
+      - name: Tasks
+        icon: fa-align-right font-orange
+
+      - name: Bolds
+        icon: fa-bold font-green
+        children:
+          - name: Bugs
+            icon: fa-bug font-red
+
+          - name: Drivers
+            icon: fa-cab font-green
+
+          - name: Payments
+            icon: fa-cc
+
+      - name: Get coffee
+        icon: fa-coffee
 
 
 sidemenu2:
