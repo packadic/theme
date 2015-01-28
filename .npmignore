@@ -1,0 +1,9 @@
+/.yo-rc.json
+/test
+/tutorials
+/Gruntfile.js
+/.travis.yml
+/.jshintrc
+/.editorconfig
+/jsdoc.json
+/docs
