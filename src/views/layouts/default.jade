@@ -1,16 +1,26 @@
+include ../base
 html
     head
         title Hai
+        meta(charset=site.encoding)
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
         block styles
             include ../partials/styles
     body
-        block topmenu
-            include ../partials/topmenu
+        #site
+            block topmenu
+                include ../partials/topmenu
 
-        block sidemenu
-            include ../partials/sidemenu
+            block sidemenu
+                include ../partials/sidemenu
 
-        block content
+            section.content
+                .col-xs-12
+                    block content
+                        p this is content
+
+        block footer
+            include ../partials/footer
 
         block scripts
             include ../partials/scripts

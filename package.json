@@ -4,7 +4,7 @@
   "description": "Packadic theme",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- -R spec"
   },
   "repository": {
     "type": "git",
@@ -48,6 +48,7 @@
     "handlebars": "^2.0.0",
     "handlebars-helpers": "^0.5.8",
     "html-minifier": "^0.6.9",
+    "istanbul": "^0.3.5",
     "load-grunt-tasks": "^0.4.0",
     "lodash": "^2.4.1",
     "minify": "^1.4.8",

@@ -29,6 +29,7 @@
     function Packadic( options ){
 
         this.options = _.merge({
+            data: {},
             debug    : true,
             selectors: {
                 sidebar : 'aside.sidemenu',
@@ -67,6 +68,12 @@
             this.window.on('resize', this.handleResize(this));
             this.handleResize(this)();
 
+            this.document.on('click', '.sidemenu-toggle', function(e){
+                e.preventDefault();
+                console.log('click .sidemenu-toggle', e, this.$sidemenu);
+                this.$sidemenu.sideMenu('toggle');
+            }.bind(this))
+
             if( this.options.debug === true ){
                 $('.site-debug').show();
                 $('*[data-debug]').each(function(){
@@ -91,7 +98,7 @@
             }.bind(self);
         },
         navigation  : function( which ){
-            return this.options.jekyll.navigation[ which ];
+            return this.options.data.navigation[ which ];
         },
         api         : function( endpoint, cb ){
             var async = defined(cb);

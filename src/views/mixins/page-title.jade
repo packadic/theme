@@ -1,3 +1,6 @@
-//
-   Created by radic on 1/28/15.
-
+mixin page-title(title, subtitle)
+    .row
+        .col-xs-12
+            h3.page-title= title
+                if subtitle
+                    small=subtitle

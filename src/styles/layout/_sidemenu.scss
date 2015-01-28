@@ -62,6 +62,51 @@
     font-size: 11px;
 }
 
+// Sidemenu closed styles
+.sidemenu.closed {
+        width: 50px;
+        .sidemenu-nav {
+            ul {
+                li {
+                    a {
+                        display: inline-block;
+                        position: relative;
+                        padding-right: 0;
+                        height: 50px;
+                        width: 100%;
+                        z-index: 900;
+
+                        span.arrow {
+                            display: none;
+                        }
+
+                        span.sidemenu-nav-item-icon {
+                            margin-top: 8px;
+                        }
+
+                        span.sidemenu-nav-item {
+                            display: none;
+                            position: absolute;
+                            padding: 20px 20px 0 20px;
+                            top: 0;
+                            width: auto;
+                            left: 50px;
+                            background: #222;
+                            height: 100%;
+                        }
+                        &:hover {
+
+                            span.sidemenu-nav-item {
+                                display: inline-block;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
 .sidemenu {
     .arrow {
         float: right;

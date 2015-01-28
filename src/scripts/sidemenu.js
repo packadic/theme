@@ -70,6 +70,7 @@
 
             var $this = this;
             var data = this.element.data('sidemenu');
+            this.$sidemenu = this.element.closest('aside.sidemenu');
             this.options = _.merge(this.options, data);
             if (!data) {
                 this.element.data('mm', (data = this));
@@ -196,6 +197,29 @@
                 .height(0)
                 .one('mmTransitionEnd', $.proxy(complete, this))
                 .emulateTransitionEnd(this.options.transitionDuration);
+        },
+
+        close: function(){
+            if(this.$sidemenu.hasClass('closed')){
+                return;
+            }
+            this.$sidemenu.addClass('closed');
+        },
+
+        open: function(){
+            this.$sidemenu.removeClass('closed');
+        },
+
+        toggle: function(){
+            if(this.isClosed()){
+                this.open();
+            } else {
+                this.close();
+            }
+        },
+
+        isClosed: function(){
+            return this.$sidemenu.hasClass('closed');
         },
 
         createFromJSON: function (json) {

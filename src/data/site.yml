@@ -1,6 +1,6 @@
-name: Radic's Gits
-description: Web Developer from Somewhere
-keywords: [radic,webdesign,programming,designing]
+name: Packadic
+description: Packadic theme
+keywords: [webdesign,programming,designing]
 
 url: ##URL##
 encoding: utf-8
@@ -8,7 +8,7 @@ timezone: Amsterdam/Europe
 
 # GITHUB METADATA
 #https://github.com/jekyll/github-metadata
-repository: RobinRadic/RobinRadic.github.io
+repository: packadic/theme
 gems:
   - jekyll-github-metadata
 
