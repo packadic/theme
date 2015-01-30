@@ -16,3 +16,7 @@
 /.sass-cache
 /.tmp
 /metro
+/examples
+/lib/blade-extensions
+/lib/radic
+/lib/highlightjs
