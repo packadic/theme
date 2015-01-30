@@ -1,6 +1,0 @@
-include ../base
-extends ../layouts/default
-block append content
-    p hai
-
-    a.sidemenu-toggle(href="#") Toggle sidebar
