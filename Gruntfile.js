@@ -4,7 +4,9 @@ var radic  = require('radic'),
     _      = require('lodash'),
     jsyaml = require('js-yaml'),
     fs     = require('fs-extra'),
-    path   = require('path');
+    path   = require('path'),
+
+    lib = require('./lib');
 
 
 module.exports = function( grunt ){
@@ -20,18 +22,7 @@ module.exports = function( grunt ){
         cleanJsdev.push('dev/assets/js/' + fileName + '.js');
     });
 
-    var getJadeData = function(){
-        function getyml( fileName ){
-            return jsyaml.safeLoad(fs.readFileSync(path.resolve(__dirname, 'src/data', fileName + '.yml'), 'utf-8'));
-        }
 
-        var site = getyml('site');
-        site.data = {};
-        [ 'navigation', 'author', 'main', 'social', 'widgets' ].forEach(function( fileName ){
-            site.data[ fileName ] = getyml(fileName);
-        });
-        return {site_json: JSON.stringify(site), site: site};
-    };
 
     var cfg = {
         copy            : {
@@ -65,9 +56,32 @@ module.exports = function( grunt ){
         jade            : {
             options: {
                 pretty: true,
-                data  : getJadeData
+                data  : lib.getJadeData
             },
             dev    : {
+                options: {
+                    processContent: function(content){
+                        var colorize = require('pygments').colorize;
+                        var matchEx = /\{%\shighlight\s(\w*)\s%\}([\w\W]*)\{%\sendhighlight\s%\}/;
+                        var replaceEx = /\{%\shighlight\s[\w]*\s%\}[\w\W]*\{%\sendhighlight\s%\}/;
+
+                        var matches = content.match(matchEx);
+                        grunt.log.writeflags(matches);
+
+                        return content;
+                    },
+                    filters: {
+                        code: function( block ) {
+                            return block
+                                .replace( /&/g, '&amp;'  )
+                                .replace( /</g, '&lt;'   )
+                                .replace( />/g, '&gt;'   )
+                                .replace( /"/g, '&quot;' )
+                                .replace( /#/g, '&#35;'  )
+                                .replace( /\\/g, '\\\\'  );
+                        }
+                    }
+                },
                 files: [
                     {expand: true, cwd: 'src/views/pages', src: '**/*.jade', ext: '.html', dest: 'dev'}
                 ]
@@ -145,7 +159,7 @@ module.exports = function( grunt ){
             },
             views        : {
                 files: [ 'src/views/**/*.jade', '!src/views/tpls/**' ],
-                tasks: [ 'clean:dev_views', 'jade:dev' ]
+                tasks: [ 'clean:dev_views', 'jade:dev', 'bootlint' ]
             },
             tpls         : {
                 files: [ 'src/views/tpls/**/*.jade' ],
@@ -170,6 +184,28 @@ module.exports = function( grunt ){
             },
             serve  : [ 'connect:livereload:keepalive', 'watch' ]
         },
+
+        bin: {
+            highlightjs: {
+
+                options: {
+                    wrap: ['node', 'mv'],
+                    cwd: 'lib/highlightjs'
+                },
+                commands: [
+                    ['node', 'tools/build.js', {t: 'browser'}, ':common'],
+                    ['mv', 'build/highlight.pack.js', path.resolve(__dirname, 'dev/assets/scripts/highlight.pack.js')]
+                ]
+            }
+        },
+        bootlint: {
+            options: {
+                stoponerror: false,
+                relaxerror: []
+            },
+                files: [ 'dev/**/*.html', 'dev/*.html' ]
+
+        },
         connect         : {
             options   : {
                 port      : 9009,
@@ -180,7 +216,33 @@ module.exports = function( grunt ){
             livereload: {
                 options: {
                     open: true,
-                    base: 'dev'
+                    base: 'dev',
+                    middleware: function (connect, options) {
+                        var middlewares = [];
+                        middlewares.push(lib.getMiddleware('rewrite'));
+                        middlewares.push(lib.getMiddleware('pygments'));
+                        //middlewares.push(lib.getMiddleware('connect'));
+
+
+
+                        /*
+                         || CONNECT
+                         */
+                        if (!Array.isArray(options.base)) {
+                            options.base = [options.base];
+                        }
+
+                        var directory = options.directory || options.base[options.base.length - 1];
+                        options.base.forEach(function (base) {
+                            // Serve static files.
+                            middlewares.push(connect.static(base));
+                        });
+
+                        // Make directory browse-able.
+                        middlewares.push(connect.directory(directory));
+
+                        return middlewares;
+                    }
                 },
                 dist   : {
                     options: {
@@ -197,13 +259,19 @@ module.exports = function( grunt ){
     grunt.registerTask('default', []);
 
     grunt.registerTask('dev_tpls', ['clean:dev_tpls', 'jade:tpls', 'string-replace:tpls']);
-    grunt.registerTask('build', [ 'clean:dev', 'copy:dev', 'concat:jsdev', 'sass:dev', 'jade:dev', 'dev_tpls', 'clean:jsdev' ]);
+    grunt.registerTask('build', [ 'clean:dev', 'copy:dev', 'concat:jsdev', 'bin:highlightjs', 'sass:dev', 'jade:dev', 'dev_tpls', 'clean:jsdev', 'bootlint' ]);
 
     grunt.registerTask('minify', function(){
         if( target === 'dist' ){
-            return grunt.task.run([ 'build', 'connect:dist:keepalive' ]);
+            return grunt.task.run([
+                'build',
+                'connect:dist:keepalive'
+            ]);
         }
-        grunt.task.run([ 'build', 'concurrent:serve' ]);
+        grunt.task.run([
+            'build',
+            'configureRewriteRules',
+            'concurrent:serve' ]);
     });
 
     grunt.registerTask('minify', [
@@ -214,6 +282,7 @@ module.exports = function( grunt ){
         'usemin'
     ]);
     grunt.registerTask('serve', [ 'build', 'concurrent:serve' ]);
+    grunt.registerTask('serve:fast', [  'concurrent:serve' ]);
 
 };
 

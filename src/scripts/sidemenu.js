@@ -96,6 +96,10 @@
                     $this.show($list);
                 }
 
+                if($this.isClosed()){
+                    $this.open(); // maximize width
+                }
+
                 //Do we need to enable the double tap
                 if ($this.options.doubleTapToGo) {
                     //if we hit a second time on the link and the href is valid, navigate to that url
@@ -203,11 +207,17 @@
             if(this.$sidemenu.hasClass('closed')){
                 return;
             }
+            this.$sidemenu.animate({width:'50px'},'slow', function(){
+                this.element.find('a.sidemenu-toggle span.sidemenu-nav-item-icon').removeClass('fa-chevron-left').addClass('fa-chevron-right');
+            }.bind(this));
             this.$sidemenu.addClass('closed');
         },
 
         open: function(){
-            this.$sidemenu.removeClass('closed');
+            this.$sidemenu.animate({width:'250px'},'slow', function(){
+                this.$sidemenu.removeClass('closed');
+                this.element.find('a.sidemenu-toggle span.sidemenu-nav-item-icon').removeClass('fa-chevron-right').addClass('fa-chevron-left');
+            }.bind(this));
         },
 
         toggle: function(){
@@ -223,49 +233,8 @@
         },
 
         createFromJSON: function (json) {
-            function createEl(tag) {
-                return $(document.createElement(tag));
-            }
-
-            function loopItems(items, $parentUl, level) {
-                $parentUl.attr('data-level', level);
-                $.each(items, function (key, item) {
-                    // LI
-                    var $li = createEl('li');
-                    if(defined(item.default) && item.default){
-                        $li.addClass('active');
-                    }
-
-                    // A
-                    var $a = createEl('a').attr('href', defined(item.href) ? item.href : '#');
-
-                    // A>span.icon
-                    if(defined(item.icon)) {
-                        $a.append(createEl('span').addClass('sidemenu-nav-item-icon fa ' + item.icon));
-                        $a.append(createEl('span').addClass('sidemenu-nav-item').text(item.name));
-                    } else {
-                        $a.append(item.name);
-                    }
-
-                    if(defined(item.children)){
-                        $a.append(createEl('span').addClass('fa arrow'));
-                    }
-
-                    $li.append($a);
-                    $parentUl.append($li);
-
-                    if(defined(item.children)){
-                        var $ul = createEl('ul');
-                        $li.append($ul);
-                        loopItems(item.children, $ul, level + 1);
-                    }
-                });
-            }
             this._destroy();
-            this.element.html('');
-            var rendered = tpls.sidemenu({ items: json });
-            console.log('creatformjson rendere', rendered);
-            this.element.html(rendered);
+            this.element.html('').html(tpls.sidemenu({ items: json }));
             this._create();
         }
     });

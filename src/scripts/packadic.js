@@ -29,7 +29,7 @@
     function Packadic( options ){
 
         this.options = _.merge({
-            data: {},
+            data     : {},
             debug    : true,
             selectors: {
                 sidebar : 'aside.sidemenu',
@@ -44,6 +44,7 @@
         this.$el = $(document.createElement('div'));
 
         this.window = $(window);
+
         this.document = $(window.document);
 
         $.each(this.options.selectors, function( name, selector ){
@@ -68,12 +69,21 @@
             this.window.on('resize', this.handleResize(this));
             this.handleResize(this)();
 
-            this.document.on('click', '.sidemenu-toggle', function(e){
+            this.document.on('click', '.sidemenu-toggle', function( e ){
                 e.preventDefault();
                 console.log('click .sidemenu-toggle', e, this.$sidemenu);
                 this.$sidemenu.sideMenu('toggle');
-            }.bind(this))
+            }.bind(this));
 
+            this.document.find('.show-class').each(function(){
+                $(this).tooltip({
+                    title: this.className.replace('show-class', '')
+                });
+            });
+
+            if(this.document.find('.codeviewer-button').length > 0){
+                this.initCodeview();
+            }
             if( this.options.debug === true ){
                 $('.site-debug').show();
                 $('*[data-debug]').each(function(){
@@ -83,6 +93,49 @@
             } else {
                 $('.site-debug').hide();
             }
+        },
+        initCodeview: function(){
+            $('.codeviewer-button').on('click', function( e ){
+                e.preventDefault();
+                var $btn = $(this);
+
+                // get original textarea
+                var $editorOrig = $($btn.attr('href'));
+                console.log('orig', $editorOrig);
+
+                // create a clone to use in bootbox
+                var $editorNew = $editorOrig.clone();
+                var newId = $editorOrig.attr('id') + '_new';
+                $editorNew.attr('id', newId);
+                console.log('new', $editorNew);
+
+                // append to bootbox
+                var $container = $(document.createElement('div'));
+                $container.append($editorNew);
+                bootbox.dialog({
+                    title  : 'Viewing code',
+                    message: $container.html()
+                })
+
+                // create the codmirror in bootbox
+                var editor = CodeMirror.fromTextArea(document.getElementById(newId), {
+                    mode : 'jade',
+                    theme: 'zenburn'
+                });
+
+                // adjust the size
+                var width = $btn.data('width') || '100%';
+                var height = $btn.data('height') || 70;
+                editor.setSize(width, height);
+
+                // export to global;
+                window.cmeditor = window.cmeditor || {};
+                window.cmeditor[newId] = editor;
+
+                setTimeout(function(){
+                    window.cmeditor[newId].refresh();
+                }, 400);
+            });
         },
         destroy     : function(){
 

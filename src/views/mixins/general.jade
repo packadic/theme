@@ -6,3 +6,19 @@ mixin js-vendor(path)
 
 mixin js-tpls(path)
     script(src="/assets/tpls/" + path)
+
+mixin css-styles(path)
+    link(href="/assets/styles/" + path, type="text/css", rel="stylesheet")
+
+mixin css-vendor(path)
+    link(href="/assets/vendor/" + path, type="text/css", rel="stylesheet")
+
+
+mixin codeviewer
+    - var id = _getRandomId(20);
+    - attributes.href = "#" + id
+    - attributes.class = attributes.class || "btn btn-xs blue";
+    - attributes.class = attributes.class + " codeviewer-button"
+    a(href="#" + id)&attributes(attributes) View code
+    textarea(id=id, class="codeviewer-textarea")
+        block

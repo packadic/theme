@@ -1,0 +1,81 @@
+include ../../base
+extends ../../layouts/codeviewer
+block page-header
+    +page-title("Portlets", "Those things with things in it")
+    +page-breadcrumbs
+        +breadcrumb("Components")
+        +breadcrumb("Portlets", false, true, true)
+
+block content
+    .portlet.light
+        .portlet-body
+            .row
+                .col-md-4
+                    .portlet.light.bordered
+                        .portlet-title
+                            .caption.bold.uppercase.font-lime Portlet
+                        .portlet-body
+                            | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum porta, iaculis dolor sed, pretium purus. Sed eu turpis neque. Phasellus in laoreet ex. Cras ut ex sit amet turpis tempus molestie. Sed at ante at justo rhoncus suscipit non vitae nunc. Etiam non velit in odio rutrum consequat eu sed lacus. Mauris tellus sem, fringilla id pretium vel, egestas commodo justo.
+                .col-md-4
+                    .portlet.light.bordered
+                        .portlet-title
+                            .caption.bold.uppercase.font-orange Portlet
+                        .portlet-body
+                            | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum porta, iaculis dolor sed, pretium purus. Sed eu turpis neque. Phasellus in laoreet ex. Cras ut ex sit amet turpis tempus molestie. Sed at ante at justo rhoncus suscipit non vitae nunc. Etiam non velit in odio rutrum consequat eu sed lacus. Mauris tellus sem, fringilla id pretium vel, egestas commodo justo.
+                .col-md-4
+                    .portlet.light.bordered
+                        .portlet-title
+                            .caption.bold.uppercase.font-orange Portlet
+                            .actions
+                                +codeviewer(class="btn btn-xs green", data-height=200)
+                                    :code
+                                        portlet.light.bordered
+                                            .portlet-title
+                                                .caption.bold.uppercase.font-orange Portlet
+                                                .actions
+                                                    a(href="#").btn.btn-xs.green
+                                            .portlet-body
+                                                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum porta,
+                                                | iaculis dolor sed, pretium purus. Sed eu turpis neque. Phasellus in laoreet ex.
+                                                | Cras ut ex sit amet turpis tempus molestie. Sed at ante at justo rhoncus suscipit non vitae nunc.
+                                                | Etiam non velit in odio rutrum consequat eu sed lacus. Mauris tellus sem, fringilla id pretium vel, egestas commodo justo.
+
+                        .portlet-body
+                            | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum porta, iaculis dolor sed, pretium purus. Sed eu turpis neque. Phasellus in laoreet ex. Cras ut ex sit amet turpis tempus molestie. Sed at ante at justo rhoncus suscipit non vitae nunc. Etiam non velit in odio rutrum consequat eu sed lacus. Mauris tellus sem, fringilla id pretium vel, egestas commodo justo.
+
+    .row
+        .col-md-12
+            .portlet.light
+                .portlet-title
+                    .caption.font-blue
+                        i.icon-paper-plane.fa-blue
+                        span.caption-subject.bold.uppercase  Form Input
+                        span.caption-helper more samples...
+                .portlet-body
+                    | body
+
+            .portlet.light
+                .portlet-body
+                    .row
+                        .col-md-6
+                            .portlet.light.bordered
+                                .portlet-title
+                                    .caption.font-green
+                                        i.fa.fa-bullhorn.fa-green
+                                        span.caption-subject.bold.uppercase  Portlet
+                                .portlet-body
+                                    p
+                                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at, beatae consequatur deleniti dignissimos dolor eius, eos iste labore laudantium minima molestias nisi officiis placeat provident quidem tempora voluptatem! Animi.
+                                    p
+                                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at, beatae consequatur deleniti dignissimos dolor eius, eos iste labore laudantium minima molestias nisi officiis placeat provident quidem tempora voluptatem! Animi.
+                        .col-md-6
+                            .portlet.light.bordered
+                                .portlet-title
+                                    .caption.font-green
+                                        i.fa.fa-bullhorn.fa-green
+                                        span.caption-subject.bold.uppercase  Portlet
+                                .portlet-body
+                                    p
+                                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at, beatae consequatur deleniti dignissimos dolor eius, eos iste labore laudantium minima molestias nisi officiis placeat provident quidem tempora voluptatem! Animi.
+                                    p
+                                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at, beatae consequatur deleniti dignissimos dolor eius, eos iste labore laudantium minima molestias nisi officiis placeat provident quidem tempora voluptatem! Animi.

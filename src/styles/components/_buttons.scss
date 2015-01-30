@@ -6,15 +6,15 @@ Customized Bootstrap Buttons
 
 .btn {
 	border-width: 0;
-	padding: 7px 14px; 	
-    font-size: 14px;  
+	padding: 7px 14px;
+    font-size: 14px;
     outline: none !important;
     background-image: none !important;
     filter: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+
     text-shadow: none;
+    @include box-shadow(none);
+    @include border-radius(0);
 
     &.dropdown-toggle,
     .btn-group &.dropdown-toggle,
@@ -37,7 +37,7 @@ Customized Bootstrap Buttons
 .btn-default {
   border-width: 1px;
   padding: 6px 13px;
-} 
+}
 
 .btn-block {
   display: block;
@@ -58,7 +58,7 @@ Customized Bootstrap Buttons
   > i[class^="icon-"],
   > i[class*="icon-"] {
     color: darken(#999, 5%);
-  } 
+  }
 }
 
 .btn-primary {
@@ -84,15 +84,15 @@ Customized Bootstrap Buttons
 /* Button sizes */
 .btn {
 	> i {
-		font-size: 14px;		
-	}  
+		font-size: 14px;
+	}
 }
 
 .btn-lg {
     padding: 10px 16px;
     font-size: 18px;
     line-height: 1.33;
-    vertical-align: middle;   
+    vertical-align: middle;
 
     > i {
         font-size: 18px;
@@ -106,8 +106,8 @@ Customized Bootstrap Buttons
     line-height: 1.5;
 
     > i {
-        font-size: 13px;   
-    } 
+        font-size: 13px;
+    }
 }
 
 .btn-xs {
@@ -116,17 +116,20 @@ Customized Bootstrap Buttons
 
     > i {
         font-size: 12px;
-    } 
+    }
 }
 
 /* Small button in button group */
 
 .btn-group {
+    .btn {
+        margin-right: 0 !important;
+    }
     .input-sm {
         .btn-default {
             padding-top: 3px;
-            padding-bottom: 3px; 
-        }   
+            padding-bottom: 3px;
+        }
     }
 }
 
@@ -134,10 +137,10 @@ Customized Bootstrap Buttons
 /* Arrow link */
 
 .btn-arrow-link {
-    vertical-align: middle;  
+    vertical-align: middle;
     display: inline-block;
     font-size: 13px;
-    
+
     > i {
        font-size: 14px;
        line-height: 14px;
@@ -157,10 +160,14 @@ Customized Bootstrap Buttons
     }
 }
 
+.btn-rounded {
+    @include border-radius($border-radius-base);
+}
+
 /* Circle Buttons */
 
 .btn-circle {
-  border-radius: 25px !important;  
+  border-radius: 25px !important;
 }
 
 .btn-circle-right {
@@ -197,7 +204,7 @@ Customized Bootstrap Buttons
   > [class^="glyphicon-"],
   > [class*=" glyphicon-"],
   > i {
-    font-size: 13px;   
+    font-size: 13px;
   }
 }
 
@@ -205,9 +212,9 @@ Customized Bootstrap Buttons
   > [class^="glyphicon-"],
   > [class*=" glyphicon-"],
   > i {
-    font-size: 11px;   
+    font-size: 11px;
   }
-} 
+}
 
 .btn-group.btn-group-circle {
     > .btn {

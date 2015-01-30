@@ -38,6 +38,9 @@ sidemenu:
   - name: Components
     icon: fa fa-cubes
     children:
+      - name: Buttons
+        href: /components/buttons
+
       - name: Forms
         href: /components/forms
 

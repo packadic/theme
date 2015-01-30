@@ -1,4 +1,5 @@
 include ../base
+doctype html
 html
     head
         title Hai
@@ -15,12 +16,20 @@ html
                 include ../partials/sidemenu
 
             section.content
-                .col-xs-12
+                .page-title-breadcrumb
+                    block page-header
+                        +page-title("Title", "Subtitle")
+                        +page-breadcrumbs
+                            +breadcrumb("Buttons", false, true, true)
+                    .clearfix
+                .page-content
                     block content
-                        p this is content
 
         block footer
             include ../partials/footer
+
+        block vendor-scripts
+            include ../partials/vendor-scripts
 
         block scripts
             include ../partials/scripts

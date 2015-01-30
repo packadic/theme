@@ -1,6 +1,7 @@
 @import "base";
 
 @import "layout/sidemenu";
+@import "layout/page-header";
 
 .navbar-topmenu {
     margin-bottom: 0;
@@ -21,9 +22,20 @@
     width: auto;
 }
 
+.page-content {
+    @include make-xs-column(12);
+}
+
 footer {
 
     color: $navbar-inverse-color;
     background: $navbar-inverse-bg;
     border-top: 1px solid $navbar-inverse-border
+}
+
+
+.breadcrumb {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
 }

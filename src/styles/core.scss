@@ -3,10 +3,10 @@
 @import url($web-font);
 
 @import "../vendor/font-awesome/scss/font-awesome";
-@import "../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap";
+//@import "../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap";
 
 // Reset and dependencies
-/*
+
 @import "../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/normalize";
 @import "../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/print";
 @import "../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/glyphicons";
@@ -52,7 +52,8 @@
 // Utility classes
 @import "../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/utilities";
 @import "../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/responsive-utilities";
-*/
+
+
 
 @import "utilities/positioning";
 @import "utilities/shadows";
