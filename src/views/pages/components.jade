@@ -1,0 +1,51 @@
+include ../base
+extends ../layouts/default
+block page-header
+    +page-title("Components", "General bootstrap components")
+    +page-breadcrumbs
+        +breadcrumb("Components", "/components", true)
+
+block content
+    .row
+        .col-md-6
+            +widget("Buttons")
+                a.btn.btn-primary Primary
+
+        .col-md-6
+            +widget("Pagination")
+                ul.pagination
+                    li
+                        a(href="#")
+                            span &laquo;
+                    li
+                        a(href="#") 1
+                    li
+                        a(href="#") 2
+                    li
+                        a(href="#") 3
+    .row
+        .col-md-4
+            +widget("Labels")
+                a.btn.btn-primary Primary
+        .col-md-4
+            +widget("Badges")
+                | adf
+        .col-md-4
+            +widget("Breadcrumbs")
+                | adf
+
+    .row
+        .col-md-6
+            +widget("Buttons")
+                a.btn.btn-primary Primary
+        .col-md-6
+            +widget("Buttons")
+                | adf
+
+    .row
+        .col-md-6
+            +widget("Buttons")
+                a.btn.btn-primary Primary
+        .col-md-6
+            +widget("Buttons")
+                | adf

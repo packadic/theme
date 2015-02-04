@@ -6,7 +6,7 @@ block append styles
 
 block content
     .portlet.light
-        .portlet-body
+        .portlet-body.container
             .row
                 .col-md-12
                     .portlet.light.bordered
@@ -17,10 +17,21 @@ block content
                             .actions
                                 a.btn.btn-primary.green Hey
                         .portlet-body
-                            .row
-                                .col-md-4
-                                    +codeviewer(class="btn btn-xs green", data-height=160)
-                                        :code
+                            .container-fluid
+                                .row
+                                    .col-md-4
+                                        +codeviewer(class="btn btn-xs green", data-height=160)
+                                            :code
+                                                table.table.table-bordered
+                                                    thead
+                                                        tr.heading
+                                                            th Hai
+                                                            th Bai
+                                                    tbody
+                                                        tr
+                                                            td First
+                                                            td Second
+                                        .table-scrollable
                                             table.table.table-bordered
                                                 thead
                                                     tr.heading
@@ -30,65 +41,60 @@ block content
                                                     tr
                                                         td First
                                                         td Second
-                                    .table-scrollable
-                                        table.table.table-bordered
-                                            thead
-                                                tr.heading
-                                                    th Hai
-                                                    th Bai
-                                            tbody
-                                                tr
-                                                    td First
-                                                    td Second
 
-                                .col-md-4
-                                    +codeviewer(class="btn btn-xs green", data-height=160)
-                                        :code
-                                            .table-scrollable
-                                                table.table.table.table-striped.table-hover
-                                                    thead
-                                                        tr
-                                                            th Hai
-                                                            th Bai
-                                                    tbody
-                                                        tr
-                                                            th First
-                                                            td Second
-                                    .table-scrollable
-                                        table.table.table-striped.table-hover
-                                            thead
-                                                tr
-                                                    th Hai
-                                                    th Bai
-                                            tbody
-                                                tr
-                                                    td First
-                                                    td Second
+                                    .col-md-4
+                                        +codeviewer(class="btn btn-xs green", data-height=160)
+                                            :code
+                                                .table-scrollable
+                                                    table.table.table.table-striped.table-hover
+                                                        thead
+                                                            tr
+                                                                th Hai
+                                                                th Bai
+                                                        tbody
+                                                            tr
+                                                                th First
+                                                                td Second
+                                        .table-scrollable
+                                            table.table.table-striped.table-hover
+                                                thead
+                                                    tr
+                                                        th Hai
+                                                        th Bai
+                                                tbody
+                                                    tr
+                                                        td First
+                                                        td Second
 
-                                .col-md-4
-                                    +codeviewer(class="btn btn-xs green", data-height=160)
-                                        :code
-                                            .table-scrollable
-                                                table.table.table.table-striped.table-hover
-                                                    thead
-                                                        tr
-                                                            th Hai
-                                                            th Bai
-                                                    tbody
-                                                        tr
-                                                            th First
-                                                            td Second
-                                    .table-scrollable
-                                        table.table.table-striped.table-hover
-                                            thead
-                                                tr
-                                                    th Hai
-                                                    th Bai
-                                            tbody
-                                                tr
-                                                    td First
-                                                    td Second
-                            .row
+                                    .col-md-4
+                                        +codeviewer(class="btn btn-xs green", data-height=160)
+                                            :code
+                                                .table-scrollable
+                                                    table.table.table.table-striped.table-hover
+                                                        thead
+                                                            tr
+                                                                th Hai
+                                                                th Bai
+                                                        tbody
+                                                            tr
+                                                                th First
+                                                                td Second
+                                        .table-scrollable
+                                            table.table.table-striped.table-hover
+                                                thead
+                                                    tr
+                                                        th Hai
+                                                        th Bai
+                                                tbody
+                                                    tr
+                                                        td First
+                                                        td Second
+
+
+
+
+                        .container
+                           .row
                                 .col-md-6
                                     .portlet
                                         .portlet-title

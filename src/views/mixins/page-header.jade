@@ -15,16 +15,15 @@ mixin page-breadcrumbs(home)
 
         block
 
-mixin breadcrumb(name, href, active, last)
+mixin breadcrumb(name, href, active)
     - href = href || false
     - active = active || false
     - var liclass = active ? "active" : "";
-    - last = last || false
     li(class=liclass)
         if href
             a(href=href)= name
         else
             | !{name}
 
-        if !last
+        if !active
             i.fa.fa-angle-right

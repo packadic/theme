@@ -22,3 +22,18 @@ mixin codeviewer
     a(href="#" + id)&attributes(attributes) View code
     textarea(id=id, class="codeviewer-textarea")
         block
+
+mixin alert(type, title, dismissable)
+    - type = type || "info"
+    - if(typeof title == 'boolean' && typeof dismissable == 'undefined') { dismissable = title; title = false };
+    - dismissable = dismissable || false;
+    - var clas = "alert alert-" + type + (dismissable ? " alert-dismissable" : "");
+    div(class=clas)
+        if dismissable
+            button(type="button", class="close", data-dismiss="alert", aria-label="Close")
+              span(aria-hidden="true")
+                | &times;
+        if title
+            strong
+                | !{title} &nbsp;
+        block

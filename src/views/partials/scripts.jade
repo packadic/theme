@@ -8,17 +8,12 @@ include ../base
 +js-script('theme.js')
 // endbuild
 script.
-    $(document).ready(function (){
+    $(document).ready(function(){
         var site = !{site_json};
         console.log(site);
         var packadic = Packadic.init({
-            data: {
-                author    : site.data.author,
-                main      : site.data.main,
-                navigation: site.data.navigation,
-                social    : site.data.social,
-                widgets   : site.data.widgets
-            }
+            site: site
+
         });
 
     });

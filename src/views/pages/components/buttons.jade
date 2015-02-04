@@ -13,64 +13,62 @@ block page-header
 block append content
     .portlet.light
         .portlet-body
-            .row
-                .col-md-12
-                    .portlet.light.bordered
-                        .portlet-title
-                            .caption.font-lime
-                                i.fa.fa-bullhorn
-                                span.caption-subject.bold.uppercase Buttons
-                        .portlet-body
-                            .row
-                                .col-md-12
-                                    each state in site.data.theme.states
-                                        a(href="#", class="btn btn-md btn-" + state)= state
-                            .row
-                                .col-md-12
-                                    .table-scrollable
-                                        table.table.table-bordered
-                                            thead
-                                                tr
-                                                    th Color
-                                                    th Light
-                                                    th Normal
-                                                    th Dark circle
-                                                    th Stripe rounded
-                                                    th Dark stripe
-                                                    th Light stripe
-                                                    th Circle
-                                                    th Icon group
-                                                    th Size
-                                            tbody
-                                                each color in site.data.theme.colors
-                                                    tr
-                                                        td(class="font-" + color)= color
-                                                        td
-                                                            a(href="#", class="btn btn-block show-class " + color + "-light")= color + "-light"
-                                                        td
-                                                            a(href="#", class="btn btn-block show-class " + color)= color
-                                                        td
-                                                            a(href="#", class="btn btn-block show-class " + color + "-dark btn-circle")= color + "-dark"
-                                                        td
-                                                            a(href="#", class="btn btn-block show-class " + color + "-light " + color + "-stripe btn-rounded")= "stripe"
-                                                        td
-                                                            a(href="#", class="btn btn-block show-class " + color + " " + color + "-dark-stripe font-grey-dark")= "dark-stripe"
-                                                        td
-                                                            a(href="#", class="btn btn-block show-class " + color + "-dark " + color + "-light-stripe")= "light-stripe"
-                                                        td
-                                                            a(href="#", class="btn btn-block show-class " + color + "-light btn-icon-only font-" + color + "-dark btn-circle")
-                                                                i.fa.fa-user
-                                                        td
-                                                            .btn-group
-                                                                a(href="#", class="btn btn-block show-class " + color + "-light btn-icon-only font-" + color + "-dark")
-                                                                    i.fa.fa-bullhorn
-                                                                a(href="#", class="btn btn-block show-class " + color + "-dark btn-icon-only font-" + color + "-light")
-                                                                    i.fa.fa-bullhorn
-                                                                a(href="#", class="btn btn-block show-class " + color + " btn-icon-only")
-                                                                    i.fa.fa-bullhorn
-                                                        td
-                                                            each size in site.data.theme.sizes
-                                                                a(href="#", class="btn show-class " + color + " btn-" + size)= size
+            .portlet.light.bordered
+                .portlet-title
+                    .caption.font-lime
+                        i.fa.fa-bullhorn
+                        span.caption-subject.bold.uppercase Buttons
+                .portlet-body.container
+                    .row
+                        .col-md-12
+                            each state in site.data.theme.states
+                                a(href="#", class="btn btn-md btn-" + state)= state
+                    .row
+                        .col-md-12
+                            .table-scrollable
+                                table.table.table-bordered
+                                    thead
+                                        tr
+                                            th Color
+                                            th Light
+                                            th Normal
+                                            th Dark circle
+                                            th Stripe rounded
+                                            th Dark stripe
+                                            th Light stripe
+                                            th Circle
+                                            th Icon group
+                                            th Size
+                                    tbody
+                                        each color in site.data.theme.colors
+                                            tr
+                                                td(class="font-" + color)= color
+                                                td
+                                                    a(href="#", class="btn btn-block show-class " + color + "-light")= color + "-light"
+                                                td
+                                                    a(href="#", class="btn btn-block show-class " + color)= color
+                                                td
+                                                    a(href="#", class="btn btn-block show-class " + color + "-dark btn-circle")= color + "-dark"
+                                                td
+                                                    a(href="#", class="btn btn-block show-class " + color + "-light " + color + "-stripe btn-rounded")= "stripe"
+                                                td
+                                                    a(href="#", class="btn btn-block show-class " + color + " " + color + "-dark-stripe font-grey-dark")= "dark-stripe"
+                                                td
+                                                    a(href="#", class="btn btn-block show-class " + color + "-dark " + color + "-light-stripe")= "light-stripe"
+                                                td
+                                                    a(href="#", class="btn btn-block show-class " + color + "-light btn-icon-only font-" + color + "-dark btn-circle")
+                                                        i.fa.fa-user
+                                                td
+                                                    .btn-group
+                                                        a(href="#", class="btn btn-block show-class " + color + "-light btn-icon-only font-" + color + "-dark")
+                                                            i.fa.fa-bullhorn
+                                                        a(href="#", class="btn btn-block show-class " + color + "-dark btn-icon-only font-" + color + "-light")
+                                                            i.fa.fa-bullhorn
+                                                        a(href="#", class="btn btn-block show-class " + color + " btn-icon-only")
+                                                            i.fa.fa-bullhorn
+                                                td
+                                                    each size in site.data.theme.sizes
+                                                        a(href="#", class="btn show-class " + color + " btn-" + size)= size
 
 
 
