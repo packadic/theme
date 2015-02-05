@@ -20,3 +20,5 @@
 /lib/blade-extensions
 /lib/radic
 /lib/highlightjs
+/src/_components
+/src/_includes
