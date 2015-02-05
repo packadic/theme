@@ -1,0 +1,16 @@
+@mixin bg-img($name){
+    background: image_url('/assets/images/bg/' + $name + '.png') repeat #404040;
+}
+
+@mixin content-bg($nr: false, $light: false){
+    $img: 'content_bg';
+    @if $light {
+        $img: $img + '_light';
+    }
+    @if type_of($nr) == 'number' {
+        @if $nr > 0 {
+            $img: $img + '_' + $nr;
+        }
+    }
+    @include bg-img($img);
+}

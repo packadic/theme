@@ -1,0 +1,37 @@
+include ../base
+doctype html
+html
+    head
+        title Hai
+        +viewport
+        meta(charset=site.encoding)
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        block styles
+            +css-style("style.css")
+
+    body
+        #site
+            block topmenu
+                include ../partials/topmenu
+
+            block sidemenu
+                include ../partials/sidemenu
+
+            section.content
+                .page-title-breadcrumb
+                    block page-header
+                        +page-title("Title", "Subtitle")
+                        +page-breadcrumbs
+                            +breadcrumb("Buttons", false, true, true)
+                    .clearfix
+                .page-content
+                    block content
+
+        block footer
+            include ../partials/footer
+
+        block vendor-scripts
+            include ../partials/vendor-scripts
+
+        block scripts
+            include ../partials/scripts

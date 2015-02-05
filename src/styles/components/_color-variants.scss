@@ -1,72 +1,47 @@
+/*
+@include text-emphasis-variant('.text-primary', $brand-primary);
 
-@mixin make-color-variant($name, $material-color, $depth: '500', $text-color: #fff){
-    /* Button */
-    .btn.#{$name} {
-        @include button-variant($text-color, material-color($material-color, $depth), material-color($material-color, $depth));
+@include text-emphasis-variant('.text-success', $state-success-text);
+
+@include text-emphasis-variant('.text-info', $state-info-text);
+
+@include text-emphasis-variant('.text-warning', $state-warning-text);
+
+@include text-emphasis-variant('.text-danger', $state-danger-text);
+
+@include bg-variant('.bg-primary', $brand-primary);
+
+@include bg-variant('.bg-success', $state-success-bg);
+
+@include bg-variant('.bg-info', $state-info-bg);
+
+@include bg-variant('.bg-warning', $state-warning-bg);
+
+@include bg-variant('.bg-danger', $state-danger-bg);
+*/
+@mixin make-button-color-variant($class-name, $background-color, $border-color, $text-color: $text-color) {
+    .btn.#{$class-name} {
+        @include button-variant($text-color, $background-color, $border-color);
     }
-
-    /* Button Strip */
-    .btn.#{$name}-stripe {
-        border-left: 3px solid material-color($material-color, $depth) !important;
-    }
-
-    /* Portlet */
-    @include porlet-background($name, material-color($material-color, $depth));
-    @include porlet-solid($name, $text-color);
-    @include porlet-box($name, material-color($material-color, $depth), $text-color);
-
-
-    /* General Element */
-    .bg-#{$name} {
-        border-color: material-color($material-color, $depth) !important;
-        background-image: none !important;
-        background-color: material-color($material-color, $depth) !important;
-        color: $text-color !important;
-    }
-
-    /* General Text & Icon Font Colors */
-    .font-#{$name} {
-        color: material-color($material-color, $depth) !important;
-    }
-
-    .progress-bar.#{$name} {
-        background: material-color($material-color, $depth) !important;
-        color: $text-color !important;
+    .btn.#{$class-name}-stripe {
+        border-left: 3px solid $background-color !important;
     }
 }
 
-@mixin packadic-color-variant($name, $text-color: #fff){
-    @include make-color-variant($name + "-light", $name, '200', $text-color);
-    @include make-color-variant($name,            $name, '500', $text-color);
-    @include make-color-variant($name + "-dark",  $name, '900', $text-color);
+@mixin make-color-variant($color-name) {
+    $light: material-color($color-name, '200');
+    $normal: material-color($color-name, '500');
+    $dark: material-color($color-name, '900');
+
+    @include text-emphasis-variant('.text-' + $color-name + '-light', $light);
+    @include text-emphasis-variant('.text-' + $color-name, $normal);
+    @include text-emphasis-variant('.text-' + $color-name + '-dark', $dark);
+
+    @include make-button-color-variant($color-name + '-light', $light, $light);
+    @include make-button-color-variant($color-name, $normal, $normal);
+    @include make-button-color-variant($color-name + '-dark', $dark, $dark, #fff);
 }
 
-@include packadic-color-variant("red");
-@include packadic-color-variant("pink");
-@include packadic-color-variant("purple");
-@include packadic-color-variant("deep-purple");
-@include packadic-color-variant("indigo");
-@include packadic-color-variant("blue");
-@include packadic-color-variant("light-blue");
-@include packadic-color-variant("cyan");
-@include packadic-color-variant("teal");
-@include packadic-color-variant("green");
-@include packadic-color-variant("light-green");
-@include packadic-color-variant("lime");
-@include packadic-color-variant("yellow");
-@include packadic-color-variant("amber");
-@include packadic-color-variant("orange");
-@include packadic-color-variant("deep-orange");
-@include packadic-color-variant("brown");
-@include packadic-color-variant("grey");
-@include packadic-color-variant("blue-grey");
-
-
-/***
-Transparent Button
-***/
-
-.btn-transparent.btn {
-  background: transparent;
-  color: #888;
+@each $color-name, $color-variants in $material-colors {
+    @include make-color-variant($color-name);
 }

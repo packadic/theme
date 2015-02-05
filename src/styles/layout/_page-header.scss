@@ -1,5 +1,7 @@
 
-.page-title-breadcrumb {
+
+#header-wrapper .page-header {
+    margin: 0;
     padding: 10px 20px;
     background: #ffffff;
     -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
@@ -9,8 +11,10 @@
     box-shadow: none !important;
     margin-bottom: 10px;
     color: #bcbcbc;
-
-    .page-header {
+    &:after{
+        @extend .clearfix;
+    }
+    .page-title {
         margin: 0;
         padding: 0;
         border-bottom: 0;

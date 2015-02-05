@@ -7,3 +7,9 @@ Bootbox
 		margin-top: 0px !important;
 	}
 }
+
+.bootbox.bootbox-full-width {
+    .modal-dialog {
+        width: 90%;
+    }
+}

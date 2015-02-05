@@ -1,0 +1,41 @@
+@import "../base";
+
+@import "sidemenu";
+@import "page-header";
+
+.navbar-topmenu {
+    margin-bottom: 0;
+}
+
+.sidemenu {
+    // Other sidemenu styles located in components/sidemenu
+    display: block;
+    float: left;
+    width: 250px;
+    background-image: linear-gradient(to right, #333333 10px, #222222 10px);
+    background-repeat: repeat-x;
+}
+
+.content {
+    display: block;
+    overflow: hidden;
+    width: auto;
+}
+
+.page-content {
+    @include make-xs-column(12);
+}
+
+footer {
+
+    color: $navbar-inverse-color;
+    background: $navbar-inverse-bg;
+    border-top: 1px solid $navbar-inverse-border
+}
+
+
+.breadcrumb {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}

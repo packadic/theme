@@ -1,51 +1,125 @@
 include ../base
 extends ../layouts/default
-block page-header
+block header
     +page-title("Components", "General bootstrap components")
     +page-breadcrumbs
         +breadcrumb("Components", "/components", true)
 
+mixin btn-group-demo(title, btnClass)
+    - btnClass = btnClass || 'btn-info';
+    h4.box-heading= title
+    .btn-group&attributes(attributes)
+        +a.btn(class=btnClass) First
+        +a.btn(class=btnClass) Second
+        +a.btn(class=btnClass) Last
+
 block content
     .row
-        .col-md-6
-            +widget("Buttons")
-                a.btn.btn-primary Primary
+        .col-lg-4
+            +box
+                +box-header("Buttons", "list", true)
+                    +a.btn.btn-success Ok
+                    +a.btn.btn-info Info
+                    +a.btn.btn-warning Close
+                +box-body(350)
+                    .row.small-margin-bottom
+                        .col-md-12
+                            .btn-group.btn-group-justified.btn-group-xs
+                                for state in site.data.theme.states
+                                    - var text = capitalizeFirst(state);
+                                    +a(class="btn btn-" + state)= text
 
-        .col-md-6
-            +widget("Pagination")
-                ul.pagination
-                    li
-                        a(href="#")
-                            span &laquo;
-                    li
-                        a(href="#") 1
-                    li
-                        a(href="#") 2
-                    li
-                        a(href="#") 3
+                    for color in site.data.theme.colors
+                        .row
+                            .col-md-12
+                                .btn-group.btn-group-justified.btn-group-sm
+                                    a(class="btn " + color + "-light").show-class
+                                        | !{color}-light
+
+                                    a(class="btn " + color).show-class
+                                        | !{color}
+
+                                    a(class="btn " + color + "-dark").show-class
+                                        | !{color}-dark
+
+
+        .col-lg-8
+            +box("Button grouping", "list", 350)
+                .row
+                    .col-md-4
+                        +btn-group-demo("Default")
+                        +btn-group-demo("Extra small").btn-group-xs
+                        +btn-group-demo("Small").btn-group-sm
+                        +btn-group-demo("Large").btn-group-lg
+
+                    .col-md-4
+                        +btn-group-demo("Rounded").btn-group-rounded
+                        +btn-group-demo("Rounded xs").btn-group-xs.btn-group-rounded
+                        +btn-group-demo("Rounded sm").btn-group-sm.btn-group-rounded
+                        +btn-group-demo("Rounded lg").btn-group-lg.btn-group-rounded
+
+                    .col-md-4
+                        +btn-group-demo("Circle").btn-group-circle
+                        +btn-group-demo("Circle xs").btn-group-xs.btn-group-circle
+                        +btn-group-demo("Circle sm").btn-group-sm.btn-group-circle
+                        +btn-group-demo("Circle lg").btn-group-lg.btn-group-circle
+
+    .row
+        .col-md-5
+            +box("Alerts", "info", 260)
+                +alert("success", "Well done") You have done well, have a cookie
+                +alert("success", "Very good", true) You have done well, You may close this
+                +alert("info", "Did you know") There are a lot of scripts out there
+                +alert("info", "Also usefull", true) Those scripts can close this box
+                +alert("warning", "Check it out") There might be an issue with you
+                +alert("warning", "Warning", true) Your dog has not enough food
+                +alert("danger", "Error") The website could not do that thing
+                +alert("danger", "Not found", true) It could have been here, but now it's gone
+
+        .col-md-7
+            +box("Labels and badges", "cog", 260).box-table
+                table.table.table-striped.table-hover.table-bordered
+                    thead
+                        tr
+                            th Class
+                            th Label
+                            th Badge
+                    tbody
+                        for state in site.data.theme.states
+                            - var text = capitalizeFirst(state);
+                            tr
+                                td= text
+                                td
+                                    span.label(class="label-" + state) Default
+                                td
+                                    span.badge(class="badge-" + state) 5
     .row
         .col-md-4
-            +widget("Labels")
-                a.btn.btn-primary Primary
+            +box("Modals")
+                .btn-group
+                    +a(data-demo-modal="information").btn.btn-info.demo-modal Information
+                    +a(data-demo-modal="success").btn.btn-success.demo-modal Success
+                    +a(data-demo-modal="warning").btn.btn-warning.demo-modal Warning
+                    +a(data-demo-modal="error").btn.btn-danger.demo-modal Error
         .col-md-4
-            +widget("Badges")
+            +box("Badges")
                 | adf
         .col-md-4
-            +widget("Breadcrumbs")
+            +box("Breadcrumbs")
                 | adf
 
     .row
         .col-md-6
-            +widget("Buttons")
+            +box("Buttons")
                 a.btn.btn-primary Primary
         .col-md-6
-            +widget("Buttons")
+            +box("Buttons")
                 | adf
 
     .row
         .col-md-6
-            +widget("Buttons")
+            +box("Buttons")
                 a.btn.btn-primary Primary
         .col-md-6
-            +widget("Buttons")
+            +box("Buttons")
                 | adf

@@ -7,7 +7,7 @@ mixin js-vendor(path)
 mixin js-tpls(path)
     script(src="/assets/tpls/" + path)
 
-mixin css-styles(path)
+mixin css-style(path)
     link(href="/assets/styles/" + path, type="text/css", rel="stylesheet")
 
 mixin css-vendor(path)
@@ -37,3 +37,9 @@ mixin alert(type, title, dismissable)
             strong
                 | !{title} &nbsp;
         block
+
+
+mixin lia
+    li
+        +a&attributes(attributes)
+            block

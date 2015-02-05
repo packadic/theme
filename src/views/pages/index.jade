@@ -1,27 +1,26 @@
-include ../base
 extends ../layouts/default
-block page-header
+block header
     +page-title("Home", "Welcome!")
 
 
 block content
     .row
         .col-md-3
-            +widget
+            +box
                 .widget-content
                     .widget-icon.pull-left.red
                         i.fa.fa-list
                     .title 102
                     .comment 13
         .col-md-3
-            +widget
+            +box
                 .widget-content
                     .widget-icon.pull-left.yellow
                         i.fa.fa-info
                     .title 11
                     .comment Messages
         .col-md-3
-            +widget
+            +box
                 .widget-content
                     .widget-icon.pull-left.blue
                         i.fa.fa-users
@@ -29,7 +28,7 @@ block content
                     .comment Users
 
         .col-md-3
-            +widget
+            +box
                 .widget-content
                     .widget-icon.pull-left.blue-grey
                         i.fa.fa-file
@@ -39,7 +38,7 @@ block content
 
     .row
         .col-md-6
-            +widget("Alerts", "info")
+            +box("Alerts", "info")
                 +alert("success", "Woot this is ok") You successfully read this important alert message.
                 +alert("success", "Woot ok", true) You successfully read this important alert message.
                 +alert("info") This alert needs your attention, but it's not super important.
@@ -48,7 +47,7 @@ block content
                 +alert("danger", true) Change a few things up and try submitting again.
 
         .col-md-6
-            +widget("Users", "users").no-padding
+            +box("Users", "users").no-padding
                 table.table.table-hover.table-light.no-margin
                     thead
                         th User
