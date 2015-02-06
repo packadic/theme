@@ -1,3 +1,8 @@
+mixin ie(condition)
+    | <!--[!{condition}]>
+    block
+    | <![endif]-->
+
 mixin js-script(path)
     script(src="/assets/scripts/" + path)
 
@@ -27,7 +32,7 @@ mixin alert(type, title, dismissable)
     - type = type || "info"
     - if(typeof title == 'boolean' && typeof dismissable == 'undefined') { dismissable = title; title = false };
     - dismissable = dismissable || false;
-    - var clas = "alert alert-" + type + (dismissable ? " alert-dismissable" : "");
+    - var clas = "alert alert-" + type + (dismissable == true ? " alert-dismissible" : "");
     div(class=clas)
         if dismissable
             button(type="button", class="close", data-dismiss="alert", aria-label="Close")

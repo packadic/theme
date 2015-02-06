@@ -15,31 +15,36 @@ module.exports = function( grunt ){
 
 
     grunt.loadTasks('lib/grunt/tasks');
+
     require('load-grunt-tasks')(grunt);
     require('time-grunt')(grunt);
 
-    var concatJsdev = [], cleanJsdev = [];
-    [ 'side-nav', 'topmenu', 'packadic' ].forEach(function( fileName ){
-        concatJsdev.push('src/scripts/' + fileName + '.js');
-        cleanJsdev.push('dev/assets/js/' + fileName + '.js');
-    });
 
     var config = grunt.file.readYAML('config.yml');
 
     var cfg = {
-        config: config,
+        config          : config,
         copy            : {
-            dev: {
+            dev_fonts        : {
                 files: [
                     {expand: true, cwd: 'src/vendor/bootstrap/fonts', src: '**', dest: 'dev/assets/fonts'},
-                    {expand: true, cwd: 'src/vendor/font-awesome/fonts', src: '**', dest: 'dev/assets/fonts'},
-                    {expand: true, cwd: 'src/images', src: '**', dest: 'dev/assets/images'},
-                    {expand: true, cwd: 'src/vendor', src: '**', dest: 'dev/assets/vendor'}
+                    {expand: true, cwd: 'src/vendor/font-awesome/fonts', src: '**', dest: 'dev/assets/fonts'}
                 ]
             },
-            dev_images: { files: [ {expand: true, cwd: 'src/images', src: '**', dest: 'dev/assets/images'}] },
-            dev_scripts: { files: [ {expand: true, cwd: 'src/scripts', src: '**', dest: 'dev/assets/vendor/packadic'}] },
-            dev_vendor: { files: [ {expand: true, cwd: 'src/vendor', src: '**', dest: 'dev/assets/vendor'}] }
+            dev_images : {files: [ {expand: true, cwd: 'src/images', src: '**', dest: 'dev/assets/images'} ]},
+            dev_scripts: {files: [ {expand: true, cwd: 'src/scripts', src: '**', dest: 'dev/assets/vendor/packadic'} ]},
+            dev_vendor : {files: [ {expand: true, cwd: 'src/vendor', src: '**', dest: 'dev/assets/vendor'} ]},
+            dev_misc: {files:[{src: 'src/.htaccess', dest: 'dev/.htaccess'}]}
+        },
+        uglify          : {
+            dev: {
+                files: {
+                    'dev/assets/vendor/modernizr.min.js' : [ 'src/vendor/modernizr/modernizr.js' ],
+                    'dev/assets/vendor/bootbox.min.js'   : [ 'src/vendor/bootbox/bootbox.js' ],
+                    'dev/assets/vendor/mscrollbar.min.js': [ 'src/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js' ],
+                    'dev/assets/vendor/require.min.js'   : [ 'src/vendor/requirejs/require.js' ]
+                }
+            }
         },
         clean           : {
             dev        : {src: 'dev/*'},
@@ -49,8 +54,7 @@ module.exports = function( grunt ){
             dev_styles : {src: 'dev/assets/styles'},
             dev_vendor : {src: 'dev/assets/vendor'},
             dev_tpls   : {src: 'dev/assets/tpls'},
-            dev_views  : {src: 'dev/**/*.html'},
-            jsdev      : {src: cleanJsdev}
+            dev_views  : {src: 'dev/**/*.html'}
         },
         'string-replace': {
             tpls: {
@@ -68,10 +72,10 @@ module.exports = function( grunt ){
             }
         },
 
-        sass            : {
+        sass: {
             options: {
                 sourcemap: 'none',
-                compass: true
+                compass  : true
             },
             dev    : {
                 files: [
@@ -79,60 +83,36 @@ module.exports = function( grunt ){
                 ]
             }
         },
-        jade: require('./lib/grunt/config/jade')(grunt),
 
-        useminPrepare   : {
-            build: {
-                options: {
-                    root : 'dev',
-                    steps: {
-                        js : [ 'concat', 'uglifyjs' ],
-                        css: [ 'cssmin' ]
-                    },
-                    dest : 'dev'
-                },
-                files  : {
-                    src: [ 'dev/_includes/_layouts/*.html' ]
-                }
-            }
-        },
-        usemin          : {
-            options: {
-                assetsDirs: [ 'dev/assets' ]
-            },
-            html   : {
-                src: [ 'dev/_includes/_layouts/*.html' ]
-            }
-        },
-        watch           : {
-            options      : {
+        watch     : {
+            options   : {
                 livereload: true
             },
-            styles       : {
+            styles    : {
                 files: [ 'src/styles/**' ],
-                tasks: [ 'clean:dev_styles',  'sass:dev' ]
+                tasks: [ 'clean:dev_styles', 'sass:dev' ]
             },
-            jsdev_scripts: {
+            scripts   : {
                 files: [ 'src/scripts/**' ],
                 tasks: [ 'clean:dev_scripts', 'copy:dev_scripts' ]
             },
-            views        : {
+            views     : {
                 files: [ 'src/views/**/*.jade', '!src/views/tpls/**' ],
-                tasks: [ 'clean:dev_views', 'jade:dev' ] //, 'bootlint' ]
+                tasks: [ 'clean:dev_views', 'jade:dev', 'bootlint' ] //, 'bootlint' ]
             },
-            images: {
-                files: ['src/images/**'],
-                tasks: ['clean:dev_images', 'copy:dev_images']
+            images    : {
+                files: [ 'src/images/**' ],
+                tasks: [ 'clean:dev_images', 'copy:dev_images' ]
             },
-            tpls         : {
+            tpls      : {
                 files: [ 'src/views/tpls/**/*.jade' ],
                 tasks: [ 'dev_tpls' ]
             },
-            vendor         : {
+            vendor    : {
                 files: [ 'src/vendor/**' ],
-                tasks: [ 'clean:dev_vendor', 'copy:dev_vendor', 'copy:dev_scripts' ]
+                tasks: [ 'clean:dev_vendor', 'copy:dev_vendor', 'copy:dev_scripts', 'uglify:dev' ]
             },
-            livereload   : {
+            livereload: {
                 options: {
                     livereload: '<%= connect.options.livereload %>'
                 },
@@ -141,22 +121,29 @@ module.exports = function( grunt ){
                 ]
             }
         },
-        concurrent      : {
+        concurrent: {
             options: {
                 logConcurrentOutput: true
             },
-            serve  : [ 'connect:livereload:keepalive', 'watch' ]
+            serve  : [ 'connect:livereload:keepalive', 'watch' ],
+            build  : [
+                'sass:dev', 'jade:dev', 'dev:tpls',
+                'copy:dev_scripts', 'uglify:dev',
+                'lodashAutobuild:dev', 'shell:dev_jquery', 'bootstrapjs:dev', 'jqueryui:dev'
+            ]
         },
-
-        bootlint: {
+        bootlint  : {
             options: {
                 stoponerror: false,
-                relaxerror : []
+                relaxerror : [
+                    'E003', // Row not in .container error - Ignore because the .container is included in #page-wrapper scss
+                    'W005' // Unable to find jQuery - Ignore because of require.js usage its not detected
+                ]
             },
             files  : [ 'dev/*/*.html', 'dev/*.html' ]
 
         },
-        connect : {
+        connect   : {
             options   : {
                 port      : "<%= config.host.port %>",
                 // Change this to '0.0.0.0' to access the server from outside.
@@ -173,10 +160,6 @@ module.exports = function( grunt ){
                         middlewares.push(lib.getMiddleware('pygments'));
                         //middlewares.push(lib.getMiddleware('connect'));
 
-
-                        /*
-                         || CONNECT
-                         */
                         if( !Array.isArray(options.base) ){
                             options.base = [ options.base ];
                         }
@@ -192,48 +175,30 @@ module.exports = function( grunt ){
 
                         return middlewares;
                     }
-                },
-                dist   : {
-                    options: {
-                        open: true,
-                        base: 'test'
-                    }
                 }
             }
         }
     };
 
+    cfg = require('./lib/grunt/config/jade')(cfg, grunt, 'dev', 'dev');
+    cfg = require('./lib/grunt/config/jsbuild')(cfg, grunt, 'dev', 'dev');
+    cfg = require('./grunt.dist')(cfg, grunt);
 
     grunt.initConfig(cfg);
 
 
     grunt.registerTask('default', []);
 
-    grunt.registerTask('dev_tpls', [ 'clean:dev_tpls', 'jade:tpls', 'string-replace:tpls' ]);
-    grunt.registerTask('build', [ 'clean:dev', 'copy:dev', 'concat:jsdev', 'bin:highlightjs', 'sass:dev', 'jade:dev', 'dev_tpls', 'clean:jsdev' ]); //, 'bootlint'
-
-    grunt.registerTask('minify', function(){
-        if( target === 'dist' ){
-            return grunt.task.run([
-                'build',
-                'connect:dist:keepalive'
-            ]);
-        }
-        grunt.task.run([
-            'build',
-            'configureRewriteRules',
-            'concurrent:serve' ]);
-    });
-
-    grunt.registerTask('minify', [
-        'useminPrepare', // optimize all files and assets
-        'concat',
-        'uglify',
-        'cssmin',
-        'usemin'
-    ]);
-    grunt.registerTask('serve', [ 'build', 'concurrent:serve' ]);
-    grunt.registerTask('serve:fast', [ 'concurrent:serve' ]);
+    grunt.registerTask('dev:tpls', [ 'clean:dev_tpls', 'jade:dev_tpls', 'string-replace:tpls' ]);
+    grunt.registerTask('dev:copy', [ 'copy:dev_images', 'copy:dev_fonts', 'copy:dev_vendor', 'copy:dev_misc' ]);
+    grunt.registerTask('dev:build', [
+        'clean:dev', 'dev:copy',
+        'sass:dev', 'jade:dev', 'dev:tpls',
+        'copy:dev_scripts', 'uglify:dev',
+        'dev:jsbuild'
+    ]); //, 'bootlint'
+    grunt.registerTask('dev:build:fast', ['clean:dev', 'dev:copy', 'concurrent:build']);
+    grunt.registerTask('dev:serve', [ 'concurrent:serve' ]);
 
 };
 

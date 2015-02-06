@@ -4,23 +4,29 @@
 require.config({
     baseUrl    : '/assets/vendor',
     paths      : {
-        moment          : 'moment/moment',
-        bootbox         : 'bootbox/bootbox',
-        lodash          : 'lodash/lodash.min',
-        jquery          : 'jquery/dist/jquery.min',
-        modernizr       : 'modernizr/modernizr',
-        'jquery-ui'     : 'jquery-ui/jquery-ui.min',
-        bootstrap       : 'bootstrap/dist/js/bootstrap.min',
+        //lodash          : 'lodash/lodash.min',
+        //jquery          : 'jquery/dist/jquery.min',
+        //bootstrap       : 'bootstrap/dist/js/bootstrap.min',
+        //'jquery-ui'     : 'jquery-ui/jquery-ui.min',
+        lodash          : 'lodash.custom.min',
+        bootstrap       : 'bootstrap.custom.min',
+        jquery          : 'jquery.min',
+        'jquery-ui'     : 'jquery-ui.custom.min',
+
+        moment          : 'moment/moment/min/moment.min',
+        bootbox         : 'bootbox.min',
+        modernizr       : 'modernizr.min',
+
         cryptojs        : 'cryptojslib/components',
         toastr          : 'toastr/toastr',
-        mscrollbar      : 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar',
+        mscrollbar      : 'mscrollbar.min',
         mousewheel      : 'jquery-mousewheel/jquery.mousewheel.min',
         'jquery-migrate': 'jquery-migrate/jquery-migrate',
 
         'bs-modal': 'bootstrap-modal/js/bootstrap-modal',
         'bs-modal-manager': 'bootstrap-modal/js/bootstrap-modalmanager',
 
-        'bs-select': 'bootstrap-select/js/bootstrap-select'
+        'bs-select': 'bootstrap-select/dist/js/bootstrap-select.min'
     },
     shim: {
         lodash: {
@@ -36,10 +42,10 @@ require.config({
             }
         },
         'jquery-migrate': ['jquery'],
-        'jquery-ui': ['jquery', 'jquery-migrate'],
+        'jquery-ui': ['jquery'], //, 'jquery-migrate'],
         'bootstrap': ['jquery-ui'],
         'mscrollbar': ['bootstrap', 'mousewheel'],
-        'packadic/packadic': ['jquery', 'jquery-migrate', 'jquery-ui', 'jade/runtime'],
+        'packadic/packadic': ['jquery', 'jquery-ui', 'jade/runtime'],
         'packadic/demo': ['packadic/packadic'],
         'bs-modal': ['bootstrap', 'bs-modal-manager']
     },

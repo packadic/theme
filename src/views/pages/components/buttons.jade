@@ -14,7 +14,7 @@ mixin btn-dropdown-demo(title, split, dropup, hasBlock)
     - hasBlock = hasBlock || false;
     .btn-group(class= dropup === true ? "dropup" : "")
         if split
-            button.btn&attributes(attributes)= title
+            button(type="button").btn&attributes(attributes)= title
             button.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')&attributes(attributes)
                 span.caret
                 span.sr-only Toggle dropdown

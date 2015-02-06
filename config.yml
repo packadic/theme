@@ -4,3 +4,35 @@ host:
 
 build: dev # dev | dist
 
+# types: dev, dist-html, dist-jekyll
+builds:
+  - name: dev-connect
+    dir: dev
+    type: dev
+    host:
+      name: 0.0.0.0
+      port: 9009
+      protocol: http
+    url: http://0.0.0.0:9009
+    git: false
+
+  - name: dev-apache
+    dir: dev
+    type: dev
+    host:
+      name: dev1.radic.nl
+      port: 80
+      protocol: http
+    url: http://dev1.radic.nl
+    git: false
+
+  - name: dist
+    type: dist-html
+    host:
+      name: packadic.github.io
+      port: 80
+      protocol: http
+    url: http://packadic.github.io/theme
+    git:
+      repo: packadic/theme
+      branch: gh-pages
