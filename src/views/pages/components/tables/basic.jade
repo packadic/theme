@@ -1,0 +1,69 @@
+extends ../../../layouts/default
+include _helpers
+block header
+    +page-title("Basic tables", "tables")
+    +page-breadcrumbs
+        +breadcrumb("Components")
+        +breadcrumb("Tables")
+        +breadcrumb("Basic tables", "/components/tables/basic", true)
+
+block content
+    .row
+        .col-md-4
+            +box("Basic", "list").box-table
+                +demo-table.show-class
+
+        .col-md-4
+            +box("Striped rows", "list").box-table
+                +demo-table.show-class.table-striped
+
+        .col-md-4
+            +box("Bordered", "list").box-table
+                +demo-table.show-class.table-bordered
+
+    .row
+        .col-md-4
+            +box("Hover rows", "list").box-table
+                +demo-table.show-class.table-hover
+        .col-md-4
+            +box("Condensed table", "list").box-table
+                +demo-table.show-class.table-condensed
+        .col-md-4
+            +box("Contextual", "list").box-table
+                +demo-table.show-class.table-bordered
+
+
+    .row
+        .col-md-12
+            +box("Responsive table", "list").box-table
+                +demo-table.show-class
+
+    .row
+        .col-md-12
+            +box("Advanced table", "list").box-table
+                +demo-table.show-class
+    .row
+        .col-md-12
+            +box("Alternative table", "list").box-table
+                +demo-table.show-class
+
+    .row
+        .col-md-4
+            +box("Table", "list").box-table
+                +demo-table.show-class.table-striped.table-bordered.table-advance.table-hover
+                    thead
+                        tr
+                            th
+                                i.fa.fa-briefcase
+                                |  Company
+                            th
+                                i.fa.fa-shopping-cart
+                            th Labels
+                    tbody
+                        tr
+                            td.highlight
+                                a(href="#") TransEX
+                            td &euro; 244.34
+
+                            td
+                                .label.label-info.label-xs Valid

@@ -1,6 +1,6 @@
 'use strict';
 
-define(['jquery', 'jquery-ui', '../../tpls/side-nav'], function($){
+define(['jquery', 'jquery-ui/widget', '../../tpls/side-nav'], function($){
 
 
     function defined( obj ){

@@ -1,0 +1,36 @@
+include ../../../base
+
+mixin demo-table-row(id, username, group, status, statusClass)
+    tr
+        td= id
+        td= username
+        td= group
+        td
+            span.label.label-sm(class="label-" + statusClass)= status
+        td
+            .btn-group.btn-group-xs
+                +a.btn.btn-icon.btn-primary
+                    i.fa.fa-eye
+                +a.btn.btn-icon.btn-danger
+                    i.fa.fa-remove
+
+mixin demo-table(hasBlock)
+    - hasBlock = hasBlock || false;
+    table.table&attributes(attributes)
+        thead
+            tr
+                th ID
+                th Username
+                th Group
+                th Status
+                th Options
+        tbody
+            if hasBlock
+                block
+            else
+                +demo-table-row("1", "admin", "Administrator", "Active", "success")
+                +demo-table-row("2", "monro", "Moderator", "Active", "success")
+                +demo-table-row("3", "afroman", "User", "Active", "success")
+                +demo-table-row("4", "twitterlover", "User", "Suspended", "warning")
+                +demo-table-row("5", "fatjack2", "User", "Blocked", "danger")
+                +demo-table-row("6", "mario", "User", "Pending", "info")

@@ -32,6 +32,8 @@ body {
 
         }
     }
+
+
     &.no-sidebar{}
     &.fixed-top-nav {
         #top-wrapper .top-nav {
@@ -231,6 +233,12 @@ body.sidebar-closed {
                 display: none;
             }
         }
+    }
+    #header-wrapper {
+        padding-left: $sidebar-bg-left-width !important;
+    }
+    #content-wrapper {
+        padding-left: $sidebar-bg-left-width + $content-padding-left !important;
     }
 }
 

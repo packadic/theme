@@ -1,5 +1,5 @@
-include ../base
-extends ../layouts/default
+include ../../base
+extends ../../layouts/default
 block header
     +page-title("Components", "General bootstrap components")
     +page-breadcrumbs
@@ -60,6 +60,7 @@ block content
                     button.btn.btn-default(type='button', data-dismiss='modal') Close
                     button.btn.btn-primary(type='button') Send message
 
+
     .row
         .col-md-4
             +box("Alerts", "info", 260)
@@ -90,26 +91,40 @@ block content
                                     span.badge(class="badge-" + state) 5
 
         .col-md-4
-            +box("Modals")
-                .btn-group
-                    +a(data-demo-modal="information").btn.btn-info.demo-modal Information
+            +box("Modals", "cog")
+                .btn-group-justified
+                    +a(data-demo-modal="information").btn.btn-info.demo-modal Info
                     +a(data-demo-modal="success").btn.btn-success.demo-modal Success
                     +a(data-demo-modal="warning").btn.btn-warning.demo-modal Warning
                     +a(data-demo-modal="error").btn.btn-danger.demo-modal Error
 
+            +box("Tooltips", "cog")
+                .btn-group.btn-group-justified
+                    +a.btn.btn-primary Left
+                    +a.btn.btn-primary Right
+                    +a.btn.btn-primary Top
+                    +a.btn.btn-primary Bottom
+
+
+            +box("Popovers", "cog")
+                .btn-group.btn-group-justified
+                    +a.btn.btn-primary Left
+                    +a.btn.btn-primary Right
+                    +a.btn.btn-primary Top
+                    +a.btn.btn-primary Bottom
 
     .row
         .col-md-6
-            +box("Buttons")
+            +box("Buttons", "cog")
                 a.btn.btn-primary Primary
         .col-md-6
-            +box("Buttons")
+            +box("Buttons", "cog")
                 | adf
 
     .row
         .col-md-6
-            +box("Buttons")
+            +box("Buttons", "cog")
                 a.btn.btn-primary Primary
         .col-md-6
-            +box("Buttons")
+            +box("Buttons", "cog")
                 | adf

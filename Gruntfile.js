@@ -13,14 +13,9 @@ var radic  = require('radic'),
 
 module.exports = function( grunt ){
 
-
-    grunt.loadTasks('lib/grunt/tasks');
-
-    require('load-grunt-tasks')(grunt);
-    require('time-grunt')(grunt);
-
-
+    var includeBuilds = true;
     var config = grunt.file.readYAML('config.yml');
+
 
     var cfg = {
         config          : config,
@@ -34,6 +29,7 @@ module.exports = function( grunt ){
             dev_images : {files: [ {expand: true, cwd: 'src/images', src: '**', dest: 'dev/assets/images'} ]},
             dev_scripts: {files: [ {expand: true, cwd: 'src/scripts', src: '**', dest: 'dev/assets/vendor/packadic'} ]},
             dev_vendor : {files: [ {expand: true, cwd: 'src/vendor', src: '**', dest: 'dev/assets/vendor'} ]},
+            dev_demo : {files: [ {expand: true, cwd: 'src/demo', src: '**', dest: 'dev/demo'} ]},
             dev_misc: {files:[{src: 'src/.htaccess', dest: 'dev/.htaccess'}]}
         },
         uglify          : {
@@ -54,6 +50,7 @@ module.exports = function( grunt ){
             dev_styles : {src: 'dev/assets/styles'},
             dev_vendor : {src: 'dev/assets/vendor'},
             dev_tpls   : {src: 'dev/assets/tpls'},
+            dev_demo   : {src: 'dev/demo'},
             dev_views  : {src: 'dev/**/*.html'}
         },
         'string-replace': {
@@ -97,7 +94,7 @@ module.exports = function( grunt ){
                 tasks: [ 'clean:dev_scripts', 'copy:dev_scripts' ]
             },
             views     : {
-                files: [ 'src/views/**/*.jade', '!src/views/tpls/**' ],
+                files: [ 'src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**' ],
                 tasks: [ 'clean:dev_views', 'jade:dev', 'bootlint' ] //, 'bootlint' ]
             },
             images    : {
@@ -110,11 +107,15 @@ module.exports = function( grunt ){
             },
             vendor    : {
                 files: [ 'src/vendor/**' ],
-                tasks: [ 'clean:dev_vendor', 'copy:dev_vendor', 'copy:dev_scripts', 'uglify:dev' ]
+                tasks: [ 'clean:dev_vendor', 'copy:dev_vendor', 'copy:dev_scripts', 'uglify:dev', 'dev:jsbuild' ]
+            },
+            demo: {
+                files: ['src/demo/**'],
+                tasks: ['clean:dev_demo', 'copy:dev_demo']
             },
             livereload: {
                 options: {
-                    livereload: '<%= connect.options.livereload %>'
+                    livereload: 35729
                 },
                 files  : [
                     'src/**/*'
@@ -125,7 +126,6 @@ module.exports = function( grunt ){
             options: {
                 logConcurrentOutput: true
             },
-            serve  : [ 'connect:livereload:keepalive', 'watch' ],
             build  : [
                 'sass:dev', 'jade:dev', 'dev:tpls',
                 'copy:dev_scripts', 'uglify:dev',
@@ -141,64 +141,35 @@ module.exports = function( grunt ){
                 ]
             },
             files  : [ 'dev/*/*.html', 'dev/*.html' ]
-
-        },
-        connect   : {
-            options   : {
-                port      : "<%= config.host.port %>",
-                // Change this to '0.0.0.0' to access the server from outside.
-                hostname  : "<%= config.host.name %>",
-                livereload: 35729
-            },
-            livereload: {
-                options: {
-                    open      : true,
-                    base      : 'dev',
-                    middleware: function( connect, options ){
-                        var middlewares = [];
-                        middlewares.push(lib.getMiddleware('rewrite'));
-                        middlewares.push(lib.getMiddleware('pygments'));
-                        //middlewares.push(lib.getMiddleware('connect'));
-
-                        if( !Array.isArray(options.base) ){
-                            options.base = [ options.base ];
-                        }
-
-                        var directory = options.directory || options.base[ options.base.length - 1 ];
-                        options.base.forEach(function( base ){
-                            // Serve static files.
-                            middlewares.push(connect.static(base));
-                        });
-
-                        // Make directory browse-able.
-                        middlewares.push(connect.directory(directory));
-
-                        return middlewares;
-                    }
-                }
-            }
         }
     };
 
     cfg = require('./lib/grunt/config/jade')(cfg, grunt, 'dev', 'dev');
     cfg = require('./lib/grunt/config/jsbuild')(cfg, grunt, 'dev', 'dev');
-    cfg = require('./grunt.dist')(cfg, grunt);
+
+    if(includeBuilds === true){
+        config.builds.forEach(function( build ){
+            cfg = require('./grunt.build')(cfg, grunt, build);
+        });
+    }
+
+    grunt.loadTasks('lib/grunt/tasks');
+    require('load-grunt-tasks')(grunt);
+    require('time-grunt')(grunt);
 
     grunt.initConfig(cfg);
 
 
-    grunt.registerTask('default', []);
-
     grunt.registerTask('dev:tpls', [ 'clean:dev_tpls', 'jade:dev_tpls', 'string-replace:tpls' ]);
-    grunt.registerTask('dev:copy', [ 'copy:dev_images', 'copy:dev_fonts', 'copy:dev_vendor', 'copy:dev_misc' ]);
+    grunt.registerTask('dev:copy', [ 'copy:dev_images', 'copy:dev_fonts', 'copy:dev_vendor', 'copy:dev_misc', 'copy:dev_demo' ]);
     grunt.registerTask('dev:build', [
         'clean:dev', 'dev:copy',
         'sass:dev', 'jade:dev', 'dev:tpls',
         'copy:dev_scripts', 'uglify:dev',
         'dev:jsbuild'
-    ]); //, 'bootlint'
+    ]);
     grunt.registerTask('dev:build:fast', ['clean:dev', 'dev:copy', 'concurrent:build']);
-    grunt.registerTask('dev:serve', [ 'concurrent:serve' ]);
-
+    grunt.registerTask('dev:watch', [ 'watch' ]);
+    grunt.registerTask('default', ['dev:build']);
 };
 

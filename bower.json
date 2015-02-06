@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "homepage": "https://github.com/packadic/theme",
   "authors": [
-    "robinradic <robin@radic.nl>"
+    "Robin Radic <robin@radic.nl> (http://robin.radic.nl)"
   ],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/packadic/theme.git"
+    },
   "description": "packadic github user pages theme",
   "moduleType": [
     "amd",
@@ -49,6 +53,8 @@
     "malihu-custom-scrollbar-plugin": "~3.0.7",
     "requirejs": "~2.1.15",
     "bootstrap-modal": "~2.2.5",
-    "bootstrap-select": "~1.6.3"
+    "bootstrap-select": "~1.6.3",
+    "jquery-impromptu": "~6.0.0",
+    "bootstrap-gtreetable": "~2.2.1-alpha"
   }
 }

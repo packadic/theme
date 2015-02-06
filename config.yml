@@ -2,37 +2,40 @@ host:
   port: 9009
   name: 0.0.0.0
 
-build: dev # dev | dist
+jsbuild:
+  jquery:
+    - deprecated
+    - effects
+  jqueryui:
+    - widget
+  bootstrap:
+    - transition
+    - collapse
+    - dropdown
+    - modal
+    - tooltip
+    - popover
+    - tab
 
 # types: dev, dist-html, dist-jekyll
 builds:
-  - name: dev-connect
-    dir: dev
-    type: dev
-    host:
-      name: 0.0.0.0
-      port: 9009
-      protocol: http
-    url: http://0.0.0.0:9009
-    git: false
-
-  - name: dev-apache
-    dir: dev
-    type: dev
-    host:
-      name: dev1.radic.nl
-      port: 80
-      protocol: http
-    url: http://dev1.radic.nl
-    git: false
-
-  - name: dist
+  - name: dist_local
+    dir: dist
     type: dist-html
     host:
-      name: packadic.github.io
+      name: dev2.radic.nl
       port: 80
       protocol: http
-    url: http://packadic.github.io/theme
+    url: http://dev2.radic.nl
+    git: false
+
+  - name: dist_ghpages
+    type: dist-jekyll
+    host:
+      name: packadic.radic.nl
+      port: 80
+      protocol: http
+    url: http://packadic.radic.nl
     git:
-      repo: packadic/theme
-      branch: gh-pages
+      repo: packadic/packadic.github.io
+      branch: master

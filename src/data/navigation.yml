@@ -39,27 +39,57 @@ sidenav:
     icon: fa fa-cubes
     children:
       - name: General
-        href: /components
+        href: /components/general
 
       - name: Typography
         href: /components/typography
 
-      - name: Forms
-        href: /components/forms
+      - name: Boxes
+        href: /components/boxes
 
       - name: Buttons
-        children:
-          - name: Overview
-            href: /components/buttons
+        href: /components/buttons
+        #href: /components/buttons/editor
 
-          - name: Editor
-            href: /components/buttons/editor
+      - name: Forms
+        children:
+          - name: Layouts
+            href: /components/forms/layouts
+
+          - name: Elements
+            href: /components/forms/elements
+
+          - name: Validation
+            href: /components/forms/validation
+
+          - name: Uploader
+            href: /components/forms/uploader
+
+          - name: Wizard
+            href: /components/forms/wizard
+
 
       - name: Portlets
         href: /components/portlets
 
       - name: Tables
-        href: /components/tables
+        children:
+          - name: Basic
+            href: /components/tables/basic
+
+          - name: Responsive
+            href: /components/tables/responsive
+
+          - name: Advanced
+            href: /components/tables/advanced
+
+          - name: Tree table
+            href: /components/tables/tree
+
+          - name: Datatables
+            href: /components/tables/datatables
+
+
 
       - name: Tabs
         href: /components/tabs
