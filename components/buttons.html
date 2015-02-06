@@ -1,0 +1,769 @@
+
+<!-- box, solid, light-->
+<!-- color--><!DOCTYPE html>
+<html>
+  <head>
+    <title>Hai</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="/assets/styles/style.css" type="text/css" rel="stylesheet"/>
+    <!--+css-vendor("malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css")-->
+    <link href="/assets/vendor/codemirror/lib/codemirror.css" type="text/css" rel="stylesheet"/>
+    <link href="/assets/vendor/codemirror/theme/zenburn.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body class="fixed-top-nav">
+    <div id="site-wrapper">
+      <div id="top-wrapper">
+        <nav role="navigation" class="top-nav">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="/" class="navbar-brand">Packadic</a>
+            </div>
+            <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+              <ul id="topmenu" class="nav navbar-nav"></ul>
+              <ul class="nav navbar-nav pull-right">
+                <li><a href="#">Test</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div id="page-wrapper">
+        <div id="sidebar-wrapper">
+          <div class="side-nav">
+            <ul>
+              <li class="side-nav-header"><a id="side-nav-toggle" href="#"><i class="fa fa-exchange"></i></a>
+                <h4>Navigation</h4>
+              </li>
+              <li><a href="#"><i class="fa fa-home"></i><span>Dashboard</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="header-wrapper">
+          <div class="page-header">
+            <div class="page-title pull-left">
+              <h1>Buttons</h1>
+              <div class="page-subtitle">All sorts of buttons for u</div>
+            </div>
+            <ol class="breadcrumb page-breadcrumb pull-right">
+              <li><i class="fa fa-home"></i><a href="/">Home</a><i class="fa fa-angle-right"></i></li>
+              <li class="active">Buttons
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div id="content-wrapper">
+          <nav role="navigation" class="navbar navbar-default hide">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="/" class="navbar-brand">Packadic</a>
+              </div>
+              <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                  <li><a href="#">Test</a>
+                  </li>
+                  <li><a href="#">Test2</a>
+                  </li>
+                  <li><a href="#">Test3</a>
+                  </li>
+                </ul>
+                <ul class="nav navbar-nav pull-right">
+                  <li><a href="#">Test</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <div id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                  <h4 id="exampleModalLabel" class="modal-title">New message</h4>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="recipient-name" class="control-label">Recipient:</label>
+                      <input id="recipient-name" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label for="message-text" class="control-label">Message:</label>
+                      <textarea id="message-text" class="form-control"></textarea>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                  <button type="button" class="btn btn-primary">Send message</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="box">
+                <header><i class="fa fa-list"></i>
+                  <h3>Buttons</h3>
+                  <div class="actions"><a data-toggle="modal" data-target="#exampleModal" class="btn btn-success" href="#">Ok</a><a class="btn btn-info" href="#">Info</a><a class="btn btn-warning" href="#">Close</a>
+                  </div>
+                </header>
+                <section data-mcs-theme="dark" data-mcs-axis="y" style="max-height: 350px;" class="mCustomScrollbar">
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-xs"><a class="btn btn-default" href="#">Default</a><a class="btn btn-primary" href="#">Primary</a><a class="btn btn-info" href="#">Info</a><a class="btn btn-success" href="#">Success</a><a class="btn btn-warning" href="#">Warning</a><a class="btn btn-danger" href="#">Danger</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn red-light show-class">red-light</a><a class="btn red show-class">red</a><a class="btn red-dark show-class">red-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn pink-light show-class">pink-light</a><a class="btn pink show-class">pink</a><a class="btn pink-dark show-class">pink-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn purple-light show-class">purple-light</a><a class="btn purple show-class">purple</a><a class="btn purple-dark show-class">purple-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn deep-purple-light show-class">deep-purple-light</a><a class="btn deep-purple show-class">deep-purple</a><a class="btn deep-purple-dark show-class">deep-purple-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn indigo-light show-class">indigo-light</a><a class="btn indigo show-class">indigo</a><a class="btn indigo-dark show-class">indigo-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn blue-light show-class">blue-light</a><a class="btn blue show-class">blue</a><a class="btn blue-dark show-class">blue-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn light-blue-light show-class">light-blue-light</a><a class="btn light-blue show-class">light-blue</a><a class="btn light-blue-dark show-class">light-blue-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn cyan-light show-class">cyan-light</a><a class="btn cyan show-class">cyan</a><a class="btn cyan-dark show-class">cyan-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn teal-light show-class">teal-light</a><a class="btn teal show-class">teal</a><a class="btn teal-dark show-class">teal-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn green-light show-class">green-light</a><a class="btn green show-class">green</a><a class="btn green-dark show-class">green-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn light-green-light show-class">light-green-light</a><a class="btn light-green show-class">light-green</a><a class="btn light-green-dark show-class">light-green-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn lime-light show-class">lime-light</a><a class="btn lime show-class">lime</a><a class="btn lime-dark show-class">lime-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn yellow-light show-class">yellow-light</a><a class="btn yellow show-class">yellow</a><a class="btn yellow-dark show-class">yellow-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn amber-light show-class">amber-light</a><a class="btn amber show-class">amber</a><a class="btn amber-dark show-class">amber-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn orange-light show-class">orange-light</a><a class="btn orange show-class">orange</a><a class="btn orange-dark show-class">orange-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn deep-orange-light show-class">deep-orange-light</a><a class="btn deep-orange show-class">deep-orange</a><a class="btn deep-orange-dark show-class">deep-orange-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn brown-light show-class">brown-light</a><a class="btn brown show-class">brown</a><a class="btn brown-dark show-class">brown-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn grey-light show-class">grey-light</a><a class="btn grey show-class">grey</a><a class="btn grey-dark show-class">grey-dark</a></div>
+                    </div>
+                  </div>
+                  <div class="row small-margin-bottom">
+                    <div class="col-md-12">
+                      <div class="btn-group btn-group-justified btn-group-sm"><a class="btn blue-grey-light show-class">blue-grey-light</a><a class="btn blue-grey show-class">blue-grey</a><a class="btn blue-grey-dark show-class">blue-grey-dark</a></div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="box">
+                <header><i class="fa fa-list"></i>
+                  <h3>Button variants</h3>
+                </header>
+                <section class="box-table">
+                  <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                      <tr>
+                        <td>Type</td>
+                        <td>XS</td>
+                        <td>SM</td>
+                        <td>MD</td>
+                        <td>LG</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Striped</td>
+                        <td><a class="btn btn-xs orange-light orange-dark-stripe show-class" href="#">Striped</a><a class="btn btn-xs teal-light teal-dark-stripe show-class" href="#">Striped</a>
+                        </td>
+                        <td><a class="btn btn-sm red-light red-dark-stripe show-class" href="#">Striped</a><a class="btn btn-sm orange-light orange-dark-stripe show-class" href="#">Striped</a>
+                        </td>
+                        <td><a class="btn blue-light blue-dark-stripe show-class" href="#">Striped</a><a class="btn red-light red-dark-stripe show-class" href="#">Striped</a>
+                        </td>
+                        <td><a class="btn btn-lg green-light green-dark-stripe show-class" href="#">Striped</a><a class="btn btn-lg blue-light blue-dark-stripe show-class" href="#">Striped</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Icon only</td>
+                        <td><a class="btn btn-icon red-light show-class btn-xs" href="#"><i class="fa fa-bullhorn"></i></a><a class="btn btn-icon blue-light show-class btn-xs" href="#"><i class="fa fa-list"></i></a><a class="btn btn-icon green-light show-class btn-xs" href="#"><i class="fa fa-github"></i></a>
+                        </td>
+                        <td><a class="btn btn-icon red-light show-class btn-sm" href="#"><i class="fa fa-bullhorn"></i></a><a class="btn btn-icon blue-light show-class btn-sm" href="#"><i class="fa fa-list"></i></a><a class="btn btn-icon green-light show-class btn-sm" href="#"><i class="fa fa-github"></i></a>
+                        </td>
+                        <td><a class="btn btn-icon red-light show-class btn-md" href="#"><i class="fa fa-bullhorn"></i></a><a class="btn btn-icon blue-light show-class btn-md" href="#"><i class="fa fa-list"></i></a><a class="btn btn-icon green-light show-class btn-md" href="#"><i class="fa fa-github"></i></a>
+                        </td>
+                        <td><a class="btn btn-icon red-light show-class btn-lg" href="#"><i class="fa fa-bullhorn"></i></a><a class="btn btn-icon blue-light show-class btn-lg" href="#"><i class="fa fa-list"></i></a><a class="btn btn-icon green-light show-class btn-lg" href="#"><i class="fa fa-github"></i></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>With icons</td>
+                        <td><a class="btn btn-primary btn-xs show-class" href="#"><i class="fa fa-list"></i> List</a><a class="btn btn-success btn-xs show-class" href="#"><i class="fa fa-check"></i> Agree</a>
+                        </td>
+                        <td><a class="btn btn-primary btn-sm show-class" href="#"><i class="fa fa-list"></i> List</a><a class="btn btn-success btn-sm show-class" href="#"><i class="fa fa-check"></i> Agree</a>
+                        </td>
+                        <td><a class="btn btn-primary btn-md show-class" href="#"><i class="fa fa-list"></i> List</a><a class="btn btn-success btn-md show-class" href="#"><i class="fa fa-check"></i> Agree</a>
+                        </td>
+                        <td><a class="btn btn-primary btn-lg show-class" href="#"><i class="fa fa-list"></i> List</a><a class="btn btn-success btn-lg show-class" href="#"><i class="fa fa-check"></i> Agree</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="box demo-button-editor" data-editor="color,size,font-color,shape" data-editor-selector="section .btn.btn-icon" data-editor-color="grey-light" data-editor-size="btn-sm" data-editor-font-color="" data-editor-shape="">
+                <header><i class="fa fa-list"></i>
+                  <h3>Button icons showcase</h3>
+                  <div class="box-header-widgets">
+                    <!-- color-->
+                    <select data-style="blue-grey btn-xs" data-width="200px" data-header="Color" data-size="7" class="button-color-select">
+                      <option class="red-light">red-light</option>
+                      <option class="red">red</option>
+                      <option class="red-dark">red-dark</option>
+                      <option class="pink-light">pink-light</option>
+                      <option class="pink">pink</option>
+                      <option class="pink-dark">pink-dark</option>
+                      <option class="purple-light">purple-light</option>
+                      <option class="purple">purple</option>
+                      <option class="purple-dark">purple-dark</option>
+                      <option class="deep-purple-light">deep-purple-light</option>
+                      <option class="deep-purple">deep-purple</option>
+                      <option class="deep-purple-dark">deep-purple-dark</option>
+                      <option class="indigo-light">indigo-light</option>
+                      <option class="indigo">indigo</option>
+                      <option class="indigo-dark">indigo-dark</option>
+                      <option class="blue-light">blue-light</option>
+                      <option class="blue">blue</option>
+                      <option class="blue-dark">blue-dark</option>
+                      <option class="light-blue-light">light-blue-light</option>
+                      <option class="light-blue">light-blue</option>
+                      <option class="light-blue-dark">light-blue-dark</option>
+                      <option class="cyan-light">cyan-light</option>
+                      <option class="cyan">cyan</option>
+                      <option class="cyan-dark">cyan-dark</option>
+                      <option class="teal-light">teal-light</option>
+                      <option class="teal">teal</option>
+                      <option class="teal-dark">teal-dark</option>
+                      <option class="green-light">green-light</option>
+                      <option class="green">green</option>
+                      <option class="green-dark">green-dark</option>
+                      <option class="light-green-light">light-green-light</option>
+                      <option class="light-green">light-green</option>
+                      <option class="light-green-dark">light-green-dark</option>
+                      <option class="lime-light">lime-light</option>
+                      <option class="lime">lime</option>
+                      <option class="lime-dark">lime-dark</option>
+                      <option class="yellow-light">yellow-light</option>
+                      <option class="yellow">yellow</option>
+                      <option class="yellow-dark">yellow-dark</option>
+                      <option class="amber-light">amber-light</option>
+                      <option class="amber">amber</option>
+                      <option class="amber-dark">amber-dark</option>
+                      <option class="orange-light">orange-light</option>
+                      <option class="orange">orange</option>
+                      <option class="orange-dark">orange-dark</option>
+                      <option class="deep-orange-light">deep-orange-light</option>
+                      <option class="deep-orange">deep-orange</option>
+                      <option class="deep-orange-dark">deep-orange-dark</option>
+                      <option class="brown-light">brown-light</option>
+                      <option class="brown">brown</option>
+                      <option class="brown-dark">brown-dark</option>
+                      <option class="grey-light">grey-light</option>
+                      <option class="grey">grey</option>
+                      <option class="grey-dark">grey-dark</option>
+                      <option class="blue-grey-light">blue-grey-light</option>
+                      <option class="blue-grey">blue-grey</option>
+                      <option class="blue-grey-dark">blue-grey-dark</option>
+                    </select>
+                    <!-- font-color-->
+                    <select data-style="blue-grey btn-xs" data-width="140px" data-header="Font color" title="Font color" data-size="7" class="button-font-color-select">
+                      <option value="">Default</option>
+                      <option data-content="&lt;span class='text-red-light'&gt;red-light&lt;/span&gt;" value="text-red-light">red-light</option>
+                      <option data-content="&lt;span class='text-red'&gt;red&lt;/span&gt;" value="text-red">red</option>
+                      <option data-content="&lt;span class='text-red-dark'&gt;red-dark&lt;/span&gt;" value="text-red-dark">red-dark</option>
+                      <option data-content="&lt;span class='text-pink-light'&gt;pink-light&lt;/span&gt;" value="text-pink-light">pink-light</option>
+                      <option data-content="&lt;span class='text-pink'&gt;pink&lt;/span&gt;" value="text-pink">pink</option>
+                      <option data-content="&lt;span class='text-pink-dark'&gt;pink-dark&lt;/span&gt;" value="text-pink-dark">pink-dark</option>
+                      <option data-content="&lt;span class='text-purple-light'&gt;purple-light&lt;/span&gt;" value="text-purple-light">purple-light</option>
+                      <option data-content="&lt;span class='text-purple'&gt;purple&lt;/span&gt;" value="text-purple">purple</option>
+                      <option data-content="&lt;span class='text-purple-dark'&gt;purple-dark&lt;/span&gt;" value="text-purple-dark">purple-dark</option>
+                      <option data-content="&lt;span class='text-deep-purple-light'&gt;deep-purple-light&lt;/span&gt;" value="text-deep-purple-light">deep-purple-light</option>
+                      <option data-content="&lt;span class='text-deep-purple'&gt;deep-purple&lt;/span&gt;" value="text-deep-purple">deep-purple</option>
+                      <option data-content="&lt;span class='text-deep-purple-dark'&gt;deep-purple-dark&lt;/span&gt;" value="text-deep-purple-dark">deep-purple-dark</option>
+                      <option data-content="&lt;span class='text-indigo-light'&gt;indigo-light&lt;/span&gt;" value="text-indigo-light">indigo-light</option>
+                      <option data-content="&lt;span class='text-indigo'&gt;indigo&lt;/span&gt;" value="text-indigo">indigo</option>
+                      <option data-content="&lt;span class='text-indigo-dark'&gt;indigo-dark&lt;/span&gt;" value="text-indigo-dark">indigo-dark</option>
+                      <option data-content="&lt;span class='text-blue-light'&gt;blue-light&lt;/span&gt;" value="text-blue-light">blue-light</option>
+                      <option data-content="&lt;span class='text-blue'&gt;blue&lt;/span&gt;" value="text-blue">blue</option>
+                      <option data-content="&lt;span class='text-blue-dark'&gt;blue-dark&lt;/span&gt;" value="text-blue-dark">blue-dark</option>
+                      <option data-content="&lt;span class='text-light-blue-light'&gt;light-blue-light&lt;/span&gt;" value="text-light-blue-light">light-blue-light</option>
+                      <option data-content="&lt;span class='text-light-blue'&gt;light-blue&lt;/span&gt;" value="text-light-blue">light-blue</option>
+                      <option data-content="&lt;span class='text-light-blue-dark'&gt;light-blue-dark&lt;/span&gt;" value="text-light-blue-dark">light-blue-dark</option>
+                      <option data-content="&lt;span class='text-cyan-light'&gt;cyan-light&lt;/span&gt;" value="text-cyan-light">cyan-light</option>
+                      <option data-content="&lt;span class='text-cyan'&gt;cyan&lt;/span&gt;" value="text-cyan">cyan</option>
+                      <option data-content="&lt;span class='text-cyan-dark'&gt;cyan-dark&lt;/span&gt;" value="text-cyan-dark">cyan-dark</option>
+                      <option data-content="&lt;span class='text-teal-light'&gt;teal-light&lt;/span&gt;" value="text-teal-light">teal-light</option>
+                      <option data-content="&lt;span class='text-teal'&gt;teal&lt;/span&gt;" value="text-teal">teal</option>
+                      <option data-content="&lt;span class='text-teal-dark'&gt;teal-dark&lt;/span&gt;" value="text-teal-dark">teal-dark</option>
+                      <option data-content="&lt;span class='text-green-light'&gt;green-light&lt;/span&gt;" value="text-green-light">green-light</option>
+                      <option data-content="&lt;span class='text-green'&gt;green&lt;/span&gt;" value="text-green">green</option>
+                      <option data-content="&lt;span class='text-green-dark'&gt;green-dark&lt;/span&gt;" value="text-green-dark">green-dark</option>
+                      <option data-content="&lt;span class='text-light-green-light'&gt;light-green-light&lt;/span&gt;" value="text-light-green-light">light-green-light</option>
+                      <option data-content="&lt;span class='text-light-green'&gt;light-green&lt;/span&gt;" value="text-light-green">light-green</option>
+                      <option data-content="&lt;span class='text-light-green-dark'&gt;light-green-dark&lt;/span&gt;" value="text-light-green-dark">light-green-dark</option>
+                      <option data-content="&lt;span class='text-lime-light'&gt;lime-light&lt;/span&gt;" value="text-lime-light">lime-light</option>
+                      <option data-content="&lt;span class='text-lime'&gt;lime&lt;/span&gt;" value="text-lime">lime</option>
+                      <option data-content="&lt;span class='text-lime-dark'&gt;lime-dark&lt;/span&gt;" value="text-lime-dark">lime-dark</option>
+                      <option data-content="&lt;span class='text-yellow-light'&gt;yellow-light&lt;/span&gt;" value="text-yellow-light">yellow-light</option>
+                      <option data-content="&lt;span class='text-yellow'&gt;yellow&lt;/span&gt;" value="text-yellow">yellow</option>
+                      <option data-content="&lt;span class='text-yellow-dark'&gt;yellow-dark&lt;/span&gt;" value="text-yellow-dark">yellow-dark</option>
+                      <option data-content="&lt;span class='text-amber-light'&gt;amber-light&lt;/span&gt;" value="text-amber-light">amber-light</option>
+                      <option data-content="&lt;span class='text-amber'&gt;amber&lt;/span&gt;" value="text-amber">amber</option>
+                      <option data-content="&lt;span class='text-amber-dark'&gt;amber-dark&lt;/span&gt;" value="text-amber-dark">amber-dark</option>
+                      <option data-content="&lt;span class='text-orange-light'&gt;orange-light&lt;/span&gt;" value="text-orange-light">orange-light</option>
+                      <option data-content="&lt;span class='text-orange'&gt;orange&lt;/span&gt;" value="text-orange">orange</option>
+                      <option data-content="&lt;span class='text-orange-dark'&gt;orange-dark&lt;/span&gt;" value="text-orange-dark">orange-dark</option>
+                      <option data-content="&lt;span class='text-deep-orange-light'&gt;deep-orange-light&lt;/span&gt;" value="text-deep-orange-light">deep-orange-light</option>
+                      <option data-content="&lt;span class='text-deep-orange'&gt;deep-orange&lt;/span&gt;" value="text-deep-orange">deep-orange</option>
+                      <option data-content="&lt;span class='text-deep-orange-dark'&gt;deep-orange-dark&lt;/span&gt;" value="text-deep-orange-dark">deep-orange-dark</option>
+                      <option data-content="&lt;span class='text-brown-light'&gt;brown-light&lt;/span&gt;" value="text-brown-light">brown-light</option>
+                      <option data-content="&lt;span class='text-brown'&gt;brown&lt;/span&gt;" value="text-brown">brown</option>
+                      <option data-content="&lt;span class='text-brown-dark'&gt;brown-dark&lt;/span&gt;" value="text-brown-dark">brown-dark</option>
+                      <option data-content="&lt;span class='text-grey-light'&gt;grey-light&lt;/span&gt;" value="text-grey-light">grey-light</option>
+                      <option data-content="&lt;span class='text-grey'&gt;grey&lt;/span&gt;" value="text-grey">grey</option>
+                      <option data-content="&lt;span class='text-grey-dark'&gt;grey-dark&lt;/span&gt;" value="text-grey-dark">grey-dark</option>
+                      <option data-content="&lt;span class='text-blue-grey-light'&gt;blue-grey-light&lt;/span&gt;" value="text-blue-grey-light">blue-grey-light</option>
+                      <option data-content="&lt;span class='text-blue-grey'&gt;blue-grey&lt;/span&gt;" value="text-blue-grey">blue-grey</option>
+                      <option data-content="&lt;span class='text-blue-grey-dark'&gt;blue-grey-dark&lt;/span&gt;" value="text-blue-grey-dark">blue-grey-dark</option>
+                    </select>
+                    <!-- size-->
+                    <select data-style="blue-grey btn-xs" data-width="80px" data-header="Size" class="button-size-select">
+                      <option value="btn-xs">xs</option>
+                      <option value="btn-sm">sm</option>
+                      <option value="btn-md">md</option>
+                      <option value="btn-lg">lg</option>
+                    </select>
+                    <!-- shape-->
+                    <select data-style="blue-grey btn-xs" data-width="120px" data-header="Shape" title="Shape" class="button-shape-select">
+                      <option value="">Default</option>
+                      <option value="btn-rounded">Rounded</option>
+                      <option value="btn-circle">Circle</option>
+                    </select>
+                  </div>
+                </header>
+                <section data-mcs-theme="dark" data-mcs-axis="y" style="max-height: 350px;" class="mCustomScrollbar">
+                  <div class="row">
+                    <div class="col-md-12"><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-glass"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-music"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-search"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-envelope-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-heart"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-star"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-star-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-user"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-film"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-th-large"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-th"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-th-list"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-check"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-remove"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-close"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-times"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-search-plus"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-search-minus"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-power-off"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-signal"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-gear"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cog"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-trash-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-home"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-clock-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-road"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-download"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrow-circle-o-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrow-circle-o-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-inbox"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-play-circle-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-rotate-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-repeat"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-refresh"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-list-alt"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-lock"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-flag"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-headphones"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-volume-off"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-volume-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-volume-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-qrcode"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-barcode"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-tag"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-tags"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-book"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bookmark"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-print"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-camera"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-font"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bold"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-italic"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-text-height"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-text-width"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-align-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-align-center"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-align-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-align-justify"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-list"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-dedent"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-outdent"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-indent"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-video-camera"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-photo"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-image"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-picture-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-pencil"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-map-marker"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-adjust"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-tint"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-edit"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-pencil-square-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-share-square-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-check-square-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrows"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-step-backward"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-fast-backward"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-backward"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-play"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-pause"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-stop"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-forward"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-fast-forward"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-step-forward"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-eject"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-chevron-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-chevron-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-plus-circle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-minus-circle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-times-circle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-check-circle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-question-circle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-info-circle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-crosshairs"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-times-circle-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-check-circle-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-ban"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrow-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrow-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrow-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrow-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-mail-forward"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-share"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-expand"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-compress"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-plus"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-minus"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-asterisk"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-exclamation-circle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-gift"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-leaf"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-fire"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-eye"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-eye-slash"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-warning"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-exclamation-triangle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-plane"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-calendar"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-random"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-comment"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-magnet"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-chevron-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-chevron-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-retweet"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-shopping-cart"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-folder"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-folder-open"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrows-v"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrows-h"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bar-chart-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bar-chart"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-twitter-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-facebook-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-camera-retro"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-key"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-gears"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cogs"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-comments"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-thumbs-o-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-thumbs-o-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-star-half"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-heart-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sign-out"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-linkedin-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-thumb-tack"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-external-link"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sign-in"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-trophy"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-github-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-upload"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-lemon-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-phone"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-square-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bookmark-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-phone-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-twitter"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-facebook-f"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-facebook"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-github"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-unlock"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-credit-card"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-rss"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-hdd-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bullhorn"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bell"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-certificate"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-hand-o-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-hand-o-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-hand-o-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-hand-o-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrow-circle-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrow-circle-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrow-circle-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrow-circle-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-globe"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-wrench"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-tasks"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-filter"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-briefcase"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrows-alt"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-group"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-users"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-chain"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-link"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cloud"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-flask"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cut"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-scissors"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-copy"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-files-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-paperclip"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-save"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-floppy-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-navicon"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-reorder"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bars"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-list-ul"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-list-ol"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-strikethrough"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-underline"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-table"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-magic"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-truck"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-pinterest"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-pinterest-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-google-plus-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-google-plus"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-money"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-caret-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-caret-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-caret-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-caret-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-columns"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-unsorted"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sort"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sort-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sort-desc"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sort-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sort-asc"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-envelope"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-linkedin"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-rotate-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-undo"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-legal"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-gavel"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-dashboard"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-tachometer"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-comment-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-comments-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-flash"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bolt"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sitemap"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-umbrella"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-paste"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-clipboard"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-lightbulb-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-exchange"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cloud-download"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cloud-upload"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-user-md"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-stethoscope"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-suitcase"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bell-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-coffee"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cutlery"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-text-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-building-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-hospital-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-ambulance"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-medkit"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-fighter-jet"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-beer"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-h-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-plus-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-angle-double-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-angle-double-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-angle-double-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-angle-double-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-angle-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-angle-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-angle-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-angle-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-desktop"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-laptop"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-tablet"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-mobile-phone"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-mobile"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-circle-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-quote-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-quote-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-spinner"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-circle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-mail-reply"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-reply"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-github-alt"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-folder-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-folder-open-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-smile-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-frown-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-meh-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-gamepad"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-keyboard-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-flag-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-flag-checkered"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-terminal"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-code"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-mail-reply-all"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-reply-all"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-star-half-empty"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-star-half-full"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-star-half-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-location-arrow"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-crop"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-code-fork"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-unlink"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-chain-broken"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-question"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-info"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-exclamation"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-superscript"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-subscript"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-eraser"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-puzzle-piece"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-microphone"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-microphone-slash"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-shield"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-calendar-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-fire-extinguisher"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-rocket"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-maxcdn"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-chevron-circle-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-chevron-circle-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-chevron-circle-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-chevron-circle-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-html5"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-css3"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-anchor"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-unlock-alt"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bullseye"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-ellipsis-h"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-ellipsis-v"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-rss-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-play-circle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-ticket"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-minus-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-minus-square-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-level-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-level-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-check-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-pencil-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-external-link-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-share-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-compass"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-toggle-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-caret-square-o-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-toggle-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-caret-square-o-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-toggle-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-caret-square-o-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-euro"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-eur"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-gbp"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-dollar"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-usd"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-rupee"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-inr"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cny"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-rmb"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-yen"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-jpy"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-ruble"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-rouble"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-rub"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-won"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-krw"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bitcoin"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-btc"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-text"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sort-alpha-asc"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sort-alpha-desc"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sort-amount-asc"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sort-amount-desc"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sort-numeric-asc"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sort-numeric-desc"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-thumbs-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-thumbs-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-youtube-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-youtube"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-xing"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-xing-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-youtube-play"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-dropbox"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-stack-overflow"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-instagram"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-flickr"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-adn"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bitbucket"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bitbucket-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-tumblr"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-tumblr-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-long-arrow-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-long-arrow-up"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-long-arrow-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-long-arrow-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-apple"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-windows"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-android"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-linux"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-dribbble"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-skype"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-foursquare"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-trello"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-female"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-male"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-gittip"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-gratipay"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sun-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-moon-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-archive"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bug"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-vk"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-weibo"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-renren"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-pagelines"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-stack-exchange"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrow-circle-o-right"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-arrow-circle-o-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-toggle-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-caret-square-o-left"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-dot-circle-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-wheelchair"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-vimeo-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-turkish-lira"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-try"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-plus-square-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-space-shuttle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-slack"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-envelope-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-wordpress"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-openid"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-institution"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bank"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-university"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-mortar-board"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-graduation-cap"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-yahoo"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-google"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-reddit"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-reddit-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-stumbleupon-circle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-stumbleupon"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-delicious"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-digg"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-pied-piper"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-pied-piper-alt"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-drupal"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-joomla"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-language"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-fax"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-building"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-child"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-paw"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-spoon"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cube"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cubes"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-behance"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-behance-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-steam"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-steam-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-recycle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-automobile"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-car"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cab"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-taxi"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-tree"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-spotify"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-deviantart"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-soundcloud"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-database"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-pdf-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-word-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-excel-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-powerpoint-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-photo-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-picture-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-image-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-zip-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-archive-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-sound-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-audio-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-movie-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-video-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-file-code-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-vine"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-codepen"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-jsfiddle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-life-bouy"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-life-buoy"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-life-saver"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-support"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-life-ring"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-circle-o-notch"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-ra"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-rebel"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-ge"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-empire"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-git-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-git"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-hacker-news"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-tencent-weibo"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-qq"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-wechat"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-weixin"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-send"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-paper-plane"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-send-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-paper-plane-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-history"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-genderless"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-circle-thin"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-header"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-paragraph"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sliders"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-share-alt"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-share-alt-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bomb"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-soccer-ball-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-futbol-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-tty"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-binoculars"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-plug"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-slideshare"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-twitch"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-yelp"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-newspaper-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-wifi"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-calculator"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-paypal"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-google-wallet"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cc-visa"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cc-mastercard"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cc-discover"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cc-amex"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cc-paypal"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cc-stripe"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bell-slash"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bell-slash-o"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-trash"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-copyright"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-at"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-eyedropper"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-paint-brush"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-birthday-cake"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-area-chart"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-pie-chart"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-line-chart"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-lastfm"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-lastfm-square"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-toggle-off"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-toggle-on"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bicycle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bus"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-ioxhost"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-angellist"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cc"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-shekel"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sheqel"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-ils"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-meanpath"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-buysellads"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-connectdevelop"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-dashcube"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-forumbee"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-leanpub"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-sellsy"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-shirtsinbulk"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-simplybuilt"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-skyatlas"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cart-plus"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-cart-arrow-down"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-diamond"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-ship"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-user-secret"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-motorcycle"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-street-view"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-heartbeat"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-venus"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-mars"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-mercury"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-transgender"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-transgender-alt"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-venus-double"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-mars-double"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-venus-mars"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-mars-stroke"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-mars-stroke-v"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-mars-stroke-h"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-neuter"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-facebook-official"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-pinterest-p"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-whatsapp"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-server"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-user-plus"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-user-times"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-hotel"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-bed"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-viacoin"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-train"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-subway"></i></a><a class="btn btn-sm btn-icon grey-light small-margin-right small-margin-bottom show-class" href="#"><i class="fa fa-medium"></i></a>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-7">
+              <div class="box">
+                <header><i class="fa fa-list"></i>
+                  <h3>Button grouping</h3>
+                </header>
+                <section data-mcs-theme="dark" data-mcs-axis="y" style="max-height: 350px;" class="mCustomScrollbar">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <h4 class="box-heading">Default</h4>
+                      <div class="btn-group"><a class="btn btn-info" href="#">First</a><a class="btn btn-info" href="#">Second</a><a class="btn btn-info" href="#">Last</a>
+                      </div>
+                      <h4 class="box-heading">Extra small</h4>
+                      <div class="btn-group btn-group-xs"><a class="btn btn-info" href="#">First</a><a class="btn btn-info" href="#">Second</a><a class="btn btn-info" href="#">Last</a>
+                      </div>
+                      <h4 class="box-heading">Small</h4>
+                      <div class="btn-group btn-group-sm"><a class="btn btn-info" href="#">First</a><a class="btn btn-info" href="#">Second</a><a class="btn btn-info" href="#">Last</a>
+                      </div>
+                      <!--+btn-group-demo("Large").btn-group-lg-->
+                    </div>
+                    <div class="col-md-4">
+                      <h4 class="box-heading">Rounded</h4>
+                      <div class="btn-group btn-group-rounded"><a class="btn btn-info" href="#">First</a><a class="btn btn-info" href="#">Second</a><a class="btn btn-info" href="#">Last</a>
+                      </div>
+                      <h4 class="box-heading">Rounded xs</h4>
+                      <div class="btn-group btn-group-xs btn-group-rounded"><a class="btn btn-info" href="#">First</a><a class="btn btn-info" href="#">Second</a><a class="btn btn-info" href="#">Last</a>
+                      </div>
+                      <h4 class="box-heading">Rounded sm</h4>
+                      <div class="btn-group btn-group-sm btn-group-rounded"><a class="btn btn-info" href="#">First</a><a class="btn btn-info" href="#">Second</a><a class="btn btn-info" href="#">Last</a>
+                      </div>
+                    </div>
+                    <!-- +btn-group-demo("Rounded lg").btn-group-lg.btn-group-rounded-->
+                    <div class="col-md-4">
+                      <h4 class="box-heading">Circle</h4>
+                      <div class="btn-group btn-group-circle"><a class="btn btn-info" href="#">First</a><a class="btn btn-info" href="#">Second</a><a class="btn btn-info" href="#">Last</a>
+                      </div>
+                      <h4 class="box-heading">Circle xs</h4>
+                      <div class="btn-group btn-group-xs btn-group-circle"><a class="btn btn-info" href="#">First</a><a class="btn btn-info" href="#">Second</a><a class="btn btn-info" href="#">Last</a>
+                      </div>
+                      <h4 class="box-heading">Circle sm</h4>
+                      <div class="btn-group btn-group-sm btn-group-circle"><a class="btn btn-info" href="#">First</a><a class="btn btn-info" href="#">Second</a><a class="btn btn-info" href="#">Last</a>
+                      </div>
+                    </div>
+                    <!-- +btn-group-demo("Circle lg").btn-group-lg.btn-group-circle-->
+                  </div>
+                </section>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="box">
+                <header><i class="fa fa-info"></i>
+                  <h3>Dropdown buttons</h3>
+                </header>
+                <section>
+                  <h4 class="box-heading">Single button dropdowns</h4>
+                  <div class="btn-group">
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-default btn-xs">Default<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-primary btn-xs">Primary<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-info btn-xs">Info<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-success btn-xs">Success<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-warning btn-xs">Warning<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-danger btn-xs">Danger<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <h4 class="box-heading">Single button dropups</h4>
+                  <div class="btn-group dropup">
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-default btn-xs">Default<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group dropup">
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-primary btn-xs">Primary<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group dropup">
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-info btn-xs">Info<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group dropup">
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-success btn-xs">Success<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group dropup">
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-warning btn-xs">Warning<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group dropup">
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-danger btn-xs">Danger<span class="caret"></span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <h4 class="box-heading">Split button dropdowns</h4>
+                  <div class="btn-group">
+                    <button class="btn btn-default btn-xs">Default</button>
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-default btn-xs"><span class="caret"></span><span class="sr-only">Toggle dropdown</span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button class="btn btn-primary btn-xs">Primary</button>
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-primary btn-xs"><span class="caret"></span><span class="sr-only">Toggle dropdown</span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button class="btn btn-info btn-xs">Info</button>
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-info btn-xs"><span class="caret"></span><span class="sr-only">Toggle dropdown</span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button class="btn btn-success btn-xs">Success</button>
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-success btn-xs"><span class="caret"></span><span class="sr-only">Toggle dropdown</span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button class="btn btn-warning btn-xs">Warning</button>
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-warning btn-xs"><span class="caret"></span><span class="sr-only">Toggle dropdown</span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <div class="btn-group">
+                    <button class="btn btn-danger btn-xs">Danger</button>
+                    <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-danger btn-xs"><span class="caret"></span><span class="sr-only">Toggle dropdown</span></button>
+                    <ul role="menu" class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </div>
+                  <h4 class="box-heading">Sizes
+                    <div class="btn-group">
+                      <button class="btn blue-dark btn-xs">xs</button>
+                      <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle blue-dark btn-xs"><span class="caret"></span><span class="sr-only">Toggle dropdown</span></button>
+                      <ul role="menu" class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                      </ul>
+                    </div>
+                    <div class="btn-group">
+                      <button class="btn blue-dark btn-sm">sm</button>
+                      <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle blue-dark btn-sm"><span class="caret"></span><span class="sr-only">Toggle dropdown</span></button>
+                      <ul role="menu" class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                      </ul>
+                    </div>
+                    <div class="btn-group">
+                      <button class="btn blue-dark">md</button>
+                      <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle blue-dark"><span class="caret"></span><span class="sr-only">Toggle dropdown</span></button>
+                      <ul role="menu" class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                      </ul>
+                    </div>
+                    <div class="btn-group">
+                      <button class="btn blue-dark btn-lg">lg</button>
+                      <button type="button" data-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle blue-dark btn-lg"><span class="caret"></span><span class="sr-only">Toggle dropdown</span></button>
+                      <ul role="menu" class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                      </ul>
+                    </div>
+                  </h4>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="box">
+                <header>
+                  <h3>Badges</h3>
+                </header>
+                <section>adf
+                </section>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="box">
+                <header>
+                  <h3>Breadcrumbs</h3>
+                </header>
+                <section>adf
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- [if lt IE 9] <!-->
+    <!-- build:js /assets/oldieshim.js-->
+    <script src="/assets/vendor/respond/dest/respond.min.js"></script>
+    <script src="/assets/vendor/excanvas/excanvas.js"></script>
+    <!-- endbuild-->
+    <!-- [endif]-->
+    <script>
+      window.PACKADIC_SITE_DATA = {"name":"Packadic","description":"Packadic theme","keywords":["webdesign","programming","designing"],"url":null,"encoding":"utf-8","timezone":"Amsterdam/Europe","repository":"packadic/theme","gems":["jekyll-github-metadata"],"sgems":["jekyll-github-metadata","jemoji","jekyll-redirect-from","jekyll-sitemap"],"layouts":"./_includes/_layouts","data_source":"./_includes/_data","defaults":[{"scope":{"path":"","type":"posts"},"values":{"image":"/images/abstract-1.jpg","comments":true,"share":true}},{"scope":{"path":"","type":"portfolio"},"values":{"hide-title":true,"share":true}},{"scope":{"path":"","type":"projects"},"values":{"layout":"project","hide-title":true,"share":true,"navigation":[{"name":"Home","link":"/","icon":"fa fa-home"},{"name":"Project overview","link":"/:project/","icon":"fa fa-user"},{"name":"Demonstration","link":"/:project/demonstration","icon":"fa fa-play"},{"name":"Documentation","link":"/:project/documentation","icon":"fa fa-mortar-board"},{"name":"API","link":"/:project/api","icon":"fa fa-code"}]}}],"collections":{"portfolio":{"output":"true;","permalink":"/portfolio/:title/"},"projects":{"output":true,"permalink":"/:path/"}},"permalink":"/:categories/:title/","paginate":5,"include":[".htaccess"],"exclude":["lib","config.rb","Capfile","src","config","Gemfile","Gemfile.lock","README.md","LICENSE","log","Rakefile","Rakefile.rb","tmp","less","*.sublime-project","*.sublime-workspace","test","spec","Gruntfile.js","package.json","node_modules","commit","serve","update-ghpages",".bowerrc","bower.json"],"data":{"navigation":{"topnav":[{"name":"Home","href":"/","icon":"fa fa-home"},{"name":"About me","href":"/about-me","icon":"fa fa-user"},{"name":"Login","href":"/contact","icon":"fa fa-key"},{"name":"Contact","href":"/contact","icon":"fa fa-pencil-o"}],"sidenav":[{"name":"Overview","href":"/","icon":"fa fa-home"},{"name":"Documentation","icon":"fa fa-cubes","children":[{"name":"Gettings started","href":"/docs/gettings-started"},{"name":"Customizing","href":"/docs/gettings-started"},{"name":"Setting up projects","href":"/docs/gettings-started"},{"name":"Grunt tasks","href":"/docs/gettings-started"}]},{"name":"Components","icon":"fa fa-cubes","children":[{"name":"General","href":"/components"},{"name":"Typography","href":"/components/typography"},{"name":"Forms","href":"/components/forms"},{"name":"Buttons","children":[{"name":"Overview","href":"/components/buttons"},{"name":"Editor","href":"/components/buttons/editor"}]},{"name":"Portlets","href":"/components/portlets"},{"name":"Tables","href":"/components/tables"},{"name":"Tabs","href":"/components/tabs"},{"name":"Widgets","href":"/components/widgets"}]},{"name":"Plugins","icon":"fa fa-puzzle-piece","children":[{"name":"Bootbox","href":"/plugins/forms"},{"name":"Switches","href":"/plugins/portlets"},{"name":"Toastr","href":"/plugins/tables"},{"name":"Code highlight","href":"/plugins/tabs"},{"name":"Select2","href":"/plugins/panels"}]},{"name":"Multi-level menu","icon":"fa fa-tasks","children":[{"name":"Tasks","icon":"fa-align-right font-orange"},{"name":"Bolds","icon":"fa-bold font-green","children":[{"name":"Bugs","icon":"fa-bug font-red"},{"name":"Drivers","icon":"fa-cab font-green"},{"name":"Payments","icon":"fa-cc"}]},{"name":"Get coffee","icon":"fa-coffee"}]}]},"author":{"name":"Robin","fullname":"Robin Radic","nationality":"Dutch","country":"The Netherlands","birthdate":"19/03/1988","company":"Radic Technologies"},"main":{"github":{"username":"RobinRadic","token":"06a97759a26ca852027849429f815f9dcf86595a","repository":"RobinRadic.github.io"},"oauth_io":"UpFevf23G2O93iSlMOQ5PRL4zq0","google_analytics":"UA-32468647-2"},"social":{"twitter":null,"facebook":null,"disqus":"radicsgit","share":{"facebook":true,"google":true,"twitter":true}},"widgets":{"page-top-user":{"js":"page-top-user.js","tpl":"page-top-user.html","func":"pageTopUser"}},"theme":{"colors":["red","pink","purple","deep-purple","indigo","blue","light-blue","cyan","teal","green","light-green","lime","yellow","amber","orange","deep-orange","brown","grey","blue-grey"],"sizes":["xs","sm","md","lg"],"states":["default","primary","info","success","warning","danger"],"icons":["glass","music","search","envelope-o","heart","star","star-o","user","film","th-large","th","th-list","check","remove","close","times","search-plus","search-minus","power-off","signal","gear","cog","trash-o","home","file-o","clock-o","road","download","arrow-circle-o-down","arrow-circle-o-up","inbox","play-circle-o","rotate-right","repeat","refresh","list-alt","lock","flag","headphones","volume-off","volume-down","volume-up","qrcode","barcode","tag","tags","book","bookmark","print","camera","font","bold","italic","text-height","text-width","align-left","align-center","align-right","align-justify","list","dedent","outdent","indent","video-camera","photo","image","picture-o","pencil","map-marker","adjust","tint","edit","pencil-square-o","share-square-o","check-square-o","arrows","step-backward","fast-backward","backward","play","pause","stop","forward","fast-forward","step-forward","eject","chevron-left","chevron-right","plus-circle","minus-circle","times-circle","check-circle","question-circle","info-circle","crosshairs","times-circle-o","check-circle-o","ban","arrow-left","arrow-right","arrow-up","arrow-down","mail-forward","share","expand","compress","plus","minus","asterisk","exclamation-circle","gift","leaf","fire","eye","eye-slash","warning","exclamation-triangle","plane","calendar","random","comment","magnet","chevron-up","chevron-down","retweet","shopping-cart","folder","folder-open","arrows-v","arrows-h","bar-chart-o","bar-chart","twitter-square","facebook-square","camera-retro","key","gears","cogs","comments","thumbs-o-up","thumbs-o-down","star-half","heart-o","sign-out","linkedin-square","thumb-tack","external-link","sign-in","trophy","github-square","upload","lemon-o","phone","square-o","bookmark-o","phone-square","twitter","facebook-f","facebook","github","unlock","credit-card","rss","hdd-o","bullhorn","bell","certificate","hand-o-right","hand-o-left","hand-o-up","hand-o-down","arrow-circle-left","arrow-circle-right","arrow-circle-up","arrow-circle-down","globe","wrench","tasks","filter","briefcase","arrows-alt","group","users","chain","link","cloud","flask","cut","scissors","copy","files-o","paperclip","save","floppy-o","square","navicon","reorder","bars","list-ul","list-ol","strikethrough","underline","table","magic","truck","pinterest","pinterest-square","google-plus-square","google-plus","money","caret-down","caret-up","caret-left","caret-right","columns","unsorted","sort","sort-down","sort-desc","sort-up","sort-asc","envelope","linkedin","rotate-left","undo","legal","gavel","dashboard","tachometer","comment-o","comments-o","flash","bolt","sitemap","umbrella","paste","clipboard","lightbulb-o","exchange","cloud-download","cloud-upload","user-md","stethoscope","suitcase","bell-o","coffee","cutlery","file-text-o","building-o","hospital-o","ambulance","medkit","fighter-jet","beer","h-square","plus-square","angle-double-left","angle-double-right","angle-double-up","angle-double-down","angle-left","angle-right","angle-up","angle-down","desktop","laptop","tablet","mobile-phone","mobile","circle-o","quote-left","quote-right","spinner","circle","mail-reply","reply","github-alt","folder-o","folder-open-o","smile-o","frown-o","meh-o","gamepad","keyboard-o","flag-o","flag-checkered","terminal","code","mail-reply-all","reply-all","star-half-empty","star-half-full","star-half-o","location-arrow","crop","code-fork","unlink","chain-broken","question","info","exclamation","superscript","subscript","eraser","puzzle-piece","microphone","microphone-slash","shield","calendar-o","fire-extinguisher","rocket","maxcdn","chevron-circle-left","chevron-circle-right","chevron-circle-up","chevron-circle-down","html5","css3","anchor","unlock-alt","bullseye","ellipsis-h","ellipsis-v","rss-square","play-circle","ticket","minus-square","minus-square-o","level-up","level-down","check-square","pencil-square","external-link-square","share-square","compass","toggle-down","caret-square-o-down","toggle-up","caret-square-o-up","toggle-right","caret-square-o-right","euro","eur","gbp","dollar","usd","rupee","inr","cny","rmb","yen","jpy","ruble","rouble","rub","won","krw","bitcoin","btc","file","file-text","sort-alpha-asc","sort-alpha-desc","sort-amount-asc","sort-amount-desc","sort-numeric-asc","sort-numeric-desc","thumbs-up","thumbs-down","youtube-square","youtube","xing","xing-square","youtube-play","dropbox","stack-overflow","instagram","flickr","adn","bitbucket","bitbucket-square","tumblr","tumblr-square","long-arrow-down","long-arrow-up","long-arrow-left","long-arrow-right","apple","windows","android","linux","dribbble","skype","foursquare","trello","female","male","gittip","gratipay","sun-o","moon-o","archive","bug","vk","weibo","renren","pagelines","stack-exchange","arrow-circle-o-right","arrow-circle-o-left","toggle-left","caret-square-o-left","dot-circle-o","wheelchair","vimeo-square","turkish-lira","try","plus-square-o","space-shuttle","slack","envelope-square","wordpress","openid","institution","bank","university","mortar-board","graduation-cap","yahoo","google","reddit","reddit-square","stumbleupon-circle","stumbleupon","delicious","digg","pied-piper","pied-piper-alt","drupal","joomla","language","fax","building","child","paw","spoon","cube","cubes","behance","behance-square","steam","steam-square","recycle","automobile","car","cab","taxi","tree","spotify","deviantart","soundcloud","database","file-pdf-o","file-word-o","file-excel-o","file-powerpoint-o","file-photo-o","file-picture-o","file-image-o","file-zip-o","file-archive-o","file-sound-o","file-audio-o","file-movie-o","file-video-o","file-code-o","vine","codepen","jsfiddle","life-bouy","life-buoy","life-saver","support","life-ring","circle-o-notch","ra","rebel","ge","empire","git-square","git","hacker-news","tencent-weibo","qq","wechat","weixin","send","paper-plane","send-o","paper-plane-o","history","genderless","circle-thin","header","paragraph","sliders","share-alt","share-alt-square","bomb","soccer-ball-o","futbol-o","tty","binoculars","plug","slideshare","twitch","yelp","newspaper-o","wifi","calculator","paypal","google-wallet","cc-visa","cc-mastercard","cc-discover","cc-amex","cc-paypal","cc-stripe","bell-slash","bell-slash-o","trash","copyright","at","eyedropper","paint-brush","birthday-cake","area-chart","pie-chart","line-chart","lastfm","lastfm-square","toggle-off","toggle-on","bicycle","bus","ioxhost","angellist","cc","shekel","sheqel","ils","meanpath","buysellads","connectdevelop","dashcube","forumbee","leanpub","sellsy","shirtsinbulk","simplybuilt","skyatlas","cart-plus","cart-arrow-down","diamond","ship","user-secret","motorcycle","street-view","heartbeat","venus","mars","mercury","transgender","transgender-alt","venus-double","mars-double","venus-mars","mars-stroke","mars-stroke-v","mars-stroke-h","neuter","facebook-official","pinterest-p","whatsapp","server","user-plus","user-times","hotel","bed","viacoin","train","subway","medium"]}}};
+      console.log(PACKADIC_SITE_DATA);
+      
+    </script>
+    <script src="/assets/vendor/requirejs/require.js"></script>
+    <script src="/assets/vendor/packadic/main.js"></script>
+  </body>
+</html>
+<!--
+include ../partials/vendor-scripts
++js-vendor('codemirror/lib/codemirror.js')
++js-vendor('codemirror/addon/runmode/runmode.js')
++js-vendor('codemirror/mode/jade/jade.js')
++js-vendor('codemirror/mode/javascript/javascript.js')
++js-vendor('codemirror/mode/css/css.js')
++js-vendor('codemirror/mode/xml/xml.js')
++js-vendor('codemirror/mode/htmlmixed/htmlmixed.js')
+
+-->
+<!--
+block scripts
+        include ../partials/scripts
+-->
