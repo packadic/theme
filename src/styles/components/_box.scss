@@ -40,6 +40,17 @@ $box-radius: 2px;
             margin-right: 5px;
         }
 
+        .box-header-widgets {
+            @extend .pull-right;
+
+
+            .box-header-widget {
+
+            }
+
+        }
+
+        // Deprecated. remove, please dont look
         .actions {
             @extend .btn-group;
             @extend .btn-group-xs;

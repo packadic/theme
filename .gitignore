@@ -12,6 +12,7 @@
 /src/vendor
 /dev
 /dist
+/.idea-bak
 /_site
 /.sass-cache
 /.tmp
@@ -22,3 +23,4 @@
 /lib/highlightjs
 /src/_components
 /src/_includes
+/gh-pages

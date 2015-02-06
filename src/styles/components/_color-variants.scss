@@ -17,15 +17,37 @@
 
 @include bg-variant('.bg-warning', $state-warning-bg);
 
-@include bg-variant('.bg-danger', $state-danger-bg);
 */
-@mixin make-button-color-variant($class-name, $background-color, $border-color, $text-color: $text-color) {
+
+@mixin text-emphasis-variant($parent, $color) {
+    #{$parent}, #{$parent} i.fa {
+        color: $color;
+
+    }
+    a#{$parent}:hover {
+        color: darken($color, 10%);
+    }
+}
+
+
+@mixin make-general-color-variant($class-name, $background-color, $border-color, $text-color: $text-color) {
     .btn.#{$class-name} {
         @include button-variant($text-color, $background-color, $border-color);
     }
     .btn.#{$class-name}-stripe {
+        border: none;
         border-left: 3px solid $background-color !important;
     }
+
+    .selectpicker li a.#{$class-name} {
+        color: $text-color;
+        background-color: $background-color;
+
+        &:hover {
+            background-color: darken($background-color, 7%);
+        }
+    }
+
 }
 
 @mixin make-color-variant($color-name) {
@@ -37,9 +59,13 @@
     @include text-emphasis-variant('.text-' + $color-name, $normal);
     @include text-emphasis-variant('.text-' + $color-name + '-dark', $dark);
 
-    @include make-button-color-variant($color-name + '-light', $light, $light);
-    @include make-button-color-variant($color-name, $normal, $normal);
-    @include make-button-color-variant($color-name + '-dark', $dark, $dark, #fff);
+    @include bg-variant('.bg-' + $color-name + '-light', $light);
+    @include bg-variant('.bg-' + $color-name, $normal);
+    @include bg-variant('.bg-' + $color-name + '-dark', $dark);
+
+    @include make-general-color-variant($color-name + '-light', $light, darken($light, 5%), $dark);
+    @include make-general-color-variant($color-name, $normal, darken($normal, 5%), #fff);
+    @include make-general-color-variant($color-name + '-dark', $dark, darken($dark, 5%), #fff);
 }
 
 @each $color-name, $color-variants in $material-colors {

@@ -14,6 +14,7 @@ define([ 'jquery', 'packadic/packadic' ],
 
         demo.init = function(){
             this.present('.demo-modal', 'modals');
+            this.present('.demo-button-editor', 'button-icon-showcase');
         };
 
         return demo;

@@ -15,7 +15,12 @@ require.config({
         toastr          : 'toastr/toastr',
         mscrollbar      : 'malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar',
         mousewheel      : 'jquery-mousewheel/jquery.mousewheel.min',
-        'jquery-migrate': 'jquery-migrate/jquery-migrate'
+        'jquery-migrate': 'jquery-migrate/jquery-migrate',
+
+        'bs-modal': 'bootstrap-modal/js/bootstrap-modal',
+        'bs-modal-manager': 'bootstrap-modal/js/bootstrap-modalmanager',
+
+        'bs-select': 'bootstrap-select/js/bootstrap-select'
     },
     shim: {
         lodash: {
@@ -35,7 +40,8 @@ require.config({
         'bootstrap': ['jquery-ui'],
         'mscrollbar': ['bootstrap', 'mousewheel'],
         'packadic/packadic': ['jquery', 'jquery-migrate', 'jquery-ui', 'jade/runtime'],
-        'packadic/demo': ['packadic/packadic']
+        'packadic/demo': ['packadic/packadic'],
+        'bs-modal': ['bootstrap', 'bs-modal-manager']
     },
     waitSeconds: 15
 });

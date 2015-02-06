@@ -14,11 +14,15 @@
 
 @import "components/type";
 @import "components/buttons";
+
 @import "components/box";
 @import "components/scrollbar";
 @import "components/popover";
 @import "components/tables";
+@import "components/modals";
 @import "components/color-variants";
 
 @import "vendor/bootbox";
+@import "vendor/bootstrap-select";
+
 @import "layout";

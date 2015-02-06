@@ -52,14 +52,6 @@ module.exports = function( grunt ){
             dev_views  : {src: 'dev/**/*.html'},
             jsdev      : {src: cleanJsdev}
         },
-        concat          : {
-            jsdev: {
-                files: [
-                    {src: concatJsdev, dest: 'dev/assets/scripts/theme.js'}
-                ]
-            }
-        },
-
         'string-replace': {
             tpls: {
                 files  : {
@@ -87,6 +79,8 @@ module.exports = function( grunt ){
                 ]
             }
         },
+        jade: require('./lib/grunt/config/jade')(grunt),
+
         useminPrepare   : {
             build: {
                 options: {
@@ -102,7 +96,6 @@ module.exports = function( grunt ){
                 }
             }
         },
-        jade: require('./lib/grunt/config/jade')(grunt),
         usemin          : {
             options: {
                 assetsDirs: [ 'dev/assets' ]
@@ -120,7 +113,7 @@ module.exports = function( grunt ){
                 tasks: [ 'clean:dev_styles',  'sass:dev' ]
             },
             jsdev_scripts: {
-                files: [ 'src/scripts/*.js' ],
+                files: [ 'src/scripts/**' ],
                 tasks: [ 'clean:dev_scripts', 'copy:dev_scripts' ]
             },
             views        : {
@@ -155,19 +148,6 @@ module.exports = function( grunt ){
             serve  : [ 'connect:livereload:keepalive', 'watch' ]
         },
 
-        bin     : {
-            highlightjs: {
-
-                options : {
-                    wrap: [ 'node', 'mv' ],
-                    cwd : 'lib/highlightjs'
-                },
-                commands: [
-                    [ 'node', 'tools/build.js', {t: 'browser'}, ':common' ],
-                    [ 'mv', 'build/highlight.pack.js', path.resolve(__dirname, 'dev/assets/scripts/highlight.pack.js') ]
-                ]
-            }
-        },
         bootlint: {
             options: {
                 stoponerror: false,

@@ -1,4 +1,5 @@
-/* rounded buttons */
+
+
 @mixin button-radius-variant($class-suffix, $border-radius) {
     .btn-#{$class-suffix} {
         border-radius: $border-radius !important;
@@ -33,6 +34,13 @@
     }
 }
 
+@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
+    padding: $padding-vertical $padding-horizontal;
+    font-size: $font-size;
+    line-height: $line-height;
+    border-radius: $border-radius;
+}
+
 
 .btn.alt {
     font-family: 'Karla', sans-serif;
@@ -46,14 +54,40 @@
 
 .btn-icon {
     text-align: center;
-    padding-left: 0;
-    padding-right: 0;
 
     > [class^="icon-"],
     > i {
         text-align: center;
         margin-top: 2px;
     }
+}
+
+@mixin button-icon-size($size, $padding, $font-size: false){
+    &.btn-icon {
+        padding: $padding;
+        height: $size;
+        width: $size;
+        i {
+            @if type_of($font-size) != 'boolean' {
+                font-size: $font-size;
+            }
+        }
+    }
+}
+
+.btn-md, .btn-icon {
+    @include button-icon-size(34px, 6px, 15px);
+}
+
+.btn-lg {
+    @include button-icon-size(45px, 10px, 17px);
+}
+
+.btn-sm {
+    @include button-icon-size(28px, 3px, 14px);
+}
+.btn-xs {
+    @include button-icon-size(20px, 0px, 10px);
 }
 
 @include button-radius-variant("circle", 25px);

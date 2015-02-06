@@ -1,7 +1,7 @@
 /*global window, navigator, document, importScripts, setTimeout, opera */
 
-define([ 'jquery', 'lodash', 'bootstrap', 'packadic/side-nav' ],
-    function( $, _ ){
+define([ 'jquery', 'lodash', 'packadic/autoloader', 'bootstrap', 'packadic/side-nav' ],
+    function( $, _, autoloader ){
         'use strict';
 
 
@@ -30,9 +30,8 @@ define([ 'jquery', 'lodash', 'bootstrap', 'packadic/side-nav' ],
 
                     topnav : 'nav.navbar-topmenu',
                     sideNav: '.side-nav ul',
-                    topmenu: '#topmenu',
+                    topmenu: '#topmenu'
 
-                    mscrollbars: '.mCustomScrollbar'
                 },
                 sideNav  : {},
                 topMenu  : {},
@@ -58,6 +57,12 @@ define([ 'jquery', 'lodash', 'bootstrap', 'packadic/side-nav' ],
                 text += possible.charAt(Math.floor(Math.random() * possible.length));
             }
             return text;
+        };
+
+        Packadic.toastr = function( callback ){
+            var args = _.toArray(arguments);
+            console.log(args);
+            require([ 'toastr' ], callback);
         };
 
         Packadic.CodeMirror = function( options, callback ){
@@ -105,7 +110,13 @@ define([ 'jquery', 'lodash', 'bootstrap', 'packadic/side-nav' ],
                     bootbox.dialog({
                         title    : options.title,
                         className: 'bootbox-full-width',
-                        message  : $container.html()
+                        message  : $container.html(),
+                        buttons: {
+                            success: {
+                                label    : 'Close',
+                                className: 'btn-primary'
+                            }
+                        }
                     });
 
                     // create the codmirror in bootbox
@@ -171,21 +182,23 @@ define([ 'jquery', 'lodash', 'bootstrap', 'packadic/side-nav' ],
             },
 
 
-
-
             initShowHtml: function(){
-                $('.show-html').on('click', function( e ){
-                    e.preventDefault();
-                    var $el = $(this);
-                    var code = $el[ 0 ].outerHTML;
-                    Packadic.showCode({
-                        title: 'Showing code',
-                        code: code,
-                        editor: {
-                            mode: 'htmlmixed'
-                        }
+                $('.show-html')
+                    .on('click', function( e ){
+                        e.preventDefault();
+                        var $el = $(this);
+                        var code = $el[ 0 ].outerHTML;
+                        Packadic.showCode({
+                            title : 'Showing code',
+                            code  : code,
+                            editor: {
+                                mode: 'htmlmixed'
+                            }
+                        });
+                    })
+                    .tooltip({
+                        title: 'Click to view HTML code'
                     });
-                });
             },
 
             initShowClass: function(){
@@ -231,15 +244,13 @@ define([ 'jquery', 'lodash', 'bootstrap', 'packadic/side-nav' ],
                 this.site = this.options.site;
 
 
-                if(this.$mscrollbars.length > 0){
-                    require(['mscrollbar'], function(){
-                        self.$mscrollbars.mCustomScrollbar();
-                    });
-                }
+                autoloader.init();
+
                 this.initShowHtml();
                 this.initShowClass();
                 this.initSideNav();
                 this.initDebug();
+
 
                 console.log(this);
             }
