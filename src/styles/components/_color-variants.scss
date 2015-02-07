@@ -48,6 +48,9 @@
         }
     }
 
+    .label.#{$class-name} {
+        @include label-variant($background-color);
+    }
 }
 
 @mixin make-color-variant($color-name) {

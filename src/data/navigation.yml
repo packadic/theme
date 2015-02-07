@@ -100,20 +100,30 @@ sidenav:
   - name: Plugins
     icon: fa fa-puzzle-piece
     children:
-      - name: Bootbox
-        href: /plugins/forms
 
-      - name: Switches
-        href: /plugins/portlets
+      - name: Scrollbar
+        href: /plugins/scrollbar
+
+      - name: $ Impromptu
+        href: /plugins/jquery-impromptu
+
+      - name: $ Popup Overlay
+        href: /plugins/jquery-popup-overlay
+
+      - name: BS Bootbox
+        href: /plugins/bootbox
+
+      - name: BS gTreeTable
+        href: /plugins/bootstrap-gtreetable
+
+      - name: BS Select
+        href: /plugins/bootstrap-select
+
+      - name: BS Switch
+        href: /plugins/bootstrap-switch
 
       - name: Toastr
-        href: /plugins/tables
-
-      - name: Code highlight
-        href: /plugins/tabs
-
-      - name: Select2
-        href: /plugins/panels
+        href: /plugins/toastr
 
   - name: Multi-level menu
     icon: fa fa-tasks

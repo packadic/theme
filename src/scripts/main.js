@@ -12,12 +12,15 @@
             //'jquery-ui'     : 'jquery-ui/jquery-ui.min',
             lodash   : 'lodash.custom.min',
             bootstrap: 'bootstrap.custom.min',
-            jquery   : 'jquery.min',
+            jquery   : 'jquery/dist/jquery.min',
 
+            '$impromptu': 'jquery-impromptu/dist/jquery-impromptu.min',
             moment   : 'moment/moment/min/moment.min',
             bootbox  : 'bootbox.min',
             modernizr: 'modernizr.min',
 
+            marked : 'marked/marked.min',
+            highlightjs: 'highlightjs/highlight.pack',
             cryptojs  : 'cryptojslib/components',
             toastr    : 'toastr/toastr',
             mscrollbar: 'mscrollbar.min',
@@ -47,12 +50,13 @@
             'jquery-migrate'   : [ 'jquery' ],
             'jquery-ui'        : [ 'jquery' ], //, 'jquery-migrate'],
             'bootstrap'        : [ 'jquery' ],
-            'gtreetable'       : [ 'jquery-ui/core', 'jquery-ui/draggable', 'jquery-ui/droppable'],
+            'gtreetable'       : [ 'jquery-migrate', 'jquery-ui/core', 'jquery-ui/draggable', 'jquery-ui/droppable'],
             'mscrollbar'       : [ 'bootstrap', 'mousewheel' ],
             'packadic/packadic': [ 'jquery', 'jquery-ui/widget', 'jade/runtime' ],
             'packadic/demo'    : [ 'packadic/packadic' ],
             'bs-modal'         : [ 'bootstrap', 'bs-modal-manager' ]
         },
+
         waitSeconds: 15
     };
 

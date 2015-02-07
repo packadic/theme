@@ -94,8 +94,12 @@ module.exports = function( grunt ){
                 tasks: [ 'clean:dev_scripts', 'copy:dev_scripts' ]
             },
             views     : {
-                files: [ 'src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**' ],
+                files: [ 'src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**' ],
                 tasks: [ 'clean:dev_views', 'jade:dev', 'bootlint' ] //, 'bootlint' ]
+            },
+            views_pages: {
+                files: [ 'src/views/pages/**/*.jade'],
+                tasks: [ 'newer:jade:dev', 'bootlint' ]
             },
             images    : {
                 files: [ 'src/images/**' ],

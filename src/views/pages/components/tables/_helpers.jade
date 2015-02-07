@@ -1,36 +1,62 @@
 include ../../../base
 
-mixin demo-table-row(id, username, group, status, statusClass)
+
+mixin demo-table-row(id, username, group, status, statusClass, bigTable)
+    - function _randomDate() {
+    -   var start = new Date(2012, 0, 1), end = new Date();
+    -   return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toLocaleDateString();
+    - }
+    - function _randomCountry(){
+    -   return ['Netherlands', 'United States', 'Germany', 'France', 'Belgium', 'Spain', 'Italy', 'Serbia'].splice((Math.random() * 8).toFixed() -1, 1)[0];
+    - }
     tr
-        td= id
+        td.text-center= id
         td= username
         td= group
+        if bigTable
+            - var date = _randomDate(), country = _randomCountry();
+            td= username + "@gmail.com"
+            td= date
+            td= country
         td
             span.label.label-sm(class="label-" + statusClass)= status
-        td
+        td.text-center
             .btn-group.btn-group-xs
                 +a.btn.btn-icon.btn-primary
                     i.fa.fa-eye
                 +a.btn.btn-icon.btn-danger
                     i.fa.fa-remove
 
-mixin demo-table(hasBlock)
+mixin demo-table(longTable, bigTable, hasBlock)
     - hasBlock = hasBlock || false;
-    table.table&attributes(attributes)
-        thead
+    - longTable = longTable || false;
+    - bigTable = bigTable || false;
+    table.table.show-class.show-class-parent&attributes(attributes)
+        thead(class=((attributes.class && attributes.class.indexOf('flip-content') !== -1) ? 'flip-content' : ''))
             tr
-                th ID
+                th(width="20").text-center ID
                 th Username
                 th Group
+                if bigTable
+                    th Email
+                    th Last login
+                    th Country
                 th Status
-                th Options
+                th(width="70").text-center
+                    i.fa.fa-cog
+
         tbody
             if hasBlock
                 block
             else
-                +demo-table-row("1", "admin", "Administrator", "Active", "success")
-                +demo-table-row("2", "monro", "Moderator", "Active", "success")
-                +demo-table-row("3", "afroman", "User", "Active", "success")
-                +demo-table-row("4", "twitterlover", "User", "Suspended", "warning")
-                +demo-table-row("5", "fatjack2", "User", "Blocked", "danger")
-                +demo-table-row("6", "mario", "User", "Pending", "info")
+                +demo-table-row("1", "admin", "Administrator", "Active", "success", bigTable)
+                +demo-table-row("2", "monro", "Moderator", "Active", "success", bigTable)
+                +demo-table-row("3", "afroman", "User", "Active", "success", bigTable)
+                +demo-table-row("4", "twitterlover", "User", "Suspended", "warning", bigTable)
+                +demo-table-row("5", "fatjack2", "User", "Blocked", "danger", bigTable)
+                +demo-table-row("6", "mario", "User", "Pending", "info", bigTable)
+                if longTable
+                    +demo-table-row("7", "tomas", "MVP", "Active", "success", bigTable)
+                    +demo-table-row("8", "paolo", "User", "Active", "success", bigTable)
+                    +demo-table-row("9", "jay", "User", "Pending", "info", bigTable)
+                    +demo-table-row("10", "lenno", "User", "Suspended", "warning", bigTable)

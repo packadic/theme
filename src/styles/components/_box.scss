@@ -78,7 +78,11 @@ $box-radius: 2px;
 
         &.box-table {
             padding: 0;
-            table {
+            > .table-responsive > table,
+            > .table-scrollable > table,
+            > .flip-scroll > table,
+            > table,
+            &.scrollable table {
                 margin: 0;
             }
         }

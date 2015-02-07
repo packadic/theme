@@ -11,59 +11,42 @@ block content
     .row
         .col-md-4
             +box("Basic", "list").box-table
-                +demo-table.show-class
+                +demo-table
 
         .col-md-4
             +box("Striped rows", "list").box-table
-                +demo-table.show-class.table-striped
+                +demo-table.table-striped
 
         .col-md-4
             +box("Bordered", "list").box-table
-                +demo-table.show-class.table-bordered
+                +demo-table.table-bordered
 
     .row
         .col-md-4
-            +box("Hover rows", "list").box-table
-                +demo-table.show-class.table-hover
+            +box("Hover + Condensed + Striped", "list").box-table
+                +demo-table.table-hover.table-condensed.table-striped
         .col-md-4
             +box("Condensed table", "list").box-table
-                +demo-table.show-class.table-condensed
+                +demo-table.table-condensed
         .col-md-4
-            +box("Contextual", "list").box-table
-                +demo-table.show-class.table-bordered
-
-
-    .row
-        .col-md-12
-            +box("Responsive table", "list").box-table
-                +demo-table.show-class
+            +box("Hover + Condensed + Striped + Light", "list").box-table
+                +demo-table.table-hover.table-condensed.table-striped.table-light
 
     .row
-        .col-md-12
-            +box("Advanced table", "list").box-table
-                +demo-table.show-class
-    .row
-        .col-md-12
-            +box("Alternative table", "list").box-table
-                +demo-table.show-class
+        .col-md-6
+            +box("Scroll: Hover + Striped", "list", 200).box-table
+                +demo-table(true).table-hover.table-striped
+        .col-md-6
+            +box("Scroll: Hover + Striped + Light", "list", 200).box-table
+                +demo-table(true).table-hover.table-striped.table-light
 
     .row
         .col-md-4
-            +box("Table", "list").box-table
-                +demo-table.show-class.table-striped.table-bordered.table-advance.table-hover
-                    thead
-                        tr
-                            th
-                                i.fa.fa-briefcase
-                                |  Company
-                            th
-                                i.fa.fa-shopping-cart
-                            th Labels
-                    tbody
-                        tr
-                            td.highlight
-                                a(href="#") TransEX
-                            td &euro; 244.34
-
-                            td
-                                .label.label-info.label-xs Valid
+            +box("Hover + Striped", "list").box-table
+                +demo-table.table-hover.table-striped
+        .col-md-4
+            +box("Hover + Bordered + Striped", "list").box-table
+                +demo-table.table-hover.table-bordered.table-striped
+        .col-md-4
+            +box("Hover + Striped + Light", "list").box-table
+                +demo-table.table-hover.table-striped.table-light

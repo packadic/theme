@@ -112,11 +112,11 @@ module.exports = function( config, grunt, build ){
         },
         jade   : {
             options                 : {
-                pretty: true,
-                data  : getJadeData
+                pretty: true
             },
             '<%= build.name %>'     : {
                 options: {
+                    data   : getJadeData,
                     filters: {
                         code: function( block ){
                             return block
@@ -149,10 +149,10 @@ module.exports = function( config, grunt, build ){
 
     // replace target names and merge with options
     var options = {};
-    _.each(tmp, function(opt, key){
-        options[key] = {};
-        _.each(opt, function(op, target){
-            options[key][target.replace('<%= build.name %>', name)] = op;
+    _.each(tmp, function( opt, key ){
+        options[ key ] = {};
+        _.each(opt, function( op, target ){
+            options[ key ][ target.replace('<%= build.name %>', name) ] = op;
         })
     });
     config = _.merge(config, options);
@@ -161,7 +161,7 @@ module.exports = function( config, grunt, build ){
     config = require('./lib/grunt/config/jsbuild')(config, grunt, name, dir);
 
 
-    grunt.registerTask(name +':build', [
+    grunt.registerTask(name + ':build', [
         'clean:' + name, 'copy:' + name, // clean all, copy images, fonts, vendor
         'sass:' + name, // sass to css compressed
         'jade:' + name, 'jade:' + name + '_tpls', 'string-replace:' + name + '_tpls', // jade views and runtime javascript views (rename selector)

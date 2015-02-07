@@ -35,8 +35,9 @@ define([ 'jquery', 'lodash' ],
                 $('.selectpicker').selectpicker();
             });
 
-            autoloader.detect('.mCustomScrollbar', 'mscrollbar', function(){
-                $('.mCustomScrollbar').mCustomScrollbar();
+            autoloader.detect('.scrollable', 'mscrollbar', function(){
+                $.mCustomScrollbar.defaults.theme = 'dark';
+                $('.scrollable').addClass('mCustomScrollbar').mCustomScrollbar();
             });
         };
 

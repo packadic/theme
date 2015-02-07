@@ -201,35 +201,6 @@ define([ 'jquery', 'lodash', 'packadic/autoloader', 'bootstrap', 'packadic/side-
                     });
             },
 
-            initShowClass: function(){
-                function strColor( str, color ){
-                    return '<span class="text-' + color + '">' + str + '</span>';
-                }
-
-                $('.show-class').each(function(){
-                    var str = '<strong>' + strColor(this.tagName.toLowerCase(), 'green') + '</strong>';
-                    var dot = strColor('.', 'blue');
-                    $.each(this.classList, function( i, className ){
-                        if( className === 'show-class' ){
-                            return;
-                        }
-                        str += dot + strColor(className, 'orange');
-                    });
-                    $(this).popover({
-                        content  : '<span style="font-size: 16px; font-family: \'Source Code Pro\', \'Consolas\', \'Courier\', monospace">' + str + '</span>',
-                        template : '<div class="popover popover-full-width" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
-                        container: '#content-wrapper',
-                        placement: 'top',
-                        trigger  : 'hover',
-                        html     : true,
-                        viewport : {
-                            selector: "#content-wrapper",
-                            padding : 0
-                        }
-
-                    });
-                });
-            },
 
             init: function(){
                 var self = this;
@@ -247,7 +218,6 @@ define([ 'jquery', 'lodash', 'packadic/autoloader', 'bootstrap', 'packadic/side-
                 autoloader.init();
 
                 this.initShowHtml();
-                this.initShowClass();
                 this.initSideNav();
                 this.initDebug();
 

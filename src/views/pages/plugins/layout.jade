@@ -1,0 +1,94 @@
+extends ../../layouts/default
+
+
+mixin pil(key)
+    tr
+        td
+            strong.lite-text-shadow.text-teal= key
+        td
+            block
+
+mixin plugin-info(pluginName, bowerName)
+    - bowerName = bowerName || false;
+    - function _getBowerDep(name, isDev){
+    -   return build.bower[isDev === true ? 'devDependencies' : 'dependencies'][name];
+    - }
+    - function _getBowerPackage(name){
+    -   return build.bower.packages[name];
+    - }
+    - var pkg = _getBowerPackage(bowerName);
+    .row
+        .col-md-4
+            +box("About", "info").box-table
+                table.table.table-light.table-hover.table-condensed
+                    tbody
+                        +pil("Name")= pluginName
+                        +pil("Package")= pkg.name
+                        +pil("License")= pkg.license
+                        +pil("Version")= pkg.version
+                        if pkg.homepage
+                            +pil("Homepage")
+                                +a(href=pkg.homepage) Open in new window
+
+        .col-md-4
+            +box("Authors", "users").box-table
+                if pkg.authors
+                    table.table.table-light.table-hover.table-condensed
+                        tbody
+                            each author, index in pkg.authors
+                                tr
+                                    td
+                                        strong.lite-text-shadow.text-teal
+                                            i.fa.fa-user
+                                    td= author
+
+
+        .col-md-4
+            +box("Dependencies", "users").box-table
+                if pkg.dependencies
+                    table.table.table-light.table-hover.table-condensed
+                        tbody
+                            each version, name in pkg.dependencies
+                                +pil(name)= version
+
+    if build.bower.packages[ bowerName ].readmemd
+        .row
+            .col-md-12
+                +box("Readme", "info")
+                    .plugin-markdown-readme.margin-left= build.bower.packages[ bowerName ].readmemd
+
+block append styles
+    +css-vendor('highlightjs/styles/github.css')
+
+
+block header
+    +page-title("Plugin", "A plugin")
+    +page-breadcrumbs
+        +breadcrumb("Plugins")
+        +breadcrumb("Plugin", "/plugins/plugin", true)
+
+
+block content
+    +tabs.tabbable-custom
+        +tabs-nav
+            block plugin-tabs
+                +tabs-nav-item("overview").active Overview
+                +tabs-nav-item("examples") Example usage
+
+        +tabs-content
+            block plugin-panels
+                +tabs-panel("overview").active
+                    block plugin-panel-overview
+                        +plugin-info("gTreeTable", "bootstrap-gtreetable")
+
+                +tabs-panel("examples")
+                    block plugin-panel-examples
+                        .row
+                            .col-md-6
+                                +box("Example", "eye")
+                                    block plugin-example
+                                        p To be done
+                            .col-md-6
+                                +box("Code", "code")
+                                    block plugin-code
+                                        p To be done

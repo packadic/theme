@@ -19,7 +19,7 @@ mixin box-body(scrollerHeight)
     - scrollerHeight = scrollerHeight || false;
     if scrollerHeight
         - var style = 'max-height: ' + scrollerHeight + 'px;'
-        section(data-mcs-theme="dark", data-mcs-axis="y", style=style).mCustomScrollbar&attributes(attributes)
+        section(data-mcs-axis="y", style=style).scrollable&attributes(attributes)
             block
     else
         section&attributes(attributes)
