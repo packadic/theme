@@ -1,4 +1,4 @@
-define([ 'highlightjs', 'marked' ],
+define([ 'plugins/highlightjs', 'plugins/marked' ],
     function( highlightjs, marked ){
         'use strict';
 

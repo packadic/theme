@@ -7,38 +7,41 @@ var radic  = require('radic'),
     jsyaml = require('js-yaml'),
     fs     = require('fs-extra'),
     path   = require('path'),
-
+    _s = require('underscore.string'),
     lib    = require('./lib');
 
 
 module.exports = function( grunt ){
 
     var includeBuilds = false;
+    var customTaskList = true;
     var config = grunt.file.readYAML('config.yml');
 
 
     var cfg = {
         config          : config,
+        includeBuilds: includeBuilds,
+        customTaskList: customTaskList,
         copy            : {
-            dev_fonts        : {
+            dev_fonts  : {
                 files: [
                     {expand: true, cwd: 'src/vendor/bootstrap/fonts', src: '**', dest: 'dev/assets/fonts'},
                     {expand: true, cwd: 'src/vendor/font-awesome/fonts', src: '**', dest: 'dev/assets/fonts'}
                 ]
             },
             dev_images : {files: [ {expand: true, cwd: 'src/images', src: '**', dest: 'dev/assets/images'} ]},
-            dev_scripts: {files: [ {expand: true, cwd: 'src/scripts', src: '**', dest: 'dev/assets/vendor/packadic'} ]},
-            dev_vendor : {files: [ {expand: true, cwd: 'src/vendor', src: '**', dest: 'dev/assets/vendor'} ]},
-            dev_demo : {files: [ {expand: true, cwd: 'src/demo', src: '**', dest: 'dev/demo'} ]},
-            dev_misc: {files:[{src: 'src/.htaccess', dest: 'dev/.htaccess'}]}
+            dev_scripts: {files: [ {expand: true, cwd: 'src/scripts', src: '**', dest: 'dev/assets/scripts'} ]},
+            dev_plugins : {files: [ {expand: true, cwd: 'src/plugins', src: '**', dest: 'dev/assets/scripts/plugins'} ]},
+            dev_demo   : {files: [ {expand: true, cwd: 'src/demo', src: '**', dest: 'dev/demo'} ]},
+            dev_misc   : {files: [ {src: 'src/.htaccess', dest: 'dev/.htaccess'} ]}
         },
         uglify          : {
             dev: {
                 files: {
-                    'dev/assets/vendor/modernizr.min.js' : [ 'src/vendor/modernizr/modernizr.js' ],
-                    'dev/assets/vendor/bootbox.min.js'   : [ 'src/vendor/bootbox/bootbox.js' ],
-                    'dev/assets/vendor/mscrollbar.min.js': [ 'src/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js' ],
-                    'dev/assets/vendor/require.min.js'   : [ 'src/vendor/requirejs/require.js' ]
+                    'dev/assets/scripts/plugins/modernizr.js' : [ 'src/plugins/modernizr/modernizr.js' ],
+                    'dev/assets/scripts/plugins/bootbox.js'   : [ 'src/plugins/bootbox/bootbox.js' ],
+                    'dev/assets/scripts/plugins/mscrollbar.js': [ 'src/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js' ],
+                    'dev/assets/scripts/plugins/require.js'   : [ 'src/plugins/requirejs/require.js' ]
                 }
             }
         },
@@ -46,85 +49,66 @@ module.exports = function( grunt ){
             dev        : {src: 'dev/*'},
             dev_fonts  : {src: 'dev/assets/fonts'},
             dev_images : {src: 'dev/assets/images'},
-            dev_scripts: {src: 'dev/assets/vendor/packadic'},
+            //dev_scripts: {src: ['dev/assets/scripts/**', '!dev/assets/scripts/plugins/**', 'dev/assets/scripts/plugins/*/**']},
             dev_styles : {src: 'dev/assets/styles'},
-            dev_vendor : {src: 'dev/assets/vendor'},
-            dev_tpls   : {src: 'dev/assets/tpls'},
+            dev_plugins : {src: 'dev/assets/scripts/plugins'},
+            dev_templates   : {src: 'dev/assets/scripts/templates'},
             dev_demo   : {src: 'dev/demo'},
             dev_views  : {src: 'dev/**/*.html'}
         },
         'string-replace': {
-            tpls: {
-                files  : {
-                    'dev/assets/tpls/': 'dev/assets/tpls/**'
-                },
+            templates: {
+                files  : {'dev/assets/scripts/templates/': 'dev/assets/scripts/templates/**'},
                 options: {
-                    replacements: [
-                        {
-                            pattern    : 'src/views/tpls/',
-                            replacement: ''
-                        }
-                    ]
+                    replacements: [ {pattern: 'src/views/tpls/', replacement: ''} ]
                 }
             }
         },
 
         sass: {
-            options: {
-                sourcemap: 'none',
-                compass  : true
-            },
+            options: {sourcemap: 'none', compass: true},
             dev    : {
-                files: [
-                    {expand: true, cwd: 'src/styles', src: '**/*.scss', ext: '.css', dest: 'dev/assets/styles'}
-                ]
+                files: [ {expand: true, cwd: 'src/styles', src: '**/*.scss', ext: '.css', dest: 'dev/assets/styles'} ]
             }
         },
 
         watch     : {
-            options   : {
-                livereload: true,
-                nospawn: true
-            },
-            styles    : {
+            options    : {livereload: true, nospawn: true},
+            styles     : {
                 files: [ 'src/styles/**' ],
                 tasks: [ 'clean:dev_styles', 'sass:dev' ]
             },
-            scripts   : {
+            scripts    : {
                 files: [ 'src/scripts/**' ],
-                tasks: [ 'clean:dev_scripts', 'copy:dev_scripts' ]
+                tasks: [ 'copy:dev_scripts' ]
             },
-            views     : {
+            views      : {
                 files: [ 'src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**' ],
                 tasks: [ 'clean:dev_views', 'jade:dev', 'bootlint' ] //, 'bootlint' ]
             },
             views_pages: {
-                files: [ 'src/views/pages/**/*.jade'],
+                files: [ 'src/views/pages/**/*.jade' ],
                 tasks: [ 'newer:jade:dev', 'bootlint' ]
             },
-            images    : {
+            images     : {
                 files: [ 'src/images/**' ],
                 tasks: [ 'clean:dev_images', 'copy:dev_images' ]
             },
-            tpls      : {
+            templates       : {
                 files: [ 'src/views/tpls/**/*.jade' ],
-                tasks: [ 'dev_tpls' ]
+                tasks: [ 'dev_templates' ]
             },
-            vendor    : {
+            vendor     : {
                 files: [ 'src/vendor/**' ],
                 tasks: [ 'clean:dev_vendor', 'copy:dev_vendor', 'copy:dev_scripts', 'uglify:dev', 'dev:jsbuild' ]
             },
-            demo: {
-                files: ['src/demo/**'],
-                tasks: ['clean:dev_demo', 'copy:dev_demo']
+            demo       : {
+                files: [ 'src/demo/**' ],
+                tasks: [ 'clean:dev_demo', 'copy:dev_demo' ]
             },
-            livereload: {
-                options: {
-                    livereload: 35729
-                },
-                files  : [
-                    'src/**/*'
-                ]
+            livereload : {
+                options: {livereload: 35729},
+                files  : [ 'src/**/*' ]
             }
         },
         concurrent: {
@@ -132,7 +116,7 @@ module.exports = function( grunt ){
                 logConcurrentOutput: true
             },
             build  : [
-                'sass:dev', 'jade:dev', 'dev:tpls',
+                'sass:dev', 'jade:dev', 'dev:templates',
                 'copy:dev_scripts', 'uglify:dev',
                 'lodashAutobuild:dev', 'shell:dev_jquery', 'bootstrapjs:dev', 'jqueryui:dev'
             ]
@@ -152,7 +136,59 @@ module.exports = function( grunt ){
     cfg = require('./lib/grunt/config/jade')(cfg, grunt, 'dev', 'dev');
     cfg = require('./lib/grunt/config/jsbuild')(cfg, grunt, 'dev', 'dev');
 
-    if(includeBuilds === true){
+    if(customTaskList == true){
+        cfg.availabletasks = {
+            tasks: {
+                options: {
+                    filter: 'include',
+                    tasks: ['dev:scripts', 'dev:templates', 'dev:build', 'dev:watch', 'dev:jsbuild', 'tasks'],
+                    reporter: function(options) {
+                        var meta        = options.meta,
+                            task        = options.currentTask,
+                            targets     = '',
+                            indentlevel = '';
+
+                        var str = '';
+                        if (meta.header && meta.groupCount) {
+                            indentlevel = '#';
+                            str += '## ' + task.group + '\n';
+                        }
+
+                        if (task.targets.length > 1) {
+                            targets = indentlevel + '### Targets: `' + task.targets.join('`, `') + '`';
+                        }
+                        str += indentlevel + '## ' + task.name + '\n' + targets + '\n' + task.info + '\n';
+
+                        var tskstr = fs.readFileSync('./tasks.md', 'utf-8')
+                        if(tskstr.indexOf(str) === -1){
+                            str = tskstr + str;
+                        }
+                        fs.outputFileSync('./tasks.md', str);
+
+
+                        if (meta.header && meta.groupCount) {
+                            console.log('\n' + radic.cli.bold(task.group));
+                        }
+
+                        if (task.targets.length > 1) {
+                            targets = '(' + task.targets.join('|') + ')';
+                        }
+
+
+                        console.log(
+                            radic.cli.cyan(_s.rpad(task.name, meta.longest)),
+                            radic.cli.white(_s.center(task.type, 4)),
+                            task.info,
+                            radic.cli.green(targets)
+                        );
+                    }
+                }
+            }
+        };
+        grunt.registerTask('tasks', 'Shows a list of custom tasks and their description, filtering out all individual tasks', ['availabletasks']);
+    }
+
+    if( includeBuilds === true ){
         config.builds.forEach(function( build ){
             cfg = require('./grunt.build')(cfg, grunt, build);
         });
@@ -165,16 +201,31 @@ module.exports = function( grunt ){
     grunt.initConfig(cfg);
 
 
-    grunt.registerTask('dev:tpls', [ 'clean:dev_tpls', 'jade:dev_tpls', 'string-replace:tpls' ]);
-    grunt.registerTask('dev:copy', [ 'copy:dev_images', 'copy:dev_fonts', 'copy:dev_vendor', 'copy:dev_misc', 'copy:dev_demo' ]);
-    grunt.registerTask('dev:build', [
+    grunt.registerTask('dev:templates', 'creates dev/scripts/templates | pre-compiled jade templates for browser useage.',
+        [ 'clean:dev_templates', 'jade:dev_templates', 'string-replace:templates' ]);
+
+    grunt.registerTask('dev:scripts', 'copy src/plugins > dev/scripts/plugins, minifies [require.js,modernizr.js,bootbox.js,mscrollbar.js] to dev/scripts/plugins, copy src/scripts/* > dev/assets/scripts',
+        ['clean:dev_scripts', 'copy:dev_plugins', 'uglify:dev', 'copy:dev_scripts']);
+
+    grunt.registerTask('dev:copy', 'copies src/{.htaccess,images,fonts,demo} to dev/assets/',
+        [ 'copy:dev_images', 'copy:dev_fonts', 'copy:dev_misc', 'copy:dev_demo' ]);
+
+    grunt.registerTask('dev:build', 'create a working development build in dev/', [
         'clean:dev', 'dev:copy',
-        'sass:dev', 'jade:dev', 'dev:tpls',
+        'sass:dev', 'jade:dev',
+        'dev:scripts', 'dev:jsbuild',
         'copy:dev_scripts', 'uglify:dev',
         'dev:jsbuild'
     ]);
-    grunt.registerTask('dev:build:fast', ['clean:dev', 'dev:copy', 'concurrent:build']);
-    grunt.registerTask('dev:watch', [ 'watch' ]);
-    grunt.registerTask('default', ['dev:build']);
+    grunt.registerTask('dev:build:fast', [ 'clean:dev', 'dev:copy', 'concurrent:build' ]);
+    grunt.registerTask('dev:watch', 'generates dev/ files on changes + livereloads afterwards', [ 'watch' ]);
+    grunt.registerTask('default', [ 'dev:build' ]);
+    grunt.registerTask('clean:dev_scripts', function(){
+        require('globule').find(['dev/assets/scripts/**', '!dev/assets/scripts/plugins/**', 'dev/assets/scripts/plugins/*/**']).forEach(function(delPath){
+            if(fs.statSync(delPath).isFile()){
+                fs.unlinkSync(delPath);
+            }
+        });
+    })
 };
 

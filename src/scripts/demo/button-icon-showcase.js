@@ -1,4 +1,4 @@
-define([ 'jquery', 'lodash', 'bs-select' ],
+define([ 'jquery', 'plugins/lodash', 'plugins/bs-select' ],
     function( $, _ ){
         'use strict';
 

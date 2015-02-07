@@ -12,9 +12,9 @@ html.no-js
 
     body.page-header-fixed
         //section#top
-        .page-header.navbar.navbar-fixed-top
+        section#top.navbar.navbar-fixed-top
             //header.top
-            .page-header-inner
+            header.top
                 .page-logo
                     +a Logo
                     .menu-toggler.sidebar-toggler
@@ -24,13 +24,13 @@ html.no-js
                     ul.nav.navbar-nav
         .clearfix
         //#page
-        .page-container
+        section#page
             //section#side
-            .page-sidebar-wrapper
+            .sidebar-wrapper
                 //section#side aside
-                .page-sidebar.navbar-collapse.collapse
+                nav.sidebar-nav.navbar-collapse.collapse
 
-                    ul.page-sidebar-menu
+                    ul.sidebar-nav-menu
                         li.sidebar-toggler-wrapper
                             .sidebar-toggler
                         li.start
@@ -56,17 +56,20 @@ html.no-js
 
 
             //section#content
-            .page-content-wrapper
+            .main-wrapper
                 //main
-                .page-content
+                main
                     //header.content
                     .row
                         .col-md-12
                             | contentsdf
         //section#bottom
-        .page-footer
+        section#bottom
             //footer.bottom
-            .page-footer-inner Radicsss
+            footer.bottom Radicsss
 
-        +js-vendor('jquery/dist/jquery.min.js')
-        +js-vendor('bootstrap/dist/js/bootstrap.min.js')
+        script.
+            window.PACKADIC_SITE_DATA = !{site_json};
+
+        +js-script('plugins/require.js')
+        +js-script('main.js')

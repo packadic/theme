@@ -5,7 +5,7 @@
     ***********/
 
     /* Header search bar, toggler button & top menu */
-    .page-header.navbar {
+    section#top.navbar {
         background-color: $header-bg-color;
 
         /* Header seaech box */
@@ -47,19 +47,19 @@
 
     /* Default Horizontal Menu */
 
-    .page-header.navbar {
+    section#top.navbar {
 
     }
 
     /* Page sidebar */
 
 
-    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover,
-    .page-sidebar {
+    .sidebar-nav-closed.sidebar-nav-fixed .sidebar-nav:hover,
+    .sidebar-nav {
         background-color: $bg-color;
 
         /* Default sidebar */
-        .page-sidebar-menu {
+        .sidebar-nav-menu {
 
             /* 1st level links */
 
@@ -194,7 +194,7 @@
                 }
             }
 
-            .page-sidebar-closed &:hover {
+            .sidebar-nav-closed &:hover {
                 .sub-menu {
                     background-color: $bg-color;
                 }
@@ -258,7 +258,7 @@
         }
 
         /* light sidebar */
-        .page-sidebar-menu.page-sidebar-menu-light {
+        .sidebar-nav-menu.sidebar-nav-menu-light {
 
             /* 1st level links */
             > li {
@@ -343,7 +343,7 @@
                 }
             }
 
-            .page-sidebar-closed &.open {
+            .sidebar-nav-closed &.open {
                 .input-group {
                     background-color: $bg-color;
                 }
@@ -357,7 +357,7 @@
 
             &.sidebar-search-solid {
 
-                .page-sidebar-closed & {
+                .sidebar-nav-closed & {
                     .input-group {
                         background: none;
                     }
@@ -384,9 +384,9 @@
         }
     }
 
-    .page-sidebar-reversed {
+    .sidebar-nav-reversed {
 
-        .page-sidebar-menu.page-sidebar-menu-light {
+        .sidebar-nav-menu.sidebar-nav-menu-light {
             /* 1st level links */
             > li {
                 &.active,
@@ -410,12 +410,12 @@
     Page Footer
     ******/
 
-    .page-footer {
-        .page-footer-inner {
+    section#bottom {
+        footer.bottom {
             color: $footer-default-font-color;
         }
 
-        .page-footer-fixed & {
+        section#bottom-fixed & {
             background-color: $footer-fixed-bg-color;
         }
     }
@@ -423,7 +423,7 @@
     @media (min-width: $screen-md-min) { /* 992px */
 
         /* Sidebar menu closed */
-        .page-sidebar-menu.page-sidebar-menu-hover-submenu {
+        .sidebar-nav-menu.sidebar-nav-menu-hover-submenu {
             > li:hover {
                 > .sub-menu {
                     box-shadow: 5px 5px rgba($sidebar-menu-sub-menu-box-shadow-color, 0.2);
@@ -436,7 +436,7 @@
             }
         }
 
-        .page-sidebar-menu.page-sidebar-menu-closed {
+        .sidebar-nav-menu.sidebar-nav-menu-closed {
             > li:hover {
                 box-shadow: 5px 5px rgba($sidebar-menu-sub-menu-box-shadow-color, 0.2);
 
@@ -457,7 +457,7 @@
         }
 
         /* Light sidebar menu */
-        .page-sidebar-menu.page-sidebar-menu-light.page-sidebar-menu-closed {
+        .sidebar-nav-menu.sidebar-nav-menu-light.sidebar-nav-menu-closed {
             > li.heading {
                 padding: 0;
                 margin-top: 15px;
@@ -469,15 +469,15 @@
 
         /* Fixed Sidebar */
 
-        .page-sidebar-fixed:not(.page-footer-fixed) {
-            .page-content {
+        .sidebar-nav-fixed:not(section#bottom-fixed) {
+            main {
                 border-bottom: 0;
             }
 
-            .page-footer {
+            section#bottom {
                 background-color: #fff;
 
-                .page-footer-inner {
+                footer.bottom {
                     color: #333;
                 }
             }
@@ -490,28 +490,28 @@
 
 
             /* Page container */
-            .page-container {
+            section#page {
                 background-color: $bg-color;
                 border-left: 1px solid $for-min-992px-page-boxed-page-container-bg-color;
                 border-bottom: 1px solid $for-min-992px-page-boxed-page-container-bg-color;
             }
 
-            &.page-sidebar-reversed {
-                .page-container {
+            &.sidebar-nav-reversed {
+                section#page {
                     border-left: 0;
                     border-right: 1px solid $for-min-992px-page-boxed-page-container-bg-color;
                 }
             }
 
-            &.page-sidebar-fixed {
-                .page-container {
+            &.sidebar-nav-fixed {
+                section#page {
                     border-left: 0;
                     border-bottom: 0;
                 }
             }
 
-            &.page-sidebar-reversed.page-sidebar-fixed {
-                .page-container {
+            &.sidebar-nav-reversed.sidebar-nav-fixed {
+                section#page {
                     border-left: 0;
                     border-right: 0;
                     border-bottom: 0;
@@ -520,14 +520,14 @@
 
             /* Page sidebar */
 
-            &.page-sidebar-fixed {
-                .page-sidebar {
+            &.sidebar-nav-fixed {
+                .sidebar-nav {
                     border-left: 1px solid $for-min-992px-page-boxed-sidebar-fixed-border-color;
                 }
             }
 
-            &.page-sidebar-reversed.page-sidebar-fixed {
-                .page-sidebar {
+            &.sidebar-nav-reversed.sidebar-nav-fixed {
+                .sidebar-nav {
                     border-right: 1px solid $for-min-992px-page-boxed-sidebar-fixed-border-color;
                     border-left: 0;
                 }
@@ -535,11 +535,11 @@
 
             /* Page footer */
 
-            &.page-sidebar-fixed.page-footer-fixed {
-                .page-footer {
+            &.sidebar-nav-fixedsection#bottom-fixed {
+                section#bottom {
                     background-color: $for-min-992px-page-boxed-bg-color !important;
 
-                    .page-footer-inner {
+                    footer.bottom {
                         color: $footer-default-font-color;
                     }
                 }
@@ -548,14 +548,14 @@
 
          /* Sidebar Menu Wirh Hoverable Submenu */
 
-        .page-sidebar-menu-hover-submenu {
+        .sidebar-nav-menu-hover-submenu {
             li {
                 &:hover {
                     a {
                         > .arrow {
                             border-right:8px solid $sidebar-menu-hover-sub-menu-bg-color;
 
-                            .page-sidebar-reversed & {
+                            .sidebar-nav-reversed & {
                                 border-left:8px solid $sidebar-menu-hover-sub-menu-bg-color;
                             }
                         }
@@ -571,10 +571,10 @@
 
     @media (max-width: $screen-sm-max) { /* 991px */
         /* Page sidebar */
-        .page-sidebar {
+        .sidebar-nav {
             background-color: $mobile-sidebar-menu-bg-color;
 
-            .page-sidebar-menu {
+            .sidebar-nav-menu {
                 > li {
                     > a {
                         border-top: 1px solid $bg-color;
@@ -606,7 +606,7 @@
             }
 
             /* light sidebar */
-            .page-sidebar-menu.page-sidebar-menu-light {
+            .sidebar-nav-menu.sidebar-nav-menu-light {
 
                 /* 1st level links */
                 > li {
@@ -648,7 +648,7 @@
 
     @media (max-width: $screen-xs-min) { /* 480px */
 
-        .page-header.navbar {
+        section#top.navbar {
 
         }
     }

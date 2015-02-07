@@ -23,6 +23,7 @@
     "async": "^0.9.0",
     "fs-extra": "^0.12.0",
     "grunt": "^0.4.5",
+    "grunt-available-tasks": "^0.5.4",
     "grunt-bootlint": "^0.7.0",
     "grunt-browserify": "^3.3.0",
     "grunt-build-control": "^0.2.2",
@@ -66,7 +67,8 @@
     "rimraf": "^2.2.8",
     "time-grunt": "^0.3.1",
     "uglify-js": "^2.4.16",
-    "uglifyjs": "^2.3.6"
+    "uglifyjs": "^2.3.6",
+    "underscore.string": "^3.0.2"
   },
   "dependencies": {
     "bootstrap-gtreetable": "git://github.com/gilek/bootstrap-gtreetable.git#v2.2.1-alpha",

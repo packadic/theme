@@ -1,5 +1,5 @@
-define([ 'jquery', 'packadic/packadic' ],
-    function( $, Packadic ){
+define([ 'jquery' ],
+    function( $ ){
         'use strict';
         var demo = {};
 

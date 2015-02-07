@@ -22,7 +22,7 @@ Page content
 		color: #888;
 	}
 
-	.page-container-bg-solid & {
+	.page-section-bg-solid & {
 		color: #666;
 		margin-bottom: 20px;
 		margin-top: 20px;
@@ -87,7 +87,7 @@ Page content
 		}
 	}
 
-	.page-container-bg-solid & {
+	.page-section-bg-solid & {
 		position: relative;
 		padding: 0px 20px;
 		background-color: #ffffff;
@@ -129,12 +129,12 @@ Page content
 
 /* Page content */
 
-.page-content {
+main {
 	margin-top: 0px;
 	padding: 0px;
 	background-color: #fff;
 
-	.page-container-bg-solid & {
+	.page-section-bg-solid & {
 		background: $page-content-solid-bg-color;
 	}
 
@@ -146,11 +146,11 @@ Page content
 @media (min-width: $screen-md-min) { /* 992px */
 
 	/* Page content */
-	.page-content-wrapper {
+	.main-wrapper {
 		float: left;
 		width: 100%;
 
-		.page-content {
+		main {
 			margin-left: $sidebar-width;
 			margin-top: 0px;
 			min-height: $page-content-min-height;
@@ -160,34 +160,34 @@ Page content
 				min-height: auto;
 			}
 
-			.page-sidebar-fixed.page-sidebar-hover-on & {
+			.sidebar-nav-fixed.sidebar-nav-hover-on & {
 				margin-left: $sidebar-collapsed-width;
 			}
 
-			.page-sidebar-reversed & {
+			.sidebar-nav-reversed & {
 				margin-left: 0 !important;
 				margin-right: $sidebar-width !important;
 			}
 
-			.page-sidebar-reversed.page-sidebar-fixed.page-sidebar-hover-on & {
+			.sidebar-nav-reversed.sidebar-nav-fixed.sidebar-nav-hover-on & {
 				margin-left: 0;
 				margin-right: $sidebar-collapsed-width;
 			}
 
-			.page-sidebar-reversed.page-sidebar-closed  & {
+			.sidebar-nav-reversed.sidebar-nav-closed  & {
 				margin-left: 0 !important;
 				margin-right: $sidebar-collapsed-width !important;
 			}
 
-			.page-sidebar-closed  & {
+			.sidebar-nav-closed  & {
 				margin-left: $sidebar-collapsed-width !important;
 			}
 
-			.page-sidebar-closed.page-sidebar-hide & {
+			.sidebar-nav-closed.sidebar-nav-hide & {
 				margin-left: 0 !important;
 			}
 
-			.page-sidebar-closed.page-sidebar-reversed.page-sidebar-hide & {
+			.sidebar-nav-closed.sidebar-nav-reversed.sidebar-nav-hide & {
 				margin-right: 0 !important;
 			}
 
@@ -202,7 +202,7 @@ Page content
 
 	/* Bg solid content's breadcrumb */
 
-	.page-container-bg-solid {
+	.page-section-bg-solid {
 		.page-bar {
 			margin-top: -20px;
 		}
@@ -216,8 +216,8 @@ Page content
  	}
 
  	/* Page content */
-	.page-content-wrapper {
-		.page-content {
+	.main-wrapper {
+		main {
 			margin: 0px !important;
 			padding: 20px 20px 20px 20px !important;
 			min-height: 280px;
@@ -235,8 +235,8 @@ Page content
 @media (max-width: $screen-xs-max) { /* 767px */
 
 	/* Page content */
-	.page-content-wrapper {
-		.page-content {
+	.main-wrapper {
+		main {
 			padding: 20px 10px 10px 10px !important;
 			overflow: hidden;
 
@@ -257,8 +257,8 @@ Page content
 @media (max-width: $screen-xs-min) { /* 480px */
 
 	/* Dashboard date range panel */
-	.page-content-wrapper {
-		.page-content {
+	.main-wrapper {
+		main {
 			.page-title {
 				small {
 					display: block;

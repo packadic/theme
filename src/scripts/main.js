@@ -4,82 +4,81 @@
 
     var jqui = [ 'accordion', 'autocomplete', 'button', 'core', 'datepicker', 'dialog', 'draggable', 'droppable', 'effect-blind', 'effect-bounce', 'effect-clip', 'effect-drop', 'effect-explode', 'effect-fade', 'effect-fold', 'effect-highlight', 'effect', 'effect-puff', 'effect-pulsate', 'effect-scale', 'effect-shake', 'effect-size', 'effect-slide', 'effect-transfer', 'menu', 'mouse', 'position', 'progressbar', 'resizable', 'selectable', 'selectmenu', 'slider', 'sortable', 'spinner', 'tabs', 'tooltip', 'widget' ];
     var config = {
-        baseUrl    : '/assets/vendor',
-        paths      : {
-            //lodash          : 'lodash/lodash.min',
-            //jquery          : 'jquery/dist/jquery.min',
-            //bootstrap       : 'bootstrap/dist/js/bootstrap.min',
-            //'jquery-ui'     : 'jquery-ui/jquery-ui.min',
-            lodash   : 'lodash.custom.min',
-            bootstrap: 'bootstrap.custom.min',
-            jquery   : 'jquery/dist/jquery.min',
-
-            '$impromptu': 'jquery-impromptu/dist/jquery-impromptu.min',
-            moment   : 'moment/moment/min/moment.min',
-            bootbox  : 'bootbox.min',
-            modernizr: 'modernizr.min',
-
-            marked : 'marked/marked.min',
-            highlightjs: 'highlightjs/highlight.pack',
-            cryptojs  : 'cryptojslib/components',
-            toastr    : 'toastr/toastr',
-            mscrollbar: 'mscrollbar.min',
-            mousewheel: 'jquery-mousewheel/jquery.mousewheel.min',
-
-            gtreetable      : "bootstrap-gtreetable/dist/bootstrap-gtreetable",
-            'jquery-migrate': 'jquery-migrate/jquery-migrate',
-
-            'bs-modal'        : 'bootstrap-modal/js/bootstrap-modal',
-            'bs-modal-manager': 'bootstrap-modal/js/bootstrap-modalmanager',
-
-            'bs-select': 'bootstrap-select/dist/js/bootstrap-select.min'
+        baseUrl: '/assets/scripts',
+        paths  : {
+            // custom build with jsbuild
+            'plugins/lodash'          : 'plugins/lodash.custom.min',
+            'plugins/bootstrap'       : 'plugins/bootstrap.custom.min',
+            'jquery'                  : 'plugins/jquery.min',
+            // dont prefix jade, template amd loader require it, same as jquery
+            'jade'                    : 'plugins/jade/runtime',
+            // custom uglified and moved
+            'plugins/bootbox'         : 'plugins/bootbox',
+            'plugins/modernizr'       : 'plugins/modernizr',
+            'plugins/mscrollbar'      : 'plugins/mscrollbar',
+            // default vendor paths
+            'plugins/impromptu'       : 'plugins/jquery-impromptu/dist/jquery-impromptu.min',
+            'plugins/moment'          : 'plugins/moment/moment/min/moment.min',
+            'plugins/marked'          : 'plugins/marked/marked.min',
+            'plugins/highlightjs'     : 'plugins/highlightjs/highlight.pack',
+            'plugins/cryptojs'        : 'plugins/cryptojslib/components',
+            'plugins/toastr'          : 'plugins/toastr/toastr',
+            'plugins/mousewheel'      : 'plugins/jquery-mousewheel/jquery.mousewheel.min',
+            'plugins/gtreetable'      : "plugins/bootstrap-gtreetable/dist/bootstrap-gtreetable",
+            'plugins/jquery-migrate'  : 'plugins/jquery-migrate/jquery-migrate',
+            'plugins/bs-modal'        : 'plugins/bootstrap-modal/js/bootstrap-modal',
+            'plugins/bs-modal-manager': 'plugins/bootstrap-modal/js/bootstrap-modalmanager',
+            'plugins/bs-select'       : 'plugins/bootstrap-select/dist/js/bootstrap-select.min'
         },
-        shim       : {
-            lodash             : {
+        shim   : {
+            'plugins/lodash'        : {
                 exports: '_'
             },
-            'jade/runtime'     : {
+            'jade'                  : {
                 exports: 'jade'
             },
-            'jquery'           : {
+            'jquery'                : {
                 exports: '$',
                 init   : function(){
                     this.jquery.noConflict();
                 }
             },
-            'jquery-migrate'   : [ 'jquery' ],
-            'jquery-ui'        : [ 'jquery' ], //, 'jquery-migrate'],
-            'bootstrap'        : [ 'jquery' ],
-            'gtreetable'       : [ 'jquery-migrate', 'jquery-ui/core', 'jquery-ui/draggable', 'jquery-ui/droppable'],
-            'mscrollbar'       : [ 'bootstrap', 'mousewheel' ],
-            'packadic/packadic': [ 'jquery', 'jquery-ui/widget', 'jade/runtime' ],
-            'packadic/demo'    : [ 'packadic/packadic' ],
-            'bs-modal'         : [ 'bootstrap', 'bs-modal-manager' ]
+            'plugins/jquery-migrate': [ 'jquery' ],
+            'plugins/jquery-ui'     : [ 'jquery' ], //, 'jquery-migrate'],
+            'plugins/bootstrap'     : [ 'jquery' ],
+            'plugins/gtreetable'    : [ 'plugins/jquery-migrate', 'plugins/jquery-ui/core', 'plugins/jquery-ui/draggable', 'plugins/jquery-ui/droppable' ],
+            'plugins/mscrollbar'    : [ 'plugins/bootstrap', 'plugins/mousewheel' ],
+            'plugins/bs-modal'      : [ 'plugins/bootstrap', 'plugins/bs-modal-manager' ],
+            // packadic scripts
+            'config'                : [ 'jquery', 'plugins/lodash' ],
+            'autoloader'            : [ 'config' ],
+            'theme'                 : [ 'config', 'plugins/bootstrap', 'jade' ],
+            'demo'                  : [ 'theme' ]
         },
 
         waitSeconds: 15
     };
 
     jqui.forEach(function( name ){
-        config.paths[ 'jquery-ui/' + name ] = 'jquery-ui/ui/minified/' + name + '.min'
+        config.paths[ 'plugins/jquery-ui/' + name ] = 'plugins/jquery-ui/ui/minified/' + name + '.min'
     });
 
     require.config(config);
 
     require(
-        [ 'jquery', 'jade/runtime', 'packadic/packadic', 'packadic/demo', 'modernizr' ],
-        function( $, jade, Packadic, demo ){
+        [ 'jquery', 'jade', 'config', 'theme', 'demo', 'plugins/modernizr' ],
+        function( $, jade, config, theme, demo ){
 
             window.jade = jade;
 
-            console.log($, jade, Packadic, demo);
-
-            Packadic.init({
-                site: window.PACKADIC_SITE_DATA
+            config.init({
+                site: window.PACKADIC_SITE_DATA,
+                selectors: {
+                    sidebar: 'ul.sidebar-nav-menu'
+                }
             });
-
+            theme.init();
             demo.init();
-
         });
 
 }.call());

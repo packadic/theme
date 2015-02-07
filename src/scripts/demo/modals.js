@@ -1,5 +1,5 @@
-define([ 'jquery', 'packadic/demo', 'packadic/packadic', 'bootbox', 'bs-modal' ],
-    function( $, demo, Packadic, bootbox ){
+define([ 'jquery', 'demo', 'plugins/bootbox', 'plugins/bs-modal' ],
+    function( $, demo, bootbox ){
         'use strict';
 
         var modals = {

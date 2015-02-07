@@ -1,4 +1,4 @@
-define([ 'jquery', 'lodash', 'gtreetable' ],
+define([ 'jquery', 'plugins/lodash', 'plugins/gtreetable' ],
     function( $, _ ){
         'use strict';
 

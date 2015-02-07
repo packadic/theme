@@ -1,4 +1,4 @@
-define([ 'jquery', 'lodash', '$impromptu' ],
+define([ 'jquery', 'plugins/lodash', 'plugins/impromptu' ],
     function( $, _ ){
         'use strict';
 
