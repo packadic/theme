@@ -100,30 +100,76 @@ sidenav:
   - name: Plugins
     icon: fa fa-puzzle-piece
     children:
+      - name: Main plugins
+        children:
+          - name: Scrollbar
+            href: /plugins/scrollbar
 
-      - name: Scrollbar
-        href: /plugins/scrollbar
+          - name: Toastr
+            href: /plugins/toastr
 
-      - name: $ Impromptu
-        href: /plugins/jquery-impromptu
+      - name: Bootstrap
+        children:
+          - name: Bootbox
+            href: /plugins/bootbox
+          - name: gTreeTable
+            href: /plugins/bootstrap-gtreetable
+          - name: Select
+            href: /plugins/bootstrap-select
+          - name: Switch
+            href: /plugins/bootstrap-switch
+          - name: Confirmation
+            href: /plugins/bootstrap-confirmation
+          - name: Contextmenu
+            href: /plugins/bootstrap-contextmenu
+          - name: Datepicker
+            href: /plugins/bootstrap-datepicker
+          - name: Daterangepicker
+            href: /plugins/bootstrap-daterangepicker
+          - name: Datetimepicker
+            href: /plugins/bootstrap-datetimepicker
+          - name: Markdown
+            href: /plugins/bootstrap-markdown
+          - name: Maxlength
+            href: /plugins/bootstrap-maxlength
 
-      - name: $ Popup Overlay
-        href: /plugins/jquery-popup-overlay
 
-      - name: BS Bootbox
-        href: /plugins/bootbox
+      - name: jQuery
+        children:
+          - name: Impromptu
+            href: /plugins/jquery-impromptu
+          - name: Popup Overlay
+            href: /plugins/jquery-popup-overlay
+          - name: Cookie
+            href: /plugins/jquery-cookie
+          - name: Nestable
+            href: /plugins/jquery-nestable
+          - name: Inputmask
+            href: /plugins/jquery-inputmask
+          - name: ScrollTo
+            href: /plugins/jquery-scrollto
 
-      - name: BS gTreeTable
-        href: /plugins/bootstrap-gtreetable
 
-      - name: BS Select
-        href: /plugins/bootstrap-select
+      - name: Utility & helpers
+        children:
+          - name: RequireJS
+            href: /plugins/requirejs
+          - name: CodeMirror
+            href: /plugins/codemirror
+          - name: CryptoJS
+            href: /plugins/cryptojslib
+          - name: Lodash
+            href: /plugins/lodash
+          - name: Marked
+            href: /plugins/marked
+          - name: HighlightJS
+            href: /plugins/highlightjs
+          - name: Moment
+            href: /plugins/moment
+          - name: Modernizr
+            href: /plugins/modernizr
 
-      - name: BS Switch
-        href: /plugins/bootstrap-switch
 
-      - name: Toastr
-        href: /plugins/toastr
 
   - name: Multi-level menu
     icon: fa fa-tasks

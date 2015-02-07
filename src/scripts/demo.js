@@ -17,7 +17,8 @@ define([ 'jquery', 'packadic/packadic' ],
             this.present('.demo-button-editor', 'button-icon-showcase');
             this.present('#gtreetable', 'gtreetable');
             this.present('.show-class', 'show-class');
-            this.present('.plugin-markdown-readme', 'plugin-markdown-readme');
+            this.present('#demo-plugins-docs', 'plugins-docs');
+            this.present('.plugin-markdown', 'plugin-markdown');
             this.present('.demo-jq-impromptu', 'jq-impromptu');
         };
 

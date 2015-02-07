@@ -1,0 +1,16 @@
+extends layout
+
+block header
+    +page-title("CodeMirror", "")
+    +page-breadcrumbs
+        +breadcrumb("Plugins")
+        +breadcrumb("CodeMirror", "/plugins/codemirror", true)
+
+block plugin-panel-overview
+    +plugin-info("CodeMirror", "codemirror")
+
+block plugin-example
+    p To be done
+
+block plugin-code
+    p To be done

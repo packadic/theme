@@ -67,9 +67,8 @@
     "jquery-cookie": "~1.4.1",
     "jquery.scrollTo": "~1.4.14",
     "jquery.inputmask": "~3.1.61",
-    "jquery-nestable": "~0.0.1"
-  },
-  "devDependencies": {
-    "marked": "~0.3.3"
+    "jquery-nestable": "~0.0.1",
+
+      "marked": "~0.3.3"
   }
 }

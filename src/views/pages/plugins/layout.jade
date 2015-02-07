@@ -1,61 +1,108 @@
 extends ../../layouts/default
 
 
+mixin showvar(va)
+    if typeof va === 'object' || typeof va === 'array'
+        each item, key in va
+            div
+                if typeof key === 'string' && key === 'md'
+                    strong.text-blue= key
+                    div(style="padding-left: 20px")
+                        each fileContent, fileName in item
+                            div
+                                strong.text-red= fileName
+                else if typeof item === 'object' || typeof item === 'array'
+                    strong.text-blue=key
+                    div(style="padding-left: 20px")
+                        +showvar(item)
+                else
+                    strong.text-blue=key
+                    span(style="padding-left: 10px")=item
+
 mixin pil(key)
     tr
         td
             strong.lite-text-shadow.text-teal= key
-        td
+        td&attributes(attributes)
             block
 
 mixin plugin-info(pluginName, bowerName)
     - bowerName = bowerName || false;
-    - function _getBowerDep(name, isDev){
-    -   return build.bower[isDev === true ? 'devDependencies' : 'dependencies'][name];
+    - function _getBowerPlugin(name){
+    -   return build.plugins[name] || {};
     - }
-    - function _getBowerPackage(name){
-    -   return build.bower.packages[name];
-    - }
-    - var pkg = _getBowerPackage(bowerName);
+    - var plugin = _getBowerPlugin(bowerName);
+    - var bw = plugin.bw, pkg = plugin.pkg, md = plugin.md, data = plugin.data, authors = plugin.authors;
+
     .row
-        .col-md-4
+        .col-md-3
             +box("About", "info").box-table
                 table.table.table-light.table-hover.table-condensed
                     tbody
                         +pil("Name")= pluginName
-                        +pil("Package")= pkg.name
-                        +pil("License")= pkg.license
-                        +pil("Version")= pkg.version
-                        if pkg.homepage
+                        if bw.name
+                            +pil("Package")= bw.name
+                        if data.license
+                            +pil("License")= data.license
+                        if bw.version
+                            +pil("Version")= bw.version
+                        if data.description
+                            +pil("Description")(style="word-break: break-word;")
+                                small= data.description
+                        if data.homepage
                             +pil("Homepage")
-                                +a(href=pkg.homepage) Open in new window
+                                +a(href=data.homepage)
+                                    small= data.homepage.replace('http://', '').replace('https://', '').replace('www.', '')
+                        if data.bugs && data.bugs.url
+                            +pil("Issues")
+                                a(href=data.bugs.url) View / Report
+                        //+pil("Homepage")=""
 
-        .col-md-4
-            +box("Authors", "users").box-table
-                if pkg.authors
+            if authors && authors.length > 0
+                +box("Authors", "users").box-table
                     table.table.table-light.table-hover.table-condensed
                         tbody
-                            each author, index in pkg.authors
+                            each author, index in authors
                                 tr
                                     td
-                                        strong.lite-text-shadow.text-teal
+                                        strong.lite-text-shadow.text-teal.with-small-padding
                                             i.fa.fa-user
-                                    td= author
-
-
-        .col-md-4
+                                    td= author.name || ""
+                                    td
+                                        if author.email
+                                            a(href="mailto:" + author.email).btn.btn-xs.btn-primary mail
+                                        else
+                                            +a.btn.btn-xs.btn-info.disabled mail
+                                    td
+                                        if author.url
+                                            a(href=author.url, target="_blank").btn.btn-xs.btn-primary www
+                                        else
+                                            +a.btn.btn-xs.btn-info.disabled www
             +box("Dependencies", "users").box-table
-                if pkg.dependencies
+                if bw.dependencies
                     table.table.table-light.table-hover.table-condensed
                         tbody
-                            each version, name in pkg.dependencies
+                            each version, name in bw.dependencies
                                 +pil(name)= version
 
-    if build.bower.packages[ bowerName ].readmemd
-        .row
-            .col-md-12
-                +box("Readme", "info")
-                    .plugin-markdown-readme.margin-left= build.bower.packages[ bowerName ].readmemd
+        .col-md-9
+            +box
+                +box-header("Documents", "list", true)
+                    each fileContent, fileName in md
+                        +a.btn.red-light.red-dark-stripe.plugin-doc-link(data-filename=fileName)= fileName
+                    +a.btn.red-light.plugin-doc-link(data-filename="debug").hide= "DEBUG"
+                +box-body
+                    each fileContent, fileName in md
+                        .plugin-doc-box(id="doc-" + fileName, class=(fileName.toLowerCase() == 'readme' ? '' : 'hide'))
+                            if typeof fileContent.toc === 'string'
+                                .plugin-doc-toc.hide!= fileContent.toc
+                            if typeof fileContent.body === 'string'
+                                .plugin-doc-body.hide!= fileContent.body.replace(/<script/g, '&lt;script').replace(/<link/g, '&lt;link')
+                            .plugin-doc-generated
+                    .plugin-doc-box(id="doc-debug").hide
+                        +showvar(plugin)
+
+
 
 block append styles
     +css-vendor('highlightjs/styles/github.css')
@@ -69,7 +116,7 @@ block header
 
 
 block content
-    +tabs.tabbable-custom
+    +tabs.tabbable-custom#demo-plugins-docs
         +tabs-nav
             block plugin-tabs
                 +tabs-nav-item("overview").active Overview
@@ -92,3 +139,4 @@ block content
                                 +box("Code", "code")
                                     block plugin-code
                                         p To be done
+
