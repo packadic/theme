@@ -1,0 +1,72 @@
+include ../base
+
+doctype html
+html.no-js
+    head
+        title Hai
+        +viewport
+        meta(charset=site.encoding)
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        block styles
+            +css-style("default.css")
+
+    body.page-header-fixed
+        //section#top
+        .page-header.navbar.navbar-fixed-top
+            //header.top
+            .page-header-inner
+                .page-logo
+                    +a Logo
+                    .menu-toggler.sidebar-toggler
+                //nav.top-nav
+                +a.menu-toggler.responsive-toggler(data-toggle="collapse" data-target=".navbar-collapse")
+                .top-menu
+                    ul.nav.navbar-nav
+        .clearfix
+        //#page
+        .page-container
+            //section#side
+            .page-sidebar-wrapper
+                //section#side aside
+                .page-sidebar.navbar-collapse.collapse
+
+                    ul.page-sidebar-menu
+                        li.sidebar-toggler-wrapper
+                            .sidebar-toggler
+                        li.start
+                            a(href='javascript:;')
+                                i.fa.fa-home
+                                span.title Dashboard
+                                span.arrow
+                            ul.sub-menu
+                                +lia
+                                    i.fa.fa-bar-chart
+                                    | Default Dashboard
+                                +lia
+                                    i.fa.fa-bulb
+                                    | New Dashboard #1
+                                +lia
+                                    i.fa.fa-graph
+                                    | New Dashboard #2
+                        li
+                            a(href='javascript:;')
+                                i.fa.fa-basket
+                                span.title eCommerce
+                                span.arrow
+
+
+            //section#content
+            .page-content-wrapper
+                //main
+                .page-content
+                    //header.content
+                    .row
+                        .col-md-12
+                            | contentsdf
+        //section#bottom
+        .page-footer
+            //footer.bottom
+            .page-footer-inner Radicsss
+
+        +js-vendor('jquery/dist/jquery.min.js')
+        +js-vendor('bootstrap/dist/js/bootstrap.min.js')

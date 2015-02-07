@@ -1,0 +1,36 @@
+$theme-name: "default";
+
+@import "base";
+
+// dependant vendor styles
+//---------
+@import "compass/reset";
+
+// Fonts
+@import url($web-font);
+@import "../vendor/font-awesome/scss/font-awesome";
+@import "../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap";
+
+
+
+// layout
+//---------
+@import "layout/header";
+@import "layout/page-container";
+@import "layout/sidebar";
+@import "layout/content";
+@import "layout/footer";
+
+
+
+// components
+//---------
+
+// vendor
+//---------
+
+// themes
+//---------
+@import "theme/layout"; // theme the layout
+// theme the components
+// theme the vendor

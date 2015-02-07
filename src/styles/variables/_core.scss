@@ -1,0 +1,18 @@
+// own variables
+$web-font:                          "//fonts.googleapis.com/css?family=";
+$font-path:                         '../fonts';
+
+$web-font-primary:                  "Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,800,700";
+$font-family-primary:  	  		 	"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-default:  	  		 	$font-family-primary;
+
+$web-font-heading:                  "Montserrat:400,700";
+$font-family-heading:               "Monserrat";
+
+$web-font-sub-heading:              "Karla:400,700italic,700,400italic";
+$font-family-sub-heading:           "Karla";
+
+$web-font-code:                     "Source+Code+Pro";
+$font-family-code:                  "Source Code Pro", monospace;
+
+$web-font:                          $web-font + $web-font-primary + "|" + $web-font-heading  + "|" + $web-font-sub-heading + "|" + $web-font-code;

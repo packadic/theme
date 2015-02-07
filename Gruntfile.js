@@ -13,7 +13,7 @@ var radic  = require('radic'),
 
 module.exports = function( grunt ){
 
-    var includeBuilds = true;
+    var includeBuilds = false;
     var config = grunt.file.readYAML('config.yml');
 
 
@@ -76,14 +76,15 @@ module.exports = function( grunt ){
             },
             dev    : {
                 files: [
-                    {expand: true, cwd: 'src/styles', src: '*.scss', ext: '.css', dest: 'dev/assets/styles'}
+                    {expand: true, cwd: 'src/styles', src: '**/*.scss', ext: '.css', dest: 'dev/assets/styles'}
                 ]
             }
         },
 
         watch     : {
             options   : {
-                livereload: true
+                livereload: true,
+                nospawn: true
             },
             styles    : {
                 files: [ 'src/styles/**' ],
