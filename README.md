@@ -8,6 +8,10 @@ By Robin Radic. MIT Licensed.
 - Github/jenkings etc widgets
 
 
+## Information
+- [Changelog](CHANGELOG.md)
+- [Grunt task overview](TASKS.md)
+- [Roadmap](ROADMAP.md)
 
 ## 3d part dos
 http://vast-engineering.github.io/jquery-popup-overlay/

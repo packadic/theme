@@ -68,6 +68,8 @@
     "jquery.scrollTo": "~1.4.14",
     "jquery.inputmask": "~3.1.61",
     "jquery-nestable": "~0.0.1",
-    "marked": "~0.3.3"
+    "marked": "~0.3.3",
+    "eventEmitter": "~4.2.11",
+    "gsap": "~1.15.1"
   }
 }

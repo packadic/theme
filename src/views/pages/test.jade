@@ -1,75 +1,100 @@
 include ../base
-
 doctype html
-html.no-js
-    head
-        title Hai
-        +viewport
-        meta(charset=site.encoding)
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        block styles
-            +css-style("default.css")
++ie('if IE 8')
+    html(lang="en").ie8.no-js
++ie('if IE 9')
+    html(lang="en").ie9.no-js
++ie('if !IE')
+    html(lang="en").no-js
+head
+    title Hai
+    +viewport
+    meta(charset=site.encoding)
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    block styles
+        +css-style("default.css")
 
-    body.page-header-fixed
-        //section#top
-        section#top.navbar.navbar-fixed-top
-            //header.top
-            header.top
-                .page-logo
-                    +a Logo
-                    .menu-toggler.sidebar-toggler
-                //nav.top-nav
-                +a.menu-toggler.responsive-toggler(data-toggle="collapse" data-target=".navbar-collapse")
-                .top-menu
-                    ul.nav.navbar-nav
-        .clearfix
-        //#page
-        section#page
-            //section#side
-            .sidebar-wrapper
-                //section#side aside
-                nav.sidebar-nav.navbar-collapse.collapse
+body.page-header-fixed
+    //section#top
+    section#top.navbar.navbar-fixed-top
+        //header.top
+        header.top
+            .page-logo
+                +a Logo
+                .menu-toggler.sidebar-toggler
+            //nav.top-nav
+            +a.menu-toggler.responsive-toggler(data-toggle="collapse" data-target=".navbar-collapse")
+            .top-menu
+                ul.nav.navbar-nav
+    .clearfix
 
-                    ul.sidebar-nav-menu
-                        li.sidebar-toggler-wrapper
-                            .sidebar-toggler
-                        li.start
-                            a(href='javascript:;')
-                                i.fa.fa-home
-                                span.title Dashboard
-                                span.arrow
-                            ul.sub-menu
-                                +lia
-                                    i.fa.fa-bar-chart
-                                    | Default Dashboard
-                                +lia
-                                    i.fa.fa-bulb
-                                    | New Dashboard #1
-                                +lia
-                                    i.fa.fa-graph
-                                    | New Dashboard #2
-                        li
-                            a(href='javascript:;')
-                                i.fa.fa-basket
-                                span.title eCommerce
-                                span.arrow
+    //#page
+    section#page
+        //section#side
+        .sidebar-wrapper
+            //section#side aside
+            nav.sidebar-nav.navbar-collapse.collapse
 
+                ul.sidebar-nav-menu(data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200")
+                    li.sidebar-toggler-wrapper
+                        .sidebar-toggler
+                    li.start
+                        a(href='javascript:;')
+                            i.fa.fa-home
+                            span.title  Dashboard
+                            span.arrow
+                        ul.sub-menu
+                            +lia
+                                i.fa.fa-bar-chart
+                                |  Charts
+                            +lia
+                                i.fa.fa-bitcoin
+                                |  Bitcoins
+                            +lia
+                                i.fa.fa-cart-plus
+                                |  Your basket
+                    li
+                        a(href='javascript:;')
+                            i.fa.fa-archive
+                            span.title Data
+                            span.arrow
+                        ul.sub-menu
+                            +lia
+                                i.fa.fa-bar-chart
+                                | MultiChart
+                            +lia
+                                i.fa.fa-cloud
+                                | Your cloud data
+                            li
+                                a(href='javascript:;')
+                                    i.fa.fa-archive
+                                    span.title Data
+                                    span.arrow
+                                ul.sub-menu
+                                    +lia
+                                        i.fa.fa-bar-chart
+                                        | MultiChart
+                                    +lia
+                                        i.fa.fa-cloud
+                                        | Your cloud data
+                                    +lia
+                                        i.fa.fa-code
+                                        | Code view
+        //section#content
+        .main-wrapper
+            //main
+            main
+                //header.content
+                .row
+                    .col-md-12
+                        | contentsdf
+    //section#bottom
+    section#bottom
+        //footer.bottom
+        footer.bottom Radicsss
 
-            //section#content
-            .main-wrapper
-                //main
-                main
-                    //header.content
-                    .row
-                        .col-md-12
-                            | contentsdf
-        //section#bottom
-        section#bottom
-            //footer.bottom
-            footer.bottom Radicsss
+    script.
+        window.PACKADIC_SITE_DATA = !{site_json};
 
-        script.
-            window.PACKADIC_SITE_DATA = !{site_json};
-
-        +js-script('plugins/require.js')
-        +js-script('main.js')
+    +js-script('plugins/require.js')
+    +js-script('main.js')

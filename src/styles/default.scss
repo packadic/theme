@@ -34,3 +34,27 @@ $theme-name: "default";
 @import "theme/layout"; // theme the layout
 // theme the components
 // theme the vendor
+
+
+
+
+@import 'SassyJSON';
+
+
+$jsonmap : (
+    breakpoints: (
+
+        screen-xs-min: $screen-xs-min,
+        screen-sm-min: $screen-sm-min,
+        screen-md-min: $screen-md-min,
+        screen-lg-min: $screen-lg-min,
+        screen-lg-med: $screen-lg-med,
+        screen-xs-max: $screen-xs-max,
+        screen-sm-max: $screen-sm-max,
+        screen-md-max: $screen-md-max
+    )
+);
+
+
+
+@include json-encode($jsonmap);

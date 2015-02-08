@@ -7,7 +7,6 @@ var radic  = require('radic'),
     jsyaml = require('js-yaml'),
     fs     = require('fs-extra'),
     path   = require('path'),
-    _s = require('underscore.string'),
     lib    = require('./lib');
 
 
@@ -17,21 +16,20 @@ module.exports = function( grunt ){
     var customTaskList = true;
     var config = grunt.file.readYAML('config.yml');
 
-
     var cfg = {
         config          : config,
-        includeBuilds: includeBuilds,
-        customTaskList: customTaskList,
+        includeBuilds   : includeBuilds,
+        customTaskList  : customTaskList,
         copy            : {
             dev_fonts  : {
                 files: [
-                    {expand: true, cwd: 'src/vendor/bootstrap/fonts', src: '**', dest: 'dev/assets/fonts'},
-                    {expand: true, cwd: 'src/vendor/font-awesome/fonts', src: '**', dest: 'dev/assets/fonts'}
+                    {expand: true, cwd: 'src/plugins/bootstrap/fonts', src: '**', dest: 'dev/assets/fonts'},
+                    {expand: true, cwd: 'src/plugins/font-awesome/fonts', src: '**', dest: 'dev/assets/fonts'}
                 ]
             },
             dev_images : {files: [ {expand: true, cwd: 'src/images', src: '**', dest: 'dev/assets/images'} ]},
             dev_scripts: {files: [ {expand: true, cwd: 'src/scripts', src: '**', dest: 'dev/assets/scripts'} ]},
-            dev_plugins : {files: [ {expand: true, cwd: 'src/plugins', src: '**', dest: 'dev/assets/scripts/plugins'} ]},
+            dev_plugins: {files: [ {expand: true, cwd: 'src/plugins', src: '**', dest: 'dev/assets/scripts/plugins'} ]},
             dev_demo   : {files: [ {expand: true, cwd: 'src/demo', src: '**', dest: 'dev/demo'} ]},
             dev_misc   : {files: [ {src: 'src/.htaccess', dest: 'dev/.htaccess'} ]}
         },
@@ -46,15 +44,15 @@ module.exports = function( grunt ){
             }
         },
         clean           : {
-            dev        : {src: 'dev/*'},
-            dev_fonts  : {src: 'dev/assets/fonts'},
-            dev_images : {src: 'dev/assets/images'},
+            dev          : {src: 'dev/*'},
+            dev_fonts    : {src: 'dev/assets/fonts'},
+            dev_images   : {src: 'dev/assets/images'},
             //dev_scripts: {src: ['dev/assets/scripts/**', '!dev/assets/scripts/plugins/**', 'dev/assets/scripts/plugins/*/**']},
-            dev_styles : {src: 'dev/assets/styles'},
-            dev_plugins : {src: 'dev/assets/scripts/plugins'},
-            dev_templates   : {src: 'dev/assets/scripts/templates'},
-            dev_demo   : {src: 'dev/demo'},
-            dev_views  : {src: 'dev/**/*.html'}
+            dev_styles   : {src: 'dev/assets/styles'},
+            dev_plugins  : {src: 'dev/assets/scripts/plugins'},
+            dev_templates: {src: 'dev/assets/scripts/templates'},
+            dev_demo     : {src: 'dev/demo'},
+            dev_views    : {src: 'dev/**/*.html'}
         },
         'string-replace': {
             templates: {
@@ -94,7 +92,7 @@ module.exports = function( grunt ){
                 files: [ 'src/images/**' ],
                 tasks: [ 'clean:dev_images', 'copy:dev_images' ]
             },
-            templates       : {
+            templates  : {
                 files: [ 'src/views/tpls/**/*.jade' ],
                 tasks: [ 'dev_templates' ]
             },
@@ -119,7 +117,8 @@ module.exports = function( grunt ){
                 'sass:dev', 'jade:dev', 'dev:templates',
                 'copy:dev_scripts', 'uglify:dev',
                 'lodashAutobuild:dev', 'shell:dev_jquery', 'bootstrapjs:dev', 'jqueryui:dev'
-            ]
+            ],
+            scripts: ['copy:dev_plugins', 'uglify:dev', 'copy:dev_scripts', 'lodashAutobuild:dev', 'shell:dev_jquery', 'bootstrapjs:dev', 'jqueryui:dev', 'jade:dev_templates', 'string-replace:templates']
         },
         bootlint  : {
             options: {
@@ -131,62 +130,13 @@ module.exports = function( grunt ){
             },
             files  : [ 'dev/*/*.html', 'dev/*.html' ]
         }
+
     };
 
     cfg = require('./lib/grunt/config/jade')(cfg, grunt, 'dev', 'dev');
     cfg = require('./lib/grunt/config/jsbuild')(cfg, grunt, 'dev', 'dev');
-
-    if(customTaskList == true){
-        cfg.availabletasks = {
-            tasks: {
-                options: {
-                    filter: 'include',
-                    tasks: ['dev:scripts', 'dev:templates', 'dev:build', 'dev:watch', 'dev:jsbuild', 'tasks'],
-                    reporter: function(options) {
-                        var meta        = options.meta,
-                            task        = options.currentTask,
-                            targets     = '',
-                            indentlevel = '';
-
-                        var str = '';
-                        if (meta.header && meta.groupCount) {
-                            indentlevel = '#';
-                            str += '## ' + task.group + '\n';
-                        }
-
-                        if (task.targets.length > 1) {
-                            targets = indentlevel + '### Targets: `' + task.targets.join('`, `') + '`';
-                        }
-                        str += indentlevel + '## ' + task.name + '\n' + targets + '\n' + task.info + '\n';
-
-                        var tskstr = fs.readFileSync('./tasks.md', 'utf-8')
-                        if(tskstr.indexOf(str) === -1){
-                            str = tskstr + str;
-                        }
-                        fs.outputFileSync('./tasks.md', str);
-
-
-                        if (meta.header && meta.groupCount) {
-                            console.log('\n' + radic.cli.bold(task.group));
-                        }
-
-                        if (task.targets.length > 1) {
-                            targets = '(' + task.targets.join('|') + ')';
-                        }
-
-
-                        console.log(
-                            radic.cli.cyan(_s.rpad(task.name, meta.longest)),
-                            radic.cli.white(_s.center(task.type, 4)),
-                            task.info,
-                            radic.cli.green(targets)
-                        );
-                    }
-                }
-            }
-        };
-        grunt.registerTask('tasks', 'Shows a list of custom tasks and their description, filtering out all individual tasks', ['availabletasks']);
-    }
+    cfg = require('./lib/grunt/config/changelog')(cfg, grunt, 'dev', 'dev');
+    cfg = require('./lib/grunt/config/availabletasks')(cfg, grunt, 'dev', 'dev');
 
     if( includeBuilds === true ){
         config.builds.forEach(function( build ){
@@ -214,8 +164,7 @@ module.exports = function( grunt ){
         'clean:dev', 'dev:copy',
         'sass:dev', 'jade:dev',
         'dev:scripts', 'dev:jsbuild',
-        'copy:dev_scripts', 'uglify:dev',
-        'dev:jsbuild'
+        'copy:dev_scripts', 'uglify:dev'
     ]);
     grunt.registerTask('dev:build:fast', [ 'clean:dev', 'dev:copy', 'concurrent:build' ]);
     grunt.registerTask('dev:watch', 'generates dev/ files on changes + livereloads afterwards', [ 'watch' ]);
