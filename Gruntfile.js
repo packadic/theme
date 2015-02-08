@@ -94,7 +94,7 @@ module.exports = function( grunt ){
             },
             templates  : {
                 files: [ 'src/views/tpls/**/*.jade' ],
-                tasks: [ 'dev_templates' ]
+                tasks: [ 'dev:templates' ]
             },
             vendor     : {
                 files: [ 'src/vendor/**' ],
