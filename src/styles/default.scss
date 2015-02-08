@@ -1,5 +1,3 @@
-$theme-name: "default";
-
 @import "base";
 
 // dependant vendor styles
@@ -25,7 +23,22 @@ $theme-name: "default";
 
 // components
 //---------
+@import "components/type";
+@import "components/buttons";
+@import "components/labels";
+@import "components/tabs";
 
+@import "components/box";
+@import "components/scrollbar";
+@import "components/popover";
+@import "components/tables";
+@import "components/modals";
+@import "components/color-variants";
+
+@import "vendor/bootbox";
+@import "vendor/bootstrap-select";
+@import "vendor/bootstrap-gtreetable";
+@import "vendor/jquery-impromptu";
 // vendor
 //---------
 
@@ -35,6 +48,13 @@ $theme-name: "default";
 // theme the components
 // theme the vendor
 
+
+// utility classes
+//---------
+@import "utilities/positioning";
+@import "utilities/shadows";
+@import "utilities/bevelgloss";
+@import "utilities/effects";
 
 
 

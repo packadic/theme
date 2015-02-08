@@ -1,102 +1,113 @@
 include ../base
 doctype html
-html.no-js
-    head
-        title Hai
-        +viewport
-        meta(charset=site.encoding)
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        block styles
-            +css-style("style.css")
++ie('if IE 8')
+    html(lang="en").ie8.no-js
++ie('if IE 9')
+    html(lang="en").ie9.no-js
++ie('if !IE')
+    html(lang="en").no-js
+head
+    title Hai
+    +viewport
+    meta(charset=site.encoding)
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    block styles
+        +css-style("default.css")
 
-    body.fixed-top-nav
-        #site-wrapper
-            #top-wrapper
-                nav.top-nav(role='navigation')
-                    .container-fluid
-                        .navbar-header
-                            button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-                                span.sr-only Toggle navigation
-                                span.icon-bar
-                                span.icon-bar
-                                span.icon-bar
-                            a.navbar-brand(href='/')= site.name
-                        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-                            ul#topmenu.nav.navbar-nav
-                            ul.nav.navbar-nav.pull-right
-                                li
-                                    a(href="#") Test
+body.section-top-fixed
+    //section#top
+    section#top.navbar.navbar-fixed-top
+        //header.top
+        header.top
+            .menu-toggler.sidebar-toggler
+                i.fa.fa-long-arrow-left
 
-            #page-wrapper
-                #sidebar-wrapper
-                    .side-nav
-                        ul
-                            li.side-nav-header
-                                +a#side-nav-toggle
-                                    i.fa.fa-exchange
-                                h4 Navigation
+            .page-logo
+                +a Logo
 
+            //nav.top-nav
+            +a.menu-toggler.responsive-toggler(data-toggle="collapse" data-target=".navbar-collapse")
+            .top-menu
+                ul.nav.navbar-nav
+    .clearfix
+
+    //#page
+    section#page
+        //section#side
+        .sidebar-wrapper
+            //section#side aside
+            nav.sidebar-nav.navbar-collapse.collapse
+
+                ul.sidebar-nav-menu(data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200")
+                    li.sidebar-toggler-wrapper
+                        .sidebar-toggler
+                    li.start
+                        a(href='javascript:;')
+                            i.fa.fa-home
+                            span.title  Dashboard
+                            span.arrow
+                        ul.sub-menu
+                            +lia
+                                i.fa.fa-bar-chart
+                                |  Charts
+                            +lia
+                                i.fa.fa-bitcoin
+                                |  Bitcoins
+                            +lia
+                                i.fa.fa-cart-plus
+                                |  Your basket
+                    li
+                        a(href='javascript:;')
+                            i.fa.fa-archive
+                            span.title Data
+                            span.arrow
+                        ul.sub-menu
+                            +lia
+                                i.fa.fa-bar-chart
+                                | MultiChart
+                            +lia
+                                i.fa.fa-cloud
+                                | Your cloud data
                             li
-                                +a
-                                    i.fa.fa-home
-                                    span Dashboard
-
-                #header-wrapper
-                    .page-header
-                        block header
-                            +page-title("Title", "Subtitle")
-                            +page-breadcrumbs
-                                +breadcrumb("Buttons", false, true, true)
-
-
-                #content-wrapper
-                    nav.navbar.navbar-default.hide(role='navigation')
-                        .container-fluid
-                            .navbar-header
-                                button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-                                    span.sr-only Toggle navigation
-                                    span.icon-bar
-                                    span.icon-bar
-                                    span.icon-bar
-                                a.navbar-brand(href='/')= site.name
-                            .collapse.navbar-collapse
-                                ul.nav.navbar-nav
-                                    +lia Test
-                                    +lia Test2
-                                    +lia Test3
-                                ul.nav.navbar-nav.pull-right
-                                    li
-                                        a(href="#") Test
+                                a(href='javascript:;')
+                                    i.fa.fa-archive
+                                    span.title Data
+                                    span.arrow
+                                ul.sub-menu
+                                    +lia
+                                        i.fa.fa-bar-chart
+                                        | MultiChart
+                                    +lia
+                                        i.fa.fa-cloud
+                                        | Your cloud data
+                                    +lia
+                                        i.fa.fa-code
+                                        | Code view
+        //section#content
+        .main-wrapper
+            //main
+            main
+                header.content
+                    block header
+                        +page-title("Title", "Subtitle")
+                        +page-breadcrumbs
+                            +breadcrumb("Buttons", false, true, true)
+                div.content
                     block content
+                        .row
+                            .col-md-12
+                                | contentsdf
+    //section#bottom
+    section#bottom
+        //footer.bottom
+        footer.bottom
+            block footer
+                p Radicsss
 
-        block vendor-scripts
-            +ie('if lt IE 9')
-                +js-vendor('respond/dest/respond.min.js')
-                +js-vendor('excanvas/excanvas.js')
+    block script
+        script.
+            window.PACKADIC_SITE_DATA = !{site_json};
 
-
-            script.
-                window.PACKADIC_SITE_DATA = !{site_json};
-                console.log(PACKADIC_SITE_DATA);
-
-            +js-vendor('require.min.js')
-            +js-vendor('packadic/main.js')
-
-
-
-            block scripts
-
-//
-            include ../partials/vendor-scripts
-            +js-vendor('codemirror/lib/codemirror.js')
-            +js-vendor('codemirror/addon/runmode/runmode.js')
-            +js-vendor('codemirror/mode/jade/jade.js')
-            +js-vendor('codemirror/mode/javascript/javascript.js')
-            +js-vendor('codemirror/mode/css/css.js')
-            +js-vendor('codemirror/mode/xml/xml.js')
-            +js-vendor('codemirror/mode/htmlmixed/htmlmixed.js')
-
-//
     block scripts
-            include ../partials/scripts
-
+        +js-script('plugins/require.js')
+        +js-script('main.js')

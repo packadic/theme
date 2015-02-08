@@ -1,4 +1,4 @@
-define([ 'jquery', 'plugins/lodash' ],
+define([ 'jquery', 'lodash' ],
     function( $, _ ){
         'use strict';
 

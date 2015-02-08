@@ -6,7 +6,8 @@
 
     /* Header search bar, toggler button & top menu */
     section#top.navbar {
-        background-color: $header-bg-color;
+        background: $section-top-bg;
+        @include box-shadow(inset 0 -1px 1px rgba(0, 0, 0, 0.5) !important);
 
         /* Header seaech box */
         .search-form {
@@ -39,8 +40,19 @@
 
         /* Toggler button for sidebar expand/collapse and responsive sidebar menu */
         .menu-toggler {
-
             background-image: image_url('sidebar_toggler_icon_#{$theme-name}.png');
+            &.sidebar-toggler{
+                background: $sidebar-menu-top-level-bg-left;
+                > i.fa {
+                    color: $brand-main-color;
+                }
+                &:hover {
+                    background-color: $sidebar-menu-top-level-bg-right;
+                    > i.fa {
+                        color: lighten($brand-main-color, 20%);
+                    }
+                }
+            }
         }
     }
 
@@ -64,10 +76,21 @@
             /* 1st level links */
 
             > li {
+
+
+
+
+
+
                 > a {
                     border-top: 1px solid $sidebar-menu-devider-border-color;
                     color: $sidebar-menu-link-font-color;
 
+                    @include sidebar-nav-menu-bg($sidebar-menu-top-level-bg-left, $sidebar-menu-top-level-bg-right);
+
+                    &:hover {
+
+                    }
                     > i {
                         color: $sidebar-menu-link-icon-font-color;
                     }
@@ -100,7 +123,9 @@
                 &:hover,
                 &.open {
                     > a {
-                        background: $sidebar-menu-link-bg-color-on-hover;
+                        //background: $sidebar-menu-link-bg-color-on-hover;
+
+                        @include sidebar-nav-menu-bg($sidebar-menu-top-level-bg-left-hover, $sidebar-menu-top-level-bg-right-hover);
                         color: $sidebar-menu-link-font-color-on-hover;
 
                         > i {
@@ -116,13 +141,19 @@
                     }
                 }
 
+                &.open > a {
+                    //background-image: none !important;
+                    //filter: none !important;
+                    @include sidebar-nav-menu-bg($sidebar-menu-link-bg-color-on-active, $sidebar-menu-top-level-bg-right);
+                }
+
                 &.active,
                 &.active.open {
                     > a {
-                        background: $sidebar-menu-link-bg-color-on-active;
+                        @include sidebar-nav-menu-bg($sidebar-menu-link-bg-color-on-active, $sidebar-menu-top-level-bg-right);
+                        //background: $sidebar-menu-link-bg-color-on-active;
                         border-top-color: transparent;
                         color: $sidebar-menu-link-font-color-on-active;
-
                         &:hover {
                             background: $sidebar-menu-link-bg-color-on-active;
                         }
@@ -227,12 +258,21 @@
                             }
                         }
                     }
+                    //background: $sidebar-menu-link-bg-color-on-active;
 
+                    &:hover > a,
+                    &.open:not(.active) > a{
+                        background: $sidebar-menu-sub-menu-link-bg-color-on-hover !important;
+                    }
+
+                    &.active> a {
+                        @include sidebar-nav-menu-bg($sidebar-menu-link-bg-color-on-active, $sidebar-menu-sub-menu-link-bg-color-on-hover, 45px, left);
+
+                    }
                     &:hover,
                     &.open,
                     &.active {
                         > a {
-                            background: $sidebar-menu-sub-menu-link-bg-color-on-hover !important;
 
                             > i {
                                 color: $sidebar-menu-sub-menu-link-icon-font-color-on-hover;
@@ -659,4 +699,10 @@
 
     body {
       background-color: $bg-color;
+    }
+
+    // content
+    main {
+        background: $main-content-bg;
+        background-color: $main-content-bg-color;
     }

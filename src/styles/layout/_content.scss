@@ -1,6 +1,62 @@
-/***
-Page content
-***/
+// @todo switch title/breadcrumbs to proper one
+
+header.content {
+    margin: 0;
+    padding: 3px 20px;
+    background: #ffffff;
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+    clear: both;
+    border-bottom: 5px solid #e5e5e5 !important;
+    box-shadow: none !important;
+    margin-bottom: 10px;
+    color: #bcbcbc;
+    &:after{
+        @extend .clearfix;
+    }
+    .page-title {
+        margin: 0;
+        padding: 0;
+        border-bottom: 0;
+    }
+    h1 {
+        font-size: 25px;
+        font-weight: 300;
+        display: inline-block;
+        margin: 5px 0 5px 0;
+
+    }
+    .page-subtitle {
+        font-size: 14px;
+        font-weight: 300;
+        color: #bcbcbc;
+        display: inline-block;
+        margin-left: 20px;
+    }
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 13px 15px;
+        border-radius: 0;
+        background: transparent;
+        li i {
+            padding: 0 10px;
+        }
+        li + li:before {
+            content: "";
+            padding: 0;
+        }
+        a {
+            color: #bcbcbc;
+            &:hover, &:focus, &:active {
+                text-decoration: none;
+            }
+            &:hover {
+                color: #777777;
+            }
+        }
+    }
+}
+
 
 /* Page title */
 
@@ -154,7 +210,10 @@ main {
 			margin-left: $sidebar-width;
 			margin-top: 0px;
 			min-height: $page-content-min-height;
-			padding: 25px 20px 10px 20px;
+
+            > div.content {
+                padding: 25px 20px 10px 20px;
+            }
 
 			&.no-min-height {
 				min-height: auto;
@@ -219,8 +278,11 @@ main {
 	.main-wrapper {
 		main {
 			margin: 0px !important;
-			padding: 20px 20px 20px 20px !important;
 			min-height: 280px;
+
+            > div.content {
+                padding: 20px 20px 20px 20px !important;
+            }
 		}
 	}
 }
@@ -237,7 +299,10 @@ main {
 	/* Page content */
 	.main-wrapper {
 		main {
-			padding: 20px 10px 10px 10px !important;
+
+            > div.content {
+                padding: 20px 10px 10px 10px !important;
+            }
 			overflow: hidden;
 
 			/* Page title */

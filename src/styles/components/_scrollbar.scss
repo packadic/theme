@@ -1,0 +1,10 @@
+@import "vendor/scrollbar";
+
+// packadic edit
+.mCustomScrollbar {
+    padding-right: 0 !important;
+}
+.mCSB_inside > .mCSB_container {
+    margin-right: 15px;
+}
+

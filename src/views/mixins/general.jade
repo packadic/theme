@@ -7,7 +7,7 @@ mixin js-script(path)
     script(src="/assets/scripts/" + path)
 
 mixin js-vendor(path)
-    script(src="/assets/vendor/" + path)
+    script(src="/assets/scripts/plugins/" + path)
 
 mixin js-tpls(path)
     script(src="/assets/tpls/" + path)
@@ -16,7 +16,7 @@ mixin css-style(path)
     link(href="/assets/styles/" + path, type="text/css", rel="stylesheet")
 
 mixin css-vendor(path)
-    link(href="/assets/vendor/" + path, type="text/css", rel="stylesheet")
+    link(href="/assets/scripts/plugins/" + path, type="text/css", rel="stylesheet")
 
 
 mixin codeviewer

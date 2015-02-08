@@ -1,4 +1,4 @@
-define([ 'jquery', 'plugins/lodash', 'templates/modal', 'plugins/bootstrap' ],
+define([ 'jquery', 'lodash', 'templates/modal', 'plugins/bootstrap' ],
     function( $, _, template ){
         'use strict';
 

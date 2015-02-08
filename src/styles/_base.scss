@@ -1,7 +1,12 @@
-@import "../plugins/bootstrap-sass-official/assets/stylesheets/bootstrap/variables";
-@import "../plugins/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
+// Vendor functions
 @import '../plugins/sass-material-colors/sass/sass-material-colors';
 @import "compass";
+
+// Core functions
+@import "mixins/general";
+@import "mixins/helpers";
+
+$theme-name: "default";
 
 // Core variables
 @import "variables/core";
@@ -14,11 +19,8 @@
 @import "variables/uniform";
 @import "variables/vendor"; // generic
 
-
-
+// Vendor variables
+@import "../plugins/bootstrap-sass-official/assets/stylesheets/bootstrap/variables";
 
 // Vendor mixins
-
-// Core mixins
-@import "mixins/general";
-@import "mixins/helpers";
+@import "../plugins/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";

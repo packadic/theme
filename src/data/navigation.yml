@@ -15,13 +15,13 @@ topnav:
     href: /contact
     icon: fa fa-pencil-o
 
-sidenav:
-  - name: Overview
+sidebar:
+  - name: Home
     href: /
     icon: fa fa-home
 
   - name: Documentation
-    icon: fa fa-cubes
+    icon: fa fa-file-code-o
     children:
       - name: Gettings started
         href: /docs/gettings-started
@@ -34,6 +34,15 @@ sidenav:
 
       - name: Grunt tasks
         href: /docs/gettings-started
+
+
+
+  - name: Layouts
+    icon: fa fa-desktop
+    children:
+      - name: Plugins
+        icon: fa fa-puzzle-piece
+
 
   - name: Components
     icon: fa fa-cubes
@@ -96,6 +105,17 @@ sidenav:
 
       - name: Widgets
         href: /components/widgets
+
+
+
+  - name: Pages
+    icon: fa fa-puzzle-piece
+    children:
+      - name: Plugins
+        icon: fa fa-puzzle-piece
+
+  - name: Github Pages
+    icon: fa fa-github
 
   - name: Plugins
     icon: fa fa-puzzle-piece
@@ -175,22 +195,29 @@ sidenav:
     icon: fa fa-tasks
     children:
       - name: Tasks
-        icon: fa-align-right font-orange
+        icon: fa fa-align-right text-orange
 
       - name: Bolds
-        icon: fa-bold font-green
+        icon: fa fa-bold text-green
         children:
           - name: Bugs
-            icon: fa-bug font-red
+            icon: fa fa-bug text-red
 
           - name: Drivers
-            icon: fa-cab font-green
+            icon: fa fa-cab text-green
 
           - name: Payments
-            icon: fa-cc
+            icon: fa fa-cc
 
       - name: Get coffee
-        icon: fa-coffee
+        icon: fa fa-coffee
 
 
 
+
+
+
+  - name: No icon
+    children:
+      - name: Plugins
+        icon: fa fa-puzzle-piece

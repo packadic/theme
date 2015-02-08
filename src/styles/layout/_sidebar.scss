@@ -56,29 +56,31 @@ Page sidebar
 				position: relative;
 				margin: 0;
 				border: 0px;
-				padding: 10px 15px;
+				padding: 10px 10px;
 				text-decoration: none;
 				font-size: $sidebar-menu-link-font-size;
 				font-weight: 300;
 
 				> i {
 					font-size: $sidebar-menu-link-icon-font-size;
-					margin-right: 5px;
 					text-shadow:none;
+                    margin-left: 1px;
+                    margin-right: 20px !important;
 				}
 
 				> i.fa {
 					top: 3px;
-					margin-left: 1px;
-					margin-right: 4px;
 				}
 
 				> [class^="fa-"] {
 					top: 2px;
 					margin-left: 1px;
-					margin-right: 4px;
 				}
 
+                &.no-icon {
+                    padding-left: 55px;
+                    height: 40px;
+                }
 				.sidebar-nav-fixed & {
 					transition: all 0.2s ease;
 				}
@@ -86,6 +88,10 @@ Page sidebar
 				.sidebar-nav-reversed.sidebar-nav-fixed & {
 					transition: none;
 				}
+
+                .title {
+                    font-size: 13px;
+                }
 			}
 
 			&.heading {
@@ -140,6 +146,7 @@ Page sidebar
 							border-color: transparent $page-content-solid-bg-color transparent transparent;
 						}
 
+
 						.page-container-bg-solid.sidebar-nav-reversed & {
 							border-color: transparent transparent transparent $page-content-solid-bg-color;
 						}
@@ -151,6 +158,16 @@ Page sidebar
 		/* all links */
 		li {
 			> a {
+                > i {
+
+                    width: 23px;
+                    text-align: center;
+                    margin-right: 4px;
+                }
+
+                > .title {
+                    font-size: 12px;
+                }
 				> .arrow {
 
 					&:before {

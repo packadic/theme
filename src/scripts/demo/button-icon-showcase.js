@@ -1,4 +1,4 @@
-define([ 'jquery', 'plugins/lodash', 'plugins/bs-select' ],
+define([ 'jquery', 'lodash', 'plugins/bs-select' ],
     function( $, _ ){
         'use strict';
 
@@ -29,7 +29,7 @@ define([ 'jquery', 'plugins/lodash', 'plugins/bs-select' ],
                     self.$pickers[ picker ].selectpicker({});
 
                     var value = self.getPickerValue(picker);
-                    console.log('init picker', picker, 'setting value', typeof value, 'val=', value, 'valid=', isValidValue(value));
+                    //console.log('init picker', picker, 'setting value', typeof value, 'val=', value, 'valid=', isValidValue(value));
                     if( isValidValue(value) ){
                         self.$pickers[ picker ].selectpicker('val', value);
                     }
@@ -50,7 +50,7 @@ define([ 'jquery', 'plugins/lodash', 'plugins/bs-select' ],
             setPickerValue: function( picker, value ){
                 this.$buttons.removeClass(this.getPickerValue(picker));
 
-                console.log('button-icon-showcase', 'setting picker', picker, 'setting value', typeof value, 'val=', value, 'valid=', isValidValue(value));
+                //console.log('button-icon-showcase', 'setting picker', picker, 'setting value', typeof value, 'val=', value, 'valid=', isValidValue(value));
                 if( isValidValue(value) ){
                     this.$buttons.addClass(value);
                 }

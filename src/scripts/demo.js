@@ -6,7 +6,7 @@ define([ 'jquery' ],
         demo.present = function(selector, module){
             var $els = $(selector);
             if($els.length > 0){
-                require(['packadic/demo/' + module], function(mod){
+                require(['demo/' + module], function(mod){
                     mod($els);
                 });
             }

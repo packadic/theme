@@ -9,11 +9,12 @@
         baseUrl: '/assets/scripts',
         paths  : {
             // custom build with jsbuild
-            'plugins/lodash'          : 'plugins/lodash.custom.min',
+            'lodash'                  : 'plugins/lodash.custom.min',
             'plugins/bootstrap'       : 'plugins/bootstrap.custom.min',
             'jquery'                  : 'plugins/jquery/dist/jquery.min',
             // dont prefix jade, template amd loader require it, same as jquery
             'jade'                    : 'plugins/jade/runtime',
+            'string'                  : 'plugins/underscore.string/dist/underscore.string.min',
             // custom uglified and moved
             'plugins/bootbox'         : 'plugins/bootbox',
             'plugins/modernizr'       : 'plugins/modernizr',
@@ -34,20 +35,26 @@
             'plugins/cookie'          : 'plugins/jquery-cookie/jquery.cookie',
             'plugins/events'          : 'plugins/eventEmitter/EventEmitter.min',
             // gsap
+            'plugins/gsap/lite'       : 'plugins/gsap/src/minified/TweenLite.min',
             'plugins/gsap/max'        : 'plugins/gsap/src/minified/TweenMax.min',
             'plugins/gsap/attr'       : 'plugins/gsap/src/minified/plugins/AttrPlugin.min',
             'plugins/gsap/color'      : 'plugins/gsap/src/minified/plugins/ColorPropsPlugin.min',
             'plugins/gsap/scroll'     : 'plugins/gsap/src/minified/plugins/ScrollToPlugin.min',
             'plugins/gsap/text'       : 'plugins/gsap/src/minified/plugins/TextPlugin.min',
-            'plugins/gsap/jquery'     : 'plugins/gsap/src/minified/jquery.gsap.min'
+            'plugins/gsap/jquery-lite': 'plugins/gsap/src/minified/jquery.gsap.min',
+            'plugins/gsap/jquery-max' : 'plugins/gsap/src/minified/jquery.gsap.min'
+
         },
 
         shim: {
-            'plugins/lodash'        : {
+            'lodash'                : {
                 exports: '_'
             },
             'jade'                  : {
                 exports: 'jade'
+            },
+            'string'                : {
+                exports: 's'
             },
             'jquery'                : {
                 exports: '$',
@@ -62,14 +69,17 @@
             'plugins/mscrollbar'    : [ 'plugins/bootstrap', 'plugins/mousewheel' ],
             'plugins/bs-modal'      : [ 'plugins/bootstrap', 'plugins/bs-modal-manager' ],
 
-            'plugins/gsap/max'   : [ 'plugins/gsap/scroll' ],
-            'plugins/gsap/jquery': [ 'jquery', 'plugins/gsap/max' ],
+            'plugins/gsap/lite'       : [ 'plugins/gsap/scroll' ],
+            'plugins/gsap/max'        : [ 'plugins/gsap/scroll' ],
+            'plugins/gsap/jquery-lite': [ 'jquery', 'plugins/gsap/lite' ],
+            'plugins/gsap/jquery-max' : [ 'jquery', 'plugins/gsap/max' ],
 
             // packadic scripts
-            'config'             : [ 'jquery', 'plugins/lodash' ],
-            'autoloader'         : [ 'config' ],
-            'theme'              : [ 'plugins/gsap/jquery', 'config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events' ],
-            'demo'               : [ 'theme' ]
+            'config'                  : [ 'jquery', 'lodash' ],
+            'eventer'                 : [ 'jquery', 'plugins/events', 'config' ],
+            'autoloader'              : [ 'config' ],
+            'theme'                   : [ 'config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events' ],
+            'demo'                    : [ 'theme' ]
         },
 
 
@@ -82,25 +92,27 @@
 
     require.config(config);
 
-    require(
-        [ 'jquery', 'jade', 'config', 'theme', 'demo', 'plugins/modernizr' ],
-        function( $, jade, config, theme, demo ){
+    require([ 'jquery', 'string', 'jade', 'config', 'plugins/modernizr' ],
+        function( $, s, jade, config ){
 
             window.jade = jade;
 
-            config.init({
+            config.merge({
+                debug: true,
                 site     : window.PACKADIC_SITE_DATA,
                 selectors: {
                     sidebar: 'ul.sidebar-nav-menu'
                 },
-                scss     : JSON.parse(theme.unquote($('head').css('font-family'), "'"))
+                scss     : JSON.parse(s.unquote($('head').css('font-family'), "'"))
             });
 
-            console.log(config);
-            theme.init();
-            demo.init();
-
+            require([ 'autoloader', 'theme', 'demo' ], function( autoloader, theme, demo ){
+                theme.init({
+                    sidebarItems: config.site.data.navigation.sidebar
+                });
+                autoloader.init();
+                demo.init();
+            });
         });
-
 }.call());
 

@@ -2,7 +2,7 @@
     background: image_url('/assets/images/bg/' + $name + '.png') repeat #404040;
 }
 
-@mixin content-bg($nr: false, $light: false){
+@function content-bg($nr: false, $light: false){
     $img: 'content_bg';
     @if $light {
         $img: $img + '_light';
@@ -12,5 +12,15 @@
             $img: $img + '_' + $nr;
         }
     }
-    @include bg-img($img);
+    @return image_url('/assets/images/bg/' + $img + '.png') repeat;
+}
+
+@mixin content-bg($nr: false, $light: false){
+    background: content-bg($nr, $light);
+}
+
+@mixin sidebar-nav-menu-bg($bg-left, $bg-right, $bg-left-width: $sidebar-collapsed-width, $to: right){
+    @include background-image(linear-gradient(to $to, $bg-left $bg-left-width, $bg-right $bg-left-width));
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($bg-left)}', endColorstr='#{ie-hex-str($bg-right)}', GradientType=1);
 }

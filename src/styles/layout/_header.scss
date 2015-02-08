@@ -85,7 +85,7 @@ section#top.navbar {
 
                 .btn.submit {
                     margin-left: -24px;
-                    padding:0;
+                    padding: 0;
                     width: $header-height;
                     background: none;
                     margin-top: 4px;
@@ -98,7 +98,6 @@ section#top.navbar {
             }
         }
 
-
         &.open {
             transition: all 0.6s;
             width: 300px !important;
@@ -108,7 +107,7 @@ section#top.navbar {
                     text-indent: 0;
 
                     &:hover {
-                        cursor:text;
+                        cursor: text;
                     }
                 }
 
@@ -138,11 +137,21 @@ section#top.navbar {
         }
 
         &.sidebar-toggler {
-            float: right;
-            margin: $header-sidebar-toggler-margin;
+            float: left;
+            text-align: center;
+            margin: 0;
+            height: $header-height - 1px;
+            padding: 12px;
+            > i.fa {
+                font-size: 20px;
+            }
+            // match width and color with the top level sidebar left bg gradient
+            width: $sidebar-collapsed-width;
+
+
 
             .sidebar-nav-closed.sidebar-nav-closed-hide-logo & {
-                margin-right: ($sidebar-collapsed-width - $header-menu-toggler-width ) / 2 ;
+                margin-right: ($sidebar-collapsed-width - $header-menu-toggler-width ) / 2;
             }
         }
 
@@ -156,7 +165,8 @@ section#top.navbar {
 }
 
 /* Allow expanded search for above 768px */
-@media (min-width: $screen-sm-min) {  /* 768px */
+@media (min-width: $screen-sm-min) {
+    /* 768px */
     section#top.navbar {
 
         /* Search box */
@@ -169,7 +179,7 @@ section#top.navbar {
                         text-indent: 0;
 
                         &:hover {
-                            cursor:text;
+                            cursor: text;
                         }
                     }
 
@@ -199,17 +209,18 @@ section#top.navbar {
 
 /* Form medium devices upto large devices */
 
-@media (min-width: $screen-md-min) and (max-width: $screen-lg-min) {  /* 992px 1200px */
+@media (min-width: $screen-md-min) and (max-width: $screen-lg-min) {
+    /* 992px 1200px */
     /* Boxed layout */
     .page-boxed {
         section#top.navbar {
-
 
         }
     }
 }
 
-@media (min-width: $screen-md-min) { /* 992px */
+@media (min-width: $screen-md-min) {
+    /* 992px */
 
     /* Page header */
     section#top.navbar {
@@ -230,13 +241,12 @@ section#top.navbar {
     }
 
     /* Boxed Layout */
-    .page-boxed	{
+    .page-boxed {
         section#top.navbar {
             /* Page logo */
             .page-logo {
                 width: ($sidebar-width + 1px);
             }
-
 
         }
     }
@@ -262,7 +272,8 @@ section#top.navbar {
     }
 }
 
-@media (max-width: $screen-sm-max) { /* 991px */
+@media (max-width: $screen-sm-max) {
+    /* 991px */
 
     /* Page header */
     section#top.navbar {
@@ -286,7 +297,7 @@ section#top.navbar {
         /* Menu Toggler */
         .menu-toggler {
             &.sidebar-toggler {
-                display:none !important;
+                display: none !important;
             }
 
             &.responsive-toggler {
@@ -313,11 +324,12 @@ section#top.navbar {
     }
 }
 
-@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) { /* 768px & 991px */
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    /* 768px & 991px */
 
     /* Boxed Layout */
     .page-boxed {
-        section#top.navbar  {
+        section#top.navbar {
             margin: auto !important;
             padding: 0;
 
@@ -328,7 +340,8 @@ section#top.navbar {
     }
 }
 
-@media (max-width: $screen-xs-max) { /* 767px */
+@media (max-width: $screen-xs-max) {
+    /* 767px */
 
     /* Page header */
     section#top.navbar {
@@ -358,11 +371,11 @@ section#top.navbar {
     /* Page header */
     section#top.navbar {
 
-
     }
 }
 
-@media (max-width: $screen-xs-min) { /* 480px */
+@media (max-width: $screen-xs-min) {
+    /* 480px */
 
     /* Fixed header for mobile */
     .section-top-fixed.section-top-fixed-mobile {
@@ -372,7 +385,6 @@ section#top.navbar {
     }
 
     section#top.navbar {
-
 
     }
 }

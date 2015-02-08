@@ -7,12 +7,27 @@ $font-family-primary:  	  		 	"Open Sans", "Helvetica Neue", Helvetica, Arial, s
 $font-family-default:  	  		 	$font-family-primary;
 
 $web-font-heading:                  "Montserrat:400,700";
-$font-family-heading:               "Monserrat";
+$font-family-heading:               "Montserrat", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 $web-font-sub-heading:              "Karla:400,700italic,700,400italic";
 $font-family-sub-heading:           "Karla";
 
 $web-font-code:                     "Source+Code+Pro";
-$font-family-code:                  "Source Code Pro", monospace;
+$font-family-code:                  "Source Code Pro", Consolas, "Courier New", monospace;
 
 $web-font:                          $web-font + $web-font-primary + "|" + $web-font-heading  + "|" + $web-font-sub-heading + "|" + $web-font-code;
+
+
+
+
+// extra bootstrap variables
+$brand-default:         			#c6c6c6;
+$brand-primary:         		 	#428bca;
+
+$state-default-text:             	#333333 ;
+$state-default-bg:           	 	$brand-default ;
+$state-default-border:       	 	darken(adjust-hue($state-default-bg, -10), 5%) ;
+
+$state-primary-text:          	 	#D8E3F2 ;
+$state-primary-bg:        		 	$brand-primary ;
+$state-primary-border:    	 	 	darken(adjust-hue($state-primary-bg, -10), 5%) ;

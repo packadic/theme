@@ -3,26 +3,44 @@
 // Theme Colors Settigns
 
 // Main settings
-$brand-main-color:                                               		#d64635;
+$brand-main-color:                                               		#33336E;
 $brand-main-font-color:													#ffffff;
 
 // Body and header
 $bg-color:                                                         		#3d3d3d;
-$header-bg-color:                                                  		#1f1f1f;
 
+// widgets
+$widget-header-color: #c3c3c3;
 
-
+// section#top
+$section-top-bg:                                                        content-bg(3, false);
+$section-top-bg-color:                                                  #444;
 
 // Header search
-$header-search-bg-color:                                        		darken($header-bg-color, 4%) !default;
-$header-search-bg-hover-color:                                  		lighten($header-bg-color, 20%) !default;
+//$header-bg-color:                                                  		#1f1f1f;
+
+$header-search-bg-color:                                        		darken($section-top-bg-color, 4%) !default;
+$header-search-bg-hover-color:                                  		lighten($section-top-bg-color, 20%) !default;
 $header-search-bg-color-on-open:                                 		$header-search-bg-hover-color !default;
 $header-search-font-color:                                      		#999999 !default;
 $header-search-placeholder-font-color:                          		darken($header-search-font-color, 1%) !default;
 
 
+$main-content-bg:                                                       content-bg(2, true) !default;
+$main-content-bg-color:                                                 #fff !default;
+
 // Sidebar menu
 $sidebar-menu-devider-border-color:                             		darken(#4d4d4d, 2%) !default;
+
+$sidebar-menu-top-level-bg-left:                                        #222222 !default;
+$sidebar-menu-top-level-bg-right:                                       #333333 !default;
+$sidebar-menu-top-level-bg-left-hover:                                  $brand-main-color !default;
+$sidebar-menu-top-level-bg-right-hover:                                 #222222 !default;
+
+$section-top-sidebar-menu-toggler-bg:                                   $sidebar-menu-top-level-bg-left !default;
+$section-top-sidebar-menu-toggler-bg-hover:                             $sidebar-menu-top-level-bg-right !default;
+
+
 
 $sidebar-menu-link-font-color:                                  		#d9d9d9 !default;
 $sidebar-menu-link-font-color-on-hover:                         		$sidebar-menu-link-font-color !default;
@@ -36,7 +54,7 @@ $sidebar-menu-link-bg-color-on-hover:                           		#303030 !defau
 $sidebar-menu-link-bg-color-on-active:                          		$brand-main-color;
 
 $sidebar-menu-arrow-color:                                      		#777777 !default;
-$sidebar-menu-arrow-color-on-active:                            		$sidebar-menu-link-font-color-on-active !default;
+$sidebar-menu-arrow-color-on-active:                            		$sidebar-menu-top-level-bg-left-hover;
 $sidebar-menu-arrow-color-on-hover:                                     $sidebar-menu-link-icon-font-color-on-hover !default;
 
 $sidebar-menu-sub-menu-box-shadow-color:                                $sidebar-menu-link-bg-color-on-hover !default;
