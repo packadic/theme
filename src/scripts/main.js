@@ -78,7 +78,7 @@
             'config'                  : [ 'jquery', 'lodash' ],
             'eventer'                 : [ 'jquery', 'plugins/events', 'config' ],
             'autoloader'              : [ 'config' ],
-            'theme'                   : [ 'config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events' ],
+            'theme'                   : [ 'plugins/gsap/jquery-lite', 'config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events' ],
             'demo'                    : [ 'theme' ]
         },
 
@@ -92,13 +92,23 @@
 
     require.config(config);
 
+    window.packadicStartTime = new Date();
+    window.logDebug = function(){
+        var loadTime = (new Date()).getTime() - packadicStartTime.getTime();
+        var args = [];
+        args.push(loadTime / 1000);
+        args.push($.makeArray(arguments));
+        console.log(typeof args, args);
+        console.debug.apply(console, args);
+    };
     require([ 'jquery', 'string', 'jade', 'config', 'plugins/modernizr' ],
         function( $, s, jade, config ){
+
 
             window.jade = jade;
 
             config.merge({
-                debug: true,
+                debug    : true,
                 site     : window.PACKADIC_SITE_DATA,
                 selectors: {
                     sidebar: 'ul.sidebar-nav-menu'
@@ -109,6 +119,16 @@
             require([ 'autoloader', 'theme', 'demo' ], function( autoloader, theme, demo ){
                 theme.init({
                     sidebarItems: config.site.data.navigation.sidebar
+                });
+                autoloader.on('detected', function(){
+                    logDebug('autoloader detected @ ' + autoloader.detected);
+                });
+                autoloader.on('loaded', function(){
+                    logDebug('autoloader loaded @ ' + autoloader.loaded);
+                });
+                autoloader.ready(function(){
+                    logDebug('autoloader ready');
+                    $('body').removeClass('page-loading');
                 });
                 autoloader.init();
                 demo.init();

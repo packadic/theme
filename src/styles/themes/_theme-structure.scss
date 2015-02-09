@@ -77,11 +77,6 @@
 
             > li {
 
-
-
-
-
-
                 > a {
                     border-top: 1px solid $sidebar-menu-devider-border-color;
                     color: $sidebar-menu-link-font-color;
@@ -231,11 +226,14 @@
                 }
             }
 
+
             .sub-menu {
                 > li {
+                    border-top: 1px solid $sidebar-menu-sub-menu-divider-border-color;
                     > a {
                         color: $sidebar-menu-sub-menu-link-font-color;
-
+                        background: $sidebar-menu-sub-menu-bg;
+                        //@include sidebar-nav-menu-bg($sidebar-menu-top-level-bg-right, $bg-color);
                         > i {
                             color: $sidebar-menu-sub-menu-link-icon-font-color;
                         }
@@ -262,12 +260,13 @@
 
                     &:hover > a,
                     &.open:not(.active) > a{
-                        background: $sidebar-menu-sub-menu-link-bg-color-on-hover !important;
+                        //background: $sidebar-menu-sub-menu-link-bg-color-on-hover !important;
+                        background: $sidebar-menu-sub-menu-bg-hover;
                     }
 
                     &.active> a {
-                        @include sidebar-nav-menu-bg($sidebar-menu-link-bg-color-on-active, $sidebar-menu-sub-menu-link-bg-color-on-hover, 45px, left);
-
+                        //@include sidebar-nav-menu-bg($sidebar-menu-link-bg-color-on-active, $sidebar-menu-sub-menu-link-bg-color-on-hover);
+                        background: $sidebar-menu-sub-menu-bg-active;
                     }
                     &:hover,
                     &.open,

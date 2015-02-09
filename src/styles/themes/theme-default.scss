@@ -1,4 +1,5 @@
+@import "../base";
 
+$theme-name: "default";
 
-
-@include "theme-structure";
+@import "theme-structure";

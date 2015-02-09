@@ -114,8 +114,31 @@ sidebar:
       - name: Plugins
         icon: fa fa-puzzle-piece
 
-  - name: Github Pages
+
+  - name: Builds
     icon: fa fa-github
+    children:
+      - name: Jekyll/Github User Pages
+        icon: fa fa-github
+
+      - name: Github Project / Docpages
+        icon: fa fa-github
+
+      - name: JSDoc3 theme
+        icon: fa fa-github
+
+      - name: Istanbul theme
+        icon: fa fa-github
+
+      - name: PHPDoc theme
+        icon: fa fa-github
+
+      - name: PHPUnit coverage theme
+        icon: fa fa-github
+
+      - name: Jekyll/Github Pages
+        icon: fa fa-github
+
 
   - name: Plugins
     icon: fa fa-puzzle-piece

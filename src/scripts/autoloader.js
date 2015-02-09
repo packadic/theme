@@ -9,29 +9,45 @@ define([ 'jquery', 'lodash', 'config', 'eventer' ],
         autoloader._defineEvent('init');
         autoloader._defineEvent('detected');
         autoloader._defineEvent('loaded');
+        autoloader._defineEvent('ready');
 
+        autoloader.detected = 0;
+        autoloader.loaded = 0;
+
+        autoloader.ready = function(callback){
+            autoloader.once('ready', callback);
+        };
+
+        autoloader.load = function(module, callback){
+            var load = [];
+            if(typeof module === 'string'){
+                load.push(module);
+            } else {
+                // array
+                load = module;
+            }
+            autoloader.detected++;
+            autoloader._trigger('detected');
+            autoloader._trigger('detected:' + module);
+            require(load, function(){
+                autoloader.loaded++;
+                autoloader._trigger('loaded');
+                autoloader._trigger('loaded:' + module);
+                if(autoloader.loaded == autoloader.detected){
+                    autoloader._trigger('ready');
+                }
+                if( _.isFunction(callback)){
+                    var args = _.toArray(arguments);
+                    callback.apply(callback, args);
+                }
+            });
+        };
         autoloader.detect = function(selector, module, callback){
             autoloader._defineEvent('detected:' + module);
             autoloader._defineEvent('loaded:' + module);
             var $els = $(selector);
-            var load = [];
             if($els.length > 0){
-                if(typeof module === 'string'){
-                    load.push(module);
-                } else {
-                    // array
-                    load = module;
-                }
-                autoloader._trigger('detected');
-                autoloader._trigger('detected:' + module);
-                require(load, function(){
-                    autoloader._trigger('loaded');
-                    autoloader._trigger('loaded:' + module);
-                    if( _.isFunction(callback)){
-                        var args = _.toArray(arguments);
-                        callback.apply(callback, args);
-                    }
-                });
+                autoloader.load(module, callback)
             }
         };
 

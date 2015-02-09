@@ -1,26 +1,30 @@
-// Vendor functions
-@import '../plugins/sass-material-colors/sass/sass-material-colors';
+
+// 1.0 MY functions that: 1. do NOT use any default variables (like default parameter variables) -- 2.
+@import "overrides/compass";
 @import "compass";
 
-// Core functions
-@import "mixins/general";
-@import "mixins/helpers";
+// 2.0 MY core variables (suffix them with !default)
+@import "variables";
 
-$theme-name: "default";
+// 3.0 MY override variables (variables that override VENDOR !default variables. do NOT suffix them with !default)
+@import "overrides/bootstrap";
+@import "overrides/uniform";
 
-// Core variables
-@import "variables/core";
-@import "variables/layout";
-@import "variables/theme";
-
-// Vendor variables definitions/overrides
-@import "variables/compass";
-@import "variables/bootstrap";
-@import "variables/uniform";
-@import "variables/vendor"; // generic
-
-// Vendor variables
+// 4.0 VENDOR (bootstrap) variables import
 @import "../plugins/bootstrap-sass-official/assets/stylesheets/bootstrap/variables";
+@import '../plugins/sass-material-colors/sass/sass-material-colors';
 
-// Vendor mixins
+// 5.0 MY extending variables = variables that uses VENDOR variables (suffix them with !default)
+@import "extensions/variables";
+
+// 6.0 MY mixins
+@import "mixins";
+
+// 6.0 VENDOR mixins
 @import "../plugins/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
+
+// 6.1 MY override mixins. mixins that override the VENDOR mixins to alter the VENDOR styles
+//@import "overrides/mixins";
+@import "layout";
+@import "theme";
+

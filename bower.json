@@ -71,6 +71,7 @@
     "marked": "~0.3.3",
     "eventEmitter": "~4.2.11",
     "gsap": "~1.15.1",
-    "underscore.string": "~3.0.3"
+    "underscore.string": "~3.0.3",
+    "spinkit": "~1.0.1"
   }
 }

@@ -203,18 +203,18 @@ Page sidebar
 			list-style: none;
 			display: none;
 			padding: 0;
-			margin: 8px 0px 8px 0px;
+			margin: 0; //8px 0px 8px 0px;
 
 			li {
 				background: none;
 				margin: 0px;
 				padding: 0px;
-				margin-top: 1px !important;
+				margin-top: 0px !important;
 
 				> a {
 					display: block;
 					margin: 0;
-					padding: 6px 15px 6px 43px;
+					padding: 6px 15px 6px 60px;
 					text-decoration: none;
 					font-size: $sidebar-menu-link-font-size;
 					font-weight: 300;
@@ -230,7 +230,7 @@ Page sidebar
 					margin: 0;
 					> li {
 						> a {
-							padding-left: 60px;
+							padding-left: 70px;
 						}
 						/* 3rd level sub menu */
 						> .sub-menu {

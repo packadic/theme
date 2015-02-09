@@ -5,7 +5,9 @@ define([ 'jquery', 'lodash', 'config', 'eventer', 'autoloader', 'plugins/cookie'
         function defined( obj ){
             return !_.isUndefined(obj);
         }
-
+        function cre(){
+            return $(document.createElement('div'));
+        }
         var theme = {
             options: {
             }
@@ -62,6 +64,35 @@ define([ 'jquery', 'lodash', 'config', 'eventer', 'autoloader', 'plugins/cookie'
         }.call());
 
         (function Helpers(){
+
+            /**
+             * checks is a property is supported on the browser
+             * @param propertyName
+             * @returns {boolean}
+             * @example
+             * var supported = theme.isSupported('animation')
+             */
+            theme.isSupported = function (propertyName) {
+                var elm = document.createElement('div');
+                propertyName = propertyName.toLowerCase();
+
+                if (elm.style[propertyName] != undefined)
+                    return true;
+
+                var propertyNameCapital = propertyName.charAt(0).toUpperCase() + propertyName.substr(1),
+                    domPrefixes = 'Webkit Moz ms O'.split(' ');
+
+                for (var i = 0; i < domPrefixes.length; i++) {
+                    if (elm.style[domPrefixes[i] + propertyNameCapital] != undefined)
+                        return true;
+                }
+
+                return false;
+            };
+
+            theme.createLoader = function(name){
+                return cre().addClass('loader').addClass('loader-' + name)
+            };
 
             theme.getTemplate = function( name, cb ){
                 require(['templates/' + name], function(template){

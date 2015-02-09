@@ -37,9 +37,8 @@ $sidebar-menu-top-level-bg-right:                                       #333333 
 $sidebar-menu-top-level-bg-left-hover:                                  $brand-main-color !default;
 $sidebar-menu-top-level-bg-right-hover:                                 #222222 !default;
 
-$section-top-sidebar-menu-toggler-bg:                                   $sidebar-menu-top-level-bg-left !default;
-$section-top-sidebar-menu-toggler-bg-hover:                             $sidebar-menu-top-level-bg-right !default;
-
+$sidebar-menu-link-bg-color-on-hover:                           		#303030 !default;
+$sidebar-menu-link-bg-color-on-active:                          		$brand-main-color;
 
 
 $sidebar-menu-link-font-color:                                  		#d9d9d9 !default;
@@ -50,18 +49,48 @@ $sidebar-menu-link-icon-font-color:                             		#888888 !defau
 $sidebar-menu-link-icon-font-color-on-active:                   		$sidebar-menu-link-font-color-on-active !default;
 $sidebar-menu-link-icon-font-color-on-hover:                            $sidebar-menu-link-icon-font-color !default;
 
-$sidebar-menu-link-bg-color-on-hover:                           		#303030 !default;
-$sidebar-menu-link-bg-color-on-active:                          		$brand-main-color;
-
 $sidebar-menu-arrow-color:                                      		#777777 !default;
 $sidebar-menu-arrow-color-on-active:                            		$sidebar-menu-top-level-bg-left-hover;
 $sidebar-menu-arrow-color-on-hover:                                     $sidebar-menu-link-icon-font-color-on-hover !default;
 
+
+
+// sidebar sub menu
 $sidebar-menu-sub-menu-box-shadow-color:                                $sidebar-menu-link-bg-color-on-hover !default;
 $sidebar-menu-sub-menu-link-font-color:                         		#bdbdbd !default;
 $sidebar-menu-sub-menu-link-icon-font-color:                    		$sidebar-menu-arrow-color !default;
 $sidebar-menu-sub-menu-link-bg-color-on-hover:                  		lighten($bg-color, 4%) !default;
 $sidebar-menu-sub-menu-link-icon-font-color-on-hover:                   $sidebar-menu-link-icon-font-color-on-hover !default;
+
+
+//$sidebar-menu-sub-menu-to: right;
+//$sidebar-menu-sub-menu-to-width: $sidebar-collapsed-width;
+$sidebar-menu-sub-menu-bg:                                              sidebar-submenu-bg(#333333, $bg-color, $sidebar-collapsed-width, right) !default;
+//$sidebar-menu-sub-menu-bg-hover: #333;
+$sidebar-menu-sub-menu-bg-hover:   sidebar-submenu-2-bg(
+        #333333,
+        #242424,
+
+                                    $sidebar-menu-sub-menu-link-bg-color-on-hover,
+                                    $sidebar-collapsed-width, right ) !default;
+
+//@include sidebar-nav-menu-bg($sidebar-menu-link-bg-color-on-active, $sidebar-menu-sub-menu-link-bg-color-on-hover);
+$sidebar-menu-sub-menu-bg-active:   sidebar-submenu-3-bg(
+
+        $brand-main-color,
+        #242424,
+        #242424,
+        $sidebar-menu-sub-menu-link-bg-color-on-hover,
+                                    $sidebar-collapsed-width,  right ) !default;
+
+
+
+$sidebar-menu-sub-menu-divider-border-color: #333333 !default;
+
+$section-top-sidebar-menu-toggler-bg:                                   $sidebar-menu-top-level-bg-left !default;
+$section-top-sidebar-menu-toggler-bg-hover:                             $sidebar-menu-top-level-bg-right !default;
+
+
 
 $sidebar-menu-hover-sub-menu-bg-color:									lighten($sidebar-menu-link-bg-color-on-hover, 4%) !default;
 

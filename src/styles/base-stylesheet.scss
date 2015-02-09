@@ -1,0 +1,95 @@
+
+// order of .scss definitions/files
+
+//--- start of base file: << imports _{name}.scss files >> exports 1 {name}.scss file that will be processed to {name}.css
+@import "base";
+
+// Fonts
+@import url($web-font);
+@import "../plugins/font-awesome/scss/font-awesome";
+
+// 7.0 VENDOR styles
+@import "../plugins/bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "vendor/bootbox";
+@import "vendor/bootstrap-select";
+@import "vendor/bootstrap-gtreetable";
+@import "vendor/jquery-impromptu";
+
+
+// 8.0 MY override mixins (that could possibly override VENDOR mixins, if wanted)
+//@import "extensions/mixins";
+
+// 9.0 MY layout styles (WITHOUT colors, images, bg colors, etc -- WITH dimensions, sizes, width, paddings, margins, etc)
+@import "layout/header";
+@import "layout/page-container";
+@import "layout/sidebar";
+@import "layout/content";
+@import "layout/footer";
+
+
+// 10.0 MY components
+@import "components/type";
+@import "components/buttons";
+@import "components/labels";
+@import "components/tabs";
+
+@import "components/box";
+@import "components/scrollbar";
+@import "components/popover";
+@import "components/tables";
+@import "components/modals";
+@import "components/color-variants";
+@import "components/loader";
+
+@import "components/utilities/positioning";
+@import "components/utilities/shadows";
+@import "components/utilities/bevelgloss";
+@import "components/utilities/effects";
+
+
+
+#page-loader {
+    display: none;
+}
+body.page-loading {
+
+    @include createLoader(page, #fefefe);
+    //background: #fefefe;
+
+    #page-loader {
+        display: block;
+    }
+
+    section#top,
+    section#page,
+    section#bottom,
+    > .clearfix {
+        display: none;
+        transition: all 2s;
+    }
+}
+
+
+
+@import 'SassyJSON';
+
+
+$jsonmap : (
+    breakpoints: (
+
+        screen-xs-min: $screen-xs-min,
+        screen-sm-min: $screen-sm-min,
+        screen-md-min: $screen-md-min,
+        screen-lg-min: $screen-lg-min,
+        screen-lg-med: $screen-lg-med,
+        screen-xs-max: $screen-xs-max,
+        screen-sm-max: $screen-sm-max,
+        screen-md-max: $screen-md-max
+    )
+);
+
+
+
+@include json-encode($jsonmap);
+
+//--- end of base file

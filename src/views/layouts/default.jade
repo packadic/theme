@@ -12,9 +12,12 @@ head
     meta(charset=site.encoding)
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     block styles
-        +css-style("default.css")
+        +css-style("base-stylesheet.css")
+        +css-style("themes/theme-default.css")
 
-body.section-top-fixed
+body.page-loading.active2.section-top-fixed
+    #page-loader
+        .loader.loader-light
     //section#top
     section#top.navbar.navbar-fixed-top
         //header.top
@@ -37,52 +40,9 @@ body.section-top-fixed
         .sidebar-wrapper
             //section#side aside
             nav.sidebar-nav.navbar-collapse.collapse
-
+                .loader.loader-light
                 ul.sidebar-nav-menu(data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200")
-                    li.sidebar-toggler-wrapper
-                        .sidebar-toggler
-                    li.start
-                        a(href='javascript:;')
-                            i.fa.fa-home
-                            span.title  Dashboard
-                            span.arrow
-                        ul.sub-menu
-                            +lia
-                                i.fa.fa-bar-chart
-                                |  Charts
-                            +lia
-                                i.fa.fa-bitcoin
-                                |  Bitcoins
-                            +lia
-                                i.fa.fa-cart-plus
-                                |  Your basket
-                    li
-                        a(href='javascript:;')
-                            i.fa.fa-archive
-                            span.title Data
-                            span.arrow
-                        ul.sub-menu
-                            +lia
-                                i.fa.fa-bar-chart
-                                | MultiChart
-                            +lia
-                                i.fa.fa-cloud
-                                | Your cloud data
-                            li
-                                a(href='javascript:;')
-                                    i.fa.fa-archive
-                                    span.title Data
-                                    span.arrow
-                                ul.sub-menu
-                                    +lia
-                                        i.fa.fa-bar-chart
-                                        | MultiChart
-                                    +lia
-                                        i.fa.fa-cloud
-                                        | Your cloud data
-                                    +lia
-                                        i.fa.fa-code
-                                        | Code view
+
         //section#content
         .main-wrapper
             //main
