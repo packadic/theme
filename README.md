@@ -1,5 +1,6 @@
-# Packadic theme
-By Robin Radic. MIT Licensed.  
+# Packadic theme  
+**Currently in development**  
+By Robin Radic. [MIT Licensed](LICENSE)  
 **Purpose**
 - HTML/css/js theme
 - Jekyll github use pages theme (JEKYL INTEGRATEION
@@ -11,7 +12,8 @@ By Robin Radic. MIT Licensed.
 ## Information
 - [Changelog](CHANGELOG.md)
 - [Grunt task overview](TASKS.md)
-- [Roadmap](ROADMAP.md)
+- [Roadmap](ROADMAP.md)  
+- [MIT Licensed](LICENSE)  
 
 ## 3d part dos
 http://vast-engineering.github.io/jquery-popup-overlay/
