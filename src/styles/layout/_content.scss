@@ -57,9 +57,6 @@ header.content {
     }
 }
 
-
-/* Page title */
-
 .page-title {
 	padding: 0px;
 	font-size: 28px;
@@ -70,7 +67,6 @@ header.content {
 	font-weight: 300;
 	font-family: $font-family-primary;
 
-	/* subtitle */
 	small {
 		font-size: 14px;
 		letter-spacing: 0px;
@@ -89,102 +85,6 @@ header.content {
 	}
 }
 
-/* Page breadcrumb */
-
-.page-bar {
-	padding: 0px;
-	background-color: #f7f7f7;
-	margin-bottom: 25px;
-
-	@include clearfix();
-
-	.page-breadcrumb {
-		display: inline-block;
-		float: left;
-		padding: 8px;
-		margin: 0;
-		list-style: none;
-
-		> li  {
-			display: inline-block;
-
-			.ie8 & {
-				margin-right: 1px;
-			}
-
-			> a,
-			> span {
-				color: #888;
-				font-size: 14px;
-				text-shadow:none;
-			}
-
-			> i {
-				color: #aaa;
-				font-size: 14px;
-				text-shadow:none;
-			}
-
-			> i[class^="icon-"],
-	        > i[class*="icon-"] {
-	        	color: darken(#999, 10%);
-	        }
-		}
-	}
-
-	.page-toolbar {
-		display: inline-block;
-		float: right;
-		padding: 0;
-
-		.btn-fit-height {
-			padding-top: 8px;
-			padding-bottom: 8px;
-		}
-	}
-
-	.page-section-bg-solid & {
-		position: relative;
-		padding: 0px 20px;
-		background-color: #ffffff;
-		margin: -25px -20px 0 -20px;
-
-		.page-breadcrumb {
-			padding: 11px 0;
-
-			> li  {
-				> a,
-				> span {
-					color: #888;
-				}
-
-				> i {
-					color: #aaa;
-				}
-
-				> i[class^="icon-"],
-		        > i[class*="icon-"] {
-		        	color: darken(#999, 5%);
-		        }
-			}
-		}
-
-		.page-toolbar {
-			padding: 6px 0;
-
-			.btn {
-				margin-top: -2px;
-
-				&.btn-sm {
-					margin-top: 0px;
-				}
-			}
-		}
-	}
-}
-
-/* Page content */
-
 main {
 	margin-top: 0px;
 	padding: 0px;
@@ -199,9 +99,9 @@ main {
 	}
 }
 
-@media (min-width: $screen-md-min) { /* 992px */
+@media (min-width: $screen-md-min) {
 
-	/* Page content */
+
 	.main-wrapper {
 		float: left;
 		width: 100%;
@@ -257,24 +157,19 @@ main {
 	}
 }
 
-@media (max-width: $screen-sm-max) { /* 991px */
-
-	/* Bg solid content's breadcrumb */
-
+@media (max-width: $screen-sm-max) {
 	.page-section-bg-solid {
 		.page-bar {
 			margin-top: -20px;
 		}
 	}
 
-	/* Boxed page container  */
 	.page-boxed > .container {
  		max-width: none !important;
  		margin: 0 !important;
  		padding: 0 !important;
  	}
 
- 	/* Page content */
 	.main-wrapper {
 		main {
 			margin: 0px !important;
@@ -287,16 +182,13 @@ main {
 	}
 }
 
-@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) { /*  768px & 991px */
-	/* Boxed page container */
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
 	.page-boxed > .container {
  		margin: auto !important;
  	}
 }
 
-@media (max-width: $screen-xs-max) { /* 767px */
-
-	/* Page content */
+@media (max-width: $screen-xs-max) {
 	.main-wrapper {
 		main {
 
@@ -305,7 +197,6 @@ main {
             }
 			overflow: hidden;
 
-			/* Page title */
 			.page-title {
 				margin-bottom: 20px;
 				font-size: 18px;
@@ -319,9 +210,7 @@ main {
 	}
 }
 
-@media (max-width: $screen-xs-min) { /* 480px */
-
-	/* Dashboard date range panel */
+@media (max-width: $screen-xs-min) {
 	.main-wrapper {
 		main {
 			.page-title {

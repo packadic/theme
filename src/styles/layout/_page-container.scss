@@ -1,7 +1,3 @@
-/***
-Page container
-***/
-
 section#page {
   	margin: 0px;
   	padding: 0px;
@@ -9,28 +5,22 @@ section#page {
 
   	@include clearfix();
 
-  	/* Fixed header */
 	.section-top-fixed & {
 		margin-top: $header-height;
 	}
 
-	/* Fixed footer for mobile */
 	.section-bottom-fixed.section-bottom-fixed-mobile & {
 		margin-bottom: 20px !important;
 	}
 }
 
 @media (min-width: $screen-md-min) {
-
-	/* Page container in fixed footer */
 	.section-bottom-fixed section#page {
 	 	margin-bottom: 20px !important;
 	}
 }
 
 @media (max-width: $screen-sm-max) {
-
-	/* Page container */
 	section#page {
 		margin: 0 !important;
 		padding: 0 !important;
@@ -42,8 +32,6 @@ section#page {
 }
 
 @media (max-width: $screen-xs-min) {
-
-	/* Page container */
 	section#page {
 		.section-top-fixed.section-top-fixed-mobile & {
   			margin-top: $header-height-xs !important;
