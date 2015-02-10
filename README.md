@@ -15,6 +15,24 @@ By Robin Radic. [MIT Licensed](LICENSE)
 - [Roadmap](ROADMAP.md)  
 - [MIT Licensed](LICENSE)  
 
+
+## Build requirements
+- nodejs / npm / bower / grunt-cli  
+- ruby / rubygems / bundler  
+
+
+## Install
+```bash
+# ensure nodejs, ruby, git etc are installed. also npm, bower, grunt, bundle, rubygems
+git clone https://github.com/packadic/theme
+cd theme
+npm install
+bower install
+bundle install
+```
+
+
+
 ## 3d part dos
 http://vast-engineering.github.io/jquery-popup-overlay/
 bourbon scss -
