@@ -71,7 +71,7 @@ sidebar:
                                 icon: fa fa-bug text-red
                               - name: Drivers
                                 icon: fa fa-cab text-green
-                                href: /components/forms/layouts # temp dev make it the active one
+                                href: #/components/forms/layouts # temp dev make it the active one
                               - name: Payments
                                 icon: fa fa-cc
                   - name: Payments
@@ -101,7 +101,7 @@ sidebar:
                             children:
                               - name: Bugs
                               - name: Drivers
-                                href: /components/forms/layouts # temp dev make it the active one
+                                href: #/components/forms/layouts # temp dev make it the active one
                               - name: Payments
                   - name: Payments
       - name: Get coffee

@@ -1,10 +1,16 @@
 define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string' ], function( $, _, config, autoloader, theme, eventer, s ){
 
+    // @todo sidebar-toggle
+    // @todo sidebar sub-menu hover title right (.sub-menu-title)
+    // @todo sidebar-collapsed sub-menu :hover
+    // @todo sidebar sub menu @media xs/sm views
+
     var defined = function( val ){
         return (typeof val !== 'undefined')
     };
 
     var sidebar = {};
+
     eventer('sidebar', sidebar);
     sidebar._defineEvent('init');
     sidebar._defineEvent('generate');
@@ -13,6 +19,7 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
     sidebar._defineEvent('loader:hide');
 
     var $sidebar = $(config.selectors.sidebar);
+    var $body = $('body');
     var $sidebarNav = $sidebar.parent();
 
     sidebar.showLoader = function(){
@@ -103,12 +110,11 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
 
             var parent = $(this).parent().parent();
             var the = $(this);
-            var menu = $('.sidebar-nav-menu');
             var sub = $(this).next();
 
-            var autoScroll = menu.data("auto-scroll");
-            var slideSpeed = parseInt(menu.data("slide-speed"));
-            var keepExpand = menu.data("keep-expanded");
+            var autoScroll = $sidebar.data("auto-scroll");
+            var slideSpeed = parseInt($sidebar.data("slide-speed"));
+            var keepExpand = $sidebar.data("keep-expanded");
 
 
             if( keepExpand !== true ){
@@ -134,7 +140,6 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
     };
 
     sidebar.handleFixed = function(){
-        var menu = $('.sidebar-nav-menu');
 
         //destroySlimScroll(menu);
 
@@ -145,7 +150,7 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
         }
 
         if( theme.getViewPort().width >= theme.getBreakpoint('md') ){
-            menu.attr("data-height", calculateFixedHeight());
+            $sidebar.attr("data-height", calculateFixedHeight());
             //initSlimScroll(menu);
             sidebar.handleWithContent();
         }
@@ -154,19 +159,19 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
     sidebar.handleWithContent = function(){
         var breakpointMd = theme.getBreakpoint('md');
         var content = $('main');
-        var sidebar = $('.sidebar-nav');
-        var body = $('body');
+
+
         var height;
 
-        if( body.hasClass("page-footer-fixed") === true && body.hasClass("sidebar-nav-fixed") === false ){
+        if( $body.hasClass("page-footer-fixed") === true && $body.hasClass("sidebar-nav-fixed") === false ){
             var available_height = theme.getViewPort().height - $('section#bottom').outerHeight() - $('section#top').outerHeight();
             if( content.height() < available_height ){
                 content.attr('style', 'min-height:' + available_height + 'px');
             }
         } else {
-            if( body.hasClass('sidebar-nav-fixed') ){
+            if( $body.hasClass('sidebar-nav-fixed') ){
                 height = calculateFixedHeight();
-                if( body.hasClass('section-bottom-fixed') === false ){
+                if( $body.hasClass('section-bottom-fixed') === false ){
                     height = height - $('section#bottom').outerHeight();
                 }
             } else {
@@ -176,7 +181,7 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
                 if( theme.getViewPort().width < breakpointMd ){
                     height = theme.getViewPort().height - headerHeight - footerHeight;
                 } else {
-                    height = sidebar.height() + 20;
+                    height = $sidebar.height() + 20;
                 }
 
                 if( (height + headerHeight + footerHeight) <= theme.getViewPort().height ){
@@ -187,28 +192,27 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
         }
     };
     sidebar.handleToggler = function(){
-        var body = $('body');
         if( $.cookie && $.cookie('sidebar_closed') === '1' && theme.getViewPort().width >= theme.getBreakpoint('md') ){
             $('body').addClass('sidebar-nav-closed');
             $('.sidebar-nav-menu').addClass('sidebar-nav-menu-closed');
         }
 
         // handle sidebar show/hide
-        $('body').on('click', '.sidebar-toggler', function( e ){
+        $body.on('click', '.sidebar-toggler', function( e ){
             var sidebar = $('.sidebar-nav');
             var sidebarMenu = $('.sidebar-nav-menu');
             $(".sidebar-search", sidebar).removeClass("open");
 
-            if( body.hasClass("sidebar-nav-closed") ){
-                body.removeClass("sidebar-nav-closed");
+            if( $body.hasClass("sidebar-nav-closed") ){
+                $body.removeClass("sidebar-nav-closed");
                 sidebarMenu.removeClass("sidebar-nav-menu-closed");
                 if( $.cookie ){
                     $.cookie('sidebar_closed', '0');
                 }
             } else {
-                body.addClass("sidebar-nav-closed");
+                $body.addClass("sidebar-nav-closed");
                 sidebarMenu.addClass("sidebar-nav-menu-closed");
-                if( body.hasClass("sidebar-nav-fixed") ){
+                if( $body.hasClass("sidebar-nav-fixed") ){
                     sidebarMenu.trigger("mouseleave");
                 }
                 if( $.cookie ){
@@ -220,14 +224,14 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
         });
     };
     sidebar.handleFixedHover = function(){
-        var body = $('body');
-        if( body.hasClass('sidebar-nav-fixed') ){
+
+        if( $body.hasClass('sidebar-nav-fixed') ){
             $('.sidebar-nav').on('mouseenter', function(){
-                if( body.hasClass('sidebar-nav-closed') ){
+                if( $body.hasClass('sidebar-nav-closed') ){
                     $(this).find('.sidebar-nav-menu').removeClass('sidebar-nav-menu-closed');
                 }
             }).on('mouseleave', function(){
-                if( body.hasClass('sidebar-nav-closed') ){
+                if( $body.hasClass('sidebar-nav-closed') ){
                     $(this).find('.sidebar-nav-menu').addClass('sidebar-nav-menu-closed');
                 }
             });
@@ -274,6 +278,9 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
             init();
         }
     };
+
+
+
     return sidebar;
 
 });

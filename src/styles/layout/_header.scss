@@ -113,7 +113,6 @@ section#top.navbar {
         }
     }
 
-
     .menu-toggler {
         display: block;
         cursor: pointer;
@@ -141,8 +140,6 @@ section#top.navbar {
             // match width and color with the top level sidebar left bg gradient
             width: $sidebar-collapsed-width;
 
-
-
             .sidebar-nav-closed.sidebar-nav-closed-hide-logo & {
                 margin-right: ($sidebar-collapsed-width - $header-menu-toggler-width ) / 2;
             }
@@ -154,8 +151,21 @@ section#top.navbar {
             margin: $header-responsive-toggler-margin;
         }
     }
-}
 
+    /* Top menu */
+    .top-menu {
+        margin: 0;
+        padding: 0;
+        float: right;
+
+        .navbar-nav {
+            padding: 0;
+            margin-right: 20px;
+            display: block;
+        }
+    }
+
+}
 
 @media (min-width: $screen-sm-min) {
     section#top.navbar {
@@ -183,11 +193,7 @@ section#top.navbar {
     }
 }
 
-
-
 @media (min-width: $screen-md-min) {
-
-
 
     section#top.navbar {
 
@@ -206,7 +212,6 @@ section#top.navbar {
         }
     }
 
-
     .page-boxed {
         section#top.navbar {
 
@@ -217,7 +222,6 @@ section#top.navbar {
         }
     }
 
-
     .sidebar-nav-closed.sidebar-nav-closed-hide-logo.page-boxed {
         section#top.navbar {
 
@@ -226,7 +230,6 @@ section#top.navbar {
             }
         }
     }
-
 
     .page-boxed.sidebar-nav-fixed {
         section#top.navbar {
@@ -244,7 +247,6 @@ section#top.navbar {
         position: relative;
         clear: both;
 
-
         .page-logo {
             width: auto;
             padding: 0;
@@ -256,7 +258,6 @@ section#top.navbar {
                 margin-left: 4px !important;
             }
         }
-
 
         .menu-toggler {
             &.sidebar-toggler {
@@ -275,7 +276,6 @@ section#top.navbar {
             position: fixed;
         }
     }
-
 
     .page-boxed section#top.navbar {
         > .container {

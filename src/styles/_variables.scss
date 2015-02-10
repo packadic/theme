@@ -12,7 +12,8 @@ $font-family-heading:               "Montserrat", "Open Sans", "Helvetica Neue",
 $web-font-sub-heading:              "Karla:400,700italic,700,400italic";
 $font-family-sub-heading:           "Karla";
 
-$web-font-code:                     "Source+Code+Pro";
+
+$web-font-code:                     "Source+Code+Pro:400";
 $font-family-code:                  "Source Code Pro", Consolas, "Courier New", monospace;
 
 $web-font:                          $web-font + $web-font-primary + "|" + $web-font-heading  + "|" + $web-font-sub-heading + "|" + $web-font-code;

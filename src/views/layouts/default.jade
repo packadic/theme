@@ -15,7 +15,7 @@ head
         +css-style("base-stylesheet.css")
         +css-style("themes/theme-default.css")
 
-body.page-loading.active2.section-top-fixed
+body.page-loading.section-top-fixed
     #page-loader
         .loader.loader-light
     //section#top
@@ -29,7 +29,9 @@ body.page-loading.active2.section-top-fixed
                 +a Logo
 
             //nav.top-nav
-            +a.menu-toggler.responsive-toggler(data-toggle="collapse" data-target=".navbar-collapse")
+            +a.menu-toggler.responsive-toggler(data-toggle="collapse" data-target=".navbar-collapse").btn.btn-default
+                i.fa.fa-bars.fa-lg
+
             .top-menu
                 ul.nav.navbar-nav
     .clearfix
