@@ -6,7 +6,7 @@ define([ 'jquery', 'lodash' ],
         }
 
         /**
-         * @returns {jQuery}
+         * @returns {Packadic}
          */
         function getEl(){
             if( typeof window.packadic_show_class === 'undefined' ){

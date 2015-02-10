@@ -53,11 +53,7 @@ define([ 'jquery', 'lodash' ],
 
 
         var config = {
-            debug: false,
-            site     : window.PACKADIC_SITE_DATA,
-            selectors: {
-                sidebar: 'ul.sidebar-nav-menu'
-            }
+            debug: false
         };
         config.merge = function(options){
             config = _.merge(config, options);

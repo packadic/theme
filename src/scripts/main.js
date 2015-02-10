@@ -83,15 +83,20 @@
         },
 
 
-        waitSeconds: 15
+        waitSeconds: 5,
+
+        config: {
+            debug    : true
+        }
+
     };
 
     jqui.forEach(function( name ){
         config.paths[ 'plugins/jquery-ui/' + name ] = 'plugins/jquery-ui/ui/minified/' + name + '.min'
     });
 
-    require.config(config);
 
+    window.requireJsConfig = config;
     window.packadicStartTime = new Date();
     window.logDebug = function(){
         var loadTime = (new Date()).getTime() - packadicStartTime.getTime();
@@ -101,38 +106,7 @@
         console.log(typeof args, args);
         console.debug.apply(console, args);
     };
-    require([ 'jquery', 'string', 'jade', 'config', 'plugins/modernizr' ],
-        function( $, s, jade, config ){
 
 
-            window.jade = jade;
-
-            config.merge({
-                debug    : true,
-                site     : window.PACKADIC_SITE_DATA,
-                selectors: {
-                    sidebar: 'ul.sidebar-nav-menu'
-                },
-                scss     : JSON.parse(s.unquote($('head').css('font-family'), "'"))
-            });
-
-            require([ 'autoloader', 'theme', 'demo' ], function( autoloader, theme, demo ){
-                theme.init({
-                    sidebarItems: config.site.data.navigation.sidebar
-                });
-                autoloader.on('detected', function(){
-                    logDebug('autoloader detected @ ' + autoloader.detected);
-                });
-                autoloader.on('loaded', function(){
-                    logDebug('autoloader loaded @ ' + autoloader.loaded);
-                });
-                autoloader.ready(function(){
-                    logDebug('autoloader ready');
-                    $('body').removeClass('page-loading');
-                });
-                autoloader.init();
-                demo.init();
-            });
-        });
 }.call());
 

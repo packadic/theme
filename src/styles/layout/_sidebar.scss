@@ -220,6 +220,7 @@
 				> .sub-menu {
 					margin: 0;
 					> li {
+                        //@include sidebar-hover-submenu($sidebar-width);
 						> a {
 							padding-left: 70px;
 						}
@@ -227,10 +228,14 @@
 						> .sub-menu {
 							margin: 0;
 							> li {
+                                @include sidebar-hover-submenu($sidebar-width);
+
 								> a {
 									padding-left: 80px;
 								}
+
 							}
+
 						}
 					}
 				}
@@ -474,22 +479,33 @@
 
 							> li {
 								> a {
-									padding-left: 15px !important;
+									padding-left: 60px !important;
 								}
 
 								> .sub-menu {
 									> li {
 										> a {
-											padding-left: 30px !important;
+											padding-left: 70px !important;
 										}
 
 										> .sub-menu {
 											> li {
 												> a {
-													padding-left: 45px !important;
+													padding-left: 80px !important;
 												}
 											}
+
+
+                                            > .sub-menu {
+                                                > li {
+                                                    > a {
+                                                        padding-left: 90px !important;
+
+                                                    }
+                                                }
+                                            }
 										}
+
 									}
 								}
 							}

@@ -1,5 +1,5 @@
 (function (factory) {
-    factory(jQuery, _, window);
+    factory(Packadic, _, window);
 }(function ($, _, window) {
     'use strict';
 

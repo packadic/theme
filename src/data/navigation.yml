@@ -36,6 +36,77 @@ sidebar:
         href: /docs/gettings-started
 
 
+  - name: Multi-level icon menu
+    icon: fa fa-tasks
+    children:
+      - name: Tasks
+        icon: fa fa-align-right text-orange
+      - name: Bolds
+        icon: fa fa-bold text-green
+        children:
+          - name: Bugs
+            icon: fa fa-bug text-red
+          - name: Drivers
+            icon: fa fa-cab text-green
+            children:
+              - name: Tasks
+                icon: fa fa-align-right text-orange
+              - name: Bolds
+                icon: fa fa-bold text-green
+                children:
+                  - name: Bugs
+                    icon: fa fa-bug text-red
+                    children:
+                      - name: Bugs
+                        icon: fa fa-bug text-red
+                      - name: Drivers
+                        icon: fa fa-cab text-green
+                        children:
+                          - name: Tasks
+                            icon: fa fa-align-right text-orange
+                          - name: Bolds
+                            icon: fa fa-bold text-green
+                            children:
+                              - name: Bugs
+                                icon: fa fa-bug text-red
+                              - name: Drivers
+                                icon: fa fa-cab text-green
+                                href: /components/forms/layouts # temp dev make it the active one
+                              - name: Payments
+                                icon: fa fa-cc
+                  - name: Payments
+                    icon: fa fa-cc
+      - name: Get coffee
+        icon: fa fa-coffee
+
+
+  - name: Multi-level menu
+    children:
+      - name: Tasks
+      - name: Bolds
+        children:
+          - name: Bugs
+          - name: Drivers
+            children:
+              - name: Tasks
+              - name: Bolds
+                children:
+                  - name: Bugs
+                    children:
+                      - name: Bugs
+                      - name: Drivers
+                        children:
+                          - name: Tasks
+                          - name: Bolds
+                            children:
+                              - name: Bugs
+                              - name: Drivers
+                                href: /components/forms/layouts # temp dev make it the active one
+                              - name: Payments
+                  - name: Payments
+      - name: Get coffee
+
+
 
   - name: Layouts
     icon: fa fa-desktop
@@ -211,31 +282,6 @@ sidebar:
             href: /plugins/moment
           - name: Modernizr
             href: /plugins/modernizr
-
-
-
-  - name: Multi-level menu
-    icon: fa fa-tasks
-    children:
-      - name: Tasks
-        icon: fa fa-align-right text-orange
-
-      - name: Bolds
-        icon: fa fa-bold text-green
-        children:
-          - name: Bugs
-            icon: fa fa-bug text-red
-
-          - name: Drivers
-            icon: fa fa-cab text-green
-
-          - name: Payments
-            icon: fa fa-cc
-
-      - name: Get coffee
-        icon: fa fa-coffee
-
-
 
 
 

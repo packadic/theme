@@ -4,19 +4,19 @@ mixin ie(condition)
     | <![endif]-->
 
 mixin js-script(path)
-    script(src="/assets/scripts/" + path)
+    script(src=assetPath + "/scripts/" + path)&attributes(attributes)
 
 mixin js-vendor(path)
-    script(src="/assets/scripts/plugins/" + path)
+    script(src=assetPath + "/scripts/plugins/" + path)&attributes(attributes)
 
 mixin js-tpls(path)
-    script(src="/assets/tpls/" + path)
+    script(src=assetPath + "/tpls/" + path)&attributes(attributes)
 
 mixin css-style(path)
-    link(href="/assets/styles/" + path, type="text/css", rel="stylesheet")
+    link(href=assetPath + "/styles/" + path, type="text/css", rel="stylesheet")&attributes(attributes)
 
 mixin css-vendor(path)
-    link(href="/assets/scripts/plugins/" + path, type="text/css", rel="stylesheet")
+    link(href=assetPath + "/scripts/plugins/" + path, type="text/css", rel="stylesheet")&attributes(attributes)
 
 
 mixin codeviewer

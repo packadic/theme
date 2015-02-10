@@ -1,0 +1,18 @@
+extends base
+block append styles
+    link(href="//code.jquery.com/qunit/qunit-1.17.1.css", rel="stylesheet")
+    link(href="assets/styles/tests.css", rel="stylesheet")
+    script(src="//code.jquery.com/qunit/qunit-1.17.1.js")
+
+
+block body
+    #qunit
+    #qunit-fixture
+
+        .ul
+            .li
+                .a First
+                .ul.sub-menu
+    script(src="assets/scripts/plugins/requirejs/require.js")
+    script(src="assets/scripts/main.js")
+

@@ -12,18 +12,6 @@ module.exports = function( config, grunt, build ){
     var name = build.name;
     var dir = build.dir;
 
-    function getJadeData(){
-        function getyml( fileName ){
-            return jsyaml.safeLoad(fs.readFileSync(path.resolve(__dirname, 'src/data', fileName + '.yml'), 'utf-8'));
-        }
-
-        var site = getyml('site');
-        site.data = {};
-        [ 'navigation', 'author', 'main', 'social', 'widgets', 'theme' ].forEach(function( fileName ){
-            site.data[ fileName ] = getyml(fileName);
-        });
-        return {site_json: JSON.stringify(site), site: site};
-    }
 
     var tmp = {
         build           : build,
@@ -140,7 +128,7 @@ module.exports = function( config, grunt, build ){
                     namespace: 'tpls'
                 },
                 files  : [
-                    {expand: true, cwd: 'src/views/tpls', src: '**/*.jade', ext: '.js', dest: '<%= build.dir %>/assets/tpls'}
+                    {expand: true, cwd: 'src/views/tpls', src: '**/*.jade', ext: '.js', dest: '<%= build.dir %>/assets/scripts/templates'}
                 ]
             }
 

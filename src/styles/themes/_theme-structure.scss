@@ -1,8 +1,4 @@
-    //## Base theme color file
 
-    /***********
-    Page Header
-    ***********/
 
     /* Header search bar, toggler button & top menu */
     section#top.navbar {
@@ -444,11 +440,7 @@
         }
     }
 
-
-    /******
-    Page Footer
-    ******/
-
+    // bottom section
     section#bottom {
         footer.bottom {
             color: $footer-default-font-color;

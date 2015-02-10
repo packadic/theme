@@ -25,6 +25,7 @@
 
 // 6.1 MY override mixins. mixins that override the VENDOR mixins to alter the VENDOR styles
 //@import "overrides/mixins";
-@import "layout";
-@import "theme";
+@import "layout-variables";
+@import "layout/layout-mixins";
+@import "theme-variables";
 

@@ -17,10 +17,36 @@ jsbuild:
     - popover
     - tab
 
+
+
+includeBuilds: false
+customTaskList: true
+
+builders:
+  dev:
+    builder: dev
+    dest: dev
+    config:
+      builder:
+        debug: true
+      global:
+        minify:
+          html: false
+          js: false
+          css: false
+          images: false
+        host:
+          name: dev2.radic.nl
+          port: 80
+          protocol: http
+        url: http://dev2.radic.nl
+        git: false
+
 # types: dev, dist-html, dist-jekyll
 builds:
   - name: dist_local
     dir: dist
+    transformer: dist
     type: dist-html
     host:
       name: dev2.radic.nl
@@ -31,6 +57,7 @@ builds:
 
   - name: dist_ghpages
     type: dist-jekyll
+    transformer: jekyll-ghpages
     host:
       name: packadic.radic.nl
       port: 80

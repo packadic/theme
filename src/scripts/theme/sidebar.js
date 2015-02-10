@@ -57,10 +57,32 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
             }
         })
     };
-
+    sidebar.onSubmenuHover = function( $li ){
+        //var $submenuTitle = $li;
+        var $title = $(this)
+        $li.on('mouseenter', function(){
+            $title.prependTo($li);
+        });
+        $li.on('mouseleave', function(){
+            $title.remove();
+        });
+    };
     sidebar.handle = function(){
         var breakpointMd = theme.getBreakpoint('md');
 
+        $sidebar.find('li > .sub-menu').filter(function(i){
+
+            result = $(this).css('caption-side') == 'bottom' || $(this).children('ul').first().hasClass('sub-menu-hover');
+            console.log($(this), $(this).css('caption-side'), result);
+            return result;
+        }).parent().on('mouseenter', function(e){
+            $(this).children('a').first().clone().addClass('sub-menu-title').prependTo(this);
+        }).on('mouseleave', function(e){
+            $(this).find('.sub-menu-title').remove();
+        });
+
+
+        //$sidebar.find('li.open').has('ul.sub-menu').
         $sidebar.on('click', 'li > a', function( e ){
             var hasSubMenu = $(this).next().hasClass('sub-menu');
 
@@ -221,7 +243,10 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
         if( !_.isString(templateName) ){
             templateName = 'sidebar';
         }
+
+        logDebug('getting template', templateName, menuItems);
         theme.getTemplate(templateName, function( template ){
+            logDebug('got template');
             var html = template({items: menuItems});
             $('ul.sidebar-nav-menu').html('').html(html);
             sidebar._trigger('sidebar:generated');

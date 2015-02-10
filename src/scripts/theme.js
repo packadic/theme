@@ -95,7 +95,9 @@ define([ 'jquery', 'lodash', 'config', 'eventer', 'autoloader', 'plugins/cookie'
             };
 
             theme.getTemplate = function( name, cb ){
+                logDebug('getting template', name, cb);
                 require(['templates/' + name], function(template){
+                    logDebug('gott template', name, template);
                     cb(template);
                 });
             };
@@ -136,8 +138,9 @@ define([ 'jquery', 'lodash', 'config', 'eventer', 'autoloader', 'plugins/cookie'
             };
 
             theme.getBreakpoint = function( which ){
-                return parseInt(theme.scss.breakpoints[ 'screen-' + which + '-min' ].replace('px', ''));
+                return parseInt(config.scss.breakpoints[ 'screen-' + which + '-min' ].replace('px', ''));
             };
+
 
         }.call());
 
@@ -277,7 +280,7 @@ define([ 'jquery', 'lodash', 'config', 'eventer', 'autoloader', 'plugins/cookie'
             theme.setOptions(options);
             theme.$window = $(window);
             theme.$document = $(window.document);
-            theme.scss = config.get('scss');
+
             console.log('theme', theme);
             theme.initEvents();
 

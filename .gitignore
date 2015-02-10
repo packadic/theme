@@ -29,3 +29,7 @@
 /src/styles-old
 /src/plugins
 /src/
+/Gemfile.lock
+/test/web
+/src/tscript
+/run.js

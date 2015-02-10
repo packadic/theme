@@ -1,0 +1,27 @@
+include ../../../src/views/base
+block doctype
+    doctype html
+block html
+    html
+    block head
+        head
+            block title
+                title Test
+            block viewport
+                +viewport
+            block meta
+                block meta-charset
+                    meta(charset=site.encoding)
+                block meta-xua-compatible
+                    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+            block styles
+                block styles-base
+                    link(href="assets/styles/base-stylesheet.css", rel="stylesheet")
+                block styles-theme
+                    link(href="assets/styles/themes/theme-default.css", rel="stylesheet")
+    block body
+        body
+            block body-content
+
+                block scripts
+

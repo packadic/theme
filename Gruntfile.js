@@ -20,6 +20,7 @@ module.exports = function( grunt ){
         config          : config,
         includeBuilds   : includeBuilds,
         customTaskList  : customTaskList,
+        includeJadePlugins: false,
         copy            : {
             dev_fonts  : {
                 files: [
@@ -45,6 +46,7 @@ module.exports = function( grunt ){
         },
         clean           : {
             dev          : {src: 'dev/*'},
+            dev_assets: { src: 'dev/assets'},
             dev_fonts    : {src: 'dev/assets/fonts'},
             dev_images   : {src: 'dev/assets/images'},
             //dev_scripts: {src: ['dev/assets/scripts/**', '!dev/assets/scripts/plugins/**', 'dev/assets/scripts/plugins/*/**']},
@@ -133,7 +135,7 @@ module.exports = function( grunt ){
 
     };
 
-    cfg = require('./lib/grunt/config/jade')(cfg, grunt, 'dev', 'dev');
+    cfg = require('./lib/grunt/config/jade').getConfig(cfg, grunt, 'dev', 'dev');
     cfg = require('./lib/grunt/config/jsbuild')(cfg, grunt, 'dev', 'dev');
     cfg = require('./lib/grunt/config/changelog')(cfg, grunt, 'dev', 'dev');
     cfg = require('./lib/grunt/config/availabletasks')(cfg, grunt, 'dev', 'dev');
@@ -155,10 +157,13 @@ module.exports = function( grunt ){
         [ 'clean:dev_templates', 'jade:dev_templates', 'string-replace:templates' ]);
 
     grunt.registerTask('dev:scripts', 'copy src/plugins > dev/scripts/plugins, minifies [require.js,modernizr.js,bootbox.js,mscrollbar.js] to dev/scripts/plugins, copy src/scripts/* > dev/assets/scripts',
-        ['clean:dev_scripts', 'copy:dev_plugins', 'uglify:dev', 'copy:dev_scripts']);
+        ['clean:dev_scripts', 'copy:dev_plugins', 'uglify:dev', 'copy:dev_scripts', 'dev:templates']);
 
     grunt.registerTask('dev:copy', 'copies src/{.htaccess,images,fonts,demo} to dev/assets/',
         [ 'copy:dev_images', 'copy:dev_fonts', 'copy:dev_misc', 'copy:dev_demo' ]);
+
+    grunt.registerTask('dev:assets', 'copies src/{.htaccess,images,fonts,demo} to dev/assets/',
+        [ 'clean:dev_assets', 'dev:copy', 'dev:scripts', 'dev:jsbuild', 'copy:dev_scripts', 'sass:dev' ]);
 
     grunt.registerTask('dev:build', 'create a working development build in dev/', [
         'clean:dev', 'dev:copy',
