@@ -26,21 +26,18 @@ builders:
   dev:
     builder: dev
     dest: dev
-    config:
-      builder:
-        debug: true
-      global:
-        minify:
-          html: false
-          js: false
-          css: false
-          images: false
-        host:
-          name: dev2.radic.nl
-          port: 80
-          protocol: http
-        url: http://dev2.radic.nl
-        git: false
+    type: dev # dist|dev
+    minify:
+      html: false
+      js: false
+      css: false
+      images: false
+    host:
+      name: dev2.radic.nl
+      port: 80
+      protocol: http
+    url: http://dev2.radic.nl
+    git: false
 
 # types: dev, dist-html, dist-jekyll
 builds:

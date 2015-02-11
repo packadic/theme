@@ -12,115 +12,100 @@ var radic  = require('radic'),
 
 module.exports = function( grunt ){
 
-    var includeBuilds = false;
-    var customTaskList = true;
-    var config = grunt.file.readYAML('config.yml');
+    var builder = 'dev';
 
-    var cfg = {
-        config          : config,
-        includeBuilds   : includeBuilds,
-        customTaskList  : customTaskList,
-        includeJadePlugins: false,
+    // load global configuration and get selected builder configuration to include in the grunt config
+    var config = grunt.file.readYAML('config.yml');
+    var builderConfig = config.builders[ builder ];
+    builderConfig.name = builder;
+
+    //grunt.log.writeflags(builderConfig);
+
+    var jadeFilters = {
+        code: function( block ){
+            return block
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/#/g, '&#35;')
+                .replace(/\\/g, '\\\\');
+        }
+    };
+    var gruntConfig = {
+        config          : builderConfig,
+        clean           : {
+            all      : {src: '<%= config.dest %>/*'},
+            assets   : {src: '<%= config.dest %>/assets'},
+            fonts    : {src: '<%= config.dest %>/assets/fonts'},
+            images   : {src: '<%= config.dest %>/assets/images'},
+            styles   : {src: '<%= config.dest %>/assets/styles'},
+            plugins  : {src: '<%= config.dest %>/assets/scripts/plugins'},
+            templates: {src: '<%= config.dest %>/assets/scripts/templates'},
+            demo     : {src: '<%= config.dest %>/demo'},
+            views    : {src: '<%= config.dest %>/**/*.html'}
+        },
         copy            : {
-            dev_fonts  : {
+            fonts  : {
                 files: [
-                    {expand: true, cwd: 'src/plugins/bootstrap/fonts', src: '**', dest: 'dev/assets/fonts'},
-                    {expand: true, cwd: 'src/plugins/font-awesome/fonts', src: '**', dest: 'dev/assets/fonts'}
+                    {expand: true, cwd: 'src/plugins/bootstrap/fonts', src: '**', dest: '<%= config.dest %>/assets/fonts'},
+                    {expand: true, cwd: 'src/plugins/font-awesome/fonts', src: '**', dest: '<%= config.dest %>/assets/fonts'}
                 ]
             },
-            dev_images : {files: [ {expand: true, cwd: 'src/images', src: '**', dest: 'dev/assets/images'} ]},
-            dev_scripts: {files: [ {expand: true, cwd: 'src/scripts', src: '**', dest: 'dev/assets/scripts'} ]},
-            dev_plugins: {files: [ {expand: true, cwd: 'src/plugins', src: '**', dest: 'dev/assets/scripts/plugins'} ]},
-            dev_demo   : {files: [ {expand: true, cwd: 'src/demo', src: '**', dest: 'dev/demo'} ]},
-            dev_misc   : {files: [ {src: 'src/.htaccess', dest: 'dev/.htaccess'} ]}
+            images : {files: [ {expand: true, cwd: 'src/images', src: '**', dest: '<%= config.dest %>/assets/images'} ]},
+            scripts: {files: [ {expand: true, cwd: 'src/scripts', src: '**', dest: '<%= config.dest %>/assets/scripts'} ]},
+            plugins: {files: [ {expand: true, cwd: 'src/plugins', src: '**', dest: '<%= config.dest %>/assets/scripts/plugins'} ]},
+            demo   : {files: [ {expand: true, cwd: 'src/demo', src: '**', dest: '<%= config.dest %>/demo'} ]},
+            misc   : {files: [ {src: 'src/.htaccess', dest: '<%= config.dest %>/.htaccess'} ]}
         },
-        uglify          : {
-            dev: {
-                files: {
-                    'dev/assets/scripts/plugins/modernizr.js' : [ 'src/plugins/modernizr/modernizr.js' ],
-                    'dev/assets/scripts/plugins/bootbox.js'   : [ 'src/plugins/bootbox/bootbox.js' ],
-                    'dev/assets/scripts/plugins/mscrollbar.js': [ 'src/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js' ],
-                    'dev/assets/scripts/plugins/require.js'   : [ 'src/plugins/requirejs/require.js' ]
-                }
+        jade            : {
+            dev      : {
+                options: {  data  : lib.getJadeData(builderConfig.type), filters: jadeFilters, pretty: true },
+                files  : [ {expand: true, cwd: 'src/views/pages', src: [ '**/*.jade', '!plugins/**' ], ext: '.html', dest: '<%= config.dest %>'} ]
+            },
+            dist : {
+                options: {  data  : lib.getJadeData(builderConfig.type), filters: jadeFilters, pretty: false },
+                files  : [ {expand: true, cwd: 'src/views/pages', src: '**/*.jade', ext: '.html', dest: '<%= config.dest %>'} ]
+            },
+            templates: {
+                options: {
+                    client   : true,
+                    pretty   : false,
+                    amd      : true,
+                    namespace: false
+                },
+                files  : [
+                    {expand: true, cwd: 'src/views/tpls', src: '**/*.jade', ext: '.js', dest: '<%= config.dest %>/assets/scripts/templates'}
+                ]
             }
-        },
-        clean           : {
-            dev          : {src: 'dev/*'},
-            dev_assets: { src: 'dev/assets'},
-            dev_fonts    : {src: 'dev/assets/fonts'},
-            dev_images   : {src: 'dev/assets/images'},
-            //dev_scripts: {src: ['dev/assets/scripts/**', '!dev/assets/scripts/plugins/**', 'dev/assets/scripts/plugins/*/**']},
-            dev_styles   : {src: 'dev/assets/styles'},
-            dev_plugins  : {src: 'dev/assets/scripts/plugins'},
-            dev_templates: {src: 'dev/assets/scripts/templates'},
-            dev_demo     : {src: 'dev/demo'},
-            dev_views    : {src: 'dev/**/*.html'}
         },
         'string-replace': {
             templates: {
-                files  : {'dev/assets/scripts/templates/': 'dev/assets/scripts/templates/**'},
+                files  : {'<%= config.dest %>/assets/scripts/templates/': '<%= config.dest %>/assets/scripts/templates/**'},
                 options: {
                     replacements: [ {pattern: 'src/views/tpls/', replacement: ''} ]
                 }
             }
         },
-
-        sass: {
+        sass            : {
             options: {sourcemap: 'none', compass: true},
             dev    : {
-                files: [ {expand: true, cwd: 'src/styles', src: '**/*.scss', ext: '.css', dest: 'dev/assets/styles'} ]
+                files: [ {expand: true, cwd: 'src/styles', src: '**/*.scss', ext: '.css', dest: '<%= config.dest %>/assets/styles'} ]
+            },
+            dist   : {
+                files: [ {expand: true, cwd: 'src/styles', src: '**/*.scss', ext: '.css', dest: '<%= config.dest %>/assets/styles'} ]
             }
         },
-
-        watch     : {
-            options    : {livereload: true, nospawn: true},
-            styles     : {
-                files: [ 'src/styles/**' ],
-                tasks: [ 'clean:dev_styles', 'sass:dev' ]
-            },
-            scripts    : {
-                files: [ 'src/scripts/**' ],
-                tasks: [ 'copy:dev_scripts' ]
-            },
-            views      : {
-                files: [ 'src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**' ],
-                tasks: [ 'clean:dev_views', 'jade:dev', 'bootlint' ] //, 'bootlint' ]
-            },
-            views_pages: {
-                files: [ 'src/views/pages/**/*.jade' ],
-                tasks: [ 'newer:jade:dev', 'bootlint' ]
-            },
-            images     : {
-                files: [ 'src/images/**' ],
-                tasks: [ 'clean:dev_images', 'copy:dev_images' ]
-            },
-            templates  : {
-                files: [ 'src/views/tpls/**/*.jade' ],
-                tasks: [ 'dev:templates' ]
-            },
-            vendor     : {
-                files: [ 'src/vendor/**' ],
-                tasks: [ 'clean:dev_vendor', 'copy:dev_vendor', 'copy:dev_scripts', 'uglify:dev', 'dev:jsbuild' ]
-            },
-            demo       : {
-                files: [ 'src/demo/**' ],
-                tasks: [ 'clean:dev_demo', 'copy:dev_demo' ]
-            },
-            livereload : {
-                options: {livereload: 35729},
-                files  : [ 'src/**/*' ]
+        uglify          : {
+            dev: {
+                options: { sourceMap: true, compress: false, beautify: true, gzip: true, preserveComments: 'all' },
+                files: {
+                    '<%= config.dest %>/assets/scripts/plugins/modernizr.js' : [ 'src/plugins/modernizr/modernizr.js' ],
+                    '<%= config.dest %>/assets/scripts/plugins/bootbox.js'   : [ 'src/plugins/bootbox/bootbox.js' ],
+                    '<%= config.dest %>/assets/scripts/plugins/mscrollbar.js': [ 'src/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js' ],
+                    '<%= config.dest %>/assets/scripts/plugins/require.js'   : [ 'src/plugins/requirejs/require.js' ]
+                }
             }
-        },
-        concurrent: {
-            options: {
-                logConcurrentOutput: true
-            },
-            build  : [
-                'sass:dev', 'jade:dev', 'dev:templates',
-                'copy:dev_scripts', 'uglify:dev',
-                'lodashAutobuild:dev', 'shell:dev_jquery', 'bootstrapjs:dev', 'jqueryui:dev'
-            ],
-            scripts: ['copy:dev_plugins', 'uglify:dev', 'copy:dev_scripts', 'lodashAutobuild:dev', 'shell:dev_jquery', 'bootstrapjs:dev', 'jqueryui:dev', 'jade:dev_templates', 'string-replace:templates']
         },
         bootlint  : {
             options: {
@@ -130,56 +115,109 @@ module.exports = function( grunt ){
                     'W005' // Unable to find jQuery - Ignore because of require.js usage its not detected
                 ]
             },
-            files  : [ 'dev/*/*.html', 'dev/*.html' ]
+            files  : [ '<%= config.dest %>/*/*.html', '<%= config.dest %>/*.html' ]
+        },
+        changelog : {
+            make: {
+                options: {
+                    logArguments: [ '--pretty=[%ad](https://github.com/packadic/theme/commit/%H): %s', '--no-merges', '--date=short' ],
+                    dest        : 'CHANGELOG.md',
+                    template    : '\n\n{{> features}}',
+                    after       : 'v0.1.0',
+                    fileHeader  : '# Changelog',
+                    featureRegex: /^(.*)$/gim,
+                    partials    : {
+                        features: '{{#if features}}{{#each features}}{{> feature}}{{/each}}{{else}}{{> empty}}{{/if}}\n',
+                        feature : '- {{this}}  \n'
+                    }
+                }
+            }
+        },
+        watch: {
+            options: {livereload: true, nospawn: true}
         }
-
     };
 
-    cfg = require('./lib/grunt/config/jade').getConfig(cfg, grunt, 'dev', 'dev');
-    cfg = require('./lib/grunt/config/jsbuild')(cfg, grunt, 'dev', 'dev');
-    cfg = require('./lib/grunt/config/changelog')(cfg, grunt, 'dev', 'dev');
-    cfg = require('./lib/grunt/config/availabletasks')(cfg, grunt, 'dev', 'dev');
-
-    if( includeBuilds === true ){
-        config.builds.forEach(function( build ){
-            cfg = require('./grunt.build')(cfg, grunt, build);
-        });
-    }
-
-    grunt.loadTasks('lib/grunt/tasks');
+    grunt.loadTasks('grunt/tasks');
     require('load-grunt-tasks')(grunt);
     require('time-grunt')(grunt);
 
-    grunt.initConfig(cfg);
+
+    var tasks = require('./grunt/builders/' + builder)(builderConfig, grunt);
+
+    // Configure watchers
+    var watchers =  {
+        styles     : {
+            files: [ 'src/styles/**' ],
+                tasks: [ 'clean:styles', 'sass:<%= config.type %>' ]
+        },
+        scripts    : {
+            files: [ 'src/scripts/**' ],
+                tasks: [ 'copy:scripts' ]
+        },
+        views      : {
+            files: [ 'src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**' ],
+                tasks: [ 'clean:views', 'jade:<%= config.type %>', 'bootlint' ] //, 'bootlint' ]
+        },
+        views_pages: {
+            files: [ 'src/views/pages/**/*.jade' ],
+                tasks: [ 'newer:jade:<%= config.type %>', 'bootlint' ]
+        },
+        images     : {
+            files: [ 'src/images/**' ],
+                tasks: [ 'clean:images', 'copy:images' ]
+        },
+        templates  : {
+            files: [ 'src/views/tpls/**/*.jade' ],
+                tasks: [ 'templates' ]
+        },
+        vendor     : {
+            files: [ 'src/vendor/**' ],
+                tasks: [ 'clean:vendor', 'copy:vendor', 'copy:scripts', 'uglify:<%= config.name %>', '<%= config.name %>:jsbuild' ]
+        },
+        demo       : {
+            files: [ 'src/demo/**' ],
+                tasks: [ 'clean:demo', 'copy:demo' ]
+        },
+        livereload : {
+            options: {livereload: 35729},
+            files  : [ 'src/**/*' ]
+        }
+    };
+    // Only include watch tasks that are enabled in the builder's task.watch array
+    tasks.watch.forEach(function(watcherName){
+        gruntConfig.watch[watcherName] = watchers[watcherName];
+    });
 
 
-    grunt.registerTask('dev:templates', 'creates dev/scripts/templates | pre-compiled jade templates for browser useage.',
-        [ 'clean:dev_templates', 'jade:dev_templates', 'string-replace:templates' ]);
+    // Add jsbuild configuration, based on all previously set config items so include last
+    gruntConfig = require('./grunt/config/jsbuild')(config, gruntConfig, builderConfig, grunt);
+    grunt.initConfig(gruntConfig);
 
-    grunt.registerTask('dev:scripts', 'copy src/plugins > dev/scripts/plugins, minifies [require.js,modernizr.js,bootbox.js,mscrollbar.js] to dev/scripts/plugins, copy src/scripts/* > dev/assets/scripts',
-        ['clean:dev_scripts', 'copy:dev_plugins', 'uglify:dev', 'copy:dev_scripts', 'dev:templates']);
-
-    grunt.registerTask('dev:copy', 'copies src/{.htaccess,images,fonts,demo} to dev/assets/',
-        [ 'copy:dev_images', 'copy:dev_fonts', 'copy:dev_misc', 'copy:dev_demo' ]);
-
-    grunt.registerTask('dev:assets', 'copies src/{.htaccess,images,fonts,demo} to dev/assets/',
-        [ 'clean:dev_assets', 'dev:copy', 'dev:scripts', 'dev:jsbuild', 'copy:dev_scripts', 'sass:dev' ]);
-
-    grunt.registerTask('dev:build', 'create a working development build in dev/', [
-        'clean:dev', 'dev:copy',
-        'sass:dev', 'jade:dev',
-        'dev:scripts', 'dev:jsbuild',
-        'copy:dev_scripts', 'uglify:dev'
-    ]);
-    grunt.registerTask('dev:build:fast', [ 'clean:dev', 'dev:copy', 'concurrent:build' ]);
-    grunt.registerTask('dev:watch', 'generates dev/ files on changes + livereloads afterwards', [ 'watch' ]);
-    grunt.registerTask('default', [ 'dev:build' ]);
-    grunt.registerTask('clean:dev_scripts', function(){
-        require('globule').find(['dev/assets/scripts/**', '!dev/assets/scripts/plugins/**', 'dev/assets/scripts/plugins/*/**']).forEach(function(delPath){
+    // Register global tasks
+    grunt.registerTask('clean:scripts', function(){
+        require('globule').find([builderConfig.dest + '/assets/scripts/**', '!' + builderConfig.dest + '/assets/scripts/plugins/**', builderConfig.dest + '/assets/scripts/plugins/*/**']).forEach(function(delPath){
             if(fs.statSync(delPath).isFile()){
                 fs.unlinkSync(delPath);
             }
         });
-    })
-};
+    });
 
+    // Register shared builder tasks and prefix them with the current selected builder name
+    var taskDesc = {
+        templates      : 'creates pre-compiled jade templates for browser useage.',
+        scripts        : 'creates the scripts',
+        copy           : 'copies most directories',
+        assets         : 'builds the assets',
+        build          : 'builds the project',
+        watch          : 'watches the project',
+        'scripts:clean': 'cleans the scripts'
+    };
+    _.each(tasks, function( subTasks, taskName ){
+        if(taskName === 'watch'){
+            return;
+        }
+        grunt.registerTask(builder + ':' + taskName, taskDesc[ taskName ], subTasks);
+    });
+
+};

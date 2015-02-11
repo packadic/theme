@@ -2,6 +2,11 @@
 
 
 
+- [2015-02-11](https://github.com/packadic/theme/commit/6eeb6e2a26c90796e0f9146bd0a6b5ff60e5d876): initialised git flow and cleaning up stuff  
+- [2015-02-10](https://github.com/packadic/theme/commit/6ba648f35c3822189e7172f1115d3beac7c0c6a3): Sidebar menu alterations and top section adjustments  
+- [2015-02-10](https://github.com/packadic/theme/commit/9417cf6e4728db1b113e53e01c05a2b454c3502d): Added build requirements and install procedure  
+- [2015-02-10](https://github.com/packadic/theme/commit/41995c1feda8141830f8f3b9913e1b36c55eb553): added gemfile, guardfile etc  
+- [2015-02-09](https://github.com/packadic/theme/commit/dda3cc8e101a921edfda67fabf0dcd7c39369b6f): changelog update  
 - [2015-02-09](https://github.com/packadic/theme/commit/9fff8197cecc5ea62c38e13676686920bc42a41d): readme update  
 - [2015-02-09](https://github.com/packadic/theme/commit/d95b072b71de53ed45f954101b7c5af37b877cfd): layout style cleanup  
 - [2015-02-09](https://github.com/packadic/theme/commit/f9fa077687f29c80671d09d13d140456bd1f26d8): 0.1.3  
