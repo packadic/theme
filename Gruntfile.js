@@ -12,12 +12,14 @@ var radic  = require('radic'),
 
 module.exports = function( grunt ){
 
-    var builder = 'dev';
+    var builderName = 'base';
 
     // load global configuration and get selected builder configuration to include in the grunt config
     var config = grunt.file.readYAML('config.yml');
-    var builderConfig = config.builders[ builder ];
-    builderConfig.name = builder;
+    var builderConfig = grunt.file.readYAML('grunt/builders/' + builderName + '.yml');
+    builderConfig = _.merge(builderConfig, config.builders[ builderName ]); // override default builderConfig with the selected builder config in config.yml
+    //var builderConfig = config.builders[ builder ];
+    builderConfig.name = builderName;
 
     //grunt.log.writeflags(builderConfig);
 
@@ -60,11 +62,11 @@ module.exports = function( grunt ){
         },
         jade            : {
             dev      : {
-                options: {  data  : lib.getJadeData(builderConfig.type), filters: jadeFilters, pretty: true },
+                options: {data: lib.getJadeData(builderConfig.type), filters: jadeFilters, pretty: true},
                 files  : [ {expand: true, cwd: 'src/views/pages', src: [ '**/*.jade', '!plugins/**' ], ext: '.html', dest: '<%= config.dest %>'} ]
             },
-            dist : {
-                options: {  data  : lib.getJadeData(builderConfig.type), filters: jadeFilters, pretty: false },
+            dist     : {
+                options: {data: lib.getJadeData(builderConfig.type), filters: jadeFilters, pretty: false},
                 files  : [ {expand: true, cwd: 'src/views/pages', src: '**/*.jade', ext: '.html', dest: '<%= config.dest %>'} ]
             },
             templates: {
@@ -98,8 +100,8 @@ module.exports = function( grunt ){
         },
         uglify          : {
             dev: {
-                options: { sourceMap: true, compress: false, beautify: true, gzip: true, preserveComments: 'all' },
-                files: {
+                options: {sourceMap: true, compress: false, beautify: true, gzip: true, preserveComments: 'all'},
+                files  : {
                     '<%= config.dest %>/assets/scripts/plugins/modernizr.js' : [ 'src/plugins/modernizr/modernizr.js' ],
                     '<%= config.dest %>/assets/scripts/plugins/bootbox.js'   : [ 'src/plugins/bootbox/bootbox.js' ],
                     '<%= config.dest %>/assets/scripts/plugins/mscrollbar.js': [ 'src/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js' ],
@@ -107,7 +109,7 @@ module.exports = function( grunt ){
                 }
             }
         },
-        bootlint  : {
+        bootlint        : {
             options: {
                 stoponerror: false,
                 relaxerror : [
@@ -117,7 +119,7 @@ module.exports = function( grunt ){
             },
             files  : [ '<%= config.dest %>/*/*.html', '<%= config.dest %>/*.html' ]
         },
-        changelog : {
+        changelog       : {
             make: {
                 options: {
                     logArguments: [ '--pretty=[%ad](https://github.com/packadic/theme/commit/%H): %s', '--no-merges', '--date=short' ],
@@ -133,8 +135,13 @@ module.exports = function( grunt ){
                 }
             }
         },
-        watch: {
+        watch           : {
             options: {livereload: true, nospawn: true}
+        },
+        availabletasks: {
+            tasks: {
+                options: {}
+            }
         }
     };
 
@@ -143,41 +150,53 @@ module.exports = function( grunt ){
     require('time-grunt')(grunt);
 
 
-    var tasks = require('./grunt/builders/' + builder)(builderConfig, grunt);
+    var builder = require('./grunt/builders/' + builderName)(builderConfig, grunt);
+    var renames = {
+        BNAME: builderConfig.name,
+        BTYPE: builderConfig.type,
+        BDEST: builderConfig.dest
+    };
+    builder.tasks = lib.replaceObjectArrayValueByMap(builder.tasks, renames);
 
+    gruntConfig.availabletasks.tasks.options = {
+        filter: 'include',
+            tasks: ['tasks' ].concat( lib.replaceArrayByMap(builder.availabletasks.tasks, renames) ),
+            reporter: lib.getAvailableTaskReporter(builder.availabletasks.reporterOptions)
+    };
+    //builder.watchers = lib.arrayReplace(builder.watchers, builderReplacerMap);
     // Configure watchers
-    var watchers =  {
+    var watchers = {
         styles     : {
             files: [ 'src/styles/**' ],
-                tasks: [ 'clean:styles', 'sass:<%= config.type %>' ]
+            tasks: [ 'clean:styles', 'sass:<%= config.type %>' ]
         },
         scripts    : {
             files: [ 'src/scripts/**' ],
-                tasks: [ 'copy:scripts' ]
+            tasks: [ 'copy:scripts' ]
         },
         views      : {
             files: [ 'src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**' ],
-                tasks: [ 'clean:views', 'jade:<%= config.type %>', 'bootlint' ] //, 'bootlint' ]
+            tasks: [ 'clean:views', 'jade:<%= config.type %>', 'bootlint' ] //, 'bootlint' ]
         },
         views_pages: {
             files: [ 'src/views/pages/**/*.jade' ],
-                tasks: [ 'newer:jade:<%= config.type %>', 'bootlint' ]
+            tasks: [ 'newer:jade:<%= config.type %>', 'bootlint' ]
         },
         images     : {
             files: [ 'src/images/**' ],
-                tasks: [ 'clean:images', 'copy:images' ]
+            tasks: [ 'clean:images', 'copy:images' ]
         },
         templates  : {
             files: [ 'src/views/tpls/**/*.jade' ],
-                tasks: [ 'templates' ]
+            tasks: [ 'templates' ]
         },
         vendor     : {
             files: [ 'src/vendor/**' ],
-                tasks: [ 'clean:vendor', 'copy:vendor', 'copy:scripts', 'uglify:<%= config.name %>', '<%= config.name %>:jsbuild' ]
+            tasks: [ 'clean:vendor', 'copy:vendor', 'copy:scripts', 'uglify:<%= config.name %>', '<%= config.name %>:jsbuild' ]
         },
         demo       : {
             files: [ 'src/demo/**' ],
-                tasks: [ 'clean:demo', 'copy:demo' ]
+            tasks: [ 'clean:demo', 'copy:demo' ]
         },
         livereload : {
             options: {livereload: 35729},
@@ -185,23 +204,54 @@ module.exports = function( grunt ){
         }
     };
     // Only include watch tasks that are enabled in the builder's task.watch array
-    tasks.watch.forEach(function(watcherName){
-        gruntConfig.watch[watcherName] = watchers[watcherName];
+    builder.watchers.forEach(function( watcherName ){
+        gruntConfig.watch[ watcherName ] = watchers[ watcherName ];
     });
+
 
 
     // Add jsbuild configuration, based on all previously set config items so include last
     gruntConfig = require('./grunt/config/jsbuild')(config, gruntConfig, builderConfig, grunt);
     grunt.initConfig(gruntConfig);
 
+    registerBuilderTasks(grunt, builder);
+
     // Register global tasks
+    // Watch
+    grunt.registerTask(builderConfig.name + ':watch', ['watch']);
+
+    // Tasks
+    grunt.registerTask('tasks', 'Shows a list of custom tasks and their description, filtering out all individual tasks', function(){
+
+        var jekyllC = config.builders.jekyll;
+        jekyllC.name = 'jekyll';
+        var c = require('./grunt/builders/jekyll')(config.builders.jekyll, grunt);
+        var taskConfig = grunt.config.get('availabletasks.tasks');
+        var tasks = taskConfig.options.tasks.concat(lib.replaceArrayByMap(c.availabletasks.tasks, {
+            BNAME: jekyllC.name,
+            BTYPE: jekyllC.type,
+            BDEST: jekyllC.dest
+        }));
+        grunt.log.writeflags(tasks);
+
+        grunt.config.set('availabletasks.edited', tasks);
+        grunt.initConfig(grunt.config.get());
+        grunt.task.run(['availabletasks:edited']);
+    });
+
+    // Clean scripts
     grunt.registerTask('clean:scripts', function(){
-        require('globule').find([builderConfig.dest + '/assets/scripts/**', '!' + builderConfig.dest + '/assets/scripts/plugins/**', builderConfig.dest + '/assets/scripts/plugins/*/**']).forEach(function(delPath){
-            if(fs.statSync(delPath).isFile()){
+        require('globule').find([ builderConfig.dest + '/assets/scripts/**', '!' + builderConfig.dest + '/assets/scripts/plugins/**', builderConfig.dest + '/assets/scripts/plugins/*/**' ]).forEach(function( delPath ){
+            if( fs.statSync(delPath).isFile() ){
                 fs.unlinkSync(delPath);
             }
         });
     });
+
+
+};
+
+function registerBuilderTasks(grunt, builder){
 
     // Register shared builder tasks and prefix them with the current selected builder name
     var taskDesc = {
@@ -213,11 +263,15 @@ module.exports = function( grunt ){
         watch          : 'watches the project',
         'scripts:clean': 'cleans the scripts'
     };
-    _.each(tasks, function( subTasks, taskName ){
-        if(taskName === 'watch'){
+    //builder.tasks = lib.objectKeyReplace(builder.tasks, builderReplacerMap);
+    _.each(builder.tasks, function( subTasks, taskName ){
+        if( taskName === 'watch' ){
             return;
         }
-        grunt.registerTask(builder + ':' + taskName, taskDesc[ taskName ], subTasks);
+        grunt.registerTask(lib.replaceStringByMap(taskName, {
+            BNAME: builder.config.name,
+            BTYPE: builder.config.type,
+            BDEST: builder.config.dest
+        }), taskDesc[ taskName ], subTasks);
     });
-
-};
+}

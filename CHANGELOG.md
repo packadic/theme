@@ -2,6 +2,7 @@
 
 
 
+- [2015-02-11](https://github.com/packadic/theme/commit/b5a87942bcfdcdf0f1da9e226233b042b1a9e9ed): revised grunt build logic to enable sub-builds with different tasks and configuration based on the same default config. this will enable html builds, jekyll builds, &lt;insert type here&gt; builds.  
 - [2015-02-11](https://github.com/packadic/theme/commit/6eeb6e2a26c90796e0f9146bd0a6b5ff60e5d876): initialised git flow and cleaning up stuff  
 - [2015-02-10](https://github.com/packadic/theme/commit/6ba648f35c3822189e7172f1115d3beac7c0c6a3): Sidebar menu alterations and top section adjustments  
 - [2015-02-10](https://github.com/packadic/theme/commit/9417cf6e4728db1b113e53e01c05a2b454c3502d): Added build requirements and install procedure  
