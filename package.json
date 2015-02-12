@@ -79,7 +79,10 @@
     "tmp": "0.0.24",
     "uglify-js": "^2.4.16",
     "uglifyjs": "^2.3.6",
-    "underscore.string": "^3.0.2"
+    "underscore.string": "^3.0.2",
+    "grunt-cli": "~0.1.13",
+    "grunt-debug": "0.0.3",
+    "node-inspector": "~0.8.3"
   },
   "dependencies": {
     "bootstrap-gtreetable": "git://github.com/gilek/bootstrap-gtreetable.git#v2.2.1-alpha",

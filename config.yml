@@ -12,39 +12,23 @@ jsbuild:
     - tooltip
     - popover
     - tab
+  lodash: auto # auto|full
 
-builders:
-  base:
-    builder: base # which of the builders in grunt/builders to use
-    dest: dev     # any folder, relative to project root
-    type: dev     # dist|dev. dist will minify, optimize and complement tasks with extra stuff (time consuming stuff)
-    minify:
-      html: false
-      js: false
-      css: false
-      images: false
-    host:
-      name: dev2.radic.nl
-      port: 80
-      protocol: http
-    url: http://dev2.radic.nl
-    git: false
+target: dev
 
-  jekyll:
-    builder: jekyll # which of the builders in grunt/builders to use
-    dest: jekyll     # any folder, relative to project root
-    type: dev     # dist|dev. dist will minify, optimize and complement tasks with extra stuff (time consuming stuff)
-    minify:
-      html: false
-      js: false
-      css: false
-      images: false
-    host:
-      name: dev2.radic.nl
-      port: 80
-      protocol: http
-    url: http://dev2.radic.nl
-    git: false
+targets:
+  dev:
+    stubs: src/stubs
+    dest: dev
+    site: {}
+    nav:
+      pre: ''
+      ext: .html
 
-paths:
-  stubs: src/stubs
+  dist:
+    stubs: src/stubs
+    dest: dist
+    site: {}
+    nav:
+      pre: ''
+      ext: .html

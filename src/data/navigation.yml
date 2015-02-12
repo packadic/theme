@@ -1,39 +1,39 @@
 topnav:
   - name: Home
-    href: /
+    href: <%= target.nav.pre %>/
     icon: fa fa-home
 
   - name: About me
-    href: /about-me
+    href: <%= target.nav.pre %>/about-me
     icon: fa fa-user
 
   - name: Login
-    href: /contact
+    href: <%= target.nav.pre %>/contact
     icon: fa fa-key
 
   - name: Contact
-    href: /contact
+    href: <%= target.nav.pre %>/contact
     icon: fa fa-pencil-o
 
 sidebar:
   - name: Home
-    href: /
+    href: <%= target.nav.pre %>/
     icon: fa fa-home
 
   - name: Documentation
     icon: fa fa-file-code-o
     children:
       - name: Gettings started
-        href: /docs/gettings-started
+        href: <%= target.nav.pre %>/docs/gettings-started<%= target.nav.ext %>
 
       - name: Customizing
-        href: /docs/gettings-started
+        href: <%= target.nav.pre %>/docs/gettings-started<%= target.nav.ext %>
 
       - name: Setting up projects
-        href: /docs/gettings-started
+        href: <%= target.nav.pre %>/docs/gettings-started<%= target.nav.ext %>
 
       - name: Grunt tasks
-        href: /docs/gettings-started
+        href: <%= target.nav.pre %>/docs/gettings-started<%= target.nav.ext %>
 
 
   - name: Multi-level icon menu
@@ -119,63 +119,63 @@ sidebar:
     icon: fa fa-cubes
     children:
       - name: General
-        href: /components/general
+        href: <%= target.nav.pre %>/components/general<%= target.nav.ext %>
 
       - name: Typography
-        href: /components/typography
+        href: <%= target.nav.pre %>/components/typography<%= target.nav.ext %>
 
       - name: Boxes
-        href: /components/boxes
+        href: <%= target.nav.pre %>/components/boxes<%= target.nav.ext %>
 
       - name: Buttons
-        href: /components/buttons
-        #href: /components/buttons/editor
+        href: <%= target.nav.pre %>/components/buttons<%= target.nav.ext %>
+        #href: <%= target.nav.pre %>/components/buttons/editor
 
       - name: Forms
         children:
           - name: Layouts
-            href: /components/forms/layouts
+            href: <%= target.nav.pre %>/components/forms/layouts<%= target.nav.ext %>
 
           - name: Elements
-            href: /components/forms/elements
+            href: <%= target.nav.pre %>/components/forms/elements<%= target.nav.ext %>
 
           - name: Validation
-            href: /components/forms/validation
+            href: <%= target.nav.pre %>/components/forms/validation<%= target.nav.ext %>
 
           - name: Uploader
-            href: /components/forms/uploader
+            href: <%= target.nav.pre %>/components/forms/uploader<%= target.nav.ext %>
 
           - name: Wizard
-            href: /components/forms/wizard
+            href: <%= target.nav.pre %>/components/forms/wizard<%= target.nav.ext %>
 
 
       - name: Portlets
-        href: /components/portlets
+        href: <%= target.nav.pre %>/components/portlets<%= target.nav.ext %>
 
       - name: Tables
         children:
           - name: Basic
-            href: /components/tables/basic
+            href: <%= target.nav.pre %>/components/tables/basic<%= target.nav.ext %>
 
           - name: Responsive
-            href: /components/tables/responsive
+            href: <%= target.nav.pre %>/components/tables/responsive<%= target.nav.ext %>
 
           - name: Advanced
-            href: /components/tables/advanced
+            href: <%= target.nav.pre %>/components/tables/advanced<%= target.nav.ext %>
 
           - name: Tree table
-            href: /components/tables/tree
+            href: <%= target.nav.pre %>/components/tables/tree<%= target.nav.ext %>
 
           - name: Datatables
-            href: /components/tables/datatables
+            href: <%= target.nav.pre %>/components/tables/datatables<%= target.nav.ext %>
 
 
 
       - name: Tabs
-        href: /components/tabs
+        href: <%= target.nav.pre %>/components/tabs<%= target.nav.ext %>
 
       - name: Widgets
-        href: /components/widgets
+        href: <%= target.nav.pre %>/components/widgets<%= target.nav.ext %>
 
 
 
@@ -217,71 +217,71 @@ sidebar:
       - name: Main plugins
         children:
           - name: Scrollbar
-            href: /plugins/scrollbar
+            href: <%= target.nav.pre %>/plugins/scrollbar<%= target.nav.ext %>
 
           - name: Toastr
-            href: /plugins/toastr
+            href: <%= target.nav.pre %>/plugins/toastr<%= target.nav.ext %>
 
       - name: Bootstrap
         children:
           - name: Bootbox
-            href: /plugins/bootbox
+            href: <%= target.nav.pre %>/plugins/bootbox<%= target.nav.ext %>
           - name: gTreeTable
-            href: /plugins/bootstrap-gtreetable
+            href: <%= target.nav.pre %>/plugins/bootstrap-gtreetable<%= target.nav.ext %>
           - name: Select
-            href: /plugins/bootstrap-select
+            href: <%= target.nav.pre %>/plugins/bootstrap-select<%= target.nav.ext %>
           - name: Switch
-            href: /plugins/bootstrap-switch
+            href: <%= target.nav.pre %>/plugins/bootstrap-switch<%= target.nav.ext %>
           - name: Confirmation
-            href: /plugins/bootstrap-confirmation
+            href: <%= target.nav.pre %>/plugins/bootstrap-confirmation<%= target.nav.ext %>
           - name: Contextmenu
-            href: /plugins/bootstrap-contextmenu
+            href: <%= target.nav.pre %>/plugins/bootstrap-contextmenu<%= target.nav.ext %>
           - name: Datepicker
-            href: /plugins/bootstrap-datepicker
+            href: <%= target.nav.pre %>/plugins/bootstrap-datepicker<%= target.nav.ext %>
           - name: Daterangepicker
-            href: /plugins/bootstrap-daterangepicker
+            href: <%= target.nav.pre %>/plugins/bootstrap-daterangepicker<%= target.nav.ext %>
           - name: Datetimepicker
-            href: /plugins/bootstrap-datetimepicker
+            href: <%= target.nav.pre %>/plugins/bootstrap-datetimepicker<%= target.nav.ext %>
           - name: Markdown
-            href: /plugins/bootstrap-markdown
+            href: <%= target.nav.pre %>/plugins/bootstrap-markdown<%= target.nav.ext %>
           - name: Maxlength
-            href: /plugins/bootstrap-maxlength
+            href: <%= target.nav.pre %>/plugins/bootstrap-maxlength<%= target.nav.ext %>
 
 
       - name: jQuery
         children:
           - name: Impromptu
-            href: /plugins/jquery-impromptu
+            href: <%= target.nav.pre %>/plugins/jquery-impromptu<%= target.nav.ext %>
           - name: Popup Overlay
-            href: /plugins/jquery-popup-overlay
+            href: <%= target.nav.pre %>/plugins/jquery-popup-overlay<%= target.nav.ext %>
           - name: Cookie
-            href: /plugins/jquery-cookie
+            href: <%= target.nav.pre %>/plugins/jquery-cookie<%= target.nav.ext %>
           - name: Nestable
-            href: /plugins/jquery-nestable
+            href: <%= target.nav.pre %>/plugins/jquery-nestable<%= target.nav.ext %>
           - name: Inputmask
-            href: /plugins/jquery-inputmask
+            href: <%= target.nav.pre %>/plugins/jquery-inputmask<%= target.nav.ext %>
           - name: ScrollTo
-            href: /plugins/jquery-scrollto
+            href: <%= target.nav.pre %>/plugins/jquery-scrollto<%= target.nav.ext %>
 
 
       - name: Utility & helpers
         children:
           - name: RequireJS
-            href: /plugins/requirejs
+            href: <%= target.nav.pre %>/plugins/requirejs<%= target.nav.ext %>
           - name: CodeMirror
-            href: /plugins/codemirror
+            href: <%= target.nav.pre %>/plugins/codemirror<%= target.nav.ext %>
           - name: CryptoJS
-            href: /plugins/cryptojslib
+            href: <%= target.nav.pre %>/plugins/cryptojslib<%= target.nav.ext %>
           - name: Lodash
-            href: /plugins/lodash
+            href: <%= target.nav.pre %>/plugins/lodash<%= target.nav.ext %>
           - name: Marked
-            href: /plugins/marked
+            href: <%= target.nav.pre %>/plugins/marked<%= target.nav.ext %>
           - name: HighlightJS
-            href: /plugins/highlightjs
+            href: <%= target.nav.pre %>/plugins/highlightjs<%= target.nav.ext %>
           - name: Moment
-            href: /plugins/moment
+            href: <%= target.nav.pre %>/plugins/moment<%= target.nav.ext %>
           - name: Modernizr
-            href: /plugins/modernizr
+            href: <%= target.nav.pre %>/plugins/modernizr<%= target.nav.ext %>
 
 
 
