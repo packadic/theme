@@ -1,55 +1,51 @@
 var radic  = require('radic'),
+    util   = radic.util,
     _      = require('lodash'),
     jsyaml = require('js-yaml'),
     fs     = require('fs-extra'),
     path   = require('path'),
-
+    jekyll = require('../../lib/jekyll'),
     lib    = require('../../');
 
 
 module.exports = function( grunt ){
 
-    grunt.registerMultiTask('bootstrapjs', 'bootstrapjs.', function(){
+    function inspect( val ){
+        process.stdout.write(util.inspect(val, {colors: true, depth: 5, hidden: true}) + '\n');
+    }
+
+    grunt.registerMultiTask('frontmatter', 'frontmatter.', function(){
         var self = this;
         var taskDone = this.async();
         var cwd = process.cwd();
         var ok = grunt.log.ok;
         var options = this.options({
-            dir   : 'src/vendor/bootstrap/js',
-            use   : [ 'transition', 'collapse', 'dropdown', 'modal', 'tooltip', 'popover', 'tab' ],
-            minify: false
+            layout: 'page'
         });
 
-        var files = [
-            'transition',
-            'alert',
-            'button',
-            'carousel',
-            'collapse',
-            'dropdown',
-            'modal',
-            'tooltip',
-            'popover',
-            'scrollspy',
-            'tab',
-            'affix'
-        ];
+
+        function writeFrontMatter( p, obj ){
+            var fm = '---\n' + 'permalink: ' +
+                     p.replace('dev/', '/').replace('.html', '').replace('index', '')
+                     + '\n---\n';
+            fm += fs.readFileSync(p, 'utf-8');
+            fs.writeFileSync(p, fm);
+            inspect('written');
+        }
+
+        this.filesSrc.forEach(function( filepath ){
+            //inspect(filepath)
+            //inspect(self.options());
+            var permalink = filepath.replace('dev/', '/').replace('.html', '').replace('index', '')
+            inspect(permalink);
+            writeFrontMatter(filepath, self.options());
+
+        })
 
 
-        var source = '';
-        options.use.forEach(function( name ){
-            grunt.log.writeln('added ' + name);
-            source += fs.readFileSync(path.resolve(cwd, options.dir, name + '.js'), 'utf-8') + "\n";
-        });
-        var outpath = path.resolve(cwd, this.data.dest + '.js');
-        var outminpath = path.resolve(cwd, this.data.dest + '.min.js');
-
-        fs.outputFileSync(outpath, source);
-        ok('written ' + outpath);
-        var uglify = require('uglify-js');
-        fs.outputFileSync(outminpath, uglify.minify(outpath).code);
-        ok('written ' + outminpath);
-
+        ok('fm done');
         taskDone();
     });
+
+
 };

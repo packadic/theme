@@ -1,6 +1,6 @@
-mixin ie(condition)
+mixin ie(condition, tag)
     | <!--[!{condition}]>
-    block
+    | !{tag}
     | <![endif]-->
 
 mixin js-script(path)

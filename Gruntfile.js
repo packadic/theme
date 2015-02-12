@@ -10,16 +10,20 @@ var radic  = require('radic'),
     lib    = require('./lib');
 
 
-module.exports = function( grunt ){
+var init = module.exports = function( grunt, builderName ){
+    var ok = grunt.log.ok;
 
-    var builderName = 'base';
+    builderName = builderName || 'base';
 
+    //grunt.log.writeflags([grunt.option('target')]);
     // load global configuration and get selected builder configuration to include in the grunt config
     var config = grunt.file.readYAML('config.yml');
+    var builders = _.keys(config.builders);
     var builderConfig = grunt.file.readYAML('grunt/builders/' + builderName + '.yml');
     builderConfig = _.merge(builderConfig, config.builders[ builderName ]); // override default builderConfig with the selected builder config in config.yml
     //var builderConfig = config.builders[ builder ];
     builderConfig.name = builderName;
+    builderConfig.type = grunt.option('target') || builderConfig.type
 
     //grunt.log.writeflags(builderConfig);
 
@@ -138,9 +142,16 @@ module.exports = function( grunt ){
         watch           : {
             options: {livereload: true, nospawn: true}
         },
-        availabletasks: {
+        availabletasks  : {
             tasks: {
                 options: {}
+            }
+        },
+        frontmatter: {
+            dev: {
+                files: {
+                    src: ['<%= config.dest %>/**/*.html', '!<%= config.dest %>/assets/**']
+                }
             }
         }
     };
@@ -159,9 +170,9 @@ module.exports = function( grunt ){
     builder.tasks = lib.replaceObjectArrayValueByMap(builder.tasks, renames);
 
     gruntConfig.availabletasks.tasks.options = {
-        filter: 'include',
-            tasks: ['tasks' ].concat( lib.replaceArrayByMap(builder.availabletasks.tasks, renames) ),
-            reporter: lib.getAvailableTaskReporter(builder.availabletasks.reporterOptions)
+        filter  : 'include',
+        tasks   : [ 'tasks' ].concat(lib.replaceArrayByMap(builder.availabletasks.tasks, renames)),
+        reporter: lib.getAvailableTaskReporter(builder.availabletasks.reporterOptions)
     };
     //builder.watchers = lib.arrayReplace(builder.watchers, builderReplacerMap);
     // Configure watchers
@@ -180,7 +191,7 @@ module.exports = function( grunt ){
         },
         views_pages: {
             files: [ 'src/views/pages/**/*.jade' ],
-            tasks: [ 'newer:jade:<%= config.type %>', 'bootlint' ]
+            tasks: [ 'newer:jade:<%= config.type %>' ]
         },
         images     : {
             files: [ 'src/images/**' ],
@@ -209,35 +220,21 @@ module.exports = function( grunt ){
     });
 
 
-
     // Add jsbuild configuration, based on all previously set config items so include last
     gruntConfig = require('./grunt/config/jsbuild')(config, gruntConfig, builderConfig, grunt);
+    if(builder.gruntConfig){ // And the builder can overide it all
+        gruntConfig = _.merge(gruntConfig, builder.gruntConfig);
+    }
     grunt.initConfig(gruntConfig);
 
-    registerBuilderTasks(grunt, builder);
+    registerAvailableTasks(grunt, config);
 
     // Register global tasks
     // Watch
-    grunt.registerTask(builderConfig.name + ':watch', ['watch']);
+
+    grunt.registerTask(builderConfig.name + ':watch', [ 'watch' ]);
 
     // Tasks
-    grunt.registerTask('tasks', 'Shows a list of custom tasks and their description, filtering out all individual tasks', function(){
-
-        var jekyllC = config.builders.jekyll;
-        jekyllC.name = 'jekyll';
-        var c = require('./grunt/builders/jekyll')(config.builders.jekyll, grunt);
-        var taskConfig = grunt.config.get('availabletasks.tasks');
-        var tasks = taskConfig.options.tasks.concat(lib.replaceArrayByMap(c.availabletasks.tasks, {
-            BNAME: jekyllC.name,
-            BTYPE: jekyllC.type,
-            BDEST: jekyllC.dest
-        }));
-        grunt.log.writeflags(tasks);
-
-        grunt.config.set('availabletasks.edited', tasks);
-        grunt.initConfig(grunt.config.get());
-        grunt.task.run(['availabletasks:edited']);
-    });
 
     // Clean scripts
     grunt.registerTask('clean:scripts', function(){
@@ -248,10 +245,35 @@ module.exports = function( grunt ){
         });
     });
 
+    // Switch jade layout for all pages
+    grunt.registerTask('jade_layout', function(target){
+        var layoutsDir = path.resolve(__dirname, 'src/views/layouts');
+        var targets = ['base', 'jekyll'];
+        if(targets.indexOf(target) === -1){
+            grunt.fail.fatal('target not supported');
+        }
+        fs.outputFileSync(layoutsDir + '/default.jade', 'extends ' + target);
+        ok('Switched jade layout to ' + target);
+    });
+
+    grunt.event.on('task.build', function(a){
+
+        //grunt.fail.fatal(a);
+        if( a.indexOf('base') === -1 ){
+            ok('not a base build');
+            var first = a.split(':')[0];
+            if(builders.indexOf(first) !== -1 ){
+                ok('its a ' + first);
+                init(grunt, first);
+            }
+
+        }
+    })
 
 };
 
-function registerBuilderTasks(grunt, builder){
+function registerAvailableTasks( grunt, config ){
+
 
     // Register shared builder tasks and prefix them with the current selected builder name
     var taskDesc = {
@@ -264,14 +286,47 @@ function registerBuilderTasks(grunt, builder){
         'scripts:clean': 'cleans the scripts'
     };
     //builder.tasks = lib.objectKeyReplace(builder.tasks, builderReplacerMap);
-    _.each(builder.tasks, function( subTasks, taskName ){
-        if( taskName === 'watch' ){
-            return;
-        }
-        grunt.registerTask(lib.replaceStringByMap(taskName, {
+
+    _.each(config.builders, function( builderConfig, builderName ){
+        builderConfig.name = builderName;
+        var builder = require('./grunt/builders/' + builderName)(builderConfig, grunt);
+
+        var renames = {
             BNAME: builder.config.name,
             BTYPE: builder.config.type,
             BDEST: builder.config.dest
-        }), taskDesc[ taskName ], subTasks);
+        };
+        builder.tasks = lib.replaceObjectArrayValueByMap(builder.tasks, renames);
+
+        _.each(builder.tasks, function( subTasks, taskName ){
+            if( taskName === 'watch' ){
+                return;
+            }
+            var replacedTaskName = lib.replaceStringByMap(taskName, renames);
+
+
+            grunt.registerTask(lib.replaceStringByMap(taskName, renames), taskDesc[ taskName ], function(){
+                grunt.event.emit('task.build', replacedTaskName);
+                grunt.task.run(subTasks);
+            });
+        });
+
+        var availableTaskConfig = grunt.config.get('availabletasks.tasks');
+
+        var tasks = availableTaskConfig.options.tasks.concat(lib.replaceArrayByMap(builder.availabletasks.tasks, renames));
+
+        //grunt.log.writeflags(tasks);
+        grunt.config.set('availabletasks.tasks.options.tasks', tasks);
+
     });
+    grunt.registerTask('tasks', 'Shows a list of custom tasks and their description, filtering out all individual tasks', function(){
+        //grunt.log.writeflags();
+        grunt.initConfig(grunt.config.get());
+        grunt.task.run([ 'availabletasks' ]);
+    });
+}
+
+
+if(!module.parent){
+    init(require('grunt-cli'));
 }

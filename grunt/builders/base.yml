@@ -1,6 +1,5 @@
-name: Robin
-fullname: Robin Radic
-nationality: Dutch
-country: The Netherlands
-birthdate: 19/03/1988
-company: Radic Technologies
+# All these configuration settings can and will be overriden
+# by the config.yml located in the project root folder
+builder: base # which of the builders in grunt/builders to use
+dest: base    # any folder, relative to project root
+type: dev     # dist|dev. dist will minify, optimize and complement tasks with extra stuff (time consuming stuff)

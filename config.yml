@@ -1,7 +1,3 @@
-host:
-  port: 9009
-  name: 0.0.0.0
-
 jsbuild:
   jquery:
     - deprecated
@@ -17,16 +13,11 @@ jsbuild:
     - popover
     - tab
 
-
-
-includeBuilds: false
-customTaskList: true
-
 builders:
-  dev:
-    builder: dev
-    dest: dev
-    type: dev # dist|dev
+  base:
+    builder: base # which of the builders in grunt/builders to use
+    dest: dev     # any folder, relative to project root
+    type: dev     # dist|dev. dist will minify, optimize and complement tasks with extra stuff (time consuming stuff)
     minify:
       html: false
       js: false
@@ -39,12 +30,15 @@ builders:
     url: http://dev2.radic.nl
     git: false
 
-# types: dev, dist-html, dist-jekyll
-builds:
-  - name: dist_local
-    dir: dist
-    transformer: dist
-    type: dist-html
+  jekyll:
+    builder: jekyll # which of the builders in grunt/builders to use
+    dest: jekyll     # any folder, relative to project root
+    type: dev     # dist|dev. dist will minify, optimize and complement tasks with extra stuff (time consuming stuff)
+    minify:
+      html: false
+      js: false
+      css: false
+      images: false
     host:
       name: dev2.radic.nl
       port: 80
@@ -52,14 +46,5 @@ builds:
     url: http://dev2.radic.nl
     git: false
 
-  - name: dist_ghpages
-    type: dist-jekyll
-    transformer: jekyll-ghpages
-    host:
-      name: packadic.radic.nl
-      port: 80
-      protocol: http
-    url: http://packadic.radic.nl
-    git:
-      repo: packadic/packadic.github.io
-      branch: master
+paths:
+  stubs: src/stubs
