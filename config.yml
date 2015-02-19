@@ -1,7 +1,3 @@
-host:
-  port: 9009
-  name: 0.0.0.0
-
 jsbuild:
   jquery:
     - deprecated
@@ -16,53 +12,25 @@ jsbuild:
     - tooltip
     - popover
     - tab
+  lodash: auto # auto|full
 
+target: dev
 
-
-includeBuilds: false
-customTaskList: true
-
-builders:
+targets:
   dev:
-    builder: dev
+    stubs: src/stubs
     dest: dev
-    config:
-      builder:
-        debug: true
-      global:
-        minify:
-          html: false
-          js: false
-          css: false
-          images: false
-        host:
-          name: dev2.radic.nl
-          port: 80
-          protocol: http
-        url: http://dev2.radic.nl
-        git: false
+    type: dev
+    site: {}
+    nav:
+      pre: ''
+      ext: .html
 
-# types: dev, dist-html, dist-jekyll
-builds:
-  - name: dist_local
-    dir: dist
-    transformer: dist
-    type: dist-html
-    host:
-      name: dev2.radic.nl
-      port: 80
-      protocol: http
-    url: http://dev2.radic.nl
-    git: false
-
-  - name: dist_ghpages
-    type: dist-jekyll
-    transformer: jekyll-ghpages
-    host:
-      name: packadic.radic.nl
-      port: 80
-      protocol: http
-    url: http://packadic.radic.nl
-    git:
-      repo: packadic/packadic.github.io
-      branch: master
+  dist:
+    stubs: src/stubs
+    dest: dist
+    type: dist
+    site: {}
+    nav:
+      pre: ''
+      ext: .html

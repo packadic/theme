@@ -30,6 +30,7 @@ npm install
 bower install
 bundle install
 ```
+`sdfa`
 
 
 

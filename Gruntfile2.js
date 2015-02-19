@@ -46,9 +46,7 @@ var init = module.exports = function( grunts ){
 
     var _config = grunt.file.readYAML('config.yml');
     var target = grunt.option('target') || _config.target || 'dev';
-    var type = grunt.option('type') || _config.target || 'dev';
     _config.targets[ target ].name = target;
-    _config.targets[ target ].type = type;
 
     var gruntConfig = {
         debug           : {
@@ -163,18 +161,8 @@ var init = module.exports = function( grunts ){
         availabletasks  : {
             tasks: {
                 options: {
-                    filter      : 'include',
-                    tasks       : [ 'tasks', 'assets', 'build', 'cp', 'rm', 'scripts', 'templates', 'views', 'watcher' ],
-                    descriptions: {
-                        'rm'       : 'Removes the dest dir',
-                        'templates': 'Generates all javascript based templates',
-                        'scripts'  : 'Generates all script assets',
-                        'cp'       : 'Copies all files that do not require processing',
-                        'assets'   : 'Generates all assets',
-                        'views'    : 'Generates all views/html files',
-                        'watcher'  : 'Acts upon file changes during development',
-                        'build'    : 'Generates a full website build'
-                    }
+                    filter: 'include',
+                    tasks : [ 'tasks', 'assets', 'build', 'cp', 'rm', 'scripts', 'templates', 'views', 'watch' ]
                 }
             }
         },
@@ -184,12 +172,6 @@ var init = module.exports = function( grunts ){
                     src: [ '<%= target.dest %>/**/*.html', '!<%= target.dest %>/assets/**' ]
                 }
             }
-        },
-        concurrent      : {
-            options: {
-                logConcurrentOutput: true
-            },
-            watch: [ 'devtools', 'watch' ]
         },
         watch           : {
             options    : {livereload: true, nospawn: true},
@@ -203,30 +185,29 @@ var init = module.exports = function( grunts ){
             },
             views      : {
                 files: [ 'src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**' ],
-                tasks: [ 'clean:views', 'jade_config', 'jade:<%= target.name %>', 'bootlint' ] //, 'bootlint' ]
+                tasks: [ 'clean:views', 'jade:<%= target.name %>', 'bootlint' ] //, 'bootlint' ]
             },
             views_pages: {
                 files: [ 'src/views/pages/**/*.jade' ],
-                tasks: [ 'jade_config', 'newer:jade:<%= target.name %>' ]
+                tasks: [ 'newer:jade:<%= target.name %>' ]
             },
-
-            images    : {
+            images     : {
                 files: [ 'src/images/**' ],
                 tasks: [ 'clean:images', 'copy:images' ]
             },
-            templates : {
+            templates  : {
                 files: [ 'src/views/tpls/**/*.jade' ],
                 tasks: [ 'templates' ]
             },
-            vendor    : {
+            vendor     : {
                 files: [ 'src/vendor/**' ],
                 tasks: [ 'clean:vendor', 'copy:vendor', 'copy:scripts', 'uglify:<%= target.name %>', '<%= target.name %>:jsbuild' ]
             },
-            demo      : {
+            demo       : {
                 files: [ 'src/demo/**' ],
                 tasks: [ 'clean:demo', 'copy:demo' ]
             },
-            livereload: {
+            livereload : {
                 options: {livereload: 35729},
                 files  : [ 'src/**/*' ]
             }
@@ -240,16 +221,16 @@ var init = module.exports = function( grunts ){
     require('time-grunt')(grunt);
 
 
-    grunt.registerTask('rm', [ 'clean:all' ]);
-    grunt.registerTask('templates', [ 'clean:templates', 'jade:templates', 'string-replace:templates' ]);
-    grunt.registerTask('scripts', [ 'clean:scripts', 'copy:plugins', 'copy:scripts', 'templates', 'uglify:' + type ]);
-    grunt.registerTask('cp', [ 'copy:images', 'copy:fonts', 'copy:misc', 'copy:demo' ]);
-    grunt.registerTask('assets', [ 'clean:assets', 'cp', 'scripts', 'jsbuild', 'copy:scripts', 'sass:' + type ]);
-    grunt.registerTask('views', [ 'clean:views', 'jade_config:' + type, 'jade:' + type ]);
-    grunt.registerTask('watcher', [ 'concurrent:watch' ]);
-    grunt.registerTask('build', [
+    grunt.registerTask('rm', 'Removes the dest dir', [ 'clean:all' ]);
+    grunt.registerTask('templates', 'Generates all javascript based templates', [ 'clean:templates', 'jade:templates', 'string-replace:templates' ]);
+    grunt.registerTask('scripts', 'Generates all script assets', [ 'clean:scripts', 'copy:plugins', 'copy:scripts', 'templates', 'uglify:' + target ]);
+    grunt.registerTask('cp', 'Copies all files that do not require processing', [ 'copy:images', 'copy:fonts', 'copy:misc', 'copy:demo' ]);
+    grunt.registerTask('assets', 'Generates all assets', [ 'clean:assets', 'cp', 'scripts', 'jsbuild', 'copy:scripts', 'sass:' + target ]);
+    grunt.registerTask('views', 'Generates all views/html files', [ 'clean:views', 'jade_config', 'jade:' + target ]);
+    grunt.registerTask('watch', 'Acts upon file changes during development', [ 'watch' ]);
+    grunt.registerTask('build', 'Generates a full website build', [
         'rm', 'cp',
-        'sass:' + type, 'jade_config:' + type, 'jade:' + type,
+        'sass:' + target, 'jade_config', 'jade:' + target,
         'scripts', 'jsbuild'
     ]);
 
