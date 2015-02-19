@@ -75,7 +75,7 @@
     "markdown-toc": "~0.6.3",
     "moment": "~2.9.0",
     "node-hooked-changelog": "0.0.6",
-    "radic": "0.6.1",
+    "radic": "^0.7.0",
     "radic-handlebars": "~0.1.5"
   }
 }
