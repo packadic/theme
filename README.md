@@ -1,14 +1,20 @@
 # Packadic theme  
-**Currently in development**  
-By Robin Radic. [MIT Licensed](LICENSE)  
-**Purpose**
-- HTML/css/js theme
-- Jekyll github use pages theme (JEKYL INTEGRATEION
-- Laravel admin theme (BLADE INTEGRATION)
-- Customises/peronalised JSDoc, PHPDoc and code coverate templats
-- Github/jenkings etc widgets
-
-
+**Currently in development**. By Robin Radic. [MIT Licensed](LICENSE)  
+  
+This is a admin theme that i intend to use for a lot of projects.
+The theme utilizes RequireJS to lazy-load load javascript files.
+It can automaticly detect if a certain script is required.
+  
+I created the site using SCSS as style pre-processor and Jade as HTML pre-processor.
+The plan is to eventually start using Typescript as Javascript pre-processor, but i'll
+start implementing that further down the road.
+  
+The theme is MIT licensed, so you can basically do with it whatever you want.
+In the near future there'll be some examples here showing several methods on how to implement
+this theme into different projects like Laravel blade, Github pages/jekyll etc.
+  
+  
+  
 ## Information
 - [Changelog](CHANGELOG.md)
 - [Grunt task overview](TASKS.md)
@@ -51,44 +57,4 @@ bourbon scss -
 - lodash
 - Jade
 - preprocess
-
-
-### Tested with
-- Mocha
-- instabul
-- Chai
-- travos
-
-
-### Implements dev stuff
-- jshint
-- edtorcofig
-- jsdoc
-- github pages
-- documentation
-
-
-### Utilizes browser side:
-- jQuery
-- Jade & Handlebar runtims
-- lodash
-- moment
-- async waterfall / each
-- boootbox
-- bootstrap 3
-- bootstrap datepicker
-- boostrap switch
-- codemirror
-- cyrptojslib
-- eventemetteir2
-- excnvas
-- font-awsoem
-- handlebars
-- highlightjs
-- jade
-- jquery ui
-- modernizr
-- respod
-- share-button
-- toastr
-
+- RequireJS
