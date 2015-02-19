@@ -2,6 +2,14 @@
 
 
 
+- [2015-02-19](https://github.com/packadic/theme/commit/77ce132fcc68b7073da03f5780b1e32a99f26f32): github pages preview update  
+- [2015-02-19](https://github.com/packadic/theme/commit/f2ec0b1ad5c22026eebd0cc73180edc20bd6a245): readme update  
+- [2015-02-19](https://github.com/packadic/theme/commit/a0e70c462dceb618f14380d5add82a1625ef031d): changes  
+- [2015-02-12](https://github.com/packadic/theme/commit/c282af82e2169a1d37172ef1d3e58c10149b98c9): after remove ignore files  
+- [2015-02-12](https://github.com/packadic/theme/commit/f5d336f37a0fbf10c8b19b15632a034541102f43): before remove ignore files  
+- [2015-02-12](https://github.com/packadic/theme/commit/a84d36268cdb7a012225e760a2e329c81c436882): Altered build tasks. Is also now uploadable to github pages by changing nav href&#x27;s and adding frontmatter.  
+- [2015-02-12](https://github.com/packadic/theme/commit/c21cbde7d977ad3c965fde34a386751045c28f59): been at it  
+- [2015-02-11](https://github.com/packadic/theme/commit/cdca639442461827c810d50f0d19c7b19e358697): registerBuild pre  
 - [2015-02-11](https://github.com/packadic/theme/commit/b5a87942bcfdcdf0f1da9e226233b042b1a9e9ed): revised grunt build logic to enable sub-builds with different tasks and configuration based on the same default config. this will enable html builds, jekyll builds, &lt;insert type here&gt; builds.  
 - [2015-02-11](https://github.com/packadic/theme/commit/6eeb6e2a26c90796e0f9146bd0a6b5ff60e5d876): initialised git flow and cleaning up stuff  
 - [2015-02-10](https://github.com/packadic/theme/commit/6ba648f35c3822189e7172f1115d3beac7c0c6a3): Sidebar menu alterations and top section adjustments  

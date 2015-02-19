@@ -20,13 +20,13 @@ this theme into different projects like Laravel blade, Github pages/jekyll etc.
 - [Grunt task overview](TASKS.md)
 - [Roadmap](ROADMAP.md)  
 - [MIT Licensed](LICENSE)  
-
-
+  
+  
 ## Build requirements
 - nodejs / npm / bower / grunt-cli  
 - ruby / rubygems / bundler  
-
-
+  
+  
 ## Install
 ```bash
 # ensure nodejs, ruby, git etc are installed. also npm, bower, grunt, bundle, rubygems

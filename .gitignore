@@ -19,9 +19,7 @@
 /metro
 /examples
 /lib/blade-extensions
-/lib/radic
 /lib/highlightjs
-/lib/jquery
 /src/_components
 /src/_includes
 /gh-pages
