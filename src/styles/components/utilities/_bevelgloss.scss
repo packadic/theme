@@ -1,0 +1,102 @@
+
+.top-bevel {
+
+
+  @include box-shadow( inset 0 1px 0 rgba(255, 255, 255, 0.4) !important);
+}
+.top-bevel-on-light {
+
+
+  @include box-shadow( inset 0 1px 0 rgba(255, 255, 255, 0.75) !important);
+}
+.top-bevel-on-dark {
+
+
+  @include box-shadow( inset 0 1px 0 rgba(255, 255, 255, 0.25) !important);
+}
+.bottom-bevel {
+
+
+  @include box-shadow( inset 0 -1px 0 rgba(0, 0, 0, 0.25) !important);
+}
+.bottom-bevel-on-light {
+
+
+  @include box-shadow( inset 0 -1px 0 rgba(0, 0, 0, 0.15) !important);
+}
+.bottom-bevel-on-dark {
+    @include box-shadow(inset 0 -1px 0 rgba(0, 0, 0, 0.5) !important);
+
+}
+.bevel,
+.bevel-subs > li,
+.big-menu > li,
+li.big-menu,
+.calendar-menu > li,
+li.calendar-menu,
+.title-menu > li,
+li.title-menu {
+
+
+  @include box-shadow( inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(0, 0, 0, 0.25) !important);
+}
+.no-boxshadow .big-menu > li {
+  border-bottom: 1px solid #666666;
+}
+.bevel-on-light,
+.bevel-on-light-subs > li,
+.message-menu > li,
+li.message-menu {
+
+
+  @include box-shadow( inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 0 -1px 0 rgba(0, 0, 0, 0.15) !important);
+}
+.bevel-on-dark,
+.bevel-on-dark-subs > li,
+#menu header,
+#profile,
+#access {
+
+
+  @include box-shadow( inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.5) !important);
+}
+.emboss,
+.emboss-subs > li {
+
+
+  @include box-shadow( inset 0 1px 4px rgba(0, 0, 0, 0.25) !important);
+}
+.emboss-on-dark,
+.emboss-on-dark-subs > li {
+
+
+  @include box-shadow( inset 0 1px 4px black !important);
+}
+.bright-text-bevel,
+.big-menu,
+.title-menu {
+  -webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  -moz-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.bright-text-bevel-on-dark,
+#menu header,
+#profile {
+  -webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+  -moz-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+.dark-text-bevel,
+.calendar-menu > li,
+li.calendar-menu,
+.message-menu > li,
+li.message-menu {
+  -webkit-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+  -moz-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+.dark-text-bevel-on-dark {
+  -webkit-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  -moz-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+}

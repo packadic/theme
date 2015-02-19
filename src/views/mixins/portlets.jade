@@ -1,0 +1,30 @@
+mixin portlet(type, noTitle)
+    - type = type || "";
+    - noTitle = noTitle || false;
+    div(class="portlet " + type)
+        if noTitle
+            .portlet-body
+                block
+        else
+            block
+
+mixin portlet-title(title, icon)
+    - icon = icon || false;
+    .portlet-title
+        div(class="caption")&attributes(attributes)
+            if icon
+                i(class="fa fa-" + icon)
+            | !{title}
+        .actions
+            block
+
+mixin portlet-body()
+    .portlet-body
+        block
+
+
+mixin portlet-action(title, icon)
+    a.btn.btn-sm.btn-default&attributes(attributes)
+        if icon
+            i(class="fa fa-" + icon)
+        |  !{title}

@@ -1,0 +1,130 @@
+include ../../base
+extends ../../layouts/default
+block header
+    +page-title("Components", "General bootstrap components")
+    +page-breadcrumbs
+        +breadcrumb("Components", "/components", true)
+
+
+mixin btn-group-demo(title, btnClass)
+    - btnClass = btnClass || 'btn-info';
+    h4.box-heading= title
+    .btn-group&attributes(attributes)
+        +a.btn(class=btnClass) First
+        +a.btn(class=btnClass) Second
+        +a.btn(class=btnClass) Last
+
+mixin btn-dropdown-demo(title, split, dropup)
+    - split = split || false;
+    - dropup = dropup || false;
+    .btn-group(class= dropup === true ? "dropup" : "")
+        if split
+            button.btn&attributes(attributes)= title
+            button.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')&attributes(attributes)
+                span.caret
+                span.sr-only Toggle dropdown
+        else
+            button.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')&attributes(attributes)
+                | !{title}
+                span.caret
+
+        ul.dropdown-menu(role='menu')
+            li
+                a(href='#') Action
+            li
+                a(href='#') Another action
+            li
+                a(href='#') Something else here
+            li.divider
+            li
+                a(href='#') Separated link
+
+block content
+
+    #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                    h4#exampleModalLabel.modal-title New message
+                .modal-body
+                    form
+                        .form-group
+                            label.control-label(for='recipient-name') Recipient:
+                            input#recipient-name.form-control(type='text')
+                        .form-group
+                            label.control-label(for='message-text') Message:
+                            textarea#message-text.form-control
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') Close
+                    button.btn.btn-primary(type='button') Send message
+
+
+    .row
+        .col-md-4
+            +box("Alerts", "info", 260)
+                +alert("success", "Well done") You have done well, have a cookie
+                +alert("success", "Very good", true) You have done well, You may close this
+                +alert("info", "Did you know") There are a lot of scripts out there
+                +alert("info", "Also usefull", true) Those scripts can close this box
+                +alert("warning", "Check it out") There might be an issue with you
+                +alert("warning", "Warning", true) Your dog has not enough food
+                +alert("danger", "Error") The website could not do that thing
+
+        .col-md-4
+            +box("Labels and badges", "cog", 260).box-table
+                table.table.table-striped.table-hover.table-bordered
+                    thead
+                        tr
+                            th Class
+                            th Label
+                            th Badge
+                    tbody
+                        for state in site.data.theme.states
+                            - var text = capitalizeFirst(state);
+                            tr
+                                td= text
+                                td
+                                    span.label(class="label-" + state) Default
+                                td
+                                    span.badge(class="badge-" + state) 5
+
+        .col-md-4
+            +box("Modals", "cog")
+                .btn-group-justified
+                    +a(data-demo-modal="information").btn.btn-info.demo-modal Info
+                    +a(data-demo-modal="success").btn.btn-success.demo-modal Success
+                    +a(data-demo-modal="warning").btn.btn-warning.demo-modal Warning
+                    +a(data-demo-modal="error").btn.btn-danger.demo-modal Error
+
+            +box("Tooltips", "cog")
+                .btn-group.btn-group-justified
+                    +a.btn.btn-primary Left
+                    +a.btn.btn-primary Right
+                    +a.btn.btn-primary Top
+                    +a.btn.btn-primary Bottom
+
+
+            +box("Popovers", "cog")
+                .btn-group.btn-group-justified
+                    +a.btn.btn-primary Left
+                    +a.btn.btn-primary Right
+                    +a.btn.btn-primary Top
+                    +a.btn.btn-primary Bottom
+
+    .row
+        .col-md-6
+            +box("Buttons", "cog")
+                a.btn.btn-primary Primary
+        .col-md-6
+            +box("Buttons", "cog")
+                | adf
+
+    .row
+        .col-md-6
+            +box("Buttons", "cog")
+                a.btn.btn-primary Primary
+        .col-md-6
+            +box("Buttons", "cog")
+                | adf

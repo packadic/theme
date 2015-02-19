@@ -1,0 +1,8 @@
+extends ../layouts/default
+block header
+    +page-title("Editor", "An editor for editing")
+block content
+    .row
+        .col-md-12
+            +box("Editor", "pencil")
+                textarea#code.code-editor

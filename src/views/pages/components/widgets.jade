@@ -1,0 +1,52 @@
+include ../../base
+extends ../../layouts/default
+block header
+    +page-title("Widgets", "Widgets that contain data")
+    +page-breadcrumbs
+        +breadcrumb("Components", "/components")
+        +breadcrumb("Widgets", "/components/widgets", true)
+
+block content
+    .row
+        .col-md-4
+            .widget
+                .widget-header
+                    i.fa.fa-code
+                    |  Widget
+                    .actions
+                        a.btn.btn-icon-only.green
+                            i.fa.fa-pencil
+                        a.btn.btn-icon-only.red
+                            i.fa.fa-remove
+                .widget-body
+                    .widget-content
+                        | Hello
+
+
+        .col-md-4
+            .widget
+                .widget-header
+                    i.fa.fa-code
+                    |  Widget
+                    .actions
+                        a.btn.green View
+                        a.btn.yellow-dark Edit
+                        a.btn.red Remove
+                .widget-body
+                    | Hello
+
+
+
+        .col-md-4
+            .widget
+                .widget-header
+                    i.fa.fa-code
+                    |  Widget
+
+                    a.pull-right.btn.btn-rounded.btn-xs.red
+                        i.fa.fa-remove
+                .widget-body
+                    .widget-content
+                        | Hello
+                .widget-footer
+                    | sdf

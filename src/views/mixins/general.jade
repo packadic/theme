@@ -1,0 +1,50 @@
+mixin ie(condition, tag)
+    | <!--[!{condition}]>
+    | !{tag}
+    | <![endif]-->
+
+mixin js-script(path)
+    script(src=assetPath + "/scripts/" + path)&attributes(attributes)
+
+mixin js-vendor(path)
+    script(src=assetPath + "/scripts/plugins/" + path)&attributes(attributes)
+
+mixin js-tpls(path)
+    script(src=assetPath + "/tpls/" + path)&attributes(attributes)
+
+mixin css-style(path)
+    link(href=assetPath + "/styles/" + path, type="text/css", rel="stylesheet")&attributes(attributes)
+
+mixin css-vendor(path)
+    link(href=assetPath + "/scripts/plugins/" + path, type="text/css", rel="stylesheet")&attributes(attributes)
+
+
+mixin codeviewer
+    - var id = _getRandomId(20);
+    - attributes.href = "#" + id
+    - attributes.class = attributes.class || "btn btn-xs blue";
+    - attributes.class = attributes.class + " codeviewer-button"
+    a(href="#" + id)&attributes(attributes) View code
+    textarea(id=id, class="codeviewer-textarea")
+        block
+
+mixin alert(type, title, dismissable)
+    - type = type || "info"
+    - if(typeof title == 'boolean' && typeof dismissable == 'undefined') { dismissable = title; title = false };
+    - dismissable = dismissable || false;
+    - var clas = "alert alert-" + type + (dismissable == true ? " alert-dismissible" : "");
+    div(class=clas)
+        if dismissable
+            button(type="button", class="close", data-dismiss="alert", aria-label="Close")
+              span(aria-hidden="true")
+                | &times;
+        if title
+            strong
+                | !{title} &nbsp;
+        block
+
+
+mixin lia
+    li
+        +a&attributes(attributes)
+            block

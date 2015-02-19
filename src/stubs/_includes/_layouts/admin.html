@@ -1,0 +1,73 @@
+{% include default %}
+<!-- @include ../partials/top.html -->
+<head>
+    <!-- @include ../partials/head.html -->
+
+    <link href="{{ ASSETDIR }}/vendor/prism.css" rel="stylesheet" type="text/css"/>
+</head>
+<body class="{% if page.layout_fluid != true %}page-boxed {% endif %}page-header-fixed page-container-bg-solid page-sidebar-closed-hide-logo page-sidebar-fixed page-sidebar-closed-hide-logo">
+<div class="page-header navbar navbar-fixed-top">
+    <div class="page-header-inner {% if page.layout_fluid != true %}container {% endif %}">
+        <!-- @include ../partials/logo.html -->
+        <!-- @include ../partials/page-top.html -->
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<div class="container">
+    <div class="page-container">
+        <div class="page-sidebar-wrapper">
+            <div class="page-sidebar navbar-collapse collapse">
+                <ul class="page-sidebar-menu page-sidebar-menu-compact " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                    <!-- @include ../partials/sidebar-navigation.html -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper">
+
+
+            <div class="page-content">
+                {% if page.title %}
+                <h3 class="page-title">
+                    {{ page.title }} <small>{{ page.subtitle }}</small>
+                </h3>
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet light">
+                            <div class="portlet-body" id="admin-widget">
+                                {{ content }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @include ../partials/footer.html -->
+</div>
+
+<!-- @include ../partials/scripts.html -->
+<!-- @include ../partials/widgets.html -->
+
+<script src="{{ ASSETDIR }}/vendor/hallo.js"></script>
+<script src="{{ ASSETDIR }}/vendor/showdown.js"></script>
+<script src="{{ ASSETDIR }}/vendor/to-markdown.js"></script>
+<script src="{{ ASSETDIR }}/vendor/prism.js" data-manual></script>
+<script src="{{ ASSETDIR }}/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="{{ ASSETDIR }}/widgets/admin.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+    $(function(){
+        $('#admin-widget').admin({
+
+        });
+
+    });
+</script>
+
+</body>
+
+<!-- @include ../partials/bottom.html -->

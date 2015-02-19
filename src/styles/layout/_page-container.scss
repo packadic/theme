@@ -1,0 +1,40 @@
+section#page {
+  	margin: 0px;
+  	padding: 0px;
+  	position: relative;
+
+  	@include clearfix();
+
+	.section-top-fixed & {
+		margin-top: $header-height;
+	}
+
+	.section-bottom-fixed.section-bottom-fixed-mobile & {
+		margin-bottom: 20px !important;
+	}
+}
+
+@media (min-width: $screen-md-min) {
+	.section-bottom-fixed section#page {
+	 	margin-bottom: 20px !important;
+	}
+}
+
+@media (max-width: $screen-sm-max) {
+	section#page {
+		margin: 0 !important;
+		padding: 0 !important;
+
+		.section-top-fixed.section-top-fixed-mobile & {
+			margin-top: $header-height !important;
+		}
+	}
+}
+
+@media (max-width: $screen-xs-min) {
+	section#page {
+		.section-top-fixed.section-top-fixed-mobile & {
+  			margin-top: $header-height-xs !important;
+  		}
+  	}
+}

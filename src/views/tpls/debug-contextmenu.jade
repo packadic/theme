@@ -1,0 +1,13 @@
+include ../base
+div#debug-contextmenu
+    ul.dropdown-menu(role="menu")
+        li
+            span.title Debug
+        +lia(tabindex="-1", href="javascript:;", data-debug-action="action1") Action
+        +lia(tabindex="-1", href="javascript:;", data-debug-action="disable") Disable
+        li.submenu
+            a(tabindex="-1", href="javascript:;") Submenu
+            ul.dropdown-menu
+                +lia Hai
+                +lia Bai
+

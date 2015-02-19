@@ -1,0 +1,26 @@
+extends ../../../layouts/default
+include _helpers
+block header
+    +page-title("Responsive tables", "tables")
+    +page-breadcrumbs
+        +breadcrumb("Components")
+        +breadcrumb("Tables")
+        +breadcrumb("Responsive tables", "/components/tables/responsive", true)
+
+
+block content
+    .row
+        .col-md-12
+            +box("Responsive table", "list").box-table
+                .table-responsive
+                    +demo-table(true, true).table-bordered
+    .row
+        .col-md-12
+            +box("Flip content table", "list").box-table
+                .flip-scroll
+                    +demo-table(true, true).table-bordered.table-striped.table-condensed.flip-content
+    .row
+        .col-md-4
+            +box("Horizontal scrollable table", "list").box-table
+                .table-scrollable
+                    +demo-table(true, true).table-bordered.table-striped.table-condensed

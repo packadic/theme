@@ -1,0 +1,20 @@
+mixin tabs
+    div(role="tabpanel")&attributes(attributes)
+        block
+
+mixin tabs-nav
+    ul(role="tablist").nav.nav-tabs&attributes(attributes)
+        block
+
+mixin tabs-nav-item(id)
+    li(role="presentation")&attributes(attributes)
+        a(href="#tab-" + id, aria-controls="tab-" + id, role="tab", data-toggle="tab")
+            block
+
+mixin tabs-content
+    .tab-content&attributes(attributes)
+        block
+
+mixin tabs-panel(id)
+    .tab-pane(role="tabpanel", id="tab-" + id)&attributes(attributes)
+        block

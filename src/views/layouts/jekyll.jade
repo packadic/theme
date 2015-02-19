@@ -1,0 +1,25 @@
+include ../mixins/jekyll
+extends _default
+block pre-doctype
+    +JT("include default")
+
+block append meta
+    - var metaContent = J("site.keywords | join: ', '") +
+    - JT('if page.tags') +
+    - J('page.tags | join: ", "') +
+    - JT('endif') +
+    - J(', ') +
+    - JT('if page.keywords') +
+    - J("page.keywords | join: ', '") +
+    - JT('endif');
+    meta(charset=J("site.encoding"))
+    meta(name="description", content=JT('if page.description') + J('page.description') + JT('else') + J('site.description') + JT('endif'))
+    meta(name="keywords", content=metaContent)
+
+
+block title
+    title
+        +JT('page.title')
+            +J('page.title &#8211;')
+        +JT('site.title')
+

@@ -1,0 +1,102 @@
+include ../base
+doctype html
+html.no-js
+    head
+        title Hai
+        +viewport
+        meta(charset=site.encoding)
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        block styles
+            +css-style("style.css")
+
+    body.fixed-top-nav
+        #site-wrapper
+            #top-wrapper
+                nav.top-nav(role='navigation')
+                    .container-fluid
+                        .navbar-header
+                            button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                                span.sr-only Toggle navigation
+                                span.icon-bar
+                                span.icon-bar
+                                span.icon-bar
+                            a.navbar-brand(href='/')= site.name
+                        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                            ul#topmenu.nav.navbar-nav
+                            ul.nav.navbar-nav.pull-right
+                                li
+                                    a(href="#") Test
+
+            #page-wrapper
+                #sidebar-wrapper
+                    .side-nav
+                        ul
+                            li.side-nav-header
+                                +a#side-nav-toggle
+                                    i.fa.fa-exchange
+                                h4 Navigation
+
+                            li
+                                +a
+                                    i.fa.fa-home
+                                    span Dashboard
+
+                #header-wrapper
+                    .page-header
+                        block header
+                            +page-title("Title", "Subtitle")
+                            +page-breadcrumbs
+                                +breadcrumb("Buttons", false, true, true)
+
+
+                #content-wrapper
+                    nav.navbar.navbar-default.hide(role='navigation')
+                        .container-fluid
+                            .navbar-header
+                                button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                                    span.sr-only Toggle navigation
+                                    span.icon-bar
+                                    span.icon-bar
+                                    span.icon-bar
+                                a.navbar-brand(href='/')= site.name
+                            .collapse.navbar-collapse
+                                ul.nav.navbar-nav
+                                    +lia Test
+                                    +lia Test2
+                                    +lia Test3
+                                ul.nav.navbar-nav.pull-right
+                                    li
+                                        a(href="#") Test
+                    block content
+
+        block vendor-scripts
+            +ie('if lt IE 9')
+                +js-vendor('respond/dest/respond.min.js')
+                +js-vendor('excanvas/excanvas.js')
+
+
+            script.
+                window.PACKADIC_SITE_DATA = !{site_json};
+                console.log(PACKADIC_SITE_DATA);
+
+            +js-vendor('require.min.js')
+            +js-vendor('packadic/main.js')
+
+
+
+            block scripts
+
+//
+            include ../partials/vendor-scripts
+            +js-vendor('codemirror/lib/codemirror.js')
+            +js-vendor('codemirror/addon/runmode/runmode.js')
+            +js-vendor('codemirror/mode/jade/jade.js')
+            +js-vendor('codemirror/mode/javascript/javascript.js')
+            +js-vendor('codemirror/mode/css/css.js')
+            +js-vendor('codemirror/mode/xml/xml.js')
+            +js-vendor('codemirror/mode/htmlmixed/htmlmixed.js')
+
+//
+    block scripts
+            include ../partials/scripts
+

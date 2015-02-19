@@ -1,0 +1,151 @@
+{% include default %}
+<!-- @include ../partials/top.html -->
+<head>
+    <!-- @include ../partials/head.html -->
+
+</head>
+<body class="{% if page.layout_fluid != true %}page-boxed {% endif %}page-header-fixed page-container-bg-solid page-sidebar-closed-hide-logo page-sidebar-fixed page-sidebar-closed-hide-logo">
+<div class="page-header navbar navbar-fixed-top">
+    <div class="page-header-inner {% if page.layout_fluid != true %}container {% endif %}">
+        <!-- @include ../partials/logo.html -->
+        <!-- @include ../partials/page-top.html -->
+    </div>
+</div>
+
+<div class="clearfix"></div>
+{% if page.layout_fluid != true %}<div class="container">{% endif %}
+    <div class="page-container">
+        <div class="page-sidebar-wrapper">
+            <div class="page-sidebar navbar-collapse collapse">
+                <ul class="page-sidebar-menu page-sidebar-menu-compact " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                    <!-- @include ../partials/sidebar-navigation.html -->
+                </ul>
+            </div>
+        </div>
+
+        <div class="page-content-wrapper">
+
+
+            <div class="page-content">
+
+                {% if page.title and page.hide-title != true %}
+                <h3 class="page-title">
+                    {{ page.title }} <small>{{ page.subtitle }}</small>
+                </h3>
+                {% endif %}
+
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <i class="fa fa-home"></i>
+                            <a href="/">Home</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="/portfolio">Portfolio</a>
+                            <i class="fa fa-angle-right"></i>
+                        </li>
+                        <li>
+                            <a href="#" class="noclick">{{ page.title }}</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="portlet light">
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-md-12 blog-page">
+                                <div class="row">
+                                    <div class="col-md-9 article-block">
+                                        <h3 style="margin-top:0;">{{ page.title }}</h3>
+                                        <div class="blog-tag-data">
+                                            <img src="/images/portfolio/{{ page.image }}" class="portfolio-main-image img-responsive" alt="">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <ul class="list-inline blog-tags">
+                                                        <li>
+                                                            <i class="fa fa-tags"></i>
+                                                            {% for tag in page.tags %}
+                                                            <a href="#" data-tag="{{ tag }}"> {{ tag }} </a>
+                                                            {% endfor %}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-6 blog-tag-data-inner">
+                                                    <ul class="list-inline">
+                                                        <li>
+                                                            <i class="fa fa-calendar"></i>
+                                                            <a href="#"> {{ page.date | append " 00:00:00" | date_to_string }} </a>
+                                                        </li>
+                                                        <li>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end news-tag-data-->
+                                        <div>
+                                            {% capture custom_content %}{{ content | replace:"<blockquote>","<blockquote class='hero'>" }}{% endcapture %}
+                                            {% include minify content=content %}
+                                        </div>
+
+                                    </div>
+                                    <!--end col-md-9-->
+                                    <div class="col-md-3 blog-sidebar">
+                                        <h3 style="margin-top:0;">Fotos</h3>
+                                        <ul class="list-inline blog-images">
+                                            {% for image in page.images %}
+                                            <li> <a href="#"><img alt="" src="/images{{ page.url }}{{ image }}"></a></li>
+                                            {% endfor %}
+                                        </ul>
+                                        <div class="space20">
+                                        </div>
+                                        <h3>Categories</h3>
+                                        <ul class="list-inline sidebar-tags">
+                                            {% for category in page.categories %}
+                                            <li>
+                                                <a href="#"> <i class="fa fa-tags"></i> {{ category }} </a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                        <div class="space20">
+                                        </div>
+                                        <h3>Share</h3>
+                                        <!-- @include ../social-share.html -->
+                                        <div class="space20">
+                                        </div>
+
+                                    </div>
+                                    <!--end col-md-3-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- @include ../partials/footer.html -->
+    {% if page.layout_fluid != true %}</div>{% endif %}
+
+<!-- @include ../partials/scripts.html -->
+<!-- @include ../partials/widgets.html -->
+<!-- @include ../disqus_comments.html -->
+<script>
+    $(function(){
+        $mainImage = $('.portfolio-main-image');
+        $('.blog-images > li > a').on('click', function(e){
+            e.preventDefault();
+            var $img = $(this).find('img');
+            $mainImage.fadeOut(400, function(){
+                $mainImage.attr('src', $img.attr('src'));
+            }).fadeIn(400);
+            //console.log()
+
+        })
+    });
+</script>
+</body>
+
+<!-- @include ../partials/bottom.html -->

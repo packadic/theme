@@ -1,0 +1,166 @@
+{% include default %}
+<!-- @include ../partials/top.html -->
+<head>
+    <!-- @include ../partials/head.html -->
+</head>
+
+
+<body class="{% if page.layout_fluid != true %}page-boxed {% endif %}page-header-fixed page-container-bg-solid page-sidebar-closed-hide-logo page-sidebar-fixed page-sidebar-closed-hide-logo">
+    <div class="page-header navbar navbar-fixed-top">
+        <div class="page-header-inner {% if page.layout_fluid != true %}container {% endif %}">
+            <!-- @include ../partials/logo.html -->
+            <!-- @include ../partials/page-top.html -->
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    {% if page.layout_fluid != true %}<div class="container">{% endif %}
+        <div class="page-container">
+            <div class="page-sidebar-wrapper">
+                <div class="page-sidebar navbar-collapse collapse">
+                    <ul class="page-sidebar-menu page-sidebar-menu-compact " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                        <!-- @include ../partials/sidebar-navigation.html -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="page-content-wrapper">
+                <div class="page-content layout-post">
+
+                    {% if page.title %}
+                    <h3 class="page-title">
+                        {{ page.title }} {% if page.subtitle %}<small>{{ page.subtitle }}</small>{% endif %}
+                    </h3>
+                    {% endif %}
+                    <div class="page-bar">
+                        <ul class="page-breadcrumb">
+                            <li>
+                                <i class="fa fa-home"></i>
+                                <a href="/">Home</a>
+                                <i class="fa fa-angle-right"></i>
+                            </li>
+                            <li>
+                                <a href="/posts">Blog posts</a>
+                                <i class="fa fa-angle-right"></i>
+                            </li>
+                            <li>
+                                <a href="#" class="noclick">{{ page.title }}</a>
+                            </li>
+                        </ul>
+                        <div class="page-toolbar">
+                            <div class="btn-group pull-right">
+                                <a href="javascript:;" class="btn btn-fit-height grey-salt gitauth github-admin-edit-page" data-github-admin-editmode="markdown" data-github-admin-edit="{{ page.path }}">
+                                    <i class="fa fa-pencil"></i> Edit
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="portlet light">
+                                <div class="portlet-body">
+                                    <div class="row">
+                                        <div class="col-md-12 blog-page">
+                                            <div class="row">
+                                                <div class="col-md-12 article-block">
+
+
+
+
+
+                                                    <div class="row">
+                                                        <div class="col-md-4 blog-img blog-tag-data">
+                                                            <img src="{{ page.image }}" alt="" class="img-responsive">
+                                                            <ul class="list-inline">
+                                                                <li>
+                                                                    <i class="fa fa-calendar"></i>
+                                                                    <a href="#">
+                                                                        {{ page.date | date: "%a, %-d %B" }} </a>
+                                                                </li>
+                                                                <!----<li>
+                                                                    <i class="fa fa-comments"></i>
+                                                                    <a href="#">
+                                                                        38 Comments </a>
+                                                                </li>-->
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-md-8 blog-article">
+                                                            <h3>
+                                                                <a href="{{ site.url }}{{ page.url }}"> {{ page.title }} </a>
+                                                            </h3>
+                                                            <p>
+                                                                {{ page.description | markdownify }}
+                                                            </p>
+
+                                                            {% if page.share == true %}
+                                                                <!-- @include ../social-share.html -->
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 blog-tag-data">
+
+                                                            <ul class="list-inline blog-tags">
+                                                                <li>
+                                                                    <i class="fa fa-tags"></i>
+                                                                    {% for tag in page.tags %}<a href="{{ site.url }}/tags/#{{ tag }}" title="Pages tagged {{ tag }}" data-tag="{{ tag }}" class="tag">{{ tag }}</a>{% unless forloop.last %}{% endunless %}{% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+
+
+                        <hr>
+
+
+
+
+
+
+                                                    <!--end news-tag-data-->
+                                                    <div class="blog-post-content">
+                                                        {% if page.minify_content == false %}
+                                                            {{ content }}
+                                                        {% else %}
+                                                            {% include minify content=content %}
+                                                        {% endif %}
+                                                    </div>
+                                                    <hr>
+                                                    <div>
+                                                        {% if page.share == true %}
+                                                            <!-- @include ../social-share.html -->
+                                                        {% endif %}
+                                                    </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                            {% if page.comments == true and site.data.social.disqus %}
+                            <div class="portlet light bordered">
+                                <div class="portlet-body">
+                                    <section id="disqus_thread"></section>
+                                </div>
+                            </div>
+                            {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- @include ../partials/footer.html -->
+            {% if page.layout_fluid != true %}</div>{% endif %}
+
+
+        <!-- @include ../partials/scripts.html -->
+
+    <!-- @include ../partials/widgets.html -->
+    <!-- @include ../disqus_comments.html -->
+</body>
+
+<!-- @include ../partials/bottom.html -->

@@ -1,0 +1,67 @@
+include ../base
+doctype html
+<!--[if IE 8]><html class="ie8" lang="en"><![endif]-->
+<!--[if IE 9]><html lang="en" class="ie9"><![endif]-->
+<!--[if !IE]><!-->
+html(lang="en")
+    head
+        title
+            | Hai
+        +viewport
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        +css-style("base-stylesheet.css")
+        +css-style("themes/theme-default.css")
+    block pre-body
+        body.page-loading.section-top-fixed
+            block body
+                #page-loader
+                    .loader.loader-light
+                //section#top
+                section#top.navbar.navbar-fixed-top
+                    //header.top
+                    header.top
+                        .menu-toggler.sidebar-toggler
+                            i.fa.fa-long-arrow-left
+                        .page-logo
+                            +a Logo
+                        //nav.top-nav
+                        +a.menu-toggler.responsive-toggler(data-toggle="collapse" data-target=".navbar-collapse").btn.btn-default
+                            i.fa.fa-bars.fa-lg
+                        .top-menu
+                            ul.nav.navbar-nav
+                .clearfix
+                //#page
+                section#page
+                    //section#side
+                    .sidebar-wrapper
+                        //section#side aside
+                        nav.sidebar-nav.navbar-collapse.collapse
+                            .loader.loader-light
+                            ul.sidebar-nav-menu(data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200")
+                    //section#content
+                    .main-wrapper
+                        //main
+                        main
+                            header.content
+                                block header
+                                    +page-title("Title", "Subtitle")
+                                    +page-breadcrumbs
+                                        +breadcrumb("Buttons", false, true, true)
+                            div.content
+                                block content
+                                    .row
+                                        .col-md-12
+                                            | contentsdf
+                //section#bottom
+                section#bottom
+                    //footer.bottom
+                    footer.bottom
+                        block footer
+                            p Radicsss
+                block script
+                    script.
+                        window.PACKADIC_SITE_DATA = !{site_json};
+                block scripts
+                    +js-script('plugins/requirejs/require.js')
+                    +js-script('main.js')
+                    +js-script('init.js')

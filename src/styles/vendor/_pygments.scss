@@ -1,0 +1,10 @@
+.highlight,
+.highlight pre,
+.highlight code{
+	border-shadow: none;
+	box-sizing: content-box;
+	box-shadow: none;
+	border: none;
+}
+
+@import "pygments/pygments-zenburn";

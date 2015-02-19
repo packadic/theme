@@ -1,0 +1,29 @@
+mixin page-title(title, subtitle)
+    .page-title.pull-left
+        h1= title
+        if subtitle
+            .page-subtitle= subtitle
+
+mixin page-breadcrumbs(home)
+    - home = home || true
+    ol.breadcrumb.page-breadcrumb.pull-right
+        if home
+            li
+                i.fa.fa-home
+                a(href='/') Home
+                i.fa.fa-angle-right
+
+        block
+
+mixin breadcrumb(name, href, active)
+    - href = href || false
+    - active = active || false
+    - var liclass = active ? "active" : "";
+    li(class=liclass)
+        if href
+            a(href=href)= name
+        else
+            | !{name}
+
+        if !active
+            i.fa.fa-angle-right

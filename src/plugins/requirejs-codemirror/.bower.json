@@ -1,0 +1,22 @@
+{
+  "name": "requirejs-codemirror",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "CodeMirror": "marijnh/CodeMirror#~4.0.3"
+  },
+  "homepage": "https://github.com/tuchk4/requirejs-codemirror",
+  "_release": "d101893b70",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "d101893b702223ea17ab8a291f6138539480baa7"
+  },
+  "_source": "git://github.com/tuchk4/requirejs-codemirror.git",
+  "_target": "*",
+  "_originalSource": "requirejs-codemirror",
+  "_direct": true
+}

@@ -1,0 +1,120 @@
+/**
+Mixins for layout/*.scss files
+Depends on: theme-variables
+**/
+
+
+// Applyable to:
+// .submenu-nav-menu > li
+// .sub-menu > li
+@mixin sidebar-hover-submenu($left, $margin-top: -30px, $width: $sidebar-width, $spacing: 1px){
+    // li
+    & {
+        caption-side: bottom; // jquery finds this and applies .sub-menu-title to the newly created A tag
+
+
+        .sub-menu {
+            display: none;
+            width: $sidebar-collapsed-submenu-width-on-hover;
+            z-index: $zindex-sidebar-submenu;
+            position: absolute;
+        }
+
+        &.active,
+        &.open {
+            .sub-menu {
+                display: none !important;
+            }
+        }
+
+        a > .arrow {
+            display: none;
+        }
+
+        &:hover {
+            // make the li 2x wider and place the title to the right
+            width: $width + $sidebar-collapsed-submenu-width-on-hover + $spacing !important;
+            position: relative !important;
+            z-index: 10000;
+            display: block !important;
+
+            > a.sub-menu-title {
+                // right side on hover title
+                float: right;
+                padding-left: 57px;
+                position: absolute;
+                left: $width + $spacing;
+                width: ($width + $spacing) + $margin-top;
+            }
+            > a:not(.sub-menu-title) {
+                > .arrow {
+                    display: block;
+                    float: right;
+                    position: absolute;
+                    right: 0;
+                    margin-top: -20px;
+                    background: none;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-top: 12px double transparent;
+                    border-bottom: 12px double transparent;
+                    border-left:0;
+
+                    &:after,
+                    &:before {
+                        display: none;
+                    }
+
+                    .sidebar-nav-reversed & {
+                        right: auto;
+                        left: 0;
+                        border-right: 0;
+                    }
+                }
+            }
+
+            > .sub-menu {
+                display: inline-block !important;
+            }
+
+            .sub-menu {
+                margin-left: $sidebar-width + $spacing;
+                margin-top: 0;
+
+                .sidebar-nav-reversed & {
+                    margin-left: -($sidebar-collapsed-submenu-width-on-hover) !important;
+                }
+
+                .sidebar-nav-closed & {
+                    margin-left: 0;
+                }
+
+                 li {
+                    a {
+                        padding-left: 50px;
+                    }
+                    .sub-menu {
+                        margin-left: $sidebar-collapsed-submenu-width-on-hover;
+                        margin-top: -38px !important;
+
+                        .sidebar-nav-reversed & {
+                            margin-left: -$sidebar-collapsed-submenu-width-on-hover !important;
+                        }
+
+                        > li > a {
+                            padding-left: 10px;
+                            padding-right: 10px;
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    > li:hover {
+    }
+    @content
+}

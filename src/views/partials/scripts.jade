@@ -1,0 +1,19 @@
+include ../base
+
+// build:js /assets/tpls.js
++js-tpls('side-nav.js')
+// endbuild
+
+// build:js /assets/scripts.js
++js-script('theme.js')
+// endbuild
+script.
+    $(document).ready(function(){
+        var site = !{site_json};
+        console.log(site);
+        var packadic = Packadic.init({
+            site: site
+
+        });
+
+    });

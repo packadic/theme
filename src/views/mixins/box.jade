@@ -1,0 +1,42 @@
+
+
+mixin box-header(title, icon, actions)
+    - icon = icon || false;
+    - title = title || false;
+    - actions = actions || false;
+    - var actionsClass = (typeof actions == 'string' ? actions : '');
+    header&attributes(attributes)
+        if icon
+            i(class="fa fa-" + icon)
+        h3= title
+        if actions
+            .actions(class=actionsClass)
+                block
+        else
+            block
+
+mixin box-body(scrollerHeight)
+    - scrollerHeight = scrollerHeight || false;
+    if scrollerHeight
+        - var style = 'max-height: ' + scrollerHeight + 'px;'
+        section(data-mcs-axis="y", style=style).scrollable&attributes(attributes)
+            block
+    else
+        section&attributes(attributes)
+            block
+
+
+mixin box(title, icon, scrollerHeight)
+    - icon = icon || false;
+    - title = title || false;
+    if title
+        .box
+            header
+                if icon
+                    i(class="fa fa-" + icon)
+                h3= title
+            +box-body(scrollerHeight)&attributes(attributes)
+                block
+    else
+        .box&attributes(attributes)
+            block

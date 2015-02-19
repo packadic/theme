@@ -1,0 +1,14 @@
+
+
+
+// extra bootstrap variables
+$brand-default:         			#c6c6c6;
+$brand-primary:         		 	#428bca;
+
+$state-default-text:             	#333333 ;
+$state-default-bg:           	 	$brand-default ;
+$state-default-border:       	 	darken(adjust-hue($state-default-bg, -10), 5%) ;
+
+$state-primary-text:          	 	#D8E3F2 ;
+$state-primary-bg:        		 	$brand-primary ;
+$state-primary-border:    	 	 	darken(adjust-hue($state-primary-bg, -10), 5%) ;

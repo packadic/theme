@@ -1,0 +1,96 @@
+
+
+// order of .scss definitions/files
+
+//--- start of base file: << imports _{name}.scss files >> exports 1 {name}.scss file that will be processed to {name}.css
+
+// 1.0 MY functions that: 1. do NOT use any default variables (like default parameter variables) -- 2.
+
+// 2.0 MY core variables (suffix them with !default)
+
+// 3.0 MY override variables (variables that override VENDOR !default variables. do NOT suffix them with !default)
+
+// 4.0 VENDOR (bootstrap) variables import
+
+// 5.0 MY extending variables = variables that uses VENDOR variables (suffix them with !default)
+
+// 6.0 MY mixins
+
+// 6.0 VENDOR mixins
+
+// 6.1 MY override mixins. mixins that override the VENDOR mixins to alter the VENDOR styles
+
+// 7.0 VENDOR styles
+
+// 8.0 MY override mixins (that could possibly override VENDOR mixins, if wanted)
+
+// 9.0 MY layout styles (WITHOUT colors, images, bg colors, etc -- WITH dimensions, sizes, width, paddings, margins, etc)
+
+//--- end of base file
+
+
+//--- start of theme file 1 (default): << imports _{name}.scss files >> exports 1 {name}.scss file that will be processed to {name}.css
+
+// 1.0 MY THEME variables (WITH colors, images, bg colors, etc -- WITHOUT dimensions, sizes, width, paddings, margins, etc)
+
+// 2.0 MY _theme.scss theme styles. extends MY layout styles / VENDOR styles with colors, images, bg colors etc
+
+//--- end of theme file
+// IF you want to have multiple themes, repeat the previous step using different MY THEME variables each time, but the same MY _theme.scss theme style
+// That way, you will generate something like theme1.css, theme2.css etc. Then one of those can be picked and used
+
+
+
+//--- Examples
+// - Example scss file/folder structure
+// - Example scss files using this exact method
+// - Example output file/folder structure
+// - Example website(s) with several themes
+
+
+/*
+
+D root vendor folder (most likely bower_components)
+--D vendor-folder-1
+--D vendor-folder-2
+
+D root scss folder
+--F core.scss
+--F _functions          - core
+--F _mixins             - core
+--F _variables          - core
+
+
+--D layout                      - contains styles
+--D--F _{name}.scss             - WITH dimensions, sizes, width, paddings, margins, etc
+--D--F _{name}.scss             - WITHOUT colors, images, bg colors,
+--D--F _header.scss
+--D--F _aside.scss
+--D--F _content.scss
+--D--F _aside.scss
+--D--F _footer.scss
+--D--F _top-navigation.scss
+
+--D components                  - contains styles WITH both dimensions and colors
+--D--F _{component-name}.scss
+--D--F _buttons.scss
+--D--F _boxes.scss
+
+
+--F _theme.scss                 - contains styles    - extends layout/component styles
+--D themes
+--D--F default.scss             - contains variables - @imports _theme.scss on the last line
+--D--F {theme2-name}.scss       - contains variables - @imports _theme.scss on the last line
+--D--F {theme3-name}.scss       - contains variables - @imports _theme.scss on the last line
+
+--D overrides
+--D--F _{vendor-name}-variables
+--D--F _{vendor-name}-functions
+--D--F _{vendor-name}-mixins
+
+--D extensions
+--D--F _{vendor-name}-variables
+--D--F _{vendor-name}-functions
+--D--F _{vendor-name}-mixins
+
+*/

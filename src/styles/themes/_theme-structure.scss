@@ -1,0 +1,699 @@
+
+
+    /* Header search bar, toggler button & top menu */
+    section#top.navbar {
+        background: $section-top-bg;
+        @include box-shadow(inset 0 -1px 1px rgba(0, 0, 0, 0.5) !important);
+
+        /* Header seaech box */
+        .search-form {
+            background: $header-search-bg-color;
+
+            &:hover {
+                background: $header-search-bg-hover-color;
+            }
+
+            .input-group {
+                .form-control {
+                    color: $header-search-font-color;
+
+                    @include placeholder($header-search-placeholder-font-color);
+                }
+
+                .input-group-btn {
+                    .btn.submit {
+                        > i {
+                            color: $header-search-font-color;
+                        }
+                    }
+                }
+            }
+
+            &.open {
+                background: $header-search-bg-color-on-open;
+            }
+        }
+
+        /* Toggler button for sidebar expand/collapse and responsive sidebar menu */
+        .menu-toggler {
+            background-image: image_url('sidebar_toggler_icon_#{$theme-name}.png');
+            &.sidebar-toggler{
+                background: $sidebar-menu-top-level-bg-left;
+                > i.fa {
+                    color: $brand-main-color;
+                }
+                &:hover {
+                    background-color: $sidebar-menu-top-level-bg-right;
+                    > i.fa {
+                        color: lighten($brand-main-color, 20%);
+                    }
+                }
+            }
+        }
+    }
+
+
+    /* Default Horizontal Menu */
+
+    section#top.navbar {
+
+    }
+
+    /* Page sidebar */
+
+
+    .sidebar-nav-closed.sidebar-nav-fixed .sidebar-nav:hover,
+    .sidebar-nav {
+        background-color: $bg-color;
+
+        /* Default sidebar */
+        .sidebar-nav-menu {
+
+            /* 1st level links */
+
+            > li {
+
+                > a {
+                    border-top: 1px solid $sidebar-menu-devider-border-color;
+                    color: $sidebar-menu-link-font-color;
+
+                    @include sidebar-nav-menu-bg($sidebar-menu-top-level-bg-left, $sidebar-menu-top-level-bg-right);
+
+                    &:hover {
+
+                    }
+                    > i {
+                        color: $sidebar-menu-link-icon-font-color;
+                    }
+
+                    > i[class^="icon-"],
+                    > i[class*="icon-"] {
+                        @if $theme-name == "light" {
+                            color: darken($sidebar-menu-link-icon-font-color, 15%);
+                        } @else if $theme-name == "light2" {
+                            color: darken($sidebar-menu-link-icon-font-color, 15%);
+                        } @else {
+                            color: lighten($sidebar-menu-link-icon-font-color, 5%);
+                        }
+                    }
+
+                    > .arrow {
+                        &:before,
+                        &.open:before {
+                            color: $sidebar-menu-arrow-color;
+                        }
+                    }
+                }
+
+                &.heading {
+                    > h3 {
+                        color: darken($sidebar-menu-link-font-color, 23%);
+                    }
+                }
+
+                &:hover,
+                &.open {
+                    > a {
+                        //background: $sidebar-menu-link-bg-color-on-hover;
+
+                        @include sidebar-nav-menu-bg($sidebar-menu-top-level-bg-left-hover, $sidebar-menu-top-level-bg-right-hover);
+                        color: $sidebar-menu-link-font-color-on-hover;
+
+                        > i {
+                            color: $sidebar-menu-link-icon-font-color-on-hover;
+                        }
+
+                        > .arrow {
+                            &:before,
+                            &.open:before {
+                                color: $sidebar-menu-arrow-color-on-hover;
+                            }
+                        }
+                    }
+                }
+
+                &.open > a {
+                    //background-image: none !important;
+                    //filter: none !important;
+                    @include sidebar-nav-menu-bg($sidebar-menu-link-bg-color-on-active, $sidebar-menu-top-level-bg-right);
+                }
+
+                &.active,
+                &.active.open {
+                    > a {
+                        @include sidebar-nav-menu-bg($sidebar-menu-link-bg-color-on-active, $sidebar-menu-top-level-bg-right);
+                        //background: $sidebar-menu-link-bg-color-on-active;
+                        border-top-color: transparent;
+                        color: $sidebar-menu-link-font-color-on-active;
+                        &:hover {
+                            background: $sidebar-menu-link-bg-color-on-active;
+                        }
+
+                        > i {
+                            color: $sidebar-menu-link-icon-font-color-on-active;
+                        }
+
+                        > .arrow {
+                            &:before,
+                            &.open:before {
+                                color: $sidebar-menu-arrow-color-on-active;
+                            }
+                        }
+                    }
+                }
+
+                &.active + li {
+                    > a {
+                        border-top-color: transparent;
+                    }
+                }
+
+                &.active.open + li {
+                    > a {
+                        border-top-color: $sidebar-menu-devider-border-color;
+                    }
+                }
+
+                &:last-child {
+                    > a {
+                        border-bottom: 1px solid transparent !important;
+                    }
+                }
+            }
+
+            /* All links */
+
+            li {
+                > a {
+                    > .arrow {
+                        &:before,
+                        &.open:before {
+                            color: $sidebar-menu-arrow-color;
+                        }
+                    }
+                }
+
+                &:hover {
+                    > a {
+                        > .arrow {
+                            &:before,
+                            &.open:before {
+                                color: $sidebar-menu-arrow-color-on-hover;
+                            }
+                        }
+                    }
+                }
+
+                &.active {
+                    > a {
+                        > .arrow {
+                            &:before,
+                            &.open:before {
+                                color: $sidebar-menu-arrow-color-on-active;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .sidebar-nav-closed &:hover {
+                .sub-menu {
+                    background-color: $bg-color;
+                }
+            }
+
+
+            .sub-menu {
+                > li {
+                    border-top: 1px solid $sidebar-menu-sub-menu-divider-border-color;
+                    > a {
+                        color: $sidebar-menu-sub-menu-link-font-color;
+                        background: $sidebar-menu-sub-menu-bg;
+                        //@include sidebar-nav-menu-bg($sidebar-menu-top-level-bg-right, $bg-color);
+                        > i {
+                            color: $sidebar-menu-sub-menu-link-icon-font-color;
+                        }
+
+                        > i[class^="icon-"],
+                        > i[class*="icon-"] {
+                            @if $theme-name == "light" {
+                                color: darken($sidebar-menu-link-icon-font-color, 15%);
+                            } @else if $theme-name == "light2" {
+                                color: darken($sidebar-menu-link-icon-font-color, 15%);
+                            } @else {
+                                color: lighten($sidebar-menu-link-icon-font-color, 5%);
+                            }
+                        }
+
+                        > .arrow {
+                            &:before,
+                            &.open:before {
+                                color: $sidebar-menu-arrow-color;
+                            }
+                        }
+                    }
+                    //background: $sidebar-menu-link-bg-color-on-active;
+
+                    &:hover > a,
+                    &.open:not(.active) > a{
+                        //background: $sidebar-menu-sub-menu-link-bg-color-on-hover !important;
+                        background: $sidebar-menu-sub-menu-bg-hover;
+                    }
+
+                    &.active> a {
+                        //@include sidebar-nav-menu-bg($sidebar-menu-link-bg-color-on-active, $sidebar-menu-sub-menu-link-bg-color-on-hover);
+                        background: $sidebar-menu-sub-menu-bg-active;
+                    }
+                    &:hover,
+                    &.open,
+                    &.active {
+                        > a {
+
+                            > i {
+                                color: $sidebar-menu-sub-menu-link-icon-font-color-on-hover;
+                                @if $theme-name == "light" {
+                                    color: darken($sidebar-menu-link-icon-font-color, 15%);
+                                } @else if $theme-name == "light2" {
+                                    color: darken($sidebar-menu-link-icon-font-color, 15%);
+                                } @else {
+                                    color: lighten($sidebar-menu-link-icon-font-color, 20%);
+                                }
+                            }
+
+                            > .arrow {
+                                &:before,
+                                &.open:before {
+                                    color: $sidebar-menu-arrow-color-on-hover;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /* light sidebar */
+        .sidebar-nav-menu.sidebar-nav-menu-light {
+
+            /* 1st level links */
+            > li {
+                &:hover,
+                &.open {
+                    > a {
+                        background: $light-sidebar-menu-link-bg-color-on-hover;
+                    }
+                }
+
+                &.active,
+                &.active.open {
+                    > a {
+                        background: $light-sidebar-menu-link-bg-color-on-active;
+                        border-left: 4px solid $light-sidebar-menu-link-border-color;
+                        color: $light-sidebar-menu-link-font-color-on-active;
+
+                        &:hover {
+                            border-left: 4px solid $sidebar-menu-link-bg-color-on-active;
+                            background: $light-sidebar-menu-link-bg-color-on-hover;
+                        }
+
+                        > i {
+                            color: $light-sidebar-menu-link-icon-color-on-active;
+                        }
+
+                        > .arrow {
+                            &:before,
+                            &.open:before {
+                                color: $light-sidebar-menu-link-arrow-color-on-active;
+                            }
+                        }
+                    }
+                }
+
+                .sub-menu {
+                    background: $light-sidebar-menu-sub-menu-bg-color;
+
+                    > li {
+                        &:hover,
+                        &.open,
+                        &.active {
+                            > a {
+                                background: $light-sidebar-menu-sub-menu-link-bg-color-on-hover !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .sidebar-toggler {
+
+            background: image_url('sidebar_inline_toggler_icon_#{$theme-name}.jpg');
+        }
+
+        /* Sidebar search */
+
+        .sidebar-search {
+
+            .input-group {
+                border-bottom: 1px solid $sidebar-search-bottom-border-color;
+
+                .form-control {
+                    background-color: $bg-color;
+                    color: $sidebar-search-input-font-color;
+                    @include placeholder($sidebar-search-input-placeholder-font-color);
+                }
+
+                .input-group-btn {
+                    .btn {
+                        > i {
+                            color: $sidebar-search-input-font-color;
+                        }
+                    }
+                }
+            }
+
+            &.sidebar-search-bordered {
+                .input-group {
+                    border: 1px solid $sidebar-search-full-border-color;
+                }
+            }
+
+            .sidebar-nav-closed &.open {
+                .input-group {
+                    background-color: $bg-color;
+                }
+
+                .remove {
+                    > i {
+                        color: $sidebar-search-input-font-color;
+                    }
+                }
+            }
+
+            &.sidebar-search-solid {
+
+                .sidebar-nav-closed & {
+                    .input-group {
+                        background: none;
+                    }
+                }
+
+                .input-group {
+                    border: 1px solid $sidebar-search-bg-color;
+                    background: $sidebar-search-bg-color;
+
+                    .form-control {
+                        background: $sidebar-search-bg-color;
+                    }
+                }
+
+                &.open .input-group {
+                    border: 1px solid $bg-color;
+                    background: $bg-color;
+
+                    .form-control {
+                        background: $bg-color;
+                    }
+                }
+            }
+        }
+    }
+
+    .sidebar-nav-reversed {
+
+        .sidebar-nav-menu.sidebar-nav-menu-light {
+            /* 1st level links */
+            > li {
+                &.active,
+                &.active.open {
+                    > a {
+                        border-left: 0;
+                        border-right: 4px solid $light-sidebar-menu-link-border-color;
+
+                        &:hover {
+                            border-left: 0;
+                            border-right: 4px solid $sidebar-menu-link-bg-color-on-active;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // bottom section
+    section#bottom {
+        footer.bottom {
+            color: $footer-default-font-color;
+        }
+
+        section#bottom-fixed & {
+            background-color: $footer-fixed-bg-color;
+        }
+    }
+
+    @media (min-width: $screen-md-min) { /* 992px */
+
+        /* Sidebar menu closed */
+        .sidebar-nav-menu.sidebar-nav-menu-hover-submenu {
+            > li:hover {
+                > .sub-menu {
+                    box-shadow: 5px 5px rgba($sidebar-menu-sub-menu-box-shadow-color, 0.2);
+
+                    &.sidebar-toggler-wrapper,
+                    &.sidebar-search-wrapper {
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+
+        .sidebar-nav-menu.sidebar-nav-menu-closed {
+            > li:hover {
+                box-shadow: 5px 5px rgba($sidebar-menu-sub-menu-box-shadow-color, 0.2);
+
+                &.sidebar-toggler-wrapper,
+                &.sidebar-search-wrapper {
+                    box-shadow: none;
+                }
+
+                > .sub-menu {
+                    box-shadow: 5px 5px rgba($sidebar-menu-sub-menu-box-shadow-color, 0.2);
+
+                    &.sidebar-toggler-wrapper,
+                    &.sidebar-search-wrapper {
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+
+        /* Light sidebar menu */
+        .sidebar-nav-menu.sidebar-nav-menu-light.sidebar-nav-menu-closed {
+            > li.heading {
+                padding: 0;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                border-top: 1px solid $sidebar-menu-devider-border-color !important;
+            }
+        }
+
+
+        /* Fixed Sidebar */
+
+        .sidebar-nav-fixed:not(section#bottom-fixed) {
+            main {
+                border-bottom: 0;
+            }
+
+            section#bottom {
+                background-color: #fff;
+
+                footer.bottom {
+                    color: #333;
+                }
+            }
+        }
+
+        /* Boxed Layout */
+
+        .page-boxed {
+            background-color: $for-min-992px-page-boxed-bg-color !important;
+
+
+            /* Page container */
+            section#page {
+                background-color: $bg-color;
+                border-left: 1px solid $for-min-992px-page-boxed-page-container-bg-color;
+                border-bottom: 1px solid $for-min-992px-page-boxed-page-container-bg-color;
+            }
+
+            &.sidebar-nav-reversed {
+                section#page {
+                    border-left: 0;
+                    border-right: 1px solid $for-min-992px-page-boxed-page-container-bg-color;
+                }
+            }
+
+            &.sidebar-nav-fixed {
+                section#page {
+                    border-left: 0;
+                    border-bottom: 0;
+                }
+            }
+
+            &.sidebar-nav-reversed.sidebar-nav-fixed {
+                section#page {
+                    border-left: 0;
+                    border-right: 0;
+                    border-bottom: 0;
+                }
+            }
+
+            /* Page sidebar */
+
+            &.sidebar-nav-fixed {
+                .sidebar-nav {
+                    border-left: 1px solid $for-min-992px-page-boxed-sidebar-fixed-border-color;
+                }
+            }
+
+            &.sidebar-nav-reversed.sidebar-nav-fixed {
+                .sidebar-nav {
+                    border-right: 1px solid $for-min-992px-page-boxed-sidebar-fixed-border-color;
+                    border-left: 0;
+                }
+            }
+
+            /* Page footer */
+
+            &.sidebar-nav-fixedsection#bottom-fixed {
+                section#bottom {
+                    background-color: $for-min-992px-page-boxed-bg-color !important;
+
+                    footer.bottom {
+                        color: $footer-default-font-color;
+                    }
+                }
+            }
+        }
+
+         /* Sidebar Menu Wirh Hoverable Submenu */
+
+        .sidebar-nav-menu-hover-submenu {
+            li {
+                &:hover {
+                    a {
+                        > .arrow {
+                            border-right:8px solid $sidebar-menu-hover-sub-menu-bg-color;
+
+                            .sidebar-nav-reversed & {
+                                border-left:8px solid $sidebar-menu-hover-sub-menu-bg-color;
+                            }
+                        }
+                    }
+
+                    > .sub-menu {
+                        background: $sidebar-menu-hover-sub-menu-bg-color !important;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: $screen-sm-max) { /* 991px */
+        /* Page sidebar */
+        .sidebar-nav {
+            background-color: $mobile-sidebar-menu-bg-color;
+
+            .sidebar-nav-menu {
+                > li {
+                    > a {
+                        border-top: 1px solid $bg-color;
+                    }
+
+                    &:hover,
+                    &.open {
+                        > a {
+                            background: $mobile-sidebar-menu-link-bg-color-on-hover;
+                        }
+                    }
+
+                    &:last-child {
+                        > a {
+                            border-bottom: 0 !important;
+                        }
+                    }
+
+                    .sub-menu {
+                        background-color: $mobile-sidebar-menu-bg-color !important;
+                    }
+                }
+
+                .sidebar-search {
+                    input {
+                        background-color: $mobile-sidebar-menu-bg-color !important;
+                    }
+                }
+            }
+
+            /* light sidebar */
+            .sidebar-nav-menu.sidebar-nav-menu-light {
+
+                /* 1st level links */
+                > li {
+                    &:hover,
+                    &.open {
+                        > a {
+                            background: $mobile-light-sidebar-menu-link-bg-color-on-hover;
+                        }
+                    }
+
+                    &.active,
+                    &.active.open {
+                        > a {
+                            background: $mobile-light-sidebar-menu-link-bg-color-on-active;
+
+                            &:hover {
+                                background: $mobile-light-sidebar-menu-link-bg-color-on-active;
+                            }
+                        }
+                    }
+
+                    .sub-menu {
+                        background: $mobile-light-sidebar-menu-sub-menu-bg-color !important;
+
+                        > li {
+                            &:hover,
+                            &.open,
+                            &.active {
+                                > a {
+                                    background: $mobile-light-sidebar-menu-sub-menu-link-bg-color-on-hover !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: $screen-xs-min) { /* 480px */
+
+        section#top.navbar {
+
+        }
+    }
+
+    /****
+    Boby
+    ****/
+
+    body {
+      background-color: $bg-color;
+    }
+
+    // content
+    main {
+        background: $main-content-bg;
+        background-color: $main-content-bg-color;
+    }

@@ -1,0 +1,81 @@
+/*
+@include text-emphasis-variant('.text-primary', $brand-primary);
+
+@include text-emphasis-variant('.text-success', $state-success-text);
+
+@include text-emphasis-variant('.text-info', $state-info-text);
+
+@include text-emphasis-variant('.text-warning', $state-warning-text);
+
+@include text-emphasis-variant('.text-danger', $state-danger-text);
+
+@include bg-variant('.bg-primary', $brand-primary);
+
+@include bg-variant('.bg-success', $state-success-bg);
+
+@include bg-variant('.bg-info', $state-info-bg);
+
+@include bg-variant('.bg-warning', $state-warning-bg);
+
+*/
+
+@mixin text-emphasis-variant($parent, $color) {
+
+
+    i.fa#{$parent} {
+        color: $color !important;
+    }
+    #{$parent}, #{$parent}-and-icon i.fa {
+        color: $color !important;;
+    }
+    a#{$parent}:hover {
+        color: darken($color, 10%) !important;;
+    }
+}
+
+
+@mixin make-general-color-variant($class-name, $background-color, $border-color, $text-color: $text-color) {
+    .btn.#{$class-name} {
+        @include button-variant($text-color, $background-color, $border-color);
+    }
+    .btn.#{$class-name}-stripe {
+        border: none;
+        border-left: 3px solid $background-color !important;
+    }
+
+    .selectpicker li a.#{$class-name} {
+        color: $text-color;
+        background-color: $background-color;
+
+        &:hover {
+            background-color: darken($background-color, 7%);
+        }
+    }
+
+    .label.#{$class-name} {
+        @include label-variant($background-color);
+    }
+
+}
+
+@mixin make-color-variant($color-name) {
+    $light: material-color($color-name, '200');
+    $normal: material-color($color-name, '500');
+    $dark: material-color($color-name, '900');
+
+    @include text-emphasis-variant('.text-' + $color-name + '-light', $light);
+    @include text-emphasis-variant('.text-' + $color-name, $normal);
+    @include text-emphasis-variant('.text-' + $color-name + '-dark', $dark);
+
+    @include bg-variant('.bg-' + $color-name + '-light', $light);
+    @include bg-variant('.bg-' + $color-name, $normal);
+    @include bg-variant('.bg-' + $color-name + '-dark', $dark);
+
+    @include make-general-color-variant($color-name + '-light', $light, darken($light, 5%), $dark);
+    @include make-general-color-variant($color-name, $normal, darken($normal, 5%), #fff);
+    @include make-general-color-variant($color-name + '-dark', $dark, darken($dark, 5%), #fff);
+}
+
+@each $color-name, $color-variants in $material-colors {
+    @include make-color-variant($color-name);
+}

@@ -1,0 +1,292 @@
+topnav:
+  - name: Home
+    href: <%= target.nav.pre %>/
+    icon: fa fa-home
+
+  - name: About me
+    href: <%= target.nav.pre %>/about-me
+    icon: fa fa-user
+
+  - name: Login
+    href: <%= target.nav.pre %>/contact
+    icon: fa fa-key
+
+  - name: Contact
+    href: <%= target.nav.pre %>/contact
+    icon: fa fa-pencil-o
+
+sidebar:
+  - name: Home
+    href: <%= target.nav.pre %>/
+    icon: fa fa-home
+
+  - name: Documentation
+    icon: fa fa-file-code-o
+    children:
+      - name: Gettings started
+        href: <%= target.nav.pre %>/docs/gettings-started<%= target.nav.ext %>
+
+      - name: Customizing
+        href: <%= target.nav.pre %>/docs/gettings-started<%= target.nav.ext %>
+
+      - name: Setting up projects
+        href: <%= target.nav.pre %>/docs/gettings-started<%= target.nav.ext %>
+
+      - name: Grunt tasks
+        href: <%= target.nav.pre %>/docs/gettings-started<%= target.nav.ext %>
+
+
+  - name: Multi-level icon menu
+    icon: fa fa-tasks
+    children:
+      - name: Tasks
+        icon: fa fa-align-right text-orange
+      - name: Bolds
+        icon: fa fa-bold text-green
+        children:
+          - name: Bugs
+            icon: fa fa-bug text-red
+          - name: Drivers
+            icon: fa fa-cab text-green
+            children:
+              - name: Tasks
+                icon: fa fa-align-right text-orange
+              - name: Bolds
+                icon: fa fa-bold text-green
+                children:
+                  - name: Bugs
+                    icon: fa fa-bug text-red
+                    children:
+                      - name: Bugs
+                        icon: fa fa-bug text-red
+                      - name: Drivers
+                        icon: fa fa-cab text-green
+                        children:
+                          - name: Tasks
+                            icon: fa fa-align-right text-orange
+                          - name: Bolds
+                            icon: fa fa-bold text-green
+                            children:
+                              - name: Bugs
+                                icon: fa fa-bug text-red
+                              - name: Drivers
+                                icon: fa fa-cab text-green
+                                href: #/components/forms/layouts # temp dev make it the active one
+                              - name: Payments
+                                icon: fa fa-cc
+                  - name: Payments
+                    icon: fa fa-cc
+      - name: Get coffee
+        icon: fa fa-coffee
+
+
+  - name: Multi-level menu
+    children:
+      - name: Tasks
+      - name: Bolds
+        children:
+          - name: Bugs
+          - name: Drivers
+            children:
+              - name: Tasks
+              - name: Bolds
+                children:
+                  - name: Bugs
+                    children:
+                      - name: Bugs
+                      - name: Drivers
+                        children:
+                          - name: Tasks
+                          - name: Bolds
+                            children:
+                              - name: Bugs
+                              - name: Drivers
+                                href: #/components/forms/layouts # temp dev make it the active one
+                              - name: Payments
+                  - name: Payments
+      - name: Get coffee
+
+
+
+  - name: Layouts
+    icon: fa fa-desktop
+    children:
+      - name: Plugins
+        icon: fa fa-puzzle-piece
+
+
+  - name: Components
+    icon: fa fa-cubes
+    children:
+      - name: General
+        href: <%= target.nav.pre %>/components/general<%= target.nav.ext %>
+
+      - name: Typography
+        href: <%= target.nav.pre %>/components/typography<%= target.nav.ext %>
+
+      - name: Boxes
+        href: <%= target.nav.pre %>/components/boxes<%= target.nav.ext %>
+
+      - name: Buttons
+        href: <%= target.nav.pre %>/components/buttons<%= target.nav.ext %>
+        #href: <%= target.nav.pre %>/components/buttons/editor
+
+      - name: Forms
+        children:
+          - name: Layouts
+            href: <%= target.nav.pre %>/components/forms/layouts<%= target.nav.ext %>
+
+          - name: Elements
+            href: <%= target.nav.pre %>/components/forms/elements<%= target.nav.ext %>
+
+          - name: Validation
+            href: <%= target.nav.pre %>/components/forms/validation<%= target.nav.ext %>
+
+          - name: Uploader
+            href: <%= target.nav.pre %>/components/forms/uploader<%= target.nav.ext %>
+
+          - name: Wizard
+            href: <%= target.nav.pre %>/components/forms/wizard<%= target.nav.ext %>
+
+
+      - name: Portlets
+        href: <%= target.nav.pre %>/components/portlets<%= target.nav.ext %>
+
+      - name: Tables
+        children:
+          - name: Basic
+            href: <%= target.nav.pre %>/components/tables/basic<%= target.nav.ext %>
+
+          - name: Responsive
+            href: <%= target.nav.pre %>/components/tables/responsive<%= target.nav.ext %>
+
+          - name: Advanced
+            href: <%= target.nav.pre %>/components/tables/advanced<%= target.nav.ext %>
+
+          - name: Tree table
+            href: <%= target.nav.pre %>/components/tables/tree<%= target.nav.ext %>
+
+          - name: Datatables
+            href: <%= target.nav.pre %>/components/tables/datatables<%= target.nav.ext %>
+
+
+
+      - name: Tabs
+        href: <%= target.nav.pre %>/components/tabs<%= target.nav.ext %>
+
+      - name: Widgets
+        href: <%= target.nav.pre %>/components/widgets<%= target.nav.ext %>
+
+
+
+  - name: Pages
+    icon: fa fa-puzzle-piece
+    children:
+      - name: Plugins
+        icon: fa fa-puzzle-piece
+
+
+  - name: Builds
+    icon: fa fa-github
+    children:
+      - name: Jekyll/Github User Pages
+        icon: fa fa-github
+
+      - name: Github Project / Docpages
+        icon: fa fa-github
+
+      - name: JSDoc3 theme
+        icon: fa fa-github
+
+      - name: Istanbul theme
+        icon: fa fa-github
+
+      - name: PHPDoc theme
+        icon: fa fa-github
+
+      - name: PHPUnit coverage theme
+        icon: fa fa-github
+
+      - name: Jekyll/Github Pages
+        icon: fa fa-github
+
+
+  - name: Plugins
+    icon: fa fa-puzzle-piece
+    children:
+      - name: Main plugins
+        children:
+          - name: Scrollbar
+            href: <%= target.nav.pre %>/plugins/scrollbar<%= target.nav.ext %>
+
+          - name: Toastr
+            href: <%= target.nav.pre %>/plugins/toastr<%= target.nav.ext %>
+
+      - name: Bootstrap
+        children:
+          - name: Bootbox
+            href: <%= target.nav.pre %>/plugins/bootbox<%= target.nav.ext %>
+          - name: gTreeTable
+            href: <%= target.nav.pre %>/plugins/bootstrap-gtreetable<%= target.nav.ext %>
+          - name: Select
+            href: <%= target.nav.pre %>/plugins/bootstrap-select<%= target.nav.ext %>
+          - name: Switch
+            href: <%= target.nav.pre %>/plugins/bootstrap-switch<%= target.nav.ext %>
+          - name: Confirmation
+            href: <%= target.nav.pre %>/plugins/bootstrap-confirmation<%= target.nav.ext %>
+          - name: Contextmenu
+            href: <%= target.nav.pre %>/plugins/bootstrap-contextmenu<%= target.nav.ext %>
+          - name: Datepicker
+            href: <%= target.nav.pre %>/plugins/bootstrap-datepicker<%= target.nav.ext %>
+          - name: Daterangepicker
+            href: <%= target.nav.pre %>/plugins/bootstrap-daterangepicker<%= target.nav.ext %>
+          - name: Datetimepicker
+            href: <%= target.nav.pre %>/plugins/bootstrap-datetimepicker<%= target.nav.ext %>
+          - name: Markdown
+            href: <%= target.nav.pre %>/plugins/bootstrap-markdown<%= target.nav.ext %>
+          - name: Maxlength
+            href: <%= target.nav.pre %>/plugins/bootstrap-maxlength<%= target.nav.ext %>
+
+
+      - name: jQuery
+        children:
+          - name: Impromptu
+            href: <%= target.nav.pre %>/plugins/jquery-impromptu<%= target.nav.ext %>
+          - name: Popup Overlay
+            href: <%= target.nav.pre %>/plugins/jquery-popup-overlay<%= target.nav.ext %>
+          - name: Cookie
+            href: <%= target.nav.pre %>/plugins/jquery-cookie<%= target.nav.ext %>
+          - name: Nestable
+            href: <%= target.nav.pre %>/plugins/jquery-nestable<%= target.nav.ext %>
+          - name: Inputmask
+            href: <%= target.nav.pre %>/plugins/jquery-inputmask<%= target.nav.ext %>
+          - name: ScrollTo
+            href: <%= target.nav.pre %>/plugins/jquery-scrollto<%= target.nav.ext %>
+
+
+      - name: Utility & helpers
+        children:
+          - name: RequireJS
+            href: <%= target.nav.pre %>/plugins/requirejs<%= target.nav.ext %>
+          - name: CodeMirror
+            href: <%= target.nav.pre %>/plugins/codemirror<%= target.nav.ext %>
+          - name: CryptoJS
+            href: <%= target.nav.pre %>/plugins/cryptojslib<%= target.nav.ext %>
+          - name: Lodash
+            href: <%= target.nav.pre %>/plugins/lodash<%= target.nav.ext %>
+          - name: Marked
+            href: <%= target.nav.pre %>/plugins/marked<%= target.nav.ext %>
+          - name: HighlightJS
+            href: <%= target.nav.pre %>/plugins/highlightjs<%= target.nav.ext %>
+          - name: Moment
+            href: <%= target.nav.pre %>/plugins/moment<%= target.nav.ext %>
+          - name: Modernizr
+            href: <%= target.nav.pre %>/plugins/modernizr<%= target.nav.ext %>
+
+
+
+
+  - name: No icon
+    children:
+      - name: Plugins
+        icon: fa fa-puzzle-piece

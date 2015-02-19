@@ -1,0 +1,224 @@
+// @todo switch title/breadcrumbs to proper one
+
+header.content {
+    margin: 0;
+    padding: 3px 20px;
+    background: #ffffff;
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+    clear: both;
+    border-bottom: 5px solid #e5e5e5 !important;
+    box-shadow: none !important;
+    margin-bottom: 10px;
+    color: #bcbcbc;
+    &:after{
+        @extend .clearfix;
+    }
+    .page-title {
+        margin: 0;
+        padding: 0;
+        border-bottom: 0;
+    }
+    h1 {
+        font-size: 25px;
+        font-weight: 300;
+        display: inline-block;
+        margin: 5px 0 5px 0;
+
+    }
+    .page-subtitle {
+        font-size: 14px;
+        font-weight: 300;
+        color: #bcbcbc;
+        display: inline-block;
+        margin-left: 20px;
+    }
+    .breadcrumb {
+        margin-bottom: 0;
+        padding: 13px 15px;
+        border-radius: 0;
+        background: transparent;
+        li i {
+            padding: 0 10px;
+        }
+        li + li:before {
+            content: "";
+            padding: 0;
+        }
+        a {
+            color: #bcbcbc;
+            &:hover, &:focus, &:active {
+                text-decoration: none;
+            }
+            &:hover {
+                color: #777777;
+            }
+        }
+    }
+}
+
+.page-title {
+	padding: 0px;
+	font-size: 28px;
+	letter-spacing: -1px;
+	display: block;
+	color: #666;
+	margin: 0px 0px 15px 0px;
+	font-weight: 300;
+	font-family: $font-family-primary;
+
+	small {
+		font-size: 14px;
+		letter-spacing: 0px;
+		font-weight: 300;
+		color: #888;
+	}
+
+	.page-section-bg-solid & {
+		color: #666;
+		margin-bottom: 20px;
+		margin-top: 20px;
+
+		small {
+			color: #666;
+		}
+	}
+}
+
+main {
+	margin-top: 0px;
+	padding: 0px;
+	background-color: #fff;
+
+	.page-section-bg-solid & {
+		background: $page-content-solid-bg-color;
+	}
+
+	.page-full-width & {
+		margin-left: 0px !important;
+	}
+}
+
+@media (min-width: $screen-md-min) {
+
+
+	.main-wrapper {
+		float: left;
+		width: 100%;
+
+		main {
+			margin-left: $sidebar-width;
+			margin-top: 0px;
+			min-height: $page-content-min-height;
+
+            > div.content {
+                padding: 25px 20px 10px 20px;
+            }
+
+			&.no-min-height {
+				min-height: auto;
+			}
+
+			.sidebar-nav-fixed.sidebar-nav-hover-on & {
+				margin-left: $sidebar-collapsed-width;
+			}
+
+			.sidebar-nav-reversed & {
+				margin-left: 0 !important;
+				margin-right: $sidebar-width !important;
+			}
+
+			.sidebar-nav-reversed.sidebar-nav-fixed.sidebar-nav-hover-on & {
+				margin-left: 0;
+				margin-right: $sidebar-collapsed-width;
+			}
+
+			.sidebar-nav-reversed.sidebar-nav-closed  & {
+				margin-left: 0 !important;
+				margin-right: $sidebar-collapsed-width !important;
+			}
+
+			.sidebar-nav-closed  & {
+				margin-left: $sidebar-collapsed-width !important;
+			}
+
+			.sidebar-nav-closed.sidebar-nav-hide & {
+				margin-left: 0 !important;
+			}
+
+			.sidebar-nav-closed.sidebar-nav-reversed.sidebar-nav-hide & {
+				margin-right: 0 !important;
+			}
+
+			.page-full-width & {
+				margin-left: 0px !important;
+			}
+		}
+	}
+}
+
+@media (max-width: $screen-sm-max) {
+	.page-section-bg-solid {
+		.page-bar {
+			margin-top: -20px;
+		}
+	}
+
+	.page-boxed > .container {
+ 		max-width: none !important;
+ 		margin: 0 !important;
+ 		padding: 0 !important;
+ 	}
+
+	.main-wrapper {
+		main {
+			margin: 0px !important;
+			min-height: 280px;
+
+            > div.content {
+                padding: 20px 20px 20px 20px !important;
+            }
+		}
+	}
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+	.page-boxed > .container {
+ 		margin: auto !important;
+ 	}
+}
+
+@media (max-width: $screen-xs-max) {
+	.main-wrapper {
+		main {
+
+            > div.content {
+                padding: 20px 10px 10px 10px !important;
+            }
+			overflow: hidden;
+
+			.page-title {
+				margin-bottom: 20px;
+				font-size: 18px;
+
+				small {
+					font-size: 13px;
+					padding-top: 3px;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: $screen-xs-min) {
+	.main-wrapper {
+		main {
+			.page-title {
+				small {
+					display: block;
+					clear: both;
+				}
+			}
+		}
+	}
+}

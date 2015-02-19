@@ -1,0 +1,28 @@
+# js: assets/widgets/{js}
+# tpl: _includes/widgets/{tpl}
+
+page-top-user:
+  js: page-top-user.js
+  tpl: page-top-user.html
+  func: pageTopUser
+
+github-profile:
+  js: github-profile.js
+  func: githubProfile
+
+github-events:
+  js: github-events.js
+  func: githubEvents
+
+faq:
+  js: faq.js
+  tpl: faq.html
+  func: faq
+
+posts-filter:
+  js: posts-filter.js
+  func: postsFilter
+
+highlight-collapse:
+  js: highlight-collapse.js
+  func: highlightCollapse
