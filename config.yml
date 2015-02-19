@@ -20,6 +20,7 @@ targets:
   dev:
     stubs: src/stubs
     dest: dev
+    type: dev
     site: {}
     nav:
       pre: ''
@@ -28,6 +29,7 @@ targets:
   dist:
     stubs: src/stubs
     dest: dist
+    type: dist
     site: {}
     nav:
       pre: ''

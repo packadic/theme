@@ -39,7 +39,7 @@ module.exports = function( grunt ){
 
 
 
-        var target = grunt.config('target.name')
+        var type = grunt.config('target.type')
 
         var jadeFilters = {
             code: function( block ){
@@ -54,10 +54,10 @@ module.exports = function( grunt ){
         };
 
         var options = grunt.config('jade_config');
-        var data = getJadeData(full || options[target].full);
-        log(options, target, data)
-        grunt.config('jade.' + target + '.options.filters', jadeFilters);
-        grunt.config('jade.' + target + '.options.data', function(){
+        var data = getJadeData(full || options[type].full);
+        log(options, type, data)
+        grunt.config('jade.' + type + '.options.filters', jadeFilters);
+        grunt.config('jade.' + type + '.options.data', function(){
             data.assetPath = '/assets';
             return data;
         }.call());
