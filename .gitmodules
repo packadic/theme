@@ -2,7 +2,3 @@
 	path = lib/jquery
 	url = https://github.com/jquery/jquery
 	branch = 1.11-stable
-[submodule "lib/radic"]
-	path = lib/radic
-	url = https://github.com/robinradic/node-radic
-	branch = master
