@@ -28,6 +28,7 @@
 /Gemfile.lock
 /test/web
 /src/tscript
+/src/plugins
 /run.js
 /upload
 /build
