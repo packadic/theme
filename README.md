@@ -39,11 +39,6 @@ bundle install
 `sdfa`
 
 
-
-## 3d part dos
-http://vast-engineering.github.io/jquery-popup-overlay/
-bourbon scss -
-
 ## Comes with:
 - src: source files(jade, scss, etc)
 - dist: Processed (minified css,js,html and imge, concatd, build *htm, ss)
