@@ -6,7 +6,7 @@
     var tweendeps = [ 'plugins/gsap/css' ]; //, 'plugins/gsap/ease', 'plugins/gsap/attr', 'plugins/gsap/scroll' ];
 
     var config = {
-        baseUrl: '/assets/scripts',
+        baseUrl: window.PACKADIC_SITE_DATA.scriptsPath,
         paths  : {
             // custom build with jsbuild
             'lodash'                  : 'plugins/lodash.custom.min',
