@@ -1,5 +1,5 @@
 @mixin bg-img($name){
-    background: image_url('/assets/images/bg/' + $name + '.png') repeat #404040;
+    background: url($image-path + '/images/bg/' + $name + '.png') repeat #404040;
 }
 
 @function content-bg($nr: false, $light: false){
@@ -12,7 +12,7 @@
             $img: $img + '_' + $nr;
         }
     }
-    @return image_url('/assets/images/bg/' + $img + '.png') repeat;
+    @return url($image-path + '/images/bg/' + $img + '.png') repeat;
 }
 
 @mixin content-bg($nr: false, $light: false){
@@ -47,4 +47,15 @@
     @include background-image(linear-gradient(to $to, $bg-left $bg-left-width, $bg-right $bg-left-width));
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($bg-left)}', endColorstr='#{ie-hex-str($bg-right)}', GradientType=1);
+}
+
+
+
+@mixin box-header-variant($text-color: $text-color, $content-bg-nr: false, $content-bg-light: false){
+    color: $text-color;
+    @include content-bg($content-bg-nr, $content-bg-light);
+    h3 {
+        @include text-shadow(0px 1px 1px rgba($text-color, 0.18));
+    }
+
 }

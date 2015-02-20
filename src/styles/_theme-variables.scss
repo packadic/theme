@@ -3,18 +3,29 @@
 // Theme Colors Settigns
 
 // Main settings
-$brand-main-color:                                               		#33336E;
-$brand-main-font-color:													#ffffff;
+$brand-main-color:                                               		#33336E !default;
+$brand-main-font-color:													#ffffff !default;
 
 // Body and header
-$bg-color:                                                         		#3d3d3d;
+$bg-color:                                                         		#3d3d3d !default;
 
 // widgets
-$widget-header-color: #c3c3c3;
+$widget-header-color:                                                   #c3c3c3 !default;
+
+// boxes
+$box-bg-color:                                                          #fff !default;
+$box-border-color:                                                      #e9e9e9 !default;
+$box-shadow:                                                            0 1px 1px rgba(0, 0, 0, 0.05) !default;
+$box-radius:                                                            2px !default;
+$box-header-text-color:                                                 #c3c3c3 !default;
+$box-header-content-bg-nr:                                              2 !default;
+$box-header-content-bg-light:                                           false !default;
+
+
 
 // section#top
-$section-top-bg:                                                        content-bg(3, false);
-$section-top-bg-color:                                                  #444;
+$section-top-bg:                                                        content-bg(3, false) !default;
+$section-top-bg-color:                                                  #444 !default;
 
 // Header search
 //$header-bg-color:                                                  		#1f1f1f;

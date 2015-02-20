@@ -1,31 +1,12 @@
-$box-bg-color: #fff;
-$box-border-color: #e9e9e9;
-$box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-$box-radius: 2px;
-
-@mixin box-header-variant($text-color: $text-color, $content-bg-nr: false, $content-bg-light: false){
-    color: $text-color;
-    @include content-bg($content-bg-nr, $content-bg-light);
-    h3 {
-        @include text-shadow(0px 1px 1px rgba($text-color, 0.18));
-    }
-
-}
 
 .box {
-    @include box-shadow($box-shadow);
-    background: $box-bg-color;
-    border: 1px solid $box-border-color;
+    border: 1px solid;
     border-radius: $box-radius;
     margin-bottom: 10px;
 
     header {
-        @include box-header-variant(#c3c3c3, 2);
-        &.light{
-            @include box-header-variant($text-color, false, true);
-        }
         padding: 3px 15px;
-        border-bottom: 1px solid #e9e9e9;
+        border-bottom: 1px solid;
         line-height: 30px;
         > h3 {
             font-family: "Karla", "Times New Roman", Times, serif;

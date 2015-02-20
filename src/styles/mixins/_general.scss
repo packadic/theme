@@ -1,5 +1,5 @@
 @mixin bg-img($name){
-    background: image_url('/assets/images/bg/' + $name + '.png') repeat #404040;
+    background: image_url($image-path + '/images/bg/' + $name + '.png') repeat #404040;
 }
 
 @function content-bg($nr: false, $light: false){
@@ -12,7 +12,7 @@
             $img: $img + '_' + $nr;
         }
     }
-    @return image_url('/assets/images/bg/' + $img + '.png') repeat;
+    @return image_url($image-path + '/images/bg/' + $img + '.png') repeat;
 }
 
 @mixin content-bg($nr: false, $light: false){
