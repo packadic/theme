@@ -6,7 +6,9 @@ url: ##URL##
 encoding: utf-8
 timezone: Amsterdam/Europe
 
+assetPath: /assets
 scriptsPath: /assets/scripts
+stylesPath: /assets/styles
 
 # GITHUB METADATA
 #https://github.com/jekyll/github-metadata
