@@ -9,6 +9,9 @@ var radic  = require('radic'),
 
 var grunt;
 
+function defined(val){
+    return ! _.isUndefined(val);
+}
 
 function log(){
     _.toArray(arguments).forEach(function( vl ){
@@ -23,6 +26,8 @@ function dd(){
 
 
 module.exports = function( grunt ){
+
+    var target;
 
     grunt.registerTask('jade_config', 'Set jade configuration. Run before jade tasks.', function(full){
         grunt.event.emit('task.start', 'jade_config');
@@ -39,7 +44,7 @@ module.exports = function( grunt ){
 
 
 
-        var type = grunt.config('target.type')
+        target = grunt.config('target');
 
         var jadeFilters = {
             code: function( block ){
@@ -54,10 +59,10 @@ module.exports = function( grunt ){
         };
 
         var options = grunt.config('jade_config');
-        var data = getJadeData(full || options[type].full);
-        log(options, type, data)
-        grunt.config('jade.' + type + '.options.filters', jadeFilters);
-        grunt.config('jade.' + type + '.options.data', function(){
+        var data = getJadeData(full || options[target.type].full);
+        log(options, target.type, data)
+        grunt.config('jade.' + target.type + '.options.filters', jadeFilters);
+        grunt.config('jade.' + target.type + '.options.data', function(){
             data.assetPath = '/assets';
             return data;
         }.call());
@@ -120,51 +125,51 @@ module.exports = function( grunt ){
         return _.values(authors);
     }
 
+    function getBowerDep( name ){
+        var dep = {name: name, bw: {}, pkg: {}, md: {}};
+        var p = rootpath('src/plugins/' + name);
+
+        if( fs.existsSync(p + '/.bower.json') ){
+            dep.bw = fse.readJSONFileSync(p + '/.bower.json');
+        } else if( fs.existsSync(p + '/bower.json') ){
+            dep.bw = fse.readJSONFileSync(p + '/bower.json');
+        }
+
+        globule.find(p + '/*.md').forEach(function( filePath ){
+            var name = path.basename(filePath, '.md').toLowerCase();
+            var doc = fs.readFileSync(filePath, 'utf-8');
+            dep.md[ name ] = {
+                body: doc
+            };
+            try {
+                var tdoc = toc(doc, {
+                    firsth1: false // skip the first header
+                }).content;
+            } catch(e) {
+            } finally {
+                dep.md[ name ].toc = tdoc;
+            }
+
+        });
+
+        if( fs.existsSync(p + '/package.json') ){
+            dep.pkg = fse.readJSONFileSync(p + '/package.json');
+        } else if( fs.existsSync(p + '/bower.json') ){
+            dep.pkg = fse.readJSONFileSync(p + '/bower.json');
+        }
+
+        dep.data = _.merge(dep.bw, dep.pkg);
+        dep.authors = getAuthors(dep.data);
+
+        return dep;
+    }
+
+    function getNpmDep( name ){
+        return fse.readJSONFileSync(rootpath('node_modules/' + name + '/package.json'));
+    }
+
     var getJadeData = function(full){
         full = full || true;
-        function getBowerDep( name ){
-            var dep = {name: name, bw: {}, pkg: {}, md: {}};
-            var p = rootpath('src/plugins/' + name);
-
-            if( fs.existsSync(p + '/.bower.json') ){
-                dep.bw = fse.readJSONFileSync(p + '/.bower.json');
-            } else if( fs.existsSync(p + '/bower.json') ){
-                dep.bw = fse.readJSONFileSync(p + '/bower.json');
-            }
-
-            globule.find(p + '/*.md').forEach(function( filePath ){
-                var name = path.basename(filePath, '.md').toLowerCase();
-                var doc = fs.readFileSync(filePath, 'utf-8');
-                dep.md[ name ] = {
-                    body: doc
-                };
-                try {
-                    var tdoc = toc(doc, {
-                        firsth1: false // skip the first header
-                    }).content;
-                } catch(e) {
-                } finally {
-                    dep.md[ name ].toc = tdoc;
-                }
-
-            });
-
-            if( fs.existsSync(p + '/package.json') ){
-                dep.pkg = fse.readJSONFileSync(p + '/package.json');
-            } else if( fs.existsSync(p + '/bower.json') ){
-                dep.pkg = fse.readJSONFileSync(p + '/bower.json');
-            }
-
-            dep.data = _.merge(dep.bw, dep.pkg);
-            dep.authors = getAuthors(dep.data);
-
-            return dep;
-        }
-
-        function getNpmDep( name ){
-            return fse.readJSONFileSync(rootpath('node_modules/' + name + '/package.json'));
-        }
-
 
         var build = {
             bower  : {},
@@ -178,22 +183,36 @@ module.exports = function( grunt ){
                 build.plugins[ name ] = getBowerDep(name);
             });
             build.package = fse.readJSONFileSync(rootpath('package.json'));
+        }
+
+        // get the config.yml into build.config
+        var defaultConfig = getyml('config.yml');
+        var defaultTargetConfig = defaultConfig.targets[defaultConfig.target];
+        var projectConfigPath = path.resolve(process.cwd(), 'config.yml');
+        var hasProjectConfig = false;
+        if(fs.existsSync(projectConfigPath)){
+            hasProjectConfig = true;
+            build.config = _.merge(defaultConfig, jsyaml.safeLoad(fs.readFileSync(projectConfigPath)));
+        } else {
             build.config = getyml('config.yml');
         }
 
+        // get the data/*.yml into site.data.*
         var site = getyml('src/data/site.yml');
         site.data = {};
         [ 'navigation', 'author', 'main', 'social', 'widgets', 'theme' ].forEach(function( fileName ){
             site.data[ fileName ] = getyml('src/data/' + fileName + '.yml');
         });
 
-        function J(str){
-            return '{{ ' + str + ' }}';
+
+        // override/merge site.data.* from config.ymlea
+        if(defined(target.site)){
+            _.each(target.site, function(obj, key){
+                site.data[key] = target.site[key];
+            });
         }
-        function JT(str){
-            return '{% ' + str + ' %}';
-        }
-        return {build: build, site: site, site_json: JSON.stringify(site), J:J, JT: JT};
+
+        return {build: build, site: site, site_json: JSON.stringify(site)};
     };
 
 
