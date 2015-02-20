@@ -15,6 +15,7 @@
             // dont prefix jade, template amd loader require it, same as jquery
             'jade'                    : 'plugins/jade/runtime',
             'string'                  : 'plugins/underscore.string/dist/underscore.string.min',
+            'code-mirror'             : 'plugins/requirejs-codemirror/src/code-mirror',
             // custom uglified and moved
             'plugins/bootbox'         : 'plugins/bootbox',
             'plugins/modernizr'       : 'plugins/modernizr',
@@ -87,7 +88,28 @@
 
         config: {
             debug: true
+        },
+
+        cm: {
+            // baseUrl to CodeMirror dir
+            baseUrl: 'plugins/codemirror',
+            // path to CodeMirror lib
+            path   : 'lib/codemirror',
+            // path to CodeMirror css file
+            css    : '/path/to/code-mirror/css/file',
+            // define themes
+            themes : {
+                monokai : '/path/to/theme/monokai.css',
+                ambiance: '/path/to/theme/ambiance.css',
+                eclipse : '/path/to/theme/eclipse.css'
+            },
+            modes  : {
+                // modes dir structure
+                path: 'mode/{mode}/{mode}'
+            }
         }
+
+
 
     };
 
@@ -101,7 +123,8 @@
         start : new Date()
     };
 
-    window.logDebug = function(){
+    window.logDebug = window.logDebugEvent = function(){
+        return;
         var loadTime = (new Date()).getTime() - packadicStartTime.getTime();
         var args = [];
         args.push(loadTime / 1000);

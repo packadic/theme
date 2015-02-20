@@ -18,20 +18,20 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
     sidebar._defineEvent('loader:show');
     sidebar._defineEvent('loader:hide');
 
-    var $sidebar = $(config.selectors.sidebar);
+    var $sidebarNavMenu = $('ul.sidebar-nav-menu');
+    var $sidebarNav = $sidebarNavMenu.parent();
     var $body = $('body');
-    var $sidebarNav = $sidebar.parent();
 
     sidebar.showLoader = function(){
         sidebar._trigger('loader:show');
-        $sidebar.hide();
+        $sidebarNavMenu.hide();
         $sidebarNav.find('.loader.loader-light').show();
     };
     sidebar.showLoader();
     sidebar.hideLoader = function(){
         sidebar._trigger('loader:hide');
         $sidebarNav.find('.loader.loader-light').hide();
-        $sidebar.show();
+        $sidebarNavMenu.show();
     };
 
     var calculateFixedHeight = function(){
@@ -46,8 +46,8 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
 
     sidebar.resolveActiveLink = function(){
         var currentPath = s.trim(location.pathname.toLowerCase(), '/');
-        var $el = $(config.selectors.sidebar);
-        $el.find('a').each(function(){
+
+        $sidebarNavMenu.find('a').each(function(){
             var href = this.getAttribute('href');
             if( !_.isString(href) ){
                 return;
@@ -77,7 +77,7 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
     sidebar.handle = function(){
         var breakpointMd = theme.getBreakpoint('md');
 
-        $sidebar.find('li > .sub-menu').filter(function(i){
+        $sidebarNavMenu.find('li > .sub-menu').filter(function(i){
 
             result = $(this).css('caption-side') == 'bottom' || $(this).children('ul').first().hasClass('sub-menu-hover');
             console.log($(this), $(this).css('caption-side'), result);
@@ -90,7 +90,7 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
 
 
         //$sidebar.find('li.open').has('ul.sub-menu').
-        $sidebar.on('click', 'li > a', function( e ){
+        $sidebarNavMenu.on('click', 'li > a', function( e ){
             var hasSubMenu = $(this).next().hasClass('sub-menu');
 
             if( theme.getViewPort().width >= breakpointMd && $(this).parents('.sidebar-nav-menu-hover-submenu').length === 1 ){ // exit of hover sidebar menu
@@ -112,9 +112,9 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
             var the = $(this);
             var sub = $(this).next();
 
-            var autoScroll = $sidebar.data("auto-scroll");
-            var slideSpeed = parseInt($sidebar.data("slide-speed"));
-            var keepExpand = $sidebar.data("keep-expanded");
+            var autoScroll = $sidebarNavMenu.data("auto-scroll");
+            var slideSpeed = parseInt($sidebarNavMenu.data("slide-speed"));
+            var keepExpand = $sidebarNavMenu.data("keep-expanded");
 
 
             if( keepExpand !== true ){
@@ -150,7 +150,7 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
         }
 
         if( theme.getViewPort().width >= theme.getBreakpoint('md') ){
-            $sidebar.attr("data-height", calculateFixedHeight());
+            $sidebarNavMenu.attr("data-height", calculateFixedHeight());
             //initSlimScroll(menu);
             sidebar.handleWithContent();
         }
@@ -181,7 +181,7 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
                 if( theme.getViewPort().width < breakpointMd ){
                     height = theme.getViewPort().height - headerHeight - footerHeight;
                 } else {
-                    height = $sidebar.height() + 20;
+                    height = $sidebarNavMenu.height() + 20;
                 }
 
                 if( (height + headerHeight + footerHeight) <= theme.getViewPort().height ){
