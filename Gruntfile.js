@@ -50,6 +50,14 @@ var init = module.exports = function( grunts ){
     _config.targets[ target ].name = target;
     _config.targets[ target ].type = type;
 
+    var uglifyFiles = {
+        '<%= target.dest %>/assets/scripts/plugins/modernizr.js' : [ 'src/plugins/modernizr/modernizr.js' ],
+        '<%= target.dest %>/assets/scripts/plugins/bootbox.js'   : [ 'src/plugins/bootbox/bootbox.js' ],
+        '<%= target.dest %>/assets/scripts/plugins/mscrollbar.js': [ 'src/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js' ],
+        '<%= target.dest %>/assets/scripts/plugins/require.js'   : [ 'src/plugins/requirejs/require.js' ]
+    };
+
+
     var gruntConfig = {
         debug           : {
             inspector: true
@@ -57,6 +65,16 @@ var init = module.exports = function( grunts ){
         config          : _config,
         target          : _config.targets[ target ],
         jsbuild         : _config.jsbuild,
+        uglify          : {
+            dev: {
+                options: {sourceMap: true, compress: false, beautify: true, gzip: true, preserveComments: 'all'},
+                files  : uglifyFiles
+            },
+            dist: {
+                options: {sourceMap: false, compress: true, beautify: false, gzip: true, preserveComments: 'none'},
+                files  : uglifyFiles
+            }
+        },
         clean           : {
             all      : {src: '<%= target.dest %>/*'},
             assets   : {src: '<%= target.dest %>/assets'},
@@ -123,17 +141,6 @@ var init = module.exports = function( grunts ){
                 files: [ {expand: true, cwd: 'src/styles', src: '**/*.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'} ]
             }
         },
-        uglify          : {
-            dev: {
-                options: {sourceMap: true, compress: false, beautify: true, gzip: true, preserveComments: 'all'},
-                files  : {
-                    '<%= target.dest %>/assets/scripts/plugins/modernizr.js' : [ 'src/plugins/modernizr/modernizr.js' ],
-                    '<%= target.dest %>/assets/scripts/plugins/bootbox.js'   : [ 'src/plugins/bootbox/bootbox.js' ],
-                    '<%= target.dest %>/assets/scripts/plugins/mscrollbar.js': [ 'src/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js' ],
-                    '<%= target.dest %>/assets/scripts/plugins/require.js'   : [ 'src/plugins/requirejs/require.js' ]
-                }
-            }
-        },
         bootlint        : {
             options: {
                 stoponerror: false,
@@ -189,7 +196,7 @@ var init = module.exports = function( grunts ){
             options: {
                 logConcurrentOutput: true
             },
-            watch: [ 'devtools', 'watch' ]
+            watch  : [ 'devtools', 'watch' ]
         },
         watch           : {
             options    : {livereload: true, nospawn: true},

@@ -27,24 +27,22 @@ function dd(){
 
 module.exports = function( grunt ){
 
-    var target;
+    var target, ok, line, cwd;
+    ok = grunt.log.ok;
+    line = grunt.log.writeln;
+    cwd = process.cwd();
 
     grunt.registerTask('jade_config', 'Set jade configuration. Run before jade tasks.', function(full){
         grunt.event.emit('task.start', 'jade_config');
         var self = this;
         var taskDone = this.async();
-        var cwd = process.cwd();
-        var ok = grunt.log.ok;
-        //dd(target, this);
+        target = grunt.config('target'); // should be done within the task
 
         this.requiresConfig('jade_config');
         this.requiresConfig('jade.dev');
         this.requiresConfig('jade.dist');
         this.requiresConfig('target.name');
 
-
-
-        target = grunt.config('target');
 
         var jadeFilters = {
             code: function( block ){

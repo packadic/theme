@@ -72,6 +72,7 @@ module.exports = function( grunt ){
         opts.shell[name + '_jquery']={
             command: [
                 'cd lib/jquery',
+                'npm install',
                 'grunt custom:-' + jsbuild.jquery.join(',-'),
                 'cd ../..',
                 'cp lib/jquery/dist/* <%= target.dest %>/assets/scripts/plugins'
