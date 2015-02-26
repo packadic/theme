@@ -43,12 +43,25 @@ var init = module.exports = function( grunts ){
 
     grunt.inspect = log;
     var ok = grunt.log.ok;
+    var _config = {},
+        target, type;
 
-    var _config = grunt.file.readYAML('config.yml');
-    var target = grunt.option('target') || _config.target || 'dev';
-    var type = grunt.option('type') || _config.target || 'dev';
-    _config.targets[ target ].name = target;
-    _config.targets[ target ].type = type;
+    function mergeConfigFrom(fromDirPath){
+        var configPath = path.resolve(fromDirPath, 'config.yml');
+        ok('Merging config from: ' + fromDirPath)
+        _config = _.merge(_config, jsyaml.safeLoad(require('fs').readFileSync(configPath)));
+        target = grunt.option('target') || _config.target || 'dev';
+        type = grunt.option('type') || _config.type || 'dev';
+        _config.targets[ target ].name = target;
+        _config.targets[ target ].type = type;
+    }
+    mergeConfigFrom(__dirname);
+//    mergeConfigFrom(process.cwd());
+    var externalConfig = grunt.option('config');
+    if(externalConfig){
+        mergeConfigFrom(externalConfig);
+    }
+
 
     var uglifyFiles = {
         '<%= target.dest %>/assets/scripts/plugins/modernizr.js' : [ 'src/plugins/modernizr/modernizr.js' ],

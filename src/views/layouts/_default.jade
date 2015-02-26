@@ -49,7 +49,7 @@ html(lang="en")
                 //section#side
                 .sidebar-wrapper
                     //section#side aside
-                    nav.sidebar-nav.navbar-collapse.collapse
+                    nav.sidebar-nav.navbar-collapse.collapsent
                         .loader.loader-light
                         ul.sidebar-nav-menu(data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200")
 
@@ -76,9 +76,19 @@ html(lang="en")
 
             block script
                 script.
-                    window.PACKADIC_SITE_DATA = !{site_json};
+                    // Auto generated. Leave this alone
+                    window.packadic = {
+                        site: !{site_json}
+                    };
 
             block scripts
                 +js-script('plugins/requirejs/require.js')
-                +js-script('main.js')
-                +js-script('init.js')
+                // @todo change
+                //+js-script('main.js')
+                //+js-script('init.js')
+                // @todo to this
+                +js-script('configuration.js')
+                // The place to include custom logic, a small demo
+                +js-script('outside_of_project.js')
+                // end smalld demo
+                +js-script('start.js')

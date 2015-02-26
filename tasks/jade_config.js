@@ -58,7 +58,7 @@ module.exports = function( grunt ){
 
         var options = grunt.config('jade_config');
         var data = getJadeData(full || options[target.type].full);
-        log(options, target.type, data)
+       // log(options, target.type, data)
         grunt.config('jade.' + target.type + '.options.filters', jadeFilters);
         grunt.config('jade.' + target.type + '.options.data', function(){
             data.assetPath = '/assets';
@@ -206,6 +206,7 @@ module.exports = function( grunt ){
         // override/merge site.data.* from config.ymlea
         if(defined(target.site)){
             _.each(target.site, function(obj, key){
+                ok('Overriding ' + key)
                 site.data[key] = target.site[key];
             });
         }
