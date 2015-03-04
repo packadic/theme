@@ -1,5 +1,5 @@
-define([ 'jquery', 'lodash', 'config', 'eventer' ],
-    function( $, _ , config, eventer){
+define([ 'jquery', 'config', 'eventer' ],
+    function( $, config, eventer){
         'use strict';
         var autoloader = {
             initialised: false

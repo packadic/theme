@@ -1,5 +1,5 @@
-define([ 'jquery', 'lodash', 'gfm' ],
-    function( $, _, gfm ){
+define([ 'jquery',  'gfm' ],
+    function( $, gfm ){
         'use strict';
 
         function Docs($el){

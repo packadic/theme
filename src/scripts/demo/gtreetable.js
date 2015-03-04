@@ -1,5 +1,5 @@
-define([ 'jquery', 'lodash', 'plugins/gtreetable' ],
-    function( $, _ ){
+define([ 'jquery', 'plugins/gtreetable' ],
+    function( $ ){
         'use strict';
 
         var demoContent = {"nodes":[{"id":1619,"name":"Test","level":0,"type":"default"},{"id":1624,"name":"deneme","level":0,"type":"default"},{"id":1631,"name":"sdfsdf","level":0,"type":"default"},{"id":1632,"name":"sdfsdf","level":0,"type":"default"},{"id":1633,"name":"sfdf","level":0,"type":"default"},{"id":1635,"name":"ss","level":0,"type":"default"}]};

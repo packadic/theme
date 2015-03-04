@@ -1,6 +1,6 @@
 
 //show-hint.css
-require([ 'jquery', 'lodash', 'config', 'code-mirror!php|htmlmixed:twilight',
+require([ 'jquery', 'config', 'code-mirror!php|htmlmixed:twilight',
        //   'cm/edit/matchbrackets',
          // 'cm/edit/closebrackets',
          // 'cm/edit/matchtags',
@@ -8,7 +8,7 @@ require([ 'jquery', 'lodash', 'config', 'code-mirror!php|htmlmixed:twilight',
           //'cm/hint/show-hint', 'cm/hint/sql-hint', 'cm/hint/xml-hint',
         //  'cm/fold/indent-fold',
           //'cm/scroll/simplescrollbars'
-], function( $, _, config, CodeMirror ){
+], function( $, config, CodeMirror ){
 
     var editors = window.packadic.editors = {};
     var log = console.log;

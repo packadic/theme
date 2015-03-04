@@ -1,5 +1,5 @@
-define([ 'jquery', 'lodash' ],
-    function( $, _ ){
+define([ 'jquery' ],
+    function( $){
         'use strict';
 
 
@@ -52,9 +52,7 @@ define([ 'jquery', 'lodash' ],
 
 
 
-        var config = {
-            debug: false
-        };
+        var config = window.packadic.config;
         config.merge = function(options){
             config = _.merge(config, options);
             return config;

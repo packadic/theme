@@ -1,5 +1,5 @@
-define([ 'jquery', 'lodash', 'plugins/bs-select' ],
-    function( $, _ ){
+define([ 'jquery',  'plugins/bs-select' ],
+    function( $ ){
         'use strict';
 
         function isValidValue(value){

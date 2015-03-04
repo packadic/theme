@@ -1,5 +1,5 @@
-define([ 'jquery', 'lodash' ],
-    function( $, _ ){
+define([ 'jquery' ],
+    function( $ ){
         'use strict';
         function strColor( str, color ){
             return '<span class="text-' + color + '">' + str + '</span>';

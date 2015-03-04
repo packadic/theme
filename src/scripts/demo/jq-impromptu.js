@@ -1,5 +1,5 @@
-define([ 'jquery', 'lodash', 'plugins/impromptu' ],
-    function( $, _ ){
+define([ 'jquery',  'plugins/impromptu' ],
+    function( $ ){
         'use strict';
 
         var temp = {

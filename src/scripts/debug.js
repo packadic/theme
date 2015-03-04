@@ -1,6 +1,7 @@
-define([ 'jquery', 'lodash', 'config', 'Console', 'module', 'plugins/contextmenu' ],
-    function( $, _, config, Console, module ){
+define([ 'jquery',  'config', 'console', 'module', 'plugins/contextmenu' ],
+    function( $, config, Console, module ){
         'use strict';
+
 
         var debug = {};
 

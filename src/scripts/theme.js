@@ -1,5 +1,5 @@
-define([ 'jquery', 'lodash', 'config', 'eventer', 'autoloader', 'plugins/cookie' ],
-    function( $, _, config, eventer, autoloader ){
+define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie' ],
+    function( $,config, eventer, autoloader ){
         'use strict';
 
         function defined( obj ){
@@ -276,6 +276,7 @@ define([ 'jquery', 'lodash', 'config', 'eventer', 'autoloader', 'plugins/cookie'
         }.call());
 
         theme.init = function(options){
+            options = _.isUndefined(options) ? {} : options;
            // console.log('theme.init', options);
             theme.setOptions(options);
             theme.$window = $(window);

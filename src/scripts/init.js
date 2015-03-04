@@ -1,75 +1,176 @@
-require.config(window.packadic.rjs);
+// here comes require.js and lodash.custom.js after build task
+/*
+ * INIT
+ */
+(function Init(){
 
-require([ 'module', 'jquery', 'lodash', 'string', 'jade', 'config', 'code-mirror', 'plugins/cookie' ],
-    function( module, $, _, s, jade, config ){
+    var packadic = (window.packadic = window.packadic || {});
 
+    packadic.start = new Date();
 
-        window.jade = jade;
-        window.packadic = _.merge(window.packadic, {
-            module: module,
-            config: config,
-            editors: {}
+    packadic.__event_callbacks = {
+        "booting" : [],     // before requirejs.config get initialised - before loading the primary dependencies
+        "booted"  : [],     // after loading up RJS, got primary dependencies and booted up packadic base modules
+        "starting": [],     // fires right after loading the theme and autoloader dependencies, before any other startup operation
+        "started" : []      // fires after the theme module has been initialised and default autoloaders have been added
+    };
 
-        });
+    packadic.bindEventHandler = function( name, cb ){
+        packadic.__event_callbacks[ name ].push(cb);
+    };
 
-        var scss = s.unquote($('head').css('font-family'), "'");
-
-        while( typeof scss !== 'object' ){
-            scss = JSON.parse(scss);
+    packadic.fireEvent = function( name ){
+        if( !_.isObject(packadic.__event_callbacks[ name ]) ){
+            return;
         }
-
-        var isDebug = false;
-        if(typeof $.cookie('debug') !== 'undefined'){
-            isDebug = parseInt($.cookie('debug')) === 1
-        }
-        $('#debug-enable').on('click', function(){
-            $.cookie('debug', '1');
-            window.location.href = window.location.href;
-        });
-        config.merge({
-            debug    :  isDebug,
-            demo : true,
-            site     : window.PACKADIC_SITE_DATA,
-            scss     : scss,
-            sidebar : {
-                togglerClosedIcon: 'fa-long-arrow-right',
-                togglerOpenedIcon: 'fa-long-arrow-left'
+        _.each(packadic.__event_callbacks[ name ], function( cb ){
+            if( typeof cb === 'function' ){
+                cb();
             }
         });
+    };
 
-        var load = [ 'autoloader', 'theme'];
-        if(config.demo === true){
-            load.push('demo');
-        }
-        if(config.debug === true){
-            load.push('debug');
-        }
+    packadic.debug = function(){
+    };
+    packadic.log = function(){
+    };
 
-        window.logDebug = window.logDebugEvent = function(){
-
-        };
+    packadic.mergeConfig = function( newConfig ){
+        window.packadic.config = _.merge(window.packadic.config, newConfig);
+    }
 
 
-        require(load, function( autoloader, theme, demo ){
-            window.packadic.autoloader = autoloader;
-            window.packadic.theme = theme;
-            window.packadic.demo = demo;
-            theme.init({
-                sidebarItems: config.site.data.navigation.sidebar
-            });
-            autoloader.on('detected', function(){
-                logDebug('autoloader detected @ ' + autoloader.detected);
-            });
-            autoloader.on('loaded', function(){
-                logDebug('autoloader loaded @ ' + autoloader.loaded);
-            });
-            autoloader.ready(function(){
-                logDebug('autoloader ready');
-                $('body').removeClass('page-loading');
-            });
-            autoloader.init();
-            if(config.demo === true){
-                demo.init();
+}.call());
+
+/*
+ * CONFIG
+ */
+(function Config(){
+
+    var packadic = (window.packadic = window.packadic || {});
+    packadic.config = {
+        debug    : false,
+        paths    : {
+            assets : '/assets',
+            images : '/assets/images',
+            scripts: '/assets/scripts',
+            fonts  : '/assets/fonts',
+            styles : '/assets/styles'
+        },
+        requireJS: {}
+    };
+
+
+    var jqui = [ 'accordion', 'autocomplete', 'button', 'core', 'datepicker', 'dialog', 'draggable', 'droppable', 'effect-blind', 'effect-bounce', 'effect-clip', 'effect-drop', 'effect-explode', 'effect-fade', 'effect-fold', 'effect-highlight', 'effect', 'effect-puff', 'effect-pulsate', 'effect-scale', 'effect-shake', 'effect-size', 'effect-slide', 'effect-transfer', 'menu', 'mouse', 'position', 'progressbar', 'resizable', 'selectable', 'selectmenu', 'slider', 'sortable', 'spinner', 'tabs', 'tooltip', 'widget' ];
+    var tweendeps = [ 'plugins/gsap/css' ]; //, 'plugins/gsap/ease', 'plugins/gsap/attr', 'plugins/gsap/scroll' ];
+
+
+    packadic.config.requireJS = {
+        baseUrl: packadic.config.paths.scripts,
+        paths  : {
+            // custom build with jsbuild
+            // 'lodash'                  : 'plugins/lodash.custom.min',
+            'plugins/bootstrap'       : 'plugins/bootstrap.custom.min',
+            'jquery'                  : 'plugins/jquery/dist/jquery.min',
+            // dont prefix jade, template amd loader require it, same as jquery
+            'jade'                    : 'plugins/jade/runtime',
+            'string'                  : 'plugins/underscore.string/dist/underscore.string.min',
+            'code-mirror'             : 'plugins/requirejs-codemirror/src/code-mirror',
+            // custom uglified and moved
+            'plugins/bootbox'         : 'plugins/bootbox',
+            'plugins/modernizr'       : 'plugins/modernizr',
+            'plugins/mscrollbar'      : 'plugins/mscrollbar',
+            // default vendor paths
+            'plugins/contextmenu'     : 'plugins/bootstrap-contextmenu/bootstrap-contextmenu',
+            'plugins/impromptu'       : 'plugins/jquery-impromptu/dist/jquery-impromptu.min',
+            'plugins/moment'          : 'plugins/moment/moment/min/moment.min',
+            'plugins/marked'          : 'plugins/marked/marked.min',
+            'plugins/highlightjs'     : 'plugins/highlightjs/highlight.pack',
+            'plugins/cryptojs'        : 'plugins/cryptojslib/components',
+            'plugins/toastr'          : 'plugins/toastr/toastr',
+            'plugins/mousewheel'      : 'plugins/jquery-mousewheel/jquery.mousewheel.min',
+            'plugins/gtreetable'      : "plugins/bootstrap-gtreetable/dist/bootstrap-gtreetable",
+            'plugins/jquery-migrate'  : 'plugins/jquery-migrate/jquery-migrate',
+            'plugins/bs-modal'        : 'plugins/bootstrap-modal/js/bootstrap-modal',
+            'plugins/bs-modal-manager': 'plugins/bootstrap-modal/js/bootstrap-modalmanager',
+            'plugins/bs-select'       : 'plugins/bootstrap-select/dist/js/bootstrap-select.min',
+            'plugins/cookie'          : 'plugins/jquery-cookie/jquery.cookie',
+            'plugins/events'          : 'plugins/eventEmitter/EventEmitter.min',
+            // gsap
+            'plugins/gsap/lite'       : 'plugins/gsap/src/minified/TweenLite.min',
+            'plugins/gsap/max'        : 'plugins/gsap/src/minified/TweenMax.min',
+            'plugins/gsap/attr'       : 'plugins/gsap/src/minified/plugins/AttrPlugin.min',
+            'plugins/gsap/color'      : 'plugins/gsap/src/minified/plugins/ColorPropsPlugin.min',
+            'plugins/gsap/scroll'     : 'plugins/gsap/src/minified/plugins/ScrollToPlugin.min',
+            'plugins/gsap/text'       : 'plugins/gsap/src/minified/plugins/TextPlugin.min',
+            'plugins/gsap/jquery-lite': 'plugins/gsap/src/minified/jquery.gsap.min',
+            'plugins/gsap/jquery-max' : 'plugins/gsap/src/minified/jquery.gsap.min'
+
+        },
+
+        shim: {
+            'jade'                  : {
+                exports: 'jade'
+            },
+            'string'                : {
+                exports: 's'
+            },
+            'jquery'                : {
+                exports: '$',
+                init   : function(){
+                    this.jquery.noConflict();
+                }
+            },
+            'plugins/jquery-migrate': [ 'jquery' ],
+            'plugins/jquery-ui'     : [ 'jquery' ], //, 'jquery-migrate'],
+            'plugins/bootstrap'     : [ 'jquery' ],
+            'plugins/gtreetable'    : [ 'plugins/jquery-migrate', 'plugins/jquery-ui/core', 'plugins/jquery-ui/draggable', 'plugins/jquery-ui/droppable' ],
+            'plugins/mscrollbar'    : [ 'plugins/bootstrap', 'plugins/mousewheel' ],
+            'plugins/bs-modal'      : [ 'plugins/bootstrap', 'plugins/bs-modal-manager' ],
+
+            'plugins/gsap/lite'       : [ 'plugins/gsap/scroll' ],
+            'plugins/gsap/max'        : [ 'plugins/gsap/scroll' ],
+            'plugins/gsap/jquery-lite': [ 'jquery', 'plugins/gsap/lite' ],
+            'plugins/gsap/jquery-max' : [ 'jquery', 'plugins/gsap/max' ],
+
+            // packadic scripts
+            'config'    : [ 'jquery' ],
+            'eventer'   : [ 'jquery', 'plugins/events', 'config' ],
+            'autoloader': [ 'config' ],
+            'theme'     : [ 'plugins/gsap/jquery-lite', 'config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events' ],
+            'demo'      : [ 'theme' ]
+        },
+
+
+        waitSeconds: 5,
+
+        config: {
+            debug: true
+        },
+
+        cm: {
+            // baseUrl to CodeMirror dir
+            baseUrl: 'plugins/codemirror',
+            // path to CodeMirror lib
+            path   : 'lib/codemirror',
+            // path to CodeMirror css file
+            css    : '/path/to/code-mirror/css/file',
+            // define themes
+            themes : {
+                monokai : '/path/to/theme/monokai.css',
+                ambiance: '/path/to/theme/ambiance.css',
+                eclipse : '/path/to/theme/eclipse.css'
+            },
+            modes  : {
+                // modes dir structure
+                path: 'mode/{mode}/{mode}'
             }
-        });
+        }
+
+
+    };
+
+    jqui.forEach(function( name ){
+        packadic.config.requireJS.paths[ 'plugins/jquery-ui/' + name ] = 'plugins/jquery-ui/ui/minified/' + name + '.min'
     });
+}.call());

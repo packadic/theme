@@ -30,7 +30,8 @@ html(lang="en")
                         i.fa.fa-long-arrow-left
 
                     .page-logo
-                        .text-logo
+                        include ../partials/logo
+                        // .text-logo
                             | Packadic
 
                     //nav.top-nav
@@ -79,13 +80,14 @@ html(lang="en")
                 include ../pages/site-data
 
             block scripts
-                +js-script('plugins/requirejs/require.js')
+                //+js-script('plugins/requirejs/require.js')
                 // @todo change
                 //+js-script('main.js')
                 //+js-script('init.js')
                 // @todo to this
-                +js-script('configuration.js')
+                //+js-script('configuration.js')
+                +js-script('init.js')
                 // The place to include custom logic, a small demo
                 +js-script('outside_of_project.js')
                 // end smalld demo
-                +js-script('start.js')
+                +js-script('boot.js')

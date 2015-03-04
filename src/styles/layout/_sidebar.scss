@@ -5,6 +5,17 @@
 	margin-right: -100%;
 }
 
+
+.sidebar-toggler i.fa {
+		transition: 300ms ease-in-out ;
+		transform: rotate(180deg) ;
+}
+.sidebar-nav-closed .sidebar-toggler i.fa {
+	transition: 300ms ease-in-out ;
+	transform: rotate(0deg) ;
+}
+
+
 .sidebar-nav,
 .sidebar-nav-closed.sidebar-nav-fixed .sidebar-nav:hover {
 
@@ -300,6 +311,7 @@
 	}
 
 	.sidebar-toggler {
+
 		display: block;
 		cursor: pointer;
 		opacity: 0.7;
@@ -309,6 +321,7 @@
 		margin-top: 15px;
 		margin-right: 19px;
 		float: right;
+
 
 
 		&:hover {
@@ -431,6 +444,8 @@
 	}
 
 	.sidebar-nav-closed {
+
+
 		.sidebar-nav {
 			width: $sidebar-collapsed-width !important;
 
@@ -560,10 +575,10 @@
 					}
 				}
 
-
 				.sidebar-toggler {
 					margin-left: 3px;
 					margin-right: 3px;
+
 				}
 
 

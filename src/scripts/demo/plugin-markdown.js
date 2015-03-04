@@ -1,5 +1,5 @@
-define([ 'jquery', 'lodash', 'plugins/highlightjs', 'plugins/marked' ],
-    function( $, _, highlightjs, marked ){
+define([ 'jquery', 'plugins/highlightjs', 'plugins/marked' ],
+    function( $, highlightjs, marked ){
         'use strict';
 
         console.log('highlightjs', highlightjs);

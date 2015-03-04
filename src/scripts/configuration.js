@@ -8,7 +8,6 @@
 
     var clone;
 
-
     clone = {};
     for(var k in window.packadic) clone[k] = window.packadic[k];
     console.log('pre-rjs config', clone);

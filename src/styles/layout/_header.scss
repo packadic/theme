@@ -128,6 +128,7 @@ section#top.navbar {
             opacity: 1;
         }
 
+
         &.sidebar-toggler {
             float: left;
             text-align: center;
@@ -139,6 +140,7 @@ section#top.navbar {
             }
             // match width and color with the top level sidebar left bg gradient
             width: $sidebar-collapsed-width;
+
 
             .sidebar-nav-closed.sidebar-nav-closed-hide-logo & {
                 margin-right: ($sidebar-collapsed-width - $header-menu-toggler-width ) / 2;

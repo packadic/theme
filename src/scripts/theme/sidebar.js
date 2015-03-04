@@ -1,4 +1,5 @@
-define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string' ], function( $, _, config, autoloader, theme, eventer, s ){
+define([ 'jquery', 'config', 'autoloader', 'theme', 'eventer', 'string' ],
+    function( $, config, autoloader, theme, eventer, s ){
 
     // @todo sidebar-toggle
     // @todo sidebar sub-menu hover title right (.sub-menu-title)

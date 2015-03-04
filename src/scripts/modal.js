@@ -1,5 +1,5 @@
-define([ 'jquery', 'lodash', 'templates/modal', 'plugins/bootstrap' ],
-    function( $, _, template ){
+define([ 'jquery', 'templates/modal', 'plugins/bootstrap' ],
+    function( $,template ){
         'use strict';
 
         var _super = $.fn.modal;

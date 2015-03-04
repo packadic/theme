@@ -80,7 +80,7 @@ var init = module.exports = function( grunts ){
         jsbuild         : _config.jsbuild,
         uglify          : {
             dev: {
-                options: {sourceMap: true, compress: false, beautify: true, gzip: true, preserveComments: 'all'},
+                options: {sourceMap: false, compress: false, beautify: true, gzip: true, preserveComments: 'all'},
                 files  : uglifyFiles
             },
             dist: {
@@ -219,7 +219,7 @@ var init = module.exports = function( grunts ){
             },
             scripts    : {
                 files: [ 'src/scripts/**' ],
-                tasks: [ 'copy:scripts' ]
+                tasks: [ 'scripts' ]
             },
             views      : {
                 files: [ 'src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**' ],
@@ -262,15 +262,17 @@ var init = module.exports = function( grunts ){
 
     grunt.registerTask('rm', [ 'clean:all' ]);
     grunt.registerTask('templates', [ 'clean:templates', 'jade:templates', 'string-replace:templates' ]);
-    grunt.registerTask('scripts', [ 'clean:scripts', 'copy:plugins', 'copy:scripts', 'templates', 'uglify:' + type ]);
+
     grunt.registerTask('cp', [ 'copy:images', 'copy:fonts', 'copy:misc', 'copy:demo' ]);
-    grunt.registerTask('assets', [ 'clean:assets', 'cp', 'scripts', 'jsbuild', 'copy:scripts', 'sass:' + type ]);
+
+    grunt.registerTask('scripts', [ 'copy:scripts', 'uglify:' + type, 'jsbuild', 'create_init_script']);
+    grunt.registerTask('assets', [ 'clean:assets', 'cp', 'copy:plugins',  'sass:' + type, 'templates', 'scripts' ]);
     grunt.registerTask('views', [ 'clean:views', 'jade_config:' + type, 'jade:' + type ]);
     grunt.registerTask('watcher', [ 'concurrent:watch' ]);
     grunt.registerTask('build', [
         'rm', 'cp',
         'sass:' + type, 'jade_config:' + type, 'jade:' + type,
-        'scripts', 'jsbuild'
+        'assets'
     ]);
 
     grunt.registerTask('clean:scripts', function(){
