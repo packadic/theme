@@ -248,9 +248,9 @@ define([ 'jquery', 'lodash', 'config', 'autoloader', 'theme', 'eventer', 'string
             templateName = 'sidebar';
         }
 
-        logDebug('getting template', templateName, menuItems);
+       // logDebug('getting template', templateName, menuItems);
         theme.getTemplate(templateName, function( template ){
-            logDebug('got template');
+          //  logDebug('got template');
             var html = template({items: menuItems});
             $('ul.sidebar-nav-menu').html('').html(html);
             sidebar._trigger('sidebar:generated');

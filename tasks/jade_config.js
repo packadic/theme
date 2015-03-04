@@ -198,7 +198,7 @@ module.exports = function( grunt ){
         // get the data/*.yml into site.data.*
         var site = getyml('src/data/site.yml');
         site.data = {};
-        [ 'navigation', 'author', 'main', 'social', 'widgets', 'theme' ].forEach(function( fileName ){
+        [ 'navigation', 'author', 'main', 'social', 'widgets', 'theme', 'icons' ].forEach(function( fileName ){
             site.data[ fileName ] = getyml('src/data/' + fileName + '.yml');
         });
 

@@ -76,7 +76,7 @@ require([ 'module', 'jquery', 'lodash', 'string', 'jade', 'config', 'code-mirror
             _.each(window.packadic.__onLoadedCallbacks, function(cb){
                 //require.load()
                 if(_.isFunction(cb)){
-                    console.log('cb is a func', cb);
+                 //   console.log('cb is a func', cb);
                     cb();
                 }
             });

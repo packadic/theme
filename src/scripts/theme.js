@@ -54,7 +54,7 @@ define([ 'jquery', 'lodash', 'config', 'eventer', 'autoloader', 'plugins/cookie'
 
             theme.setOptions = function(options){
                 theme.options = _.merge(theme.options, options);
-                console.log('theme.setOptions options=', options, 'theme.options=', theme.options);
+               // console.log('theme.setOptions options=', options, 'theme.options=', theme.options);
             };
 
             theme.isDebug = function(){
@@ -95,9 +95,9 @@ define([ 'jquery', 'lodash', 'config', 'eventer', 'autoloader', 'plugins/cookie'
             };
 
             theme.getTemplate = function( name, cb ){
-                logDebug('getting template', name, cb);
+             //   logDebug('getting template', name, cb);
                 require(['templates/' + name], function(template){
-                    logDebug('gott template', name, template);
+              //      logDebug('gott template', name, template);
                     cb(template);
                 });
             };
@@ -276,7 +276,7 @@ define([ 'jquery', 'lodash', 'config', 'eventer', 'autoloader', 'plugins/cookie'
         }.call());
 
         theme.init = function(options){
-            console.log('theme.init', options);
+           // console.log('theme.init', options);
             theme.setOptions(options);
             theme.$window = $(window);
             theme.$document = $(window.document);

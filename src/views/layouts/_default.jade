@@ -12,6 +12,7 @@ html(lang="en")
                     | Hai
             +viewport
             block meta
+                meta(charset="UTF-8")
                 meta(http-equiv="X-UA-Compatible", content="IE=edge")
             block styles
                 +css-style("base-stylesheet.css")
@@ -75,11 +76,7 @@ html(lang="en")
                         p Radicsss
 
             block script
-                script.
-                    // Auto generated. Leave this alone
-                    window.packadic = {
-                        site: !{site_json}
-                    };
+                include ../pages/site-data
 
             block scripts
                 +js-script('plugins/requirejs/require.js')
