@@ -5,6 +5,8 @@
 /.idea/
 /docs
 /coverage
+/dev
+/site
 /npm-debug.log
 /istanbul-radic-report
 /html-report
