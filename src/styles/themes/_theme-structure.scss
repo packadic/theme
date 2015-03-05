@@ -56,7 +56,76 @@
     /* Default Horizontal Menu */
 
     section#top.navbar {
+        .header-menu {
 
+            .navbar-nav {
+                > li  {
+                    .dropdown-menu {
+                        background: $header-menu-nav-dropdown-bg-color;
+                        border: 0;
+
+                        &:after {
+                            border-bottom-color: $header-menu-nav-dropdown-bg-color;
+                        }
+
+                        > li.external {
+                            background: $header-menu-nav-dropdown-header-bg-color;
+
+                            > h3 {
+                                color: $header-menu-nav-dropdown-header-font-color;
+                            }
+
+                            > a {
+                                &:hover {
+                                    color: lighten($link-color, 11%);
+                                }
+                            }
+                        }
+
+                        &.dropdown-menu-default,
+                        .dropdown-menu-list {
+                            > li {
+                                a {
+                                    color: $header-menu-nav-dropdown-item-font-color;
+                                    border-bottom: 1px solid $header-menu-nav-dropdown-item-border-color !important;
+
+                                    > i {
+                                        color: $header-menu-nav-dropdown-item-icon-color;
+                                    }
+
+                                    &:hover {
+                                        background: $header-menu-nav-dropdown-item-bg-color-on-hover;
+                                    }
+                                }
+                            }
+                        }
+
+                        &.dropdown-menu-default {
+                            > li {
+                                a {
+                                    border-bottom: 0 !important;
+                                }
+
+                                &.divider {
+                                    background: $header-menu-nav-dropdown-default-menu-divider;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+
+            }
+            > ul.navbar-nav {
+                > li {
+                    > a {
+                       // background: #333;
+
+                    }
+                }
+            }
+        }
     }
 
     /* Page sidebar */

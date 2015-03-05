@@ -29,12 +29,35 @@ $section-top-bg-color:                                                  #444 !de
 
 // Header search
 //$header-bg-color:                                                  		#1f1f1f;
+$header-bg-color:                                                  		#1f1f1f !default;
 
-$header-search-bg-color:                                        		darken($section-top-bg-color, 4%) !default;
-$header-search-bg-hover-color:                                  		lighten($section-top-bg-color, 20%) !default;
+// Mega Menu
+$header-hor-menu-bg-color:                                              $header-bg-color;
+$header-hor-menu-fixed-border-box:										0px 1px 10px 0px rgba($header-hor-menu-bg-color, 0.2);
+
+$header-hor-menu-default-link-bg-color-on-hover:                		lighten($header-bg-color, 10%);
+$header-hor-menu-default-link-bg-color-on-active:               		$brand-main-color;
+
+// Header search
+$header-search-bg-color:                                        		darken($header-bg-color, 4%) !default;
+$header-search-bg-hover-color:                                  		$header-hor-menu-default-link-bg-color-on-hover !default;
 $header-search-bg-color-on-open:                                 		$header-search-bg-hover-color !default;
 $header-search-font-color:                                      		#999999 !default;
 $header-search-placeholder-font-color:                          		darken($header-search-font-color, 1%) !default;
+
+// Top Menu Notifications
+$header-menu-nav-dropdown-bg-color: 								    lighten($header-hor-menu-bg-color, 10%);
+$header-menu-nav-dropdown-header-bg-color:							    lighten($header-hor-menu-bg-color, 2%);
+$header-menu-nav-dropdown-header-font-color:			    			lighten($header-menu-nav-dropdown-header-bg-color, 50%);
+
+$header-menu-nav-dropdown-item-font-color:				    			#888888;
+$header-menu-nav-dropdown-item-border-color:			    			lighten($header-menu-nav-dropdown-bg-color, 6%);
+$header-menu-nav-dropdown-item-icon-color:				    			lighten($header-menu-nav-dropdown-header-bg-color, 45%);
+$header-menu-nav-dropdown-item-bg-color-on-hover:		    			lighten($header-menu-nav-dropdown-bg-color, 4%);
+
+$header-menu-nav-dropdown-default-menu-divider:			        		$header-menu-nav-dropdown-item-border-color;
+$header-menu-nav-dropdown-notification-time-bg-color:	    			darken($header-menu-nav-dropdown-bg-color, 5%);
+//end: Top Menu Extended Dropdowns
 
 
 $main-content-bg:                                                       content-bg(2, true) !default;

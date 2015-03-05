@@ -30,20 +30,27 @@ html(lang="en")
                         i.fa.fa-long-arrow-left
 
                     .page-logo
-                        include ../partials/logo
-                        // .text-logo
+                        .text-logo
                             | Packadic
+
+                    // include ../partials/logo
 
                     //nav.top-nav
                     +a.menu-toggler.responsive-toggler(data-toggle="collapse" data-target=".navbar-collapse").btn.btn-default
                         i.fa.fa-bars.fa-lg
 
-                    .debug
-                        a#debug-enable
-                            i.fa.fa-code
-
-                    .top-menu
+                    .header-menu
                         ul.nav.navbar-nav
+                            li
+                                a(data-toggle="dropdown").dropdown-toggle Dropmenu
+                                ul(role="menu").dropdown-menu
+                                    +lia Hello2
+                                    +lia Hello3
+                            li
+                                a(data-toggle="dropdown").dropdown-toggle Dropmenu
+                                ul(role="menu").dropdown-menu
+                                    +lia Hello2
+                                    +lia Hello3
             .clearfix
 
             //#page
@@ -78,6 +85,7 @@ html(lang="en")
 
             block script
                 include ../pages/site-data
+
 
             block scripts
                 //+js-script('plugins/requirejs/require.js')

@@ -76,6 +76,7 @@
     "requirejs-codemirror": "*",
     "jquery-slimscroll": "~1.3.3",
     "material-ui": "~0.7.0",
-    "svg.js": "~1.0.1"
+    "svg.js": "~1.0.1",
+    "svg": "kbwood/svg#~1.5.0"
   }
 }

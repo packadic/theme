@@ -3,7 +3,8 @@
 
     var packadic = (window.packadic = window.packadic || {});
     packadic.mergeConfig({
-        debug    : true
+        debug: true,
+        demo : true
     });
 
     packadic.bindEventHandler('booting', function(){
@@ -17,7 +18,7 @@
     });
     packadic.bindEventHandler('started', function(){
         console.info('(demo outside of project) event handler - STARTED');
-        require(['theme/sidebar'], function(sidebar){
+        require([ 'theme/sidebar' ], function( sidebar ){
             sidebar.init(packadic.site.data.navigation.sidebar);
         })
     });

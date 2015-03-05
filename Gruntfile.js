@@ -107,7 +107,7 @@ var init = module.exports = function( grunts ){
                 ]
             },
             images : {files: [ {expand: true, cwd: 'src/images', src: '**', dest: '<%= target.dest %>/assets/images'} ]},
-            scripts: {files: [ {expand: true, cwd: 'src/scripts', src: '**', dest: '<%= target.dest %>/assets/scripts'} ]},
+            scripts: {files: [ {expand: true, cwd: 'src/scripts', src: ['**', '!init.js'], dest: '<%= target.dest %>/assets/scripts'} ]},
             plugins: {files: [ {expand: true, cwd: 'src/plugins', src: '**', dest: '<%= target.dest %>/assets/scripts/plugins'} ]},
             demo   : {files: [ {expand: true, cwd: 'src/demo', src: '**', dest: '<%= target.dest %>/demo'} ]},
             misc   : {files: [ {src: 'src/.htaccess', dest: '<%= target.dest %>/.htaccess'} ]}
@@ -218,7 +218,11 @@ var init = module.exports = function( grunts ){
                 tasks: [ 'clean:styles', 'sass:<%= target.name %>' ]
             },
             scripts    : {
-                files: [ 'src/scripts/**' ],
+                files: [ 'src/scripts/**', '!src/scripts/init.js' ],
+                tasks: [ 'copy:scripts' ]
+            },
+            initscripts    : {
+                files: [ 'src/scripts/init.js' ],
                 tasks: [ 'scripts' ]
             },
             views      : {

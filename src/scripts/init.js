@@ -81,6 +81,7 @@
             'plugins/modernizr'       : 'plugins/modernizr',
             'plugins/mscrollbar'      : 'plugins/mscrollbar',
             // default vendor paths
+            'plugins/svg'             : 'plugins/svg.js/dist/svg',
             'plugins/contextmenu'     : 'plugins/bootstrap-contextmenu/bootstrap-contextmenu',
             'plugins/impromptu'       : 'plugins/jquery-impromptu/dist/jquery-impromptu.min',
             'plugins/moment'          : 'plugins/moment/moment/min/moment.min',
@@ -109,6 +110,9 @@
         },
 
         shim: {
+            'plugins/svg': {
+                exports: 'SVG'
+            },
             'jade'                  : {
                 exports: 'jade'
             },

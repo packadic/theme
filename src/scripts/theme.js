@@ -1,25 +1,28 @@
-define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie' ],
-    function( $,config, eventer, autoloader ){
+define([ 'jquery', 'config', 'eventer', 'autoloader',  'plugins/cookie' ],
+    function( $, config, eventer, autoloader ){
         'use strict';
 
         function defined( obj ){
             return !_.isUndefined(obj);
         }
+
         function cre(){
             return $(document.createElement('div'));
         }
+
         var theme = {
-            options: {
-            }
+            options: {}
         };
 
         eventer('theme', theme);
 
         // hack to make slideUp and slideDown work with animate, so it uses GSAP
-        if(typeof TweenLite !== 'undefined' || typeof TweenMax !== 'undefined'){
+        if( typeof TweenLite !== 'undefined' || typeof TweenMax !== 'undefined' ){
             var slideAnimation = function( type, speed, cb ){
-                if( typeof cb !== 'function' ) cb = function(){
-                };
+                if( typeof cb !== 'function' ){
+                    cb = function(){
+                    };
+                }
                 var margin = function( what ){
                     parseInt(sub.css('margin-' + what).replace('px', ''))
                 };
@@ -44,17 +47,17 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie' ],
 
         (function Options(){
 
-            theme.setOption = function(option, value){
+            theme.setOption = function( option, value ){
 
             };
 
-            theme.getOption = function(option){
+            theme.getOption = function( option ){
 
             };
 
-            theme.setOptions = function(options){
+            theme.setOptions = function( options ){
                 theme.options = _.merge(theme.options, options);
-               // console.log('theme.setOptions options=', options, 'theme.options=', theme.options);
+                // console.log('theme.setOptions options=', options, 'theme.options=', theme.options);
             };
 
             theme.isDebug = function(){
@@ -72,32 +75,34 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie' ],
              * @example
              * var supported = theme.isSupported('animation')
              */
-            theme.isSupported = function (propertyName) {
+            theme.isSupported = function( propertyName ){
                 var elm = document.createElement('div');
                 propertyName = propertyName.toLowerCase();
 
-                if (elm.style[propertyName] != undefined)
+                if( elm.style[ propertyName ] != undefined ){
                     return true;
+                }
 
                 var propertyNameCapital = propertyName.charAt(0).toUpperCase() + propertyName.substr(1),
-                    domPrefixes = 'Webkit Moz ms O'.split(' ');
+                    domPrefixes         = 'Webkit Moz ms O'.split(' ');
 
-                for (var i = 0; i < domPrefixes.length; i++) {
-                    if (elm.style[domPrefixes[i] + propertyNameCapital] != undefined)
+                for( var i = 0; i < domPrefixes.length; i++ ){
+                    if( elm.style[ domPrefixes[ i ] + propertyNameCapital ] != undefined ){
                         return true;
+                    }
                 }
 
                 return false;
             };
 
-            theme.createLoader = function(name){
+            theme.createLoader = function( name ){
                 return cre().addClass('loader').addClass('loader-' + name)
             };
 
             theme.getTemplate = function( name, cb ){
-             //   logDebug('getting template', name, cb);
-                require(['templates/' + name], function(template){
-              //      logDebug('gott template', name, template);
+                //   logDebug('getting template', name, cb);
+                require([ 'templates/' + name ], function( template ){
+                    //      logDebug('gott template', name, template);
                     cb(template);
                 });
             };
@@ -147,11 +152,10 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie' ],
         (function Events(){
 
 
-
             theme._initResizeEvent = function(){
                 theme._defineEvent('resize');
                 var resize;
-                theme.$window.on('resize',function(){
+                theme.$window.on('resize', function(){
                     if( resize ){
                         clearTimeout(resize);
                     }
@@ -251,7 +255,6 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie' ],
 
         }.call());
 
-
         (function Initialisers(){
 
             // @todo move to demo
@@ -275,13 +278,13 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie' ],
             };
         }.call());
 
-        theme.init = function(options){
+
+        theme.init = function( options ){
             options = _.isUndefined(options) ? {} : options;
-           // console.log('theme.init', options);
+            // console.log('theme.init', options);
             theme.setOptions(options);
             theme.$window = $(window);
             theme.$document = $(window.document);
-
             console.log('theme', theme);
             theme.initEvents();
 
@@ -290,11 +293,17 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie' ],
             // @todo move to demo
             theme.initShowHtml();
 
-            autoloader.detect('.sidebar-nav-menu', 'theme/sidebar', function(sidebar){
-                if(defined(theme.options.sidebarItems)){
+
+            autoloader.detect('.sidebar-nav-menu', 'theme/sidebar', function( sidebar ){
+                if( defined(theme.options.sidebarItems) ){
                     sidebar.init(theme.options.sidebarItems);
                 }
             });
+
+            autoloader.detect('#page-svg-logo', 'theme/logo', function( logo ){
+                logo.init();
+            })
+
         };
 
         return theme;

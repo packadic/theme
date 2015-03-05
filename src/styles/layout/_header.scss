@@ -23,7 +23,7 @@ section#top.navbar {
         display: block;
         width: $sidebar-logo-container-width;
         height: $header-height;
-        padding-left: 20px;
+        padding-left: 0px;
         padding-right: 20px;
 
         .sidebar-nav-closed.sidebar-nav-closed-hide-logo & {
@@ -47,7 +47,11 @@ section#top.navbar {
 
         .text-logo {
             padding-left: 20px;
-            padding-top: 12px;
+            padding-top: 5px;
+            font-family: $font-family-heading;
+            color: #bcbcbc;
+
+            font-size: 25px;
         }
     }
 
@@ -154,16 +158,80 @@ section#top.navbar {
         }
     }
 
-    /* Top menu */
-    .top-menu {
+
+    .header-menu {
         margin: 0;
         padding: 0;
-        float: right;
+        //float: right;
 
-        .navbar-nav {
+
+        ul.navbar-nav {
             padding: 0;
             margin-right: 20px;
+            margin-left: 1px;
             display: block;
+            > li {
+                &:first-child {
+                    border-left: 1px solid #484848;
+                }
+                border-right: 1px solid #484848;
+                > a {
+                    cursor: pointer;
+                    height: $header-height;
+                    line-height: 46px;
+                    padding: 0 15px !important;
+                    #color: rgb(47, 44, 45);
+                    font-size: 15px;
+
+                    color: #888888;
+                    background: #222222;
+
+                    &:hover {
+                        background: #333333;
+                    }
+                }
+
+                .dropdown-menu {
+
+                    background: #333;
+                    border-right: 5px solid #222;
+                    border-bottom: 5px solid #222;
+                    padding: 0px;
+                    &:before {
+                        border-left: none;
+                        border-right: none;
+                    }
+
+                    li {
+                        border-bottom: 1px solid #484848;
+
+                        &:last-child{
+                            border-bottom: none;
+                        }
+                    }
+                    a {
+                        padding: 7px 20px;
+                        color: #888888;
+
+                        &:hover {
+
+                        background: #222;
+                        }
+                    }
+
+                    .dropdown-menu-list {
+                        > li.external {
+
+                            a {
+                                background: none !important;
+                                border: none !important;
+                            }
+                        }
+                    }
+                }
+
+            }
+
         }
     }
 
