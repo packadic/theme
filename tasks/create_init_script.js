@@ -38,12 +38,15 @@ module.exports = function( grunt ){
             return fs.readFileSync(path.join(cwd, dest, 'assets/scripts', filePath), 'UTF-8');
         };
 
+        grunt.log.writeln('trying to read from ' + path.join(cwd, dest, 'assets/scripts'));
+
         var initScript = '';
         initScript += " \n ; " + readScript('plugins/lodash.custom.min.js');
         initScript += " \n ; " + readScript('plugins/require.js');
         initScript += " \n ; " + readScript('init.js');
 
         var destPath = path.join(cwd, dest, 'assets/scripts/init.js');
+        grunt.log.writeln('trying to write to ' + destPath);
         fs.writeFileSync(destPath, initScript);
 
 

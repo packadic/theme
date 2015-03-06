@@ -170,6 +170,8 @@ section#top.navbar {
             margin-right: 20px;
             margin-left: 1px;
             display: block;
+
+
             > li {
                 &:first-child {
                     border-left: 1px solid #484848;
@@ -189,10 +191,20 @@ section#top.navbar {
                     &:hover {
                         background: #333333;
                     }
+
                 }
 
                 .dropdown-menu {
+                    small {
+                        font-size: 10px;
+                        float: right;
+                        line-height: 20px;
+                        display: block;
+                    }
 
+                    &.dropdown-wide {
+                        min-width: 300px !important;;
+                    }
                     background: #333;
                     border-right: 5px solid #222;
                     border-bottom: 5px solid #222;
@@ -212,6 +224,7 @@ section#top.navbar {
                     a {
                         padding: 7px 20px;
                         color: #888888;
+
 
                         &:hover {
 

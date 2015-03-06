@@ -66,6 +66,13 @@ define([ 'jquery', 'config', 'eventer' ],
                 $.mCustomScrollbar.defaults.theme = 'dark';
                 $('.scrollable').addClass('mCustomScrollbar').mCustomScrollbar();
             });
+
+            autoloader.detect('[data-share-buttons]', 'share-buttons', function(sb){
+                sb.applyTo('[data-share-buttons]');
+            })
+            autoloader.detect('.highlighter', 'highlighter', function(highlighter){
+                highlighter.applyTo($('.highlighter'));
+            })
         };
 
         return autoloader;

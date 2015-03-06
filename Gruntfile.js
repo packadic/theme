@@ -46,7 +46,7 @@ var init = module.exports = function( grunts ){
     var _config = {},
         target, type;
 
-    function mergeConfigFrom(fromDirPath){
+    function mergeConfigFrom( fromDirPath ){
         var configPath = path.resolve(fromDirPath, 'config.yml');
         ok('Merging config from: ' + fromDirPath)
         _config = _.merge(_config, jsyaml.safeLoad(require('fs').readFileSync(configPath)));
@@ -55,10 +55,11 @@ var init = module.exports = function( grunts ){
         _config.targets[ target ].name = target;
         _config.targets[ target ].type = type;
     }
+
     mergeConfigFrom(__dirname);
 //    mergeConfigFrom(process.cwd());
     var externalConfig = grunt.option('config');
-    if(externalConfig){
+    if( externalConfig ){
         mergeConfigFrom(externalConfig);
     }
 
@@ -79,7 +80,7 @@ var init = module.exports = function( grunts ){
         target          : _config.targets[ target ],
         jsbuild         : _config.jsbuild,
         uglify          : {
-            dev: {
+            dev : {
                 options: {sourceMap: false, compress: false, beautify: true, gzip: true, preserveComments: 'all'},
                 files  : uglifyFiles
             },
@@ -100,17 +101,18 @@ var init = module.exports = function( grunts ){
             views    : {src: '<%= target.dest %>/**/*.html'}
         },
         copy            : {
-            fonts  : {
+            fonts        : {
                 files: [
                     {expand: true, cwd: 'src/plugins/bootstrap/fonts', src: '**', dest: '<%= target.dest %>/assets/fonts'},
                     {expand: true, cwd: 'src/plugins/font-awesome/fonts', src: '**', dest: '<%= target.dest %>/assets/fonts'}
                 ]
             },
-            images : {files: [ {expand: true, cwd: 'src/images', src: '**', dest: '<%= target.dest %>/assets/images'} ]},
-            scripts: {files: [ {expand: true, cwd: 'src/scripts', src: ['**', '!init.js'], dest: '<%= target.dest %>/assets/scripts'} ]},
-            plugins: {files: [ {expand: true, cwd: 'src/plugins', src: '**', dest: '<%= target.dest %>/assets/scripts/plugins'} ]},
-            demo   : {files: [ {expand: true, cwd: 'src/demo', src: '**', dest: '<%= target.dest %>/demo'} ]},
-            misc   : {files: [ {src: 'src/.htaccess', dest: '<%= target.dest %>/.htaccess'} ]}
+            images       : {files: [ {expand: true, cwd: 'src/images', src: '**', dest: '<%= target.dest %>/assets/images'} ]},
+            scripts_watch: {files: [ {expand: true, cwd: 'src/scripts', src: [ '**', '!init.js' ], dest: '<%= target.dest %>/assets/scripts'} ]},
+            scripts      : {files: [ {expand: true, cwd: 'src/scripts', src: '**', dest: '<%= target.dest %>/assets/scripts'} ]},
+            plugins      : {files: [ {expand: true, cwd: 'src/plugins', src: '**', dest: '<%= target.dest %>/assets/scripts/plugins'} ]},
+            demo         : {files: [ {expand: true, cwd: 'src/demo', src: '**', dest: '<%= target.dest %>/demo'} ]},
+            misc         : {files: [ {src: 'src/.htaccess', dest: '<%= target.dest %>/.htaccess'} ]}
         },
         jade            : {
             dev      : {
@@ -205,6 +207,10 @@ var init = module.exports = function( grunts ){
                 }
             }
         },
+        init_script     : {
+            src : "<%= target.dest %>/assets/scripts",
+            dest: "<%= target.dest %>/assets/scripts/init.js"
+        },
         concurrent      : {
             options: {
                 logConcurrentOutput: true
@@ -217,11 +223,11 @@ var init = module.exports = function( grunts ){
                 files: [ 'src/styles/**' ],
                 tasks: [ 'clean:styles', 'sass:<%= target.name %>' ]
             },
-            scripts    : {
+            scripts_watch    : {
                 files: [ 'src/scripts/**', '!src/scripts/init.js' ],
-                tasks: [ 'copy:scripts' ]
+                tasks: [ 'copy:scripts_watch' ]
             },
-            initscripts    : {
+            initscripts: {
                 files: [ 'src/scripts/init.js' ],
                 tasks: [ 'scripts' ]
             },
@@ -269,8 +275,8 @@ var init = module.exports = function( grunts ){
 
     grunt.registerTask('cp', [ 'copy:images', 'copy:fonts', 'copy:misc', 'copy:demo' ]);
 
-    grunt.registerTask('scripts', [ 'copy:scripts', 'uglify:' + type, 'jsbuild', 'create_init_script']);
-    grunt.registerTask('assets', [ 'clean:assets', 'cp', 'copy:plugins',  'sass:' + type, 'templates', 'scripts' ]);
+    grunt.registerTask('scripts', [ 'copy:scripts', 'uglify:' + type, 'jsbuild', 'create_init_script' ]);
+    grunt.registerTask('assets', [ 'clean:assets', 'cp', 'copy:plugins', 'sass:' + type, 'templates', 'scripts' ]);
     grunt.registerTask('views', [ 'clean:views', 'jade_config:' + type, 'jade:' + type ]);
     grunt.registerTask('watcher', [ 'concurrent:watch' ]);
     grunt.registerTask('build', [

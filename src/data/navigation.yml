@@ -121,6 +121,9 @@ sidebar:
       - name: General
         href: <%= target.nav.pre %>/components/general<%= target.nav.ext %>
 
+      - name: Utility classes
+        href: <%= target.nav.pre %>/components/utility-classes<%= target.nav.ext %>
+
       - name: Typography
         href: <%= target.nav.pre %>/components/typography<%= target.nav.ext %>
 
