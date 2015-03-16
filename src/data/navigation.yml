@@ -20,22 +20,6 @@ sidebar:
     href: <%= target.nav.pre %>/
     icon: fa fa-home
 
-  - name: Documentation
-    icon: fa fa-file-code-o
-    children:
-      - name: Gettings started
-        href: <%= target.nav.pre %>/docs/gettings-started<%= target.nav.ext %>
-
-      - name: Customizing
-        href: <%= target.nav.pre %>/docs/gettings-started<%= target.nav.ext %>
-
-      - name: Setting up projects
-        href: <%= target.nav.pre %>/docs/gettings-started<%= target.nav.ext %>
-
-      - name: Grunt tasks
-        href: <%= target.nav.pre %>/docs/gettings-started<%= target.nav.ext %>
-
-
   - name: Multi-level icon menu
     icon: fa fa-tasks
     children:
@@ -80,34 +64,6 @@ sidebar:
         icon: fa fa-coffee
 
 
-  - name: Multi-level menu
-    children:
-      - name: Tasks
-      - name: Bolds
-        children:
-          - name: Bugs
-          - name: Drivers
-            children:
-              - name: Tasks
-              - name: Bolds
-                children:
-                  - name: Bugs
-                    children:
-                      - name: Bugs
-                      - name: Drivers
-                        children:
-                          - name: Tasks
-                          - name: Bolds
-                            children:
-                              - name: Bugs
-                              - name: Drivers
-                                href: #/components/forms/layouts # temp dev make it the active one
-                              - name: Payments
-                  - name: Payments
-      - name: Get coffee
-
-
-
   - name: Layouts
     icon: fa fa-desktop
     children:
@@ -121,14 +77,8 @@ sidebar:
       - name: General
         href: <%= target.nav.pre %>/components/general<%= target.nav.ext %>
 
-      - name: Utility classes
-        href: <%= target.nav.pre %>/components/utility-classes<%= target.nav.ext %>
-
       - name: Typography
         href: <%= target.nav.pre %>/components/typography<%= target.nav.ext %>
-
-      - name: Boxes
-        href: <%= target.nav.pre %>/components/boxes<%= target.nav.ext %>
 
       - name: Buttons
         href: <%= target.nav.pre %>/components/buttons<%= target.nav.ext %>
@@ -152,9 +102,6 @@ sidebar:
             href: <%= target.nav.pre %>/components/forms/wizard<%= target.nav.ext %>
 
 
-      - name: Portlets
-        href: <%= target.nav.pre %>/components/portlets<%= target.nav.ext %>
-
       - name: Tables
         children:
           - name: Basic
@@ -173,6 +120,8 @@ sidebar:
             href: <%= target.nav.pre %>/components/tables/datatables<%= target.nav.ext %>
 
 
+      - name: Boxes
+        href: <%= target.nav.pre %>/components/boxes<%= target.nav.ext %>
 
       - name: Tabs
         href: <%= target.nav.pre %>/components/tabs<%= target.nav.ext %>
@@ -180,6 +129,8 @@ sidebar:
       - name: Widgets
         href: <%= target.nav.pre %>/components/widgets<%= target.nav.ext %>
 
+      - name: Utility classes
+        href: <%= target.nav.pre %>/components/utility-classes<%= target.nav.ext %>
 
 
   - name: Pages

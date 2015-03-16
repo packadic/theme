@@ -1,0 +1,25 @@
+extends ../../../layouts/default
+block header
+    +page-title("Themer", "themer")
+    +page-breadcrumbs
+        +breadcrumb("Components", "/components")
+        +breadcrumb("Boxes", "/components/boxes", true)
+block content
+    #packadic-themer
+        .row
+            .col-lg-4
+                +box("Boxes", "list")
+                    | Hello
+            .col-lg-4
+                +box("Boxes", "list")
+                    | Hello
+            .col-lg-4
+                +box("Boxes", "list")
+                    | Hello
+        .row
+            .col-lg-6
+                +box("Boxes", "list")
+                    | Hello
+            .col-lg-6
+                +box("Boxes", "list")
+                    | Hello

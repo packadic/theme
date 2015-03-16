@@ -28,15 +28,14 @@ block content
         .col-md-4
             +box("Header combinations")
                 h3.no-margin-top.box-heading.show-class Mixing texts and headers
-                textarea#sfsdf
-                    :code
-                        .btn.btn-primary
-                +a(href="#sfsdf").btn.btn-primary.codeviewer-button Codeview
                 p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum porta, iaculis dolor sed, pretium purus.
                 h4.box-heading.show-class Another text
                 p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum porta, iaculis dolor sed, pretium purus.
                 h5.box-heading.show-class Another text
                 p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum porta, iaculis dolor sed, pretium purus.
+
+            +box("Headings")
+                +heading-list
 
         .col-md-4
             +box("Header combinations 2")
@@ -47,52 +46,199 @@ block content
                 h5 Another text
                 p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ipsum porta, iaculis dolor sed, pretium purus.
 
-
-
-.col-md-4
-            h4 "Karla" headings bold
-                +heading-list.alt.bold
-
-    .row
-        .col-md-4
-            h4 Headings
-                +heading-list
-
-        .col-md-4
-            h4 "Karla" headings
+            +box("'Karla' headings")
                 +heading-list.alt
 
-        .col-md-4
-            h4 "Karla" headings bold
-                +heading-list.alt.bold
+    .row
+        .col-md-6
+            +box("Text colors")
+                for color in site.data.theme.colors
+                    .row
+                        .col-md-4
+                            span(class="text-" + color + "-light")
+                                | .text-!{color}-light
+                        .col-md-4
+                            span(class="text-" + color)
+                                | .text-!{color}
+                        .col-md-4
+                            span(class="text-" + color + "-dark")
+                                | .text-!{color}-dark
+
+        .col-md-6
+            +box("Link colors")
+                for color in site.data.theme.colors
+                    .row
+                        .col-md-4
+                            +a(class="text-" + color + "-light")
+                                | .text-!{color}-light
+                        .col-md-4
+                            +a(class="text-" + color)
+                                | .text-!{color}
+                        .col-md-4
+                            +a(class="text-" + color + "-dark")
+                                | .text-!{color}-dark
 
 
     .row
-        .col-md-6
-            h4 Text colors
-            for color in site.data.theme.colors
-                .row
-                    .col-md-4
-                        span(class="text-" + color + "-light")
-                            | .text-!{color}-light
-                    .col-md-4
-                        span(class="text-" + color)
-                            | .text-!{color}
-                    .col-md-4
-                        span(class="text-" + color + "-dark")
-                            | .text-!{color}-dark
+        .col-xlg-6.col-lg-6.col-md-12.col-sm-12
+            +box("Code rendering HTML")
+                pre
+                    code.highlighter.hljs.lang-html.
+                        <div class="box">
+                            <header>
+                                <h3>Header combinations</h3>
+                            </header>
+                            <section>
+                                <h3 class="no-margin-top box-heading show-class">
+                                    Mixing texts and headers
+                                </h3>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Nulla nec ipsum porta, iaculis dolor sed, pretium purus.
+                                </p>
+                                <h4 class="box-heading show-class">
+                                    Another text
+                                </h4>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Nulla nec ipsum porta, iaculis dolor sed, pretium purus.
+                                </p>
+                            </section>
+                        </div>
 
-        .col-md-6
-            h4 Link colors
-            for color in site.data.theme.colors
-                .row
-                    .col-md-4
-                        +a(class="text-" + color + "-light")
-                            | .text-!{color}-light
-                    .col-md-4
-                        +a(class="text-" + color)
-                            | .text-!{color}
-                    .col-md-4
-                        +a(class="text-" + color + "-dark")
-                            | .text-!{color}-dark
+        .col-xlg-6.col-lg-6.col-md-12.col-sm-12
+            +box("Code rendering PHP")
+                pre
+                    code.highlighter.hljs.lang-php.
+                        public function addNamespace($id, $dirName)
+                        {
+                            $location = $this->getPath('namespaces').'/'.$dirName;
+                            $this->app->view->addLocation($location);
+                            $this->app->view->addNamespace($id, $location);
+                        }
 
+                        public function getPath($type)
+                        {
+                            return $this->paths[$type];
+                        }
+
+
+    .row
+        .col-lg-4.col-md-4.col-sm-6
+            +box("List normal")
+                ul
+                    li
+                        | List item 1
+                        ul
+                            li Child list item 1
+                            li Child list item 2
+                            li Child list item 3
+                            li Child list item 4
+                            li Child list item 5
+                            li Child list item 6
+                    li List item 2
+                    li List item 3
+                    li List item 4
+                    li List item 5
+                    li List item 6
+
+        .col-lg-4.col-md-4.col-sm-6
+            +box("Ordered list")
+                ol
+                    li Numerouse list item 1
+                    li Numerouse list item 2
+                    li Numerouse list item 3
+                    li Numerouse list item 4
+                    li Numerouse list item 5
+                    li Numerouse list item 6
+                    li Numerouse list item 7
+                    li Numerouse list item 8
+                    li Numerouse list item 9
+                    li Numerouse list item 10
+                    li Numerouse list item 11
+                    li Numerouse list item 12
+
+        .col-lg-4.col-md-4.col-sm-12
+            +box("Unstyled list")
+                ul.list-unstyled
+                    li Unstyled list item 1
+                    li Unstyled list item 2
+                    li
+                        | Unstyled list item 3
+                        ul
+                            li Sublist item 1
+                            li Sublist item 2
+                            li Sublist item 3
+                            li Sublist item 4
+                    li Unstyled list item 4
+                    li Unstyled list item 5
+                    li
+                        | Unstyled list item 6
+                        ul
+                            li Sublist item 1
+                            li Sublist item 2
+
+    .row
+        .col-lg-6.col-md-6.col-sm-12
+            +box("Contextual colors")
+                p.text-muted
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam mollitia accusamus soluta, aliquam aut nam possimus eos fugiat voluptates iste repudiandae voluptas voluptatum nostrum adipisci atque maiores perspiciatis. Deleniti, distinctio!
+                p.text-primary
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit in maiores alias quia repudiandae distinctio eos iusto odio vel omnis excepturi aperiam, odit ad impedit nihil, ea atque? Tenetur, veritatis.
+                p.text-success
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum minus dolore eius in at, expedita porro enim dolor, rerum numquam, dolorum non quam et reprehenderit, pariatur? Esse ut natus maiores!
+                p.text-info
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum saepe, soluta nihil sequi nemo, ea eligendi quasi, quibusdam nulla atque obcaecati. Atque voluptas, modi adipisci aut qui! Officiis, fuga, non.
+                p.text-warning
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos recusandae dolore cum doloremque laboriosam aliquid magni praesentium, placeat. Impedit libero vero, blanditiis doloremque, praesentium iusto unde repellendus ipsam error magnam.
+                p.text-danger
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos soluta nemo, laborum totam, voluptate quae earum ea eius, reiciendis sint vel nesciunt qui. Natus at, consectetur ratione officiis minus eligendi.
+
+        .col-lg-6.col-md-6.col-sm-12
+            +box("Contextual colors")
+                p.bg-primary(style='padding:10px;')
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere earum fugit suscipit mollitia doloremque sapiente, sit veritatis incidunt, autem qui distinctio ex, perspiciatis quaerat. Officia excepturi inventore animi harum ad.
+                p.bg-success(style='padding:10px;')
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic pariatur sunt reprehenderit, beatae facere, ducimus sequi vel error deserunt, quasi eum quibusdam. Modi aperiam tempora placeat, soluta assumenda earum maxime.
+                p.bg-info(style='padding:10px;')
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate explicabo quia, possimus reiciendis ipsam facilis expedita, et quod magni architecto? Assumenda laboriosam necessitatibus quod tempore optio, placeat possimus qui unde.
+                p.bg-warning(style='padding:10px;')
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda sit possimus autem recusandae saepe qui fugiat aut animi nam at atque sint, eaque et, nulla, consectetur. Eos modi cum aperiam!
+                p.bg-danger(style='padding:10px;')
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic facilis nam alias, aliquam ea, quod labore vel delectus nihil magni at laboriosam maxime consectetur dolore placeat rem iste libero repellat.
+
+
+    .row
+        .col-lg-12.col-md-12.col-sm-12
+            +box("Blockquotes")
+                .row
+                    .col-lg-12.col-md-12.col-sm-12
+                        blockquote
+                            p Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    .col-lg-6.col-md-6.col-sm-6
+                        blockquote
+                            p Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            small Lorem ipsum test
+                    .col-lg-6.col-md-6.col-sm-6
+                        blockquote.blockquote-reverse
+                            p Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            small Lorem ipsum test
+    .row
+        .col-lg-12.col-md-12.col-sm-12
+            +box("Hightlights")
+                p
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
+                    mark atque nobis quos natus
+                    |  dolorem laborum officiis esse assumenda, adipisci unde fugiat
+                    mark  corporis provident
+                    | , delectus dicta commodi minus ullam vel debitis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat dolorum officia magnam quaerat, consequatur voluptatum delectus voluptatem perferendis expedita, nam maiores nesciunt ducimus. Ratione ducimus excepturi possimus, praesentium aliquam eligendi!
+                p
+                    | Lorem
+                    mark  ipsum dolor sit amet
+                    | , consectetur adipisicing elit. Animi saepe provident repellendus quisquam placeat praesentium sunt quaerat possimus, laboriosam modi nulla, sed quae consequuntur dolores rem fugiat minima molestias qui! Lorem ipsum dolor sit amet,
+                    mark  onsectetur adipisicing elit. Ex, debitis
+                    | , exercitationem! Provident corporis
+                    mark enim beatae nemo cupiditate aliquam
+                    |  adipisci ut officiis quibusdam excepturi! Ea vitae quidem perferendis eaque, aliquam minus. Lorem ipsum dolor sit amet,
+                    mark  consectetur adipisicing
+                    |  elit. Expedita consequuntur distinctio, mollitia a debitis dolore, labore dolorem asperiores officiis laborum dolorum cumque aperiam similique impedit officia, aliquam quibusdam facilis soluta.

@@ -1,45 +1,67 @@
-include ../../base
 extends ../../layouts/default
 
+mixin tab-content(name)
+    p
+        | Howdy, I'm #{name}.
+    p
+        | Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
+
+
+
+mixin tabber-nav(prefix)
+    ul.nav.nav-tabs(role="tablist")&attributes(attributes)
+        li(role="presentation").active
+            a(href="##{prefix}home", aria-controls="#{prefix}home", role="tab", data-toggle="tab") Home
+        li(role="presentation")
+            a(href="##{prefix}profile", aria-controls="#{prefix}profile", role="tab", data-toggle="tab") Profile
+
+mixin tabber-content(prefix)
+    .tab-content&attributes(attributes)
+        .tab-pane.active.fade.in(role="tabpanel", id="##{prefix}home")
+            +tab-content("home of " + prefix)
+        .tab-pane.fade(role="tabpanel", id="##{prefix}profile")
+            +tab-content("profile of " + prefix)
+
+mixin tabber(prefix)
+    .tabber(role="tabpanel")&attributes(attributes)
+        +tabber-nav(prefix)
+        +tabber-content(prefix)
+
 block content
-    .portlet.light
-        .portlet-body
-            .row
-                .col-md-12
-                    .tabbable-panel
-                        .tabbable-line
-                            ul.nav.nav-tabs
-                                li.active
-                                    a(href='#tab_default_1', data-toggle='tab')
-                                        | Tab 1
-                                li
-                                    a(href='#tab_default_2', data-toggle='tab')
-                                        | Tab 2
-                                li
-                                    a(href='#tab_default_3', data-toggle='tab')
-                                        | Tab 3
-                            .tab-content
-                                #tab_default_1.tab-pane.active
-                                    p
-                                        | I'm in Tab 1.
-                                    p
-                                        | Duis autem eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat.
-                                    p
-                                        a.btn.btn-success(href='http://j.mp/metronictheme', target='_blank')
-                                            | Learn more...
-                                #tab_default_2.tab-pane
-                                    p
-                                        | Howdy, I'm in Tab 2.
-                                    p
-                                        | Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation.
-                                    p
-                                        a.btn.btn-warning(href='http://j.mp/metronictheme', target='_blank')
-                                            | Click for more features...
-                                #tab_default_3.tab-pane
-                                    p
-                                        | Howdy, I'm in Tab 3.
-                                    p
-                                        | Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
-                                    p
-                                        a.btn.btn-info(href='http://j.mp/metronictheme', target='_blank')
-                                            | Learn more...
+
+    .row
+        .col-md-4
+            +tabber("first")
+
+        .col-md-4
+            +tabber("sec").tabber-grey
+
+        .col-md-4
+            +tabber("ttt").tabber-grey
+
+
+    .row.margin-top
+        .col-md-4
+            +box("Tabs in box", "list").box-tabber
+                +tabber("tatt")
+        .col-md-4
+            +box("Tabs in box", "list").box-tabber
+                +tabber("tatt33").tabber-grey
+        .col-md-4
+            +box("Tabs in box", "list").box-tabber
+                .tabber.tabs-bottom(role="tabpanel")
+                    +tabber-content("tsdfatt")
+                    +tabber-nav("tsdfatt")
+
+    .row.margin-top
+        .col-md-4
+            .tabber.tabs-bottom(role="tabpanel")
+                +tabber-content("sec2sec")
+                +tabber-nav("sec2sec")
+        .col-md-4
+            .tabber.tabber-grey.tabs-bottom(role="tabpanel")
+                +tabber-content("secsec")
+                +tabber-nav("secsec")
+
+        .col-md-4
+            +tabber("tttff")

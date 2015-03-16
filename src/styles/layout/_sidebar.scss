@@ -8,11 +8,11 @@
 
 .sidebar-toggler i.fa {
 		transition: 300ms ease-in-out ;
-		transform: rotate(180deg) ;
+		transform: rotate(0deg) ;
 }
 .sidebar-nav-closed .sidebar-toggler i.fa {
 	transition: 300ms ease-in-out ;
-	transform: rotate(0deg) ;
+	transform: rotate(180deg) ;
 }
 
 

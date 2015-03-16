@@ -9,7 +9,9 @@
     var clone;
 
     clone = {};
-    for(var k in window.packadic) clone[k] = window.packadic[k];
+    for( var k in window.packadic ){
+        clone[ k ] = window.packadic[ k ];
+    }
     console.log('pre-rjs config', clone);
 
 
@@ -34,6 +36,7 @@
             'plugins/moment'          : 'plugins/moment/moment/min/moment.min',
             'plugins/marked'          : 'plugins/marked/marked.min',
             'plugins/highlightjs'     : 'plugins/highlightjs/highlight.pack',
+            'plugins/uniform'         : 'plugins/jquery.uniform/jquery.uniform.min',
             'plugins/cryptojs'        : 'plugins/cryptojslib/components',
             'plugins/toastr'          : 'plugins/toastr/toastr',
             'plugins/mousewheel'      : 'plugins/jquery-mousewheel/jquery.mousewheel.min',
@@ -55,6 +58,7 @@
             'plugins/gsap/jquery-max' : 'plugins/gsap/src/minified/jquery.gsap.min'
 
         },
+
 
         shim: {
             'lodash'                : {
@@ -119,7 +123,6 @@
         }
 
 
-
     };
 
     jqui.forEach(function( name ){
@@ -128,7 +131,7 @@
 
 
     window.packadic.__onLoadedCallbacks = [];
-    window.packadic.loaded = function(cb){
+    window.packadic.loaded = function( cb ){
         window.packadic.__onLoadedCallbacks.push(cb);
     }
 
@@ -146,7 +149,9 @@
 
     console.log('post-rjs config', window.packadic);
 
-    for(var k in window.packadic) clone[k] = window.packadic[k];
+    for( var k in window.packadic ){
+        clone[ k ] = window.packadic[ k ];
+    }
     console.log('postcd -rjs config', clone);
 }.call());
 

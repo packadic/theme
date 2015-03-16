@@ -14,7 +14,7 @@ $widget-header-color:                                                   #c3c3c3 
 
 // boxes
 $box-bg-color:                                                          #fff !default;
-$box-border-color:                                                      #e9e9e9 !default;
+$box-border-color:                                                      #DDD !default;
 $box-shadow:                                                            0 1px 1px rgba(0, 0, 0, 0.05) !default;
 $box-radius:                                                            2px !default;
 $box-header-text-color:                                                 #c3c3c3 !default;
@@ -160,6 +160,8 @@ $footer-default-font-color:                                     		lighten($bg-co
 $footer-default-go-top-bg-color:                                		lighten($bg-color, 7%) !default;
 $footer-default-go-top-icon-font-color:                          		lighten($bg-color, 30%) !default;
 $footer-fixed-bg-color: 												darken($bg-color, 7%) !default;
+
+$section-bottom-bg-color: rgb(57, 59, 99) !default;
 
 //Boxed layout
 $for-min-992px-page-boxed-page-container-bg-color:              		$sidebar-menu-devider-border-color !default;

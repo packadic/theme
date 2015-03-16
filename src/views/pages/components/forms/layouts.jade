@@ -1,16 +1,161 @@
 extends ../../../layouts/default
 
+mixin form-box(name, icon)
+    .row
+        .col-lg-12
+            +box(name, icon)
+                form&attributes(attributes)
+                    block
+
 block header
-    +page-title("Forms", "forms")
+    +page-title("Forms", "Layouts")
     +page-breadcrumbs
         +breadcrumb("Components", "/components")
         +breadcrumb("Forms")
         +breadcrumb("Layouts", "/components/forms/layouts", true)
 
+
 block content
+    #demo-forms
     .row
-        .col-lg-12
-            +box("Forms", "list")
-                .row
-                    .col-md-12
-                        | Hello
+        .col-md-6
+            +form-box("Horizontal", "list").form-horizontal
+                .form-title
+                    .col-sm-offset-3.col-sm-9
+                        h4 Title
+                .form-group
+                    label.col-sm-3.control-label(for='inputEmail3') Email
+                    .col-sm-9
+                        input#inputEmail3.form-control(type='email', placeholder='Email')
+                .form-group
+                    label.col-sm-3.control-label(for='inputPassword3') Password
+                    .col-sm-9
+                        input#inputPassword3.form-control(type='password', placeholder='Password')
+                .form-group
+                    label.col-sm-3.control-label First name
+                    .col-sm-9
+                        input.form-control(type='text', placeholder='First name')
+                .form-group
+                    label.col-sm-3.control-label Last name
+                    .col-sm-9
+                        input.form-control(type='text', placeholder='Last name')
+                .form-group
+                    .col-sm-offset-3.col-sm-9
+                        .checkbox
+                            label
+                                input(type='checkbox')
+                                |  Remember me
+                .form-group
+                    .col-sm-offset-3.col-sm-9
+                        button.btn.btn-default(type='submit') Sign in
+
+
+        .col-md-6
+            +form-box("Default", "list")
+                .form-title
+                    h4 Title
+                .form-group
+                    label(for='exampleInputEmail1') Email address
+                    input#exampleInputEmail1.form-control(type='email', placeholder='Enter email')
+                .form-group
+                    label(for='exampleInputPassword1') Password
+                    input#exampleInputPassword1.form-control(type='password', placeholder='Password')
+                .form-group
+                    label(for='exampleInputFile') File input
+                    input#exampleInputFile(type='file')
+                    p.help-block Example block-level help text here.
+                .checkbox
+                    label
+                        input(type='checkbox')
+                        |  Check me out
+                button.btn.btn-default(type='submit') Submit
+
+
+    .row
+        .col-md-6
+            +form-box("Horizontal bordered", "list").form-horizontal.form-bordered
+                .form-title
+                    h4 Credentials
+                .form-group
+                    label.col-sm-3.control-label(for='inputEmail3') Email
+                    .col-sm-9
+                        input#inputEmail3.form-control(type='email', placeholder='Email')
+                .form-group
+                    label.col-sm-3.control-label(for='inputPassword3') Password
+                    .col-sm-9
+                        input#inputPassword3.form-control(type='password', placeholder='Password')
+                .form-title
+                    h4 Personal information
+                .form-group
+                    label.col-sm-3.control-label First name
+                    .col-sm-9
+                        input.form-control(type='text', placeholder='First name')
+                .form-group
+                    label.col-sm-3.control-label Last name
+                    .col-sm-9
+                        input.form-control(type='text', placeholder='Last name')
+
+                .form-group
+                    .col-sm-offset-3.col-sm-9
+                        .checkbox
+                            label
+                                input(type='checkbox')
+                                |  Remember me
+                .form-actions
+                    .col-sm-offset-3.col-sm-9
+                        button.btn.btn-default(type='submit') Sign in
+        .col-md-6
+            +form-box("Horizontal", "list").form-horizontal
+                .form-title
+                    .col-sm-offset-3.col-sm-9
+                        h4 Title
+                .form-group
+                    label.col-sm-3.control-label(for='inputEmail3') Email
+                    .col-sm-9
+                        input#inputEmail3.form-control(type='email', placeholder='Email')
+                .form-group
+                    label.col-sm-3.control-label(for='inputPassword3') Password
+                    .col-sm-9
+                        input#inputPassword3.form-control(type='password', placeholder='Password')
+                .form-group
+                    label.col-sm-3.control-label First name
+                    .col-sm-9
+                        input.form-control(type='text', placeholder='First name')
+                .form-group
+                    label.col-sm-3.control-label Last name
+                    .col-sm-9
+                        input.form-control(type='text', placeholder='Last name')
+                .form-group
+                    .col-sm-offset-3.col-sm-9
+                        .checkbox
+                            label
+                                input(type='checkbox')
+                                |  Remember me
+                .form-group
+                    .col-sm-offset-3.col-sm-9
+                        button.btn.btn-default(type='submit') Sign in
+
+    .row
+        .col-md-6
+            +form-box("Inline", "list").form-inline
+                .form-group
+                    label.sr-only(for='exampleInputEmail3') Email address
+                    input#exampleInputEmail3.form-control(type='email', placeholder='Enter email')
+                .form-group
+                    label.sr-only(for='exampleInputPassword3') Password
+                    input#exampleInputPassword3.form-control(type='password', placeholder='Password')
+                .checkbox
+                    label
+                        input(type='checkbox')
+                        |  Remember me
+                button.btn.btn-default(type='submit') Sign in
+
+        .col-md-6
+            +form-box("Inline 2", "list").form-inline
+                .form-group
+                    label.sr-only(for='exampleInputAmount') Amount (in dollars)
+                    .input-group
+                        .input-group-addon $
+                        input#exampleInputAmount.form-control(type='text', placeholder='Amount')
+                        .input-group-addon .00
+                button.btn.btn-primary(type='submit') Transfer cash

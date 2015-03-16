@@ -7,6 +7,15 @@ $width-default: 220px; // 3 960px-grid columns
 $zindex-select-dropdown: 1035; // must be lower than a modal background (1040) but higher than the fixed navbar (1030)
 
 
+// fix for icons
+.selectpicker li .fa {
+    width: 14px !important;
+    text-align: center;
+    margin-right: 5px;
+}
+
+
+
 // Mixins
 .cursor-disabled {
   cursor: not-allowed;

@@ -10,10 +10,16 @@
 
 // 7.0 VENDOR styles
 @import "../plugins/bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "vendor/uniform";
 @import "vendor/bootbox";
+@import "vendor/datepicker3";
+@import "vendor/bootstrap-switch";
 @import "vendor/bootstrap-select";
 @import "vendor/bootstrap-gtreetable";
 @import "vendor/jquery-impromptu";
+@import "vendor/toastr";
+
+//@import "vendor/select2";
 
 
 // 8.0 MY override mixins (that could possibly override VENDOR mixins, if wanted)
@@ -32,22 +38,32 @@
 @import "components/buttons";
 @import "components/labels";
 @import "components/tabs";
+@import "components/form_layouts";
 
 @import "components/box";
 @import "components/scrollbar";
 @import "components/popover";
 @import "components/tables";
 @import "components/modals";
-@import "components/color-variants";
 @import "components/loader";
 @import "components/share-buttons";
 
+@import "components/color-variants";
+
+
 @import "components/utilities/positioning";
 @import "components/utilities/shadows";
-@import "components/utilities/bevelgloss";
+//@import "components/utilities/bevelgloss";
 @import "components/utilities/effects";
 
 
+
+blockquote {
+
+    border-left: 5px solid #33336E;
+    background: #F0F0F0 ;
+    border-radius: 4px ;
+}
 
 #page-loader {
     display: none;

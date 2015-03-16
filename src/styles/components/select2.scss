@@ -1,0 +1,11 @@
+@import "../base";
+@import "_select2";
+@import "../../plugins/select2-bootstrap-css/lib/select2-bootstrap";
+//@import "../vendor/select2";
+
+
+.select2-search-choice {
+    border-radius: 0 !important;
+    font-size: 13px !important;
+    background-color: #E0E0E0 !important;
+}

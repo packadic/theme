@@ -67,34 +67,48 @@
 
     packadic.config.requireJS = {
         baseUrl: packadic.config.paths.scripts,
+        map    : {
+            '*': {
+                'css': 'plugins/require-css/css'
+            }
+        },
         paths  : {
             // custom build with jsbuild
             // 'lodash'                  : 'plugins/lodash.custom.min',
-            'plugins/bootstrap'       : 'plugins/bootstrap.custom.min',
-            'jquery'                  : 'plugins/jquery/dist/jquery.min',
+            'plugins/bootstrap'  : 'plugins/bootstrap.custom.min',
+            'jquery'             : 'plugins/jquery/dist/jquery.min',
             // dont prefix jade, template amd loader require it, same as jquery
-            'jade'                    : 'plugins/jade/runtime',
-            'string'                  : 'plugins/underscore.string/dist/underscore.string.min',
-            'code-mirror'             : 'plugins/requirejs-codemirror/src/code-mirror',
+            'jade'               : 'plugins/jade/runtime',
+            'string'             : 'plugins/underscore.string/dist/underscore.string.min',
+            'code-mirror'        : 'plugins/requirejs-codemirror/src/code-mirror',
             // custom uglified and moved
-            'plugins/bootbox'         : 'plugins/bootbox',
-            'plugins/modernizr'       : 'plugins/modernizr',
-            'plugins/mscrollbar'      : 'plugins/mscrollbar',
+            'plugins/bootbox'    : 'plugins/bootbox',
+            'plugins/modernizr'  : 'plugins/modernizr',
+            'plugins/mscrollbar' : 'plugins/mscrollbar',
             // default vendor paths
-            'plugins/svg'             : 'plugins/svg.js/dist/svg',
-            'plugins/contextmenu'     : 'plugins/bootstrap-contextmenu/bootstrap-contextmenu',
-            'plugins/impromptu'       : 'plugins/jquery-impromptu/dist/jquery-impromptu.min',
-            'plugins/moment'          : 'plugins/moment/moment/min/moment.min',
-            'plugins/marked'          : 'plugins/marked/marked.min',
-            'plugins/highlightjs'     : 'plugins/highlightjs/highlight.pack',
-            'plugins/cryptojs'        : 'plugins/cryptojslib/components',
-            'plugins/toastr'          : 'plugins/toastr/toastr',
-            'plugins/mousewheel'      : 'plugins/jquery-mousewheel/jquery.mousewheel.min',
-            'plugins/gtreetable'      : "plugins/bootstrap-gtreetable/dist/bootstrap-gtreetable",
-            'plugins/jquery-migrate'  : 'plugins/jquery-migrate/jquery-migrate',
+            'plugins/svg'        : 'plugins/svg.js/dist/svg',
+            'plugins/impromptu'  : 'plugins/jquery-impromptu/dist/jquery-impromptu.min',
+            'plugins/moment'     : 'plugins/moment/moment/min/moment.min',
+            'plugins/uniform'    : 'plugins/jquery.uniform/jquery.uniform.min',
+            'plugins/select2'    : 'plugins/select2/select2.min',
+            'plugins/marked'     : 'plugins/marked/marked.min',
+            'plugins/highlightjs': 'plugins/highlightjs/highlight.pack',
+
+            'plugins/cryptojs'      : 'plugins/cryptojslib/components',
+            'plugins/toastr'        : 'plugins/toastr/toastr',
+            'plugins/mousewheel'    : 'plugins/jquery-mousewheel/jquery.mousewheel.min',
+            'plugins/gtreetable'    : "plugins/bootstrap-gtreetable/dist/bootstrap-gtreetable",
+            'plugins/jquery-migrate': 'plugins/jquery-migrate/jquery-migrate',
+
+            'plugins/bs-datepicker'   : 'plugins/bootstrap-datepicker/js/bootstrap-datepicker',
             'plugins/bs-modal'        : 'plugins/bootstrap-modal/js/bootstrap-modal',
             'plugins/bs-modal-manager': 'plugins/bootstrap-modal/js/bootstrap-modalmanager',
+            'plugins/bs-switch'       : 'plugins/bootstrap-switch/dist/js/bootstrap-switch.min',
             'plugins/bs-select'       : 'plugins/bootstrap-select/dist/js/bootstrap-select.min',
+            'plugins/bs-confirmation' : 'plugins/bootstrap-confirmation2/bootstrap-confirmation',
+            'plugins/bs-maxlength'    : 'plugins/bootstrap-maxlength/bootstrap-maxlength.min',
+            'plugins/contextmenu'     : 'plugins/bootstrap-contextmenu/bootstrap-contextmenu',
+
             'plugins/cookie'          : 'plugins/jquery-cookie/jquery.cookie',
             'plugins/events'          : 'plugins/eventEmitter/EventEmitter.min',
             // gsap
@@ -105,12 +119,16 @@
             'plugins/gsap/scroll'     : 'plugins/gsap/src/minified/plugins/ScrollToPlugin.min',
             'plugins/gsap/text'       : 'plugins/gsap/src/minified/plugins/TextPlugin.min',
             'plugins/gsap/jquery-lite': 'plugins/gsap/src/minified/jquery.gsap.min',
-            'plugins/gsap/jquery-max' : 'plugins/gsap/src/minified/jquery.gsap.min'
+            'plugins/gsap/jquery-max' : 'plugins/gsap/src/minified/jquery.gsap.min',
 
+
+            //styles
+            'plugins/select2css'      : '../styles/components/select2',
+            'plugins/highlightjscss'  : 'plugins/highlightjs/styles/zenburn'
         },
 
         shim: {
-            'plugins/svg': {
+            'plugins/svg'           : {
                 exports: 'SVG'
             },
             'jade'                  : {
@@ -137,12 +155,16 @@
             'plugins/gsap/jquery-lite': [ 'jquery', 'plugins/gsap/lite' ],
             'plugins/gsap/jquery-max' : [ 'jquery', 'plugins/gsap/max' ],
 
+            'plugins/select2': [ 'css!plugins/select2css' ],
+
+            'plugins/highlightjs': [ 'css!plugins/highlightjscss' ],
+
             // packadic scripts
-            'config'    : [ 'jquery' ],
-            'eventer'   : [ 'jquery', 'plugins/events', 'config' ],
-            'autoloader': [ 'config' ],
-            'theme'     : [ 'plugins/gsap/jquery-lite', 'config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events' ],
-            'demo'      : [ 'theme' ]
+            'config'             : [ 'jquery' ],
+            'eventer'            : [ 'jquery', 'plugins/events', 'config' ],
+            'autoloader'         : [ 'config' ],
+            'theme'              : [ 'plugins/gsap/jquery-lite', 'config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events' ],
+            'demo'               : [ 'theme' ]
         },
 
 

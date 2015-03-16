@@ -1,0 +1,12 @@
+
+.box {
+    @include box-shadow($box-shadow);
+    background: $box-bg-color;
+    border-color: $box-border-color;
+    border-top-color: transparent;
+
+    header {
+        @include box-header-variant($box-header-text-color, $box-header-content-bg-nr, $box-header-content-bg-light);
+        border-bottom-color: $box-border-color;
+    }
+}

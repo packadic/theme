@@ -1,4 +1,4 @@
-define([ 'jquery', 'config', 'eventer', 'autoloader',  'plugins/cookie' ],
+define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie' ],
     function( $, config, eventer, autoloader ){
         'use strict';
 
@@ -6,8 +6,11 @@ define([ 'jquery', 'config', 'eventer', 'autoloader',  'plugins/cookie' ],
             return !_.isUndefined(obj);
         }
 
-        function cre(){
-            return $(document.createElement('div'));
+        function cre( name ){
+            if( !defined(name) ){
+                name = 'div';
+            }
+            return $(document.createElement(name));
         }
 
         var theme = {
@@ -84,7 +87,7 @@ define([ 'jquery', 'config', 'eventer', 'autoloader',  'plugins/cookie' ],
                 }
 
                 var propertyNameCapital = propertyName.charAt(0).toUpperCase() + propertyName.substr(1),
-                    domPrefixes         = 'Webkit Moz ms O'.split(' ');
+                    domPrefixes = 'Webkit Moz ms O'.split(' ');
 
                 for( var i = 0; i < domPrefixes.length; i++ ){
                     if( elm.style[ domPrefixes[ i ] + propertyNameCapital ] != undefined ){
@@ -172,10 +175,43 @@ define([ 'jquery', 'config', 'eventer', 'autoloader',  'plugins/cookie' ],
 
         (function Loaders(){
 
-            theme.toastr = function( callback ){
-                var args = _.toArray(arguments);
-                theme._events.trigger('toastr', args);
-                require([ 'toastr' ], callback);
+            theme.notify = theme.toastr = function( fnName, message, title ){
+                require([ 'plugins/toastr' ], function( toastr ){
+                    toastr[ fnName ].apply(toastr, [ message, title ]);
+                });
+            };
+
+            theme.alert = function( opt ){
+                var type = opt.type || 'success',
+                    message = opt.message || '',
+                    delay = opt.delay || 3000,
+                    title = opt.title || false,
+                    target = opt.target || 'main > div.content',
+                    insertFnName = opt.insertFnName || 'prepend';
+
+                var $alert = cre('div');
+                var $close = cre('button');
+
+                $alert
+                    .addClass('alert alert-' + type + ' alert-dismissible')
+                    .append($close
+                        .attr('type', 'button')
+                        .attr('data-dismiss', 'alert')
+                        .attr('aria-label', 'Close')
+                        .addClass('close')
+                        .html('<span aria-hidden="true">×</span>'));
+
+                if( title !== false ){
+                    $alert.append(cre('strong').text(title));
+                }
+
+                $alert.append(cre('p').text(message));
+
+                $('main > div.content').first()[ insertFnName ]($alert);
+                setTimeout(function(){
+                    $alert.hide('slow');
+                    $alert.fadeOut('slow');
+                }, delay);
             };
 
             theme.CodeMirror = function( options, callback ){

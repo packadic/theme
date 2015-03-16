@@ -3,4 +3,6 @@ $theme-name: "default";
 
 @import "../base";
 
-@import "theme-structure";
+@import "theme-layout";
+@import "theme-box";
+@import "theme-tabs";

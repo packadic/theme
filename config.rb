@@ -3,7 +3,7 @@ require 'SassyJSON'
 # Require any additional compass plugins here.
 
 # Set this to the root of your project when deployed:
-http_path = "/"
+http_path = "dev"
 css_dir = "dev/assets/styles"
 sass_dir = "src/styles"
 images_dir = "dev/assets/images"

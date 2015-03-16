@@ -12,7 +12,8 @@
             $img: $img + '_' + $nr;
         }
     }
-    @return url($image-path + '/images/bg/' + $img + '.png') repeat;
+    @return image_url('bg/' + $img + '.png') repeat;
+
 }
 
 @mixin content-bg($nr: false, $light: false){

@@ -69,10 +69,41 @@ define([ 'jquery', 'config', 'eventer' ],
 
             autoloader.detect('[data-share-buttons]', 'share-buttons', function(sb){
                 sb.applyTo('[data-share-buttons]');
-            })
+            });
+
             autoloader.detect('.highlighter', 'highlighter', function(highlighter){
                 highlighter.applyTo($('.highlighter'));
-            })
+            });
+
+            autoloader.detect('.tipped', 'plugins/bootstrap', function(){
+                $('.tipped').tooltip();
+            });
+
+            autoloader.detect('[data-toggle="confirmation"]', 'plugins/bs-confirmation', function(){
+                $('a[data-toggle="confirmation"]').confirmation({
+                    container: 'body',
+                    btnCancelIcon: 'fa fa-remove',
+                    btnOkIcon: 'fa fa-check',
+                    btnOkClass: 'btn-xs btn-info',
+                    btnCancelClass: 'btn-xs btn-primary'
+
+                });
+            });
+
+            /*
+             * FORM STUFFZ
+             */
+            autoloader.detect('form', 'plugins/uniform', function(){
+                $("input[type='checkbox'], input[type='file'], input[type='radio']").not('.switch').uniform();
+            });
+
+            autoloader.detect('select.select2', 'plugins/select2', function(){
+                $("select.select2").select2();
+            });
+
+            autoloader.detect('input.switch', 'plugins/bs-switch', function(){
+                $("input.switch").bootstrapSwitch();
+            });
         };
 
         return autoloader;

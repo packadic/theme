@@ -1,4 +1,4 @@
-define([ 'jquery',  'config', 'console', 'module', 'plugins/contextmenu' ],
+define([ 'jquery', 'config', 'console', 'module', 'plugins/contextmenu' ],
     function( $, config, Console, module ){
         'use strict';
 
@@ -44,24 +44,26 @@ define([ 'jquery',  'config', 'console', 'module', 'plugins/contextmenu' ],
 
             require([ 'templates/debug-contextmenu' ], function( template ){
 
-                $('body')
-                    .css('position', 'relative')
-                    .attr('data-toggle', 'debug-context')
-                    .attr('data-target', '#debug-contextmenu')
-                    .prepend(template({}))
-                    .contextmenu({'target': '#debug-contextmenu'})
-                    .on('click', '[data-debug-action]', function( e ){
-                        var action = e.target.dataset.debugAction;
-                        logDebugEvent('click debug event', action, e);
+                if( parseInt($.cookie('debug')) === 1 ){
+                    $('body')
+                        .css('position', 'relative')
+                        .attr('data-toggle', 'debug-context')
+                        .attr('data-target', '#debug-contextmenu')
+                        .prepend(template({}))
+                        .contextmenu({'target': '#debug-contextmenu'})
+                        .on('click', '[data-debug-action]', function( e ){
+                            var action = e.target.dataset.debugAction;
+                            logDebugEvent('click debug event', action, e);
 
-                        switch(action){
-                            case "disable":
-                                $.cookie('debug', '0');
-                                window.location.href = window.location.href;
-                                break;
+                            switch( action ){
+                                case "disable":
+                                    $.cookie('debug', '0');
+                                    window.location.href = window.location.href;
+                                    break;
 
-                        }
-                    });
+                            }
+                        });
+                }
             });
         }
 

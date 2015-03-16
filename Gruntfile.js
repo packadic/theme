@@ -107,6 +107,7 @@ var init = module.exports = function( grunts ){
                     {expand: true, cwd: 'src/plugins/font-awesome/fonts', src: '**', dest: '<%= target.dest %>/assets/fonts'}
                 ]
             },
+            sass         : {files: [ {expand: true, cwd: 'src/styles', src: '**', dest: '<%= target.dest %>/assets/styles/sass'} ]},
             images       : {files: [ {expand: true, cwd: 'src/images', src: '**', dest: '<%= target.dest %>/assets/images'} ]},
             scripts_watch: {files: [ {expand: true, cwd: 'src/scripts', src: [ '**', '!init.js' ], dest: '<%= target.dest %>/assets/scripts'} ]},
             scripts      : {files: [ {expand: true, cwd: 'src/scripts', src: '**', dest: '<%= target.dest %>/assets/scripts'} ]},
@@ -218,24 +219,24 @@ var init = module.exports = function( grunts ){
             watch  : [ 'devtools', 'watch' ]
         },
         watch           : {
-            options    : {livereload: true, nospawn: true},
-            styles     : {
+            options      : {livereload: true, nospawn: true},
+            styles       : {
                 files: [ 'src/styles/**' ],
                 tasks: [ 'clean:styles', 'sass:<%= target.name %>' ]
             },
-            scripts_watch    : {
+            scripts_watch: {
                 files: [ 'src/scripts/**', '!src/scripts/init.js' ],
                 tasks: [ 'copy:scripts_watch' ]
             },
-            initscripts: {
+            initscripts  : {
                 files: [ 'src/scripts/init.js' ],
                 tasks: [ 'scripts' ]
             },
-            views      : {
+            views        : {
                 files: [ 'src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**' ],
                 tasks: [ 'clean:views', 'jade_config', 'jade:<%= target.name %>', 'bootlint' ] //, 'bootlint' ]
             },
-            views_pages: {
+            views_pages  : {
                 files: [ 'src/views/pages/**/*.jade' ],
                 tasks: [ 'jade_config', 'newer:jade:<%= target.name %>' ]
             },

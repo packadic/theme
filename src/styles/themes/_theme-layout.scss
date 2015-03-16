@@ -515,8 +515,10 @@
             color: $footer-default-font-color;
         }
 
-        section#bottom-fixed & {
-            background-color: $footer-fixed-bg-color;
+        background-color: $section-bottom-bg-color;
+
+        .section-bottom-fixed & {
+         //#   background-color: $footer-fixed-bg-color;
         }
     }
 
@@ -765,19 +767,4 @@
     main {
         background: $main-content-bg;
         background-color: $main-content-bg-color;
-    }
-
-    /***
-    Box
-    ****/
-
-    .box {
-        @include box-shadow($box-shadow);
-        background: $box-bg-color;
-        border-color: $box-border-color;
-
-        header {
-            @include box-header-variant($box-header-text-color, $box-header-content-bg-nr, $box-header-content-bg-light);
-            border-bottom-color: $box-border-color;
-        }
     }

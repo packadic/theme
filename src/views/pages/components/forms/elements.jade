@@ -1,16 +1,183 @@
 extends ../../../layouts/default
+mixin form-box(name, icon)
+    .row
+        .col-lg-12
+            +box(name, icon)
+                form&attributes(attributes)
+                    block
 
 block header
-    +page-title("Forms", "forms")
+    +page-title("Forms", "Elements")
     +page-breadcrumbs
         +breadcrumb("Components", "/components")
         +breadcrumb("Forms")
-        +breadcrumb("Layouts", "/components/forms/layouts", true)
+        +breadcrumb("Elements", "/components/forms/elements", true)
 
 block content
+    #demo-forms
     .row
-        .col-lg-12
-            +box("Forms", "list")
-                .row
-                    .col-md-12
-                        | Hello
+        .col-md-6
+            // BS SWITCH
+            +form-box("Switches", "list").form-horizontal.form-bordered
+                .form-group
+                    label.col-sm-3.control-label(for='inputEmail3') Default
+                    .col-sm-9
+                        input(type='checkbox', data-size="small", data-on-color="warning",  checked).switch
+                        input(type='checkbox', data-size="small").switch
+                        input(type='checkbox', data-size="small", data-on-color="info",  checked).switch
+                        input(type='checkbox', data-size="small").switch
+
+                .form-group
+                    label.col-sm-3.control-label(for='inputEmail3') Alterered
+                    .col-sm-9.mid-padding-top.mid-padding-bottom
+                        input(type='checkbox', data-size="mini", data-on-color="danger", data-on-text="Yes", data-off-text="Ohhhh", checked).switch
+                        input(type='checkbox', data-size="mini", data-off-text=":(").switch
+                        input(type='checkbox', data-size="mini", data-off-text="YAY",  data-on-color="success",  checked).switch
+                        input(type='checkbox', data-size="mini", data-off-text="NO").switch
+
+            // SELECT 2
+            +form-box("Select2", "list").form-horizontal.form-bordered
+                .form-group
+                    label.col-sm-3.control-label Default
+                    .col-sm-9
+                        select.form-control.select2
+                            option(value='default') Default
+                            option(value='agent') Agent
+                            option(value='aristo') Aristo
+                            option(value='jeans') Jeans
+
+                .form-group
+                    label.col-sm-3.control-label Tags
+                    .col-sm-9
+                        input(name="test").form-control.form-demo-select2-tags
+
+
+            // BS DATEPICKER
+            +form-box("Datepicker", "list").form-horizontal.form-bordered
+
+                .form-group
+                    label.col-sm-3.control-label Input
+                    .col-sm-9
+                        input(name="datepicker").form-control.form-demo-datepicker-input
+
+                .form-group
+                    label.col-sm-3.control-label Inline
+                    .col-sm-9
+                        .form-demo-datepicker-inline
+
+
+            // BS SELECT
+            +form-box("Select picker", "list").form-horizontal.form-bordered
+                .form-group
+                    label.col-sm-3.control-label Select something
+                    .col-sm-9
+                        select.form-control.selectpicker
+                            option(value='default') Default
+                            option(value='agent') Agent
+                            option(value='aristo') Aristo
+                            option(value='jeans') Jeans
+
+                .form-group
+                    label.col-sm-3.control-label Multiselect
+                    .col-sm-9
+                        select.form-control.selectpicker(multiple='', data-selected-text-format='count')
+                            option Mustard
+                            option Ketchup
+                            option Relish
+
+                .form-group
+                    label.col-sm-3.control-label Groups
+                    .col-sm-9
+                        select.form-control.selectpicker
+                            optgroup(label='Picnic', disabled='')
+                                option Mustard
+                                option Ketchup
+                                option Relish
+                            optgroup(label='Camping')
+                                option Tent
+                                option Flashlight
+                                option Toilet Paper
+
+                .form-group
+                    label.col-sm-3.control-label Labels
+                    .col-sm-9
+                        select.form-control.selectpicker
+                            option(data-content="<span class='label label-warning'>Mustard</span>") Mustard
+                            option(data-content="<span class='label label-danger label-important'>Ketchup</span>") Ketchup
+                            option(data-content="<span class='label label-success'>Relish</span>") Relish
+                            option(data-content="<span class='label label-info'>Mayonnaise</span>") Mayonnaise
+
+                .form-group
+                    label.col-sm-3.control-label Icons
+                    .col-sm-9
+                        select.form-control.selectpicker
+                            option(data-content="<i class='fa fa-bold'></i> Mustard") Mustard
+                            option(data-content="<i class='fa fa-github'></i> Ketchup") Ketchup
+                            option(data-content="<i class='fa fa-legal'></i> Relish") Relish
+                            option(data-content="<i class='fa fa-info'></i> Mayonnaise") Mayonnaise
+
+        .col-md-6
+            // Miscelanious
+            +form-box("Miscelanious", "list").form-horizontal.form-bordered
+                .form-group
+                    label.col-sm-3.control-label Max length
+                    .col-sm-9
+                        input(name="maxlen", class="form-demo-maxlength", maxlength="20", value="Type..").form-control
+
+                .form-group
+                    .col-sm-offset-3.col-sm-9
+                        a(data-toggle="confirmation", href="#", title="Are u sure?").btn.btn-primary.btn-sm Confirmation popover
+
+            // UNIFORM
+            +form-box("Uniform", "list").form-horizontal.form-bordered
+
+                .form-title
+                    .col-sm-offset-3.col-sm-9
+                        h4 Title
+
+                .form-group
+                    label.col-sm-3.control-label Select it
+                    .col-sm-9
+                        .checkbox
+                            label
+                                input(type='radio', name='radio', value='hi')
+                                |  Saying hi
+                        .checkbox
+                            label
+                                input(type='radio', name='radio', value='feedback')
+                                |  Sending feedback
+                        .checkbox
+                            label
+                                input(type='radio', name='radio', value='default', checked='CHECKED')
+                                |  Default Seleted Radio
+
+                .form-group
+                    label.col-sm-3.control-label Do it
+                    .col-sm-9
+                        .checkbox
+                            label
+                                input#contactBack(type='checkbox')
+                                |  Please contact me back
+                        .checkbox
+                            label
+                                input#goodDay(type='checkbox', checked='CHECKED')
+                                |  Today is a good day
+                .form-title
+                    .col-sm-offset-3.col-sm-9
+                        h4 Title 2
+
+                .form-group
+                    label.col-sm-3.control-label Upload a file:
+                    .col-sm-9
+                        input(type='file')
+
+                .form-group
+                    .col-sm-offset-3.col-sm-9
+                        .checkbox
+                            label
+                                input(type='checkbox')
+                                |  Remember me
+
+                .form-actions
+                    .col-sm-offset-3.col-sm-9
+                        button.btn.btn-default(type='submit') Sign in

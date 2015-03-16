@@ -3,7 +3,6 @@
     border: 1px solid;
     border-radius: $box-radius;
     margin-bottom: 10px;
-
     header {
         padding: 3px 15px;
         border-bottom: 1px solid;
@@ -23,7 +22,6 @@
 
         .box-header-widgets {
             @extend .pull-right;
-
 
             .box-header-widget {
 
@@ -59,12 +57,41 @@
 
         &.box-table {
             padding: 0;
-            > .table-responsive > table,
-            > .table-scrollable > table,
-            > .flip-scroll > table,
-            > table,
-            &.scrollable table {
+            > div > table,
+            > table {
                 margin: 0;
+                &.table-bordered {
+                    border: none;
+                    > thead th,
+                    > tbody td {
+                        &:first-child {
+                            border-left: none;
+                        }
+                        &:last-child {
+                            border-right: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.box-tabber {
+            padding: 0;
+            > .tabber {
+                > .nav-tabs > li:first-child > a {
+                    border-left: none;
+                    margin-left: 0;
+                }
+                &.tabs-bottom > .tab-content {
+                    border-top: none;
+                }
+                &:not(.tabs-bottom) > .tab-content {
+                    border-bottom: none;
+                }
+                > .tab-content {
+                    border-left: none;
+                    border-right: none;
+                }
             }
         }
     }

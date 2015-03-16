@@ -1,0 +1,40 @@
+
+form {
+    .form-group {
+
+    }
+    .form-title {
+        @include make-row();
+        > h1, h2, h3, h4, h5, h6 {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+    .form-actions {
+        @include make-row();
+    }
+}
+
+form {
+    &.form-horizontal {
+        padding: 5px;
+    }
+    &.form-bordered {
+        .form-group {
+            border-bottom: 1px solid #D7D7D7;
+            padding-bottom: 15px;
+            &:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+        }
+        .form-title {
+            border-bottom: 2px solid #D7D7D7;
+            padding-bottom: 0;
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+    }
+
+}
