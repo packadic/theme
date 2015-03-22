@@ -14,6 +14,7 @@
 // 4.0 VENDOR (bootstrap) variables import
 @import "../plugins/bootstrap-sass-official/assets/stylesheets/bootstrap/variables";
 @import '../plugins/sass-material-colors/sass/sass-material-colors';
+@import "../plugins/bootstrap-material-design/sass/_variables.scss";
 
 // 5.0 MY extending variables = variables that uses VENDOR variables (suffix them with !default)
 @import "extensions/variables";

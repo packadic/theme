@@ -11,9 +11,8 @@ header.content {
     box-shadow: none !important;
     margin-bottom: 10px;
     color: #bcbcbc;
-    &:after{
-        @extend .clearfix;
-    }
+    @include clearfix;
+
     .page-title {
         margin: 0;
         padding: 0;

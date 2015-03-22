@@ -1,9 +1,11 @@
 
 .box {
-    @include box-shadow($box-shadow);
+    //@include box-shadow($box-shadow);
     background: $box-bg-color;
     border-color: $box-border-color;
     border-top-color: transparent;
+
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.22);
 
     header {
         @include box-header-variant($box-header-text-color, $box-header-content-bg-nr, $box-header-content-bg-light);

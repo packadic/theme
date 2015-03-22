@@ -1,8 +1,9 @@
 
 .box {
-    border: 1px solid;
+    //border: 1px solid;
     border-radius: $box-radius;
     margin-bottom: 10px;
+
     header {
         padding: 3px 15px;
         border-bottom: 1px solid;
@@ -32,10 +33,13 @@
         // Deprecated. remove, please dont look
         .actions {
             @extend .btn-group;
-            @extend .btn-group-xs;
-            @extend .pull-right;
+
+            float: right;
             padding: 4px 0;
 
+            > .btn {
+                @include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+            }
             &.rounded {
                 @extend .btn-group-rounded;
             }

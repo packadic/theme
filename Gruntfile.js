@@ -5,6 +5,7 @@
 var radic  = require('radic'),
     _      = require('lodash'),
     util   = require('util'),
+    _s     = require('underscore.string'),
     jsyaml = require('js-yaml'),
     fs     = require('fs-extra'),
     path   = require('path'),
@@ -46,9 +47,11 @@ var init = module.exports = function( grunts ){
     var _config = {},
         target, type;
 
-    function mergeConfigFrom( fromDirPath ){
-        var configPath = path.resolve(fromDirPath, 'config.yml');
-        ok('Merging config from: ' + fromDirPath)
+    function mergeConfigFrom( configPath ){
+        if( ! _s.endsWith(configPath, '.yml')){
+            configPath = path.resolve(configPath, 'config.yml');
+        }
+        ok('Merging config from: ' + configPath)
         _config = _.merge(_config, jsyaml.safeLoad(require('fs').readFileSync(configPath)));
         target = grunt.option('target') || _config.target || 'dev';
         type = grunt.option('type') || _config.type || 'dev';
@@ -104,6 +107,7 @@ var init = module.exports = function( grunts ){
             fonts        : {
                 files: [
                     {expand: true, cwd: 'src/plugins/bootstrap/fonts', src: '**', dest: '<%= target.dest %>/assets/fonts'},
+                    {expand: true, cwd: 'src/plugins/bootstrap-material-design/fonts', src: '**', dest: '<%= target.dest %>/assets/fonts'},
                     {expand: true, cwd: 'src/plugins/font-awesome/fonts', src: '**', dest: '<%= target.dest %>/assets/fonts'}
                 ]
             },
@@ -218,6 +222,22 @@ var init = module.exports = function( grunts ){
             },
             watch  : [ 'devtools', 'watch' ]
         },
+        typescript: {
+            dev: {
+                src: ['src/tscript/*.ts'],
+                dest: '<%= target.dest %>/assets/scripts/ts/',
+                options: {
+                    module: 'amd', //or commonjs
+                    target: 'es5', //or es3
+                    basePath: '<%= target.src %>/tscript',
+                    sourceMap: false,
+                    declaration: true,
+                    references: [
+
+                    ]
+                }
+            }
+        },
         watch           : {
             options      : {livereload: true, nospawn: true},
             styles       : {
@@ -227,6 +247,10 @@ var init = module.exports = function( grunts ){
             scripts_watch: {
                 files: [ 'src/scripts/**', '!src/scripts/init.js' ],
                 tasks: [ 'copy:scripts_watch' ]
+            },
+            tscripts: {
+                files: ['src/tscript/**'],
+                tasks: ['typescript:dev']
             },
             initscripts  : {
                 files: [ 'src/scripts/init.js' ],

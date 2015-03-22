@@ -66,10 +66,7 @@ sidebar:
 
   - name: Layouts
     icon: fa fa-desktop
-    children:
-      - name: Plugins
-        icon: fa fa-puzzle-piece
-
+    href: <%= target.nav.pre %>layouts<%= target.nav.ext %>
 
   - name: Components
     icon: fa fa-cubes
@@ -125,6 +122,9 @@ sidebar:
 
       - name: Tabs
         href: <%= target.nav.pre %>/components/tabs<%= target.nav.ext %>
+
+      - name: Modals
+        href: <%= target.nav.pre %>/components/modals<%= target.nav.ext %>
 
       - name: Widgets
         href: <%= target.nav.pre %>/components/widgets<%= target.nav.ext %>

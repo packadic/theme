@@ -1,4 +1,4 @@
-define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie' ],
+define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie', 'plugins/bs-material-ripples' ],
     function( $, config, eventer, autoloader ){
         'use strict';
 
@@ -328,7 +328,18 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie' ],
 
             // @todo move to demo
             theme.initShowHtml();
+            $([
+                ".btn:not(.btn-link)",
+                ".card-image",
+                ".navbar a:not(.withoutripple)",
+                ".dropdown-menu a",
+                ".nav-tabs a:not(.withoutripple)",
+                ".withripple"
+            ].join(",")).addClass('withripple').ripples();
 
+            autoloader.detect('form', 'theme/forms', function( forms ){
+                forms.init();
+            });
 
             autoloader.detect('.sidebar-nav-menu', 'theme/sidebar', function( sidebar ){
                 if( defined(theme.options.sidebarItems) ){

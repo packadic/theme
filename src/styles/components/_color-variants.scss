@@ -65,6 +65,10 @@
         @include label-variant($background-color);
     }
 
+    .widget .widget-icon.#{$class-name} {
+        background-color: $background-color;
+        color: $text-color;
+    }
 }
 
 @mixin make-color-variant($color-name) {

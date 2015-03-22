@@ -1,5 +1,8 @@
-
+@import "../vendor/bootstrap-modal-bs3patch";
+@import "../vendor/bootstrap-modal";
 .modal {
+    border-radius: 0;
+    width: auto;
     .modal-header {
         color: $widget-header-color;
         padding: 5px 10px;
@@ -23,5 +26,13 @@
 
     .modal-footer {
         @include content-bg(false, true);
+    }
+    .modal-dialog{
+        margin: 0;
+    }
+    .modal-content {
+        @include box-shadow(none);
+        border: none;
+        background-color: transparent;
     }
 }

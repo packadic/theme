@@ -80,6 +80,7 @@
     "svg": "kbwood/svg#~1.5.0",
     "select2-bootstrap-css": "~1.4.6",
     "require-css": "~0.1.8",
-    "bootstrap-confirmation2": "~2.1.2"
+    "bootstrap-confirmation2": "~2.1.2",
+    "bootstrap-material-design": "~0.3.0"
   }
 }

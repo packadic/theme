@@ -4,8 +4,73 @@ mixin form-box(name, icon)
     .row
         .col-lg-12
             +box(name, icon)
-                form&attributes(attributes)
+                form.show-class&attributes(attributes)
                     block
+mixin form-demo-content(label)
+    - var rnd = Math.random()
+    .form-title
+        h4 Credentials
+    .form-group
+        if(label)
+            label(for=rnd + "email").control-label Email
+        input.form-control(id=rnd + "email", type='email', placeholder='Email', data-hint='Enter a valid email address')&attributes(attributes)
+    .form-group
+        if(label)
+            label(for=rnd + "password").control-label Password
+        input.form-control(id=rnd + "password", type='password', placeholder='Password', data-hint='Enter a password that is safe')&attributes(attributes)
+    .form-title
+        h4 Personal information
+    .form-group
+        if(label)
+            label(for=rnd + "first_name").control-label First name
+        input.form-control(id=rnd + "first_name", type='text', placeholder='First name')&attributes(attributes)
+    .form-group
+        if(label)
+            label(for=rnd + "last_name").control-label Last name
+        input.form-control(id=rnd + "last_name", type='text', placeholder='Last name', data-hint='Help block')&attributes(attributes)
+    .form-group
+        if(label)
+            label(for=rnd + "file") Avatar
+        input.form-control(id=rnd + "file", type='file')&attributes(attributes)
+        p.help-block Example block-level help text here.
+    .checkbox
+        label(for=rnd + "checkbox")
+            input(id=rnd + "checkbox", type='checkbox')
+            |  Check me out
+    button.btn.btn-default(type='submit') Submit
+
+
+mixin form-horizontal-demo-content()
+    - var rnd = Math.random()
+    .form-title
+        h4 Credentials
+    .form-group
+        label(for=rnd + "email").col-sm-3.control-label Email
+        .col-sm-9
+            input.form-control(id=rnd + "email",type='email', placeholder='Email', data-hint='Enter a valid email address')&attributes(attributes)
+    .form-group
+        label(for=rnd + "password").col-sm-3.control-label Password
+        .col-sm-9
+            input.form-control(id=rnd + "password",type='password', placeholder='Password', data-hint='Enter a password that is safe')&attributes(attributes)
+    .form-title
+        h4 Personal information
+    .form-group
+        label(for=rnd + "first-name").col-sm-3.control-label First name
+        .col-sm-9
+            input.form-control(id=rnd + "first-name",type='text', placeholder='First name')&attributes(attributes)
+    .form-group
+        label(for=rnd + "last-name").col-sm-3.control-label Last name
+        .col-sm-9
+            input.form-control(id=rnd + "last-name",type='text', placeholder='Last name')&attributes(attributes)
+    .form-group
+        .col-sm-offset-3.col-sm-9
+            .checkbox
+                label
+                    input(type='checkbox')
+                    |  Remember me
+    .form-actions
+        .col-sm-offset-3.col-sm-9
+            button.btn.btn-default(type='submit') Sign in
 
 block header
     +page-title("Forms", "Layouts")
@@ -17,93 +82,29 @@ block header
 
 block content
     #demo-forms
+
+    .row
+        .col-md-6
+            +form-box("Default", "list")
+                +form-demo-content(true)
+        .col-md-6
+            +form-box("Default material design", "list").form-material
+                +form-demo-content(false).floating-label
+
     .row
         .col-md-6
             +form-box("Horizontal", "list").form-horizontal
-                .form-title
-                    .col-sm-offset-3.col-sm-9
-                        h4 Title
-                .form-group
-                    label.col-sm-3.control-label(for='inputEmail3') Email
-                    .col-sm-9
-                        input#inputEmail3.form-control(type='email', placeholder='Email')
-                .form-group
-                    label.col-sm-3.control-label(for='inputPassword3') Password
-                    .col-sm-9
-                        input#inputPassword3.form-control(type='password', placeholder='Password')
-                .form-group
-                    label.col-sm-3.control-label First name
-                    .col-sm-9
-                        input.form-control(type='text', placeholder='First name')
-                .form-group
-                    label.col-sm-3.control-label Last name
-                    .col-sm-9
-                        input.form-control(type='text', placeholder='Last name')
-                .form-group
-                    .col-sm-offset-3.col-sm-9
-                        .checkbox
-                            label
-                                input(type='checkbox')
-                                |  Remember me
-                .form-group
-                    .col-sm-offset-3.col-sm-9
-                        button.btn.btn-default(type='submit') Sign in
-
+                +form-horizontal-demo-content
 
         .col-md-6
-            +form-box("Default", "list")
-                .form-title
-                    h4 Title
-                .form-group
-                    label(for='exampleInputEmail1') Email address
-                    input#exampleInputEmail1.form-control(type='email', placeholder='Enter email')
-                .form-group
-                    label(for='exampleInputPassword1') Password
-                    input#exampleInputPassword1.form-control(type='password', placeholder='Password')
-                .form-group
-                    label(for='exampleInputFile') File input
-                    input#exampleInputFile(type='file')
-                    p.help-block Example block-level help text here.
-                .checkbox
-                    label
-                        input(type='checkbox')
-                        |  Check me out
-                button.btn.btn-default(type='submit') Submit
-
+            +form-box("Horizontal material design", "list").form-horizontal.form-material
+                +form-horizontal-demo-content
 
     .row
         .col-md-6
             +form-box("Horizontal bordered", "list").form-horizontal.form-bordered
-                .form-title
-                    h4 Credentials
-                .form-group
-                    label.col-sm-3.control-label(for='inputEmail3') Email
-                    .col-sm-9
-                        input#inputEmail3.form-control(type='email', placeholder='Email')
-                .form-group
-                    label.col-sm-3.control-label(for='inputPassword3') Password
-                    .col-sm-9
-                        input#inputPassword3.form-control(type='password', placeholder='Password')
-                .form-title
-                    h4 Personal information
-                .form-group
-                    label.col-sm-3.control-label First name
-                    .col-sm-9
-                        input.form-control(type='text', placeholder='First name')
-                .form-group
-                    label.col-sm-3.control-label Last name
-                    .col-sm-9
-                        input.form-control(type='text', placeholder='Last name')
+                +form-horizontal-demo-content
 
-                .form-group
-                    .col-sm-offset-3.col-sm-9
-                        .checkbox
-                            label
-                                input(type='checkbox')
-                                |  Remember me
-                .form-actions
-                    .col-sm-offset-3.col-sm-9
-                        button.btn.btn-default(type='submit') Sign in
         .col-md-6
             +form-box("Horizontal", "list").form-horizontal
                 .form-title

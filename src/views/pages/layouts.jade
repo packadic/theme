@@ -1,0 +1,36 @@
+extends ../layouts/default
+
+mixin layform(title)
+    .col-sm-12.col-md-6
+        +box(title).box-form
+            form(role="form")&attributes(attributes)
+                block
+
+block header
+    +page-title("Layouts", "Checkitouts")
+
+block content
+    .row
+        +layform("Left first").form-horizontal
+            .form-group
+                label.control-label.col-sm-3 Hai
+                .col-sm-9
+                    input(type="text").form-control
+            .form-group
+                p aaaa
+            .form-actions
+                .col-sm-offset-3.col-sm-9
+                    a.btn.btn-primary Sub
+
+block append scripts
+    script.
+        (function Customisers(){
+
+            var packadic = (window.packadic = window.packadic || {});
+
+            packadic.bindEventHandler('started', function(){
+
+
+
+            });
+        }.call());

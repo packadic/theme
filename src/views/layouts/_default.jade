@@ -16,6 +16,8 @@ html(lang="en")
                 meta(http-equiv="X-UA-Compatible", content="IE=edge")
             block styles
                 +css-style("base-stylesheet.css")
+                +css-style("layout.css")
+                +css-style("components.css")
                 +css-style("themes/theme-default.css")
 
     body.page-loading.section-top-fixed
@@ -99,3 +101,5 @@ html(lang="en")
                 +js-script('outside_of_project.js')
                 // end smalld demo
                 +js-script('boot.js')
+
+            block after

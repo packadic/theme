@@ -1,0 +1,278 @@
+<!DOCTYPE html><!--[if IE 8]><html class="ie8" lang="en"><![endif]-->
+<!--[if IE 9]><html lang="en" class="ie9"><![endif]-->
+<!--[if !IE]><!-->
+<html lang="en"><!--<![endif]-->
+  <head>
+    <title>Hai</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="/assets/styles/base-stylesheet.css" type="text/css" rel="stylesheet"/>
+    <link href="/assets/styles/themes/theme-default.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body class="page-loading section-top-fixed">
+    <div id="page-loader">
+      <div class="loader loader-light"></div>
+    </div>
+    <!--section#top-->
+    <section id="top" class="navbar navbar-fixed-top">
+      <!--header.top-->
+      <header class="top">
+        <div class="menu-toggler sidebar-toggler"><i class="fa fa-long-arrow-left"></i></div>
+        <div class="page-logo">
+          <div class="text-logo">Packadic</div>
+        </div>
+        <!-- include ../partials/logo-->
+        <!--nav.top-nav--><a data-toggle="collapse" data-target=".navbar-collapse" class="menu-toggler responsive-toggler btn btn-default" href="#"><i class="fa fa-bars fa-lg"></i></a>
+        <div class="header-menu">
+          <ul class="nav navbar-nav">
+            <li><a data-toggle="dropdown" class="dropdown-toggle">Dropmenu</a>
+              <ul role="menu" class="dropdown-menu">
+                <li><a href="#">Hello2</a>
+                </li>
+                <li><a href="#">Hello3</a>
+                </li>
+              </ul>
+            </li>
+            <li><a data-toggle="dropdown" class="dropdown-toggle">Dropmenu</a>
+              <ul role="menu" class="dropdown-menu">
+                <li><a href="#">Hello2</a>
+                </li>
+                <li><a href="#">Hello3</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </header>
+    </section>
+    <div class="clearfix"></div>
+    <!--#page-->
+    <section id="page">
+      <!--section#side-->
+      <div class="sidebar-wrapper">
+        <!--section#side aside-->
+        <nav class="sidebar-nav navbar-collapse collapsent">
+          <div class="loader loader-light"></div>
+          <ul data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" class="sidebar-nav-menu"></ul>
+        </nav>
+      </div>
+      <!--section#content-->
+      <div class="main-wrapper">
+        <!--main-->
+        <main>
+          <header class="content">
+            <div class="page-title pull-left">
+              <h1>Components</h1>
+              <div class="page-subtitle">General bootstrap components</div>
+            </div>
+            <ol class="breadcrumb page-breadcrumb pull-right">
+              <li><i class="fa fa-home"></i><a href="/">Home</a><i class="fa fa-angle-right"></i></li>
+              <li class="active"><a href="/components">Components</a>
+              </li>
+            </ol>
+          </header>
+          <div class="content">
+            <div id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                    <h4 id="exampleModalLabel" class="modal-title">New message</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="recipient-name" class="control-label">Recipient:</label>
+                        <input id="recipient-name" type="text" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="message-text" class="control-label">Message:</label>
+                        <textarea id="message-text" class="form-control"></textarea>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                    <button type="button" class="btn btn-primary">Send message</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="box">
+                  <header><i class="fa fa-info"></i>
+                    <h3>Alerts</h3>
+                  </header>
+                  <section data-mcs-axis="y" style="max-height: 260px;" class="scrollable">
+                    <div class="alert alert-success"><strong>Well done &nbsp;</strong>You have done well, have a cookie
+                    </div>
+                    <div class="alert alert-success alert-dismissible">
+                      <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button><strong>Very good &nbsp;</strong>You have done well, You may close this
+                    </div>
+                    <div class="alert alert-info"><strong>Did you know &nbsp;</strong>There are a lot of scripts out there
+                    </div>
+                    <div class="alert alert-info alert-dismissible">
+                      <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button><strong>Also usefull &nbsp;</strong>Those scripts can close this box
+                    </div>
+                    <div class="alert alert-warning"><strong>Check it out &nbsp;</strong>There might be an issue with you
+                    </div>
+                    <div class="alert alert-warning alert-dismissible">
+                      <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button><strong>Warning &nbsp;</strong>Your dog has not enough food
+                    </div>
+                    <div class="alert alert-danger"><strong>Error &nbsp;</strong>The website could not do that thing
+                    </div>
+                  </section>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box">
+                  <header><i class="fa fa-cog"></i>
+                    <h3>Labels and badges</h3>
+                  </header>
+                  <section data-mcs-axis="y" style="max-height: 260px;" class="scrollable box-table">
+                    <table class="table table-striped table-hover table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Class</th>
+                          <th>Label</th>
+                          <th>Badge</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Default</td>
+                          <td><span class="label label-default">Default</span></td>
+                          <td><span class="badge badge-default">5</span></td>
+                        </tr>
+                        <tr>
+                          <td>Primary</td>
+                          <td><span class="label label-primary">Default</span></td>
+                          <td><span class="badge badge-primary">5</span></td>
+                        </tr>
+                        <tr>
+                          <td>Info</td>
+                          <td><span class="label label-info">Default</span></td>
+                          <td><span class="badge badge-info">5</span></td>
+                        </tr>
+                        <tr>
+                          <td>Success</td>
+                          <td><span class="label label-success">Default</span></td>
+                          <td><span class="badge badge-success">5</span></td>
+                        </tr>
+                        <tr>
+                          <td>Warning</td>
+                          <td><span class="label label-warning">Default</span></td>
+                          <td><span class="badge badge-warning">5</span></td>
+                        </tr>
+                        <tr>
+                          <td>Danger</td>
+                          <td><span class="label label-danger">Default</span></td>
+                          <td><span class="badge badge-danger">5</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </section>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box">
+                  <header><i class="fa fa-cog"></i>
+                    <h3>Modals</h3>
+                  </header>
+                  <section>
+                    <div class="btn-group-justified"><a data-demo-modal="information" class="btn btn-info demo-modal" href="#">Info</a><a data-demo-modal="success" class="btn btn-success demo-modal" href="#">Success</a><a data-demo-modal="warning" class="btn btn-warning demo-modal" href="#">Warning</a><a data-demo-modal="error" class="btn btn-danger demo-modal" href="#">Error</a>
+                    </div>
+                  </section>
+                </div>
+                <div class="box">
+                  <header><i class="fa fa-cog"></i>
+                    <h3>Tooltips</h3>
+                  </header>
+                  <section>
+                    <div class="btn-group btn-group-justified"><a title="Bottom" class="btn btn-primary tipped" href="#">Left</a><a title="Bottom" class="btn btn-primary tipped" href="#">Right</a><a title="Bottom" class="btn btn-primary tipped" href="#">Top</a><a title="Bottom" class="btn btn-primary tipped" href="#">Bottom</a>
+                    </div>
+                  </section>
+                </div>
+                <div class="box">
+                  <header><i class="fa fa-cog"></i>
+                    <h3>Popovers</h3>
+                  </header>
+                  <section>
+                    <div class="btn-group btn-group-justified"><a class="btn btn-primary" href="#">Left</a><a class="btn btn-primary" href="#">Right</a><a class="btn btn-primary" href="#">Top</a><a class="btn btn-primary" href="#">Bottom</a>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="box">
+                  <header><i class="fa fa-cog"></i>
+                    <h3>Buttons</h3>
+                  </header>
+                  <section><a class="btn btn-primary">Primary</a>
+                  </section>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="box">
+                  <header><i class="fa fa-cog"></i>
+                    <h3>Buttons</h3>
+                  </header>
+                  <section>adf
+                  </section>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="box">
+                  <header><i class="fa fa-cog"></i>
+                    <h3>Buttons</h3>
+                  </header>
+                  <section><a class="btn btn-primary">Primary</a>
+                  </section>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="box">
+                  <header><i class="fa fa-cog"></i>
+                    <h3>Buttons</h3>
+                  </header>
+                  <section>adf
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </section>
+    <!--section#bottom-->
+    <section id="bottom">
+      <!--footer.bottom-->
+      <footer class="bottom">
+        <p>Radicsss</p>
+      </footer>
+    </section>
+    <script>
+      // Auto generated. Leave this alone
+      window.packadic = {
+          site: {"name":"Packadic","description":"Packadic theme","keywords":["webdesign","programming","designing"],"url":null,"encoding":"utf-8","timezone":"Amsterdam/Europe","assetPath":"/assets","scriptsPath":"/assets/scripts","stylesPath":"/assets/styles","repository":"packadic/theme","gems":["jekyll-github-metadata"],"sgems":["jekyll-github-metadata","jemoji","jekyll-redirect-from","jekyll-sitemap"],"layouts":"./_includes/_layouts","data_source":"./_includes/_data","defaults":[{"scope":{"path":"","type":"posts"},"values":{"image":"/images/abstract-1.jpg","comments":true,"share":true}},{"scope":{"path":"","type":"portfolio"},"values":{"hide-title":true,"share":true}},{"scope":{"path":"","type":"projects"},"values":{"layout":"project","hide-title":true,"share":true,"navigation":[{"name":"Home","link":"/","icon":"fa fa-home"},{"name":"Project overview","link":"/:project/","icon":"fa fa-user"},{"name":"Demonstration","link":"/:project/demonstration","icon":"fa fa-play"},{"name":"Documentation","link":"/:project/documentation","icon":"fa fa-mortar-board"},{"name":"API","link":"/:project/api","icon":"fa fa-code"}]}}],"collections":{"portfolio":{"output":"true;","permalink":"/portfolio/:title/"},"projects":{"output":true,"permalink":"/:path/"}},"permalink":"/:categories/:title/","paginate":5,"include":[".htaccess"],"exclude":["lib","config.rb","Capfile","src","config","Gemfile","Gemfile.lock","README.md","LICENSE","log","Rakefile","Rakefile.rb","tmp","less","*.sublime-project","*.sublime-workspace","test","spec","Gruntfile.js","package.json","node_modules","commit","serve","update-ghpages",".bowerrc","bower.json"],"data":{"navigation":{"sidebar":[{"name":"Home","href":"/home","icon":"fa fa-home"}]},"author":{"name":"Robin","fullname":"Robin Radic","nationality":"Dutch","country":"The Netherlands","birthdate":"19/03/1988","company":"Radic Technologies"},"main":{"github":{"username":"RobinRadic","token":"06a97759a26ca852027849429f815f9dcf86595a","repository":"RobinRadic.github.io"},"oauth_io":"UpFevf23G2O93iSlMOQ5PRL4zq0","google_analytics":"UA-32468647-2"},"social":{"twitter":null,"facebook":null,"disqus":"radicsgit","share":{"facebook":true,"google":true,"twitter":true}},"widgets":{"page-top-user":{"js":"page-top-user.js","tpl":"page-top-user.html","func":"pageTopUser"}},"theme":{"colors":["red","pink","purple","deep-purple","indigo","blue","light-blue","cyan","teal","green","light-green","lime","yellow","amber","orange","deep-orange","brown","grey","blue-grey"],"sizes":["xs","sm","md","lg"],"states":["default","primary","info","success","warning","danger"]},"icons":{"icons":{}}}}
+      };
+    </script>
+    <!--+js-script('plugins/requirejs/require.js')-->
+    <!-- @todo change-->
+    <!--+js-script('main.js')-->
+    <!--+js-script('init.js')-->
+    <!-- @todo to this-->
+    <!--+js-script('configuration.js')-->
+    <script src="/assets/scripts/init.js"></script>
+    <!-- The place to include custom logic, a small demo-->
+    <script src="/assets/scripts/outside_of_project.js"></script>
+    <!-- end smalld demo-->
+    <script src="/assets/scripts/boot.js"></script>
+  </body>
+</html>

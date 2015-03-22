@@ -1,7 +1,7 @@
 
 form {
     .form-group {
-
+     //   @import "../../plugins/bootstrap-material-design/sass/inputs";
     }
     .form-title {
         @include make-row();
@@ -13,9 +13,39 @@ form {
     .form-actions {
         @include make-row();
     }
+
 }
 
 form {
+    .help-block {
+        font-size: 12px;
+        color: #737373;
+        margin-left: 5px;
+    }
+
+    &.form-material {
+
+        .form-control {
+            border-bottom-color: #B3B2B2 !important;
+        }
+        .form-group {
+            margin-bottom: 30px;
+        }
+        .help-block {
+            display: block;
+            position: absolute;
+            margin-top: 2px;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+        .focus {
+            .help-block {
+                opacity: 1;
+            }
+        }
+    }
+
     &.form-horizontal {
         padding: 5px;
     }

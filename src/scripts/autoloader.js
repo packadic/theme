@@ -90,11 +90,8 @@ define([ 'jquery', 'config', 'eventer' ],
                 });
             });
 
-            /*
-             * FORM STUFFZ
-             */
-            autoloader.detect('form', 'plugins/uniform', function(){
-                $("input[type='checkbox'], input[type='file'], input[type='radio']").not('.switch').uniform();
+            autoloader.detect('.modal, [data-toggle="modal"]', 'plugins/bs-modal', function(){
+                //$("select.select2").select2();
             });
 
             autoloader.detect('select.select2', 'plugins/select2', function(){

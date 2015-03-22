@@ -10,8 +10,16 @@
 
 // 7.0 VENDOR styles
 @import "../plugins/bootstrap-sass-official/assets/stylesheets/bootstrap";
-@import "vendor/uniform";
+@import "../plugins/bootstrap-material-design/sass/ripples";
+
+.ripple {
+    background-color: rgba(0, 0, 0, 0.25) !important;
+}
+form:not(.form-material) {
+    @import "vendor/uniform";
+}
 @import "vendor/bootbox";
+
 @import "vendor/datepicker3";
 @import "vendor/bootstrap-switch";
 @import "vendor/bootstrap-select";
@@ -19,75 +27,8 @@
 @import "vendor/jquery-impromptu";
 @import "vendor/toastr";
 
-//@import "vendor/select2";
 
-
-// 8.0 MY override mixins (that could possibly override VENDOR mixins, if wanted)
-//@import "extensions/mixins";
-
-// 9.0 MY layout styles (WITHOUT colors, images, bg colors, etc -- WITH dimensions, sizes, width, paddings, margins, etc)
-@import "layout/header";
-@import "layout/page-container";
-@import "layout/sidebar";
-@import "layout/content";
-@import "layout/footer";
-
-
-// 10.0 MY components
-@import "components/type";
-@import "components/buttons";
-@import "components/labels";
-@import "components/tabs";
-@import "components/form_layouts";
-
-@import "components/box";
-@import "components/scrollbar";
-@import "components/popover";
-@import "components/tables";
-@import "components/modals";
-@import "components/loader";
-@import "components/share-buttons";
-
-@import "components/color-variants";
-
-
-@import "components/utilities/positioning";
-@import "components/utilities/shadows";
-//@import "components/utilities/bevelgloss";
-@import "components/utilities/effects";
-
-
-
-blockquote {
-
-    border-left: 5px solid #33336E;
-    background: #F0F0F0 ;
-    border-radius: 4px ;
-}
-
-#page-loader {
-    display: none;
-}
-body.page-loading {
-
-    @include createLoader(page, #fefefe);
-    //background: #fefefe;
-
-    #page-loader {
-        display: block;
-    }
-
-    section#top,
-    section#page,
-    section#bottom,
-    > .clearfix {
-        display: none;
-        transition: all 2s;
-    }
-}
-
-
-
+@import "components";
 
 @import 'SassyJSON';
 
