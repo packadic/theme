@@ -39,6 +39,7 @@ header.content {
         background: transparent;
         li i {
             padding: 0 10px;
+            display: inline;
         }
         li + li:before {
             content: "";

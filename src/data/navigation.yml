@@ -68,6 +68,18 @@ sidebar:
     icon: fa fa-desktop
     href: <%= target.nav.pre %>layouts<%= target.nav.ext %>
 
+  - name: Documentation
+    icon: fa fa-book
+    children:
+      - name: API
+        children:
+          - name: General
+            href: <%= target.nav.pre %>/documentation/api/general<%= target.nav.ext %>
+      - name: CSS
+        children:
+          - name: Utility classes
+            href: <%= target.nav.pre %>/documentation/css/utility-classes<%= target.nav.ext %>
+
   - name: Components
     icon: fa fa-cubes
     children:
@@ -81,42 +93,6 @@ sidebar:
         href: <%= target.nav.pre %>/components/buttons<%= target.nav.ext %>
         #href: <%= target.nav.pre %>/components/buttons/editor
 
-      - name: Forms
-        children:
-          - name: Layouts
-            href: <%= target.nav.pre %>/components/forms/layouts<%= target.nav.ext %>
-
-          - name: Elements
-            href: <%= target.nav.pre %>/components/forms/elements<%= target.nav.ext %>
-
-          - name: Validation
-            href: <%= target.nav.pre %>/components/forms/validation<%= target.nav.ext %>
-
-          - name: Uploader
-            href: <%= target.nav.pre %>/components/forms/uploader<%= target.nav.ext %>
-
-          - name: Wizard
-            href: <%= target.nav.pre %>/components/forms/wizard<%= target.nav.ext %>
-
-
-      - name: Tables
-        children:
-          - name: Basic
-            href: <%= target.nav.pre %>/components/tables/basic<%= target.nav.ext %>
-
-          - name: Responsive
-            href: <%= target.nav.pre %>/components/tables/responsive<%= target.nav.ext %>
-
-          - name: Advanced
-            href: <%= target.nav.pre %>/components/tables/advanced<%= target.nav.ext %>
-
-          - name: Tree table
-            href: <%= target.nav.pre %>/components/tables/tree<%= target.nav.ext %>
-
-          - name: Datatables
-            href: <%= target.nav.pre %>/components/tables/datatables<%= target.nav.ext %>
-
-
       - name: Boxes
         href: <%= target.nav.pre %>/components/boxes<%= target.nav.ext %>
 
@@ -129,8 +105,43 @@ sidebar:
       - name: Widgets
         href: <%= target.nav.pre %>/components/widgets<%= target.nav.ext %>
 
-      - name: Utility classes
-        href: <%= target.nav.pre %>/components/utility-classes<%= target.nav.ext %>
+
+  - name: Forms
+    icon: fa fa-pencil
+    children:
+      - name: Layouts
+        href: <%= target.nav.pre %>/components/forms/layouts<%= target.nav.ext %>
+
+      - name: Elements
+        href: <%= target.nav.pre %>/components/forms/elements<%= target.nav.ext %>
+
+      - name: Validation
+        href: <%= target.nav.pre %>/components/forms/validation<%= target.nav.ext %>
+
+      - name: Uploader
+        href: <%= target.nav.pre %>/components/forms/uploader<%= target.nav.ext %>
+
+      - name: Wizard
+        href: <%= target.nav.pre %>/components/forms/wizard<%= target.nav.ext %>
+
+
+  - name: Tables
+    icon: fa fa-table
+    children:
+      - name: Basic
+        href: <%= target.nav.pre %>/components/tables/basic<%= target.nav.ext %>
+
+      - name: Responsive
+        href: <%= target.nav.pre %>/components/tables/responsive<%= target.nav.ext %>
+
+      - name: Advanced
+        href: <%= target.nav.pre %>/components/tables/advanced<%= target.nav.ext %>
+
+      - name: Tree table
+        href: <%= target.nav.pre %>/components/tables/tree<%= target.nav.ext %>
+
+      - name: Datatables
+        href: <%= target.nav.pre %>/components/tables/datatables<%= target.nav.ext %>
 
 
   - name: Pages
@@ -138,31 +149,6 @@ sidebar:
     children:
       - name: Plugins
         icon: fa fa-puzzle-piece
-
-
-  - name: Builds
-    icon: fa fa-github
-    children:
-      - name: Jekyll/Github User Pages
-        icon: fa fa-github
-
-      - name: Github Project / Docpages
-        icon: fa fa-github
-
-      - name: JSDoc3 theme
-        icon: fa fa-github
-
-      - name: Istanbul theme
-        icon: fa fa-github
-
-      - name: PHPDoc theme
-        icon: fa fa-github
-
-      - name: PHPUnit coverage theme
-        icon: fa fa-github
-
-      - name: Jekyll/Github Pages
-        icon: fa fa-github
 
 
   - name: Plugins

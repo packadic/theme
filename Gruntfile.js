@@ -159,6 +159,9 @@ var init = module.exports = function( grunts ){
             },
             dist   : {
                 files: [ {expand: true, cwd: 'src/styles', src: '**/*.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'} ]
+            },
+            fast: {
+                files: [ {expand: true, cwd: 'src/styles', src: 'fast.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'} ]
             }
         },
         bootlint        : {
@@ -241,8 +244,12 @@ var init = module.exports = function( grunts ){
         watch           : {
             options      : {livereload: true, nospawn: true},
             styles       : {
-                files: [ 'src/styles/**' ],
+                files: [ 'src/styles/**', '!src/styles/fast.scss', '!src/styles/components/_header-dropdown.scss' ],
                 tasks: [ 'clean:styles', 'sass:<%= target.name %>' ]
+            },
+            style_fast: {
+                files: [ 'src/styles/fast.scss','src/styles/components/_header-dropdown.scss' ],
+                tasks: [ 'sass:fast' ]
             },
             scripts_watch: {
                 files: [ 'src/scripts/**', '!src/scripts/init.js' ],

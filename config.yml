@@ -12,6 +12,7 @@ jsbuild:
     - tooltip
     - popover
     - tab
+    - alert
   lodash: auto # auto|full
 
 target: dev

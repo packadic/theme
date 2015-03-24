@@ -16,8 +16,7 @@ html(lang="en")
                 meta(http-equiv="X-UA-Compatible", content="IE=edge")
             block styles
                 +css-style("base-stylesheet.css")
-                +css-style("layout.css")
-                +css-style("components.css")
+                +css-style("fast.css")
                 +css-style("themes/theme-default.css")
 
     body.page-loading.section-top-fixed
@@ -42,17 +41,7 @@ html(lang="en")
                         i.fa.fa-bars.fa-lg
 
                     .header-menu
-                        ul.nav.navbar-nav
-                            li
-                                a(data-toggle="dropdown").dropdown-toggle Dropmenu
-                                ul(role="menu").dropdown-menu
-                                    +lia Hello2
-                                    +lia Hello3
-                            li
-                                a(data-toggle="dropdown").dropdown-toggle Dropmenu
-                                ul(role="menu").dropdown-menu
-                                    +lia Hello2
-                                    +lia Hello3
+                        include ../partials/header-menu
             .clearfix
 
             //#page

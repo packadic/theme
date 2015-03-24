@@ -65,6 +65,12 @@
         @include label-variant($background-color);
     }
 
+    .badge.#{$class-name} {
+
+        background-color: $background-color;
+        color: $text-color;
+    }
+
     .widget .widget-icon.#{$class-name} {
         background-color: $background-color;
         color: $text-color;

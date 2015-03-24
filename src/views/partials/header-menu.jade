@@ -1,0 +1,44 @@
+include ../base
+mixin dropdown-task(title, percent)
+    li
+        a(href='#')
+            .task
+                span=title
+                span.percent=percent+"%"
+            .progress
+                .progress-bar(role='progressbar', aria-valuenow=percent, aria-valuemin='0', aria-valuemax='100', style='width: ' + percent + '%')&attributes(attributes)
+                    span.sr-only #{percent}% Complete (warning)
+
+ul.nav.navbar-nav
+    li
+        a(data-toggle="dropdown").dropdown-toggle Dropmenu
+        ul(role="menu").dropdown-menu
+            +lia Hello2
+            +lia Hello3
+    li
+        a(data-toggle="dropdown").dropdown-toggle Dropmenu
+        ul(role="menu").dropdown-menu
+            +lia Hello2
+            +lia Hello3
+ul.nav.navbar-nav.pull-right
+    li
+        a(data-toggle="dropdown").dropdown-toggle
+            i.fa.fa-list
+        ul(role="menu").dropdown-menu.dropdown-wide.dropdown-task-list
+            li.header
+                h3
+                    | You have
+                    strong &nbsp;3 new&nbsp;
+                    | tasks
+                a(href="#") View all
+            +dropdown-task("Update progress", 30).progress-bar-warning
+            +dropdown-task("User migration", 65).progress-bar-primary
+            +dropdown-task("Important process", 40).progress-bar-info
+            +dropdown-task("New stuff", 85).progress-bar-danger
+            +dropdown-task("My progress", 20).progress-bar-primary
+    li
+        a(data-toggle="dropdown").dropdown-toggle
+            i.fa.fa-user
+        ul(role="menu").dropdown-menu
+            +lia Hello2
+            +lia Hello3

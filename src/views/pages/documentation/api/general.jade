@@ -1,0 +1,43 @@
+extends ../../../layouts/default
+
+mixin doc-api-class-row(className, requireName)
+    tr
+        td=className
+        td=requireName
+        td
+            block
+
+block header
+    +page-title("Documentation", "API Introduction")
+    +page-breadcrumbs
+        //+breadcrumb("", "/")
+        +breadcrumb("Documentation")
+        +breadcrumb("API")
+        +breadcrumb("General", "documentation/api/general", true)
+
+
+
+block content
+    .row
+        .col-lg-6
+            +box("Introduction")
+                p Packadic provides several modules to interact with the template. An overview:
+                table.table.table-hover.table-condensed.table-striped.table-bordered
+                    thead
+                        tr
+                            th Module
+                            th Require name
+                            th Description
+                    tbody
+                        +doc-api-class-row('autoloader', 'autoloader') The autoloader detects HTML and loads the appropriate module
+                        +doc-api-class-row('theme', 'theme') The theme module provides interaction with the theme
+                        +doc-api-class-row('sidebar', 'theme/sidebar') Sidebar module provides interaction with the sidebar
+        .col-lg-6
+            +box('Basic usage')
+                pre
+                    code.hljs.highlighter.lang-js.
+                        require(['jquery', 'theme', 'theme/sidebar'],
+                            function($, theme, sidebar){
+                                $('selector').hide();
+                                theme.tasks.add('some_new_tasks', 'Task title', 55);
+                        });

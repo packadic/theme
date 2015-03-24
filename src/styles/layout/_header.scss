@@ -171,6 +171,46 @@ section#top.navbar {
             margin-left: 1px;
             display: block;
 
+            &.pull-right {
+                > li {
+                    margin-right: 0;
+                    margin-left: 1px;
+                    > ul.dropdown-menu > li.header {
+                        display: block;
+                        overflow: hidden;
+                        padding: 10px;
+                        letter-spacing: 0.5px;
+                        background: #454545;
+                        h3 {
+                            margin: 0;
+                            padding: 0;
+                            float: left;
+                            font-size: 13px;
+                            font-weight: normal;
+                            display: inline-block;
+                            color: #b3b3b3;
+                            font-family: $font-family-sub-heading;
+                        }
+                        a {
+                            display: inline-block;
+                            padding: 0;
+                            background: none;
+                            clear: inherit;
+                            font-size: 13px;
+                            font-weight: 300;
+                            position: absolute;
+                            right: 10px;
+                            border: 0;
+                            margin-top: -1px;
+                        }
+                    }
+                }
+                .dropdown-menu {
+                    right: 0;
+                    float: right;
+                    left: auto;
+                }
+            }
 
             > li {
                 &:first-child {

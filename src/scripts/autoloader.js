@@ -58,6 +58,10 @@ define([ 'jquery', 'config', 'eventer' ],
             }
             autoloader.initialised = true;
 
+            autoloader.detect('body', 'plugins/bootstrap', function(){
+
+            });
+
             autoloader.detect('.selectpicker', 'plugins/bs-select', function(){
                 $('.selectpicker').selectpicker();
             });
@@ -78,7 +82,16 @@ define([ 'jquery', 'config', 'eventer' ],
             autoloader.detect('.tipped', 'plugins/bootstrap', function(){
                 $('.tipped').tooltip();
             });
-
+            autoloader.detect('[data-toggle="tooltip"]', 'plugins/bootstrap', function(){
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+            autoloader.detect('[data-toggle="popover"]', 'plugins/bootstrap', function(){
+                var $el = $('[data-toggle="popover"]');
+                $(document).on('click', '[data-toggle="popover"]', function(e){
+                    e.preventDefault();
+                });
+                $el.popover();
+            });
             autoloader.detect('[data-toggle="confirmation"]', 'plugins/bs-confirmation', function(){
                 $('a[data-toggle="confirmation"]').confirmation({
                     container: 'body',

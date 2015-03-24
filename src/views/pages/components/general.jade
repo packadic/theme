@@ -1,9 +1,62 @@
-include ../../base
+
 extends ../../layouts/default
 block header
     +page-title("Components", "General bootstrap components")
     +page-breadcrumbs
         +breadcrumb("Components", "/components", true)
+
+mixin popover-btn-demo(side)
+    - var sideLcase = side.toLowerCase();
+    +a.btn.btn-primary(data-toggle="popover", tabindex="0", role="button", data-trigger="focus", data-container="body", data-placement=sideLcase, title="Popover title", data-content="And here's some amazing content. It's very engaging. Right?")=side
+
+mixin tooltip-btn-demo(side)
+    - var sideLcase = side.toLowerCase();
+    +a.btn.btn-primary(data-toggle="tooltip", data-container="body", data-placement=sideLcase, title="Tooltip on " + sideLcase)=side
+
+mixin progress-bars-demo(title)
+    .col-md-4
+        +box(title, "cog")&attributes(attributes)
+            .progress
+                .progress-bar.progress-bar-success(role='progressbar', aria-valuenow='40', aria-valuemin='0', aria-valuemax='100', style='width: 40%')
+                    span.sr-only 40% Complete (success)
+            .progress
+                .progress-bar.progress-bar-info(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style='width: 20%')
+                    span.sr-only 20% Complete
+            .progress
+                .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='60', aria-valuemin='0', aria-valuemax='100', style='width: 60%')
+                    span.sr-only 60% Complete (warning)
+            .progress
+                .progress-bar.progress-bar-danger(role='progressbar', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100', style='width: 80%')
+                    span.sr-only 80% Complete (danger)
+    .col-md-4
+        +box(title + " striped", "cog")&attributes(attributes)
+            .progress
+                .progress-bar.progress-bar-success.progress-bar-striped(role='progressbar', aria-valuenow='40', aria-valuemin='0', aria-valuemax='100', style='width: 40%')
+                    span.sr-only 40% Complete (success)
+            .progress
+                .progress-bar.progress-bar-info.progress-bar-striped(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style='width: 20%')
+                    span.sr-only 20% Complete
+            .progress
+                .progress-bar.progress-bar-warning.progress-bar-striped(role='progressbar', aria-valuenow='60', aria-valuemin='0', aria-valuemax='100', style='width: 60%')
+                    span.sr-only 60% Complete (warning)
+            .progress
+                .progress-bar.progress-bar-danger.progress-bar-striped(role='progressbar', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100', style='width: 80%')
+                    span.sr-only 80% Complete (danger)
+    .col-md-4
+        +box(title + " animated & stacked", "cog")&attributes(attributes)
+            .progress
+                .progress-bar.progress-bar-striped.active(role='progressbar', aria-valuenow='45', aria-valuemin='0', aria-valuemax='100', style='width: 45%')
+                    span.sr-only 45% Complete
+            .progress
+                .progress-bar.progress-bar-striped.progress-bar-danger.active(role='progressbar', aria-valuenow='65', aria-valuemin='0', aria-valuemax='100', style='width: 45%')
+                    span.sr-only 65% Complete
+            .progress
+                .progress-bar.progress-bar-success(style='width: 35%')
+                    span.sr-only 35% Complete (success)
+                .progress-bar.progress-bar-warning.progress-bar-striped(style='width: 20%')
+                    span.sr-only 20% Complete (warning)
+                .progress-bar.progress-bar-danger(style='width: 10%')
+                    span.sr-only 10% Complete (danger)
 
 
 mixin btn-group-demo(title, btnClass)
@@ -62,7 +115,7 @@ block content
 
 
     .row
-        .col-md-4
+        .col-md-6
             +box("Alerts", "info", 260)
                 +alert("success", "Well done") You have done well, have a cookie
                 +alert("success", "Very good", true) You have done well, You may close this
@@ -72,55 +125,91 @@ block content
                 +alert("warning", "Warning", true) Your dog has not enough food
                 +alert("danger", "Error") The website could not do that thing
 
-        .col-md-4
+        .col-md-3
             +box("Labels and badges", "cog", 260).box-table
-                table.table.table-striped.table-hover.table-bordered
+                table.table.table-striped.table-hover.table-bordered.no-margin
                     thead
                         tr
                             th Class
-                            th Label
-                            th Badge
+                            th.text-center Label
+                            th.text-center Badge
                     tbody
                         for state in site.data.theme.states
                             - var text = capitalizeFirst(state);
                             tr
                                 td= text
-                                td
+                                td.text-center
                                     span.label(class="label-" + state) Default
-                                td
+                                td.text-center
                                     span.badge(class="badge-" + state) 5
-
-        .col-md-4
-            +box("Modals", "cog")
-                .btn-group-justified
-                    +a(data-demo-modal="information").btn.btn-info.demo-modal Info
-                    +a(data-demo-modal="success").btn.btn-success.demo-modal Success
-                    +a(data-demo-modal="warning").btn.btn-warning.demo-modal Warning
-                    +a(data-demo-modal="error").btn.btn-danger.demo-modal Error
-
+                        for color in site.data.theme.colors
+                            - var text = capitalizeFirst(color);
+                            tr
+                                td= text
+                                td.text-center
+                                    span.label(class=color) Default
+                                td.text-center
+                                    span.badge(class=color) 5
+        .col-md-3
             +box("Tooltips", "cog")
                 .btn-group.btn-group-justified
-                    +a.btn.btn-primary.tipped(title="Bottom") Left
-                    +a.btn.btn-primary.tipped(title="Bottom") Right
-                    +a.btn.btn-primary.tipped(title="Bottom") Top
-                    +a.btn.btn-primary.tipped(title="Bottom") Bottom
-
+                    +tooltip-btn-demo('Left')
+                    +tooltip-btn-demo('Right')
+                    +tooltip-btn-demo('Top')
+                    +tooltip-btn-demo('Bottom')
 
             +box("Popovers", "cog")
                 .btn-group.btn-group-justified
-                    +a.btn.btn-primary Left
-                    +a.btn.btn-primary Right
-                    +a.btn.btn-primary Top
-                    +a.btn.btn-primary Bottom
+                    +popover-btn-demo('Left')
+                    +popover-btn-demo('Right')
+                    +popover-btn-demo('Top')
+                    +popover-btn-demo('Bottom')
+    .row
+        +progress-bars-demo("Progress bars")
 
     .row
-        .col-md-6
-            +box("Buttons", "cog")
-                a.btn.btn-primary Primary
-        .col-md-6
-            +box("Buttons", "cog")
-                | adf
+        +progress-bars-demo("BS Materials bars").bs-material
 
+
+    .row
+        .col-md-4.bs-material
+            +box("List group", "list")
+                .list-group
+                    .list-group-item
+                        .row-action-primary
+                            i.fa.fa-folder
+                        .row-content
+                            .action-secondary
+                                i.mdi-material-info
+                            h4.list-group-item-heading Tile with an icon
+                            p.list-group-item-text Donec id elit non mi porta gravida at eget metus.
+                    .list-group-separator
+                    .list-group-item
+                        .row-action-primary
+                            i.fa.fa-folder
+                        .row-content
+                            .action-secondary
+                                i.mdi-material-info
+                            h4.list-group-item-heading Tile with an icon
+                            p.list-group-item-text Maecenas sed diam eget risus varius blandit.
+                    .list-group-separator
+                    .list-group-item
+                        .row-action-primary
+                            i.fa.fa-folder
+                        .row-content
+                            .action-secondary
+                                i.mdi-material-info
+                            h4.list-group-item-heading Tile with an icon
+                            p.list-group-item-text Maecenas sed diam eget risus varius blandit.
+                    .list-group-separator
+
+
+        .col-md-4.bs-material
+            p asdf
+
+
+        .col-md-4.bs-material
+            p asdf
     .row
         .col-md-6
             +box("Buttons", "cog")

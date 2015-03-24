@@ -10,16 +10,19 @@ block content
 
 
     .row
-        .col-lg-4
+        .col-lg-6
             +box("Modals", "list")
                 a.btn.btn-primary(data-toggle="modal", href='#responsive') Responsive
                 a.btn.btn-primary(data-toggle="modal", href='#full-width') Full width
                 a.btn.btn-primary(data-toggle="modal", href='#long') Long
                 a.btn.btn-primary(data-toggle="modal", href='#notlong') Not long
                 a.btn.btn-primary(data-toggle="modal", href='#verylong') Very long
-        .col-lg-4
-            +box("Boxes", "list")
-                | Hello
+        .col-lg-6
+            +box("Bootbox modals", "list")
+                +a(data-demo-modal="information").btn.btn-info.demo-modal Info
+                +a(data-demo-modal="success").btn.btn-success.demo-modal Success
+                +a(data-demo-modal="warning").btn.btn-warning.demo-modal Warning
+                +a(data-demo-modal="error").btn.btn-danger.demo-modal Error
         .col-lg-4
             +box("Boxes", "list")
                 | Hello

@@ -16,10 +16,12 @@ define([ 'jquery' ],
 
         demo.init = function(){
             this.present('.demo-modal', 'modals');
+            this.present('.demo-popover', 'popover');
             this.present('#packadic-themer', 'themer');
             this.present('.demo-button-editor', 'button-icon-showcase');
             this.present('#gtreetable', 'gtreetable');
             this.present('.show-class', 'show-class');
+            this.present('.show-html', 'show-html');
             this.present('#demo-plugins-docs', 'plugins-docs');
             this.present('.plugin-markdown', 'plugin-markdown');
             this.present('.demo-jq-impromptu', 'jq-impromptu');
