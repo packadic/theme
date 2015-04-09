@@ -32,7 +32,8 @@ html(lang="en")
 
                     .page-logo
                         .text-logo
-                            | Packadic
+                            block text-logo
+                                | Packadic
 
                     // include ../partials/logo
 
@@ -41,7 +42,8 @@ html(lang="en")
                         i.fa.fa-bars.fa-lg
 
                     .header-menu
-                        include ../partials/header-menu
+                        block header-menu
+                            include ../partials/header-menu
             .clearfix
 
             //#page
@@ -74,17 +76,12 @@ html(lang="en")
                     block footer
                         p Radicsss
 
-            block script
+            block site-data
                 include ../pages/site-data
 
+            block script
 
             block scripts
-                //+js-script('plugins/requirejs/require.js')
-                // @todo change
-                //+js-script('main.js')
-                //+js-script('init.js')
-                // @todo to this
-                //+js-script('configuration.js')
                 +js-script('init.js')
                 // The place to include custom logic, a small demo
                 +js-script('outside_of_project.js')

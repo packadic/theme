@@ -21,9 +21,6 @@ mixin sidebar-item(item, top_index, level)
                 each child, index in item.children
                     +sidebar-item(child, level)
 
-// display menu toggle first
-li.sidebar-toggler-wrapper.hide
-    .sidebar-toggler
 
 // now loop over the items and call the mixin for each
 each item, index in items

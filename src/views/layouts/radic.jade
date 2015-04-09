@@ -1,0 +1,17 @@
+extends default
+
+block header-menu
+    //- will not output within markup
+
+block text-logo
+    | Radic
+
+//block site-data
+//- will not output within markup
+
+block scripts
+    +js-script('init.js')
+    // The place to include custom logic, a small demo
+    +js-script('radic/init.js')
+    // end smalld demo
+    +js-script('boot.js')

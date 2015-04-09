@@ -86,6 +86,7 @@
             'plugins/modernizr'  : 'plugins/modernizr',
             'plugins/mscrollbar' : 'plugins/mscrollbar',
             // default vendor paths
+            'plugins/async'      : 'plugins/async/lib/async',
             'plugins/svg'        : 'plugins/svg.js/dist/svg',
             'plugins/impromptu'  : 'plugins/jquery-impromptu/dist/jquery-impromptu.min',
             'plugins/moment'     : 'plugins/moment/moment/min/moment.min',
@@ -151,7 +152,7 @@
             'plugins/gtreetable'    : [ 'plugins/jquery-migrate', 'plugins/jquery-ui/core', 'plugins/jquery-ui/draggable', 'plugins/jquery-ui/droppable' ],
             'plugins/mscrollbar'    : [ 'plugins/bootstrap', 'plugins/mousewheel' ],
             'plugins/bs-modal'      : [ 'plugins/bootstrap', 'plugins/bs-modal-manager' ],
-            'plugins/bs-material'      : [ 'plugins/bootstrap', 'plugins/bs-material-ripples' ],
+            'plugins/bs-material'   : [ 'plugins/bootstrap', 'plugins/bs-material-ripples' ],
 
             'plugins/gsap/lite'       : [ 'plugins/gsap/scroll' ],
             'plugins/gsap/max'        : [ 'plugins/gsap/scroll' ],

@@ -230,3 +230,24 @@ sidebar:
     children:
       - name: Plugins
         icon: fa fa-puzzle-piece
+
+sidebar-radic:
+  - name: Home
+    href: <%= target.nav.pre %>/radic<%=target.nav.ext %>
+    icon: fa fa-home
+
+  - name: Blog
+    href: <%= target.nav.pre %>/radic/blog<%=target.nav.ext %>
+    icon: fa fa-pencil-square-o
+
+  - name: Portfolio
+    href: <%= target.nav.pre %>/radic/portfolio<%=target.nav.ext %>
+    icon: fa fa-picture-o
+
+  - name: Projects
+    href: <%= target.nav.pre %>/radic/projects<%=target.nav.ext %>
+    icon: fa fa-cubes
+
+  - name: Contact
+    href: <%= target.nav.pre %>/radic/contact<%=target.nav.ext %>
+    icon: fa fa-envelope-o
