@@ -101,7 +101,7 @@
             'plugins/github-api'         : 'plugins/github-api/github',
             'plugins/oauth2'             : 'plugins/javascript-oauth2/oauth2/oauth2',
             'plugins/oauth-io'           : 'plugins/oauth.io/dist/oauth.min',
-
+            'plugins/md5'                : 'plugins/blueimp-md5/js/md5.min',
             // jquery
             'plugins/jquery-migrate'     : 'plugins/jquery-migrate/jquery-migrate',
             'plugins/jquery-slimscroll'  : 'plugins/jquery-slimscroll/jquery.slimscroll.min',

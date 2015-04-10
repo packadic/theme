@@ -1,5 +1,6 @@
 include _mixins
 
-+box("Branches @ " + repo.full_name)
++box("Branches")
     each branch in branches
-        a.btn.btn-block.btn-primary.no-margin-top(href="#", data-owner=repo.owner, data-repo=repo.name, data-branch=branch)=branch
+        - var owner = _.isObject(repo.owner) ? repo.owner.login : repo.owner;
+        a.btn.btn-block.btn-primary.no-margin-top(href="#", data-owner=owner, data-repo=repo.name, data-branch=branch)=branch

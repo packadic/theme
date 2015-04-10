@@ -86,6 +86,7 @@
     "javascript-oauth2": "ox-it/javascript-oauth2",
     "oauth.io": "~0.4.0",
     "ace-builds": "~1.1.9",
-    "ace": "~1.1.9"
+    "ace": "~1.1.9",
+    "blueimp-md5": "~1.1.0"
   }
 }
