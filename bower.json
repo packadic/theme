@@ -81,6 +81,11 @@
     "select2-bootstrap-css": "~1.4.6",
     "require-css": "~0.1.8",
     "bootstrap-confirmation2": "~2.1.2",
-    "bootstrap-material-design": "~0.3.0"
+    "bootstrap-material-design": "~0.3.0",
+    "github-api": "~0.10.5",
+    "javascript-oauth2": "ox-it/javascript-oauth2",
+    "oauth.io": "~0.4.0",
+    "ace-builds": "~1.1.9",
+    "ace": "~1.1.9"
   }
 }

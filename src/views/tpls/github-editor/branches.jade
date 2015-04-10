@@ -1,0 +1,5 @@
+include _mixins
+
++box("Branches @ " + repo.full_name)
+    each branch in branches
+        a.btn.btn-block.btn-primary.no-margin-top(href="#", data-owner=repo.owner, data-repo=repo.name, data-branch=branch)=branch

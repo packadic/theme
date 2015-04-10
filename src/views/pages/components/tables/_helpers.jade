@@ -33,17 +33,16 @@ mixin demo-table(longTable, bigTable, hasBlock)
     - bigTable = bigTable || false;
     table.table.show-class.show-class-parent&attributes(attributes)
         thead(class=((attributes.class && attributes.class.indexOf('flip-content') !== -1) ? 'flip-content' : ''))
-            tr
-                th(width="20").text-center ID
-                th Username
-                th Group
-                if bigTable
-                    th Email
-                    th Last login
-                    th Country
-                th Status
-                th(width="70").text-center
-                    i.fa.fa-cog
+            th(width="20").text-center ID
+            th Username
+            th Group
+            if bigTable
+                th Email
+                th Last login
+                th Country
+            th Status
+            th(width="70").text-center
+                i.fa.fa-cog
 
         tbody
             if hasBlock

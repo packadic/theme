@@ -1,0 +1,10 @@
+include _mixins
++gh-table("Repositories", "fa fa-list", 250)
+    thead
+        th.text-center Name
+    tbody
+        each repo in repos
+            tr
+                td
+                    a(href="#", data-owner=repo.owner.login, data-repo-name=repo.name, data-repo-name-full=repo.full_name)
+                        small=repo.full_name

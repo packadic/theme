@@ -149,11 +149,104 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie', 'plugins
                 return parseInt(config.scss.breakpoints[ 'screen-' + which + '-min' ].replace('px', ''));
             };
 
+            theme.initSlimScroll = function( el, opts ){
+                require([ 'plugins/jquery-slimscroll' ], function(){
+                    $(el).each(function(){
+                        if( $(this).attr("data-initialized") ){
+                            return; // exit
+                        }
+
+                        var height;
+
+                        if( $(this).attr("data-height") ){
+                            height = $(this).attr("data-height");
+                        } else {
+                            height = $(this).css('height');
+                        }
+
+                        if( !defined(opts) ){
+                            opts = {};
+                        }
+
+                        $(this).slimScroll(_.merge({
+                            allowPageScroll: true, // allow page scroll when the element scroll is ended
+                            size           : '7px',
+                            color          : ($(this).attr("data-handle-color") ? $(this).attr("data-handle-color") : '#bbb'),
+                            wrapperClass   : ($(this).attr("data-wrapper-class") ? $(this).attr("data-wrapper-class") : 'slimScrollDiv'),
+                            railColor      : ($(this).attr("data-rail-color") ? $(this).attr("data-rail-color") : '#eaeaea'),
+                            position       : 'right',
+                            height         : height,
+                            alwaysVisible  : ($(this).attr("data-always-visible") == "1" ? true : false),
+                            railVisible    : ($(this).attr("data-rail-visible") == "1" ? true : false),
+                            disableFadeOut : true
+                        }, opts));
+
+                        $(this).attr("data-initialized", "1");
+                    });
+                });
+            };
+
+            theme.destroySlimScroll = function( el ){
+                $(el).each(function(){
+                    if( $(this).attr("data-initialized") === "1" ){ // destroy existing instance before updating the height
+                        $(this).removeAttr("data-initialized");
+                        $(this).removeAttr("style");
+
+                        var attrList = {};
+
+                        // store the custom attribures so later we will reassign.
+                        if( $(this).attr("data-handle-color") ){
+                            attrList[ "data-handle-color" ] = $(this).attr("data-handle-color");
+                        }
+                        if( $(this).attr("data-wrapper-class") ){
+                            attrList[ "data-wrapper-class" ] = $(this).attr("data-wrapper-class");
+                        }
+                        if( $(this).attr("data-rail-color") ){
+                            attrList[ "data-rail-color" ] = $(this).attr("data-rail-color");
+                        }
+                        if( $(this).attr("data-always-visible") ){
+                            attrList[ "data-always-visible" ] = $(this).attr("data-always-visible");
+                        }
+                        if( $(this).attr("data-rail-visible") ){
+                            attrList[ "data-rail-visible" ] = $(this).attr("data-rail-visible");
+                        }
+
+                        $(this).slimScroll({
+                            wrapperClass: ($(this).attr("data-wrapper-class") ? $(this).attr("data-wrapper-class") : 'slimScrollDiv'),
+                            destroy     : true
+                        });
+
+                        var the = $(this);
+
+                        // reassign custom attributes
+                        $.each(attrList, function( key, value ){
+                            the.attr(key, value);
+                        });
+
+                    }
+                });
+            };
+
 
         }.call());
 
         (function Events(){
 
+            theme.initHeaderSearchForm = function(){
+                $('section#top').on('click', '.search-form', function( e ){
+                    $(this).addClass("open");
+                    $(this).find('.form-control')
+                        .focus()
+                        .on('blur', function( e ){
+                            $(this).closest('.search-form').removeClass("open");
+                            $(this).unbind("blur");
+                        });
+                }).on('mousedown', '.search-form.open .submit', function( e ){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $(this).closest('.search-form').submit();
+                });
+            };
 
             theme._initResizeEvent = function(){
                 theme._defineEvent('resize');
@@ -317,13 +410,13 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie', 'plugins
                 return $el;
             }
 
-            function setTitle($el, title){
+            function setTitle( $el, title ){
                 $el = _makeEl($el);
                 $el.$title.text(title);
                 return $el;
             }
 
-            function setType($el, type){
+            function setType( $el, type ){
                 $el = _makeEl($el);
                 $el.$bar.removeAttr('class').addClass('progress-bar progress-bar-' + type);
                 return $el;
@@ -350,10 +443,9 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie', 'plugins
             theme.$window = $(window);
             theme.$document = $(window.document);
             console.log('theme', theme);
+
             theme.initEvents();
-
-            console.log(theme);
-
+            theme.initHeaderSearchForm();
 
             $([
                 ".btn:not(.btn-link)",

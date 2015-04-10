@@ -4,7 +4,8 @@
     var packadic = (window.packadic = window.packadic || {});
     packadic.mergeConfig({
         debug: true,
-        demo : true
+        demo : true,
+        oauth_io: 'UpFevf23G2O93iSlMOQ5PRL4zq0'
     });
 
     packadic.bindEventHandler('booting', function(){

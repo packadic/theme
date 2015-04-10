@@ -90,6 +90,14 @@ var init = module.exports = function( grunts ){
             dist: {
                 options: {sourceMap: false, compress: true, beautify: false, gzip: true, preserveComments: 'none'},
                 files  : uglifyFiles
+            },
+            templates: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= target.dest %>/assets/scripts/templates',
+                    src: '**/*.js',
+                    dest: '<%= target.dest %>/assets/scripts/templates'
+                }]
             }
         },
         clean           : {
@@ -136,7 +144,7 @@ var init = module.exports = function( grunts ){
                     namespace: false
                 },
                 files  : [
-                    {expand: true, cwd: 'src/views/tpls', src: '**/*.jade', ext: '.js', dest: '<%= target.dest %>/assets/scripts/templates'}
+                    {expand: true, cwd: 'src/views/tpls', src: ['**/*.jade', '!**/_*.jade'], ext: '.js', dest: '<%= target.dest %>/assets/scripts/templates'}
                 ]
             }
         },
@@ -303,7 +311,7 @@ var init = module.exports = function( grunts ){
 
 
     grunt.registerTask('rm', [ 'clean:all' ]);
-    grunt.registerTask('templates', [ 'clean:templates', 'jade:templates', 'string-replace:templates' ]);
+    grunt.registerTask('templates', [ 'clean:templates', 'jade:templates', 'string-replace:templates', 'uglify:templates' ]);
 
     grunt.registerTask('cp', [ 'copy:images', 'copy:fonts', 'copy:misc', 'copy:demo' ]);
 

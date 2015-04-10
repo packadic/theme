@@ -1,0 +1,224 @@
+extends layouts/default
+
+block header
+    +page-title("Github editor").pull-left
+    .pull-right
+        .small-padding-top.extra-large-margin-right
+            .btn-toolbar(role="toolbar")
+                .btn-group(role="group")
+                    a.btn.btn-sm.blue-light.hide#github-auth(href="#") Login
+block content
+    .row
+        .col-md-12
+            #github-editor-toolbar.btn-toolbar
+
+                .btn-group.btn-group-sm
+                    a.btn.btn-primary Save
+                    a.btn.yellow-dark Other
+
+                .btn-group.btn-group-sm.pull-right
+                    select#github-editor-modelist(data-style="blue-grey btn-sm", data-width="200px", data-header="Modex", data-size="7")
+                    select#github-editor-themelist(data-style="blue-grey btn-sm", data-width="200px", data-header="Themes", data-size="7")
+
+            #github-editor
+
+    .row
+        .col-md-3
+            #github-editor-repos
+            #github-editor-branches
+        .col-md-6
+            #github-editor-contents
+
+
+block scripts-pre-boot
+    script.
+        (function(){
+            packadic.bindEventHandler('started', function(){
+                require([ 'jquery', 'github-editor', 'plugins/async', 'theme' ], function( $, editor, async, theme ){
+                    window.editor = editor;
+                    editor.init('#github-editor');
+                    function cre( el ){
+                        if( _.isUndefined(el) ){
+                            el = 'div';
+                        }
+                        return $(document.createElement(el));
+                    }
+
+                    function calcHeight(){
+                        var height = theme.getViewPort().height - $('section#top').outerHeight();
+                        if( $('body').hasClass("section-bottom-fixed") ){
+                            height = height - $('section#bottom').outerHeight();
+                        }
+                        return height;
+                    }
+
+
+                    editor.getAuthButton($('#github-auth'));
+
+                    var acereq = [ 'ace/ace' ]
+                    $.each([ 'beautify', 'emmet', 'searchbox', 'settings_menu', 'modelist', 'themelist', 'language_tools' ], function( i, ext ){
+                        acereq.push('ace/ext/' + ext);
+                    });
+                    acereq.push('plugins/bs-select')
+
+                    showFileEditor(editor.github.getRepo('robinradic', 'blade-extensions'), {}, 'develop', 'README.md');
+
+                    function showFileEditor( repo, repoData, branch, path ){
+                        repo.read(branch, path, function( err, data ){
+                            require(acereq, function( ace, beautify, emmet, searchbox, settings_menu, modelist, themelist, language_tools ){
+                                console.log(arguments);
+                                editor.$el.html('').append(
+                                    cre('pre').attr('id', 'github-editor-code').css({
+                                        height: parseInt($('main').css('min-height').replace('px', '')) -
+                                              $('main > header.content').outerHeight() -
+                                              parseInt($('main > div.content').css('padding-top').replace('px', '')) -
+                                              parseInt($('main > div.content').css('padding-bottom').replace('px', '')) -
+                                              $('section#top').outerHeight() -
+                                              $('section#bottom').outerHeight()
+                                    }).html(data)
+                                );
+
+                                (function SetupEditor(){
+                                    var editor = window.aceEditor = ace.edit("github-editor-code");
+                                    settings_menu.init(editor);
+                                    editor.setTheme("ace/theme/katzenmilch");
+                                    editor.setOption("enableEmmet", true);
+                                    editor.setFontSize(14);
+                                    editor.session.setMode("ace/mode/markdown");                                                                                    // enable autocompletion and snippets
+                                    editor.setOptions({
+                                        enableBasicAutocompletion: true,
+                                        enableSnippets           : true,
+                                        enableLiveAutocompletion : false
+                                    });
+                                    editor.commands.addCommands(
+                                        [ {
+                                              name    : "showSettingsMenu",
+                                              bindKey : {win: "Ctrl-q", mac: "Command-q"},
+                                              exec    : function( editor ){
+                                                  editor.showSettingsMenu();
+                                              },
+                                              readOnly: true
+                                          } ]
+                                    );
+                                }.call())
+
+                                function makeList( type ){
+                                    var $select = $('select#github-editor-' + type + 'list').html('');
+                                    $.each(type == 'theme' ? themelist.themes : modelist.modes, function( i, th ){
+                                        $select.append(
+                                            cre('option')
+                                                .attr('value', type == 'theme' ? th.theme : th.mode)
+                                                .text(th.caption)
+                                        )
+                                    })
+                                    $select.selectpicker();
+                                    $select.on('change', function( e ){
+                                        var val = $select.selectpicker('val');
+                                        if( type == 'theme' ){
+                                            aceEditor.setTheme(val);
+                                        } else {
+                                            aceEditor.session.setMode(val)
+                                        }
+                                    })
+                                    if( type == 'theme' ){
+                                        $select.selectpicker('val', aceEditor.getTheme());
+                                    } else {
+                                        $select.selectpicker('val', aceEditor.session.getMode().$id);
+                                    }
+
+                                }
+
+                                makeList('theme');
+                                setTimeout(function(){ // needs to be executed with a delay, otherwise getmode returns text
+                                    makeList('mode');
+                                }, 200)
+
+
+                            });
+                        });
+                    }
+
+                    function showContent( repo, repoData, branch, path ){
+                        path = path || '';
+                        var segments = path.split('/');
+                        var isRootPath = segments.length === 0;
+
+                        repo.contents(branch, path, function( err, files ){
+                            console.log(files);
+
+                            editor.getBox('contents', {files: files, repo: repoData, branch: branch}, function( box ){
+                                box.find('a[data-name]').on('click', function( e ){
+                                    e.preventDefault();
+                                    var data = $(this).data();
+                                    if( data.type === 'dir' ){
+                                        showContent(repo, repoData, branch, data.path);
+                                    } else {
+                                        showFileEditor(repo, repoData, branch, data.path);
+                                    }
+                                })
+                                box.find('#github-editor-contents-path').html('').append(cre('i').text(path));
+                                var up = box.find('#github-editor-contents-up');
+                                up.off('click').on('click', function( e ){
+                                    e.preventDefault();
+                                    showContent(repo, repoData, branch, isRootPath ? '' : segments[ segments.length - 2 ]);
+                                });
+
+
+                                $('#github-editor-contents').html('').append(box.show());
+                            })
+
+                        })
+                    }
+
+                    function showBranches( owner, repoName ){
+                        var repo = editor.github.getRepo(owner, repoName);
+                        async.parallel({
+                            repo    : function( cb ){
+                                repo.show(function( err, repoData ){
+                                    cb(null, repoData);
+                                })
+                            },
+                            branches: function( cb ){
+                                repo.listBranches(function( err, branches ){
+                                    cb(null, branches);
+                                })
+                            }
+                        }, function( err, result ){
+                            editor.getBox('branches', result, function( box ){
+                                box.find('a[data-branch]').on('click', function( e ){
+                                    e.preventDefault();
+                                    showContent(repo, result.repo, $(this).data('branch'));
+                                })
+                                $('#github-editor-branches').html('').append(box.show());
+                            })
+                        })
+                    }
+
+                    function showRepositories(){
+                        async.waterfall([
+                            function( cb ){
+                                editor.getAll(function( data ){
+                                    cb(null, data);
+                                });
+                            },
+                            function( data, cb ){
+                                editor.getBox('repos', {repos: [].concat.apply([], _.merge(_.values(data.repos)))}, function( table ){
+                                    cb(null, data, table);
+                                });
+                            },
+                            function( data, table, cb ){
+                                table.find('a[data-repo-name]').on('click', function( e ){
+                                    e.preventDefault();
+                                    var data = $(this).data();
+                                    showBranches(data.owner, data.repoName);
+                                });
+                                $('#github-editor-repos').html('').append(table.show());
+                                cb();
+                            }
+                        ])
+                    }
+
+
+                })
+            })
+        }.call())

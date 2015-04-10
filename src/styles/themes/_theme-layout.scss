@@ -3,21 +3,32 @@
     /* Header search bar, toggler button & top menu */
     section#top.navbar {
         background: $section-top-bg;
-        @include box-shadow(inset 0 -1px 1px rgba(0, 0, 0, 0.5) !important);
+        //@include box-shadow(inset 0 -1px 1px rgba(0, 0, 0, 0.5) !important);
+
+        border-bottom: 1px solid $sidebar-menu-devider-border-color;
 
         /* Header seaech box */
         .search-form {
             background: $header-search-bg-color;
 
+            border-left: 1px solid #484848;
             &:hover {
                 background: $header-search-bg-hover-color;
             }
+
 
             .input-group {
                 .form-control {
                     color: $header-search-font-color;
 
                     @include placeholder($header-search-placeholder-font-color);
+
+
+                    &:focus {
+                        @include box-shadow(none);
+                        outline-color: transparent !important;
+                        border-color: transparent !important;
+                    }
                 }
 
                 .input-group-btn {
@@ -243,6 +254,9 @@
                     }
                 }
 
+                &:first-child > a {
+                    border-top: none !important;
+                }
                 &:last-child {
                     > a {
                         border-bottom: 1px solid transparent !important;
@@ -515,7 +529,7 @@
             color: $footer-default-font-color;
         }
 
-        background-color: $section-bottom-bg-color;
+        background: $section-bottom-bg;
 
         .section-bottom-fixed & {
          //#   background-color: $footer-fixed-bg-color;

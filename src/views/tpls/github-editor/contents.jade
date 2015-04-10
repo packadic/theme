@@ -1,0 +1,18 @@
+include _mixins
+
++gh-table("Contents for " + repo.full_name + " @ " + branch, "fa fa-list", 400)
+    thead
+        th(width=30).mid-padding.text-center
+            a(href="#")#github-editor-contents-up
+                i.fa.fa-level-up
+
+        th.padding-left#github-editor-contents-path
+
+    tbody
+        each file in files
+            - icon = file.type == "dir" ? "fa-folder text-green-dark" : "fa-file text-yellow-dark"
+            tr
+                td.mid-padding.text-center
+                    i.fa(class=icon)
+                td.padding-left
+                    a(href="#", data-path=file.path, data-name=file.name, data-type=file.type)=file.name

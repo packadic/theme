@@ -74,33 +74,43 @@
         },
         paths  : {
             // custom build with jsbuild
-            // 'lodash'                  : 'plugins/lodash.custom.min',
-            'plugins/bootstrap'  : 'plugins/bootstrap.custom.min',
-            'jquery'             : 'plugins/jquery/dist/jquery.min',
+            'jquery'                     : 'plugins/jquery/dist/jquery.min',
+            'plugins/bootstrap'          : 'plugins/bootstrap.custom.min',
+
             // dont prefix jade, template amd loader require it, same as jquery
-            'jade'               : 'plugins/jade/runtime',
-            'string'             : 'plugins/underscore.string/dist/underscore.string.min',
-            'code-mirror'        : 'plugins/requirejs-codemirror/src/code-mirror',
+            'jade'                       : 'plugins/jade/runtime',
+            'string'                     : 'plugins/underscore.string/dist/underscore.string.min',
+            'code-mirror'                : 'plugins/requirejs-codemirror/src/code-mirror',
+            'ace'                        : 'plugins/ace/lib/ace',
+
             // custom uglified and moved
-            'plugins/bootbox'    : 'plugins/bootbox',
-            'plugins/modernizr'  : 'plugins/modernizr',
-            'plugins/mscrollbar' : 'plugins/mscrollbar',
+            'plugins/bootbox'            : 'plugins/bootbox',
+            'plugins/modernizr'          : 'plugins/modernizr',
+            'plugins/mscrollbar'         : 'plugins/mscrollbar',
+
             // default vendor paths
-            'plugins/async'      : 'plugins/async/lib/async',
-            'plugins/svg'        : 'plugins/svg.js/dist/svg',
-            'plugins/impromptu'  : 'plugins/jquery-impromptu/dist/jquery-impromptu.min',
-            'plugins/moment'     : 'plugins/moment/moment/min/moment.min',
-            'plugins/uniform'    : 'plugins/jquery.uniform/jquery.uniform.min',
-            'plugins/select2'    : 'plugins/select2/select2.min',
-            'plugins/marked'     : 'plugins/marked/marked.min',
-            'plugins/highlightjs': 'plugins/highlightjs/highlight.pack',
+            'plugins/async'              : 'plugins/async/lib/async',
+            'plugins/svg'                : 'plugins/svg.js/dist/svg',
+            'plugins/moment'             : 'plugins/moment/moment/min/moment.min',
+            'plugins/select2'            : 'plugins/select2/select2.min',
+            'plugins/marked'             : 'plugins/marked/marked.min',
+            'plugins/highlightjs'        : 'plugins/highlightjs/highlight.pack',
+            'plugins/cryptojs'           : 'plugins/cryptojslib/components',
+            'plugins/toastr'             : 'plugins/toastr/toastr',
+            'plugins/events'             : 'plugins/eventEmitter/EventEmitter.min',
+            'plugins/github-api'         : 'plugins/github-api/github',
+            'plugins/oauth2'             : 'plugins/javascript-oauth2/oauth2/oauth2',
+            'plugins/oauth-io'           : 'plugins/oauth.io/dist/oauth.min',
 
-            'plugins/cryptojs'      : 'plugins/cryptojslib/components',
-            'plugins/toastr'        : 'plugins/toastr/toastr',
-            'plugins/mousewheel'    : 'plugins/jquery-mousewheel/jquery.mousewheel.min',
-            'plugins/gtreetable'    : "plugins/bootstrap-gtreetable/dist/bootstrap-gtreetable",
-            'plugins/jquery-migrate': 'plugins/jquery-migrate/jquery-migrate',
+            // jquery
+            'plugins/jquery-migrate'     : 'plugins/jquery-migrate/jquery-migrate',
+            'plugins/jquery-slimscroll'  : 'plugins/jquery-slimscroll/jquery.slimscroll.min',
+            'plugins/mousewheel'         : 'plugins/jquery-mousewheel/jquery.mousewheel.min',
+            'plugins/uniform'            : 'plugins/jquery.uniform/jquery.uniform.min',
+            'plugins/impromptu'          : 'plugins/jquery-impromptu/dist/jquery-impromptu.min',
+            'plugins/cookie'             : 'plugins/jquery-cookie/jquery.cookie',
 
+            // bootstrap
             'plugins/bs-datepicker'      : 'plugins/bootstrap-datepicker/js/bootstrap-datepicker',
             'plugins/bs-modal'           : 'plugins/bootstrap-modal/js/bootstrap-modal',
             'plugins/bs-modal-manager'   : 'plugins/bootstrap-modal/js/bootstrap-modalmanager',
@@ -111,35 +121,33 @@
             'plugins/bs-material'        : 'vendor/material',
             'plugins/bs-material-ripples': 'plugins/bootstrap-material-design/scripts/ripples',
             'plugins/contextmenu'        : 'plugins/bootstrap-contextmenu/bootstrap-contextmenu',
+            'plugins/gtreetable'         : "plugins/bootstrap-gtreetable/dist/bootstrap-gtreetable",
 
-            'plugins/cookie'          : 'plugins/jquery-cookie/jquery.cookie',
-            'plugins/events'          : 'plugins/eventEmitter/EventEmitter.min',
+
             // gsap
-            'plugins/gsap/lite'       : 'plugins/gsap/src/minified/TweenLite.min',
-            'plugins/gsap/max'        : 'plugins/gsap/src/minified/TweenMax.min',
-            'plugins/gsap/attr'       : 'plugins/gsap/src/minified/plugins/AttrPlugin.min',
-            'plugins/gsap/color'      : 'plugins/gsap/src/minified/plugins/ColorPropsPlugin.min',
-            'plugins/gsap/scroll'     : 'plugins/gsap/src/minified/plugins/ScrollToPlugin.min',
-            'plugins/gsap/text'       : 'plugins/gsap/src/minified/plugins/TextPlugin.min',
-            'plugins/gsap/jquery-lite': 'plugins/gsap/src/minified/jquery.gsap.min',
-            'plugins/gsap/jquery-max' : 'plugins/gsap/src/minified/jquery.gsap.min',
+            'plugins/gsap/lite'          : 'plugins/gsap/src/minified/TweenLite.min',
+            'plugins/gsap/max'           : 'plugins/gsap/src/minified/TweenMax.min',
+            'plugins/gsap/attr'          : 'plugins/gsap/src/minified/plugins/AttrPlugin.min',
+            'plugins/gsap/color'         : 'plugins/gsap/src/minified/plugins/ColorPropsPlugin.min',
+            'plugins/gsap/scroll'        : 'plugins/gsap/src/minified/plugins/ScrollToPlugin.min',
+            'plugins/gsap/text'          : 'plugins/gsap/src/minified/plugins/TextPlugin.min',
+            'plugins/gsap/jquery-lite'   : 'plugins/gsap/src/minified/jquery.gsap.min',
+            'plugins/gsap/jquery-max'    : 'plugins/gsap/src/minified/jquery.gsap.min',
 
 
-            //styles
-            'plugins/select2css'      : '../styles/components/select2',
-            'plugins/highlightjscss'  : 'plugins/highlightjs/styles/zenburn'
+            // stylesheets
+            'plugins/select2css'         : '../styles/components/select2',
+            'plugins/highlightjscss'     : 'plugins/highlightjs/styles/zenburn'
         },
 
+
         shim: {
-            'plugins/svg'           : {
-                exports: 'SVG'
-            },
-            'jade'                  : {
-                exports: 'jade'
-            },
-            'string'                : {
-                exports: 's'
-            },
+            'plugins/svg'           : {exports: 'SVG'},
+            'jade'                  : {exports: 'jade'},
+            'string'                : {exports: 's'},
+            'plugins/github-api'    : {exports: 'Github'},
+            'plugins/oauth2'        : {exports: 'oauth2'},
+            'plugins/oauth-io'      : {exports: 'OAuth'},
             'jquery'                : {
                 exports: '$',
                 init   : function(){

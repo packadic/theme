@@ -1,0 +1,8 @@
+include ../../mixins/box
+
+mixin gh-table(title, icon, maxHeight)
+    - icon = icon || "fa fa-list";
+    - maxHeight = maxHeight || false
+    +box(title, icon, maxHeight).box-table
+        table.table.table-bordered.table-condensed.table-hover.table-light.table-striped.no-margin-bottom
+            block

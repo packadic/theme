@@ -1,0 +1,12 @@
+include _mixins
+
++gh-table("Organisations", "fa fa-list", 250)
+    thead
+        th.text-center Name
+    tbody
+        each org in orgs
+            tr
+                td
+                    img(src=org.avatar_url, width="20", height="20")
+                    a(href="#", data-org=org.login, data-org-id=org.id).margin-left
+                        strong=org.login

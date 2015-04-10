@@ -19,73 +19,79 @@ html(lang="en")
                 +css-style("fast.css")
                 +css-style("themes/theme-default.css")
 
-    body.page-loading.section-top-fixed
-        block body
-            #page-loader
-                .loader.loader-light
-            //section#top
-            section#top.navbar.navbar-fixed-top
-                //header.top
-                header.top
-                    .menu-toggler.sidebar-toggler
-                        i.fa.fa-long-arrow-left
+    block body-tag
+        body.page-loading.section-top-fixed
 
-                    .page-logo
-                        .text-logo
-                            block text-logo
-                                | Packadic
+    block body
+        #page-loader
+            .loader.loader-light
+        //section#top
+        section#top.navbar.navbar-fixed-top
+            //header.top
+            header.top
+                .menu-toggler.sidebar-toggler
+                    i.fa.fa-long-arrow-left
 
-                    // include ../partials/logo
+                .page-logo
+                    .text-logo
+                        block text-logo
+                            | Packadic
 
-                    //nav.top-nav
-                    +a.menu-toggler.responsive-toggler(data-toggle="collapse" data-target=".navbar-collapse").btn.btn-default
-                        i.fa.fa-bars.fa-lg
+                block header-search-form
+                    +search-form('/radic/index.html', 'POST', 'search')#search-form
 
-                    .header-menu
-                        block header-menu
-                            include ../partials/header-menu
-            .clearfix
+                //nav.top-nav
+                +a.menu-toggler.responsive-toggler(data-toggle="collapse" data-target=".navbar-collapse").btn.btn-default
+                    i.fa.fa-bars.fa-lg
 
-            //#page
-            section#page
-                //section#side
-                .sidebar-wrapper
-                    //section#side aside
-                    nav.sidebar-nav.navbar-collapse.collapsent
-                        .loader.loader-light
-                        ul.sidebar-nav-menu(data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200")
+                .header-menu
+                    block header-menu
+                        include ../partials/header-menu
+        .clearfix
 
-                //section#content
-                .main-wrapper
-                    //main
-                    main
-                        header.content
-                            block header
-                                +page-title("Title", "Subtitle")
-                                +page-breadcrumbs
-                                    +breadcrumb("Buttons", false, true, true)
-                        div.content
-                            block content
-                                .row
-                                    .col-md-12
-                                        | contentsdf
-            //section#bottom
-            section#bottom
-                //footer.bottom
-                footer.bottom
-                    block footer
-                        p Radicsss
+        //#page
+        section#page
+            //section#side
+            .sidebar-wrapper
+                //section#side aside
+                nav.sidebar-nav.navbar-collapse.collapsent
+                    .loader.loader-light
+                    ul.sidebar-nav-menu(data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200")
 
-            block site-data
-                include ../pages/site-data
+            //section#content
+            .main-wrapper
+                //main
+                main
+                    header.content
+                        block header
+                            +page-title("Title", "Subtitle")
+                            +page-breadcrumbs
+                                +breadcrumb("Buttons", false, true, true)
+                    div.content
+                        block content
+                            .row
+                                .col-md-12
+                                    | contentsdf
+        //section#bottom
+        section#bottom
+            //footer.bottom
+            footer.bottom
+                block footer
+                    p Radicsss
 
-            block script
+        block site-data
+            include ../pages/site-data
 
-            block scripts
-                +js-script('init.js')
-                // The place to include custom logic, a small demo
-                +js-script('outside_of_project.js')
-                // end smalld demo
-                +js-script('boot.js')
+        block script
 
-            block after
+        block scripts
+            +js-script('init.js')
+
+            // The place to include custom logic, a small demo
+            block scripts-outside-of-project
+            +js-script('outside_of_project.js')
+            block scripts-pre-boot
+
+            +js-script('boot.js')
+
+        block after

@@ -24,7 +24,7 @@ $box-header-content-bg-light:                                           false !d
 
 
 // section#top
-$section-top-bg:                                                        content-bg(3, false) !default;
+$section-top-bg:                                                        content-bg(5, false) !default;
 $section-top-bg-color:                                                  #444 !default;
 
 // Header search
@@ -39,7 +39,7 @@ $header-hor-menu-default-link-bg-color-on-hover:                		lighten($heade
 $header-hor-menu-default-link-bg-color-on-active:               		$brand-main-color;
 
 // Header search
-$header-search-bg-color:                                        		darken($header-bg-color, 4%) !default;
+$header-search-bg-color:                                        		#222 !default;
 $header-search-bg-hover-color:                                  		$header-hor-menu-default-link-bg-color-on-hover !default;
 $header-search-bg-color-on-open:                                 		$header-search-bg-hover-color !default;
 $header-search-font-color:                                      		#999999 !default;
@@ -163,6 +163,7 @@ $footer-fixed-bg-color: 												darken($bg-color, 7%) !default;
 
 $section-bottom-bg-color: rgb(57, 59, 99) !default;
 
+$section-bottom-bg:                                                     content-bg(5, false) !default;
 //Boxed layout
 $for-min-992px-page-boxed-page-container-bg-color:              		$sidebar-menu-devider-border-color !default;
 $for-min-992px-page-boxed-bg-color:                             		darken($bg-color, 3%) !default;

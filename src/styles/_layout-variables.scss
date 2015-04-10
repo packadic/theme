@@ -45,7 +45,7 @@ $header-hor-menu-search-input-margin:    			 					7px 0 0 0 !default;  // adjust
 $sidebar-width:             											235px !default; // sidebar width. default:235px
 $sidebar-collapsed-width:   											45px  !default; // minimized/collapsed sidebar width. default:35px
 $sidebar-collapsed-submenu-width-on-hover:								210px !default; // sub menu width displayed on hover in collapsed sidebar mode. default:210px
-$sidebar-logo-container-width:  										$sidebar-width - $sidebar-collapsed-width !default; // logo container width. Normally same with sidebar-width.
+$sidebar-logo-container-width:  										$sidebar-width - $sidebar-collapsed-width - 1 !default; // logo container width. Normally same with sidebar-width.
 $sidebar-logo-container-width-xs: 										110px !default; // logo container width in mobile portrait view. default:110px.
 $sidebar-logo-container-width-xxs: 										100px !default; // logo container width in mobile landspace view. default:100px.
 

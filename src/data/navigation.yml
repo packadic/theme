@@ -106,6 +106,10 @@ sidebar:
         href: <%= target.nav.pre %>/components/widgets<%= target.nav.ext %>
 
 
+  - name: Github editor
+    href: <%= target.nav.pre %>/github-editor<%= target.nav.ext %>
+    icon: fa fa-git
+
   - name: Forms
     icon: fa fa-pencil
     children:

@@ -1,0 +1,8 @@
+
+mixin search-form(action, method, inputName)
+    form.search-form(action=action, method=method)&attributes(attributes)
+        .input-group
+            input.form-control(type='text', placeholder='Search...', name=inputName)
+            span.input-group-btn
+                a.btn.submit(href='javascript:;')
+                    i.fa.fa-search
