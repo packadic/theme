@@ -9,7 +9,7 @@
 
     require.config(packadic.config.requireJS);
 
-    require([ 'module', 'jquery',  'autoloader', 'string', 'jade', 'code-mirror', 'plugins/cookie' ],
+    require([ 'module', 'jquery',  'autoloader', 'string', 'jade', 'config', 'code-mirror', 'plugins/cookie' ],
         function( module, $, autoloader, s, jade, config ){
 
             window.jade = jade;

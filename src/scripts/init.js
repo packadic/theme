@@ -127,6 +127,8 @@
             // gsap
             'plugins/gsap/lite'          : 'plugins/gsap/src/minified/TweenLite.min',
             'plugins/gsap/max'           : 'plugins/gsap/src/minified/TweenMax.min',
+            'plugins/gsap/ease'          : 'plugins/gsap/src/minified/easing/EasePack.min',
+            'plugins/gsap/css'           : 'plugins/gsap/src/minified/plugins/CSSPlugin.min',
             'plugins/gsap/attr'          : 'plugins/gsap/src/minified/plugins/AttrPlugin.min',
             'plugins/gsap/color'         : 'plugins/gsap/src/minified/plugins/ColorPropsPlugin.min',
             'plugins/gsap/scroll'        : 'plugins/gsap/src/minified/plugins/ScrollToPlugin.min',
@@ -142,6 +144,7 @@
 
 
         shim: {
+
             'plugins/svg'           : {exports: 'SVG'},
             'jade'                  : {exports: 'jade'},
             'string'                : {exports: 's'},
@@ -163,7 +166,7 @@
             'plugins/bs-material'   : [ 'plugins/bootstrap', 'plugins/bs-material-ripples' ],
 
             'plugins/gsap/lite'       : [ 'plugins/gsap/scroll' ],
-            'plugins/gsap/max'        : [ 'plugins/gsap/scroll' ],
+            'plugins/gsap/max'        : {exports: 'TweenMax', deps: [ 'plugins/gsap/scroll' ]},
             'plugins/gsap/jquery-lite': [ 'jquery', 'plugins/gsap/lite' ],
             'plugins/gsap/jquery-max' : [ 'jquery', 'plugins/gsap/max' ],
 
@@ -175,7 +178,7 @@
             'config'             : [ 'jquery' ],
             'eventer'            : [ 'jquery', 'plugins/events', 'config' ],
             'autoloader'         : [ 'config' ],
-            'theme'              : [ 'plugins/gsap/jquery-lite', 'config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events' ],
+            'theme'              : [  'config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events' ],
             'demo'               : [ 'theme' ]
         },
 

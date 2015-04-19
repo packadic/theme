@@ -233,19 +233,27 @@ var init = module.exports = function( grunts ){
             },
             watch  : [ 'devtools', 'watch' ]
         },
-        typescript: {
+        requirejs: {
             dev: {
-                src: ['src/tscript/*.ts'],
-                dest: '<%= target.dest %>/assets/scripts/ts/',
                 options: {
-                    module: 'amd', //or commonjs
-                    target: 'es5', //or es3
-                    basePath: '<%= target.src %>/tscript',
-                    sourceMap: false,
-                    declaration: true,
-                    references: [
-
-                    ]
+                    baseUrl                   : "dev/assets/scripts",
+                    optimizeCss               : false,
+                    modules                   : [
+                        {name: "ace-editor"},
+                        {
+                            name: 'boot', include: [
+                            'jquery', 'plugins/async', 'autoloader', 'string', 'jade', 'code-mirror',
+                            'plugins/cookie', 'theme', 'theme/sidebar', 'templates/sidebar', 'config', 'eventer', 'plugins/bs-material-ripples',
+                            'storage', 'json'
+                        ]
+                        }
+                    ],
+                    mainConfigFile            : 'dev/assets/scripts/init.js',
+                    dir                       : "dev/assets/scripts",
+                    skipDirOptimize           : false,
+                    preserveLicenseComments   : false,
+                    removeCombined            : true,
+                    optimizeAllPluginResources: true
                 }
             }
         },

@@ -1,6 +1,8 @@
 # Changelog
 
 
+[Link me](http://link.nl) naaar jou toe weet je **wel**
+
 
 - [2015-02-19](https://github.com/packadic/theme/commit/77ce132fcc68b7073da03f5780b1e32a99f26f32): github pages preview update  
 - [2015-02-19](https://github.com/packadic/theme/commit/f2ec0b1ad5c22026eebd0cc73180edc20bd6a245): readme update  

@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+var requirejs = require('requirejs'),
+    util = require('util'),
+    _ = require('lodash');
+
+function dump(val){
+    process.stdout.write(util.inspect(val, { hidden: true, colors: true, depth: 5}));
+}
+
+function getMainConfig(){
+    GLOBAL.window = {};
+    require('./src/scripts/init');
+    var rjsConfig = {};
+    Object.keys(GLOBAL.window.packadic.config.requireJS).forEach(function( k ){
+        rjsConfig[ k ] = GLOBAL.window.packadic.config.requireJS[ k ];
+    });
+    delete GLOBAL.window;
+    return rjsConfig;
+}
+var rconfig = getMainConfig();
+var config = {
+    paths: rconfig.paths,
+    shim: rconfig.shim,
+    baseUrl                : "dev/assets/scripts2",
+    optimizeCss            : false,
+    modules                : [
+        {name: "ace-editor"},
+        {
+            name: 'boot', include: [
+            'jquery', 'plugins/async', 'autoloader', 'string', 'jade', 'code-mirror',
+            'plugins/cookie', 'theme', 'theme/sidebar', 'templates/sidebar', 'config',
+            'eventer', 'plugins/bs-material-ripples', 'storage', 'json'
+        ]
+        }
+    ],
+    dir                    : "dist/assets/scripts",
+    skipDirOptimize: false,
+    preserveLicenseComments: false,
+    removeCombined         : true,
+    optimizeAllPluginResources: true
+};
+dump(require('./build'));

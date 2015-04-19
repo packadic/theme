@@ -1,24 +1,24 @@
 define([ 'jquery', 'config', 'eventer' ],
     function( $, config, eventer){
         'use strict';
-        var autoloader = {
+        var al = {
             initialised: false
         };
-        eventer('autoloader', autoloader);
+        eventer('autoloader', al);
 
-        autoloader._defineEvent('init');
-        autoloader._defineEvent('detected');
-        autoloader._defineEvent('loaded');
-        autoloader._defineEvent('ready');
+        al._defineEvent('init');
+        al._defineEvent('detected');
+        al._defineEvent('loaded');
+        al._defineEvent('ready');
 
-        autoloader.detected = 0;
-        autoloader.loaded = 0;
+        al.detected = 0;
+        al.loaded = 0;
 
-        autoloader.ready = function(callback){
-            autoloader.once('ready', callback);
+        al.ready = function(callback){
+            al.once('ready', callback);
         };
 
-        autoloader.load = function(module, callback){
+        al.load = function(module, callback){
             var load = [];
             if(typeof module === 'string'){
                 load.push(module);
@@ -26,15 +26,15 @@ define([ 'jquery', 'config', 'eventer' ],
                 // array
                 load = module;
             }
-            autoloader.detected++;
-            autoloader._trigger('detected');
-            autoloader._trigger('detected:' + module);
+            al.detected++;
+            al._trigger('detected');
+            al._trigger('detected:' + module);
             require(load, function(){
-                autoloader.loaded++;
-                autoloader._trigger('loaded');
-                autoloader._trigger('loaded:' + module);
-                if(autoloader.loaded == autoloader.detected){
-                    autoloader._trigger('ready');
+                al.loaded++;
+                al._trigger('loaded');
+                al._trigger('loaded:' + module);
+                if(al.loaded == al.detected){
+                    al._trigger('ready');
                 }
                 if( _.isFunction(callback)){
                     var args = _.toArray(arguments);
@@ -42,57 +42,59 @@ define([ 'jquery', 'config', 'eventer' ],
                 }
             });
         };
-        autoloader.detect = function(selector, module, callback){
-            autoloader._defineEvent('detected:' + module);
-            autoloader._defineEvent('loaded:' + module);
+        al.detect = function(selector, module, callback){
+            al._defineEvent('detected:' + module);
+            al._defineEvent('loaded:' + module);
             var $els = $(selector);
             if($els.length > 0){
-                autoloader.load(module, callback)
+                al.load(module, callback)
             }
         };
 
-        autoloader.init = function(){
-            autoloader._trigger('init');
-            if(autoloader.initialised === true){
+        al.init = function(){
+            al._trigger('init');
+            if(al.initialised === true){
                 return;
             }
-            autoloader.initialised = true;
+            al.initialised = true;
 
-            autoloader.detect('body', 'plugins/bootstrap', function(){
+            al.detect('body', 'plugins/bootstrap', function(){
 
             });
 
-            autoloader.detect('.selectpicker', 'plugins/bs-select', function(){
+            al.detect('.selectpicker', 'plugins/bs-select', function(){
                 $('.selectpicker').selectpicker();
             });
 
-            autoloader.detect('.scrollable', 'plugins/mscrollbar', function(){
+            al.detect('.scrollable', 'plugins/mscrollbar', function(){
                 $.mCustomScrollbar.defaults.theme = 'dark';
                 $('.scrollable').addClass('mCustomScrollbar').mCustomScrollbar();
             });
 
-            autoloader.detect('[data-share-buttons]', 'share-buttons', function(sb){
+            al.detect('[data-share-buttons]', 'share-buttons', function(sb){
                 sb.applyTo('[data-share-buttons]');
             });
 
-            autoloader.detect('.highlighter', 'highlighter', function(highlighter){
+            al.detect('.highlighter', 'highlighter', function(highlighter){
                 highlighter.applyTo($('.highlighter'));
             });
 
-            autoloader.detect('.tipped', 'plugins/bootstrap', function(){
+            al.detect('.tipped', 'plugins/bootstrap', function(){
                 $('.tipped').tooltip();
             });
-            autoloader.detect('[data-toggle="tooltip"]', 'plugins/bootstrap', function(){
-                $('[data-toggle="tooltip"]').tooltip();
+            al.detect('[data-toggle="tooltip"]', 'plugins/bootstrap', function(){
+                $('[data-toggle="tooltip"]').tooltip({
+                    container: 'body'
+                });
             });
-            autoloader.detect('[data-toggle="popover"]', 'plugins/bootstrap', function(){
+            al.detect('[data-toggle="popover"]', 'plugins/bootstrap', function(){
                 var $el = $('[data-toggle="popover"]');
                 $(document).on('click', '[data-toggle="popover"]', function(e){
                     e.preventDefault();
                 });
                 $el.popover();
             });
-            autoloader.detect('[data-toggle="confirmation"]', 'plugins/bs-confirmation', function(){
+            al.detect('[data-toggle="confirmation"]', 'plugins/bs-confirmation', function(){
                 $('a[data-toggle="confirmation"]').confirmation({
                     container: 'body',
                     btnCancelIcon: 'fa fa-remove',
@@ -103,18 +105,18 @@ define([ 'jquery', 'config', 'eventer' ],
                 });
             });
 
-            autoloader.detect('.modal, [data-toggle="modal"]', 'plugins/bs-modal', function(){
+            al.detect('.modal, [data-toggle="modal"]', 'plugins/bs-modal', function(){
                 //$("select.select2").select2();
             });
 
-            autoloader.detect('select.select2', 'plugins/select2', function(){
+            al.detect('select.select2', 'plugins/select2', function(){
                 $("select.select2").select2();
             });
 
-            autoloader.detect('input.switch', 'plugins/bs-switch', function(){
+            al.detect('input.switch', 'plugins/bs-switch', function(){
                 $("input.switch").bootstrapSwitch();
             });
         };
 
-        return autoloader;
+        return al;
     });

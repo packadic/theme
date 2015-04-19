@@ -66,7 +66,12 @@ sidebar:
 
   - name: Layouts
     icon: fa fa-desktop
-    href: <%= target.nav.pre %>layouts<%= target.nav.ext %>
+    children:
+      - name: Main
+        href: <%= target.nav.pre %>/layouts<%= target.nav.ext %>
+      - name: New sidebar
+        href: <%= target.nav.pre %>/layouts/sidebar-new<%= target.nav.ext %>
+
 
   - name: Documentation
     icon: fa fa-book

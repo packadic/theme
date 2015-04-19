@@ -1,4 +1,4 @@
-define([ 'jquery', 'storage', 'plugins/md5' ], function($, storage, md5 ){
+define([ 'jquery', 'storage', 'plugins/md5', 'eventer' ], function( $, storage, md5, eventer ){
 
     // Initial Setup
     // -------------
@@ -20,11 +20,34 @@ define([ 'jquery', 'storage', 'plugins/md5' ], function($, storage, md5 ){
     var API_URL = 'https://api.github.com';
 
     var Github = function( options ){
-
+        options = options || {};
         options.cache = options.cache || true;
         options.cacheDaysExpire = options.cacheDaysExpire || 30;
+        eventer('github', this);
+        var self = this;
 
-        var cacheSeconds = options.cacheDaysExpire * 24 * 60 * 60 * 60;
+        this._defineEvent('request');
+        this._defineEvent('response');
+
+        this.setOption = function( key, value ){
+            options[ key ] = value;
+        };
+
+        this.setAccessToken = function( token ){
+            options.token = token;
+        };
+        this.setUsername = function( username ){
+            options.username = username;
+        };
+        this.setPassword = function( password ){
+            options.password = password;
+        };
+        this.setAuth = function( auth ){
+            options.auth = auth;
+        };
+        this.getOptions = function(){
+            return options;
+        };
 
         // HTTP Request Abstraction
         // =======
@@ -32,25 +55,26 @@ define([ 'jquery', 'storage', 'plugins/md5' ], function($, storage, md5 ){
         // I'm not proud of this and neither should you be if you were responsible for the XMLHttpRequest spec.
 
         function _request( method, path, data, cb, raw, sync ){
+            self._trigger('request', method, path, data, raw, sync);
             function getURL(){
                 var url = path.indexOf('//') >= 0 ? path : API_URL + path;
-                return url + ((/\?/).test(url) ? "&" : "?") + (data ? $.param(data) + '&' : '') + (new Date()).getTime();
+                return url; // + ((/\?/).test(url) ? "&" : "?"); // + (new Date()).getTime();
             }
 
             var xhr = new XMLHttpRequest();
 
             var URL = getURL();
-            /*
-            console.log(data);
-            console.log(JSON.stringify(data));
-            console.log(URL);
-            if(data){
+            /*(data ? $.param(data) + '&' : '') +
+             console.log(data);
+             console.log(JSON.stringify(data));
+             console.log(URL);
+             if(data){
 
-                console.log('param url', URL);
-            }*/
+             console.log('param url', URL);
+             }*/
             xhr.open(method, URL, !sync);
 
-            if(options.cache === true){
+            if( options.cache === true ){
                 var cacheKey = md5(method + path + (data ? JSON.stringify(data) : ''));
                 var ETag = storage.get(cacheKey + ':ETag');
                 if( ETag ){
@@ -60,12 +84,15 @@ define([ 'jquery', 'storage', 'plugins/md5' ], function($, storage, md5 ){
 
             if( !sync ){
                 xhr.onreadystatechange = function(){
+
+                    self._trigger('response', this);
                     if( this.readyState == 4 ){
                         if( this.status === 304 ){
                             cb(null, options.cache ? storage.get(cacheKey, {json: true}) : '', this);
                         } else if( this.status >= 200 && this.status < 300 ){
                             var response = raw ? this.responseText : this.responseText ? JSON.parse(this.responseText) : true;
-                            if(options.cache === true){
+                            if( options.cache === true ){
+                                var cacheSeconds = options.cacheDaysExpire * 24 * 60 * 60 * 60;
                                 storage.set(cacheKey + ':ETag', this.getResponseHeader('ETag'), {expires: cacheSeconds});
                                 storage.set(cacheKey, response, {json: true, expires: cacheSeconds});
                             }
@@ -701,6 +728,7 @@ define([ 'jquery', 'storage', 'plugins/md5' ], function($, storage, md5 ){
                         return cb(err);
                     }
                     _request("PUT", repoPath + "/contents/" + path, {
+                        path   : path,
                         message: message,
                         content: btoa(content),
                         branch : branch,

@@ -54,9 +54,10 @@ html(lang="en")
             //section#side
             .sidebar-wrapper
                 //section#side aside
-                nav.sidebar-nav.navbar-collapse.collapsent
-                    .loader.loader-light
-                    ul.sidebar-nav-menu(data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200")
+                block sidebar
+                    nav.sidebar-nav.navbar-collapse.collapsent
+                        .loader.loader-light
+                        ul.sidebar-nav-menu(data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200")
 
             //section#content
             .main-wrapper

@@ -1,4 +1,10 @@
-define([ 'jquery', 'theme', 'templates/codepad', 'plugins/bs-select' ], function( $, theme, template ){
+define([
+    'jquery', 'theme', 'templates/codepad', 'plugins/bs-select',
+
+], function(
+    $, theme, template
+
+){
 
 
     (function Helpers(){
@@ -11,18 +17,24 @@ define([ 'jquery', 'theme', 'templates/codepad', 'plugins/bs-select' ], function
         return $(document.createElement(el));
     }
 
-    function Codepad( id ){
+    function Codepad( id, options ){
         this.id = id;
-        this.$el = $('#' + id).html('');
+
+        options = options || {};
+        this.options = _.merge(this.defaults, options);
 
         this.$codepad = $(template({
             id: id
-        }));
-        this.$el.append(this.$codepad.hide());
+        })).hide();
 
-        this.$editor = cre('pre').attr('id', 'codepad-editor-' + this.id);
+        $('body').append(this.$codepad);
 
-        if(this.options.deferRequireModules === false){
+        this.$editorContainer = this.$codepad.find('.codepad-editor-container').append(
+            this.$editor = cre('pre').attr('id', 'codepad-editor-' + this.id)
+        );
+
+
+        if( this.options.deferRequireModules === false ){
             this.__requireModules(function( reqs ){
                 this.reqs = reqs;
             }.bind(this));
@@ -36,35 +48,32 @@ define([ 'jquery', 'theme', 'templates/codepad', 'plugins/bs-select' ], function
     }
 
     Codepad.prototype = {
-        options: {},
+        options    : {},
         defaults   : {
             deferRequireModules: true
         },
         Constructor: Codepad,
 
         reqs     : [],
-        aceEditor: null,
+        editor   : null,
         themelist: {},
         modelist : {},
 
         __requireModules: function( cb ){
-            var acereq = [ 'ace/ace' ];
-            $.each([ 'beautify', 'emmet', 'searchbox', 'settings_menu', 'modelist', 'themelist', 'language_tools' ], function( i, ext ){
-                acereq.push('ace/ext/' + ext);
-            });
-            require(acereq, function( ace, beautify, emmet, searchbox, settings_menu, modelist, themelist, language_tools ){
-                this.themelist = themelist;
-                this.modelist = modelist;
-                cb([ ace, beautify, emmet, searchbox, settings_menu, modelist, themelist, language_tools ]);
-            }.bind(this));
+            require(['ace-editor'],
+                function(aces){
+                    this.themelist = aces.themelist;
+                    this.modelist = aces.modelist;
+                    cb([ aces.ace, aces.beautify, aces.emmet, aces.searchbox, aces.settings_menu, aces.modelist, aces.themelist, aces.language_tools ]);
+                }.bind(this));
             return this;
         },
 
         __setupEditor: function( ace, beautify, emmet, searchbox, settings_menu, modelist, themelist, language_tools ){
             this.adjustHeightToMatch();
-            this.$codepad.find('.codepad-editor-container').html('').append(this.$editor);
+            this.$editorContainer.html('').append(this.$editor);
 
-            var editor = this.aceEditor = window.aceEditor = ace.edit(this.$editor.attr('id'));
+            var editor = this.editor = ace.edit(this.$editor.attr('id'));
             settings_menu.init(editor);
             editor.setTheme("ace/theme/kuroir");
             editor.setOption("enableEmmet", true);
@@ -98,8 +107,8 @@ define([ 'jquery', 'theme', 'templates/codepad', 'plugins/bs-select' ], function
             this.$editor.css({
                 height: height
             });
-            if( !_.isUndefined(this.aceEditor) && this.aceEditor ){
-                this.aceEditor.resize();
+            if( !_.isUndefined(this.editor) && this.editor ){
+                this.editor.resize();
             }
             return this;
         },
@@ -113,7 +122,7 @@ define([ 'jquery', 'theme', 'templates/codepad', 'plugins/bs-select' ], function
                 }
                 return this
             }
-            this.$el.replaceWith(this.$codepad);
+
             this.__requireModules(function( reqs ){
                 this.__setupEditor.apply(this, reqs);
 
@@ -122,8 +131,8 @@ define([ 'jquery', 'theme', 'templates/codepad', 'plugins/bs-select' ], function
                     this.__makeList('mode');
                 }.bind(this), 400);
 
-                $.each(this.toolbarButtons, function(name, btn){
-                    if(btn.hasClass('added')){
+                $.each(this.toolbarButtons, function( name, btn ){
+                    if( btn.hasClass('added') ){
                         return;
                     }
                     btn.addClass('added');
@@ -138,23 +147,44 @@ define([ 'jquery', 'theme', 'templates/codepad', 'plugins/bs-select' ], function
             return this;
         },
 
+        toTopLine   : function(){
+            this.editor.session.selection.clearSelection();
+            this.editor.navigateTo(0, 0);
+        },
+        setContainer: function( $el ){
+            $el.html('').append(this.$codepad);
+        },
+
         show: function(){
             this.$codepad.show();
+            this.toTopLine();
             return this;
         },
 
-        hide: function(){
+        hide   : function(){
             this.$codepad.hide();
             return this;
         },
-
-
-        setValue: function(val){
-            this.aceEditor.session.setValue(val);
+        slideUp: function(){
+            this.$codepad.slideDown.apply(this.$codepad, $.makeArray(arguments));
+            return this;
         },
 
-        setModeForPath: function(path){
-            this.aceEditor.session.setMode(this.modelist.getModeForPath(path).mode);
+        slideDown: function(){
+            this.$codepad.slideDown.apply(this.$codepad, $.makeArray(arguments));
+            return this;
+        },
+
+        setValue: function( val ){
+            this.editor.setValue(val);
+        },
+
+        getValue: function(){
+            return this.editor.getValue();
+        },
+
+        setModeForPath: function( path ){
+            this.editor.session.setMode(this.modelist.getModeForPath(path).mode);
             this.__makeList('mode');
         },
 
@@ -164,7 +194,7 @@ define([ 'jquery', 'theme', 'templates/codepad', 'plugins/bs-select' ], function
                 .addClass('btn ' + classes || '')
                 .attr('id', 'codepad-toolbar-button-' + name)
                 .html(value);
-            if(this.isInitialized){
+            if( this.isInitialized ){
                 btn.addClass('added');
                 this.$codepad.find('.codepad-toolbar .codepad-toolbar-left').append(btn);
             }
@@ -193,16 +223,16 @@ define([ 'jquery', 'theme', 'templates/codepad', 'plugins/bs-select' ], function
             $select.on('change', function( e ){
                 var val = $select.selectpicker('val');
                 if( type == 'theme' ){
-                    aceEditor.setTheme(val);
+                    this.editor.setTheme(val);
                 } else {
-                    aceEditor.session.setMode(val)
+                    this.editor.session.setMode(val)
                 }
-            });
+            }.bind(this));
 
             if( type == 'theme' ){
-                $select.selectpicker('val', this.aceEditor.getTheme());
+                $select.selectpicker('val', this.editor.getTheme());
             } else {
-                $select.selectpicker('val', this.aceEditor.session.getMode().$id);
+                $select.selectpicker('val', this.editor.session.getMode().$id);
             }
             return this;
         }
