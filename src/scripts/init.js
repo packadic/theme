@@ -139,10 +139,11 @@
 
 
             // Datatables
-            'datatables': 'plugins/datatables/media/js/jquery.dataTables.min',
-            'datatables-css': 'plugins/datatables/media/css/jquery.dataTables.css',
-            'datatables/plugins': 'plugins/datatables-plugins',
-            'datatables/bs-plugins': 'plugins/datatables-plugins',
+            'datatables'                 : 'plugins/datatables/media/js/jquery.dataTables.min',
+            'datatables/bootstrap'       : 'datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.min',
+            'datatables-css'             : 'plugins/datatables/media/css/jquery.dataTables.css',
+            'datatables/plugins'         : 'plugins/datatables-plugins',
+            'datatables/bs-plugins'      : 'plugins/datatables-plugins',
 
             // stylesheets
             'plugins/select2css'         : '../styles/components/select2',
@@ -177,7 +178,9 @@
             'plugins/gsap/jquery-lite': [ 'jquery', 'plugins/gsap/lite' ],
             'plugins/gsap/jquery-max' : [ 'jquery', 'plugins/gsap/max' ],
 
-            'plugins/select2': [ 'css!plugins/select2css' ],
+            'vendor/dataTables.bootstrap': [ 'datatables' ],
+
+            'plugins/select2'    : [ 'css!plugins/select2css' ],
             'plugins/highlightjs': [ 'css!plugins/highlightjscss' ],
 
             // packadic scripts

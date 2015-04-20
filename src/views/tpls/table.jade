@@ -1,14 +1,16 @@
-- table = typeof table == 'object' ? table : {}
+- var table = typeof table == 'object' ? table : {}
 - table.class = typeof table.class == 'string' ? table.class : "table-hover table-striped table-light table-bordered"
 table(class="table " + table.class)
     thead
-        each col, index in cols
-            th&attributes(col.th || null)
-                | #{col.content}
+        if table.cols
+            each col in table.cols
+                th&attributes(col.th || null)
+                    | #{col.content}
     tbody
-        each row, index in rows
-            tr&attributes(row.tr || null)
-                each rowCol, rowColIndex in row.tds
-                    td&attributes(rowCol.td || null)
-                        | #{rowCol.content}
+        if table.rows
+            each row in table.rows
+                tr&attributes(row.tr || null)
+                    each rowCol in row.tds
+                        td&attributes(rowCol.td || null)
+                            | #{rowCol.content}
 

@@ -1,12 +1,19 @@
-/***
-Datatables Plugin(in v1.3)
-***/
+@import "../vendor/datatables_bootstrap";
+
+
 .dataTable {
     width: 100%;
     clear: both;
     margin-top: 5px;
 }
 
+.dataTables_wrapper {
+
+    .input-inline {
+        display: inline;
+    }
+
+}
 .dataTables_filter {
     .form-control {
         margin-left: 4px;
@@ -208,7 +215,7 @@ TableTools
         }
 
         .dataTables_wrapper {
-            padding: 0;
+            padding: 20px;
             margin: 0;
             box-shadow: 5px 5px rgba(#666, 0.1);
 
@@ -291,3 +298,14 @@ Scroller Extension
 .dataTables_scrollBody {
     border-bottom: 1px solid #dddddd !important;
 }
+
+
+
+/* IMAGE OVERIDES */
+
+table.dataTable thead .sorting { background:  image_url("datatables/sort_both.png") no-repeat center right; }
+table.dataTable thead .sorting_asc { background:  image_url('datatables/sort_asc.png') no-repeat center right; }
+table.dataTable thead .sorting_desc { background:  image_url('datatables/sort_desc.png') no-repeat center right; }
+
+table.dataTable thead .sorting_asc_disabled { background:  image_url('datatables/sort_asc_disabled.png') no-repeat center right; }
+table.dataTable thead .sorting_desc_disabled { background:  image_url('datatables/sort_desc_disabled.png') no-repeat center right; }

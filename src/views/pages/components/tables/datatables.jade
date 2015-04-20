@@ -10,8 +10,36 @@ block header
 block content
     .row
         .col-md-12
-            +box("Tree", "list").box-table
-                table#gtreetable.table.gtreetable
-                    thead
-                        tr
-                            th Category
+            +box("Datatable", "list")
+                #demo-datatable
+
+block scripts-pre-boot
+    script.
+        (function InitDatatables(){
+            var packadic = (window.packadic ? window.packadic : {});
+
+            packadic.bindEventHandler('started', function(){
+                require(['jquery', 'datatable'], function($, datatable){
+
+                    var nColNumber = -1;
+                    var datatableVars = datatable.getDefaultSSPVars({
+                        "columnDefs": [
+                            { targets: [ ++nColNumber ], 'title': 'ID', 'name': 'id', 'data': 'id' },
+                            { targets: [ ++nColNumber ], 'title': 'Label', 'name': 'label', 'data': 'label' },
+                            { targets: [ ++nColNumber ], 'title': 'Slug', 'name': 'slug', 'data': 'slug'},
+                            { targets: [ ++nColNumber ], 'title': 'Field Type', 'name': 'field_type', 'data': 'field_type'},
+                            { targets: [ ++nColNumber ], 'title': 'Description', 'name': 'description', 'data': 'description'},
+                            { targets: [ ++nColNumber ], 'title': 'Enabled', 'name': 'enabled', 'data': 'enabled'}
+                        ],
+                        "ajax": {
+                            "url"    : "http://la.radic.nl/admin/attributes"
+                        }
+                    });
+
+                    datatable.create($('#demo-datatable'), null, datatableVars, function($el){
+
+                    })
+                });
+            })
+
+        }.call())
