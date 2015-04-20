@@ -1,5 +1,6 @@
-define([ 'jquery', 'defined', 'cre', 'theme', 'datatables', 'vendor/dataTables.bootstrap', 'plugins/select2' ],
-    function( $, defined, cre, theme ){
+define([ 'jquery', 'fn/defined', 'fn/default', 'fn/cre', 'theme', 'Q',
+         'datatables', 'vendor/dataTables.bootstrap', 'plugins/select2' ],
+    function( $, defined, def, cre, theme, Q ){
         'use strict';
 
         var dt = {};
@@ -29,22 +30,18 @@ define([ 'jquery', 'defined', 'cre', 'theme', 'datatables', 'vendor/dataTables.b
                 return _.merge(defaults, overrides);
             };
 
-            dt.create = function( $targetElement, templateVars, datatableVars, callback ){
-                theme.getTemplate('table', function( template ){
-                    var defaultTemplateVars = {table: {cols: [], rows: []}};
-                    templateVars = templateVars || defaultTemplateVars;
-
-                    var tableHtml = template(templateVars);
-                    $targetElement.html(tableHtml)
-                        .find('> table')
-                        .first()
-                        .dataTable(datatableVars)
-                        .find('.dataTables_length select').select2();
-
-                    callback($targetElement);
+            dt.create = function(datatableVars, templateVars){
+                var defer = Q.defer();
+                theme.table(def(templateVars, null)).then(function($table){
+                    $table.appendTo($('body')).dataTable(datatableVars);
+                    var $wrapper = $table.parents('.dataTables_wrapper').first();
+                    $table.show().find('.dataTables_length select').select2();
+                    $wrapper.$table = $table;
+                    defer.resolve($wrapper);
                 });
-
+                return defer.promise;
             }
+
         }.call());
 
         return dt;

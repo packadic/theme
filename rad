@@ -21,22 +21,45 @@ var rconfig = getMainConfig();
 var config = {
     paths: rconfig.paths,
     shim: rconfig.shim,
-    baseUrl                : "dev/assets/scripts2",
+    baseUrl                : "dev/assets/scripts",
     optimizeCss            : false,
     modules                : [
         {name: "ace-editor"},
         {
             name: 'boot', include: [
-            'jquery', 'plugins/async', 'autoloader', 'string', 'jade', 'code-mirror',
-            'plugins/cookie', 'theme', 'theme/sidebar', 'templates/sidebar', 'config',
-            'eventer', 'plugins/bs-material-ripples', 'storage', 'json'
-        ]
+                'jquery', 'plugins/async', 'autoloader', 'string', 'jade', 'code-mirror',
+                'plugins/cookie', 'theme', 'theme/sidebar', 'config',
+                'templates/sidebar','templates/alert','templates/box','templates/table',
+                'eventer', 'plugins/bs-material-ripples', 'storage', 'json',
+                'fn/defined', 'fn/default', 'fn/cre', 'Q'
+            ]
+        },
+        {
+            name: 'demo',
+            exclude: ['boot'],
+            include: ['demo/show-html', 'demo/show-class', 'demo/forms', 'demo/button-icon-showcase']
+        },
+        {
+            name: 'datatable',
+            exclude: ['demo', 'boot'],
+            include: ['datatables', 'vendor/dataTables.bootstrap']
         }
     ],
-    dir                    : "dist/assets/scripts",
-    skipDirOptimize: false,
+    dir                    : "dist/assets/scripts2",
+    uglify: "none",
+    skipDirOptimize: true,
     preserveLicenseComments: false,
     removeCombined         : true,
     optimizeAllPluginResources: true
 };
-dump(require('./build'));
+delete config.paths['plugins/select2css'];
+delete config.paths['plugins/highlightjscss'];
+delete config.shim['plugins/select2'];
+delete config.shim['plugins/highlightjs'];
+
+
+
+dump(config);
+requirejs.optimize(config, function(asdf){
+    console.log(asdf);
+});

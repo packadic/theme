@@ -1,10 +1,11 @@
-define([ 'jquery', 'config', 'eventer', 'autoloader', 'defined', 'cre',
+define([ 'jquery', 'fn/defined', 'fn/default', 'fn/cre', 'config', 'eventer', 'autoload', 'Q',
          'plugins/cookie', 'plugins/bs-material-ripples' ],
-    function( $, config, eventer, autoloader, defined, cre ){
+    function( $, defined, def, cre, config, eventer, autoload, Q ){
         'use strict';
 
         var theme = {
-            options: {}
+            options: {},
+            $hidden: cre().addClass('hide')
         };
 
         eventer('theme', theme);
@@ -140,6 +141,46 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'defined', 'cre',
                 return parseInt(config.scss.breakpoints[ 'screen-' + which + '-min' ].replace('px', ''));
             };
 
+        }.call());
+
+        (function Events(){
+
+            theme.initHeaderSearchForm = function(){
+                $('section#top').on('click', '.search-form', function( e ){
+                    $(this).addClass("open");
+                    $(this).find('.form-control')
+                        .focus()
+                        .on('blur', function( e ){
+                            $(this).closest('.search-form').removeClass("open");
+                            $(this).unbind("blur");
+                        });
+                }).on('mousedown', '.search-form.open .submit', function( e ){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $(this).closest('.search-form').submit();
+                });
+            };
+
+            theme._initResizeEvent = function(){
+                theme._defineEvent('resize');
+                var resize;
+                theme.$window.on('resize', function(){
+                    if( resize ){
+                        clearTimeout(resize);
+                    }
+                    resize = setTimeout(function(){
+                        theme._trigger('resize');
+                    }, 50);
+                });
+            };
+
+            theme.initEvents = function(){
+                theme._initResizeEvent();
+            }
+        }.call());
+
+        (function PluginHelpers(){
+
             theme.initSlimScroll = function( el, opts ){
                 require([ 'plugins/jquery-slimscroll' ], function(){
                     $(el).each(function(){
@@ -218,52 +259,24 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'defined', 'cre',
                 });
             };
 
-
-        }.call());
-
-        (function Events(){
-
-            theme.initHeaderSearchForm = function(){
-                $('section#top').on('click', '.search-form', function( e ){
-                    $(this).addClass("open");
-                    $(this).find('.form-control')
-                        .focus()
-                        .on('blur', function( e ){
-                            $(this).closest('.search-form').removeClass("open");
-                            $(this).unbind("blur");
-                        });
-                }).on('mousedown', '.search-form.open .submit', function( e ){
-                    e.preventDefault();
-                    e.stopPropagation();
-                    $(this).closest('.search-form').submit();
+            theme.scrollable = function( $el ){
+                require([ 'plugins/mscrollbar' ], function(){
+                    $.mCustomScrollbar.defaults.theme = 'dark';
+                    $el.addClass('mCustomScrollbar').mCustomScrollbar();
                 });
             };
 
-            theme._initResizeEvent = function(){
-                theme._defineEvent('resize');
-                var resize;
-                theme.$window.on('resize', function(){
-                    if( resize ){
-                        clearTimeout(resize);
-                    }
-                    resize = setTimeout(function(){
-                        theme._trigger('resize');
-                    }, 50);
-                });
-            };
-
-            theme.initEvents = function(){
-                theme._initResizeEvent();
-            }
-        }.call());
-
-        (function Loaders(){
-
-            theme.notify = theme.toastr = function( fnName, message, title ){
+            theme.toastr = function( fnName, message, title ){
                 require([ 'plugins/toastr' ], function( toastr ){
                     toastr[ fnName ].apply(toastr, [ message, title ]);
                 });
             };
+
+        }.call());
+
+        (function Interaction(){
+
+            theme.notify = theme.toastr;
 
             theme.alert = function( opt ){
                 var type = opt.type || 'success',
@@ -298,6 +311,69 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'defined', 'cre',
                 }, delay);
             };
 
+            theme.box = function( title, icon, actions ){
+                var deferred = Q.defer();
+                actions = defined(actions) ? actions : false;
+                theme.getTemplate('box', function( template ){
+                    var $box = $(template({
+                        title  : title,
+                        icon   : icon,
+                        actions: actions
+                    }));
+                    $box.$content = $box.find('section').first();
+                    $box.$actions = $box.find('> header > .actions').first();
+                    $box.createAction = function( id, name, classes, href ){
+                        classes = defined(classes) ? classes : 'btn-primary';
+                        href = defined(href) ? href : 'javascript:;';
+                        $box.$actions[ id ] = cre('a')
+                            .attr('href', href)
+                            .attr('id', id)
+                            .addClass('btn')
+                            .addClass(classes)
+                            .text(name);
+                        $box.$actions.append($box.$actions[ id ]);
+                        return $box.$actions[ id ];
+                    };
+                    deferred.resolve($box);
+                });
+                return deferred.promise;
+            };
+
+            theme.button = function( name, size, classes, type, href ){
+                type = def(type, 'a');
+                size = def(size, 'xs');
+                classes = def(classes, '');
+                type = def(type, 'a');
+                href = def(href, 'javascript:;');
+
+                var $button = cre(type)
+                    .addClass('btn btn-' + size)
+                    .addClass(classes);
+
+                if( type === 'a' ){
+                    $button.attr('href', href).text(name);
+                } else if( type === 'button' ){
+                    $button.val(name);
+                }
+                return $button;
+            };
+
+
+            theme.table = function(cols, rows, classes){
+                var deferred = Q.defer();
+                theme.getTemplate('table', function( template ){
+                    var $table = $(template({
+                        table: {
+                            classes: classes,
+                            cols: def(cols, []),
+                            rows: def(rows, [])
+                        }
+                    }));
+                    deferred.resolve($table);
+                });
+                return deferred.promise;
+            };
+
 
         }.call());
 
@@ -321,13 +397,7 @@ define([ 'jquery', 'config', 'eventer', 'autoloader', 'defined', 'cre',
                 ".withripple"
             ].join(",")).addClass('withripple').ripples();
 
-            autoloader.detect('form', 'theme/forms', function( forms ){
-                forms.init();
-            });
 
-            autoloader.detect('#page-svg-logo', 'theme/logo', function( logo ){
-                logo.init();
-            })
 
         };
 

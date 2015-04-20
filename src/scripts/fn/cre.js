@@ -1,4 +1,4 @@
-define([ 'jquery' ], function( $ ){
+define([ 'jquery', 'fn/defined' ], function( $ , defined ){
     'use strict';
 
     return function( name ){

@@ -1,0 +1,15 @@
+mixin form(type, bordered, title)
+    form(role="form", class="form-" + type + (bordered ? " form-bordered":null))&attributes(attributes)
+        block
+
+mixin form-group(id, name, breakpoint, bp1, bp2)
+    .form-group
+        label.control-label(class=(breakpoint ? "col-" + breakpoint + "-" + bp1:null)) #{name}
+        if breakpoint
+            div(class="col-" + breakpoint + "-" + bp2)
+                block
+        else
+            block
+
+mixin form-input(id, type, placeholder)
+    input.form-control(name=id, id=id, type=type, placeholder=placeholder ? placeholder + ".." : null)&attributes(attributes)

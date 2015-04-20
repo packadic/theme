@@ -6,16 +6,25 @@
 
     var packadic = (window.packadic = window.packadic || {});
 
-    packadic.start = new Date();
+    packadic.start = Date.now();
 
+    packadic.getElapsedTime = function(){
+        return (Date.now() - packadic.start) / 1000;
+    };
+
+    packadic.__events_fired = [];
     packadic.__event_callbacks = {
-        "booting" : [],     // before requirejs.config get initialised - before loading the primary dependencies
-        "booted"  : [],     // after loading up RJS, got primary dependencies and booted up packadic base modules
+        "pre-boot": [],     // before requirejs.config get initialised - before loading the primary dependencies
+        "booting" : [],     // after loading up require.js config, before the first require() call
+        "booted"  : [],     // after the first require() call when primary dependencies are loaded and booted up packadic base modules
         "starting": [],     // fires right after loading the theme and autoloader dependencies, before any other startup operation
         "started" : []      // fires after the theme module has been initialised and default autoloaders have been added
     };
 
     packadic.bindEventHandler = function( name, cb ){
+        if(packadic.__events_fired.indexOf(name) !== -1){
+            return cb();
+        }
         packadic.__event_callbacks[ name ].push(cb);
     };
 
@@ -28,6 +37,8 @@
                 cb();
             }
         });
+
+        packadic.__events_fired.push(name);
     };
 
     packadic.debug = function(){
@@ -42,6 +53,7 @@
 
 }.call());
 
+
 /*
  * CONFIG
  */
@@ -49,15 +61,16 @@
 
     var packadic = (window.packadic = window.packadic || {});
     packadic.config = {
-        debug    : false,
-        paths    : {
+        debug                 : false,
+        pageLoadedOnAutoloaded: true,
+        paths                 : {
             assets : '/assets',
             images : '/assets/images',
             scripts: '/assets/scripts',
             fonts  : '/assets/fonts',
             styles : '/assets/styles'
         },
-        requireJS: {}
+        requireJS             : {}
     };
 
 
@@ -82,6 +95,7 @@
             'string'                     : 'plugins/underscore.string/dist/underscore.string.min',
             'code-mirror'                : 'plugins/requirejs-codemirror/src/code-mirror',
             'ace'                        : 'plugins/ace/lib/ace',
+            'Q'                          : 'plugins/q/q',
 
             // custom uglified and moved
             'plugins/bootbox'            : 'plugins/bootbox',
@@ -102,6 +116,9 @@
             'plugins/oauth2'             : 'plugins/javascript-oauth2/oauth2/oauth2',
             'plugins/oauth-io'           : 'plugins/oauth.io/dist/oauth.min',
             'plugins/md5'                : 'plugins/blueimp-md5/js/md5.min',
+            'plugins/pace'               : 'plugins/pace/pace.min',
+
+
             // jquery
             'plugins/jquery-rest'        : 'plugins/jquery.rest/dist/1/jquery.rest.min',
             'plugins/jquery-migrate'     : 'plugins/jquery-migrate/jquery-migrate',
@@ -140,8 +157,6 @@
 
             // Datatables
             'datatables'                 : 'plugins/datatables/media/js/jquery.dataTables.min',
-            'datatables/bootstrap'       : 'datatables/plugins/integration/bootstrap/3/dataTables.bootstrap.min',
-            'datatables-css'             : 'plugins/datatables/media/css/jquery.dataTables.css',
             'datatables/plugins'         : 'plugins/datatables-plugins',
             'datatables/bs-plugins'      : 'plugins/datatables-plugins',
 
@@ -152,13 +167,15 @@
 
 
         shim: {
+            // stand-alone and exports
+            'plugins/svg'       : {exports: 'SVG'},
+            'jade'              : {exports: 'jade'},
+            'string'            : {exports: 's'},
+            'plugins/github-api': {exports: 'Github'},
+            'plugins/oauth2'    : {exports: 'oauth2'},
+            'plugins/oauth-io'  : {exports: 'OAuth'},
 
-            'plugins/svg'           : {exports: 'SVG'},
-            'jade'                  : {exports: 'jade'},
-            'string'                : {exports: 's'},
-            'plugins/github-api'    : {exports: 'Github'},
-            'plugins/oauth2'        : {exports: 'oauth2'},
-            'plugins/oauth-io'      : {exports: 'OAuth'},
+            // jquery
             'jquery'                : {
                 exports: '$',
                 init   : function(){
@@ -167,12 +184,16 @@
             },
             'plugins/jquery-migrate': [ 'jquery' ],
             'plugins/jquery-ui'     : [ 'jquery' ], //, 'jquery-migrate'],
-            'plugins/bootstrap'     : [ 'jquery' ],
-            'plugins/gtreetable'    : [ 'plugins/jquery-migrate', 'plugins/jquery-ui/core', 'plugins/jquery-ui/draggable', 'plugins/jquery-ui/droppable' ],
-            'plugins/mscrollbar'    : [ 'plugins/bootstrap', 'plugins/mousewheel' ],
-            'plugins/bs-modal'      : [ 'plugins/bootstrap', 'plugins/bs-modal-manager' ],
-            'plugins/bs-material'   : [ 'plugins/bootstrap', 'plugins/bs-material-ripples' ],
 
+            // bootstrap
+            'plugins/bootstrap'      : [ 'jquery' ],
+            'plugins/gtreetable'     : [ 'plugins/jquery-migrate', 'plugins/jquery-ui/core', 'plugins/jquery-ui/draggable', 'plugins/jquery-ui/droppable' ],
+            'plugins/mscrollbar'     : [ 'plugins/bootstrap', 'plugins/mousewheel' ],
+            'plugins/bs-modal'       : [ 'plugins/bootstrap', 'plugins/bs-modal-manager' ],
+            'plugins/bs-material'    : [ 'plugins/bootstrap', 'plugins/bs-material-ripples' ],
+            'plugins/bs-confirmation': [ 'plugins/bootstrap' ],
+
+            // misc
             'plugins/gsap/lite'       : [ 'plugins/gsap/scroll' ],
             'plugins/gsap/max'        : {exports: 'TweenMax', deps: [ 'plugins/gsap/scroll' ]},
             'plugins/gsap/jquery-lite': [ 'jquery', 'plugins/gsap/lite' ],
@@ -186,7 +207,7 @@
             // packadic scripts
             'config'             : [ 'jquery' ],
             'eventer'            : [ 'jquery', 'plugins/events', 'config' ],
-            'autoloader'         : [ 'config' ],
+            'autoload'           : [ 'config' ],
             'theme'              : [ 'config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events' ],
             'demo'               : [ 'theme' ]
         },

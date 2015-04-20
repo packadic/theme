@@ -1,0 +1,16 @@
+include ../../mixins/forms
+
+- breakpoint = "md"
+- bp1 = 3
+- bp2 = 9
+
+mixin input-group(id, name, type, maxLen)
+    - if(maxLen) attributes['max-length'] = maxLen;
+    +form-group(id, name, breakpoint, bp1, bp2)
+        +form-input(id, type, name)&attributes(attributes)
+
++form("horizontal", true)
+    +input-group('label', 'Label', 'text', 20)
+    +input-group('slug', 'Slug', 'text', 20)
+    +input-group('description', 'Description', 'text')
+    +input-group('enabled', 'Enabled', 'checkbox').switch

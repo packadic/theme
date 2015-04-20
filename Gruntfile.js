@@ -225,7 +225,11 @@ var init = module.exports = function( grunts ){
         },
         init_script     : {
             src : "<%= target.dest %>/assets/scripts",
-            dest: "<%= target.dest %>/assets/scripts/init.js"
+            dest: "<%= target.dest %>/assets/scripts/init.js",
+            prepend_scripts: [
+                'plugins/lodash.custom.js',
+                'plugins/require.js'
+            ]
         },
         concurrent      : {
             options: {
@@ -277,7 +281,7 @@ var init = module.exports = function( grunts ){
             },
             initscripts  : {
                 files: [ 'src/scripts/init.js' ],
-                tasks: [ 'scripts' ]
+                tasks: [ 'jsbuild', 'copy:scripts', 'create_init_script' ]
             },
             views        : {
                 files: [ 'src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**' ],

@@ -40,9 +40,14 @@ module.exports = function( grunt ){
 
         grunt.log.writeln('trying to read from ' + path.join(cwd, dest, 'assets/scripts'));
 
+        var prependScripts = grunt.config('init_script.prepend_scripts');
         var initScript = '';
-        initScript += " \n ; " + readScript('plugins/lodash.custom.min.js');
-        initScript += " \n ; " + readScript('plugins/require.js');
+        prependScripts.forEach(function(scriptPath){
+            initScript += " \n ; " + readScript(scriptPath);
+        });
+        //initScript += " \n ; " + readScript('plugins/lodash.custom.min.js');
+        //initScript += " \n ; " + readScript('plugins/require.js');
+        //initScript += " \n ; " + readScript('plugins/pace/pace.js');
         initScript += " \n ; " + readScript('init.js');
 
         var destPath = path.join(cwd, dest, 'assets/scripts/init.js');
