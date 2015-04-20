@@ -103,6 +103,7 @@
             'plugins/oauth-io'           : 'plugins/oauth.io/dist/oauth.min',
             'plugins/md5'                : 'plugins/blueimp-md5/js/md5.min',
             // jquery
+            'plugins/jquery-rest'        : 'plugins/jquery.rest/dist/1/jquery.rest.min',
             'plugins/jquery-migrate'     : 'plugins/jquery-migrate/jquery-migrate',
             'plugins/jquery-slimscroll'  : 'plugins/jquery-slimscroll/jquery.slimscroll.min',
             'plugins/mousewheel'         : 'plugins/jquery-mousewheel/jquery.mousewheel.min',
@@ -136,6 +137,12 @@
             'plugins/gsap/jquery-lite'   : 'plugins/gsap/src/minified/jquery.gsap.min',
             'plugins/gsap/jquery-max'    : 'plugins/gsap/src/minified/jquery.gsap.min',
 
+
+            // Datatables
+            'datatables': 'plugins/datatables/media/js/jquery.dataTables.min',
+            'datatables-css': 'plugins/datatables/media/css/jquery.dataTables.css',
+            'datatables/plugins': 'plugins/datatables-plugins',
+            'datatables/bs-plugins': 'plugins/datatables-plugins',
 
             // stylesheets
             'plugins/select2css'         : '../styles/components/select2',
@@ -171,14 +178,13 @@
             'plugins/gsap/jquery-max' : [ 'jquery', 'plugins/gsap/max' ],
 
             'plugins/select2': [ 'css!plugins/select2css' ],
-
             'plugins/highlightjs': [ 'css!plugins/highlightjscss' ],
 
             // packadic scripts
             'config'             : [ 'jquery' ],
             'eventer'            : [ 'jquery', 'plugins/events', 'config' ],
             'autoloader'         : [ 'config' ],
-            'theme'              : [  'config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events' ],
+            'theme'              : [ 'config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events' ],
             'demo'               : [ 'theme' ]
         },
 

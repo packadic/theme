@@ -1,0 +1,16 @@
+// jquery-impromptu
+$jqi-bg-color: #777777 !default;
+$jqi-arrow-border-color: #ffffff !default;
+$jqi-border-color: #eeeeee !default;
+$jqi-close-color: #bbbbbb !default;
+$jqi-text-color: #444444 !default;
+
+// bootstrap-select
+$bs-select-color-red-error: rgb(185, 74, 72);
+$bs-select-color-blue-hover: rgb(100, 177, 216);
+$bs-select-color-grey-arrow: rgb(204, 204, 204);
+$bs-select-width-default: 220px; // 3 960px-grid columns
+$bs-select-zindex-select-dropdown: 1035; // must be lower than a modal background (1040) but higher than the fixed navbar (1030)
+
+// bootstrap-switch
+$bootstrap-switch-base: "bootstrap-switch";

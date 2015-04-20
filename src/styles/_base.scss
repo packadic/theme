@@ -11,7 +11,7 @@
 @import "overrides/uniform";
 
 
-// 4.0 VENDOR (bootstrap) variables import
+// 4.0 VENDOR (bootstrap etc) variables import
 @import "../plugins/bootstrap-sass-official/assets/stylesheets/bootstrap/variables";
 @import '../plugins/sass-material-colors/sass/sass-material-colors';
 @import "../plugins/bootstrap-material-design/sass/_variables.scss";
@@ -27,7 +27,8 @@
 
 // 6.1 MY override mixins. mixins that override the VENDOR mixins to alter the VENDOR styles
 //@import "overrides/mixins";
-@import "layout-variables";
+@import "layout/layout-variables";
 @import "layout/layout-mixins";
 @import "theme-variables";
 
+@import "plugin-variables";

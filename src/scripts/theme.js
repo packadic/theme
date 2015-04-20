@@ -1,17 +1,7 @@
-define([ 'jquery', 'config', 'eventer', 'autoloader', 'plugins/cookie', 'plugins/bs-material-ripples' ],
-    function( $, config, eventer, autoloader ){
+define([ 'jquery', 'config', 'eventer', 'autoloader', 'defined', 'cre',
+         'plugins/cookie', 'plugins/bs-material-ripples' ],
+    function( $, config, eventer, autoloader, defined, cre ){
         'use strict';
-
-        function defined( obj ){
-            return !_.isUndefined(obj);
-        }
-
-        function cre( name ){
-            if( !defined(name) ){
-                name = 'div';
-            }
-            return $(document.createElement(name));
-        }
 
         var theme = {
             options: {}

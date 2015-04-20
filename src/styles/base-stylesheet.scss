@@ -16,16 +16,18 @@
     background-color: rgba(0, 0, 0, 0.25) !important;
 }
 form:not(.form-material) {
-    @import "vendor/uniform";
+    @import "plugins/uniform";
 }
-@import "vendor/bootbox";
+@import "plugins/bootbox";
 
-@import "vendor/datepicker3";
-@import "vendor/bootstrap-switch";
-@import "vendor/bootstrap-select";
-@import "vendor/bootstrap-gtreetable";
-@import "vendor/jquery-impromptu";
-@import "vendor/toastr";
+@import "plugins/datepicker3";
+@import "plugins/bootstrap-switch";
+@import "plugins/bootstrap-select";
+@import "plugins/bootstrap-gtreetable";
+@import "plugins/jquery-impromptu";
+@import "plugins/toastr";
+@import "plugins/m-custom-scrollbar";
+@import "plugins/datatables";
 
 // 9.0 MY layout styles (WITHOUT colors, images, bg colors, etc -- WITH dimensions, sizes, width, paddings, margins, etc)
 @import "layout/header";
@@ -46,7 +48,6 @@ form:not(.form-material) {
 @import "components/form_layouts";
 
 @import "components/box";
-@import "components/scrollbar";
 @import "components/popover";
 @import "components/tables";
 @import "components/modals";
@@ -59,7 +60,6 @@ form:not(.form-material) {
 
 @import "components/utilities/positioning";
 @import "components/utilities/shadows";
-//@import "components/utilities/bevelgloss";
 @import "components/utilities/effects";
 
 

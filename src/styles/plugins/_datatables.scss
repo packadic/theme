@@ -1,5 +1,3 @@
-@import "base";
-@import "components/header-dropdown";
 /***
 Datatables Plugin(in v1.3)
 ***/
@@ -15,7 +13,7 @@ Datatables Plugin(in v1.3)
     }
 
     label {
-        line-height: 32px ;
+        line-height: 32px;
     }
 }
 
@@ -28,37 +26,37 @@ Datatables Plugin(in v1.3)
 }
 
 .dataTable .row-details.row-details-close {
-    background: url("../img/datatable-row-openclose.png") no-repeat 0 0;
+    background: image_url("datatable-row-openclose.png") no-repeat 0 0;
 }
 
 .dataTable .row-details.row-details-open {
-    background: url("../img/datatable-row-openclose.png") no-repeat 0 -23px ;
+    background: image_url("datatable-row-openclose.png") no-repeat 0 -23px;
 }
 
 .dataTable .details {
-    background-color: #eee ;
+    background-color: #eeeeee;
 }
 
 .dataTable .details td,
 .dataTable .details th {
     padding: 4px;
-    background: none ;
+    background: none;
     border: 0;
 }
 
 .dataTable .details tr:hover td,
 .dataTable .details tr:hover th {
-    background: none ;
+    background: none;
 }
 
 .dataTable .details tr:nth-child(odd) td,
 .dataTable .details tr:nth-child(odd) th {
-    background-color: #eee ;
+    background-color: #eeeeee;
 }
 
 .dataTable .details tr:nth-child(even) td,
 .dataTable .details tr:nth-child(even) th {
-    background-color: #eee ;
+    background-color: #eeeeee;
 }
 
 .dataTable > thead > tr > th.sorting,
@@ -105,10 +103,10 @@ Datatables Plugin(in v1.3)
     margin-left: 0;
     padding: 7px;
     text-align: center;
-    color: #333;
+    color: #333333;
     font-size: 13px;
-    border: 1px solid #ddd;
-    background-color: #eee;
+    border: 1px solid #dddddd;
+    background-color: #eeeeee;
     vertical-align: middle;
     -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
@@ -116,7 +114,7 @@ Datatables Plugin(in v1.3)
 }
 
 .dataTables_processing span {
-    line-height:15px;
+    line-height: 15px;
     vertical-align: middle;
 }
 
@@ -153,7 +151,7 @@ TableTools
 }
 
 .DTTT_Print {
-    background-color: #fff;
+    background-color: #ffffff;
 
     .DTTT_PrintMessage {
         display: none;
@@ -202,7 +200,7 @@ TableTools
 
         .portlet {
             border: 0;
-            padding:0;
+            padding: 0;
 
             .portlet-body {
                 padding: 0;
@@ -281,7 +279,7 @@ Scroller Extension
 }
 
 .dataTables_scrollHead {
-    border-bottom: 2px solid #ddd !important;
+    border-bottom: 2px solid #dddddd !important;
 
     thead {
         th {
@@ -291,24 +289,5 @@ Scroller Extension
 }
 
 .dataTables_scrollBody {
-    border-bottom: 1px solid #ddd !important;
-}
-
-// popup message for copy function of the tabletools
-
-.DTTT_Print_Info {
-    width: 300px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -50px;
-    margin-left: -150px;
-    background: #eee;
-    padding: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,.2);
-
-    > h6 {
-        font-size: 16px;
-        font-weight: 400;
-    }
+    border-bottom: 1px solid #dddddd !important;
 }
