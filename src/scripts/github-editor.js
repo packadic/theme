@@ -185,6 +185,7 @@ define([ 'jquery', 'config', 'theme', 'plugins/async', 'plugins/oauth-io', 'Gith
             ui.getAuthButton = function( $el ){
 
                 if( !_.isUndefined(this.btnAuth) ){
+                    console.warn('getAuthButton $el is undefined', this.btnAuth);
                     return this.btnAuth;
                 }
                 var btnAuth = {$el: $el || cre('a').addClass('btn btn-sm blue-light hide').attr('id', 'github-auth').attr('href', '#').text('Login')};
@@ -237,7 +238,8 @@ define([ 'jquery', 'config', 'theme', 'plugins/async', 'plugins/oauth-io', 'Gith
                     if( _.isFunction(done) ){
                         done();
                     }
-                })
+                });
+
             }
         }.call());
 

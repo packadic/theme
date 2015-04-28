@@ -4,7 +4,11 @@ jsbuild:
     - effects
   jqueryui:
     - widget
+    - core
+    - position
+    - autocomplete
   bootstrap:
+    - affix
     - transition
     - collapse
     - dropdown

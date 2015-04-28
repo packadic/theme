@@ -1,0 +1,21 @@
+
+//--- start of base file: << imports _{name}.scss files >> exports 1 {name}.scss file that will be processed to {name}.css
+@import "base";
+
+form:not(.form-material) {
+    @import "plugins/uniform";
+}
+
+
+@import "plugins/bootbox";
+
+@import "plugins/datepicker3";
+@import "plugins/bootstrap-switch";
+@import "plugins/bootstrap-select";
+@import "plugins/bootstrap-gtreetable";
+@import "plugins/jquery-impromptu";
+@import "plugins/toastr";
+@import "plugins/m-custom-scrollbar";
+@import "plugins/datatables";
+
+@import "vendor/jquery-ui";

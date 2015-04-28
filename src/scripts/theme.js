@@ -163,14 +163,10 @@ define([ 'jquery', 'fn/defined', 'fn/default', 'fn/cre', 'config', 'eventer', 'a
 
             theme._initResizeEvent = function(){
                 theme._defineEvent('resize');
-                var resize;
                 theme.$window.on('resize', function(){
-                    if( resize ){
-                        clearTimeout(resize);
-                    }
-                    resize = setTimeout(function(){
+                    setTimeout(function(){
                         theme._trigger('resize');
-                    }, 50);
+                    }, 600); // delay the event a bit, otherwise it doesn't seem to work well in some cases
                 });
             };
 
@@ -188,13 +184,7 @@ define([ 'jquery', 'fn/defined', 'fn/default', 'fn/cre', 'config', 'eventer', 'a
                             return; // exit
                         }
 
-                        var height;
-
-                        if( $(this).attr("data-height") ){
-                            height = $(this).attr("data-height");
-                        } else {
-                            height = $(this).css('height');
-                        }
+                        var height = $(this).attr("data-height") ? $(this).attr("data-height") : $(this).css('height');
 
                         if( !defined(opts) ){
                             opts = {};
@@ -202,10 +192,10 @@ define([ 'jquery', 'fn/defined', 'fn/default', 'fn/cre', 'config', 'eventer', 'a
 
                         $(this).slimScroll(_.merge({
                             allowPageScroll: true, // allow page scroll when the element scroll is ended
-                            size           : '7px',
+                            size           : '6px',
                             color          : ($(this).attr("data-handle-color") ? $(this).attr("data-handle-color") : '#bbb'),
                             wrapperClass   : ($(this).attr("data-wrapper-class") ? $(this).attr("data-wrapper-class") : 'slimScrollDiv'),
-                            railColor      : ($(this).attr("data-rail-color") ? $(this).attr("data-rail-color") : '#eaeaea'),
+                            railColor      : ($(this).attr("data-rail-color") ? $(this).attr("data-rail-color") : '#222'),
                             position       : 'right',
                             height         : height,
                             alwaysVisible  : ($(this).attr("data-always-visible") == "1" ? true : false),

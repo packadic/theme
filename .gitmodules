@@ -2,3 +2,11 @@
 	path = lib/jquery
 	url = https://github.com/jquery/jquery
 	branch = 1.11-stable
+[submodule "lib/build"]
+	path = lib/build
+	url = https://github.com/laradic/php-build-tools
+	branch = master
+[submodule "lib/jquery-validation"]
+	path = lib/jquery-validation
+	url = https://github.com/posabsolute/jQuery-Validation-Engine
+	branch = master

@@ -48,7 +48,7 @@ var init = module.exports = function( grunts ){
         target, type;
 
     function mergeConfigFrom( configPath ){
-        if( ! _s.endsWith(configPath, '.yml')){
+        if( !_s.endsWith(configPath, '.yml') ){
             configPath = path.resolve(configPath, 'config.yml');
         }
         ok('Merging config from: ' + configPath)
@@ -83,21 +83,21 @@ var init = module.exports = function( grunts ){
         target          : _config.targets[ target ],
         jsbuild         : _config.jsbuild,
         uglify          : {
-            dev : {
+            dev      : {
                 options: {sourceMap: false, compress: false, beautify: true, gzip: true, preserveComments: 'all'},
                 files  : uglifyFiles
             },
-            dist: {
+            dist     : {
                 options: {sourceMap: false, compress: true, beautify: false, gzip: true, preserveComments: 'none'},
                 files  : uglifyFiles
             },
             templates: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= target.dest %>/assets/scripts/templates',
-                    src: '**/*.js',
-                    dest: '<%= target.dest %>/assets/scripts/templates'
-                }]
+                files: [ {
+                             expand: true,
+                             cwd   : '<%= target.dest %>/assets/scripts/templates',
+                             src   : '**/*.js',
+                             dest  : '<%= target.dest %>/assets/scripts/templates'
+                         } ]
             }
         },
         clean           : {
@@ -144,7 +144,7 @@ var init = module.exports = function( grunts ){
                     namespace: false
                 },
                 files  : [
-                    {expand: true, cwd: 'src/views/tpls', src: ['**/*.jade', '!**/_*.jade'], ext: '.js', dest: '<%= target.dest %>/assets/scripts/templates'}
+                    {expand: true, cwd: 'src/views/tpls', src: [ '**/*.jade', '!**/_*.jade' ], ext: '.js', dest: '<%= target.dest %>/assets/scripts/templates'}
                 ]
             }
         },
@@ -168,8 +168,12 @@ var init = module.exports = function( grunts ){
             dist   : {
                 files: [ {expand: true, cwd: 'src/styles', src: '**/*.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'} ]
             },
-            fast: {
+            fast   : {
                 files: [ {expand: true, cwd: 'src/styles', src: 'fast.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'} ]
+            },
+            nav   : {
+                options: { loadPath: 'src/styles' },
+                files: [ {expand: true, cwd: 'src/styles', src: 'nav.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'} ]
             }
         },
         bootlint        : {
@@ -224,8 +228,8 @@ var init = module.exports = function( grunts ){
             }
         },
         init_script     : {
-            src : "<%= target.dest %>/assets/scripts",
-            dest: "<%= target.dest %>/assets/scripts/init.js",
+            src            : "<%= target.dest %>/assets/scripts",
+            dest           : "<%= target.dest %>/assets/scripts/init.js",
             prepend_scripts: [
                 'plugins/lodash.custom.js',
                 'plugins/require.js'
@@ -237,7 +241,7 @@ var init = module.exports = function( grunts ){
             },
             watch  : [ 'devtools', 'watch' ]
         },
-        requirejs: {
+        requirejs       : {
             dev: {
                 options: {
                     baseUrl                   : "dev/assets/scripts",
@@ -263,29 +267,38 @@ var init = module.exports = function( grunts ){
         },
         watch           : {
             options      : {livereload: true, nospawn: true},
+
             styles       : {
-                files: [ 'src/styles/**', '!src/styles/fast.scss', '!src/styles/components/_header-dropdown.scss' ],
+                files: [ 'src/styles/**', '!src/styles/fast.scss', '!src/styles/nav.scss', '!src/styles/components/_header-dropdown.scss' ],
                 tasks: [ 'clean:styles', 'sass:<%= target.name %>' ]
             },
-            style_fast: {
-                files: [ 'src/styles/fast.scss','src/styles/components/_header-dropdown.scss' ],
+            style_fast   : {
+                files: [ 'src/styles/fast.scss', 'src/styles/components/_header-dropdown.scss' ],
                 tasks: [ 'sass:fast' ]
+            },
+            style_nav : {
+                files: [ 'src/styles/bs.scss', 'src/styles/nav.scss'],
+                tasks: [ 'sass:nav' ]
             },
             scripts_watch: {
                 files: [ 'src/scripts/**', '!src/scripts/init.js' ],
                 tasks: [ 'copy:scripts_watch' ]
             },
-            tscripts: {
-                files: ['src/tscript/**'],
-                tasks: ['typescript:dev']
+            plugins      : {
+                files: [ 'src/plugins/**' ],
+                tasks: [ 'copy:plugins' ]
+            },
+            tscripts     : {
+                files: [ 'src/tscript/**' ],
+                tasks: [ 'typescript:dev' ]
             },
             initscripts  : {
                 files: [ 'src/scripts/init.js' ],
-                tasks: [ 'jsbuild', 'copy:scripts', 'create_init_script' ]
+                tasks: [  'create_init_script' ] //'jsbuild:lodash', 'copy:scripts', 'uglify:dev',
             },
             views        : {
                 files: [ 'src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**' ],
-                tasks: [ 'clean:views', 'jade_config', 'jade:<%= target.name %>', 'bootlint' ] //, 'bootlint' ]
+                tasks: [ 'clean:views', 'jade_config', 'jade:<%= target.name %>' ] //, 'bootlint' ]
             },
             views_pages  : {
                 files: [ 'src/views/pages/**/*.jade' ],
@@ -299,10 +312,6 @@ var init = module.exports = function( grunts ){
             templates : {
                 files: [ 'src/views/tpls/**/*.jade' ],
                 tasks: [ 'templates' ]
-            },
-            vendor    : {
-                files: [ 'src/vendor/**' ],
-                tasks: [ 'clean:vendor', 'copy:vendor', 'copy:scripts', 'uglify:<%= target.name %>', '<%= target.name %>:jsbuild' ]
             },
             demo      : {
                 files: [ 'src/demo/**' ],
@@ -330,7 +339,7 @@ var init = module.exports = function( grunts ){
     grunt.registerTask('scripts', [ 'copy:scripts', 'uglify:' + type, 'jsbuild', 'create_init_script' ]);
     grunt.registerTask('assets', [ 'clean:assets', 'cp', 'copy:plugins', 'sass:' + type, 'templates', 'scripts' ]);
     grunt.registerTask('views', [ 'clean:views', 'jade_config:' + type, 'jade:' + type ]);
-    grunt.registerTask('watcher', [ 'concurrent:watch' ]);
+    grunt.registerTask('watcher', [ 'watch' ]);
     grunt.registerTask('build', [
         'rm', 'cp',
         'sass:' + type, 'jade_config:' + type, 'jade:' + type,

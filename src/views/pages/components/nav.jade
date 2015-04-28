@@ -1,0 +1,50 @@
+extends ../../layouts/default
+
+mixin list-item(name, href, active)
+    - href = href || '#'
+    - active = active || false
+    li(role="presentation", class=active ? "active":null)
+        a(href=href)=name
+        block
+
+mixin list-items()
+    +list-item("Home", "#", true)
+    +list-item("Item first")
+    +list-item("Then something else")
+    +list-item("This too")
+    +list-item("And this")
+
+mixin sub-menu(type)
+    - type = type || 'sub-menu'
+    ul(class=type)
+        block
+
+block append styles
+    +css-style("nav.css")
+
+
+
+block content
+    .row.mid-margin-bottom
+        .col-md-12
+            .radic-nav
+                ul.pills
+                    +list-items
+                    +sub-menu('dropdown-menu')
+                        +list-items
+                    +list-items
+
+    .row.mid-margin-top
+        .col-md-3
+            .radic-nav
+                span.radic-nav-title This is the nav
+                ul.pills.stacked
+                    +list-items
+                    +sub-menu
+                        +list-items
+                    +list-items
+
+    script.
+        (function Phpdoc(){
+
+        }.call());

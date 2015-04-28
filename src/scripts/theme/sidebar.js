@@ -1,5 +1,5 @@
-define([ 'jquery', 'config', 'autoloader', 'theme', 'eventer', 'string', 'plugins/async' ],
-    function( $, config, autoloader, theme, eventer, s, async ){
+define([ 'jquery', 'config', 'theme', 'eventer', 'string', 'plugins/async' ],
+    function( $, config, theme, eventer, s, async ){
 
         // @todo sidebar-toggle
         // @todo sidebar sub-menu hover title right (.sub-menu-title)
@@ -339,7 +339,6 @@ define([ 'jquery', 'config', 'autoloader', 'theme', 'eventer', 'string', 'plugin
                 $sidebarNavMenu.find('li > .sub-menu').filter(function( i ){
 
                     result = $(this).css('caption-side') == 'bottom' || $(this).children('ul').first().hasClass('sub-menu-hover');
-                    console.log($(this), $(this).css('caption-side'), result);
                     return result;
                 }).parent().on('mouseenter', function( e ){
                     $(this).children('a').first().clone().addClass('sub-menu-title').prependTo(this);

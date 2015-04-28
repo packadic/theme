@@ -2,6 +2,7 @@
 // 1.0 MY functions that: 1. do NOT use any default variables (like default parameter variables) -- 2.
 @import "overrides/compass";
 @import "compass";
+@import "functions";
 
 // 2.0 MY core variables (suffix them with !default)
 @import "variables";
@@ -32,3 +33,4 @@
 @import "theme-variables";
 
 @import "plugin-variables";
+@import "jquery-ui-variables";

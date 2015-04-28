@@ -5,7 +5,10 @@ include ../../mixins/forms
 - bp2 = 9
 
 mixin input-group(id, name, type, maxLen)
-    - if(maxLen) attributes['max-length'] = maxLen;
+    - if(maxLen){
+    - attributes["maxlength"] = maxLen;
+    - attributes["class"] = "maxLength";
+    - }
     +form-group(id, name, breakpoint, bp1, bp2)
         +form-input(id, type, name)&attributes(attributes)
 

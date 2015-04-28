@@ -13,16 +13,17 @@
     packadic.fireEvent('booting'); // Fire "booting" event
 
     require([ 'module', 'jquery',  'autoload', 'string', 'jade', 'config', 'code-mirror', 'plugins/cookie' ],
-        function( module, $, autoload, s, jade, config ){
+        function( module, $, autoload, _s, jade, config ){
 
             packadic.removePageLoader = function(){
                 $('body').removeClass('page-loading');
             };
 
             window.jade = jade;
+            window._s = _s;
 
             // SCSS Json
-            var scss = s.unquote($('head').css('font-family'), "'");
+            var scss = _s.unquote($('head').css('font-family'), "'");
             while( typeof scss !== 'object' ){
                 scss = JSON.parse(scss);
             }

@@ -2,13 +2,13 @@
 /*
  * INIT
  */
-(function Init(){
+(function Init() {
 
     var packadic = (window.packadic = window.packadic || {});
 
     packadic.start = Date.now();
 
-    packadic.getElapsedTime = function(){
+    packadic.getElapsedTime = function () {
         return (Date.now() - packadic.start) / 1000;
     };
 
@@ -21,19 +21,19 @@
         "started" : []      // fires after the theme module has been initialised and default autoloaders have been added
     };
 
-    packadic.bindEventHandler = function( name, cb ){
-        if(packadic.__events_fired.indexOf(name) !== -1){
+    packadic.bindEventHandler = function (name, cb) {
+        if (packadic.__events_fired.indexOf(name) !== -1) {
             return cb();
         }
-        packadic.__event_callbacks[ name ].push(cb);
+        packadic.__event_callbacks[name].push(cb);
     };
 
-    packadic.fireEvent = function( name ){
-        if( !_.isObject(packadic.__event_callbacks[ name ]) ){
+    packadic.fireEvent = function (name) {
+        if (!_.isObject(packadic.__event_callbacks[name])) {
             return;
         }
-        _.each(packadic.__event_callbacks[ name ], function( cb ){
-            if( typeof cb === 'function' ){
+        _.each(packadic.__event_callbacks[name], function (cb) {
+            if (typeof cb === 'function') {
                 cb();
             }
         });
@@ -41,12 +41,12 @@
         packadic.__events_fired.push(name);
     };
 
-    packadic.debug = function(){
+    packadic.debug = function () {
     };
-    packadic.log = function(){
+    packadic.log = function () {
     };
 
-    packadic.mergeConfig = function( newConfig ){
+    packadic.mergeConfig = function (newConfig) {
         window.packadic.config = _.merge(window.packadic.config, newConfig);
     }
 
@@ -57,7 +57,7 @@
 /*
  * CONFIG
  */
-(function Config(){
+(function Config() {
 
     var packadic = (window.packadic = window.packadic || {});
     packadic.config = {
@@ -74,9 +74,10 @@
     };
 
 
-    var jqui = [ 'accordion', 'autocomplete', 'button', 'core', 'datepicker', 'dialog', 'draggable', 'droppable', 'effect-blind', 'effect-bounce', 'effect-clip', 'effect-drop', 'effect-explode', 'effect-fade', 'effect-fold', 'effect-highlight', 'effect', 'effect-puff', 'effect-pulsate', 'effect-scale', 'effect-shake', 'effect-size', 'effect-slide', 'effect-transfer', 'menu', 'mouse', 'position', 'progressbar', 'resizable', 'selectable', 'selectmenu', 'slider', 'sortable', 'spinner', 'tabs', 'tooltip', 'widget' ];
-    var tweendeps = [ 'plugins/gsap/css' ]; //, 'plugins/gsap/ease', 'plugins/gsap/attr', 'plugins/gsap/scroll' ];
+    var jqui = ['accordion', 'autocomplete', 'button', 'core', 'datepicker', 'dialog', 'draggable', 'droppable', 'effect-blind', 'effect-bounce', 'effect-clip', 'effect-drop', 'effect-explode', 'effect-fade', 'effect-fold', 'effect-highlight', 'effect', 'effect-puff', 'effect-pulsate', 'effect-scale', 'effect-shake', 'effect-size', 'effect-slide', 'effect-transfer', 'menu', 'mouse', 'position', 'progressbar', 'resizable', 'selectable', 'selectmenu', 'slider', 'sortable', 'spinner', 'tabs', 'tooltip', 'widget'];
+    var tweendeps = ['plugins/gsap/css']; //, 'plugins/gsap/ease', 'plugins/gsap/attr', 'plugins/gsap/scroll' ];
 
+    packadic.config.jQueryUI = jqui;
 
     packadic.config.requireJS = {
         baseUrl: packadic.config.paths.scripts,
@@ -85,10 +86,12 @@
                 'css': 'plugins/require-css/css'
             }
         },
-        paths  : {
+
+        paths: {
             // custom build with jsbuild
             'jquery'                     : 'plugins/jquery/dist/jquery.min',
             'plugins/bootstrap'          : 'plugins/bootstrap.custom.min',
+            'jquery-ui'                  : 'plugins/jquery-ui/ui',
 
             // dont prefix jade, template amd loader require it, same as jquery
             'jade'                       : 'plugins/jade/runtime',
@@ -117,16 +120,19 @@
             'plugins/oauth-io'           : 'plugins/oauth.io/dist/oauth.min',
             'plugins/md5'                : 'plugins/blueimp-md5/js/md5.min',
             'plugins/pace'               : 'plugins/pace/pace.min',
-
+            'plugins/speakingurl'        : 'plugins/speakingurl/speakingurl.min',
 
             // jquery
             'plugins/jquery-rest'        : 'plugins/jquery.rest/dist/1/jquery.rest.min',
             'plugins/jquery-migrate'     : 'plugins/jquery-migrate/jquery-migrate',
             'plugins/jquery-slimscroll'  : 'plugins/jquery-slimscroll/jquery.slimscroll.min',
+            'plugins/jquery-slugify'     : 'plugins/jquery-slugify/dist/slugify.min',
             'plugins/mousewheel'         : 'plugins/jquery-mousewheel/jquery.mousewheel.min',
             'plugins/uniform'            : 'plugins/jquery.uniform/jquery.uniform.min',
             'plugins/impromptu'          : 'plugins/jquery-impromptu/dist/jquery-impromptu.min',
             'plugins/cookie'             : 'plugins/jquery-cookie/jquery.cookie',
+            'plugins/validation'         : 'plugins/jquery-form-validator/form-validator/jquery.form-validator.min',
+            'plugins/tag-it'             : 'plugins/tag-it/js/tag-it.min',
 
             // bootstrap
             'plugins/bs-datepicker'      : 'plugins/bootstrap-datepicker/js/bootstrap-datepicker',
@@ -166,50 +172,55 @@
         },
 
 
+
+
+
         shim: {
             // stand-alone and exports
             'plugins/svg'       : {exports: 'SVG'},
             'jade'              : {exports: 'jade'},
-            'string'            : {exports: 's'},
+            'string'            : {exports: '_s'},
             'plugins/github-api': {exports: 'Github'},
             'plugins/oauth2'    : {exports: 'oauth2'},
             'plugins/oauth-io'  : {exports: 'OAuth'},
 
             // jquery
-            'jquery'                : {
+            'jquery'            : {
                 exports: '$',
-                init   : function(){
+                init   : function () {
                     this.jquery.noConflict();
                 }
             },
-            'plugins/jquery-migrate': [ 'jquery' ],
-            'plugins/jquery-ui'     : [ 'jquery' ], //, 'jquery-migrate'],
 
+            'plugins/jquery-migrate'  : ['jquery'],
+            'jquery-ui'               : ['jquery'], //, 'jquery-migrate'],
+            'plugins/jquery-slugify'  : ['jquery', 'plugins/speakingurl'],
+            'plugins/tag-it'          : ['jquery-ui/core', 'jquery-ui/widget', 'jquery-ui/position', 'jquery-ui/menu', 'jquery-ui/autocomplete'],
             // bootstrap
-            'plugins/bootstrap'      : [ 'jquery' ],
-            'plugins/gtreetable'     : [ 'plugins/jquery-migrate', 'plugins/jquery-ui/core', 'plugins/jquery-ui/draggable', 'plugins/jquery-ui/droppable' ],
-            'plugins/mscrollbar'     : [ 'plugins/bootstrap', 'plugins/mousewheel' ],
-            'plugins/bs-modal'       : [ 'plugins/bootstrap', 'plugins/bs-modal-manager' ],
-            'plugins/bs-material'    : [ 'plugins/bootstrap', 'plugins/bs-material-ripples' ],
-            'plugins/bs-confirmation': [ 'plugins/bootstrap' ],
+            'plugins/bootstrap'       : ['jquery'],
+            'plugins/gtreetable'      : ['plugins/jquery-migrate', 'plugins/jquery-ui/core', 'plugins/jquery-ui/draggable', 'plugins/jquery-ui/droppable'],
+            'plugins/mscrollbar'      : ['plugins/bootstrap', 'plugins/mousewheel'],
+            'plugins/bs-modal'        : ['plugins/bootstrap', 'plugins/bs-modal-manager'],
+            'plugins/bs-material'     : ['plugins/bootstrap', 'plugins/bs-material-ripples'],
+            'plugins/bs-confirmation' : ['plugins/bootstrap'],
 
             // misc
-            'plugins/gsap/lite'       : [ 'plugins/gsap/scroll' ],
-            'plugins/gsap/max'        : {exports: 'TweenMax', deps: [ 'plugins/gsap/scroll' ]},
-            'plugins/gsap/jquery-lite': [ 'jquery', 'plugins/gsap/lite' ],
-            'plugins/gsap/jquery-max' : [ 'jquery', 'plugins/gsap/max' ],
+            'plugins/gsap/lite'       : ['plugins/gsap/scroll'],
+            'plugins/gsap/max'        : {exports: 'TweenMax', deps: ['plugins/gsap/scroll']},
+            'plugins/gsap/jquery-lite': ['jquery', 'plugins/gsap/lite'],
+            'plugins/gsap/jquery-max' : ['jquery', 'plugins/gsap/max'],
 
-            'vendor/dataTables.bootstrap': [ 'datatables' ],
+            'vendor/dataTables.bootstrap': ['datatables'],
 
-            'plugins/select2'    : [ 'css!plugins/select2css' ],
-            'plugins/highlightjs': [ 'css!plugins/highlightjscss' ],
+            'plugins/select2'    : ['css!plugins/select2css'],
+            'plugins/highlightjs': ['css!plugins/highlightjscss'],
 
             // packadic scripts
-            'config'             : [ 'jquery' ],
-            'eventer'            : [ 'jquery', 'plugins/events', 'config' ],
-            'autoload'           : [ 'config' ],
-            'theme'              : [ 'config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events' ],
-            'demo'               : [ 'theme' ]
+            'config'             : ['jquery'],
+            'eventer'            : ['jquery', 'plugins/events', 'config'],
+            'autoload'           : ['config'],
+            'theme'              : ['config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events'],
+            'demo'               : ['theme']
         },
 
 
@@ -221,11 +232,11 @@
 
         cm: {
             // baseUrl to CodeMirror dir
-            baseUrl: 'plugins/codemirror',
+            baseUrl: 'plugins/codemirror/',
             // path to CodeMirror lib
             path   : 'lib/codemirror',
             // path to CodeMirror css file
-            css    : '/path/to/code-mirror/css/file',
+            css    : packadic.config.requireJS.basePath + '/lib/codemirror.css',
             // define themes
             themes : {
                 monokai : '/path/to/theme/monokai.css',
@@ -241,7 +252,7 @@
 
     };
 
-    jqui.forEach(function( name ){
-        packadic.config.requireJS.paths[ 'plugins/jquery-ui/' + name ] = 'plugins/jquery-ui/ui/minified/' + name + '.min'
+    jqui.forEach(function (name) {
+        packadic.config.requireJS.paths['plugins/jquery-ui/' + name] = 'plugins/jquery-ui/ui/minified/' + name + '.min'
     });
 }.call());

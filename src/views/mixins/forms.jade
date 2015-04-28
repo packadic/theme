@@ -2,6 +2,8 @@ mixin form(type, bordered, title)
     form(role="form", class="form-" + type + (bordered ? " form-bordered":null))&attributes(attributes)
         block
 
+
+
 mixin form-group(id, name, breakpoint, bp1, bp2)
     .form-group
         label.control-label(class=(breakpoint ? "col-" + breakpoint + "-" + bp1:null)) #{name}

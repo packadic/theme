@@ -1,4 +1,4 @@
-define([ 'jquery' ], function( $ ){
+define([ 'jquery', '../fn/defined', '../fn/cre' ], function( $, defined, cre ){
 
         var $taskList = $('ul.dropdown-task-list');
         var $taskListContainer = $taskList.parent('li');

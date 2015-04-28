@@ -1,0 +1,114 @@
+extends ../../../layouts/default
+
+mixin form-box(name, icon)
+    .row
+        .col-lg-12
+            +box(name, icon)
+                form.show-class&attributes(attributes)
+                    block
+
+mixin form-control(rnd, name, type, label, horizontal)
+    - horizontal = horizontal || false;
+    .form-group
+        if(label)
+            label(for=rnd + "email", class=horizontal ? "col-md-3" : null).control-label=label
+        if(horizontal)
+            .col-md-9
+                input.form-control(data-validation="required", id=rnd + name, name=name type=type, placeholder=label)&attributes(attributes)
+        else
+            input.form-control(data-validation="required", id=rnd + name, name=name type=type, placeholder=label)&attributes(attributes)
+
+mixin form-demo-content(label, horizontal)
+    - var rnd = Math.random()
+    .form-title
+        h4 Credentials
+    +form-control(rnd, 'email', 'email', 'Email', horizontal)
+    +form-control(rnd, 'password', 'password', 'Password', horizontal)(data-validation="length", data-validation-length="10-20")
+    .form-title
+        h4 Personal information
+    +form-control(rnd, 'first_name', 'text', 'First name', horizontal)
+    +form-control(rnd, 'last_name', 'text', 'Last name', horizontal)
+    +form-control(rnd, 'age', 'number', 'Number', horizontal)
+    +form-control(rnd, 'website', 'url', 'Website', horizontal)
+    +form-control(rnd, 'phone', 'tel', 'Phone', horizontal)
+    +form-control(rnd, 'fav_color', 'color', 'Favourite color', horizontal)
+    .form-group
+        if(label)
+            label(for=rnd + "file") Avatar
+        input.form-control(id=rnd + "file", type='file')&attributes(attributes)
+        p.help-block Example block-level help text here.
+    .checkbox
+        label(for=rnd + "checkbox")
+            input(id=rnd + "checkbox", type='checkbox')
+            |  Check me out
+    .form-actions
+        button.btn.btn-default(type='submit') Submit
+
+
+mixin form-horizontal-demo-content()
+    - var rnd = Math.random()
+    .form-title
+        h4 Credentials
+    .form-group.has-success
+        label(for=rnd + "email").col-sm-3.control-label Email
+        .col-sm-9
+            input.form-control(id=rnd + "email",type='email', placeholder='Email', data-hint='Enter a valid email address')&attributes(attributes)
+    .form-group.has-error
+        label(for=rnd + "password").col-sm-3.control-label Password
+        .col-sm-9
+            input.form-control(id=rnd + "password",type='password', placeholder='Password', data-hint='Enter a password that is safe')&attributes(attributes)
+    .form-title
+        h4 Personal information
+    .form-group.has-warning
+        label(for=rnd + "first-name").col-sm-3.control-label First name
+        .col-sm-9
+            input.form-control(id=rnd + "first-name",type='text', placeholder='First name')&attributes(attributes)
+    .form-group
+        label(for=rnd + "last-name").col-sm-3.control-label Last name
+        .col-sm-9
+            input.form-control(id=rnd + "last-name",type='text', placeholder='Last name')&attributes(attributes)
+    .form-group
+        .col-sm-offset-3.col-sm-9
+            .checkbox
+                label
+                    input(type='checkbox')
+                    |  Remember me
+    .form-actions
+        .col-sm-offset-3.col-sm-9
+            button.btn.btn-default(type='submit') Sign in
+
+
+block header
+    +page-title("Forms", "Validation")
+    +page-breadcrumbs
+        +breadcrumb("Components", "/components")
+        +breadcrumb("Forms")
+        +breadcrumb("Validation", "/components/forms/validation", true)
+
+
+block content
+    #demo-forms
+
+    .row
+        .col-md-6
+            +form-box("Default", "list")#validate-form
+                +form-demo-content(true)
+        .col-md-6
+            +form-box("Validation states", "list").form-horizontal
+                +form-horizontal-demo-content
+
+block append scripts-outside-of-project
+    script.
+        (function(){
+            window.packadic.bindEventHandler('booted', function(){
+                require(['jquery', 'plugins/validation'], function($){
+                    $.validate({
+                        form: '#validate-form',
+                        modules: 'date, security, html5',
+                        borderColorOnError: '#a94442',
+                        errorElementClass: '',
+                        addValidClassOnAll: false
+                    });
+                });
+            });
+        }.call());

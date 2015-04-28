@@ -95,7 +95,11 @@
     "datatables-bootstrap3": "*",
     "datatables-plugins-bootstrap3": "~0.1.7",
     "q": "1.0.1",
-    "pace": "~1.0.2"
+    "pace": "~1.0.2",
+    "jquery-slugify": "~1.1.0",
+    "jquery-form-validator": "~2.2.1",
+    "tag-it": "*",
+    "sass.js": "~0.7.0"
   },
   "resolutions": {
     "datatables": "~1.10.6"

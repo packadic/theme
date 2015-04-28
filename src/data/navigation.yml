@@ -98,6 +98,9 @@ sidebar:
         href: <%= target.nav.pre %>/components/buttons<%= target.nav.ext %>
         #href: <%= target.nav.pre %>/components/buttons/editor
 
+      - name: Nav
+        href: <%= target.nav.pre %>/components/nav<%= target.nav.ext %>
+
       - name: Boxes
         href: <%= target.nav.pre %>/components/boxes<%= target.nav.ext %>
 
@@ -107,8 +110,12 @@ sidebar:
       - name: Modals
         href: <%= target.nav.pre %>/components/modals<%= target.nav.ext %>
 
+      - name: jQuery UI
+        href: <%= target.nav.pre %>/components/jquery-ui<%= target.nav.ext %>
+
       - name: Widgets
         href: <%= target.nav.pre %>/components/widgets<%= target.nav.ext %>
+
 
 
   - name: Github editor

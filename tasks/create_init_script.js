@@ -3,7 +3,7 @@ var radic  = require('radic'),
     _      = require('lodash'),
     jsyaml = require('js-yaml'),
     fse     = require('fs-extra'),
-    fs     = require('fs-extra'),
+    fs     = require('fs'),
     globule       = require('globule'),
     path   = require('path');
 
@@ -30,13 +30,18 @@ module.exports = function( grunt ){
         var cwd = process.cwd();
         var ok = grunt.log.ok;
 
-        this.requires('jsbuild', 'copy:scripts');
-
         var target = grunt.config.get('target');
         var dest = target.dest;
+        var destInitJs = path.join(cwd, dest, 'assets/scripts/init.js');
+
         var readScript = function(filePath){
             return fs.readFileSync(path.join(cwd, dest, 'assets/scripts', filePath), 'UTF-8');
         };
+
+        var initJsContent = fs.readFileSync(path.join(cwd, 'src/scripts/init.js'), 'UTF-8');
+        if(fs.existsSync(destInitJs)){
+            fs.unlinkSync(destInitJs);
+        }
 
         grunt.log.writeln('trying to read from ' + path.join(cwd, dest, 'assets/scripts'));
 
@@ -48,11 +53,12 @@ module.exports = function( grunt ){
         //initScript += " \n ; " + readScript('plugins/lodash.custom.min.js');
         //initScript += " \n ; " + readScript('plugins/require.js');
         //initScript += " \n ; " + readScript('plugins/pace/pace.js');
-        initScript += " \n ; " + readScript('init.js');
+        initScript += " \n ; " + initJsContent;
 
-        var destPath = path.join(cwd, dest, 'assets/scripts/init.js');
+        var destPath = destInitJs;
         grunt.log.writeln('trying to write to ' + destPath);
         fs.writeFileSync(destPath, initScript);
+
 
 
         grunt.event.emit('task.done', 'create_init_bootscript', self);

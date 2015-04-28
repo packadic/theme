@@ -1,0 +1,93 @@
+@import "base";
+
+
+// 10.0 MY components
+@import "components/type";
+@import "components/buttons";
+@import "components/labels";
+@import "components/tabs";
+//@import "components/dropdown";
+//@import "components/header-dropdown";
+@import "components/tabs";
+@import "components/form_layouts";
+
+@import "components/box";
+@import "components/popover";
+@import "components/tables";
+@import "components/modals";
+@import "components/loader";
+@import "components/share-buttons";
+@import "components/widgets";
+
+@import "components/sliding-tags";
+@import "components/tabbed-widget";
+@import "components/task-list";
+@import "components/to-do-list";
+
+@import "components/color-variants";
+
+
+@import "components/utilities/positioning";
+@import "components/utilities/shadows";
+@import "components/utilities/effects";
+
+
+@import "components/bootstrap-material";
+
+blockquote {
+
+
+    border-left: 5px solid #33336E;
+    background: #F0F0F0 ;
+    border-radius: 4px ;
+}
+
+#page-loader {
+    display: none;
+}
+body.page-loading {
+
+    @include createLoader(page, #fefefe);
+    //background: #fefefe;
+
+    #page-loader {
+        display: block;
+    }
+
+    section#top,
+    section#page,
+    section#bottom,
+    > .clearfix {
+        display: none;
+        transition: all 2s;
+    }
+}
+
+
+
+@import 'SassyJSON';
+
+
+$jsonmap : (
+    breakpoints: (
+
+        screen-xs-min: $screen-xs-min,
+        screen-sm-min: $screen-sm-min,
+        screen-md-min: $screen-md-min,
+        screen-lg-min: $screen-lg-min,
+        screen-lg-med: $screen-lg-med,
+        screen-xs-max: $screen-xs-max,
+        screen-sm-max: $screen-sm-max,
+        screen-md-max: $screen-md-max
+    )
+);
+
+
+
+@include json-encode($jsonmap);
+
+//--- end of base file
+
+.slimScrollBar {
+    border-radius: 0 !important;
+}

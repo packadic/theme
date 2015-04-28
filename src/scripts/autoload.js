@@ -88,8 +88,23 @@ define([
                     require([ 'plugins/uniform' ], function(){
                         $target.uniform();
                     })
-                })
+                });
+
+                if($el.find('form.form-material').length > 0)
+                {
+                    require(['plugins/bs-material'], function(){
+                        $.material.init({
+                            autofill: true,
+                            "inputElements": "form.form-material input.form-control, form.form-material textarea.form-control, form.form-material select.form-control",
+                            "checkboxElements": "form.form-material .checkbox > label > input[type=checkbox]",
+                            "togglebuttonElements": "form.form-material .togglebutton > label > input[type=checkbox]",
+                            "radioElements": "form.form-material .radio > label > input[type=radio]"
+                        });
+                    })
+                }
+
             });
+
 
     }.call());
 
