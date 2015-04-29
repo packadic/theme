@@ -14,6 +14,12 @@ section#page {
 	}
 }
 
+body.without-section-top section#page {
+    .section-top-fixed & {
+        margin-top: 0;
+    }
+}
+
 @media (min-width: $screen-md-min) {
 	.section-bottom-fixed section#page {
 	 	margin-bottom: 20px !important;

@@ -290,6 +290,10 @@ section#top.navbar {
 
 }
 
+body.without-section-top section#top {
+    display: none;
+}
+
 @media (min-width: $screen-sm-min) {
     section#top.navbar {
         .search-form {

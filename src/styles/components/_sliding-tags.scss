@@ -9,7 +9,7 @@
 
 $tagsHeight: 26px;
 $tagsDefaultColor: #eb6b22;
-$tagsColors: green #65bb34, blue #56a3d5;
+$tagsColors: "green" #65bb34, "blue" #56a3d5;
 
 .tags {
   @include clearfix;

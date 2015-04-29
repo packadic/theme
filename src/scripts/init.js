@@ -3,9 +3,12 @@
  * INIT
  */
 (function Init() {
-
     var packadic = (window.packadic = window.packadic || {});
 
+    if(!_.isObject(packadic.config)){
+        packadic.config = {};
+    }
+    packadic.state = 'pre-boot';
     packadic.start = Date.now();
 
     packadic.getElapsedTime = function () {
@@ -28,6 +31,22 @@
         packadic.__event_callbacks[name].push(cb);
     };
 
+    packadic.onPreBoot = function(cb){
+        packadic.bindEventHandler('pre-boot', cb);
+    };
+    packadic.onBoot = function(cb){
+        packadic.bindEventHandler('booting', cb);
+    };
+    packadic.onBooted = function(cb){
+        packadic.bindEventHandler('booted', cb);
+    };
+    packadic.onStart = function(cb){
+        packadic.bindEventHandler('starting', cb);
+    };
+    packadic.onStarted = function(cb){
+        packadic.bindEventHandler('started', cb);
+    };
+
     packadic.fireEvent = function (name) {
         if (!_.isObject(packadic.__event_callbacks[name])) {
             return;
@@ -37,9 +56,10 @@
                 cb();
             }
         });
-
+        packadic.state = name;
         packadic.__events_fired.push(name);
     };
+
 
     packadic.debug = function () {
     };
@@ -47,7 +67,7 @@
     };
 
     packadic.mergeConfig = function (newConfig) {
-        window.packadic.config = _.merge(window.packadic.config, newConfig);
+        packadic.config = _.merge(packadic.config, newConfig);
     }
 
 

@@ -10,3 +10,11 @@
 	path = lib/jquery-validation
 	url = https://github.com/posabsolute/jQuery-Validation-Engine
 	branch = master
+[submodule "lib/mootools"]
+	path = lib/mootools
+	url = https://github.com/mootools/mootools-core
+	branch = master
+[submodule "lib/bash"]
+	path = lib/bash
+	url = https://github.com/robinradic/radic-bash-lib
+	branch = master

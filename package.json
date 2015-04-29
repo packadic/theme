@@ -81,6 +81,8 @@
     "node-hooked-changelog": "0.0.6",
     "radic": "^0.7.0",
     "radic-handlebars": "~0.1.5",
-    "grunt-contrib-requirejs": "~0.4.4"
+    "grunt-contrib-requirejs": "~0.4.4",
+    "grunt-typescript": "~0.6.1",
+    "grunt-browserify": "~3.7.0"
   }
 }
