@@ -10,11 +10,6 @@
     }
     packadic.state = 'pre-boot';
     packadic.start = Date.now();
-
-    packadic.getElapsedTime = function () {
-        return (Date.now() - packadic.start) / 1000;
-    };
-
     packadic.__events_fired = [];
     packadic.__event_callbacks = {
         "pre-boot": [],     // before requirejs.config get initialised - before loading the primary dependencies
@@ -24,18 +19,25 @@
         "started" : []      // fires after the theme module has been initialised and default autoloaders have been added
     };
 
+    packadic.getElapsedTime = function () {
+        return (Date.now() - packadic.start) / 1000;
+    };
+
     packadic.bindEventHandler = function (name, cb) {
         if (packadic.__events_fired.indexOf(name) !== -1) {
             return cb();
         }
         packadic.__event_callbacks[name].push(cb);
+        return packadic;
     };
 
     packadic.onPreBoot = function(cb){
         packadic.bindEventHandler('pre-boot', cb);
+        return packadic;
     };
     packadic.onBoot = function(req, cb){
         packadic.bindEventHandler('booting', cb);
+        return packadic;
     };
     packadic.onBooted = function(req, cb){
         packadic.bindEventHandler('booted', function(){
@@ -45,6 +47,7 @@
                 require(req, cb);
             }
         });
+        return packadic;
     };
     packadic.onStart = function(req, cb){
         packadic.bindEventHandler('starting', function(){
@@ -54,6 +57,7 @@
                 require(req, cb);
             }
         });
+        return packadic;
     };
     packadic.onStarted = function(req, cb){
         packadic.bindEventHandler('started', function(){
@@ -63,6 +67,7 @@
                 require(req, cb);
             }
         });
+        return packadic;
     };
 
     packadic.fireEvent = function (name) {
@@ -76,6 +81,7 @@
         });
         packadic.state = name;
         packadic.__events_fired.push(name);
+        return packadic;
     };
 
 
@@ -86,6 +92,7 @@
 
     packadic.mergeConfig = function (newConfig) {
         packadic.config = _.merge(packadic.config, newConfig);
+        return packadic;
     }
 
 
@@ -255,9 +262,9 @@
 
             // packadic scripts
             'config'             : ['jquery'],
-            'eventer'            : ['jquery', 'plugins/events', 'config'],
-            'autoload'           : ['config'],
-            'theme'              : ['config', 'plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events'],
+            'eventer'            : ['jquery', 'plugins/events'],
+            'autoload'           : ['jquery'],
+            'theme'              : ['plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events'],
             'demo'               : ['theme']
         },
 

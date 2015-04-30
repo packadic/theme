@@ -10,39 +10,3 @@ block header
     +page-title("Layouts", "Checkitouts")
 
 block content
-    .settings-editor.panel.panel-default
-        button.btn.btn-primary.withoutripple
-            i.fa.fa-cog
-        .panel-heading Panel Editor
-        .panel-body
-            div#layout-editor
-
-
-block append scripts-pre-boot
-    script.
-        packadic.onBooted(['jquery', 'demo/component-editor', 'demo/metro'], function ($, ComponentEditor, metro) {
-            var layoutEditor = window.ceditors = new ComponentEditor($('#layout-editor'), {
-                target   : '#layout-editor',
-                editables: [{
-                    id: 'section-top-toggle', name: 'Display top', 'default': true, type: 'switch', options: {
-                        isEnabled  : function(){ return $('body').hasClass('without-section-top') === false; },
-                        toggle : function(){
-                            console.log('toggle', 'is enabled', this.isEnabled());
-                            $('body')[ (this.isEnabled() ? 'add' : 'remove') + 'Class']('without-section-top')
-                        }
-                    }
-                }, {
-                    id: 'page-boxed', name: 'Boxed page', 'default': false, type: 'switch', options: {
-                        isEnabled  : function(){ return $('body').hasClass('page-boxed') },
-                        toggle : function(){
-                            console.log('toggle', 'is enabled', this.isEnabled());
-                            $('body')[ (this.isEnabled() ? 'remove' : 'add') + 'Class']('page-boxed')
-                        }
-                    }
-                } ]
-            })
-
-            window.metro = metro;
-            console.log('metro', metro);
-
-        });

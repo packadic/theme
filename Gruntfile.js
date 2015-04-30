@@ -296,7 +296,7 @@ var init = module.exports = function (grunts) {
             },
             views        : {
                 files: ['src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**'],
-                tasks: ['clean:views', 'jade_config', 'jade:<%= target.name %>'] //, 'bootlint' ]
+                tasks: ['views'] //, 'bootlint' ]
             },
             views_pages  : {
                 files: ['src/views/pages/**/*.jade'],

@@ -119,7 +119,7 @@ define(['jquery', 'theme', 'theme/sidebar'], function ($, theme, sidebar) {
             //sidebar
             if ($('body').hasClass('page-full-width') === false) {
                 if (sidebarOption === 'fixed') {
-                    $("body").addClass("page-sidebar-fixed");
+                    $("body").addClass("sidebar-nav-fixed");
                     $("sidebar-nav-menu").addClass("sidebar-nav-menu-fixed");
                     $("sidebar-nav-menu").removeClass("sidebar-nav-menu-default");
                     sidebar.handleFixedHover();

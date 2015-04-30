@@ -1,7 +1,8 @@
-define([ 'jquery', 'config', 'theme', 'plugins/async', 'plugins/oauth-io', 'Github', 'Codepad', 'plugins/bootbox', 'storage', 'eventer', 'plugins/mscrollbar' ],
-    function( $, config, theme, async, OAuth, Github, Codepad, bootbox, storage, eventer ){
+define([ 'jquery', 'theme', 'plugins/async', 'plugins/oauth-io', 'Github', 'Codepad', 'plugins/bootbox', 'storage', 'eventer', 'plugins/mscrollbar' ],
+    function( $, theme, async, OAuth, Github, Codepad, bootbox, storage, eventer ){
 
 
+        var packadic = (window.packadic = window.packadic || {});
         function cre( el ){
             return $(document.createElement(_.isUndefined(el) ? 'div' : el));
         }
@@ -21,7 +22,7 @@ define([ 'jquery', 'config', 'theme', 'plugins/async', 'plugins/oauth-io', 'Gith
         editor._defineEvent('editor.file.commit');
 
         (function Connection(){
-            OAuth.initialize(config.oauth_io);
+            OAuth.initialize(packadic.config.oauth_io);
 
             github.authorize = function( preventReload ){
                 preventReload = preventReload || false;

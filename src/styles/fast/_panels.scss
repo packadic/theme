@@ -27,7 +27,7 @@
     min-height: 40px;
 
     .panel-title {
-        font-size: 14px;
+        font-size: 16px;
         font-family: $font-family-sub-heading;
     }
 
@@ -70,13 +70,11 @@
 
 
 .panel-default, .partition-default {
-    background-color: #FFFFFF;
-
+    background: image-url('textures/back-pattern.png') repeat #FFFFFF;
     .panel-heading {
-        background-color: #F7F7F7;
+        background: image-url('textures/padded-light.png') repeat #C0C0C0;
         border: none;
     }
-
     .panel-tools {
         .btn, > a {
             color: rgba(#FFF,0.8) !important;
@@ -85,6 +83,10 @@
                 color: #FFF !important;
             }
         }
+    }
+    .panel-footer {
+        background: image-url('textures/concrete-wall-3.png') repeat;
+        border-top: 1px dashed #CACACA;
     }
 }
 

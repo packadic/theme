@@ -1,0 +1,45 @@
+style(type="text/css").
+    #files a {
+        width: 50px;
+        height: 50px;
+    }
+.row
+    .col-sm-12
+        +box("Textures", "list", 500)
+            .row
+                .col-sm-12
+                    form
+                        .form-group
+                            .col-sm-9
+                                input(type="text", id="selector", class="form-control")
+                            .col-sm-3#selected
+            .row.small-margin-top
+                .col-sm-12#files
+                    each fileName, index in site.data.theme.textures
+                        a.btn.btn-sm.grey-light.small-margin-right.small-margin-bottom(style="background: url(/assets/images/textures/" + fileName + ") repeat", data-filename=fileName)
+
+
+
+script.
+    document.addEventListener("DOMContentLoaded", function (event) {
+        setTimeout(function () {
+            console.log('loaded dom content');
+            window.packadic.onBooted(['jquery'], function ($) {
+                var $files = $('#files'),
+                    $selector = $('#selector'),
+                    $selected = $('#selected'),
+                    $apply = $('#apply');
+                $selector.on('change', function () {
+                    var l = $($selector.val()).length
+                    $selected.html('<p>Found <strong>' + l + '</strong> results</p>');
+                })
+                $files.find('a').on('click', function (e) {
+                    e.preventDefault();
+                    var $el = $(this);
+                    var name = $el.data('filename');
+                    $($selector.val()).css('background-image', 'url(/assets/images/textures/' + name + ')');
+                    $($selector.val()).css('background-repeat', 'repeat');
+                })
+            });
+        }.call())
+    }, 1000)

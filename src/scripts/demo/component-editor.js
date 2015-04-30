@@ -33,6 +33,7 @@ define(['jquery', '../fn/defined', '../fn/cre', 'plugins/bs-switch'],
                 });
 
                 // Set the target to the default value
+                self.setCurrent(editable.id, editable.default);
                 var $editable = self.getTarget(editable.id);
                 var defaultClass = editable.options[editable.default].class;
                 if (!$editable.hasClass(defaultClass)) {

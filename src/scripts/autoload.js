@@ -3,6 +3,7 @@ define([
 ], function( $, defined, def, cre, async ){
     "use strict";
 
+    var packadic = (window.packadic = window.packadic || {});
     var autoload = {};
 
     autoload._plugins = [];

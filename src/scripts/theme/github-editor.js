@@ -1,13 +1,14 @@
-define([ 'jquery', 'config', 'theme', 'plugins/async', 'plugins/oauth-io', 'Github', 'Codepad', 'plugins/bootbox', 'storage',
+define([ 'jquery', 'theme', 'plugins/async', 'plugins/oauth-io', 'Github', 'Codepad', 'plugins/bootbox', 'storage',
          'plugins/mscrollbar' ],
-    function( $, config, theme, async, OAuth, Github, Codepad, bootbox, storage ){
+    function( $, theme, async, OAuth, Github, Codepad, bootbox, storage ){
 
+        var packadic = (window.packadic = window.packadic || {});
         // temp debug
         window.theme = theme;
         window.storage = storage;
 
 
-        OAuth.initialize(config.oauth_io);
+        OAuth.initialize(packadic.config.oauth_io);
 
         var api = {};
         var github = null;
