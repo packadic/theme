@@ -40,3 +40,7 @@
 /theme
 /config.rb.bak
 /lib
+/sassdoc
+/tmp
+/logs
+/src/sass

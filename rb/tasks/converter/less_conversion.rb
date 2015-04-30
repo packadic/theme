@@ -79,6 +79,8 @@ class Converter
         case name
           when '_variables.less'
             file_content = insert_default_vars(file_content)
+          when 'variables.less'
+            file_content = insert_default_vars(file_content)
           when '_vendor.less'
             file_content = file_content.gsub('font-awesome/less', 'font-awesome/scss')
           when 'bootstrap.less'

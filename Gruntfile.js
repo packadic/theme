@@ -162,7 +162,7 @@ var init = module.exports = function (grunts) {
             }
         },
         sass            : {
-            options: {sourcemap: 'none', compass: true},
+            options: { compass: true, bundleExec: true, sourcemap: 'none' },
             dev    : {
                 files: [{expand: true, cwd: 'src/styles', src: '**/*.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             },
@@ -271,11 +271,11 @@ var init = module.exports = function (grunts) {
             options: {livereload: true, nospawn: true},
 
             styles       : {
-                files: ['src/styles/**', '!src/styles/fast.scss', '!src/styles/nav.scss', '!src/styles/components/_header-dropdown.scss'],
+                files: ['src/styles/**', '!src/styles/fast/**', '!src/styles/fast.scss', '!src/styles/nav.scss', '!src/styles/components/_header-dropdown.scss'],
                 tasks: ['clean:styles', 'sass:<%= target.name %>']
             },
             style_fast   : {
-                files: ['src/styles/fast.scss', 'src/styles/components/_header-dropdown.scss'],
+                files: ['src/styles/fast/**', 'src/styles/fast.scss', 'src/styles/components/_header-dropdown.scss'],
                 tasks: ['sass:fast']
             },
             style_nav    : {
@@ -364,14 +364,14 @@ var init = module.exports = function (grunts) {
     grunt.registerTask('assets', ['clean:assets', 'cp', 'copy:plugins', 'sass:' + type, 'templates', 'scripts']);
     grunt.registerTask('views', ['clean:views', 'jade_config:' + type, 'jade:' + type]);
 
-    grunt.registerTask('watcher2', ['watch']);
+    grunt.registerTask('watcher', ['concurrent:watch']);
     grunt.registerTask('build', [
         'rm', 'cp',
         'sass:' + type, 'jade_config:' + type, 'jade:' + type,
         'assets'
     ]);
 
-    grunt.registerTask('watcher', function (target) {
+    grunt.registerTask('watcher2', function (target) {
         if(!_.isUndefined(target) && target == 'tscripts') {
             grunt.log.writeln('Starting watch on tscripts');
             grunt.config.set('watch', {

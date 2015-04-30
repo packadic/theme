@@ -10,27 +10,39 @@ block header
     +page-title("Layouts", "Checkitouts")
 
 block content
-    .row
-        +layform("Left first").form-horizontal
-            .form-group
-                label.control-label.col-sm-3 Hai
-                .col-sm-9
-                    input(type="text").form-control
-            .form-group
-                p aaaa
-            .form-actions
-                .col-sm-offset-3.col-sm-9
-                    a.btn.btn-primary Sub
+    .settings-editor.panel.panel-default
+        button.btn.btn-primary.withoutripple
+            i.fa.fa-cog
+        .panel-heading Panel Editor
+        .panel-body
+            div#layout-editor
 
-block append scripts
+
+block append scripts-pre-boot
     script.
-        (function Customisers(){
+        packadic.onBooted(['jquery', 'demo/component-editor', 'demo/metro'], function ($, ComponentEditor, metro) {
+            var layoutEditor = window.ceditors = new ComponentEditor($('#layout-editor'), {
+                target   : '#layout-editor',
+                editables: [{
+                    id: 'section-top-toggle', name: 'Display top', 'default': true, type: 'switch', options: {
+                        isEnabled  : function(){ return $('body').hasClass('without-section-top') === false; },
+                        toggle : function(){
+                            console.log('toggle', 'is enabled', this.isEnabled());
+                            $('body')[ (this.isEnabled() ? 'add' : 'remove') + 'Class']('without-section-top')
+                        }
+                    }
+                }, {
+                    id: 'page-boxed', name: 'Boxed page', 'default': false, type: 'switch', options: {
+                        isEnabled  : function(){ return $('body').hasClass('page-boxed') },
+                        toggle : function(){
+                            console.log('toggle', 'is enabled', this.isEnabled());
+                            $('body')[ (this.isEnabled() ? 'remove' : 'add') + 'Class']('page-boxed')
+                        }
+                    }
+                } ]
+            })
 
-            var packadic = (window.packadic = window.packadic || {});
+            window.metro = metro;
+            console.log('metro', metro);
 
-            packadic.bindEventHandler('started', function(){
-
-
-
-            });
-        }.call());
+        });

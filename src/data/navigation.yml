@@ -107,6 +107,9 @@ sidebar:
       - name: Tabs
         href: <%= target.nav.pre %>/components/tabs<%= target.nav.ext %>
 
+      - name: Panels
+        href: <%= target.nav.pre %>/components/panels<%= target.nav.ext %>
+
       - name: Modals
         href: <%= target.nav.pre %>/components/modals<%= target.nav.ext %>
 

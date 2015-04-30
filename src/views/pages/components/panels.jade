@@ -1,0 +1,112 @@
+extends ../../layouts/default
+block header
+    +page-title("Widgets", "Widgets that contain data")
+    +page-breadcrumbs
+        +breadcrumb("Components", "/components")
+        +breadcrumb("Widgets", "/components/widgets", true)
+
+block scripts-pre-boot
+    script.
+        packadic.onBooted(['jquery', 'demo/component-editor'], function ($, ComponentEditor) {
+            var colors = ['primary', 'transparent'];
+            $.each(packadic.site.data.theme.colors, function (i, color) {
+                colors.push(color + '-light');
+                colors.push(color);
+                colors.push(color + '-dark');
+            });
+
+            var colorOptions = {};
+            $.each(colors, function (i, color) {
+                colorOptions[color] = {'class': 'panel-' + color, name: color}
+            });
+
+            var editors = {};
+            $('div[data-demo-panel-tool]').each(function () {
+                var $el = $(this);
+                var target = $el.data('demo-panel-tool');
+                editors[target] = new ComponentEditor($el, {
+                    target   : target,
+                    editables: [{
+                        id: 'panel', name: 'Panel style', 'default': 'primary', type: 'select', options: {
+                            'default'  : {'class': 'panel-default', name: 'Default'},
+                            transparent: {'class': 'panel-transparent', name: 'Transparent'},
+                            primary    : {'class': 'panel-primary', name: 'Primary'}
+
+                        }
+                    }, {
+                        id: 'footer-toggle', name: 'Show footer', 'default': 'show', type: 'select', options: {
+                            show: {'class': 'show', name: 'Show'},
+                            hide: {'class': 'hide', name: 'Hide'}
+                        }
+                    }, {
+                        id: 'heading-toggle', name: 'Show heading', 'default': 'show', type: 'select', options: {
+                            show: {'class': 'show', name: 'Show'},
+                            hide: {'class': 'hide', name: 'Hide'}
+                        }
+                    }]
+                })
+            })
+            window.ceditors = editors;
+        });
+
+
+block content
+
+    .row
+        div.col-md-3
+            #panel1
+                .panel(data-component-editor-id="panel")
+                    .panel-heading(data-component-editor-id="heading-toggle")
+                        h4.panel-title Panel Title
+                    .panel-body
+                        p Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+                        p Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.
+                    .panel-footer(data-component-editor-id="footer-toggle")
+                        | Panel Footer
+        div.col-md-3
+            #panel2
+                .panel(data-component-editor-id="panel")
+                    .panel-heading(data-component-editor-id="heading-toggle")
+                        h4.panel-title Panel Title
+                    .panel-body
+                        p Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+                        p Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.
+                    .panel-footer(data-component-editor-id="footer-toggle")
+                        | Panel Footer
+
+
+
+
+        div.col-md-3
+            #panel3
+                div.panel(data-component-editor-id="panel")
+                    .panel-heading.border-light(data-component-editor-id="heading-toggle")
+                        h4.panel-title Toolbar
+                        ul.panel-heading-tabs.border-light
+                            li
+                                .pull-right
+                                    .btn-group(dropdown='', is-open='status.isopen')
+                                        button.btn.btn-primary.dropdown-toggle(type='button', dropdown-toggle='', ng-disabled='disabled', aria-haspopup='true', aria-expanded='false')
+                                            | Tools
+                                            span.caret
+                            li
+                                .rate
+                                    i.fa.fa-caret-up.text-primary
+                                    span.value 15
+                                    span.percentage %
+                            li.panel-tools
+                                ct-paneltool(tool-refresh='load1')
+                                    a.btn.btn-transparent.btn-sm(href='#', panel-refresh='', tooltip-placement='top', tooltip='Refresh', data-spinner='load1')
+                                        i.ti-reload
+                    div.panel-body
+                        p Nullam quis risus eget urna mollis ornare vel eu leo.
+                        p Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                    .panel-footer(data-component-editor-id="footer-toggle")
+                        | Panel Footer
+
+        .col-md-3
+            .panel.panel-default
+                .panel-heading
+                    h4.panel-title Panel Editor
+                .panel-body
+                    div(data-demo-panel-tool="#panel1,#panel2,#panel3")

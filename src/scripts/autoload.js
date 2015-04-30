@@ -94,6 +94,16 @@ define([
                 {
                     require(['plugins/bs-material'], function(){
                         $.material.init({
+                            "withRipples": [
+                                "a:not(.withoutripple)",
+                                "button:not(.withoutripple)",
+                                ".btn:not(.btn-link)",
+                                ".card-image",
+                                ".navbar a:not(.withoutripple)",
+                                ".dropdown-menu a",
+                                ".nav-tabs a:not(.withoutripple)",
+                                ".withripple"
+                            ].join(","),
                             autofill: true,
                             "inputElements": "form.form-material input.form-control, form.form-material textarea.form-control, form.form-material select.form-control",
                             "checkboxElements": "form.form-material .checkbox > label > input[type=checkbox]",

@@ -1,0 +1,161 @@
+[
+  {
+    "description": "Get the color variants\n\n",
+    "commentRange": {
+      "start": 9,
+      "end": 11
+    },
+    "context": {
+      "type": "function",
+      "name": "get-color-variant",
+      "code": "\n    @if($variant == 'light'){\n        @return material-color($color-name, '200');\n    } @else if($variant == 'dark') {\n        @return material-color($color-name, '500');\n    } @else {\n        @return material-color($color-name, '900');\n    }\n",
+      "line": {
+        "start": 12,
+        "end": 20
+      }
+    },
+    "author": [
+      "Robin Radic"
+    ],
+    "access": "public",
+    "group": [
+      "undefined"
+    ],
+    "require": [],
+    "file": {
+      "path": "fast.scss",
+      "name": "fast.scss"
+    }
+  },
+  {
+    "description": "Mixin to manage responsive breakpoints\n",
+    "commentRange": {
+      "start": 3,
+      "end": 6
+    },
+    "context": {
+      "type": "mixin",
+      "name": "respond-to",
+      "code": "\n    // If the key exists in the map\n    @if map-has-key($breakpoints, $breakpoint) {\n        // Prints a media query based on the value\n        @media #{inspect(map-get($breakpoints, $breakpoint))} {\n            @content;\n        }\n    }\n\n        // If the key doesn't exist in the map\n    @else {\n        @warn \"Unfortunately, no value could be retrieved from `#{$breakpoint}`. \"\n        + \"Available breakpoints are: #{map-keys($breakpoints)}.\";\n    }\n",
+      "line": {
+        "start": 7,
+        "end": 21
+      }
+    },
+    "author": [
+      "Hugo Giraudel"
+    ],
+    "parameter": [
+      {
+        "type": "String",
+        "name": "breakpoint",
+        "description": "Breakpoint name"
+      }
+    ],
+    "require": [],
+    "access": "public",
+    "content": "",
+    "group": [
+      "undefined"
+    ],
+    "file": {
+      "path": "functions/_breakpoints.scss",
+      "name": "_breakpoints.scss"
+    }
+  },
+  {
+    "description": "Map deep get\n",
+    "commentRange": {
+      "start": 4,
+      "end": 9
+    },
+    "context": {
+      "type": "function",
+      "name": "map-deep-get",
+      "code": "\n    @each $key in $keys {\n        $map: map-get($map, $key);\n    }\n    @return $map;\n",
+      "line": {
+        "start": 10,
+        "end": 15
+      }
+    },
+    "author": [
+      "Hugo Giraudel"
+    ],
+    "access": "public",
+    "parameter": [
+      {
+        "type": "Map",
+        "name": "map",
+        "description": "Map"
+      },
+      {
+        "type": "Arglist",
+        "name": "keys",
+        "description": "Key chain"
+      }
+    ],
+    "return": {
+      "type": "*",
+      "description": "Desired value"
+    },
+    "group": [
+      "undefined"
+    ],
+    "require": [],
+    "file": {
+      "path": "functions/_deep-getset-maps.scss",
+      "name": "_deep-getset-maps.scss"
+    }
+  },
+  {
+    "description": "Deep set function to set a value in nested maps\n",
+    "commentRange": {
+      "start": 17,
+      "end": 23
+    },
+    "context": {
+      "type": "function",
+      "name": "map-deep-set",
+      "code": "\n    $maps: ($map,);\n    $result: null;\n\n    // If the last key is a map already\n    // Warn the user we will be overriding it with $value\n    @if type-of(nth($keys, -1)) == \"map\" {\n        @warn \"The last key you specified is a map; it will be overrided with `#{$value}`.\";\n    }\n\n    // If $keys is a single key\n    // Just merge and return\n    @if length($keys) == 1 {\n        @return map-merge($map, ($keys: $value));\n    }\n\n    // Loop from the first to the second to last key from $keys\n    // Store the associated map to this key in the $maps list\n    // If the key doesn't exist, throw an error\n    @for $i from 1 through length($keys) - 1 {\n        $current-key: nth($keys, $i);\n        $current-map: nth($maps, -1);\n        $current-get: map-get($current-map, $current-key);\n        @if $current-get == null {\n            @error \"Key `#{$key}` doesn't exist at current level in map.\";\n        }\n        $maps: append($maps, $current-get);\n    }\n\n    // Loop from the last map to the first one\n    // Merge it with the previous one\n    @for $i from length($maps) through 1 {\n        $current-map: nth($maps, $i);\n        $current-key: nth($keys, $i);\n        $current-val: if($i == length($maps), $value, $result);\n        $result: map-merge($current-map, ($current-key: $current-val));\n    }\n\n    // Return result\n    @return $result;\n",
+      "line": {
+        "start": 24,
+        "end": 64
+      }
+    },
+    "author": [
+      "Hugo Giraudel"
+    ],
+    "access": "public",
+    "parameter": [
+      {
+        "type": "Map",
+        "name": "map",
+        "description": "Map"
+      },
+      {
+        "type": "List",
+        "name": "keys",
+        "description": "Key chaine"
+      },
+      {
+        "type": "*",
+        "name": "value",
+        "description": "Value to assign"
+      }
+    ],
+    "return": {
+      "type": "Map"
+    },
+    "group": [
+      "undefined"
+    ],
+    "require": [],
+    "throw": [
+      "Key `#{$key}` doesn"
+    ],
+    "file": {
+      "path": "functions/_deep-getset-maps.scss",
+      "name": "_deep-getset-maps.scss"
+    }
+  }
+]

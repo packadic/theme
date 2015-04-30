@@ -1,0 +1,375 @@
+// #E4E4E4 - 818181
+.panel {
+    background: none;
+    //box-shadow(0 3px 6px rgba(0, 0, 0, 0.16))
+
+    @include box-shadow(0 3px 6px rgba(0, 0, 0, 0.16) !important);
+    //@include border-radius(3px);
+    color: $text-color;
+    border: none;
+    position: relative;
+}
+
+.panel-footer {
+    position: relative;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: inherit;
+    padding: 15px;
+    background: none;
+}
+
+.panel-heading {
+    position: relative;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding: 12px;
+    min-height: 40px;
+
+    .panel-title {
+        font-size: 14px;
+        font-family: $font-family-sub-heading;
+    }
+
+    .panel-heading-tabs {
+        list-style: none;
+        top: 0;
+        right: 0;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+
+        > li {
+            float: left;
+            padding: 0 15px;
+            border-left-width: 1px;
+            border-left-style: solid;
+            border-left-color: inherit;
+            height: 50px;
+            line-height: 40px;
+
+            &.panel-tools {
+                position: relative;
+                @include opacity(1);
+                right: auto;
+                top: auto;
+
+                .tmp-tool {
+                    right: 20px;
+                    top: auto;
+                }
+
+                .dropdown {
+                    line-height: normal;
+                }
+            }
+        }
+    }
+}
+
+
+
+.panel-default, .partition-default {
+    background-color: #FFFFFF;
+
+    .panel-heading {
+        background-color: #F7F7F7;
+        border: none;
+    }
+
+    .panel-tools {
+        .btn, > a {
+            color: rgba(#FFF,0.8) !important;
+
+            &:hover {
+                color: #FFF !important;
+            }
+        }
+    }
+}
+
+.panel-transparent, .partition-transparent {
+    background: none;
+    position: relative;
+    box-shadow: none;
+
+    color: $gray-dark;
+
+    .panel-tools {
+        .btn, > a {
+            color: rgba(darken($grey,50%), 0.7) !important;
+
+            &:hover {
+                color: darken($grey,50%) !important;
+            }
+        }
+    }
+}
+
+.panel-primary, .partition-primary {
+    background-color: #c3eaf0;
+    position: relative;
+    color: #FFF;
+
+    .panel-heading {
+        background-color: #bcc6c0;
+        border: none;
+    }
+
+    .panel-tools {
+        .btn, > a {
+            color: rgba(#FFF,0.8) !important;
+
+            &:hover {
+                color: #FFF !important;
+            }
+        }
+    }
+}
+
+/// Get the color variants
+///
+/// @return {Hex} Hex color code
+@mixin panel-color-variant($name, $color){
+    .panel-#{$name}, .partition-#{$name} {
+        background: $color;
+        position: relative;
+        box-shadow: none;
+        color: #FFF;
+
+        border: 1px solid rgba($color, 0.07);
+        .panel-tools {
+            .btn, > a {
+                color: rgba(darken(#FFF,50%), 0.7) !important;
+                &:hover {
+                    color: darken(#FFF,50%) !important;
+                }
+            }
+        }
+    }
+}
+
+@each $color-name, $color-variants in $material-colors {
+  //  @include panel-color-variant($color-name + '-light', get-color-variant($color-name, 'light'));
+ //   @include panel-color-variant($color-name, get-color-variant($color-name));
+ //   @include panel-color-variant($color-name + '-dark', get-color-variant($color-name, 'dark'));
+}
+
+
+
+.panel-scroll {
+    overflow: hidden;
+    position: relative;
+    width: auto;
+    padding-right: 10px !important;
+}
+
+.panel-note {
+    @include border-radius(0);
+    border: none;
+
+    .panel-heading {
+        background: image-url("panels/note_dot.png") repeat-x;
+        border-bottom: 0 none;
+        padding-top: 30px;
+        padding-bottom: 10px;
+        top: 0;
+        z-index: 3;
+        position: relative;
+
+        h3 {
+            margin: 0;
+        }
+    }
+
+    .panel-body {
+        background: image-url("panels/line_detail.png") repeat;
+        padding: 0;
+        margin: 0 15px;
+        line-height: 18px;
+    }
+
+    .panel-footer {
+        background: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-top: none;
+        padding: 10px 15px;
+        margin-bottom: 0;
+
+        .avatar-note {
+            width: 30px;
+            height: 30px;
+            float: left;
+            margin-right: 10px;
+
+            img {
+                @include border-radius(2px);
+            }
+        }
+
+        .author-note {
+            display: block;
+            line-height: 14px;
+        }
+
+        .timestamp {
+            color: #999999;
+            display: inline-block;
+            font-size: $font-size-extra-small;
+        }
+    }
+
+    .note-options {
+        a {
+            margin-left: 10px;
+            font-size: $font-size-small;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+[class^="partition-"] {
+    &:after {
+        content: " ";
+        visibility: hidden;
+        display: block;
+        height: 0;
+        clear: both;
+    }
+}
+
+.full-white-backdrop {
+    background-color: #FFFFFF;
+    display: none;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1049;
+}
+
+.panel.panel-full-screen {
+    bottom: 0;
+    left: 10px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1048;
+    background-color: #FFFFFF;
+}
+
+.tmp-tool {
+    position: fixed;
+    right: 40px;
+    top: 20px;
+}
+// Spinner
+.csspinner {
+    position: relative;
+}
+
+.csspinner:before {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255,255,255, 0.8);
+}
+
+.csspinner:after {
+    z-index: 2;
+    content: "";
+    position: absolute;
+    -webkit-transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
+}
+
+.load1:after {
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    left: 50%;
+    margin: -15px 0 0 -15px;
+    border-radius: 50%;
+    border-top: 2px solid rgba(0, 0, 0, 0.2);
+    border-right: 2px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    border-left: 2px solid $primary;
+    -webkit-animation: load1 1.1s infinite linear;
+    animation: load1 1.1s infinite linear;
+}
+
+@-webkit-keyframes load1 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes load1 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.load2:after {
+    width: 30px;
+    height: 30px;
+    background-color: #3300aa;
+    top: 50%;
+    left: 50%;
+    margin: -15px 0 0 -15px;
+    -webkit-animation: load2 1.2s infinite ease-in-out;
+    animation: load2 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes load2 {
+    0% {
+        -webkit-transform: perspective(120px);
+    }
+
+    50% {
+        -webkit-transform: perspective(120px) rotateY(180deg);
+    }
+
+    100% {
+        -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
+    }
+}
+
+@keyframes load2 {
+    0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    }
+
+    50% {
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    }
+
+    100% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    }
+}

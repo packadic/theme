@@ -1,0 +1,223 @@
+
+
+//colors
+$color_pumice_approx: #c6c6c6;
+$color_tropical_blue_approx: #cad8f3;
+$color_link_water_approx: #dee7f8;
+$color_fuscous_gray_approx: #555;
+$color_tapa_approx: #777;
+$color_spindle_approx: #bbcef1;
+$color_cornflower_blue_approx: #6d95e0;
+$color_log_cabin_approx: #222;
+$color_mine_shaft_approx: #333333;
+$color_silver_chalice_approx: #aaaaaa;
+$white: #ffffff;
+$color_mountain_mist_approx: #999999;
+$color_alto_approx: #dadada;
+
+//fonts
+$font_0: arial;
+$font_1: sans-serif;
+
+//@extend-elements
+//original selectors
+//.tagit-autocomplete .ui-state-hover, .tagit-autocomplete .ui-state-focus
+%extend_1 {
+    border: 1px solid $color_mountain_mist_approx;
+    background: $color_alto_approx;
+    font-weight: normal;
+    color: $color_log_cabin_approx;
+}
+
+
+.ui-widget {
+    font-size: 1.1em;
+}
+.tagit-autocomplete {
+    &.ui-autocomplete {
+        position: absolute;
+        cursor: default;
+    }
+    &.ui-menu {
+        list-style: none;
+        padding: 2px;
+        margin: 0;
+        display: block;
+        float: left;
+        .ui-menu {
+            margin-top: -3px;
+        }
+        .ui-menu-item {
+            margin: 0;
+            padding: 0;
+            zoom: 1;
+            float: left;
+            clear: left;
+            width: 100%;
+            a {
+                text-decoration: none;
+                display: block;
+                padding: .2em .4em;
+                line-height: 1.5;
+                zoom: 1;
+            }
+        }
+    }
+    &.ui-widget-content {
+        border: 1px solid $color_silver_chalice_approx;
+        background: $white 50% 50% repeat-x;
+        color: $color_log_cabin_approx;
+    }
+    &.ui-corner-all {
+        //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+        border-radius: 4px;
+    }
+    .ui-corner-all {
+        //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+        border-radius: 4px;
+    }
+    .ui-state-hover {
+        @extend %extend_1;
+    }
+    .ui-state-focus {
+        @extend %extend_1;
+    }
+    .ui-state-active {
+        border: 1px solid $color_silver_chalice_approx;
+    }
+    .ui-widget-content {
+        border: 1px solid $color_silver_chalice_approx;
+    }
+    .ui-menu .ui-menu-item a {
+        &.ui-state-hover {
+            font-weight: normal;
+            margin: -1px;
+        }
+        &.ui-state-active {
+            font-weight: normal;
+            margin: -1px;
+        }
+    }
+}
+ul.tagit {
+    border-style: solid;
+    border-width: 1px;
+    border-color: $color_pumice_approx;
+    background: inherit;
+    input[type="text"] {
+        color: $color_mine_shaft_approx;
+        background: none;
+    }
+    li.tagit-choice {
+        //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+        border-radius: 6px;
+        border: 1px solid $color_tropical_blue_approx;
+        background: none;
+        background-color: $color_link_water_approx;
+        font-weight: normal;
+        a {
+            &.tagit-close {
+                text-decoration: none;
+                .text-icon:hover {
+                    color: $color_log_cabin_approx;
+                }
+            }
+            &.tagLabel:hover {
+                color: $color_log_cabin_approx;
+            }
+        }
+        .tagit-close {
+            right: .4em;
+            .text-icon {
+                display: inline;
+                font-family: $font_0, $font_1;
+                font-size: 16px;
+                line-height: 16px;
+                color: $color_tapa_approx;
+            }
+        }
+        .ui-icon {
+            display: none;
+        }
+        &:hover {
+            background-color: $color_spindle_approx;
+            border-color: $color_cornflower_blue_approx;
+        }
+        &.remove {
+            background-color: $color_spindle_approx;
+            border-color: $color_cornflower_blue_approx;
+        }
+        .tagit-label:not(a) {
+            color: $color_fuscous_gray_approx;
+        }
+    }
+}
+* html .tagit-autocomplete.ui-autocomplete {
+    width: 1px;
+}
+
+.tagit .ui-helper-hidden-accessible {
+    position: absolute !important;
+    clip: rect(1px,1px,1px,1px);
+}
+
+ul.tagit {
+    padding: 1px 5px;
+    overflow: auto;
+    margin-left: inherit;
+    margin-right: inherit;
+    li {
+        display: block;
+        float: left;
+        margin: 2px 5px 2px 0;
+        &.tagit-choice {
+            position: relative;
+            line-height: inherit;
+            .tagit-close {
+                cursor: pointer;
+                position: absolute;
+                right: .1em;
+                top: 50%;
+                margin-top: -8px;
+                line-height: 17px;
+                .text-icon {
+                    display: none;
+                }
+            }
+            input {
+                display: block;
+                float: left;
+                margin: 2px 5px 2px 0;
+            }
+            a.tagit-label {
+                cursor: pointer;
+                text-decoration: none;
+            }
+        }
+        &.tagit-choice-read-only {
+            padding: .2em .5em .2em .5em;
+        }
+        &.tagit-choice-editable {
+            padding: .2em 18px .2em .5em;
+        }
+        &.tagit-new {
+            padding: .25em 4px .25em 0;
+        }
+    }
+    input[type="text"] {
+        //Instead of the line below you could use @includebox-sizing($bs)
+        box-sizing: border-box;
+        //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+        box-shadow: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+        width: inherit;
+        background-color: inherit;
+        outline: none;
+    }
+}
+
+input.tagit-hidden-field {
+    display: none;
+}

@@ -294,6 +294,64 @@ body.without-section-top section#top {
     display: none;
 }
 
+
+
+
+@media (min-width: $screen-md-min) { /* 992px */
+
+    /* Page header */
+    .page-header.navbar {
+        /* Header logo */
+        .page-logo {
+            .page-sidebar-closed.page-sidebar-closed-hide-logo & {
+                padding: 0;
+            }
+
+            .page-sidebar-closed.page-sidebar-closed-hide-logo & {
+                width: $sidebar-collapsed-width;
+
+                .logo-default {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    /* Boxed Layout */
+    .page-boxed	{
+        section#top.navbar {
+            /* Page logo */
+            .page-logo {
+                width: ($sidebar-width + 1px);
+            }
+
+            /* Top menu */
+            .top-menu {
+                .navbar-nav {
+                    margin-right: 0px;
+                }
+            }
+        }
+    }
+
+    .sidebar-nav-closed.sidebar-nav-closed-hide-logo.page-boxed {
+        section#top.navbar {
+            /* Page logo */
+            .page-logo {
+                width: ($sidebar-collapsed-width + 1);
+            }
+        }
+    }
+
+    .page-boxed.sidebar-nav-fixed {
+        section#top.navbar {
+            .page-logo {
+                width: $sidebar-width;
+            }
+        }
+    }
+}
+
 @media (min-width: $screen-sm-min) {
     section#top.navbar {
         .search-form {
@@ -405,7 +463,7 @@ body.without-section-top section#top {
     }
 
     .page-boxed section#top.navbar {
-        > .container {
+        > header.top {
             max-width: none !important;
             margin: 0 !important;
             padding: 0 !important;
@@ -419,7 +477,7 @@ body.without-section-top section#top {
             margin: auto !important;
             padding: 0;
 
-            > .container {
+            > header.top {
                 margin: auto !important;
             }
         }

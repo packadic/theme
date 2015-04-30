@@ -12,3 +12,5 @@ $state-default-border:       	 	darken(adjust-hue($state-default-bg, -10), 5%) ;
 $state-primary-text:          	 	#D8E3F2 ;
 $state-primary-bg:        		 	$brand-primary ;
 $state-primary-border:    	 	 	darken(adjust-hue($state-primary-bg, -10), 5%) ;
+
+$font-size-extra-small:         ceil(($font-size-base * 0.70)) !default; // ~10px

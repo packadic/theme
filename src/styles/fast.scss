@@ -1,541 +1,97 @@
-@import "base";
-@import "components/header-dropdown";
+////
+/// Fast parsed
+/// @author Robin Radic
+////
 
+@import "base";
+@import "fast/header-dropdown";
+@import "fast/datatables";
+//@import "fast/tagit";
+@import "fast/panels";
+
+.settings-editor {
+
+    position: fixed !important;
+    right: -330px;
+    width: 330px;
+    top: 51px;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    @include transition (right 0.2s ease 0s);
+    border-left: 1px solid $box-border-color !important;
+    border-bottom: 1px solid $box-border-color !important;
+    z-index: 1050;
+
+    &.active {
+        right: 0;
+    }
+
+    > .btn {
+        background: #c4c4c4 !important;
+        border-color: $box-border-color !important;
+        border-right-width: 0;
+        left: -44px;
+        padding: 10px 14px;
+        position: absolute;
+        top: 0px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+
+        &:hover, &:active, &:focus {
+            box-shadow: none !important;
+            outline: 0 !important;
+        }
+        > i.fa {
+            color: #000;
+            font-size: 20px;
+        }
+    }
+
+
+
+    &.panel {
+        border-radius: 0 !important;
+        border-top: none;
+        border-right: none;
+        background: #FFF;
+        border-color: $box-border-color !important;
+
+        .panel-heading {
+            border-top-width: 1px;
+            border-top-style: solid;
+            padding: 11px 15px;
+            background: lighten($grey, 15%);
+            border-color: $box-border-color;
+            border-radius: 0 !important;
+        }
+
+        .panel-body {
+            padding: 10px;
+        }
+
+        .setting-box {
+            border-bottom: 1px solid $box-border-color;
+            padding: 11px 10px 10px;
+
+            .setting-title {
+                padding: 5px 0;
+                > label {
+                    font-size: 10px;
+                    font-weight: normal;
+                }
+            }
+
+            .setting-control {
+                width: 140px;
+
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}
 .theme-styler {
 
-}
-
-//colors
-$color_pumice_approx: #c6c6c6;
-$color_tropical_blue_approx: #cad8f3;
-$color_link_water_approx: #dee7f8;
-$color_fuscous_gray_approx: #555;
-$color_tapa_approx: #777;
-$color_spindle_approx: #bbcef1;
-$color_cornflower_blue_approx: #6d95e0;
-$color_log_cabin_approx: #222;
-$color_mine_shaft_approx: #333333;
-$color_silver_chalice_approx: #aaaaaa;
-$white: #ffffff;
-$color_mountain_mist_approx: #999999;
-$color_alto_approx: #dadada;
-
-//fonts
-$font_0: arial;
-$font_1: sans-serif;
-
-//@extend-elements
-//original selectors
-//.tagit-autocomplete .ui-state-hover, .tagit-autocomplete .ui-state-focus
-%extend_1 {
-    border: 1px solid $color_mountain_mist_approx;
-    background: $color_alto_approx;
-    font-weight: normal;
-    color: $color_log_cabin_approx;
-}
-
-
-.ui-widget {
-    font-size: 1.1em;
-}
-.tagit-autocomplete {
-    &.ui-autocomplete {
-        position: absolute;
-        cursor: default;
-    }
-    &.ui-menu {
-        list-style: none;
-        padding: 2px;
-        margin: 0;
-        display: block;
-        float: left;
-        .ui-menu {
-            margin-top: -3px;
-        }
-        .ui-menu-item {
-            margin: 0;
-            padding: 0;
-            zoom: 1;
-            float: left;
-            clear: left;
-            width: 100%;
-            a {
-                text-decoration: none;
-                display: block;
-                padding: .2em .4em;
-                line-height: 1.5;
-                zoom: 1;
-            }
-        }
-    }
-    &.ui-widget-content {
-        border: 1px solid $color_silver_chalice_approx;
-        background: $white 50% 50% repeat-x;
-        color: $color_log_cabin_approx;
-    }
-    &.ui-corner-all {
-        //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
-        border-radius: 4px;
-    }
-    .ui-corner-all {
-        //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
-        border-radius: 4px;
-    }
-    .ui-state-hover {
-        @extend %extend_1;
-    }
-    .ui-state-focus {
-        @extend %extend_1;
-    }
-    .ui-state-active {
-        border: 1px solid $color_silver_chalice_approx;
-    }
-    .ui-widget-content {
-        border: 1px solid $color_silver_chalice_approx;
-    }
-    .ui-menu .ui-menu-item a {
-        &.ui-state-hover {
-            font-weight: normal;
-            margin: -1px;
-        }
-        &.ui-state-active {
-            font-weight: normal;
-            margin: -1px;
-        }
-    }
-}
-ul.tagit {
-    border-style: solid;
-    border-width: 1px;
-    border-color: $color_pumice_approx;
-    background: inherit;
-    input[type="text"] {
-        color: $color_mine_shaft_approx;
-        background: none;
-    }
-    li.tagit-choice {
-        //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
-        border-radius: 6px;
-        border: 1px solid $color_tropical_blue_approx;
-        background: none;
-        background-color: $color_link_water_approx;
-        font-weight: normal;
-        a {
-            &.tagit-close {
-                text-decoration: none;
-                .text-icon:hover {
-                    color: $color_log_cabin_approx;
-                }
-            }
-            &.tagLabel:hover {
-                color: $color_log_cabin_approx;
-            }
-        }
-        .tagit-close {
-            right: .4em;
-            .text-icon {
-                display: inline;
-                font-family: $font_0, $font_1;
-                font-size: 16px;
-                line-height: 16px;
-                color: $color_tapa_approx;
-            }
-        }
-        .ui-icon {
-            display: none;
-        }
-        &:hover {
-            background-color: $color_spindle_approx;
-            border-color: $color_cornflower_blue_approx;
-        }
-        &.remove {
-            background-color: $color_spindle_approx;
-            border-color: $color_cornflower_blue_approx;
-        }
-        .tagit-label:not(a) {
-            color: $color_fuscous_gray_approx;
-        }
-    }
-}
-* html .tagit-autocomplete.ui-autocomplete {
-    width: 1px;
-}
-
-.tagit .ui-helper-hidden-accessible {
-    position: absolute !important;
-    clip: rect(1px,1px,1px,1px);
-}
-
-ul.tagit {
-    padding: 1px 5px;
-    overflow: auto;
-    margin-left: inherit;
-    margin-right: inherit;
-    li {
-        display: block;
-        float: left;
-        margin: 2px 5px 2px 0;
-        &.tagit-choice {
-            position: relative;
-            line-height: inherit;
-            .tagit-close {
-                cursor: pointer;
-                position: absolute;
-                right: .1em;
-                top: 50%;
-                margin-top: -8px;
-                line-height: 17px;
-                .text-icon {
-                    display: none;
-                }
-            }
-            input {
-                display: block;
-                float: left;
-                margin: 2px 5px 2px 0;
-            }
-            a.tagit-label {
-                cursor: pointer;
-                text-decoration: none;
-            }
-        }
-        &.tagit-choice-read-only {
-            padding: .2em .5em .2em .5em;
-        }
-        &.tagit-choice-editable {
-            padding: .2em 18px .2em .5em;
-        }
-        &.tagit-new {
-            padding: .25em 4px .25em 0;
-        }
-    }
-    input[type="text"] {
-        //Instead of the line below you could use @includebox-sizing($bs)
-        box-sizing: border-box;
-        //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-        box-shadow: none;
-        border: none;
-        margin: 0;
-        padding: 0;
-        width: inherit;
-        background-color: inherit;
-        outline: none;
-    }
-}
-
-input.tagit-hidden-field {
-    display: none;
-}
-
-/***
-Datatables Plugin(in v1.3)
-***/
-.dataTable {
-    width: 100%;
-    clear: both;
-    margin-top: 5px;
-}
-
-.dataTables_filter {
-    .form-control {
-        margin-left: 4px;
-    }
-
-    label {
-        line-height: 32px;
-    }
-}
-
-.dataTable .row-details {
-    margin-top: 3px;
-    display: inline-block;
-    cursor: pointer;
-    width: 14px;
-    height: 14px;
-}
-
-.dataTable .row-details.row-details-close {
-    background: url("../img/datatable-row-openclose.png") no-repeat 0 0;
-}
-
-.dataTable .row-details.row-details-open {
-    background: url("../img/datatable-row-openclose.png") no-repeat 0 -23px;
-}
-
-.dataTable .details {
-    background-color: #eee;
-}
-
-.dataTable .details td,
-.dataTable .details th {
-    padding: 4px;
-    background: none;
-    border: 0;
-}
-
-.dataTable .details tr:hover td,
-.dataTable .details tr:hover th {
-    background: none;
-}
-
-.dataTable .details tr:nth-child(odd) td,
-.dataTable .details tr:nth-child(odd) th {
-    background-color: #eee;
-}
-
-.dataTable .details tr:nth-child(even) td,
-.dataTable .details tr:nth-child(even) th {
-    background-color: #eee;
-}
-
-.dataTable > thead > tr > th.sorting,
-.dataTable > thead > tr > th.sorting_asc,
-.dataTable > thead > tr > th.sorting_desc {
-    padding-right: 18px;
-}
-
-.dataTable .table-checkbox {
-    width: 8px !important;
-}
-
-@media (max-width: 768px) {
-    .dataTables_wrapper .dataTables_length .form-control,
-    .dataTables_wrapper .dataTables_filter .form-control {
-        display: inline-block;
-    }
-
-    .dataTables_wrapper .dataTables_info {
-        top: 17px;
-    }
-
-    .dataTables_wrapper .dataTables_paginate {
-        margin-top: -15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .dataTables_wrapper .dataTables_filter .form-control {
-        width: 175px !important;
-    }
-
-    .dataTables_wrapper .dataTables_paginate {
-        float: left;
-        margin-top: 20px;
-    }
-}
-
-.dataTables_processing {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    min-width: 125px;
-    margin-left: 0;
-    padding: 7px;
-    text-align: center;
-    color: #333;
-    font-size: 13px;
-    border: 1px solid #ddd;
-    background-color: #eee;
-    vertical-align: middle;
-    -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
-}
-
-.dataTables_processing span {
-    line-height: 15px;
-    vertical-align: middle;
-}
-
-.dataTables_empty {
-    text-align: center;
-}
-
-/***
-TableTools
-***/
-.tabletools-btn-group {
-    margin: 0 0 10px 0;
-
-    > .btn {
-        margin-right: 5px;
-
-        &:last-child {
-            margin-right: 0;
-        }
-    }
-}
-
-.tabletools-dropdown-on-portlet {
-    margin-top: -45px;
-    float: right;
-
-    > .btn {
-        margin-right: 5px;
-
-        &:last-child {
-            margin-right: 0;
-        }
-    }
-}
-
-.DTTT_Print {
-    background-color: #fff;
-
-    .DTTT_PrintMessage {
-        display: none;
-    }
-
-    @media print {
-
-        .DTTT_PrintMessage {
-            display: inline-block;
-        }
-
-    }
-
-    .DTTT_Print_Info {
-        display: block;
-        position: fixed;
-        top: 35px;
-        font-size: 18px;
-        width: 700px;
-        left: 50%;
-        margin-left: -350px;
-        text-align: center;
-    }
-
-    .page-sidebar,
-    .page-header,
-    .page-footer {
-        display: none;
-    }
-
-    .page-content-wrapper {
-        float: none;
-    }
-
-    .row,
-    [class*="col-"] {
-        padding: 0;
-        margin: 0;
-    }
-
-    .page-content {
-        margin: 50px auto !important;
-        border: 0 !important;
-        width: 800px !important;
-        padding: 0 !important;
-
-        .portlet {
-            border: 0;
-            padding: 0;
-
-            .portlet-body {
-                padding: 0;
-            }
-        }
-
-        .dataTables_wrapper {
-            padding: 0;
-            margin: 0;
-            box-shadow: 5px 5px rgba(#666, 0.1);
-
-            @media print {
-                box-shadow: none;
-            }
-        }
-    }
-}
-
-/***
-Extended pagination
-***/
-
-.paging_bootstrap_extended {
-    margin: 0 !important;
-    padding: 0 !important;
-    float: none !important;
-    font-size: 13px;
-}
-
-.dataTables_extended_wrapper .seperator {
-    padding: 0 2px;
-}
-
-.dataTables_extended_wrapper div.dataTables_paginate,
-.dataTables_extended_wrapper div.dataTables_length,
-.dataTables_extended_wrapper div.dataTables_info {
-    display: inline-block;
-    float: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    position: static !important;
-}
-
-@media (max-width: 480px) {
-
-    .dataTables_extended_wrapper div.dataTables_paginate,
-    .dataTables_extended_wrapper div.dataTables_length,
-    .dataTables_extended_wrapper div.dataTables_info {
-        display: block;
-        margin-bottom: 10px !important;
-    }
-
-    .dataTables_extended_wrapper .seperator {
-        display: none !important;
-    }
-}
-
-.dataTables_extended_wrapper div.dataTables_length label {
-    margin: 0 !important;
-    padding: 0 !important;
-    font-size: 13px;
-    float: none !important;
-    display: inline-block !important;
-}
-
-.table-container .table-actions-wrapper {
-    display: none;
-}
-
-/***
-Scroller Extension
-***/
-
-.dataTables_scroll {
-    margin-bottom: 10px;
-}
-
-.dataTables_scrollHead {
-    border-bottom: 2px solid #ddd !important;
-
-    thead {
-        th {
-            border-bottom: 0 !important;
-        }
-    }
-}
-
-.dataTables_scrollBody {
-    border-bottom: 1px solid #ddd !important;
-}
-
-// popup message for copy function of the tabletools
-
-.DTTT_Print_Info {
-    width: 300px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -50px;
-    margin-left: -150px;
-    background: #eee;
-    padding: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
-
-    > h6 {
-        font-size: 16px;
-        font-weight: 400;
-    }
 }

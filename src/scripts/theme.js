@@ -145,6 +145,14 @@ define([ 'jquery', 'fn/defined', 'fn/default', 'fn/cre', 'config', 'eventer', 'a
 
         (function Events(){
 
+            theme.initSettingsEditor = function(){
+                var $el = $('.settings-editor');
+                $el.find('> .btn').on('click', function(e){
+                    e.preventDefault();
+                    $(this).parent().toggleClass('active');
+                })
+            };
+
             theme.initHeaderSearchForm = function(){
                 $('section#top').on('click', '.search-form', function( e ){
                     $(this).addClass("open");
@@ -377,6 +385,7 @@ define([ 'jquery', 'fn/defined', 'fn/default', 'fn/cre', 'config', 'eventer', 'a
 
             theme.initEvents();
             theme.initHeaderSearchForm();
+            theme.initSettingsEditor();
 
             $([
                 ".btn:not(.btn-link)",

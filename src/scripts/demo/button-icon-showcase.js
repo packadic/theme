@@ -12,7 +12,7 @@ define([ 'jquery',  'plugins/bs-select' ],
             return true;
         }
 
-        function Showcase( $el ){
+        function Showcase( $el ) {
             var self = this;
             this.$el = $el;
             this.$buttons = this.$el.find(this.$el.data('editor-selector'));
@@ -20,26 +20,27 @@ define([ 'jquery',  'plugins/bs-select' ],
             this.pickers = this.$el.data('editor').split(',');
             this.$pickers = {};
 
-            _.each(this.pickers, function( picker ){
-                self.$pickers[ picker ] = self.$el.find('.button-' + picker + '-select');
+            _.each(this.pickers, function (picker) {
+                self.$pickers[picker] = self.$el.find('.button-' + picker + '-select');
             });
 
-            $(document).ready(function(){
-                _.each(self.pickers, function( picker ){
-                    self.$pickers[ picker ].selectpicker({});
+            $(document).ready(function () {
+                _.each(self.pickers, function (picker) {
+                    self.$pickers[picker].selectpicker({});
 
                     var value = self.getPickerValue(picker);
                     //console.log('init picker', picker, 'setting value', typeof value, 'val=', value, 'valid=', isValidValue(value));
-                    if( isValidValue(value) ){
-                        self.$pickers[ picker ].selectpicker('val', value);
+                    if (isValidValue(value)) {
+                        self.$pickers[picker].selectpicker('val', value);
                     }
 
-                    self.$pickers[ picker ].on('change', function(){
+                    self.$pickers[picker].on('change', function () {
                         self.setPickerValue(picker, $(this).selectpicker('val'));
                     });
                 });
             });
         }
+
 
         Showcase.prototype = {
 

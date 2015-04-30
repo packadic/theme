@@ -408,6 +408,9 @@ define([ 'jquery', 'config', 'theme', 'eventer', 'string', 'plugins/async' ],
                 }
             };
 
+            /**
+             * @todo move to theme.js
+             */
             sidebar.handleWithContent = function(){
                 var breakpointMd = theme.getBreakpoint('md');
                 var content = $('main');
@@ -415,7 +418,7 @@ define([ 'jquery', 'config', 'theme', 'eventer', 'string', 'plugins/async' ],
 
                 var height;
 
-                if( $body.hasClass("page-footer-fixed") === true && sidebar.isFixed() === false ){
+                if( $body.hasClass("section-bottom-fixed") === true && sidebar.isFixed() === false ){
                     var available_height = theme.getViewPort().height - $('section#bottom').outerHeight() - $('section#top').outerHeight();
                     if( content.height() < available_height ){
                         content.attr('style', 'min-height:' + available_height + 'px');

@@ -1,3 +1,14 @@
 @import "functions/data-types";
 @import "functions/deep-getset-maps";
 @import "functions/breakpoints";
+
+
+@function get-color-variant($color-name, $variant: ''){
+    @if($variant == 'light'){
+        @return material-color($color-name, '200');
+    } @else if($variant == 'dark') {
+        @return material-color($color-name, '500');
+    } @else {
+        @return material-color($color-name, '900');
+    }
+}

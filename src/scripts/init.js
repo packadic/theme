@@ -34,17 +34,35 @@
     packadic.onPreBoot = function(cb){
         packadic.bindEventHandler('pre-boot', cb);
     };
-    packadic.onBoot = function(cb){
+    packadic.onBoot = function(req, cb){
         packadic.bindEventHandler('booting', cb);
     };
-    packadic.onBooted = function(cb){
-        packadic.bindEventHandler('booted', cb);
+    packadic.onBooted = function(req, cb){
+        packadic.bindEventHandler('booted', function(){
+            if(_.isFunction(req)){
+                req();
+            } else {
+                require(req, cb);
+            }
+        });
     };
-    packadic.onStart = function(cb){
-        packadic.bindEventHandler('starting', cb);
+    packadic.onStart = function(req, cb){
+        packadic.bindEventHandler('starting', function(){
+            if(_.isFunction(req)){
+                req();
+            } else {
+                require(req, cb);
+            }
+        });
     };
-    packadic.onStarted = function(cb){
-        packadic.bindEventHandler('started', cb);
+    packadic.onStarted = function(req, cb){
+        packadic.bindEventHandler('started', function(){
+            if(_.isFunction(req)){
+                req();
+            } else {
+                require(req, cb);
+            }
+        });
     };
 
     packadic.fireEvent = function (name) {

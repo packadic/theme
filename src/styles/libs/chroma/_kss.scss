@@ -1,0 +1,88 @@
+//
+// "KSS" module for the system.
+//
+
+
+@import "./variables";
+
+
+// chroma-kss-markup()
+//
+// Returns the HTML needed to display all colors in color() in a KSS style
+// guide. The parameters are used to specify the classes for various elements.
+//
+// Usage:
+// ```scss
+// @import 'init';
+//
+// /*
+// #{chroma-kss-markup()}
+// */
+//
+// Then use a Gulp.js or Grunt task to strip the leading and trailing lines
+// (containing "/*" and "*/" respectively) from the generated file.
+//
+// $wrapper-class     - Defaults to 'kss-style'.
+// $title-class       - Defaults to 'chroma-kss__title'.
+// $description-class - Defaults to 'chroma-kss__description'.
+// $color-class       - Defaults to 'chroma-kss'.
+// $swatch-class      - Defaults to 'chroma-kss__swatch'.
+// $variable-class    - Defaults to 'chroma-kss__variable'.
+//
+// style guide: sass.functions.chroma.chroma-kss-markup
+
+@function chroma-kss-markup(
+  $wrapper-class:     'kss-style',
+  $title-class:       'chroma-kss__title',
+  $description-class: 'chroma-kss__description',
+  $color-class:       'chroma-kss',
+  $swatch-class:      'chroma-kss__swatch',
+  $variable-class:    'chroma-kss__variable',
+  $alt-text-class:    'chroma-kss__alt-text',
+  $value-class:       'chroma-kss__value',
+  $reference-class:   'chroma-kss__reference'
+) {
+  $markup: '';
+
+  @if $wrapper-class {
+    $markup: '<div class="' + $wrapper-class + '">';
+  }
+
+  @each $scheme, $data in map-get($chroma, 'schemes') {
+    // Display the scheme name and description.
+    $markup: $markup
+      + '<h3 class="' + $title-class + '">#{$scheme}</h3>'
+      + '<p class="' + $description-class + '">#{map-get($data, 'description')}</p>';
+
+    // Display the colors in the scheme.
+    @each $color, $data in map-get($chroma, 'names') {
+      $seperator: str-index($color, '::');
+      @if $scheme == str-slice($color, 1, $seperator - 1) {
+        $color: str-slice($color, $seperator + 2);
+        $value: map-get($data, 'value');
+        $reference: map-get($data, 'reference');
+        $referenced_by: map-get($data, 'referenced_by');
+
+        $markup: $markup
+          + '<div class="#{$color-class}">'
+          +   '<span class="#{$swatch-class}" style="background-color: #{$value}"></span>'
+          +   '<code class="#{$variable-class}">color(#{$color})</code>'
+          +   ' <span class="#{$alt-text-class}">uses the color:</span> '
+          +   '<span class="#{$value-class}"><code>#{$value}</code>';
+        @if $reference {
+          $markup: $markup + ' (#{$reference})';
+        }
+        $markup: $markup + '</span>';
+        @if length($referenced_by) > 0 {
+          $markup: $markup + ' <span class="#{$reference_class}">This color is inherited by: #{inspect($referenced_by)}</span>'
+        }
+        $markup: $markup + '</div>';
+      }
+    }
+  }
+
+  @if $wrapper-class {
+    $markup: $markup + '</div>';
+  }
+  @return $markup;
+}
