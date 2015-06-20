@@ -1,5 +1,12 @@
 extends ../../layouts/default
 
+mixin popover-btn-demo(side)
+    - var sideLcase = side.toLowerCase();
+    +a.btn.btn-primary(data-toggle="popover", tabindex="0", role="button", data-trigger="focus", data-container="body", data-placement=sideLcase, title="Popover title", data-content="And here's some amazing content. It's very engaging. Right?")=side
+mixin tooltip-btn-demo(side)
+    - var sideLcase = side.toLowerCase();
+    +a.btn.btn-primary(data-toggle="tooltip", data-container="body", data-placement=sideLcase, title="Tooltip on " + sideLcase)=side
+
 block header
     +page-title("Modals", "modals")
     +page-breadcrumbs
@@ -10,22 +17,32 @@ block content
 
 
     .row
-        .col-lg-6
+        .col-lg-5
             +box("Modals", "list")
                 a.btn.btn-primary(data-toggle="modal", href='#responsive') Responsive
                 a.btn.btn-primary(data-toggle="modal", href='#full-width') Full width
                 a.btn.btn-primary(data-toggle="modal", href='#long') Long
                 a.btn.btn-primary(data-toggle="modal", href='#notlong') Not long
                 a.btn.btn-primary(data-toggle="modal", href='#verylong') Very long
-        .col-lg-6
+        .col-lg-3
             +box("Bootbox modals", "list")
                 +a(data-demo-modal="information").btn.btn-info.demo-modal Info
                 +a(data-demo-modal="success").btn.btn-success.demo-modal Success
                 +a(data-demo-modal="warning").btn.btn-warning.demo-modal Warning
                 +a(data-demo-modal="error").btn.btn-danger.demo-modal Error
         .col-lg-4
-            +box("Boxes", "list")
-                | Hello
+            +box("Tooltips", "cog")
+                .btn-group.btn-group-justified
+                    +tooltip-btn-demo('Left')
+                    +tooltip-btn-demo('Right')
+                    +tooltip-btn-demo('Top')
+                    +tooltip-btn-demo('Bottom')
+            +box("Popovers", "cog")
+                .btn-group.btn-group-justified
+                    +popover-btn-demo('Left')
+                    +popover-btn-demo('Right')
+                    +popover-btn-demo('Top')
+                    +popover-btn-demo('Bottom')
     .row
         .col-lg-6
             +box("Boxes", "list")

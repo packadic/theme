@@ -20,71 +20,6 @@ sidebar:
     href: <%= target.nav.pre %>/
     icon: fa fa-home
 
-  - name: Multi-level icon menu
-    icon: fa fa-tasks
-    children:
-      - name: Tasks
-        icon: fa fa-align-right text-orange
-      - name: Bolds
-        icon: fa fa-bold text-green
-        children:
-          - name: Bugs
-            icon: fa fa-bug text-red
-          - name: Drivers
-            icon: fa fa-cab text-green
-            children:
-              - name: Tasks
-                icon: fa fa-align-right text-orange
-              - name: Bolds
-                icon: fa fa-bold text-green
-                children:
-                  - name: Bugs
-                    icon: fa fa-bug text-red
-                    children:
-                      - name: Bugs
-                        icon: fa fa-bug text-red
-                      - name: Drivers
-                        icon: fa fa-cab text-green
-                        children:
-                          - name: Tasks
-                            icon: fa fa-align-right text-orange
-                          - name: Bolds
-                            icon: fa fa-bold text-green
-                            children:
-                              - name: Bugs
-                                icon: fa fa-bug text-red
-                              - name: Drivers
-                                icon: fa fa-cab text-green
-                                href: #/components/forms/layouts # temp dev make it the active one
-                              - name: Payments
-                                icon: fa fa-cc
-                  - name: Payments
-                    icon: fa fa-cc
-      - name: Get coffee
-        icon: fa fa-coffee
-
-
-  - name: Layouts
-    icon: fa fa-desktop
-    children:
-      - name: Main
-        href: <%= target.nav.pre %>/layouts<%= target.nav.ext %>
-      - name: New sidebar
-        href: <%= target.nav.pre %>/layouts/sidebar-new<%= target.nav.ext %>
-
-
-  - name: Documentation
-    icon: fa fa-book
-    children:
-      - name: API
-        children:
-          - name: General
-            href: <%= target.nav.pre %>/documentation/api/general<%= target.nav.ext %>
-      - name: CSS
-        children:
-          - name: Utility classes
-            href: <%= target.nav.pre %>/documentation/css/utility-classes<%= target.nav.ext %>
-
   - name: Components
     icon: fa fa-cubes
     children:
@@ -98,19 +33,16 @@ sidebar:
         href: <%= target.nav.pre %>/components/buttons<%= target.nav.ext %>
         #href: <%= target.nav.pre %>/components/buttons/editor
 
-      - name: Nav
-        href: <%= target.nav.pre %>/components/nav<%= target.nav.ext %>
-
       - name: Boxes
         href: <%= target.nav.pre %>/components/boxes<%= target.nav.ext %>
 
-      - name: Tabs
+      - name: Tabs n Navs
         href: <%= target.nav.pre %>/components/tabs<%= target.nav.ext %>
 
       - name: Panels
         href: <%= target.nav.pre %>/components/panels<%= target.nav.ext %>
 
-      - name: Modals
+      - name: Notifications n Modals
         href: <%= target.nav.pre %>/components/modals<%= target.nav.ext %>
 
       - name: jQuery UI
@@ -121,9 +53,8 @@ sidebar:
 
 
 
-  - name: Github editor
-    href: <%= target.nav.pre %>/github-editor<%= target.nav.ext %>
-    icon: fa fa-git
+
+
 
   - name: Forms
     icon: fa fa-pencil
@@ -243,6 +174,62 @@ sidebar:
             href: <%= target.nav.pre %>/plugins/modernizr<%= target.nav.ext %>
 
 
+
+  - name: Documentation
+    icon: fa fa-book
+    children:
+      - name: API
+        children:
+          - name: General
+            href: <%= target.nav.pre %>/documentation/api/general<%= target.nav.ext %>
+      - name: CSS
+        children:
+          - name: Utility classes
+            href: <%= target.nav.pre %>/documentation/css/utility-classes<%= target.nav.ext %>
+
+
+  - name: Multi-level icon menu
+    icon: fa fa-tasks
+    children:
+      - name: Tasks
+        icon: fa fa-align-right text-orange
+      - name: Bolds
+        icon: fa fa-bold text-green
+        children:
+          - name: Bugs
+            icon: fa fa-bug text-red
+          - name: Drivers
+            icon: fa fa-cab text-green
+            children:
+              - name: Tasks
+                icon: fa fa-align-right text-orange
+              - name: Bolds
+                icon: fa fa-bold text-green
+                children:
+                  - name: Bugs
+                    icon: fa fa-bug text-red
+                    children:
+                      - name: Bugs
+                        icon: fa fa-bug text-red
+                      - name: Drivers
+                        icon: fa fa-cab text-green
+                        children:
+                          - name: Tasks
+                            icon: fa fa-align-right text-orange
+                          - name: Bolds
+                            icon: fa fa-bold text-green
+                            children:
+                              - name: Bugs
+                                icon: fa fa-bug text-red
+                              - name: Drivers
+                                icon: fa fa-cab text-green
+                                href: #/components/forms/layouts # temp dev make it the active one
+                              - name: Payments
+                                icon: fa fa-cc
+                  - name: Payments
+                    icon: fa fa-cc
+      - name: Get coffee
+        icon: fa fa-coffee
 
 
   - name: No icon

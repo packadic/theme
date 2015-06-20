@@ -164,7 +164,8 @@ var init = module.exports = function (grunts) {
         sass            : {
             options: { compass: true, bundleExec: true, sourcemap: 'none' },
             dev    : {
-                files: [{expand: true, cwd: 'src/styles', src: ['**/*.scss', '!stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
+                //files: [{expand: true, cwd: 'src/styles', src: ['**/*.scss', '!stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
+                files: [{expand: true, cwd: 'src/styles', src: ['themes/theme-default.scss', 'stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             },
             dist   : {
                 options: { style: 'compressed' },
@@ -276,7 +277,7 @@ var init = module.exports = function (grunts) {
                 tasks: ['copy:plugins']
             },*/
             styles       : {
-                files: ['src/styles/**', '!src/styles/fast/**', '!src/styles/fast.scss', '!src/styles/nav.scss', '!src/styles/components/_header-dropdown.scss'],
+                files: ['src/styles/**'], // '!src/styles/fast/**', '!src/styles/fast.scss', '!src/styles/nav.scss', '!src/styles/components/_header-dropdown.scss'],
                 tasks: ['clean:styles', 'sass:<%= target.name %>']
             },
             style_fast   : {

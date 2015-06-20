@@ -9,6 +9,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             $hidden: cre().addClass('hide')
         };
 
+        packadic.theme = theme;
         eventer('theme', theme);
 
 
@@ -153,7 +154,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                     $(this).slimScroll(_.merge({
                         allowPageScroll: true, // allow page scroll when the element scroll is ended
                         size           : '6px',
-                        color          : ($(this).attr("data-handle-color") ? $(this).attr("data-handle-color") : '#bbb'),
+                        color          : ($(this).attr("data-handle-color") ? $(this).attr("data-handle-color") : '#000'),
                         wrapperClass   : ($(this).attr("data-wrapper-class") ? $(this).attr("data-wrapper-class") : 'slimScrollDiv'),
                         railColor      : ($(this).attr("data-rail-color") ? $(this).attr("data-rail-color") : '#222'),
                         position       : 'right',
@@ -217,8 +218,13 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         };
 
 
-        theme.initBoxControls = function(){
+        theme.initBoxes = function(){
             var $boxes = $('body').find('.box');
+
+            $boxes.find('section.scrollable').each(function(){
+                theme.initSlimScroll($(this), { alwaysVisible: true });
+            });
+
             var ensureControlContainer = function($boxEl){
                 var $controls = $boxEl.children('header').first().find('.controls');
                 if($controls.length == 0){
@@ -391,7 +397,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             theme.initEvents();
             theme.initHeaderSearchForm();
             theme.initSettingsEditor();
-            theme.initBoxControls();
+            theme.initBoxes();
             $([
                 ".btn:not(.btn-link)",
                 ".card-image",

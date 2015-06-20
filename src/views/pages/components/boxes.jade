@@ -22,5 +22,12 @@ block content
             +box("Boxes", "list", false, 'box-draggable box-removable box-closable')
                 | box-draggable box-removable box-closable
         .col-lg-6
-            +box("Boxes", "list")
-                | Hello
+            +box
+                +box-header("Box with actions", "list", true)
+                    +a(data-toggle='modal', data-target='#exampleModal').btn.btn-success Ok
+                    +a.btn.btn-info Info
+                    +a.btn.btn-warning Close
+                +box-body(350)
+                    p lorem ipsum lala
+                    p lorem ipsum lala
+                    p lorem ipsum lala

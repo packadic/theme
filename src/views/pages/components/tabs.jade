@@ -15,10 +15,14 @@ mixin tabber-nav(prefix)
         li(role="presentation")
             a(href="##{prefix}profile", aria-controls="#{prefix}profile", role="tab", data-toggle="tab") Profile
 
-mixin tabber-content(prefix)
+mixin tabber-content(prefix, withBlock)
+    - withBlock = withBlock || false;
     .tab-content&attributes(attributes)
         .tab-pane.active.fade.in(role="tabpanel", id="##{prefix}home")
-            +tab-content("home of " + prefix)
+            if withBlock
+                block
+            else
+                +tab-content("home of " + prefix)
         .tab-pane.fade(role="tabpanel", id="##{prefix}profile")
             +tab-content("profile of " + prefix)
 
@@ -26,6 +30,19 @@ mixin tabber(prefix)
     .tabber(role="tabpanel")&attributes(attributes)
         +tabber-nav(prefix)
         +tabber-content(prefix)
+
+
+mixin list-item(name, href, active)
+    - href = href || '#'
+    - active = active || false
+    li(role="presentation", class=active ? "active" : null)
+        a(href=href)=name
+        block
+mixin list-items()
+    +list-item("Home", "#", true)
+    +list-item("Item first")
+    +list-item("Then this")
+    +list-item("This too")
 
 block content
 
@@ -42,11 +59,19 @@ block content
 
     .row.margin-top
         .col-md-4
-            +box("Tabs in box", "list").box-tabber
-                +tabber("tatt")
+            +box("Tabs and nav nav-pill", "list").box-tabber
+                .tabber(role="tabpanel")
+                    +tabber-nav("tatt")
+                    +tabber-content("tatt", true)
+                        ul.nav.nav-pills.nav-stacked
+                            +list-items
         .col-md-4
-            +box("Tabs in box", "list").box-tabber
-                +tabber("tatt33").tabber-grey
+            +box("Tabs and nav nav-pill nav-stacked", "list").box-tabber
+                .tabber(role="tabpanel").tabber-grey
+                    +tabber-nav("tatt33")
+                    +tabber-content("tatt33", true)
+                        ul.nav.nav-pills
+                            +list-items
         .col-md-4
             +box("Tabs in box", "list").box-tabber
                 .tabber.tabs-bottom(role="tabpanel")

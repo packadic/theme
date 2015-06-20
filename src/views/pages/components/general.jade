@@ -5,14 +5,6 @@ block header
     +page-breadcrumbs
         +breadcrumb("Components", "/components", true)
 
-mixin popover-btn-demo(side)
-    - var sideLcase = side.toLowerCase();
-    +a.btn.btn-primary(data-toggle="popover", tabindex="0", role="button", data-trigger="focus", data-container="body", data-placement=sideLcase, title="Popover title", data-content="And here's some amazing content. It's very engaging. Right?")=side
-
-mixin tooltip-btn-demo(side)
-    - var sideLcase = side.toLowerCase();
-    +a.btn.btn-primary(data-toggle="tooltip", data-container="body", data-placement=sideLcase, title="Tooltip on " + sideLcase)=side
-
 mixin progress-bars-demo(title)
     .col-md-4
         +box(title, "cog")&attributes(attributes)
@@ -150,29 +142,7 @@ block content
                                     span.label(class=color) Default
                                 td.text-center
                                     span.badge(class=color) 5
-        .col-md-3
-            +box("Tooltips", "cog")
-                .btn-group.btn-group-justified
-                    +tooltip-btn-demo('Left')
-                    +tooltip-btn-demo('Right')
-                    +tooltip-btn-demo('Top')
-                    +tooltip-btn-demo('Bottom')
-
-            +box("Popovers", "cog")
-                .btn-group.btn-group-justified
-                    +popover-btn-demo('Left')
-                    +popover-btn-demo('Right')
-                    +popover-btn-demo('Top')
-                    +popover-btn-demo('Bottom')
-    .row
-        +progress-bars-demo("Progress bars")
-
-    .row
-        +progress-bars-demo("BS Materials bars").bs-material
-
-
-    .row
-        .col-md-4.bs-material
+        .col-md-3.bs-material
             +box("List group", "list")
                 .list-group
                     .list-group-item
@@ -204,6 +174,15 @@ block content
                     .list-group-separator
 
 
+    .row
+        +progress-bars-demo("Progress bars")
+
+    .row
+        +progress-bars-demo("BS Materials bars").bs-material
+
+
+    .row
+        .col-md-4
         .col-md-4.bs-material
             p asdf
 

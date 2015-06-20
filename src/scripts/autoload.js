@@ -125,9 +125,9 @@ define([
             .add('selectpicker', '.selectpicker', [ 'plugins/bs-select' ], 'selectpicker')
 
             // M CUSTOM SCROLLLBAR
-            .add('mCustomScrollbar', '.scrollable', [ 'plugins/mscrollbar' ], 'mCS', {theme: 'dark'}, function( $el ){
-                $el.addClass('mCustomScrollbar');
-            })
+            //.add('mCustomScrollbar', '.scrollable', [ 'plugins/mscrollbar' ], 'mCS', {theme: 'dark'}, function( $el ){
+            //    $el.addClass('mCustomScrollbar');
+            //})
 
             // TOOLTIP
             .add('tooltip', '[data-toggle="tooltip"]', [ 'plugins/bootstrap' ], 'bs.tooltip', {container: 'body'})
