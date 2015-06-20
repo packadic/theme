@@ -18,7 +18,7 @@ define([ 'jquery', 'plugins/events' ], function( $, EventEmitter ){
         };
         obj._trigger = function(){
             var args = $.makeArray(arguments);
-            if( packadic.config.get('debug') === true ){
+            if( packadic.config.debug === true ){
                 console.debug('DEBUG::event:' + name + ':' + args[ 0 ])
             }
             obj[ prop ].trigger.apply(obj[ prop ], args);

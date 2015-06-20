@@ -20,6 +20,14 @@
     background: content-bg($nr, $light);
 }
 
+@function texture-bg($name, $color: transparent)
+{
+    @return image_url('textures/' + $name + '.png') repeat $color;
+}
+@mixin texture-background($name, $color: transparent){
+    background: texture-bg($name, $color);
+}
+
 @function sidebar-submenu-bg($bg-left, $bg-right, $bg-left-width: $sidebar-collapsed-width, $to: right){
     @return linear-gradient(to $to, $bg-left $bg-left-width, $bg-right $bg-left-width) repeat-x;
 }
@@ -50,16 +58,6 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($bg-left)}', endColorstr='#{ie-hex-str($bg-right)}', GradientType=1);
 }
 
-
-
-@mixin box-header-variant($text-color: $text-color, $content-bg-nr: false, $content-bg-light: false){
-    color: $text-color;
-    @include content-bg($content-bg-nr, $content-bg-light);
-    h3 {
-        @include text-shadow(0px 1px 1px rgba($text-color, 0.18));
-    }
-
-}
 
 
 

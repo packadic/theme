@@ -9,6 +9,7 @@ function dump(val){
 
 function getMainConfig(){
     GLOBAL.window = {};
+    GLOBAL._ = _;
     require('./src/scripts/init');
     var rjsConfig = {};
     Object.keys(GLOBAL.window.packadic.config.requireJS).forEach(function( k ){
@@ -21,14 +22,14 @@ var rconfig = getMainConfig();
 var config = {
     paths: rconfig.paths,
     shim: rconfig.shim,
-    baseUrl                : "dev/assets/scripts",
+    baseUrl                : "dev/assets/scripts2",
     optimizeCss            : false,
     modules                : [
         {name: "ace-editor"},
         {
             name: 'boot', include: [
-                'jquery', 'plugins/async', 'autoloader', 'string', 'jade', 'code-mirror',
-                'plugins/cookie', 'theme', 'theme/sidebar', 'config',
+                'jquery', 'plugins/async', 'autoload', 'string', 'jade', 'code-mirror',
+                'plugins/cookie', 'theme', 'theme/sidebar',
                 'templates/sidebar','templates/alert','templates/box','templates/table',
                 'eventer', 'plugins/bs-material-ripples', 'storage', 'json',
                 'fn/defined', 'fn/default', 'fn/cre', 'Q'
@@ -40,14 +41,14 @@ var config = {
             include: ['demo/show-html', 'demo/show-class', 'demo/forms', 'demo/button-icon-showcase']
         },
         {
-            name: 'datatable',
+            name: 'datatables',
             exclude: ['demo', 'boot'],
             include: ['datatables', 'vendor/dataTables.bootstrap']
         }
     ],
     dir                    : "dist/assets/scripts2",
-    uglify: "none",
-    skipDirOptimize: true,
+    uglify: "uglify",
+    //skipDirOptimize: true,
     preserveLicenseComments: false,
     removeCombined         : true,
     optimizeAllPluginResources: true

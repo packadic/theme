@@ -164,10 +164,11 @@ var init = module.exports = function (grunts) {
         sass            : {
             options: { compass: true, bundleExec: true, sourcemap: 'none' },
             dev    : {
-                files: [{expand: true, cwd: 'src/styles', src: '**/*.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
+                files: [{expand: true, cwd: 'src/styles', src: ['**/*.scss', '!stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             },
             dist   : {
-                files: [{expand: true, cwd: 'src/styles', src: '**/*.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
+                options: { style: 'compressed' },
+                files: [{expand: true, cwd: 'src/styles', src: 'stylesheet.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             },
             fast   : {
                 files: [{expand: true, cwd: 'src/styles', src: 'fast.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
@@ -268,8 +269,12 @@ var init = module.exports = function (grunts) {
             }
         },
         watch           : {
-            options: {livereload: true, nospawn: true},
+            options: {livereload: true}, //, nospawn: true},
 
+        /*plugins      : {
+                files: ['src/plugins/**'],
+                tasks: ['copy:plugins']
+            },*/
             styles       : {
                 files: ['src/styles/**', '!src/styles/fast/**', '!src/styles/fast.scss', '!src/styles/nav.scss', '!src/styles/components/_header-dropdown.scss'],
                 tasks: ['clean:styles', 'sass:<%= target.name %>']
@@ -285,10 +290,6 @@ var init = module.exports = function (grunts) {
             scripts_watch: {
                 files: ['src/scripts/**', '!src/scripts/init.js'],
                 tasks: ['copy:scripts_watch']
-            },
-            plugins      : {
-                files: ['src/plugins/**'],
-                tasks: ['copy:plugins']
             },
             initscripts  : {
                 files: ['src/scripts/init.js'],
@@ -314,10 +315,6 @@ var init = module.exports = function (grunts) {
             demo      : {
                 files: ['src/demo/**'],
                 tasks: ['clean:demo', 'copy:demo']
-            },
-            browserify      : {
-                files: ['src/tscripts/**'],
-                tasks: ['browserify']
             },
             livereload: {
                 options: {livereload: 35729},

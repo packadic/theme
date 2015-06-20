@@ -26,11 +26,13 @@ mixin box-body(scrollerHeight)
             block
 
 
-mixin box(title, icon, scrollerHeight)
+
+mixin box(title, icon, scrollerHeight, boxClasses)
     - icon = icon || false;
     - title = title || false;
+    - boxClasses = boxClasses || '';
     if title
-        .box
+        .box(class=boxClasses)
             header
                 if icon
                     i(class="fa fa-" + icon)

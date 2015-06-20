@@ -250,7 +250,7 @@
 						> .sub-menu {
 							margin: 0;
 							> li {
-                                @include sidebar-hover-submenu($sidebar-width);
+                                //@include sidebar-hover-submenu($sidebar-width);
 
 								> a {
 									padding-left: 80px;
@@ -263,6 +263,7 @@
 				}
 			}
 		}
+
 
 		li.active {
 			> .sub-menu {

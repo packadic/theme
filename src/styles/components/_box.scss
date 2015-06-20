@@ -47,6 +47,10 @@
                 @extend .btn-group-circle;
             }
         }
+
+        .controls {
+            float: right;
+        }
     }
 
     section {

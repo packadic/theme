@@ -217,6 +217,51 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         };
 
 
+        theme.initBoxControls = function(){
+            var $boxes = $('body').find('.box');
+            var ensureControlContainer = function($boxEl){
+                var $controls = $boxEl.children('header').first().find('.controls');
+                if($controls.length == 0){
+                    $controls = cre().addClass('controls');
+                    $boxEl.children('header').first().append($controls)
+                }
+                return $controls;
+            };
+
+
+            $boxes.filter('.box-closable').each(function(){
+                var $controls = ensureControlContainer($(this));
+                if($controls.find('a[data-control="closable"]').length == 0){
+                    var $i = cre('i').addClass('fa fa-chevron-down');
+                    var $a = cre('a')
+                        .attr('data-control', 'closable')
+                        .append($i)
+                        .attr('href', '#').on('click', function(){
+                            var $sec = $(this).closest('.box').children('section').first();
+                            if($i.hasClass('fa-chevron-down')){
+                                $sec.slideUp();
+                                $i.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+                            } else {
+                                $sec.slideDown();
+                                $i.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+                            }
+                        });
+                    $controls.append($a);
+                }
+            });
+
+            // draggable boxes init
+            var $boxesDraggable = $('body').find('.box-draggable');
+            if($boxesDraggable.length > 0){
+                require(['jquery-ui/draggable'], function(){
+                    $boxesDraggable.each(function(){
+                        var $draggable = $(this);
+                        $draggable.draggable({ handle: $draggable.find('header').first() });
+                    });
+                });
+            }
+        };
+
 
         theme.toastr = function (fnName, message, title) {
             require(['plugins/toastr'], function (toastr) {
@@ -332,7 +377,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             theme.initEvents();
             theme.initHeaderSearchForm();
             theme.initSettingsEditor();
-
+            theme.initBoxControls();
             $([
                 ".btn:not(.btn-link)",
                 ".card-image",
