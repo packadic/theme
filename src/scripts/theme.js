@@ -250,13 +250,25 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                 }
             });
 
+            $boxes.filter('.box-draggable').each(function(){
+
+            })
             // draggable boxes init
             var $boxesDraggable = $('body').find('.box-draggable');
             if($boxesDraggable.length > 0){
                 require(['jquery-ui/draggable'], function(){
                     $boxesDraggable.each(function(){
-                        var $draggable = $(this);
-                        $draggable.draggable({ handle: $draggable.find('header').first() });
+
+                        var $controls = ensureControlContainer($(this));
+                        if($controls.find('a[data-control="draggable"]').length == 0){
+                            var $i = cre('i').addClass('fa fa-arrows-alt');
+                            var $a = cre('a')
+                                .attr('data-control', 'draggable')
+                                .append($i);
+                            $controls.append($a);
+                        }
+
+                        $(this).draggable({ handle: $controls.find('a[data-control="draggable"]') });
                     });
                 });
             }
@@ -305,7 +317,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         };
 
 
-
+        /** @deprecated todo: remove  */
         theme.box = function (title, icon, actions) {
             var deferred = Q.defer();
             actions = defined(actions) ? actions : false;
@@ -334,6 +346,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             return deferred.promise;
         };
 
+        /** @deprecated todo: remove  */
         theme.button = function (name, size, classes, type, href) {
             type = def(type, 'a');
             size = def(size, 'xs');
@@ -353,6 +366,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             return $button;
         };
 
+        /** @deprecated todo: remove  */
         theme.table = function (cols, rows, classes) {
             var deferred = Q.defer();
             theme.getTemplate('table', function (template) {
