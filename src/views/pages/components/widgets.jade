@@ -5,38 +5,68 @@ block header
         +breadcrumb("Components", "/components")
         +breadcrumb("Widgets", "/components/widgets", true)
 
+
+mixin demo-widget-stat()
+
 block content
-    .row
-        .col-md-3
-            +box.widget
-                .widget-icon.red
-                    i.fa.fa-list
-                .widget-content
-                    .title 102
-                    .comment 13
-                .clearfix
-        .col-md-3
-            +box.widget
-                .widget-icon.dark-yellow
-                    i.fa.fa-info
-                .widget-content
-                    .title 11
-                    .comment Messages
-                .clearfix
-        .col-md-3
-            +box.widget
-                .widget-icon.blue
-                    i.fa.fa-users
-                .widget-content
-                    .title 44
-                    .comment Users
-                .clearfix
-        .col-md-3
-            +box.widget
-                .widget-icon.blue-grey
-                    i.fa.fa-file
-                .widget-content
-                    .title 102
-                    .comment Files uploaded
-                .clearfix
+    .content-area
+        .row
+            .col-md-3
+                +box.widget.widget-stat.blue
+                    .bg-icon
+                        i.fa.fa-users
+                    .details
+                        .title 102
+                        .desc Users
+                +box.widget.widget-stat-alt.blue
+                    .bg-icon
+                        i.fa.fa-users
+                    .details
+                        .title 102
+                        .desc Users
+                    a(href="#").link View
+
+            .col-md-3
+                +box.widget.widget-stat.blue-light
+                    .bg-icon
+                        i.fa.fa-info
+                    .details
+                        .title 11
+                        .desc Notifications
+                +box.widget.widget-stat-alt.blue-light
+                    .bg-icon
+                        i.fa.fa-info
+                    .details
+                        .title 11
+                        .desc Notifications
+                    a(href="#").link View
+            .col-md-3
+                +box.widget.widget-stat-alt.orange
+                    .bg-icon
+                        i.fa.fa-file
+                    .details
+                        .title 44
+                        .desc Documents
+                +box.widget.widget-stat.orange
+                    .bg-icon
+                        i.fa.fa-file
+                    .details
+                        .title 44
+                        .desc Documents
+                    a(href="#").link View
+            .col-md-3
+                +box.widget.widget-stat-alt.green
+                    .bg-icon
+                        i.fa.fa-usd
+                    .details
+                        .title 1354,22
+                        .desc Donated
+                +box.widget.widget-stat.green
+                    .bg-icon
+                        i.fa.fa-usd
+                    .details
+                        .title 1354,22
+                        .desc Donated
+                    a(href="#").link View
+
 

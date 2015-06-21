@@ -112,3 +112,48 @@
 
     }
 }
+
+
+/* THEME STUFF */
+
+
+.box {
+    //@include box-shadow($box-shadow);
+    background: $box-bg-color;
+    border-color: $box-border-color;
+    border-top-color: transparent;
+
+    @include box-shadow(0 3px 6px rgba(0, 0, 0, 0.16));
+    //box-shadow: @include box-shadow;
+
+    header {
+        color: $box-header-text-color;
+        @include content-bg($box-header-content-bg-nr, $box-header-content-bg-light);
+        border-bottom-color: $box-border-color;
+        h3 {
+            @include text-shadow(0px 1px 1px rgba($box-header-text-color, 0.18));
+        }
+    }
+}
+
+
+
+@mixin box-variant($name, $header-background, $header-text-color: $box-header-text-color, $background: $box-bg-color){
+    .box.box-style-#{$name}{
+        background: $background;
+        > header {
+            color: $header-text-color;
+            background: $header-background;
+            h3 {
+                @include text-shadow(0px 1px 1px rgba($header-text-color, 0.18));
+            }
+        }
+        @content
+    }
+}
+
+
+@include box-variant('light', texture-bg('padded-light', #C0C0C0), #4C4C4C, texture-bg('back-pattern', #FFF));
+
+
+@include box-variant('solid', texture-bg('solid', #C0C0C0), #4C4C4C);

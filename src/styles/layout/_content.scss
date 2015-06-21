@@ -9,7 +9,7 @@ header.content {
     clear: both;
     border-bottom: 5px solid #e5e5e5 !important;
     box-shadow: none !important;
-    margin-bottom: 10px;
+    //margin-bottom: 10px;
     color: #bcbcbc;
     @include clearfix;
 
@@ -57,168 +57,207 @@ header.content {
     }
 }
 
+.content > .content-area {
+    background: rgba(165, 218, 224, 0.15);
+    padding: 15px 20px 0 20px;
+    margin: 0 -20px 25px -20px;
+}
+
+.content > .content-tabbed {
+    margin: -26px -20px 0 -20px;
+    > ul.nav.nav-tabs.nav-tabs-content {
+        background: #FFF;
+        > li > a {
+            padding: 8px 15px;
+            color: #bcbcbc;
+            //color: lighten(#EEE, 40%);
+            font-family: "Montserrat", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: #FFF;
+            border-color: transparent;
+            border-bottom-color: #ddd;
+            border-right-color: #ddd;
+            margin-right: 0px;
+        }
+        > li:not(.active) > a:hover {
+            color: darken(#bcbcbc, 15);
+            border-bottom-color: #b7b7b7;
+        }
+        > li.active > a {
+            background: $main-content-bg;
+            background-color: $main-content-bg-color;
+            color: inherit;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+        }
+    }
+    > .tab-content {
+        > .tab-pane {
+            padding: 20px;
+        }
+    }
+}
+
 .page-title {
-	padding: 0px;
-	font-size: 28px;
-	letter-spacing: -1px;
-	display: block;
-	color: #666;
-	margin: 0px 0px 15px 0px;
-	font-weight: 300;
-	font-family: $font-family-primary;
+    padding: 0px;
+    font-size: 28px;
+    letter-spacing: -1px;
+    display: block;
+    color: #666666;
+    margin: 0px 0px 15px 0px;
+    font-weight: 300;
+    font-family: $font-family-primary;
 
-	small {
-		font-size: 14px;
-		letter-spacing: 0px;
-		font-weight: 300;
-		color: #888;
-	}
+    small {
+        font-size: 14px;
+        letter-spacing: 0px;
+        font-weight: 300;
+        color: #888888;
+    }
 
-	.page-section-bg-solid & {
-		color: #666;
-		margin-bottom: 20px;
-		margin-top: 20px;
+    .page-section-bg-solid & {
+        color: #666666;
+        margin-bottom: 20px;
+        margin-top: 20px;
 
-		small {
-			color: #666;
-		}
-	}
+        small {
+            color: #666666;
+        }
+    }
 }
 
 main {
-	margin-top: 0px;
-	padding: 0px;
-	background-color: #fff;
+    margin-top: 0px;
+    padding: 0px;
+    background-color: #ffffff;
 
-	.page-section-bg-solid & {
-		background: $page-content-solid-bg-color;
-	}
+    .page-section-bg-solid & {
+        background: $page-content-solid-bg-color;
+    }
 
-	.page-full-width & {
-		margin-left: 0px !important;
-	}
+    .page-full-width & {
+        margin-left: 0px !important;
+    }
 }
 
 @media (min-width: $screen-md-min) {
 
+    .main-wrapper {
+        float: left;
+        width: 100%;
 
-	.main-wrapper {
-		float: left;
-		width: 100%;
-
-		main {
-			margin-left: $sidebar-width;
-			margin-top: 0px;
-			min-height: $page-content-min-height;
+        main {
+            margin-left: $sidebar-width;
+            margin-top: 0px;
+            min-height: $page-content-min-height;
 
             > div.content {
                 padding: 25px 20px 10px 20px;
             }
 
-			&.no-min-height {
-				min-height: auto;
-			}
+            &.no-min-height {
+                min-height: auto;
+            }
 
-			.sidebar-nav-fixed.sidebar-nav-hover-on & {
-				margin-left: $sidebar-collapsed-width;
-			}
+            .sidebar-nav-fixed.sidebar-nav-hover-on & {
+                margin-left: $sidebar-collapsed-width;
+            }
 
-			.sidebar-nav-reversed & {
-				margin-left: 0 !important;
-				margin-right: $sidebar-width !important;
-			}
+            .sidebar-nav-reversed & {
+                margin-left: 0 !important;
+                margin-right: $sidebar-width !important;
+            }
 
-			.sidebar-nav-reversed.sidebar-nav-fixed.sidebar-nav-hover-on & {
-				margin-left: 0;
-				margin-right: $sidebar-collapsed-width;
-			}
+            .sidebar-nav-reversed.sidebar-nav-fixed.sidebar-nav-hover-on & {
+                margin-left: 0;
+                margin-right: $sidebar-collapsed-width;
+            }
 
-			.sidebar-nav-reversed.sidebar-nav-closed  & {
-				margin-left: 0 !important;
-				margin-right: $sidebar-collapsed-width !important;
-			}
+            .sidebar-nav-reversed.sidebar-nav-closed & {
+                margin-left: 0 !important;
+                margin-right: $sidebar-collapsed-width !important;
+            }
 
-			.sidebar-nav-closed  & {
-				margin-left: $sidebar-collapsed-width !important;
-			}
+            .sidebar-nav-closed & {
+                margin-left: $sidebar-collapsed-width !important;
+            }
 
-			.sidebar-nav-closed.sidebar-nav-hide & {
-				margin-left: 0 !important;
-			}
+            .sidebar-nav-closed.sidebar-nav-hide & {
+                margin-left: 0 !important;
+            }
 
-			.sidebar-nav-closed.sidebar-nav-reversed.sidebar-nav-hide & {
-				margin-right: 0 !important;
-			}
+            .sidebar-nav-closed.sidebar-nav-reversed.sidebar-nav-hide & {
+                margin-right: 0 !important;
+            }
 
-			.page-full-width & {
-				margin-left: 0px !important;
-			}
-		}
-	}
+            .page-full-width & {
+                margin-left: 0px !important;
+            }
+        }
+    }
 }
 
 @media (max-width: $screen-sm-max) {
-	.page-section-bg-solid {
-		.page-bar {
-			margin-top: -20px;
-		}
-	}
+    .page-section-bg-solid {
+        .page-bar {
+            margin-top: -20px;
+        }
+    }
 
-	.page-boxed > section#page {
- 		max-width: none !important;
- 		margin: 0 !important;
- 		padding: 0 !important;
- 	}
+    .page-boxed > section#page {
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
 
-	.main-wrapper {
-		main {
-			margin: 0px !important;
-			min-height: 280px;
+    .main-wrapper {
+        main {
+            margin: 0px !important;
+            min-height: 280px;
 
             > div.content {
                 padding: 20px 20px 20px 20px !important;
             }
-		}
-	}
+        }
+    }
 }
 
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-	.page-boxed > section#page {
- 		margin: auto !important;
- 	}
+    .page-boxed > section#page {
+        margin: auto !important;
+    }
 }
 
 @media (max-width: $screen-xs-max) {
-	.main-wrapper {
-		main {
+    .main-wrapper {
+        main {
 
             > div.content {
                 padding: 20px 10px 10px 10px !important;
             }
-			overflow: hidden;
+            overflow: hidden;
 
-			.page-title {
-				margin-bottom: 20px;
-				font-size: 18px;
+            .page-title {
+                margin-bottom: 20px;
+                font-size: 18px;
 
-				small {
-					font-size: 13px;
-					padding-top: 3px;
-				}
-			}
-		}
-	}
+                small {
+                    font-size: 13px;
+                    padding-top: 3px;
+                }
+            }
+        }
+    }
 }
 
 @media (max-width: $screen-xs-min) {
-	.main-wrapper {
-		main {
-			.page-title {
-				small {
-					display: block;
-					clear: both;
-				}
-			}
-		}
-	}
+    .main-wrapper {
+        main {
+            .page-title {
+                small {
+                    display: block;
+                    clear: both;
+                }
+            }
+        }
+    }
 }

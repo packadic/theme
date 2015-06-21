@@ -77,6 +77,28 @@
     }
 }
 
+
+@mixin widget-color-variant($color-name, $color) {
+    .widget.#{$color-name} {
+        &.widget-stat .bg-icon {
+            background-color: $color;
+        }
+        &.widget-stat-alt .bg-icon > i {
+            color: $color;
+        }
+        &.widget-stat, &.widget-stat-alt {
+            a.link {
+                background-color: rgba($color, 0.25);
+                color: darken($color, 10);
+            }
+            a.link:hover {
+                background-color: rgba($color, 0.55);
+                color: darken($color, 15);
+            }
+        }
+    }
+}
+
 @mixin make-color-variant($color-name) {
     $light: material-color($color-name, '200');
     $normal: material-color($color-name, '500');
@@ -93,6 +115,10 @@
     @include make-general-color-variant($color-name + '-light', $light, darken($light, 5%), $dark);
     @include make-general-color-variant($color-name, $normal, darken($normal, 5%), #fff);
     @include make-general-color-variant($color-name + '-dark', $dark, darken($dark, 5%), #fff);
+
+    @include widget-color-variant($color-name + '-light', $light);
+    @include widget-color-variant($color-name , $normal);
+    @include widget-color-variant($color-name + '-dark', $dark);
 }
 
 @each $color-name, $color-variants in $material-colors {

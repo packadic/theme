@@ -70,6 +70,9 @@ $tabber-tab-active-color: #222;
     @include tabber-tabs-bottom(#D8D8D8);
 }
 
+
+
+
 @mixin old() {
     .nav-tabs,
     .nav-pills {
