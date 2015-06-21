@@ -1,4 +1,6 @@
 .widget {
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 -2px 3px rgba(0, 0, 0, 0.1); // iOS <4.3 & Android <4.1
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 -2px 3px rgba(0, 0, 0, 0.1);
     display: block;
     overflow: hidden;
     @include texture-background('mirrored-squares', #ffffff);
@@ -23,6 +25,60 @@
         font-size: 16px;
         letter-spacing: 0px;
         font-weight: 300;
+    }
+}
+
+.widget.widget-user-overview {
+    .picture {
+        //background-image: image-url('wallpaper1.jpg');
+        background-position: top center;
+        background-size: 100% 100%;
+        text-align: center;
+        height: 100%;
+        padding: 5px 0;
+        img {
+            height: 128px;
+            width: 128px;
+        }
+        h3 {
+            font-size: 25px
+        }
+        h3, p {
+            color: white;
+            @include text-shadow(0 1px 2px #000000);
+        }
+    }
+    .link-bar {
+        text-align: center;
+        @include make-row();
+        a {
+
+        }
+        i {
+            padding: 10px;
+        }
+    }
+    .link-list {
+        > a {
+            font-family: $font-family-sub-heading;
+            font-weight: 400;
+            padding: 10px;
+            position: relative;
+            display: block;
+            margin-bottom: -1px;
+            background-color: rgba(#ccc, 0.1);
+            border: 1px solid #e4eaec;
+            color: #555555;
+            border-width: 1px 0;
+            border-top: 0;
+            &:hover {
+                text-decoration: none;
+                background-color: rgba(#ccc, 0.3);
+            }
+        }
+        i {
+            margin-right: 10px;
+        }
     }
 }
 

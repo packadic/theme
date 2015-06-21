@@ -6,8 +6,6 @@ block header
         +breadcrumb("Widgets", "/components/widgets", true)
 
 
-mixin demo-widget-stat()
-
 block content
     .content-tabbed
         ul(role="tablist").nav.nav-tabs.nav-tabs-content
@@ -109,7 +107,41 @@ block content
                                 .progress-bar(role='progressbar', aria-valuemin='0', aria-valuemax='30', data-transitiongoal='25', data-display-text="center")
 
 
+            #widgets-userprofile(role="tabpanel").tab-pane.fade
+                .row
+                    .col-md-4
+                        +box.widget.widget-user-overview
+                            .picture(style="background-image: url('/assets/images/wallpaper1.jpg')")
+                                img.img-thumbnail.img-circle(src="/assets/images/users/steven-hallam.jpg", alt="Image")
+                                h3 Steven Hallam
+                                p #steven-hallam
+                            .link-bar.bg-cyan-dark
+                                .col-xs-4
+                                    a(href="#").text-grey-light
+                                        i.fa.fa-twitter.fa-2x
+                                .col-xs-4
+                                    a(href="#").text-grey-light
+                                        i.fa.fa-facebook.fa-2x
+                                .col-xs-4
+                                    a(href="#").text-grey-light
+                                        i.fa.fa-comments.fa-2x
+                            .link-list
+                                a(href="#")
+                                    span.label.label-primary.pull-right 15
+                                    i.fa.fa-fw.fa-clock-o.text-muted
+                                    | Recent Activity
+                                a(href="#")
+                                    span.label.label-primary.pull-right 1523
+                                    i.fa.fa-fw.fa-users.text-muted
+                                    | Following
+                                a(href="#")
+                                    span.label.label-primary.pull-right 312
+                                    i.fa.fa-fw.fa-camera.text-muted
+                                    | Photos
 
+
+
+            #widgets-events(role="tabpanel").tab-pane.fade
                 .row
                     .col-md-4
                         +box("Tags", "tag")
@@ -130,7 +162,6 @@ block content
                                     a(href='index.html')
                                         | Misc
                                         span 12
-
                             ul.tags.blue
                                 li
                                     a(href='index.html')
@@ -149,7 +180,3 @@ block content
                                         | Desktop
                                         span 160
 
-            #widgets-userprofile(role="tabpanel").tab-pane.fade
-                p Todo
-            #widgets-events(role="tabpanel").tab-pane.fade
-                p Todo

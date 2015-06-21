@@ -18,8 +18,8 @@ mixin box-header(title, icon, actions)
 mixin box-body(scrollerHeight)
     - scrollerHeight = scrollerHeight || false;
     if scrollerHeight
-        - var style = 'max-height: ' + scrollerHeight + 'px;'
-        section(data-mcs-axis="y", style=style).scrollable&attributes(attributes)
+        - var style = 'height: ' + scrollerHeight + 'px;'
+        section(style=style).scrollable&attributes(attributes)
             block
     else
         section&attributes(attributes)
