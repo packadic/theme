@@ -27,15 +27,9 @@
         font-weight: 300;
     }
 }
-@mixin thumb-size($size){
-    img.thumb#{$size} {
-        height: #{$size}px;
-        width: #{$size}px;
-    }
-}
-@include thumb-size(128);
-@include thumb-size(96);
+
 .widget.widget-user-overview {
+    background-image: none;
     .splitted {
         @include make-row();
         margin-top: 5px;

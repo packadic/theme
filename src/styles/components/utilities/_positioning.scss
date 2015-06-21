@@ -1,3 +1,14 @@
+
+@mixin thumb-size($size){
+    img.thumb#{$size} {
+        height: #{$size}px;
+        width: #{$size}px;
+    }
+}
+@include thumb-size(128);
+@include thumb-size(96);
+
+
 /* Padding */
 .with-padding {
     padding: 20px !important;

@@ -1,6 +1,6 @@
 topnav:
   - name: Home
-    href: <%= target.nav.pre %>/
+    href: <%= target.nav.pre %>/index
     icon: fa fa-home
 
   - name: About me
@@ -17,7 +17,7 @@ topnav:
 
 sidebar:
   - name: Home
-    href: <%= target.nav.pre %>/
+    href: <%= target.nav.pre %>/index<%= target.nav.ext %>
     icon: fa fa-home
 
   - name: Components
@@ -88,81 +88,6 @@ sidebar:
 
           - name: Datatables
             href: <%= target.nav.pre %>/components/tables/datatables<%= target.nav.ext %>
-
-
-
-  - name: Plugins
-    icon: fa fa-puzzle-piece
-    children:
-      - name: Main plugins
-        children:
-          - name: Scrollbar
-            href: <%= target.nav.pre %>/plugins/scrollbar<%= target.nav.ext %>
-
-          - name: Toastr
-            href: <%= target.nav.pre %>/plugins/toastr<%= target.nav.ext %>
-
-      - name: Bootstrap
-        children:
-          - name: Bootbox
-            href: <%= target.nav.pre %>/plugins/bootbox<%= target.nav.ext %>
-          - name: gTreeTable
-            href: <%= target.nav.pre %>/plugins/bootstrap-gtreetable<%= target.nav.ext %>
-          - name: Select
-            href: <%= target.nav.pre %>/plugins/bootstrap-select<%= target.nav.ext %>
-          - name: Switch
-            href: <%= target.nav.pre %>/plugins/bootstrap-switch<%= target.nav.ext %>
-          - name: Confirmation
-            href: <%= target.nav.pre %>/plugins/bootstrap-confirmation<%= target.nav.ext %>
-          - name: Contextmenu
-            href: <%= target.nav.pre %>/plugins/bootstrap-contextmenu<%= target.nav.ext %>
-          - name: Datepicker
-            href: <%= target.nav.pre %>/plugins/bootstrap-datepicker<%= target.nav.ext %>
-          - name: Daterangepicker
-            href: <%= target.nav.pre %>/plugins/bootstrap-daterangepicker<%= target.nav.ext %>
-          - name: Datetimepicker
-            href: <%= target.nav.pre %>/plugins/bootstrap-datetimepicker<%= target.nav.ext %>
-          - name: Markdown
-            href: <%= target.nav.pre %>/plugins/bootstrap-markdown<%= target.nav.ext %>
-          - name: Maxlength
-            href: <%= target.nav.pre %>/plugins/bootstrap-maxlength<%= target.nav.ext %>
-
-
-      - name: jQuery
-        children:
-          - name: Impromptu
-            href: <%= target.nav.pre %>/plugins/jquery-impromptu<%= target.nav.ext %>
-          - name: Popup Overlay
-            href: <%= target.nav.pre %>/plugins/jquery-popup-overlay<%= target.nav.ext %>
-          - name: Cookie
-            href: <%= target.nav.pre %>/plugins/jquery-cookie<%= target.nav.ext %>
-          - name: Nestable
-            href: <%= target.nav.pre %>/plugins/jquery-nestable<%= target.nav.ext %>
-          - name: Inputmask
-            href: <%= target.nav.pre %>/plugins/jquery-inputmask<%= target.nav.ext %>
-          - name: ScrollTo
-            href: <%= target.nav.pre %>/plugins/jquery-scrollto<%= target.nav.ext %>
-
-
-      - name: Utility & helpers
-        children:
-          - name: RequireJS
-            href: <%= target.nav.pre %>/plugins/requirejs<%= target.nav.ext %>
-          - name: CodeMirror
-            href: <%= target.nav.pre %>/plugins/codemirror<%= target.nav.ext %>
-          - name: CryptoJS
-            href: <%= target.nav.pre %>/plugins/cryptojslib<%= target.nav.ext %>
-          - name: Lodash
-            href: <%= target.nav.pre %>/plugins/lodash<%= target.nav.ext %>
-          - name: Marked
-            href: <%= target.nav.pre %>/plugins/marked<%= target.nav.ext %>
-          - name: HighlightJS
-            href: <%= target.nav.pre %>/plugins/highlightjs<%= target.nav.ext %>
-          - name: Moment
-            href: <%= target.nav.pre %>/plugins/moment<%= target.nav.ext %>
-          - name: Modernizr
-            href: <%= target.nav.pre %>/plugins/modernizr<%= target.nav.ext %>
-
 
 
   - name: Documentation
