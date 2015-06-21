@@ -112,7 +112,7 @@ block content
                     .col-md-4
                         +box.widget.widget-user-overview
                             .picture(style="background-image: url('/assets/images/wallpaper1.jpg')")
-                                img.img-thumbnail.img-circle(src="/assets/images/users/steven-hallam.jpg", alt="Image")
+                                img.img-thumbnail.img-circle.thumb128(src="/assets/images/users/steven-hallam.jpg", alt="Image")
                                 h3 Steven Hallam
                                 p #steven-hallam
                             .link-bar.bg-cyan-dark
@@ -138,6 +138,35 @@ block content
                                     span.label.label-primary.pull-right 312
                                     i.fa.fa-fw.fa-camera.text-muted
                                     | Photos
+                    .col-md-4
+                        +box.widget.widget-user-overview
+                            .splitted
+                                .col-xs-6.text-center
+                                    img.img-thumbnail.img-circle.thumb96(src="/assets/images/users/steven-hallam.jpg", alt="Image")
+                                .col-xs-6
+                                    h3 Steven Hallam
+                                    ul.list-unstyled
+                                        li
+                                            i.fa.fa-map-marker.fa-fw
+                                            | Queens, UK
+                                        li
+                                            i.fa.fa-twitter.fa-fw
+                                            | @stevenhallam
+                                        li
+                                            i.fa.fa-envelope.fa-fw
+                                            | steven@hallam.com
+
+                            .stat-bar.bg-cyan-dark.text-grey-light
+                                .col-xs-4
+                                    h3 300
+                                    p.text-muted Followers
+                                .col-xs-4
+                                    h3 1200
+                                    p.text-muted Following
+                                .col-xs-4
+                                    h3 250
+                                    p.text-muted Stars
+
 
 
 

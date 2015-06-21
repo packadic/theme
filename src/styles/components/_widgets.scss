@@ -27,8 +27,29 @@
         font-weight: 300;
     }
 }
-
+@mixin thumb-size($size){
+    img.thumb#{$size} {
+        height: #{$size}px;
+        width: #{$size}px;
+    }
+}
+@include thumb-size(128);
+@include thumb-size(96);
 .widget.widget-user-overview {
+    .splitted {
+        @include make-row();
+        margin-top: 5px;
+        h3 {
+            font-size: 25px
+        }
+        ul.list-unstyled {
+            font-size: 14px;
+            font-family: $font-family-sub-heading;
+            i {
+                margin-right: 10px;
+            }
+        }
+    }
     .picture {
         //background-image: image-url('wallpaper1.jpg');
         background-position: top center;
@@ -36,26 +57,27 @@
         text-align: center;
         height: 100%;
         padding: 5px 0;
-        img {
-            height: 128px;
-            width: 128px;
-        }
-        h3 {
-            font-size: 25px
-        }
         h3, p {
             color: white;
             @include text-shadow(0 1px 2px #000000);
         }
     }
-    .link-bar {
+    .link-bar, .stat-bar {
         text-align: center;
         @include make-row();
-        a {
-
-        }
         i {
             padding: 10px;
+        }
+    }
+    .stat-bar {
+        h3 {
+            font-size: 25px;
+            line-height: 25px;
+            margin-top: 10px;
+        }
+        p {
+            font-size: 14px;
+            font-weight: 400;
         }
     }
     .link-list {
