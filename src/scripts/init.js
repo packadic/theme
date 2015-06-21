@@ -181,6 +181,7 @@
 
             // bootstrap
             'plugins/bs-datepicker'      : 'plugins/bootstrap-datepicker/js/bootstrap-datepicker',
+            'plugins/bs-progressbar'     : 'plugins/bootstrap-progressbar/bootstrap-progressbar',
             'plugins/bs-modal'           : 'plugins/bootstrap-modal/js/bootstrap-modal',
             'plugins/bs-modal-manager'   : 'plugins/bootstrap-modal/js/bootstrap-modalmanager',
             'plugins/bs-switch'          : 'plugins/bootstrap-switch/dist/js/bootstrap-switch.min',

@@ -39,66 +39,56 @@ sidebar:
       - name: Tabs n Navs
         href: <%= target.nav.pre %>/components/tabs<%= target.nav.ext %>
 
-      - name: Panels
-        href: <%= target.nav.pre %>/components/panels<%= target.nav.ext %>
+      #- name: Panels
+      #  href: <%= target.nav.pre %>/components/panels<%= target.nav.ext %>
 
       - name: Notifications n Modals
         href: <%= target.nav.pre %>/components/modals<%= target.nav.ext %>
 
-      - name: jQuery UI
-        href: <%= target.nav.pre %>/components/jquery-ui<%= target.nav.ext %>
+      #- name: jQuery UI
+      #  href: <%= target.nav.pre %>/components/jquery-ui<%= target.nav.ext %>
 
       - name: Widgets
         href: <%= target.nav.pre %>/components/widgets<%= target.nav.ext %>
 
 
+      - name: Forms
+        #icon: fa fa-pencil
+        children:
+          - name: Layouts
+            href: <%= target.nav.pre %>/components/forms/layouts<%= target.nav.ext %>
+
+          - name: Elements
+            href: <%= target.nav.pre %>/components/forms/elements<%= target.nav.ext %>
+
+          - name: Validation
+            href: <%= target.nav.pre %>/components/forms/validation<%= target.nav.ext %>
+
+          - name: Uploader
+            href: <%= target.nav.pre %>/components/forms/uploader<%= target.nav.ext %>
+
+          - name: Wizard
+            href: <%= target.nav.pre %>/components/forms/wizard<%= target.nav.ext %>
 
 
+      - name: Tables
+        #icon: fa fa-table
+        children:
+          - name: Basic
+            href: <%= target.nav.pre %>/components/tables/basic<%= target.nav.ext %>
 
+          - name: Responsive
+            href: <%= target.nav.pre %>/components/tables/responsive<%= target.nav.ext %>
 
-  - name: Forms
-    icon: fa fa-pencil
-    children:
-      - name: Layouts
-        href: <%= target.nav.pre %>/components/forms/layouts<%= target.nav.ext %>
+          - name: Advanced
+            href: <%= target.nav.pre %>/components/tables/advanced<%= target.nav.ext %>
 
-      - name: Elements
-        href: <%= target.nav.pre %>/components/forms/elements<%= target.nav.ext %>
+          - name: Tree table
+            href: <%= target.nav.pre %>/components/tables/tree<%= target.nav.ext %>
 
-      - name: Validation
-        href: <%= target.nav.pre %>/components/forms/validation<%= target.nav.ext %>
+          - name: Datatables
+            href: <%= target.nav.pre %>/components/tables/datatables<%= target.nav.ext %>
 
-      - name: Uploader
-        href: <%= target.nav.pre %>/components/forms/uploader<%= target.nav.ext %>
-
-      - name: Wizard
-        href: <%= target.nav.pre %>/components/forms/wizard<%= target.nav.ext %>
-
-
-  - name: Tables
-    icon: fa fa-table
-    children:
-      - name: Basic
-        href: <%= target.nav.pre %>/components/tables/basic<%= target.nav.ext %>
-
-      - name: Responsive
-        href: <%= target.nav.pre %>/components/tables/responsive<%= target.nav.ext %>
-
-      - name: Advanced
-        href: <%= target.nav.pre %>/components/tables/advanced<%= target.nav.ext %>
-
-      - name: Tree table
-        href: <%= target.nav.pre %>/components/tables/tree<%= target.nav.ext %>
-
-      - name: Datatables
-        href: <%= target.nav.pre %>/components/tables/datatables<%= target.nav.ext %>
-
-
-  - name: Pages
-    icon: fa fa-puzzle-piece
-    children:
-      - name: Plugins
-        icon: fa fa-puzzle-piece
 
 
   - name: Plugins

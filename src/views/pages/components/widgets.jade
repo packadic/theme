@@ -9,64 +9,147 @@ block header
 mixin demo-widget-stat()
 
 block content
-    .content-area
-        .row
-            .col-md-3
-                +box.widget.widget-stat.blue
-                    .bg-icon
-                        i.fa.fa-users
-                    .details
-                        .title 102
-                        .desc Users
-                +box.widget.widget-stat-alt.blue
-                    .bg-icon
-                        i.fa.fa-users
-                    .details
-                        .title 102
-                        .desc Users
-                    a(href="#").link View
+    .content-tabbed
+        ul(role="tablist").nav.nav-tabs.nav-tabs-content
+            li(role="presentation").active
+                a(href="#widgets-state", aria-controls="widgets-state", role="tab", data-toggle="tab") Status and Indicators
+            li(role="presentation")
+                a(href="#widgets-userprofile", aria-controls="widgets-userprofile", role="tab", data-toggle="tab") User Profile
+            li(role="presentation")
+                a(href="#widgets-events", aria-controls="widgets-events", role="tab", data-toggle="tab") Events and tasks
 
-            .col-md-3
-                +box.widget.widget-stat.blue-light
-                    .bg-icon
-                        i.fa.fa-info
-                    .details
-                        .title 11
-                        .desc Notifications
-                +box.widget.widget-stat-alt.blue-light
-                    .bg-icon
-                        i.fa.fa-info
-                    .details
-                        .title 11
-                        .desc Notifications
-                    a(href="#").link View
-            .col-md-3
-                +box.widget.widget-stat-alt.orange
-                    .bg-icon
-                        i.fa.fa-file
-                    .details
-                        .title 44
-                        .desc Documents
-                +box.widget.widget-stat.orange
-                    .bg-icon
-                        i.fa.fa-file
-                    .details
-                        .title 44
-                        .desc Documents
-                    a(href="#").link View
-            .col-md-3
-                +box.widget.widget-stat-alt.green
-                    .bg-icon
-                        i.fa.fa-usd
-                    .details
-                        .title 1354,22
-                        .desc Donated
-                +box.widget.widget-stat.green
-                    .bg-icon
-                        i.fa.fa-usd
-                    .details
-                        .title 1354,22
-                        .desc Donated
-                    a(href="#").link View
+        .tab-content
+            #widgets-state(role="tabpanel").tab-pane.active.fade.in
+                .row
+                    .col-md-3
+                        +box.widget.widget-stat.blue
+                            .bg-icon
+                                i.fa.fa-users
+                            .details
+                                h3 102
+                                p Users
+                        +box.widget.widget-stat-alt.blue
+                            .bg-icon
+                                i.fa.fa-users
+                            .details
+                                h3 102
+                                p Users
+                            a(href="#").link View
+
+                    .col-md-3
+                        +box.widget.widget-stat.blue-light
+                            .bg-icon
+                                i.fa.fa-info
+                            .details
+                                h3 11
+                                p Notifications
+                        +box.widget.widget-stat-alt.blue-light
+                            .bg-icon
+                                i.fa.fa-info
+                            .details
+                                h3 11
+                                p Notifications
+                            a(href="#").link View
+                    .col-md-3
+                        +box.widget.widget-stat-alt.orange
+                            .bg-icon
+                                i.fa.fa-file
+                            .details
+                                h3 44
+                                p Documents
+                        +box.widget.widget-stat.orange
+                            .bg-icon
+                                i.fa.fa-file
+                            .details
+                                h3 44
+                                p Documents
+                            a(href="#").link View
+                    .col-md-3
+                        +box.widget.widget-stat-alt.green
+                            .bg-icon
+                                i.fa.fa-usd
+                            .details
+                                h3 1354,22
+                                p Donated
+                        +box.widget.widget-stat.green
+                            .bg-icon
+                                i.fa.fa-usd
+                            .details
+                                h3 1354,22
+                                p Donated
+                            a(href="#").link View
 
 
+                .row
+                    .col-md-3
+                        +box.widget.widget-progress.teal
+                            a(href="#", data-toggle="tooltip", title="Go to disk overview").bg-icon
+                                i.fa.fa-database
+                            p Disk space 'n icon link
+                            .progress
+                                .progress-bar(role='progressbar', aria-valuemin='0', aria-valuemax='200', data-transitiongoal='83', data-display-text="center")
+                    .col-md-3
+                        +box.widget.widget-progress.brown
+                            h3 83Gb
+                            p Disk space usage
+                            .progress
+                                .progress-bar(role='progressbar', aria-valuemin='0', aria-valuemax='200', data-transitiongoal='83', data-display-text="center")
+                    .col-md-3
+                        +box.widget.widget-progress.orange
+                            .bg-icon
+                                i.fa.fa-clock-o
+                            p Evaluation period
+                            .progress
+                                .progress-bar(role='progressbar', aria-valuemin='0', aria-valuemax='30', data-transitiongoal='25', data-display-text="center")
+                    .col-md-3
+                        +box.widget.widget-progress.cyan
+                            h3 5 days
+                            p Evaluation period
+                            .progress
+                                .progress-bar(role='progressbar', aria-valuemin='0', aria-valuemax='30', data-transitiongoal='25', data-display-text="center")
+
+
+
+                .row
+                    .col-md-4
+                        +box("Tags", "tag")
+                            ul.tags.green
+                                li
+                                    a(href='index.html')
+                                        | Design
+                                        span 23
+                                li
+                                    a(href='index.html')
+                                        | Illustration
+                                        span 42
+                                li
+                                    a(href='index.html')
+                                        | Component
+                                        span 108
+                                li
+                                    a(href='index.html')
+                                        | Misc
+                                        span 12
+
+                            ul.tags.blue
+                                li
+                                    a(href='index.html')
+                                        | Infrastructure
+                                        span 31
+                                li
+                                    a(href='index.html')
+                                        | Application
+                                        span 33
+                                li
+                                    a(href='index.html')
+                                        | Mobile
+                                        span 65
+                                li
+                                    a(href='index.html')
+                                        | Desktop
+                                        span 160
+
+            #widgets-userprofile(role="tabpanel").tab-pane.fade
+                p Todo
+            #widgets-events(role="tabpanel").tab-pane.fade
+                p Todo

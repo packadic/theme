@@ -48,7 +48,8 @@ define([
                     require(requires, function(){
                         // If defined, call the pre init function that allows altering the target before initialisation
                         if( typeof data.preInitFn === 'function' ){
-                            data.preInitFn($target);
+                            var retval = data.preInitFn($target, data);
+                            if( defined(retval) ) data = retval;
                         }
 
                         // and initialize target element with the plugin
@@ -137,6 +138,12 @@ define([
                 $el.on('click', function( e ){
                     e.preventDefault();
                 });
+            })
+
+            .add('progressbar', '.progress .progress-bar', ['plugins/bs-progressbar'], 'bs.progressbar', {}, function($el, data){
+                data.options.display_text = $el.data('display-text') || 'none';
+                data.options.use_percentage = $el.data('use-percentage') || false;
+                return data;
             })
 
             // CONFIRMATION

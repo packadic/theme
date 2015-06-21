@@ -99,7 +99,8 @@
     "jquery-slugify": "~1.1.0",
     "jquery-form-validator": "~2.2.1",
     "tag-it": "*",
-    "sass.js": "~0.7.0"
+    "sass.js": "~0.7.0",
+    "bootstrap-progressbar": "~0.9.0"
   },
   "resolutions": {
     "datatables": "~1.10.6"

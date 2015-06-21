@@ -13,9 +13,11 @@ form:not(.form-material) {
 @import "plugins/bootstrap-switch";
 @import "plugins/bootstrap-select";
 @import "plugins/bootstrap-gtreetable";
+@import "../plugins/bootstrap-progressbar/scss/bootstrap-progressbar-3.3.0-3.x.x";
 @import "plugins/jquery-impromptu";
 @import "plugins/toastr";
 @import "plugins/m-custom-scrollbar";
 @import "plugins/datatables";
 
 @import "vendor/jquery-ui";
+

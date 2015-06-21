@@ -80,6 +80,21 @@
 
 @mixin widget-color-variant($color-name, $color) {
     .widget.#{$color-name} {
+        &.widget-progress {
+            .bg-icon {
+                color: $color;
+            }
+            a.bg-icon:hover > i {
+                @include opacity(0.8)
+            }
+            .progress {
+                background-color: rgba($color, 0.2);
+
+                .progress-bar {
+                    background-color: $color;
+                }
+            }
+        }
         &.widget-stat .bg-icon {
             background-color: $color;
         }
