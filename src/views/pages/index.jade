@@ -4,66 +4,92 @@ block header
 
 
 block content
-    .row
-        .col-md-3
-            +box.widget.widget-stat.blue
-                .bg-icon
-                    i.fa.fa-users
-                .details
-                    h3 102
-                    p Users
-        .col-md-3
-            +box.widget.widget-stat.blue-light
-                .bg-icon
-                    i.fa.fa-info
-                .details
-                    h3 11
-                    p Notifications
-        .col-md-3
-            +box.widget.widget-stat-alt.orange
-                .bg-icon
-                    i.fa.fa-file
-                .details
-                    h3 44
-                    p Documents
-        .col-md-3
-            +box.widget.widget-stat-alt.green
-                .bg-icon
-                    i.fa.fa-usd
-                .details
-                    h3 1354,22
-                    p Donated
+    #dashboard-demo
+        .row
+            .col-md-3
+                +box.widget.widget-stat.blue
+                    .bg-icon
+                        i.fa.fa-users
+                    .details
+                        h3 102
+                        p Users
+            .col-md-3
+                +box.widget.widget-stat.blue-light
+                    .bg-icon
+                        i.fa.fa-info
+                    .details
+                        h3 11
+                        p Notifications
+            .col-md-3
+                +box.widget.widget-stat-alt.orange
+                    .bg-icon
+                        i.fa.fa-file
+                    .details
+                        h3 44
+                        p Documents
+            .col-md-3
+                +box.widget.widget-stat-alt.green
+                    .bg-icon
+                        i.fa.fa-usd
+                    .details
+                        h3 1354,22
+                        p Donated
 
 
-    .row
-        .col-md-6
-            +box("Alerts", "info")
-                +alert("success", "Woot this is ok") You successfully read this important alert message.
-                +alert("success", "Woot ok", true) You successfully read this important alert message.
-                +alert("info") This alert needs your attention, but it's not super important.
-                +alert("warning", true) This is not looking good
-                +alert("danger") Change a few things up and try submitting again.
-                +alert("danger", true) Change a few things up and try submitting again.
+        .row
+            .col-md-6
+                +box("Alerts", "info")
+                    +alert("success", "Woot this is ok") You successfully read this important alert message.
+                    //+alert("success", "Woot ok", true) You successfully read this important alert message.
+                    +alert("info") This alert needs your attention, but it's not super important.
+                    //+alert("warning", true) This is not looking good
+                    //+alert("danger") Change a few things up and try submitting again.
+                    +alert("danger", true) Change a few things up and try submitting again.
 
-        .col-md-6
-            +box("Users", "users").no-padding
-                table.table.table-hover.table-light.no-margin
-                    thead
-                        th User
-                        th Last login
-                        th.text-right Options
-                    tbody
-                        - users = ['Radic', 'Robin', 'Angelar', 'Typeman', 'Xezar', 'Filao', 'Imbar']
-                        each user in users
-                            tr
-                                td
-                                    a(href="#")= user
-                                td 2 days go
-                                td.text-right
-                                    a(href="#").btn.btn-xs.btn-primary
-                                        i.fa.fa-pencil
-                                        |  Edit
-                                    a(href="#").btn.btn-xs.btn-danger
-                                        i.fa.fa-remove
-                                        |  Delete
+                +box("Stats", "info")
+                    .piedemo.clearfix
+                        .chart
+                            .percentage(data-percent='55')
+                                span 55
+                                | %
+                            .label New visitors
+                        .chart
+                            .percentage(data-percent='21')
+                                span 21
+                                | %
+                            .label Bounce rate
+                        .chart
+                            .percentage(data-percent='66')
+                                span 66
+                                | %
+                            .label CPU Usage
+                        .chart
+                            .percentage(data-percent='11')
+                                span 11
+                                | %
+                            .label Bandwidth
+
+
+
+            .col-md-6
+                +box("Users", "users").no-padding
+                    table.table.table-hover.table-light.no-margin
+                        thead
+                            th User
+                            th Last login
+                            th.text-right Options
+                        tbody
+                            - users = ['Radic', 'Robin', 'Angelar', 'Typeman', 'Xezar', 'Filao', 'Imbar']
+                            each user in users
+                                tr
+                                    td
+                                        a(href="#")= user
+                                    td 2 days go
+                                    td.text-right
+                                        a(href="#").btn.btn-xs.btn-primary
+                                            i.fa.fa-pencil
+                                            |  Edit
+                                        a(href="#").btn.btn-xs.btn-danger
+                                            i.fa.fa-remove
+                                            |  Delete
 

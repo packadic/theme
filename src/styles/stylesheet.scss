@@ -42,6 +42,7 @@ form:not(.form-material) {
 @import "plugins/toastr";
 @import "plugins/m-custom-scrollbar";
 @import "plugins/datatables";
+@import "plugins/jquery-easy-pie-chart";
 
 @import "vendor/jquery-ui";
 
@@ -134,9 +135,15 @@ $jsonmap : (
     )
 
 );
-
-
-
+$_my_colors: ();
+@each $color-name, $color-variants in $material-colors {
+    $_my_colors: map-merge($_my_colors, (
+        $color-name + "-light": material-color($color-name, '200'),
+        $color-name: material-color($color-name, '500'),
+        $color-name + "-dark": material-color($color-name, '900'),
+    ))
+}
+$jsonmap: map-merge($jsonmap, (colors: $_my_colors));
 @include json-encode($jsonmap);
 
 //--- end of base file

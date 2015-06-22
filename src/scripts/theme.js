@@ -24,9 +24,18 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                 json   : true,
                 default: defaultOptions
             }),
-            defaultOptions: defaultOptions
+            defaultOptions: defaultOptions,
+
+            // import the SCSS exported values. We'll use those often enough
+            colors        : packadic.config.scss.colors,
+            fonts         : packadic.config.scss.fonts,
+            breakpoints   : packadic.config.scss.breakpoints
         };
 
+        $.each(theme.fonts, function(k, v){
+            theme.fonts[k] = v.join(', ');
+        });
+        console.log(theme.fonts);
 
         eventer('theme', theme);
 

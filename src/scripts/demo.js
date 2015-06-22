@@ -28,6 +28,7 @@ define([ 'jquery' ],
             this.present('#demo-forms', 'forms');
             this.present('#charts-demo', 'flots');
             this.present('#charts-demo', 'charts');
+            this.present('#dashboard-demo', 'dashboard');
         };
 
         return demo;
