@@ -248,29 +248,33 @@ var init = module.exports = function (grunts) {
             },
             watch  : ['devtools', 'watch']
         },
-        requirejs       : {
-            dev: {
-                options: {
-                    baseUrl                   : "dev/assets/scripts",
-                    optimizeCss               : false,
-                    modules                   : [
-                        {name: "ace-editor"},
-                        {
-                            name: 'boot', include: [
-                            'jquery', 'plugins/async', 'autoloader', 'string', 'jade', 'code-mirror',
-                            'plugins/cookie', 'theme', 'theme/sidebar', 'templates/sidebar', 'config', 'eventer', 'plugins/bs-material-ripples',
-                            'storage', 'json'
-                        ]
-                        }
-                    ],
-                    mainConfigFile            : 'dev/assets/scripts/init.js',
-                    dir                       : "dev/assets/scripts",
-                    skipDirOptimize           : false,
-                    preserveLicenseComments   : false,
-                    removeCombined            : true,
-                    optimizeAllPluginResources: true
+        pcscripts       : {
+            modules                   : [
+                {name: "vendor/ace-editor"},
+                {
+                    name: 'boot', include: [
+                    'jquery', 'plugins/async', 'autoload', 'string', 'jade', 'code-mirror',
+                    'plugins/cookie', 'theme', 'theme/sidebar',
+                    'templates/sidebar', 'templates/alert', 'templates/box', 'templates/table',
+                    'eventer', 'plugins/bs-material-ripples', 'storage', 'json',
+                    'fn/defined', 'fn/default', 'fn/cre', 'Q'
+                ]
+                },
+                {
+                    name   : 'demo',
+                    exclude: ['boot'],
+                    include: ['demo/show-html', 'demo/show-class', 'demo/forms', 'demo/button-icon-showcase', 'demo/component-editor']
                 }
-            }
+            ],
+            baseUrl                   : "<%= target.dest %>/assets/scripts-staged", // from
+            dir                       : "<%= target.dest %>/assets/scripts",          // to
+            optimizeCss               : false,
+            uglify                    : "uglify",
+            //allowSourceOverwrites: true,
+            skipDirOptimize           : true,
+            preserveLicenseComments   : false,
+            removeCombined            : true,
+            optimizeAllPluginResources: true
         },
         watch           : {
             options: {livereload: true}, //, nospawn: true},
@@ -296,7 +300,7 @@ var init = module.exports = function (grunts) {
                 tasks: ['copy:scripts_watch']
             },
             initscripts  : {
-                files: ['src/scripts/init.js'],
+                files: ['src/scripts/init.js','src/scripts/config.js'],
                 tasks: ['create_init_script'] //'jsbuild:lodash', 'copy:scripts', 'uglify:dev',
             },
             views        : {

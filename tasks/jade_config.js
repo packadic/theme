@@ -128,9 +128,9 @@ module.exports = function( grunt ){
         var p = rootpath('src/plugins/' + name);
 
         if( fs.existsSync(p + '/.bower.json') ){
-            dep.bw = fse.readJSONFileSync(p + '/.bower.json');
+            dep.bw = fse.readJsonSync(p + '/.bower.json');
         } else if( fs.existsSync(p + '/bower.json') ){
-            dep.bw = fse.readJSONFileSync(p + '/bower.json');
+            dep.bw = fse.readJsonSync(p + '/bower.json');
         }
 
         globule.find(p + '/*.md').forEach(function( filePath ){
@@ -151,9 +151,9 @@ module.exports = function( grunt ){
         });
 
         if( fs.existsSync(p + '/package.json') ){
-            dep.pkg = fse.readJSONFileSync(p + '/package.json');
+            dep.pkg = fse.readJsonSync(p + '/package.json');
         } else if( fs.existsSync(p + '/bower.json') ){
-            dep.pkg = fse.readJSONFileSync(p + '/bower.json');
+            dep.pkg = fse.readJsonSync(p + '/bower.json');
         }
 
         dep.data = _.merge(dep.bw, dep.pkg);
@@ -163,7 +163,7 @@ module.exports = function( grunt ){
     }
 
     function getNpmDep( name ){
-        return fse.readJSONFileSync(rootpath('node_modules/' + name + '/package.json'));
+        return fse.readJsonSync(rootpath('node_modules/' + name + '/package.json'));
     }
 
     var getJadeData = function(full){
@@ -176,11 +176,11 @@ module.exports = function( grunt ){
             plugins: {}
         };
         if( full !== true ){
-            build.bower = fse.readJSONFileSync(rootpath('bower.json'));
+            build.bower = fse.readJsonSync(rootpath('bower.json'));
             _.each(build.bower.dependencies, function( version, name ){
                 build.plugins[ name ] = getBowerDep(name);
             });
-            build.package = fse.readJSONFileSync(rootpath('package.json'));
+            build.package = fse.readJsonSync(rootpath('package.json'));
         }
 
         // get the config.yml into build.config

@@ -26,6 +26,8 @@ define([ 'jquery' ],
             this.present('.plugin-markdown', 'plugin-markdown');
             this.present('.demo-jq-impromptu', 'jq-impromptu');
             this.present('#demo-forms', 'forms');
+            this.present('#charts-demo', 'flots');
+            this.present('#charts-demo', 'charts');
         };
 
         return demo;

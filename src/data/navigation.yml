@@ -51,6 +51,9 @@ sidebar:
       - name: Widgets
         href: <%= target.nav.pre %>/components/widgets<%= target.nav.ext %>
 
+      - name: Charts
+        href: <%= target.nav.pre %>/components/charts<%= target.nav.ext %>
+
 
   - name: Forms
     #icon: fa fa-pencil

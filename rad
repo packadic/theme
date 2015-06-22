@@ -1,58 +1,86 @@
 #!/usr/bin/env node
 var requirejs = require('requirejs'),
-    util = require('util'),
-    _ = require('lodash');
+    util      = require('util'),
+    _         = require('lodash'),
+    path = require('path'),
+    fs = require('fs-extra'),
+    glob = require('globule');
 
-function dump(val){
-    process.stdout.write(util.inspect(val, { hidden: true, colors: true, depth: 5}));
+
+if( _.isUndefined(process.argv[2]) || process.argv.length < 2){
+    exit(1);
 }
 
-function getMainConfig(){
+var target = process.argv[2];
+
+function dump(val) {
+    process.stdout.write(util.inspect(val, {hidden: true, colors: true, depth: 5}));
+}
+
+
+function getMainConfig() {
     GLOBAL.window = {};
     GLOBAL._ = _;
-    require('./src/scripts/init');
+    require('./src/scripts/config');
     var rjsConfig = {};
-    Object.keys(GLOBAL.window.packadic.config.requireJS).forEach(function( k ){
-        rjsConfig[ k ] = GLOBAL.window.packadic.config.requireJS[ k ];
+    Object.keys(GLOBAL.window.packadic.config.requireJS).forEach(function (k) {
+        rjsConfig[k] = GLOBAL.window.packadic.config.requireJS[k];
     });
     delete GLOBAL.window;
     return rjsConfig;
 }
 var rconfig = getMainConfig();
 var config = {
-    paths: rconfig.paths,
-    shim: rconfig.shim,
-    baseUrl                : "dev/assets/scripts2",
-    optimizeCss            : false,
-    modules                : [
-        {name: "ace-editor"},
+    paths                     : rconfig.paths,
+    shim                      : rconfig.shim,
+    modules                   : [
+        {name: "vendor/ace-editor"},
         {
             name: 'boot', include: [
-                'jquery', 'plugins/async', 'autoload', 'string', 'jade', 'code-mirror',
-                'plugins/cookie', 'theme', 'theme/sidebar',
-                'templates/sidebar','templates/alert','templates/box','templates/table',
-                'eventer', 'plugins/bs-material-ripples', 'storage', 'json',
-                'fn/defined', 'fn/default', 'fn/cre', 'Q'
-            ]
+            'jquery', 'plugins/async', 'autoload', 'string', 'jade', 'code-mirror',
+            'plugins/cookie', 'theme', 'theme/sidebar',
+            'templates/sidebar', 'templates/alert', 'templates/box', 'templates/table',
+            'eventer', 'plugins/bs-material-ripples', 'storage', 'json',
+            'fn/defined', 'fn/default', 'fn/cre', 'Q'
+        ]
         },
         {
-            name: 'demo',
+            name   : 'demo',
             exclude: ['boot'],
-            include: ['demo/show-html', 'demo/show-class', 'demo/forms', 'demo/button-icon-showcase']
-        },
-        {
-            name: 'datatables',
-            exclude: ['demo', 'boot'],
-            include: ['datatables', 'vendor/dataTables.bootstrap']
+            include: ['demo/show-html', 'demo/show-class', 'demo/forms', 'demo/button-icon-showcase', 'demo/component-editor']
         }
     ],
-    dir                    : "dist/assets/scripts2",
-    uglify: "uglify",
-    //skipDirOptimize: true,
-    preserveLicenseComments: false,
-    removeCombined         : true,
-    optimizeAllPluginResources: true
+    dir                       : target + "/assets/scripts",          // to
+    optimizeCss               : false,
+    uglify                    : "uglify",
+    //allowSourceOverwrites: true,
+    skipDirOptimize           : true,
+    preserveLicenseComments   : false,
+    removeCombined            : true,
+    optimizeAllPluginResources: true,
+
+    onModuleBundleComplete: function (data) {
+        console.log('onModuleBundleComplete', data.name, data.path);
+    },
+
+    onBuildWrite: function (moduleName, path, contents) {
+        console.log('onBuildWrite', moduleName, path);
+        return contents;
+    }
 };
+
+config.baseUrl = config.dir + '_base';
+if(fs.existsSync(config.baseUrl)){
+    fs.emptydirSync(config.baseUrl);
+}
+
+fs.copySync(config.dir, config.baseUrl);
+
+
+
+function addIgnoreDir(path) {
+    config.paths[path] = 'empty:'; // mind the :
+}
 delete config.paths['plugins/select2css'];
 delete config.paths['plugins/highlightjscss'];
 delete config.shim['plugins/select2'];
@@ -60,7 +88,48 @@ delete config.shim['plugins/highlightjs'];
 
 
 
-dump(config);
-requirejs.optimize(config, function(asdf){
-    console.log(asdf);
-});
+
+requirejs.optimize(config, function (asdf) { console.log(asdf); });
+
+if(config.skipDirOptimize === true) { // we skip slow ass rjs optimize and do it ourselfs
+    var uglify = require('uglify-js');
+    var files = [];
+    _.each(config.paths, function (filePath, b) {
+        if ( filePath.indexOf('.min') > - 1 ) { // is a minified file, skip
+            return;
+        } else {
+            var checkPath = path.join(config.dir, filePath);
+            var found = glob.find(
+                [
+                    checkPath + '*.js', '!' + checkPath + '*.min.js',
+                    checkPath + '**/*.js', '!' + checkPath + '**/*.min.js'
+                ]
+            );
+
+            if(found.length > 0) {
+                files = files.concat(found);
+            }
+
+        }
+    });
+
+    files.forEach(function(file){
+        if(file.indexOf('oauth2.js') > -1){
+            return;
+        }
+        try {
+            var result = uglify.minify(file);
+            fs.unlink(file);
+            fs.writeFile(file, result.code);
+            console.log('Minified ', file);
+        }catch(e){
+            console.log(file, e);
+        }
+    })
+}
+
+
+
+if(fs.existsSync(config.baseUrl)){
+    fs.emptydirSync(config.baseUrl);
+}

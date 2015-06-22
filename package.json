@@ -24,7 +24,7 @@
     "async": "~0.9.0",
     "eventemitter": "~0.3.3",
     "eventemitter2": "~0.4.14",
-    "fs-extra": "~0.16.3",
+    "fs-extra": "~0.20.0",
     "globule": "~0.2.0",
     "grunt": "~0.4.5",
     "grunt-available-tasks": "~0.5.4",
@@ -83,6 +83,7 @@
     "radic-handlebars": "~0.1.5",
     "grunt-contrib-requirejs": "~0.4.4",
     "grunt-typescript": "~0.6.1",
-    "grunt-browserify": "~3.7.0"
+    "grunt-browserify": "~3.7.0",
+    "fs-extra": "~0.20.0"
   }
 }

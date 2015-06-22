@@ -30,6 +30,11 @@
             }
             packadic.config.scss = scss;
 
+            packadic.config.chartjsGlobal.tooltipTitleFontFamily = scss.fonts.subheading.join(', ');
+            packadic.config.chartjsGlobal.tooltipFontFamily = scss.fonts.base.join(', ');
+            packadic.config.chartjsGlobal.scaleFontFamily = scss.fonts.heading.join(', ');
+
+
             // Debug
             if(packadic.config.debug !== true){
                 var isDebug = false;

@@ -102,7 +102,7 @@ module.exports = function( grunt ){
         var map = {
             bootstrap: 'bootstrapjs:' + name,
             jqueryui: 'jqueryui:' + name,
-            jquery: 'shell:' + name + '_jquery',
+            //jquery: 'shell:' + name + '_jquery',
             lodash: 'lodashAutobuild:' + name
         };
         if(target){

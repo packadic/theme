@@ -25,8 +25,15 @@
         console.warn('(' + packadic.getElapsedTime() + 's) STARTED');
     });
 
+    packadic.onStart(['jquery', 'theme', 'fn/cre', 'flot', 'flot.pie'], function ($, theme, cre) {
+
+    });
     // Create layout settings editor for demo
     packadic.onStart(['jquery', 'theme/settings-editor', 'theme', 'storage', 'fn/cre'], function ($, SettingsEditor, theme, storage, cre) {
+
+
+
+
         var shouldSave = function () {
             return storage.get('demo.layout.editor.save', {default: false}) == "true";
         };

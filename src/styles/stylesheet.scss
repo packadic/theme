@@ -125,7 +125,14 @@ $jsonmap : (
         screen-xs-max: $screen-xs-max,
         screen-sm-max: $screen-sm-max,
         screen-md-max: $screen-md-max
+    ),
+    fonts: (
+        base: $font-family-base,
+        heading: $font-family-heading,
+        subheading: $font-family-sub-heading
+
     )
+
 );
 
 
