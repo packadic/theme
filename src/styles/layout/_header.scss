@@ -172,7 +172,7 @@ section#top.navbar {
             display: block;
 
             &.pull-right {
-                margin-right: -1px;
+                margin-right: 0;
                 > li {
                     margin-right: 0;
                     margin-left: 1px;
@@ -291,7 +291,7 @@ section#top.navbar {
 
 }
 
-body.without-section-top section#top {
+body.section-top-hidden section#top {
     display: none;
 }
 

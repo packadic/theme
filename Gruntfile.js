@@ -372,23 +372,6 @@ var init = module.exports = function (grunts) {
         'assets'
     ]);
 
-    grunt.registerTask('watcher2', function (target) {
-        if(!_.isUndefined(target) && target == 'tscripts') {
-            grunt.log.writeln('Starting watch on tscripts');
-            grunt.config.set('watch', {
-                options   : {livereload: true, nospawn: true},
-                browserify: {
-                    files: ['src/tscripts/**'],
-                    tasks: ['browserify']
-                },
-                livereload: {
-                    options: {livereload: 35729},
-                    files  : ['src/**/*']
-                }
-            })
-        }
-        grunt.task.run(['watch']);
-    });
 
     grunt.registerTask('clean:scripts', function () {
         grunt.log.writeln(grunt.config.get('target.dest'));

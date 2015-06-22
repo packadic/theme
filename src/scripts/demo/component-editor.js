@@ -3,6 +3,18 @@ define(['jquery', '../fn/defined', '../fn/cre', 'plugins/bs-switch'],
         'use strict';
 
         var controls = {
+            button: function(editable, $container){
+                return cre('a').appendTo($container)
+                    .attr({
+                        id: editable.id,
+                        class: 'btn btn-primary btn-xs',
+                        href: '#'
+                    })
+                    .text(editable.name)
+                    .on('click', function(){
+                        editable.options.click.apply(editable.options);
+                    });
+            },
             select: function(editable, $container){
                 var self = this;
                 var $control = cre('select')
@@ -10,15 +22,15 @@ define(['jquery', '../fn/defined', '../fn/cre', 'plugins/bs-switch'],
                     .addClass(self.options.controlClass)
                     .attr('data-component-editor-for-id', editable.id);
                 // Populate the select
-                $.each(editable.options, function (key, option) {
+
+                $.each(editable.options.choices, function (key, option) {
                     var opt = cre('option').attr('value', key).text(option.name);
                     if (editable.default === key) {
                         opt.attr('selected', 'selected');
                     }
                     $control.append(opt);
                 });
-                // On change option
-                $control.on('change', function(){
+                var onChange = function(){
                     var $el = $(this);
                     console.log('selected new editable option', $el.val());
                     var id = $el.data('component-editor-for-id');
@@ -30,15 +42,23 @@ define(['jquery', '../fn/defined', '../fn/cre', 'plugins/bs-switch'],
 
                     self.setCurrent(id, $el.val());
                     console.log('changed option for', id, editable)
-                });
+                };
+
+                var customOnChange = function(){
+                    return editable.options.onChange($(this)); //
+                };
+
+
+                // On change option
+                $control.on('change', defined(editable.options.onChange) ? customOnChange : onChange);
 
                 // Set the target to the default value
                 self.setCurrent(editable.id, editable.default);
                 var $editable = self.getTarget(editable.id);
-                var defaultClass = editable.options[editable.default].class;
-                if (!$editable.hasClass(defaultClass)) {
-                    $editable.addClass(defaultClass);
-                }
+                var defaultOption = editable.options[editable.default];
+                //if (defined(defaultOption['class']) && !$editable.hasClass(defaultOption['class'])) {
+                //    $editable.addClass(defaultOption['class']);
+                // }
 
                 return $control;
             },
@@ -55,10 +75,10 @@ define(['jquery', '../fn/defined', '../fn/cre', 'plugins/bs-switch'],
                     })
                     .addClass('switch')
                     .bootstrapSwitch({
-                        state: editable.default,
+                        state: editable.options.isEnabled(),
                         onSwitchChange: function(event, data){
                             console.log(event, data);
-                            editable.options.toggle.apply(editable.options);
+                            editable.options.toggle.apply(editable.options, [event, data]);
                         }
                     });
             }

@@ -23,7 +23,7 @@ define(['jquery', 'theme', 'theme/sidebar'], function ($, theme, sidebar) {
         }
 
         //handle theme layout
-        var resetLayout = function () {
+        var resetThemeOptions = function () {
             $("body").
                 removeClass("page-boxed").
                 removeClass("section-bottom-fixed").
@@ -51,7 +51,7 @@ define(['jquery', 'theme', 'theme/sidebar'], function ($, theme, sidebar) {
 
         var lastSelectedLayout = '';
 
-        var setLayout = function () {
+        var applyThemeOptions = function () {
 
             var opts = window.theme.opts;
             var a = {
@@ -81,7 +81,7 @@ define(['jquery', 'theme', 'theme/sidebar'], function ($, theme, sidebar) {
                 headerOption = 'fixed';
             }
 
-            resetLayout(); // reset layout to default state
+            resetThemeOptions(); // reset layout to default state
 
             if (layoutOption === "boxed") {
                 $("body").addClass("page-boxed");
@@ -182,80 +182,10 @@ define(['jquery', 'theme', 'theme/sidebar'], function ($, theme, sidebar) {
             sidebar.handleFixed(); // reinitialize fixed sidebar
         };
 
-        // handle theme colors
-        var setColor = function (color) {
-            var color_ = (Metronic.isRTL() ? color + '-rtl' : color);
-            $('#style_color').attr("href", Layout.getLayoutCssPath() + 'themes/' + color_ + ".css");
-            if (color == 'light2') {
-                $('.page-logo img').attr('src', Layout.getLayoutImgPath() + 'logo-invert.png');
-            } else {
-                $('.page-logo img').attr('src', Layout.getLayoutImgPath() + 'logo.png');
-            }
-        };
-
-        var dunno = function () {
-            $('.toggler', panel).click(function () {
-                $('.toggler').hide();
-                $('.toggler-close').show();
-                $('.theme-panel > .theme-options').show();
-            });
-
-            $('.toggler-close', panel).click(function () {
-                $('.toggler').show();
-                $('.toggler-close').hide();
-                $('.theme-panel > .theme-options').hide();
-            });
-
-            $('.theme-colors > ul > li', panel).click(function () {
-                var color = $(this).attr("data-style");
-                setColor(color);
-                $('ul > li', panel).removeClass("current");
-                $(this).addClass("current");
-            });
-
-            // set default theme options:
-
-            if ($("body").hasClass("page-boxed")) {
-                opts['layout-option'] = "boxed";
-            }
-
-            if ($("body").hasClass("sidebar-nav-fixed")) {
-                opts['sidebar-option'] = "fixed";
-            }
-
-            if ($("body").hasClass("section-top-fixed")) {
-                opts['page-header-option'] = "fixed";
-            }
-
-            if ($("body").hasClass("section-bottom-fixed")) {
-                opts['page-footer-option'] = "fixed";
-            }
-
-            if ($("body").hasClass("sidebar-nav-reversed")) {
-                opts['sidebar-pos-option'] = "right";
-            }
-
-            if ($(".sidebar-nav-menu").hasClass("sidebar-nav-menu-light")) {
-                opts['sidebar-style-option'] = "light";
-            }
-
-            if ($(".sidebar-nav-menu").hasClass("sidebar-nav-menu-hover-submenu")) {
-                opts['sidebar-menu-option'] = "hover";
-            }
-
-            var sidebarOption = opts['sidebar-option'];
-            var headerOption = opts['page-header-option'];
-            var footerOption = opts['page-footer-option'];
-            var sidebarPosOption = opts['sidebar-pos-option'];
-            var sidebarStyleOption = opts['sidebar-style-option'];
-            var sidebarMenuOption = opts['sidebar-menu-option'];
-
-        };
 
         return {
-            reset: resetLayout,
-            apply: setLayout,
-            color: setColor
+            reset: resetThemeOptions,
+            apply: applyThemeOptions
         }
     };
 
@@ -263,7 +193,6 @@ define(['jquery', 'theme', 'theme/sidebar'], function ($, theme, sidebar) {
         var func = handleTheme();
         window.theme.reset = func.reset;
         window.theme.apply = func.apply;
-        window.theme.color = func.color;
     });
 
 

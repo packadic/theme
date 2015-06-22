@@ -83,7 +83,11 @@
 
             .setting-control {
                 width: 140px;
+                select.form-control {
+                    padding: 0 6px;
+                    height: 23px;
 
+                }
             }
 
             &:last-child {

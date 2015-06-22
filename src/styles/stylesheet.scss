@@ -1,5 +1,141 @@
-@import "base-stylesheet";
-@import "layout";
-@import "plugins";
-@import "components";
+
+// order of .scss definitions/files
+
+//--- start of base file: << imports _{name}.scss files >> exports 1 {name}.scss file that will be processed to {name}.css
+@import "base";
+
+// Fonts
+@import url($web-font);
+@import "../plugins/font-awesome/scss/font-awesome";
+
+// 7.0 VENDOR styles
+@import "../plugins/bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "../plugins/bootstrap-material-design/sass/ripples";
+
+.ripple {
+    background-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+
+
+// 9.0 MY layout styles (WITHOUT colors, images, bg colors, etc -- WITH dimensions, sizes, width, paddings, margins, etc)
+@import "layout/header";
+@import "layout/page-container";
+@import "layout/sidebar";
+@import "layout/content";
+@import "layout/footer";
+
+
+form:not(.form-material) {
+    @import "plugins/uniform";
+}
+
+
+@import "plugins/bootbox";
+
+@import "plugins/datepicker3";
+@import "plugins/bootstrap-switch";
+@import "plugins/bootstrap-select";
+@import "plugins/bootstrap-gtreetable";
+@import "../plugins/bootstrap-progressbar/scss/bootstrap-progressbar-3.3.0-3.x.x";
+@import "plugins/jquery-impromptu";
+@import "plugins/toastr";
+@import "plugins/m-custom-scrollbar";
+@import "plugins/datatables";
+
+@import "vendor/jquery-ui";
+
+
+
+// 10.0 MY components
+@import "components/type";
+@import "components/buttons";
+@import "components/labels";
+@import "components/tabs";
+//@import "components/dropdown";
+//@import "components/header-dropdown";
+@import "components/tabs";
+@import "components/form_layouts";
+
+@import "components/box";
+@import "components/popover";
+@import "components/tables";
+@import "components/modals";
+@import "components/loader";
+@import "components/share-buttons";
+@import "components/widgets";
+
+@import "components/sliding-tags";
+@import "components/tabbed-widget";
+@import "components/task-list";
+@import "components/to-do-list";
+
+//@import "components/color-variants";
+
+
+@import "utilities/positioning";
+@import "utilities/shadows";
+@import "utilities/effects";
+
+
+@import "components/bootstrap-material";
+
+blockquote {
+
+
+    border-left: 5px solid #33336E;
+    background: #F0F0F0 ;
+    border-radius: 4px ;
+}
+
+#page-loader {
+    display: none;
+}
+body.page-loading {
+
+    @include createLoader(page, #fefefe);
+    //background: #fefefe;
+
+    #page-loader {
+        display: block;
+    }
+
+    section#top,
+    section#page,
+    section#bottom,
+    > .clearfix {
+        display: none;
+        transition: all 2s;
+    }
+}
+
+
+
+@import 'SassyJSON';
+
+
+$jsonmap : (
+    breakpoints: (
+
+        screen-xs-min: $screen-xs-min,
+        screen-sm-min: $screen-sm-min,
+        screen-md-min: $screen-md-min,
+        screen-lg-min: $screen-lg-min,
+        screen-lg-med: $screen-lg-med,
+        screen-xs-max: $screen-xs-max,
+        screen-sm-max: $screen-sm-max,
+        screen-md-max: $screen-md-max
+    )
+);
+
+
+
+@include json-encode($jsonmap);
+
+//--- end of base file
+
+.slimScrollBar {
+    border-radius: 0 !important;
+}
+
 @import "fast";

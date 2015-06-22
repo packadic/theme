@@ -1,23 +1,237 @@
-define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', 'Q',
+define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', 'Q', 'storage',
         'plugins/cookie', 'plugins/bs-material-ripples'],
-    function ($, defined, def, cre, eventer, autoload, Q) {
+    function ($, defined, def, cre, eventer, autoload, Q, storage) {
         'use strict';
 
         var packadic = (window.packadic = window.packadic || {});
 
-        var theme = {
-            $hidden: cre().addClass('hide')
+        var defaultLayoutOptions = {
+            'layout-option'                        : 'fluid',
+            'sidebar-option'                       : 'default',
+            'page-header-option'                   : 'fixed',
+            'page-header-top-dropdown-style-option': 'light',
+            'sidebar-menu-option'                  : 'accordion',
+            'page-footer-option'                   : 'fixed',
+            'sidebar-pos-option'                   : 'left',
+            'sidebar-style-option'                 : 'default',
+            'section-top-option' : 'normal'
         };
 
-        packadic.theme = theme;
+        var theme = {
+            $hidden: cre().addClass('hide'),
+            layout: storage.get('theme.layout', {
+                json: true,
+                default: defaultLayoutOptions
+            })
+        };
+
+
         eventer('theme', theme);
+
+
+
+        theme.initLayout = function () {
+            theme.layout = storage.get('theme.layout', {
+                json: true,
+                default: defaultLayoutOptions
+            });
+
+
+            theme.applyLayout();
+        };
+
+        var resetLayout = function(){
+            $("body").
+                removeClass("page-boxed").
+                removeClass("section-bottom-fixed").
+                removeClass("sidebar-nav-fixed").
+                removeClass("section-top-fixed").
+                removeClass('section-top-hidden').
+                removeClass("sidebar-nav-reversed");
+
+            $('section#top > header.top').removeClass("container");
+
+            if ($('section#page').parent(".container").size() === 1) {
+                $('section#page').insertAfter('body > .clearfix');
+            }
+
+            if ($('section#bottom > .container').size() === 1) {
+                $('section#bottom').html($('section#bottom > .container').html());
+            } else if ($('section#bottom').parent(".container").size() === 1) {
+                $('section#bottom').insertAfter('section#page');
+                //$('.scroll-to-top').insertAfter('section#bottom');
+            }
+
+            $(".top-menu > .navbar-nav > li.dropdown").removeClass("dropdown-dark");
+
+            $('body > .container').remove();
+        };
+
+        var lastSelectedLayout = '';
+        theme.applyLayout = function () {
+
+            var opts = theme.layout;
+            var layoutOption = opts['layout-option'];
+            var sidebarOption = opts['sidebar-option'];
+            var headerOption = opts['page-header-option'];
+            var footerOption = opts['page-footer-option'];
+            var sidebarPosOption = opts['sidebar-pos-option'];
+            var sidebarStyleOption = opts['sidebar-style-option'];
+            var sidebarMenuOption = opts['sidebar-menu-option'];
+            var headerTopDropdownStyle = opts['page-header-top-dropdown-style-option'];
+
+            var sectionTopOption = opts['section-top-option'];
+
+            if (sidebarOption == "fixed") {
+                opts['section-top-option'] = "fixed";
+                opts['sidebar-option'] = "fixed";
+                sidebarOption = 'fixed';
+                sectionTopOption = 'fixed';
+            }
+
+            resetLayout(); // reset layout to default state
+
+            if (layoutOption === "boxed") {
+                $("body").addClass("page-boxed");
+
+                // set header
+                $('section#top > header.top').addClass("container");
+                var cont = $('body > .clearfix').after('<div class="container"></div>');
+
+                // set content
+                $('section#page').appendTo('body > .container');
+
+                // set footer
+                if (footerOption === 'fixed') {
+                    $('section#bottom').html('<div class="container">' + $('section#bottom').html() + '</div>');
+                } else {
+                    $('section#bottom').appendTo('body > .container');
+                }
+            }
+
+            if (lastSelectedLayout != layoutOption) {
+                //layout changed, run responsive handler:
+                theme._trigger('resize');
+            }
+            lastSelectedLayout = layoutOption;
+
+            //header
+            if (sectionTopOption === 'fixed') {
+                $("body").addClass("section-top-fixed");
+                $("section#top").removeClass("navbar-static-top").addClass("navbar-fixed-top");
+            } else if(sectionTopOption === 'normal') {
+                $("body").removeClass("section-top-fixed");
+                $("section#top").removeClass("navbar-fixed-top").addClass("navbar-static-top");
+            } else if(sectionTopOption === 'hidden'){
+                $('body').addClass('section-top-hidden');
+            }
+
+            //sidebar
+            if ($('body').hasClass('page-full-width') === false) {
+                if (sidebarOption === 'fixed') {
+                    $("body").addClass("sidebar-nav-fixed");
+                    $("sidebar-nav-menu").addClass("sidebar-nav-menu-fixed");
+                    $("sidebar-nav-menu").removeClass("sidebar-nav-menu-default");
+
+                    require(['theme/sidebar'], function(sidebar) {
+                        sidebar.handleFixedHover();
+                    });
+                    //Layout.initFixedSidebarHoverEffect();
+                } else {
+                    $("body").removeClass("sidebar-nav-fixed");
+                    $("sidebar-nav-menu").addClass("sidebar-nav-menu-default");
+                    $("sidebar-nav-menu").removeClass("sidebar-nav-menu-fixed");
+                    $('.sidebar-nav-menu').unbind('mouseenter').unbind('mouseleave');
+                }
+            }
+
+            // top dropdown style
+            if (headerTopDropdownStyle === 'dark') {
+                $(".top-menu > .navbar-nav > li.dropdown").addClass("dropdown-dark");
+            } else {
+                $(".top-menu > .navbar-nav > li.dropdown").removeClass("dropdown-dark");
+            }
+
+            //footer
+            if (footerOption === 'fixed') {
+                $("body").addClass("section-bottom-fixed");
+            } else {
+                $("body").removeClass("section-bottom-fixed");
+            }
+
+            //sidebar style
+            if (sidebarStyleOption === 'light') {
+                $(".sidebar-nav-menu").addClass("sidebar-nav-menu-light");
+            } else {
+                $(".sidebar-nav-menu").removeClass("sidebar-nav-menu-light");
+            }
+
+            //sidebar menu
+            if (sidebarMenuOption === 'hover') {
+                if (sidebarOption == 'fixed') {
+                    opts['sidebar-menu-option'] = "accordion";
+                    alert("Hover Sidebar Menu is not compatible with Fixed Sidebar Mode. Select Default Sidebar Mode Instead.");
+                } else {
+                    $(".sidebar-nav-menu").addClass("sidebar-nav-menu-hover-submenu");
+                }
+            } else {
+                $(".sidebar-nav-menu").removeClass("sidebar-nav-menu-hover-submenu");
+            }
+
+            if (sidebarPosOption === 'right') {
+                $("body").addClass("sidebar-nav-reversed");
+                $('#frontend-link').tooltip('destroy').tooltip({
+                    placement: 'left'
+                });
+            } else {
+                $("body").removeClass("sidebar-nav-reversed");
+                $('#frontend-link').tooltip('destroy').tooltip({
+                    placement: 'right'
+                });
+            }
+
+            require(['theme/sidebar'], function(sidebar){
+                sidebar.handleWithContent(); // fix content height
+                sidebar.handleFixed(); // reinitialize fixed sidebar
+            });
+        };
+
+        theme.get = function(opt){
+            if(!defined(theme.layout[opt])){
+                console.error('theme.get failed on ', opt);
+                return;
+            }
+            return theme.layout[opt];
+        };
+        theme.set = function(opt, value, refresh, save){
+            if(!defined(theme.layout[opt]) || !defined(value)) return;
+            refresh = defined(refresh) ? refresh : true;
+            save = defined(save) ? save :  true;
+            console.log('doing ', opt, ' with:', value, ' refresh:', refresh, 'save', save);
+            theme.layout[opt] = value;
+            if(save) storage.set('theme.layout', theme.layout, { json: true } );
+            if(refresh) theme.applyLayout();
+        };
+        theme.save = function(){
+            storage.set('theme.layout', theme.layout, {json:true});
+        };
+        theme.reset = function(save){
+            if(!defined(save) || save === true) {
+                storage.del('theme.layout');
+            }
+            theme.layout = defaultLayoutOptions;
+            theme.applyLayout();
+        };
+
 
 
         theme.isDebug = function () {
             return packadic.config.debug;
         };
 
-
+        theme.hasSidebar = function(){
+            return $('nav.sidebar-nav').length > 0;
+        };
 
         /**
          * checks is a property is supported on the browser
@@ -100,6 +314,8 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
 
 
+
+
         theme.initSettingsEditor = function () {
             var $el = $('.settings-editor');
             $el.find('> .btn').on('click', function (e) {
@@ -135,7 +351,69 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
         theme.initEvents = function () {
             theme._initResizeEvent();
-        }
+        };
+
+        theme.initBoxes = function(){
+            var $boxes = $('body').find('.box');
+
+            $boxes.find('section.scrollable').each(function(){
+                theme.initSlimScroll($(this), { alwaysVisible: true });
+            });
+
+            var ensureControlContainer = function($boxEl){
+                var $controls = $boxEl.children('header').first().find('.controls');
+                if($controls.length == 0){
+                    $controls = cre().addClass('controls');
+                    $boxEl.children('header').first().append($controls)
+                }
+                return $controls;
+            };
+
+
+            $boxes.filter('.box-closable').each(function(){
+                var $controls = ensureControlContainer($(this));
+                if($controls.find('a[data-control="closable"]').length == 0){
+                    var $i = cre('i').addClass('fa fa-chevron-down');
+                    var $a = cre('a')
+                        .attr('data-control', 'closable')
+                        .append($i)
+                        .attr('href', '#').on('click', function(){
+                            var $sec = $(this).closest('.box').children('section').first();
+                            if($i.hasClass('fa-chevron-down')){
+                                $sec.slideUp();
+                                $i.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+                            } else {
+                                $sec.slideDown();
+                                $i.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+                            }
+                        });
+                    $controls.append($a);
+                }
+            });
+
+            $boxes.filter('.box-draggable').each(function(){
+
+            })
+            // draggable boxes init
+            var $boxesDraggable = $('body').find('.box-draggable');
+            if($boxesDraggable.length > 0){
+                require(['jquery-ui/draggable'], function(){
+                    $boxesDraggable.each(function(){
+
+                        var $controls = ensureControlContainer($(this));
+                        if($controls.find('a[data-control="draggable"]').length == 0){
+                            var $i = cre('i').addClass('fa fa-arrows-alt');
+                            var $a = cre('a')
+                                .attr('data-control', 'draggable')
+                                .append($i);
+                            $controls.append($a);
+                        }
+
+                        $(this).draggable({ handle: $controls.find('a[data-control="draggable"]') });
+                    });
+                });
+            }
+        };
 
 
         theme.initSlimScroll = function (el, opts) {
@@ -210,6 +488,10 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             });
         };
 
+
+
+
+        /** @deprecated todo: remove  */
         theme.scrollable = function ($el) {
             require(['plugins/mscrollbar'], function () {
                 $.mCustomScrollbar.defaults.theme = 'dark';
@@ -218,67 +500,6 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         };
 
 
-        theme.initBoxes = function(){
-            var $boxes = $('body').find('.box');
-
-            $boxes.find('section.scrollable').each(function(){
-                theme.initSlimScroll($(this), { alwaysVisible: true });
-            });
-
-            var ensureControlContainer = function($boxEl){
-                var $controls = $boxEl.children('header').first().find('.controls');
-                if($controls.length == 0){
-                    $controls = cre().addClass('controls');
-                    $boxEl.children('header').first().append($controls)
-                }
-                return $controls;
-            };
-
-
-            $boxes.filter('.box-closable').each(function(){
-                var $controls = ensureControlContainer($(this));
-                if($controls.find('a[data-control="closable"]').length == 0){
-                    var $i = cre('i').addClass('fa fa-chevron-down');
-                    var $a = cre('a')
-                        .attr('data-control', 'closable')
-                        .append($i)
-                        .attr('href', '#').on('click', function(){
-                            var $sec = $(this).closest('.box').children('section').first();
-                            if($i.hasClass('fa-chevron-down')){
-                                $sec.slideUp();
-                                $i.removeClass('fa-chevron-down').addClass('fa-chevron-up');
-                            } else {
-                                $sec.slideDown();
-                                $i.removeClass('fa-chevron-up').addClass('fa-chevron-down');
-                            }
-                        });
-                    $controls.append($a);
-                }
-            });
-
-            $boxes.filter('.box-draggable').each(function(){
-
-            })
-            // draggable boxes init
-            var $boxesDraggable = $('body').find('.box-draggable');
-            if($boxesDraggable.length > 0){
-                require(['jquery-ui/draggable'], function(){
-                    $boxesDraggable.each(function(){
-
-                        var $controls = ensureControlContainer($(this));
-                        if($controls.find('a[data-control="draggable"]').length == 0){
-                            var $i = cre('i').addClass('fa fa-arrows-alt');
-                            var $a = cre('a')
-                                .attr('data-control', 'draggable')
-                                .append($i);
-                            $controls.append($a);
-                        }
-
-                        $(this).draggable({ handle: $controls.find('a[data-control="draggable"]') });
-                    });
-                });
-            }
-        };
 
 
         theme.toastr = function (fnName, message, title) {
@@ -389,6 +610,11 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         };
 
 
+
+
+
+
+
         theme.init = function () {
 
             theme.$window = $(window);
@@ -398,6 +624,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             theme.initHeaderSearchForm();
             theme.initSettingsEditor();
             theme.initBoxes();
+
             $([
                 ".btn:not(.btn-link)",
                 ".card-image",
@@ -412,7 +639,17 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                 theme.scrollTo($(e.target));
             });
 
+            theme.initLayout();
         };
+
+
+
+        if(theme.isDebug()){ // usefull for easy browser console access
+            packadic.theme = theme;
+        }
+
+
+
 
         return theme;
     });

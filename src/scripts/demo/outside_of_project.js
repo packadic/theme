@@ -24,51 +24,67 @@
     }).onStarted(function () {
         console.warn('(' + packadic.getElapsedTime() + 's) STARTED');
     });
-    packadic.onBooted(['jquery', 'demo/component-editor', 'demo/metro'], function ($, ComponentEditor) {
-        var layoutEditor = window.ceditors = new ComponentEditor($('#layout-editor'), {
+
+    // Create layout settings editor for demo
+    packadic.onStart(['jquery', 'theme/settings-editor', 'theme', 'storage'], function ($, SettingsEditor, theme, storage) {
+        var shouldSave = function(){
+            return storage.get('demo.layout.editor.save', {default: false}) == "true";
+        };
+
+
+        var layoutEditor = window.ceditors = new SettingsEditor($('#layout-editor'), {
             target   : '#layout-editor',
-            editables: [{
-                id: 'section-top-toggle', name: 'Display top', 'default': true, type: 'switch', options: {
-                    isEnabled  : function(){ return $('body').hasClass('without-section-top') === false; },
-                    toggle : function(){
-                        console.log('toggle', 'is enabled', this.isEnabled());
-                        $('body')[ (this.isEnabled() ? 'add' : 'remove') + 'Class']('without-section-top')
+            controls: [{
+                id: 'persistent-save', name: 'Save adjustments', 'default': false, type: 'switch', options: {
+                    isEnabled  : shouldSave,
+                    toggle : function(event, val){
+                        storage.set('demo.layout.editor.save', val);
+                    }
+                }
+            },{
+                id: 'top', name: 'Top section', 'default': theme.get('section-top-option'), type: 'select', options: {
+                    choices: {
+                        'hidden'  : { name: 'Hidden'},
+                        'normal': { name: 'Normal'},
+                        fixed    : { name: 'Fixed'}
+                    },
+                    onChange: function($el){
+                        theme.set('section-top-option', $el.val(), true, shouldSave())
                     }
                 }
             }, {
                 id: 'page-boxed', name: 'Boxed page', 'default': false, type: 'switch', options: {
-                    isEnabled  : function(){ return window.theme.opts['layout-option'] === 'boxed' },
-                    toggle : function(){
-                        console.log('toggle', 'is enabled', this.isEnabled());
-                        window.theme.opts['layout-option'] = window.theme.opts['layout-option'] === 'boxed' ? 'fluid' : 'boxed';
-                        window.theme.apply();
+                    isEnabled  : function(){ return theme.get('layout-option') === 'boxed' },
+                    toggle : function(event, val){
+                        theme.set('layout-option', val ? 'boxed' : 'fluid', true, shouldSave());
                     }
                 }
             }, {
                 id: 'header-fixed', name: 'Fixed header', 'default': true, type: 'switch', options: {
-                    isEnabled  : function(){ return window.theme.opts['page-header-option'] === 'fixed' },
-                    toggle : function(){
-                        console.log('header fix', 'is enabled', this.isEnabled());
-                        window.theme.opts['page-header-option'] = window.theme.opts['page-header-option'] === 'fixed' ? 'default' : 'fixed';
-                        window.theme.apply();
+                    isEnabled  : function(){ return theme.get('page-header-option') === 'fixed' },
+                    toggle : function(event, val){
+                        theme.set('page-header-option', val ? 'fixed' : 'default', true, shouldSave());
                     }
                 }
             }, {
                 id: 'footer-fixed', name: 'Fixed footer', 'default': true, type: 'switch', options: {
-                    isEnabled  : function(){ return window.theme.opts['page-footer-option'] === 'boxed' },
-                    toggle : function(){
-                        console.log('footer fix', 'is enabled', this.isEnabled());
-                        window.theme.opts['page-footer-option'] = window.theme.opts['page-footer-option'] === 'fixed' ? 'default' : 'fixed';
-                        window.theme.apply();
+                    isEnabled  : function(){ return theme.get('page-footer-option') === 'fixed' },
+                    toggle : function(event, val){
+                        theme.set('page-footer-option', val ? 'fixed' : 'default', true, shouldSave());
                     }
                 }
             }, {
                 id: 'sidebar-fixed', name: 'Fixed sidebar', 'default': false, type: 'switch', options: {
-                    isEnabled  : function(){ return window.theme.opts['sidebar-option'] === 'boxed' },
-                    toggle : function(){
-                        console.log('sidebar fix', 'is enabled', this.isEnabled());
-                        window.theme.opts['sidebar-option'] = window.theme.opts['sidebar-option'] === 'fixed' ? 'default' : 'fixed';
-                        window.theme.apply();
+                    isEnabled  : function(){ return theme.get('sidebar-option') === 'fixed' },
+                    toggle : function(event, val){
+                        theme.set('sidebar-option', val ? 'fixed' : 'default', true, shouldSave());
+                    }
+                }
+            }, {
+                id: 'layout-reset-default', name: 'Reset to defaults', type: 'button', options: {
+                    click: function(){
+                        theme.reset(shouldSave());
+                        window.location.reload();
                     }
                 }
             } ]

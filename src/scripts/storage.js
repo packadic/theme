@@ -1,4 +1,4 @@
-define([ 'json' ], function( json ){
+define([ 'json', 'fn/defined' ], function( json, defined ){
 
     var storage = {};
 
@@ -25,7 +25,7 @@ define([ 'json' ], function( json ){
     storage.get = function( key, options ){
         options = $.extend({json: false, default: null}, options);
 
-        if( _.isUndefined(key) ){
+        if( !defined(key) ){
             return options.default;
         }
 
@@ -42,7 +42,7 @@ define([ 'json' ], function( json ){
 
         var val = window[ 'localStorage' ].getItem(key);
 
-        if( _.isUndefined(val) ){
+        if( !defined(val) || defined(val) && val == null ){
             return options.default;
         }
 

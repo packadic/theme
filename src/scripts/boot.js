@@ -12,8 +12,8 @@
 
     packadic.fireEvent('booting'); // Fire "booting" event
 
-    require([ 'module', 'jquery',  'autoload', 'string', 'jade', 'code-mirror', 'plugins/cookie' ],
-        function( module, $, autoload, _s, jade){
+    require([ 'module', 'jquery',  'autoload', 'string', 'jade', 'storage', 'code-mirror', 'plugins/cookie' ],
+        function( module, $, autoload, _s, jade, storage){
 
 
             packadic.removePageLoader = function(){

@@ -1,16 +1,16 @@
 
 // 1.0 MY functions that: 1. do NOT use any default variables (like default parameter variables) -- 2.
-@import "overrides/compass";
+@import "variables/override_compass_variables";
 @import "compass";
-@import "libs/chroma";
+@import "functions/chroma";
 
 
 // 2.0 MY core variables (suffix them with !default)
-@import "variables";
+@import "variables/base_variables";
 
 // 3.0 MY override variables (variables that override VENDOR !default variables. do NOT suffix them with !default)
-@import "overrides/bootstrap";
-@import "overrides/uniform";
+@import "variables/override_bootstrap_variables";
+@import "variables/override_uniform_variables";
 
 
 // 4.0 VENDOR (bootstrap etc) variables import
@@ -19,7 +19,7 @@
 @import "../plugins/bootstrap-material-design/sass/_variables.scss";
 
 // 5.0 MY extending variables = variables that uses VENDOR variables (suffix them with !default)
-@import "extensions/variables";
+@import "variables/extending_variables";
 
 // 6.0 MY mixins
 @import "functions";
@@ -30,9 +30,9 @@
 
 // 6.1 MY override mixins. mixins that override the VENDOR mixins to alter the VENDOR styles
 //@import "overrides/mixins";
-@import "layout/layout-variables";
+@import "variables/layout-variables";
 @import "layout/layout-mixins";
-@import "theme-variables";
+@import "variables/theme-variables";
 
-@import "plugin-variables";
-@import "jquery-ui-variables";
+@import "variables/plugin-variables";
+@import "variables/jquery-ui-variables";
