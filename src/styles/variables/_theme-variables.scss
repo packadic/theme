@@ -106,9 +106,8 @@ $sidebar-menu-sub-menu-bg:                                              sidebar-
 $sidebar-menu-sub-menu-bg-hover:   sidebar-submenu-2-bg(
         #333333,
         #242424,
-
-                                    $sidebar-menu-sub-menu-link-bg-color-on-hover,
-                                    $sidebar-collapsed-width, right ) !default;
+        $sidebar-menu-sub-menu-link-bg-color-on-hover,
+        $sidebar-collapsed-width, right ) !default;
 
 //@include sidebar-nav-menu-bg($sidebar-menu-link-bg-color-on-active, $sidebar-menu-sub-menu-link-bg-color-on-hover);
 $sidebar-menu-sub-menu-bg-active:   sidebar-submenu-3-bg(
@@ -126,7 +125,17 @@ $sidebar-menu-sub-menu-divider-border-color: #333333 !default;
 $section-top-sidebar-menu-toggler-bg:                                   $sidebar-menu-top-level-bg-left !default;
 $section-top-sidebar-menu-toggler-bg-hover:                             $sidebar-menu-top-level-bg-right !default;
 
+// Sidebar with HOVER ENABLED instead of ACCORDION
+$sidebar-menu-hover-sub-menu-bg:                                sidebar-submenu-bg(#333333, $bg-color, $sidebar-collapsed-width, right) !default;
+$sidebar-menu-hover-sub-menu-bg-hover: linear-gradient(to right,
+    #333 0px,
+    #242424 0px,
+    #242424 45px,
+    $sidebar-menu-sub-menu-link-bg-color-on-hover 45px) repeat-x !default;
 
+
+
+$sidebar-menu-hover-sub-menu-bg-active: $sidebar-menu-hover-sub-menu-bg-hover;
 
 $sidebar-menu-hover-sub-menu-bg-color:									lighten($sidebar-menu-link-bg-color-on-hover, 4%) !default;
 

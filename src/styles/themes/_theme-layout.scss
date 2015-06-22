@@ -347,6 +347,7 @@
                         //@include sidebar-nav-menu-bg($sidebar-menu-link-bg-color-on-active, $sidebar-menu-sub-menu-link-bg-color-on-hover);
                         background: $sidebar-menu-sub-menu-bg-active;
                     }
+
                     &:hover,
                     &.open,
                     &.active {
@@ -374,6 +375,29 @@
                 }
             }
         }
+
+        .sidebar-nav-menu.sidebar-nav-menu-hover-submenu {
+            .sub-menu > li {
+
+                > a {
+                    background: $sidebar-menu-hover-sub-menu-bg;
+                }
+                //background: $sidebar-menu-link-bg-color-on-active;
+
+                &:hover > a,
+                &.open:not(.active) > a{
+                    //background: $sidebar-menu-sub-menu-link-bg-color-on-hover !important;
+                    background: $sidebar-menu-hover-sub-menu-bg-hover;
+                }
+
+                &.active> a {
+                    //@include sidebar-nav-menu-bg($sidebar-menu-link-bg-color-on-active, $sidebar-menu-sub-menu-link-bg-color-on-hover);
+                    background: $sidebar-menu-hover-sub-menu-bg-active;
+                }
+            }
+        }
+        // $sidebar-menu-hover-sub-menu-bg-hover
+
 
         /* light sidebar */
         .sidebar-nav-menu.sidebar-nav-menu-light {
@@ -572,7 +596,6 @@
             }
         }
 
-        /* Light sidebar menu */
         .sidebar-nav-menu.sidebar-nav-menu-light.sidebar-nav-menu-closed {
             > li.heading {
                 padding: 0;
@@ -581,9 +604,6 @@
                 border-top: 1px solid $sidebar-menu-devider-border-color !important;
             }
         }
-
-
-        /* Fixed Sidebar */
 
         .sidebar-nav-fixed:not(section#bottom-fixed) {
             main {
@@ -598,8 +618,6 @@
                 }
             }
         }
-
-        /* Boxed Layout */
 
         .page-boxed {
             background-color: $for-min-992px-page-boxed-bg-color !important;
@@ -661,8 +679,6 @@
                 }
             }
         }
-
-         /* Sidebar Menu Wirh Hoverable Submenu */
 
         .sidebar-nav-menu-hover-submenu {
             li {

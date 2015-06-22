@@ -162,7 +162,7 @@ var init = module.exports = function (grunts) {
             }
         },
         sass            : {
-            options: { compass: true, bundleExec: true, sourcemap: 'none' },
+            options: { compass: true, bundleExec: true, sourcemap: 'file' },
             dev    : {
                 //files: [{expand: true, cwd: 'src/styles', src: ['**/*.scss', '!stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
                 files: [{expand: true, cwd: 'src/styles', src: ['themes/theme-default.scss', 'stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]

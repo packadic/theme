@@ -80,11 +80,12 @@
                         theme.set('sidebar-style', val ? 'light' : 'default', true, shouldSave());
                     }
                 }
+
             }, {
                 id: 'sidebar-menu', name: 'Sidebar Hover', 'default': false, type: 'switch', options: {
                     isEnabled  : function(){ return theme.get('sidebar-menu') === 'hover' },
                     toggle : function(event, val){
-                        theme.set('sidebar-menu', val ? 'hover' : 'accordion', true, shouldSave());
+                        theme.set('sidebar-menu', val ? 'hover' : 'default', true, shouldSave());
                     }
                 }
             }, {
