@@ -2,7 +2,16 @@ define(['jquery', '../fn/defined', '../fn/cre', 'plugins/bs-switch'],
     function ($, defined, cre) {
         'use strict';
 
+        var packadic = (window.packadic = window.packadic || {});
+
+
         var controls = {
+            texturePicker: function(editable, $container){
+                var self = this;
+                var $picker = cre();
+
+                return $picker;
+            },
             button: function(editable, $container){
                 return cre('a').appendTo($container)
                     .attr({

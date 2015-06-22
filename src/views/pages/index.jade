@@ -6,38 +6,33 @@ block header
 block content
     .row
         .col-md-3
-            +box.widget
-                .widget-icon.red
-                    i.fa.fa-list
-                .widget-content
-                    .title 102
-                    .comment 13
-                .clearfix
-        .col-md-3
-            +box.widget
-                .widget-icon.dark-yellow
-                    i.fa.fa-info
-                .widget-content
-                    .title 11
-                    .comment Messages
-                .clearfix
-        .col-md-3
-            +box.widget
-                .widget-icon.blue
+            +box.widget.widget-stat.blue
+                .bg-icon
                     i.fa.fa-users
-                .widget-content
-                    .title 44
-                    .comment Users
-                .clearfix
-
+                .details
+                    h3 102
+                    p Users
         .col-md-3
-            +box.widget
-                .widget-icon.blue-grey
+            +box.widget.widget-stat.blue-light
+                .bg-icon
+                    i.fa.fa-info
+                .details
+                    h3 11
+                    p Notifications
+        .col-md-3
+            +box.widget.widget-stat-alt.orange
+                .bg-icon
                     i.fa.fa-file
-                .widget-content
-                    .title 102
-                    .comment Files uploaded
-                .clearfix
+                .details
+                    h3 44
+                    p Documents
+        .col-md-3
+            +box.widget.widget-stat-alt.green
+                .bg-icon
+                    i.fa.fa-usd
+                .details
+                    h3 1354,22
+                    p Donated
 
 
     .row
@@ -71,10 +66,4 @@ block content
                                     a(href="#").btn.btn-xs.btn-danger
                                         i.fa.fa-remove
                                         |  Delete
-    .row
-        .col-md-4
-            | sdf
-        .col-md-4
-            | sdf
-        .col-md-4
-            | sdf
+

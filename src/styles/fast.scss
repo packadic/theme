@@ -9,6 +9,8 @@
 //@import "fast/tagit";
 @import "fast/panels";
 
+
+
 .settings-editor {
 
     position: fixed !important;
@@ -95,6 +97,16 @@
             }
         }
     }
+}
+
+
+
+.mmhover {
+    border: 2px solid #86ff3c !important;
+}
+
+.settings-editor.element-editor {
+    top: 120px;
 }
 .theme-styler {
 

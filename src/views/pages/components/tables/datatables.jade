@@ -19,26 +19,56 @@ block scripts-pre-boot
             var packadic = (window.packadic ? window.packadic : {});
 
             packadic.bindEventHandler('started', function(){
-                require(['jquery', 'datatable'], function($, datatable){
+                require(['jquery', 'theme/datatable'], function($, datatable){
 
                     var nColNumber = -1;
                     var datatableVars = datatable.getDefaultSSPVars({
                         "columnDefs": [
-                            { targets: [ ++nColNumber ], 'title': 'ID', 'name': 'id', 'data': 'id' },
-                            { targets: [ ++nColNumber ], 'title': 'Label', 'name': 'label', 'data': 'label' },
-                            { targets: [ ++nColNumber ], 'title': 'Slug', 'name': 'slug', 'data': 'slug'},
-                            { targets: [ ++nColNumber ], 'title': 'Field Type', 'name': 'field_type', 'data': 'field_type'},
-                            { targets: [ ++nColNumber ], 'title': 'Description', 'name': 'description', 'data': 'description'},
-                            { targets: [ ++nColNumber ], 'title': 'Enabled', 'name': 'enabled', 'data': 'enabled'}
+                            { targets: [ ++nColNumber ], 'title': 'ID', 'name': 'index', 'data': 'index' },
+                            { targets: [ ++nColNumber ], 'title': 'Label', 'name': 'email', 'data': 'email' },
+                            { targets: [ ++nColNumber ], 'title': 'Slug', 'name': 'phone', 'data': 'phone'},
+                            { targets: [ ++nColNumber ], 'title': 'Field Type', 'name': 'balance', 'data': 'balance'},
+                            { targets: [ ++nColNumber ], 'title': 'Description', 'name': 'company', 'data': 'company'},
+                            { targets: [ ++nColNumber ], 'title': 'Enabled', 'name': 'isActive', 'data': 'isActive'}
                         ],
                         "ajax": {
-                            "url"    : "http://la.radic.nl/admin/attributes"
-                        }
+                            "url"    : "/demo/datatables.json"
+                        },
+                        "processing": false,
+                        "serverSide": false
                     });
 
-                    datatable.create($('#demo-datatable'), null, datatableVars, function($el){
+                    datatable.create(datatableVars).then(function ($wrapper) {
+                        $('#demo-datatable').append($wrapper);
+                    });
+                    console.log(dt);
 
-                    })
+
+                    /*
+                     "range": [
+                     "tags": [
+                     ],
+                     "longitude": 118.842636,
+                     "latitude": 8.069443,
+                     "registered": "Sunday, May 4, 2014 12:26 AM",
+                     "about": "Officia ex do nisi esse ut irure reprehenderit mollit voluptate consectetur laborum eiusmod aliquip officia. Nisi proident sint esse amet in consectetur sunt fugiat tempor aliqua minim cupidatat enim. Non irure ad ex tempor commodo ex. Aliqua aute ullamco aliquip veniam tempor tempor occaecat magna anim ullamco esse ipsum occaecat. Sunt ea amet ut dolore ipsum commodo laboris esse anim ut occaecat ex consequat.\r\n",
+                     "address": "767 Wythe Place, Hatteras, Federated States Of Micronesia, 8475",
+                     "phone": "+1 (931) 437-2807",
+                     "email": "carver.sawyer@macronaut.net",
+                     "company": "MACRONAUT",
+                     "name": {
+                     "last": "Sawyer",
+                     "first": "Carver"
+                     },
+                     "eyeColor": "blue",
+                     "age": 24,
+                     "picture": "http://placehold.it/32x32",
+                     "balance": "$3,380.41",
+                     "isActive": false,
+                     "guid": "a4619adf-bf8e-4ff3-a91f-f7eec2d9ac11",
+                     "index": 0,
+                     "_id": "5587ded1b0fe79dd26812c43"
+                     */
                 });
             })
 

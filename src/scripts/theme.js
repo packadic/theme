@@ -543,7 +543,6 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         };
 
 
-        /** @deprecated todo: remove  */
         theme.box = function (title, icon, actions) {
             var deferred = Q.defer();
             actions = defined(actions) ? actions : false;
@@ -567,12 +566,12 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                     $box.$actions.append($box.$actions[id]);
                     return $box.$actions[id];
                 };
+                theme.$hidden.append($box);
                 deferred.resolve($box);
             });
             return deferred.promise;
         };
 
-        /** @deprecated todo: remove  */
         theme.button = function (name, size, classes, type, href) {
             type = def(type, 'a');
             size = def(size, 'xs');
@@ -592,7 +591,6 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             return $button;
         };
 
-        /** @deprecated todo: remove  */
         theme.table = function (cols, rows, classes) {
             var deferred = Q.defer();
             theme.getTemplate('table', function (template) {

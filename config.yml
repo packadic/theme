@@ -37,3 +37,11 @@ targets:
     nav:
       pre: ''
       ext: .html
+
+  ghpages:
+    dest: ghpages
+    type: dist
+    site: {}
+    nav:
+      pre: ''
+      ext: .html

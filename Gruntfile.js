@@ -165,11 +165,11 @@ var init = module.exports = function (grunts) {
             options: { compass: true, bundleExec: true, sourcemap: 'file' },
             dev    : {
                 //files: [{expand: true, cwd: 'src/styles', src: ['**/*.scss', '!stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
-                files: [{expand: true, cwd: 'src/styles', src: ['themes/theme-default.scss', 'stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
+                files: [{expand: true, cwd: 'src/styles', src: ['components/select2.scss', 'themes/theme-default.scss', 'stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             },
             dist   : {
-                options: { style: 'compressed' },
-                files: [{expand: true, cwd: 'src/styles', src: 'stylesheet.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
+                options: { style: 'compressed', sourcemap: 'none' },
+                files: [{expand: true, cwd: 'src/styles', src: ['components/select2.scss', 'themes/theme-default.scss', 'stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             },
             fast   : {
                 files: [{expand: true, cwd: 'src/styles', src: 'fast.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
@@ -324,27 +324,6 @@ var init = module.exports = function (grunts) {
                 options: {livereload: 35729},
                 files  : ['src/**/*']
             }
-        },
-        browserify      : {
-            dist: {
-                options: {},
-                files  : {
-                    'dev/tscripts/Packadic.js': ['src/tscripts/Packadic/**/*.js']
-                }
-            }
-        },
-        typescript      : {
-            base: {
-                src    : ['src/tscripts/**/*.ts'],
-                dest   : '.tmp',
-                options: {
-                    module     : 'commonjs', //or commonjs
-                    target     : 'es5', //or es3
-                    basePath   : 'src/tscripts',
-                    sourceMap  : true,
-                    declaration: true
-                }
-            }
         }
     };
 
@@ -380,17 +359,6 @@ var init = module.exports = function (grunts) {
                 fs.unlinkSync(delPath);
             }
         });
-    });
-
-    // Switch jade layout for all pages
-    grunt.registerTask('jade_layout', function (target) {
-        var layoutsDir = path.resolve(__dirname, 'src/views/layouts');
-        var targets = ['base', 'jekyll'];
-        if (targets.indexOf(target) === -1) {
-            grunt.fail.fatal('target not supported');
-        }
-        fs.outputFileSync(layoutsDir + '/default.jade', 'extends ' + target);
-        ok('Switched jade layout to ' + target);
     });
 
     grunt.registerTask('tasks', 'Shows a list of custom tasks and their description, filtering out all individual tasks', function () {

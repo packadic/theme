@@ -42,7 +42,6 @@
 
 
 
-
 @function sidebar-submenu-3-bg($bg-left, $bg-left-2, $bg-left-3, $bg-right, $bg-left-width: $sidebar-collapsed-width, $to: right){
     @return linear-gradient(to $to,
         $bg-left $bg-left-width,
