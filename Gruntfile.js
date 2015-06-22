@@ -237,6 +237,9 @@ var init = module.exports = function (grunts) {
                 'plugins/lodash.custom.js',
                 'plugins/require.js',
                 'vendor/mootools-1.5.1-custom.js'
+            ],
+            append_scripts: [
+                'config.js'
             ]
         },
         concurrent      : {

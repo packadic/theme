@@ -12,10 +12,9 @@
 
     packadic.fireEvent('booting'); // Fire "booting" event
 
-    require([ 'module', 'jquery',  'autoload', 'string', 'jade', 'tween-check', 'code-mirror', 'plugins/cookie' ],
-        function( module, $, autoload, _s, jade, tweenCheck){
+    require([ 'module', 'jquery',  'autoload', 'string', 'jade', 'code-mirror', 'plugins/cookie' ],
+        function( module, $, autoload, _s, jade){
 
-            tweenCheck.check();
 
             packadic.removePageLoader = function(){
                 $('body').removeClass('page-loading');

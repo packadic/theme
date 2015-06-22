@@ -23,7 +23,6 @@ target: dev
 
 targets:
   dev:
-    stubs: src/stubs
     dest: dev
     type: dev
     site: {}
@@ -32,7 +31,6 @@ targets:
       ext: .html
 
   dist:
-    stubs: src/stubs
     dest: dist
     type: dist
     site: {}

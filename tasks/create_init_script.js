@@ -46,14 +46,15 @@ module.exports = function( grunt ){
         grunt.log.writeln('trying to read from ' + path.join(cwd, dest, 'assets/scripts'));
 
         var prependScripts = grunt.config('init_script.prepend_scripts');
+        var appendScripts = grunt.config('init_script.append_scripts');
         var initScript = '';
         prependScripts.forEach(function(scriptPath){
             initScript += " \n ; " + readScript(scriptPath);
         });
-        //initScript += " \n ; " + readScript('plugins/lodash.custom.min.js');
-        //initScript += " \n ; " + readScript('plugins/require.js');
-        //initScript += " \n ; " + readScript('plugins/pace/pace.js');
         initScript += " \n ; " + initJsContent;
+        appendScripts.forEach(function(scriptPath){
+            initScript += " \n ; " + readScript(scriptPath);
+        });
 
         var destPath = destInitJs;
         grunt.log.writeln('trying to write to ' + destPath);
