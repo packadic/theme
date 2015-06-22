@@ -42,42 +42,49 @@
                     }
                 }
             },{
-                id: 'top', name: 'Top section', 'default': theme.get('section-top-option'), type: 'select', options: {
+                id: 'top', name: 'Top', 'default': theme.get('section-top'), type: 'select', options: {
                     choices: {
                         'hidden'  : { name: 'Hidden'},
                         'normal': { name: 'Normal'},
                         fixed    : { name: 'Fixed'}
                     },
                     onChange: function($el){
-                        theme.set('section-top-option', $el.val(), true, shouldSave())
+                        theme.set('section-top', $el.val(), true, shouldSave())
                     }
                 }
             }, {
-                id: 'page-boxed', name: 'Boxed page', 'default': false, type: 'switch', options: {
+                id: 'page-boxed', name: 'Boxed Layout', 'default': false, type: 'switch', options: {
                     isEnabled  : function(){ return theme.get('layout-option') === 'boxed' },
                     toggle : function(event, val){
                         theme.set('layout-option', val ? 'boxed' : 'fluid', true, shouldSave());
                     }
                 }
             }, {
-                id: 'header-fixed', name: 'Fixed header', 'default': true, type: 'switch', options: {
-                    isEnabled  : function(){ return theme.get('page-header-option') === 'fixed' },
+                id: 'footer-fixed', name: 'Fixed Bottom', 'default': true, type: 'switch', options: {
+                    isEnabled  : function(){ return theme.get('section-bottom') === 'fixed' },
                     toggle : function(event, val){
-                        theme.set('page-header-option', val ? 'fixed' : 'default', true, shouldSave());
+                        theme.set('section-bottom', val ? 'fixed' : 'default', true, shouldSave());
                     }
                 }
             }, {
-                id: 'footer-fixed', name: 'Fixed footer', 'default': true, type: 'switch', options: {
-                    isEnabled  : function(){ return theme.get('page-footer-option') === 'fixed' },
-                    toggle : function(event, val){
-                        theme.set('page-footer-option', val ? 'fixed' : 'default', true, shouldSave());
-                    }
-                }
-            }, {
-                id: 'sidebar-fixed', name: 'Fixed sidebar', 'default': false, type: 'switch', options: {
+                id: 'sidebar-fixed', name: 'Fixed Sidebar', 'default': false, type: 'switch', options: {
                     isEnabled  : function(){ return theme.get('sidebar-option') === 'fixed' },
                     toggle : function(event, val){
                         theme.set('sidebar-option', val ? 'fixed' : 'default', true, shouldSave());
+                    }
+                }
+            }, {
+                id: 'sidebar-style', name: 'Light Sidebar', 'default': false, type: 'switch', options: {
+                    isEnabled  : function(){ return theme.get('sidebar-option') === 'light' },
+                    toggle : function(event, val){
+                        theme.set('sidebar-style', val ? 'light' : 'default', true, shouldSave());
+                    }
+                }
+            }, {
+                id: 'sidebar-menu', name: 'Sidebar Hover', 'default': false, type: 'switch', options: {
+                    isEnabled  : function(){ return theme.get('sidebar-menu') === 'hover' },
+                    toggle : function(event, val){
+                        theme.set('sidebar-menu', val ? 'hover' : 'accordion', true, shouldSave());
                     }
                 }
             }, {

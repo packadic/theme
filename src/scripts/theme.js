@@ -5,42 +5,46 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
         var packadic = (window.packadic = window.packadic || {});
 
-        var defaultLayoutOptions = {
-            'layout-option'                        : 'fluid',
-            'sidebar-option'                       : 'default',
-            'page-header-option'                   : 'fixed',
-            'page-header-top-dropdown-style-option': 'light',
-            'sidebar-menu-option'                  : 'accordion',
-            'page-footer-option'                   : 'fixed',
-            'sidebar-pos-option'                   : 'left',
-            'sidebar-style-option'                 : 'default',
-            'section-top-option' : 'normal'
+        var defaultOptions = {
+            'layout-option' : 'fluid',
+            'sidebar-option': 'default',
+
+
+            'sidebar-menu'      : 'accordion',
+            'sidebar-pos-option': 'left',
+            'sidebar-style'     : 'default',
+
+            'section-bottom': 'fixed',
+            'section-top'   : 'normal'
         };
 
         var theme = {
-            $hidden: cre().addClass('hide'),
-            layout: storage.get('theme.layout', {
-                json: true,
-                default: defaultLayoutOptions
-            })
+            $hidden       : cre().addClass('hide'),
+            options       : storage.get('theme.options', {
+                json   : true,
+                default: defaultOptions
+            }),
+            defaultOptions: defaultOptions
         };
 
 
         eventer('theme', theme);
 
 
+        var $body = $('body'),
+            $sidebarNavMenu = $('.sidebar-nav-menu');
 
         theme.initLayout = function () {
-            theme.layout = storage.get('theme.layout', {
-                json: true,
-                default: defaultLayoutOptions
+            theme.options = storage.get('theme.options', {
+                json   : true,
+                default: defaultOptions
             });
 
 
             theme.applyLayout();
         };
 
-        var resetLayout = function(){
+        var resetLayout = function () {
             $("body").
                 removeClass("page-boxed").
                 removeClass("section-bottom-fixed").
@@ -51,13 +55,13 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
             $('section#top > header.top').removeClass("container");
 
-            if ($('section#page').parent(".container").size() === 1) {
+            if ( $('section#page').parent(".container").size() === 1 ) {
                 $('section#page').insertAfter('body > .clearfix');
             }
 
-            if ($('section#bottom > .container').size() === 1) {
+            if ( $('section#bottom > .container').size() === 1 ) {
                 $('section#bottom').html($('section#bottom > .container').html());
-            } else if ($('section#bottom').parent(".container").size() === 1) {
+            } else if ( $('section#bottom').parent(".container").size() === 1 ) {
                 $('section#bottom').insertAfter('section#page');
                 //$('.scroll-to-top').insertAfter('section#bottom');
             }
@@ -69,30 +73,30 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
         var lastSelectedLayout = '';
         theme.applyLayout = function () {
-
-            var opts = theme.layout;
+            var opts = theme.options;
             var layoutOption = opts['layout-option'];
             var sidebarOption = opts['sidebar-option'];
-            var headerOption = opts['page-header-option'];
-            var footerOption = opts['page-footer-option'];
-            var sidebarPosOption = opts['sidebar-pos-option'];
-            var sidebarStyleOption = opts['sidebar-style-option'];
-            var sidebarMenuOption = opts['sidebar-menu-option'];
-            var headerTopDropdownStyle = opts['page-header-top-dropdown-style-option'];
 
-            var sectionTopOption = opts['section-top-option'];
 
-            if (sidebarOption == "fixed") {
-                opts['section-top-option'] = "fixed";
+            var sidebarPosition = opts['sidebar-pos-option'];
+            var sidebarStyle = opts['sidebar-style'];
+            var sidebarMenu = opts['sidebar-menu'];
+
+
+            var sectionBottom = opts['section-bottom'];
+            var sectionTop = opts['section-top'];
+
+            if ( sidebarOption == "fixed" ) {
+                opts['section-top'] = "fixed";
                 opts['sidebar-option'] = "fixed";
                 sidebarOption = 'fixed';
-                sectionTopOption = 'fixed';
+                sectionTop = 'fixed';
             }
 
             resetLayout(); // reset layout to default state
 
-            if (layoutOption === "boxed") {
-                $("body").addClass("page-boxed");
+            if ( layoutOption === "boxed" ) {
+                $body.addClass("page-boxed");
 
                 // set header
                 $('section#top > header.top').addClass("container");
@@ -102,124 +106,123 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                 $('section#page').appendTo('body > .container');
 
                 // set footer
-                if (footerOption === 'fixed') {
+                if ( sectionBottom === 'fixed' ) {
                     $('section#bottom').html('<div class="container">' + $('section#bottom').html() + '</div>');
                 } else {
                     $('section#bottom').appendTo('body > .container');
                 }
             }
 
-            if (lastSelectedLayout != layoutOption) {
+            if ( lastSelectedLayout != layoutOption ) {
                 //layout changed, run responsive handler:
                 theme._trigger('resize');
             }
             lastSelectedLayout = layoutOption;
 
             //header
-            if (sectionTopOption === 'fixed') {
-                $("body").addClass("section-top-fixed");
+            if ( sectionTop === 'fixed' ) {
+                $body.addClass("section-top-fixed");
                 $("section#top").removeClass("navbar-static-top").addClass("navbar-fixed-top");
-            } else if(sectionTopOption === 'normal') {
-                $("body").removeClass("section-top-fixed");
+            } else if ( sectionTop === 'normal' ) {
+                $body.removeClass("section-top-fixed");
                 $("section#top").removeClass("navbar-fixed-top").addClass("navbar-static-top");
-            } else if(sectionTopOption === 'hidden'){
-                $('body').addClass('section-top-hidden');
+            } else if ( sectionTop === 'hidden' ) {
+                $body.addClass('section-top-hidden');
             }
 
             //sidebar
-            if ($('body').hasClass('page-full-width') === false) {
-                if (sidebarOption === 'fixed') {
-                    $("body").addClass("sidebar-nav-fixed");
-                    $("sidebar-nav-menu").addClass("sidebar-nav-menu-fixed");
-                    $("sidebar-nav-menu").removeClass("sidebar-nav-menu-default");
+            if ( $body.hasClass('page-full-width') === false ) {
+                if ( sidebarOption === 'fixed' ) {
+                    $body.addClass("sidebar-nav-fixed");
+                    $sidebarNavMenu.addClass("sidebar-nav-menu-fixed")
+                        .removeClass("sidebar-nav-menu-default");
 
-                    require(['theme/sidebar'], function(sidebar) {
+                    require(['theme/sidebar'], function (sidebar) {
                         sidebar.handleFixedHover();
                     });
                     //Layout.initFixedSidebarHoverEffect();
                 } else {
-                    $("body").removeClass("sidebar-nav-fixed");
-                    $("sidebar-nav-menu").addClass("sidebar-nav-menu-default");
-                    $("sidebar-nav-menu").removeClass("sidebar-nav-menu-fixed");
-                    $('.sidebar-nav-menu').unbind('mouseenter').unbind('mouseleave');
+                    $body.removeClass("sidebar-nav-fixed");
+                    $sidebarNavMenu.addClass("sidebar-nav-menu-default")
+                        .removeClass("sidebar-nav-menu-fixed")
+                        .unbind('mouseenter')
+                        .unbind('mouseleave');
                 }
-            }
-
-            // top dropdown style
-            if (headerTopDropdownStyle === 'dark') {
-                $(".top-menu > .navbar-nav > li.dropdown").addClass("dropdown-dark");
-            } else {
-                $(".top-menu > .navbar-nav > li.dropdown").removeClass("dropdown-dark");
             }
 
             //footer
-            if (footerOption === 'fixed') {
-                $("body").addClass("section-bottom-fixed");
+            if ( sectionBottom === 'fixed' ) {
+                $body.addClass("section-bottom-fixed");
             } else {
-                $("body").removeClass("section-bottom-fixed");
+                $body.removeClass("section-bottom-fixed");
             }
 
             //sidebar style
-            if (sidebarStyleOption === 'light') {
-                $(".sidebar-nav-menu").addClass("sidebar-nav-menu-light");
+            if ( sidebarStyle === 'light' ) {
+                $sidebarNavMenu.addClass("sidebar-nav-menu-light");
             } else {
-                $(".sidebar-nav-menu").removeClass("sidebar-nav-menu-light");
+                $sidebarNavMenu.removeClass("sidebar-nav-menu-light");
             }
 
             //sidebar menu
-            if (sidebarMenuOption === 'hover') {
-                if (sidebarOption == 'fixed') {
-                    opts['sidebar-menu-option'] = "accordion";
+            if ( sidebarMenu === 'hover' ) {
+                if ( sidebarOption == 'fixed' ) {
+                    opts['sidebar-menu'] = "accordion";
                     alert("Hover Sidebar Menu is not compatible with Fixed Sidebar Mode. Select Default Sidebar Mode Instead.");
                 } else {
-                    $(".sidebar-nav-menu").addClass("sidebar-nav-menu-hover-submenu");
+                    $sidebarNavMenu.addClass("sidebar-nav-menu-hover-submenu");
                 }
             } else {
-                $(".sidebar-nav-menu").removeClass("sidebar-nav-menu-hover-submenu");
+                $sidebarNavMenu.removeClass("sidebar-nav-menu-hover-submenu");
             }
 
-            if (sidebarPosOption === 'right') {
-                $("body").addClass("sidebar-nav-reversed");
+            if ( sidebarPosition === 'right' ) {
+                $body.addClass("sidebar-nav-reversed");
                 $('#frontend-link').tooltip('destroy').tooltip({
                     placement: 'left'
                 });
             } else {
-                $("body").removeClass("sidebar-nav-reversed");
+                $body.removeClass("sidebar-nav-reversed");
                 $('#frontend-link').tooltip('destroy').tooltip({
                     placement: 'right'
                 });
             }
 
-            require(['theme/sidebar'], function(sidebar){
+            require(['theme/sidebar'], function (sidebar) {
                 sidebar.handleWithContent(); // fix content height
                 sidebar.handleFixed(); // reinitialize fixed sidebar
             });
         };
 
-        theme.get = function(opt){
-            if(!defined(theme.layout[opt])){
+
+        theme.get = function (opt) {
+            if ( ! defined(theme.options[opt]) ) {
                 console.error('theme.get failed on ', opt);
                 return;
             }
-            return theme.layout[opt];
+            return theme.options[opt];
         };
-        theme.set = function(opt, value, refresh, save){
-            if(!defined(theme.layout[opt]) || !defined(value)) return;
+
+
+        theme.set = function (opt, value, refresh, save) {
+            if ( ! defined(theme.options[opt]) || ! defined(value) ) return;
             refresh = defined(refresh) ? refresh : true;
-            save = defined(save) ? save :  true;
+            save = defined(save) ? save : true;
             console.log('doing ', opt, ' with:', value, ' refresh:', refresh, 'save', save);
-            theme.layout[opt] = value;
-            if(save) storage.set('theme.layout', theme.layout, { json: true } );
-            if(refresh) theme.applyLayout();
+            theme.options[opt] = value;
+            if ( save ) storage.set('theme.options', theme.options, {json: true});
+            if ( refresh ) theme.applyLayout();
         };
-        theme.save = function(){
-            storage.set('theme.layout', theme.layout, {json:true});
+
+        theme.save = function () {
+            storage.set('theme.options', theme.options, {json: true});
         };
-        theme.reset = function(save){
-            if(!defined(save) || save === true) {
-                storage.del('theme.layout');
+
+        theme.reset = function (save) {
+            if ( ! defined(save) || save === true ) {
+                storage.del('theme.options');
             }
-            theme.layout = defaultLayoutOptions;
+            theme.options = defaultOptions;
             theme.applyLayout();
         };
 
@@ -229,7 +232,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             return packadic.config.debug;
         };
 
-        theme.hasSidebar = function(){
+        theme.hasSidebar = function () {
             return $('nav.sidebar-nav').length > 0;
         };
 
@@ -244,15 +247,15 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             var elm = document.createElement('div');
             propertyName = propertyName.toLowerCase();
 
-            if (elm.style[propertyName] != undefined) {
+            if ( elm.style[propertyName] != undefined ) {
                 return true;
             }
 
             var propertyNameCapital = propertyName.charAt(0).toUpperCase() + propertyName.substr(1),
                 domPrefixes = 'Webkit Moz ms O'.split(' ');
 
-            for (var i = 0; i < domPrefixes.length; i++) {
-                if (elm.style[domPrefixes[i] + propertyNameCapital] != undefined) {
+            for (var i = 0; i < domPrefixes.length; i ++) {
+                if ( elm.style[domPrefixes[i] + propertyNameCapital] != undefined ) {
                     return true;
                 }
             }
@@ -276,7 +279,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         theme.getViewPort = function () {
             var e = window,
                 a = 'inner';
-            if (!('innerWidth' in window)) {
+            if ( ! ('innerWidth' in window) ) {
                 a = 'client';
                 e = document.documentElement || document.body;
             }
@@ -297,12 +300,12 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         };
 
         theme.getRandomId = function (length) {
-            if (!_.isNumber(length)) {
+            if ( ! _.isNumber(length) ) {
                 length = 15;
             }
             var text = "";
             var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for (var i = 0; i < length; i++) {
+            for (var i = 0; i < length; i ++) {
                 text += possible.charAt(Math.floor(Math.random() * possible.length));
             }
             return text;
@@ -311,8 +314,6 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         theme.getBreakpoint = function (which) {
             return parseInt(packadic.config.scss.breakpoints['screen-' + which + '-min'].replace('px', ''));
         };
-
-
 
 
 
@@ -353,16 +354,16 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             theme._initResizeEvent();
         };
 
-        theme.initBoxes = function(){
+        theme.initBoxes = function () {
             var $boxes = $('body').find('.box');
 
-            $boxes.find('section.scrollable').each(function(){
-                theme.initSlimScroll($(this), { alwaysVisible: true });
+            $boxes.find('section.scrollable').each(function () {
+                theme.initSlimScroll($(this), {alwaysVisible: true});
             });
 
-            var ensureControlContainer = function($boxEl){
+            var ensureControlContainer = function ($boxEl) {
                 var $controls = $boxEl.children('header').first().find('.controls');
-                if($controls.length == 0){
+                if ( $controls.length == 0 ) {
                     $controls = cre().addClass('controls');
                     $boxEl.children('header').first().append($controls)
                 }
@@ -370,16 +371,16 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             };
 
 
-            $boxes.filter('.box-closable').each(function(){
+            $boxes.filter('.box-closable').each(function () {
                 var $controls = ensureControlContainer($(this));
-                if($controls.find('a[data-control="closable"]').length == 0){
+                if ( $controls.find('a[data-control="closable"]').length == 0 ) {
                     var $i = cre('i').addClass('fa fa-chevron-down');
                     var $a = cre('a')
                         .attr('data-control', 'closable')
                         .append($i)
-                        .attr('href', '#').on('click', function(){
+                        .attr('href', '#').on('click', function () {
                             var $sec = $(this).closest('.box').children('section').first();
-                            if($i.hasClass('fa-chevron-down')){
+                            if ( $i.hasClass('fa-chevron-down') ) {
                                 $sec.slideUp();
                                 $i.removeClass('fa-chevron-down').addClass('fa-chevron-up');
                             } else {
@@ -391,17 +392,17 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                 }
             });
 
-            $boxes.filter('.box-draggable').each(function(){
+            $boxes.filter('.box-draggable').each(function () {
 
             })
             // draggable boxes init
             var $boxesDraggable = $('body').find('.box-draggable');
-            if($boxesDraggable.length > 0){
-                require(['jquery-ui/draggable'], function(){
-                    $boxesDraggable.each(function(){
+            if ( $boxesDraggable.length > 0 ) {
+                require(['jquery-ui/draggable'], function () {
+                    $boxesDraggable.each(function () {
 
                         var $controls = ensureControlContainer($(this));
-                        if($controls.find('a[data-control="draggable"]').length == 0){
+                        if ( $controls.find('a[data-control="draggable"]').length == 0 ) {
                             var $i = cre('i').addClass('fa fa-arrows-alt');
                             var $a = cre('a')
                                 .attr('data-control', 'draggable')
@@ -409,7 +410,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                             $controls.append($a);
                         }
 
-                        $(this).draggable({ handle: $controls.find('a[data-control="draggable"]') });
+                        $(this).draggable({handle: $controls.find('a[data-control="draggable"]')});
                     });
                 });
             }
@@ -419,13 +420,13 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         theme.initSlimScroll = function (el, opts) {
             require(['plugins/jquery-slimscroll'], function () {
                 $(el).each(function () {
-                    if ($(this).attr("data-initialized")) {
+                    if ( $(this).attr("data-initialized") ) {
                         return; // exit
                     }
 
                     var height = $(this).attr("data-height") ? $(this).attr("data-height") : $(this).css('height');
 
-                    if (!defined(opts)) {
+                    if ( ! defined(opts) ) {
                         opts = {};
                     }
 
@@ -449,26 +450,26 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
         theme.destroySlimScroll = function (el) {
             $(el).each(function () {
-                if ($(this).attr("data-initialized") === "1") { // destroy existing instance before updating the height
+                if ( $(this).attr("data-initialized") === "1" ) { // destroy existing instance before updating the height
                     $(this).removeAttr("data-initialized");
                     $(this).removeAttr("style");
 
                     var attrList = {};
 
                     // store the custom attribures so later we will reassign.
-                    if ($(this).attr("data-handle-color")) {
+                    if ( $(this).attr("data-handle-color") ) {
                         attrList["data-handle-color"] = $(this).attr("data-handle-color");
                     }
-                    if ($(this).attr("data-wrapper-class")) {
+                    if ( $(this).attr("data-wrapper-class") ) {
                         attrList["data-wrapper-class"] = $(this).attr("data-wrapper-class");
                     }
-                    if ($(this).attr("data-rail-color")) {
+                    if ( $(this).attr("data-rail-color") ) {
                         attrList["data-rail-color"] = $(this).attr("data-rail-color");
                     }
-                    if ($(this).attr("data-always-visible")) {
+                    if ( $(this).attr("data-always-visible") ) {
                         attrList["data-always-visible"] = $(this).attr("data-always-visible");
                     }
-                    if ($(this).attr("data-rail-visible")) {
+                    if ( $(this).attr("data-rail-visible") ) {
                         attrList["data-rail-visible"] = $(this).attr("data-rail-visible");
                     }
 
@@ -490,7 +491,6 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
 
 
-
         /** @deprecated todo: remove  */
         theme.scrollable = function ($el) {
             require(['plugins/mscrollbar'], function () {
@@ -498,7 +498,6 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                 $el.addClass('mCustomScrollbar').mCustomScrollbar();
             });
         };
-
 
 
 
@@ -530,7 +529,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                     .addClass('close')
                     .html('<span aria-hidden="true">×</span>'));
 
-            if (title !== false) {
+            if ( title !== false ) {
                 $alert.append(cre('strong').text(title));
             }
 
@@ -585,9 +584,9 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                 .addClass('btn btn-' + size)
                 .addClass(classes);
 
-            if (type === 'a') {
+            if ( type === 'a' ) {
                 $button.attr('href', href).text(name);
-            } else if (type === 'button') {
+            } else if ( type === 'button' ) {
                 $button.val(name);
             }
             return $button;
@@ -608,10 +607,6 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             });
             return deferred.promise;
         };
-
-
-
-
 
 
 
@@ -644,10 +639,9 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
 
 
-        if(theme.isDebug()){ // usefull for easy browser console access
+        if ( theme.isDebug() ) { // usefull for easy browser console access
             packadic.theme = theme;
         }
-
 
 
 

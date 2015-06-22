@@ -18,7 +18,7 @@ module.exports = function( grunt ){
         var cwd = process.cwd();
         var ok = grunt.log.ok;
         var options = this.options({
-            layout: 'page'
+            options: 'page'
         });
 
 
