@@ -145,6 +145,7 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
                 return;
             }
 
+            $body.addClass('sidebar-nav-closing');
             sidebar.openCloseInProgress = true;
             var $title = $sidebarNavMenu.find('li a span.title, li a span.arrow');
 
@@ -193,7 +194,9 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
                 $sidebarNav.removeAttr('style');
                 $title.removeAttr('style');
 
-                $body.addClass("sidebar-nav-closed");
+                $body
+                    .addClass("sidebar-nav-closed")
+                    .removeClass('sidebar-nav-closing');
                 $sidebarNavMenu.addClass("sidebar-nav-menu-closed");
 
                 if ( sidebar.isFixed() ) {

@@ -57,7 +57,7 @@
     @return linear-gradient(to $to, $bg-left $bg-left-width, $bg-right $bg-left-width) repeat-x;
 }
 
-@function sidebar-submenu-2-bg($bg-left, $bg-left-2, $bg-right, $bg-left-width: $sidebar-collapsed-width, $to: right){
+@function sidebar-submenu-bg-hover($bg-left, $bg-left-2, $bg-right, $bg-left-width: $sidebar-collapsed-width, $to: right){
     @return linear-gradient(to $to,
         $bg-left $bg-left-width - 10px,
         $bg-left-2 $bg-left-width - 10px,
@@ -67,7 +67,7 @@
 
 
 
-@function sidebar-submenu-3-bg($bg-left, $bg-left-2, $bg-left-3, $bg-right, $bg-left-width: $sidebar-collapsed-width, $to: right){
+@function sidebar-submenu-bg-active($bg-left, $bg-left-2, $bg-left-3, $bg-right, $bg-left-width: $sidebar-collapsed-width, $to: right){
     @return linear-gradient(to $to,
         $bg-left $bg-left-width,
         $bg-left-2 $bg-left-width - 10px,

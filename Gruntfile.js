@@ -288,10 +288,11 @@ var init = module.exports = function (grunts) {
                 files: ['src/styles/**'], // '!src/styles/fast/**', '!src/styles/fast.scss', '!src/styles/nav.scss', '!src/styles/components/_header-dropdown.scss'],
                 tasks: [ 'sassc:dev'] //'sass:<%= target.name %>']
             },
-            style_json: {
-                files: ['src/styles/json.scss', 'src/styles/variables/**'],
-                tasks: ['sass:json']
-            },/*
+            //style_json: {
+            //    files: ['src/styles/json.scss', 'src/styles/variables/**'],
+            //    tasks: ['sass:json']
+            //},
+            /*
             style_fast   : {
                 files: ['src/styles/fast/**', 'src/styles/fast.scss', 'src/styles/components/_header-dropdown.scss'],
                 tasks: ['sass:fast']

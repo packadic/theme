@@ -27,32 +27,26 @@ $box-header-content-bg-nr:                                              2 !defau
 $box-header-content-bg-light:                                           false !default;
 
 
-
 // section#top
-$section-top-bg:                                                        content-bg(5, false) !default;
-$section-top-bg-color:                                                  #444 !default;
+$section-top-bg:                                                        linear-gradient(to bottom, #414141 0%, #333 100%) !default; //content-bg(5, false) !default;
+$section-top-bg-color:                                                  #333 !default;
 
-// Header search
-//$header-bg-color:                                                  		#1f1f1f;
-$header-bg-color:                                                  		#1f1f1f !default;
+$section-top-sidebar-menu-toggler-bg:                                   #222 !default;
+$section-top-sidebar-menu-toggler-bg-hover:                             #333 !default;
 
-// Mega Menu
-$header-hor-menu-bg-color:                                              $header-bg-color;
-$header-hor-menu-fixed-border-box:										0px 1px 10px 0px rgba($header-hor-menu-bg-color, 0.2);
+$section-top-search-bg-color:                                        	transparent !default;
+$section-top-search-bg-hover-color:                                  	lighten($section-top-bg-color, 2%);
+$section-top-search-bg-color-on-open:                                   $section-top-search-bg-hover-color !default;
+$section-top-search-font-color:                                      	#999999 !default;
+$section-top-search-placeholder-font-color:                          	darken($section-top-search-font-color, 1%) !default;
 
-$header-hor-menu-default-link-bg-color-on-hover:                		lighten($header-bg-color, 10%);
-$header-hor-menu-default-link-bg-color-on-active:               		$brand-main-color;
 
-// Header search
-$header-search-bg-color:                                        		#222 !default;
-$header-search-bg-hover-color:                                  		$header-hor-menu-default-link-bg-color-on-hover !default;
-$header-search-bg-color-on-open:                                 		$header-search-bg-hover-color !default;
-$header-search-font-color:                                      		#999999 !default;
-$header-search-placeholder-font-color:                          		darken($header-search-font-color, 1%) !default;
+// Header menu
+$header-menu-nav-border-left-color:                                     #4A4A4A !default;
+$header-menu-nav-border-right-color:                                    #292929 !default;
 
-// Top Menu Notifications
-$header-menu-nav-dropdown-bg-color: 								    lighten($header-hor-menu-bg-color, 10%);
-$header-menu-nav-dropdown-header-bg-color:							    lighten($header-hor-menu-bg-color, 2%);
+$header-menu-nav-dropdown-bg-color: 								    $section-top-bg-color !default;
+$header-menu-nav-dropdown-header-bg-color:							    lighten($section-top-bg-color, 2%);
 $header-menu-nav-dropdown-header-font-color:			    			lighten($header-menu-nav-dropdown-header-bg-color, 50%);
 
 $header-menu-nav-dropdown-item-font-color:				    			#888888;
@@ -62,109 +56,75 @@ $header-menu-nav-dropdown-item-bg-color-on-hover:		    			lighten($header-menu-n
 
 $header-menu-nav-dropdown-default-menu-divider:			        		$header-menu-nav-dropdown-item-border-color;
 $header-menu-nav-dropdown-notification-time-bg-color:	    			darken($header-menu-nav-dropdown-bg-color, 5%);
-//end: Top Menu Extended Dropdowns
+
 
 
 // Sidebar menu
-$sidebar-menu-devider-border-color:                             		darken(#4d4d4d, 2%) !default;
+$sidebar-menu-divider-border-color:                             		darken(#4d4d4d, 2%) !default;
 
-$sidebar-menu-top-level-bg-left:                                        #222222 !default;
-$sidebar-menu-top-level-bg-right:                                       #333333 !default;
-$sidebar-menu-top-level-bg-left-hover:                                  $brand-main-color !default;
-$sidebar-menu-top-level-bg-right-hover:                                 #222222 !default;
+// Sidebar Menu : 1st Level
+$sidebar-menu-link-bg:                                                  linear-gradient(to right, #222 45px, #333 45px) repeat-x !default;
+$sidebar-menu-link-bg-hover:                                            linear-gradient(to right, $brand-main-color 45px, #333 45px) repeat-x !default;
+$sidebar-menu-link-bg-active:                                           linear-gradient(to right, $brand-main-color 45px, #333 45px) repeat-x !default;
 
+$sidebar-menu-link-color:                                               #d9d9d9 !default;
+$sidebar-menu-link-color-hover:                                         #d9d9d9 !default;
+$sidebar-menu-link-color-active:                                        #d9d9d9 !default;
+
+$sidebar-menu-icon-color:                                               #bdbdbd !default;
+$sidebar-menu-icon-color-hover:                                         #d9d9d9 !default;
+$sidebar-menu-icon-color-active:                                        #d9d9d9 !default;
+
+$sidebar-menu-arrow-color:                                              #bdbdbd !default;
+$sidebar-menu-arrow-color-hover:                                        #bdbdbd !default;
+$sidebar-menu-arrow-color-active:                                       #bdbdbd !default;
+
+// Sidebar Menu: Submenus
 $sidebar-menu-link-bg-color-on-hover:                           		#303030 !default;
 $sidebar-menu-link-bg-color-on-active:                          		$brand-main-color;
 
 
-$sidebar-menu-link-font-color:                                  		#d9d9d9 !default;
-$sidebar-menu-link-font-color-on-hover:                         		$sidebar-menu-link-font-color !default;
-$sidebar-menu-link-font-color-on-active:                        		#ffffff !default;
+$sidebar-sub-menu-divider-border-color: #333333 !default;
 
-$sidebar-menu-link-icon-font-color:                             		#888888 !default;
-$sidebar-menu-link-icon-font-color-on-active:                   		$sidebar-menu-link-font-color-on-active !default;
-$sidebar-menu-link-icon-font-color-on-hover:                            $sidebar-menu-link-icon-font-color !default;
-
-$sidebar-menu-arrow-color:                                      		#777777 !default;
-$sidebar-menu-arrow-color-on-active:                            		$sidebar-menu-top-level-bg-left-hover;
-$sidebar-menu-arrow-color-on-hover:                                     $sidebar-menu-link-icon-font-color-on-hover !default;
+// sidebar-hover-sub-menu and sidebar-closed
+$sidebar-sub-menu-box-shadow-color:                                     #303030 !default;
 
 
+$sidebar-sub-menu-bg:        sidebar-submenu-bg(#333333, $bg-color, $sidebar-collapsed-width, right) !default;
+$sidebar-sub-menu-bg-hover:  sidebar-submenu-bg-hover(#333333, #242424, lighten($bg-color, 4%), $sidebar-collapsed-width, right ) !default;
+$sidebar-sub-menu-bg-active: sidebar-submenu-bg-active($brand-main-color, #242424, #242424, lighten($bg-color, 4%), $sidebar-collapsed-width,  right ) !default;
 
-// sidebar sub menu
-$sidebar-menu-sub-menu-box-shadow-color:                                $sidebar-menu-link-bg-color-on-hover !default;
-$sidebar-menu-sub-menu-link-font-color:                         		#bdbdbd !default;
-$sidebar-menu-sub-menu-link-icon-font-color:                    		$sidebar-menu-arrow-color !default;
-$sidebar-menu-sub-menu-link-bg-color-on-hover:                  		lighten($bg-color, 4%) !default;
-$sidebar-menu-sub-menu-link-icon-font-color-on-hover:                   $sidebar-menu-link-icon-font-color-on-hover !default;
+$sidebar-sub-menu-link-color:                         		            #bdbdbd !default;
+$sidebar-sub-menu-link-color-hover:                         		    #bdbdbd !default;
+$sidebar-sub-menu-link-color-active:                         		    #bdbdbd !default;
 
+$sidebar-sub-menu-icon-color:                    		                $sidebar-menu-icon-color !default;
+$sidebar-sub-menu-icon-color-hover:                                     $sidebar-menu-icon-color-hover !default;
+$sidebar-sub-menu-icon-color-active:                                    $sidebar-menu-icon-color-active !default;
 
-//$sidebar-menu-sub-menu-to: right;
-//$sidebar-menu-sub-menu-to-width: $sidebar-collapsed-width;
-$sidebar-menu-sub-menu-bg:                                              sidebar-submenu-bg(#333333, $bg-color, $sidebar-collapsed-width, right) !default;
-//$sidebar-menu-sub-menu-bg-hover: #333;
-$sidebar-menu-sub-menu-bg-hover:   sidebar-submenu-2-bg(
-        #333333,
-        #242424,
-        $sidebar-menu-sub-menu-link-bg-color-on-hover,
-        $sidebar-collapsed-width, right ) !default;
-
-//@include sidebar-nav-menu-bg($sidebar-menu-link-bg-color-on-active, $sidebar-menu-sub-menu-link-bg-color-on-hover);
-$sidebar-menu-sub-menu-bg-active:   sidebar-submenu-3-bg(
-
-        $brand-main-color,
-        #242424,
-        #242424,
-        $sidebar-menu-sub-menu-link-bg-color-on-hover,
-                                    $sidebar-collapsed-width,  right ) !default;
+$sidebar-sub-menu-arrow-color:                                          #bdbdbd !default;
+$sidebar-sub-menu-arrow-color-hover:                                    #bdbdbd !default;
+$sidebar-sub-menu-arrow-color-active:                                   #bdbdbd !default;
 
 
-
-$sidebar-menu-sub-menu-divider-border-color: #333333 !default;
-
-$section-top-sidebar-menu-toggler-bg:                                   $sidebar-menu-top-level-bg-left !default;
-$section-top-sidebar-menu-toggler-bg-hover:                             $sidebar-menu-top-level-bg-right !default;
 
 // Sidebar with HOVER ENABLED instead of ACCORDION
-$sidebar-menu-hover-sub-menu-bg:                                sidebar-submenu-bg(#333333, $bg-color, $sidebar-collapsed-width, right) !default;
-$sidebar-menu-hover-sub-menu-bg-hover: linear-gradient(to right,
-    #333 0px,
-    #242424 0px,
-    #242424 45px,
-    $sidebar-menu-sub-menu-link-bg-color-on-hover 45px) repeat-x !default;
+$sidebar-hover-sub-menu-bg:        $sidebar-sub-menu-bg !default;
+$sidebar-hover-sub-menu-bg-hover:  linear-gradient(to right, #333 0px, #242424 0px, #242424 45px, lighten($bg-color, 4%) 45px) repeat-x !default;
 
-
-
-$sidebar-menu-hover-sub-menu-bg-active: $sidebar-menu-hover-sub-menu-bg-hover;
-
-$sidebar-menu-hover-sub-menu-bg-color:									lighten($sidebar-menu-link-bg-color-on-hover, 4%) !default;
+$sidebar-hover-sub-menu-bg-active: $sidebar-hover-sub-menu-bg-hover;
+$sidebar-hover-sub-menu-bg-color:									lighten($sidebar-menu-link-bg-color-on-hover, 4%) !default;
 
 // Sidebar for mobile
 $mobile-sidebar-menu-bg-color:                           				darken($bg-color, 7%) !default;
 $mobile-sidebar-menu-link-bg-color-on-hover:             				darken($bg-color, 4%) !default;
 
-// Light sidebar menu
-$light-sidebar-menu-link-border-color:                                  $brand-main-color !default;
-$light-sidebar-menu-link-bg-color-on-hover:                             lighten($bg-color, 2%) !default;
-$light-sidebar-menu-link-bg-color-on-active:                            lighten($bg-color, 4%) !default;
-$light-sidebar-menu-link-font-color-on-active:                          #f1f1f1 !default;
-$light-sidebar-menu-link-icon-color-on-active:                          #eeeeee !default;
-$light-sidebar-menu-link-arrow-color-on-active:                         #eeeeee !default;
-
-$light-sidebar-menu-sub-menu-bg-color:                                  lighten($bg-color, 2%) !default;
-$light-sidebar-menu-sub-menu-link-bg-color-on-hover:					lighten($bg-color, 4%) !default;
-
-$mobile-light-sidebar-menu-sub-menu-bg-color:                           $mobile-sidebar-menu-bg-color !default;
-$mobile-light-sidebar-menu-link-bg-color-on-hover:             			lighten($mobile-sidebar-menu-bg-color, 3%) !default;
-$mobile-light-sidebar-menu-link-bg-color-on-active:             		lighten($mobile-sidebar-menu-bg-color, 3%) !default;
-$mobile-light-sidebar-menu-sub-menu-link-bg-color-on-hover:             lighten($mobile-sidebar-menu-bg-color, 3%) !default;
-
 // Sidebar search
 $sidebar-search-bg-color:                                               darken($bg-color, 5%) !default;
-$sidebar-search-bottom-border-color:                            		lighten($sidebar-menu-devider-border-color, 0%) !default;
-$sidebar-search-full-border-color:                              		lighten($sidebar-menu-devider-border-color, 0%) !default;
-$sidebar-search-input-font-color:                               		lighten($sidebar-menu-devider-border-color, 8%) !default;
-$sidebar-search-input-placeholder-font-color:                   		lighten($sidebar-menu-devider-border-color, 8%) !default;
+$sidebar-search-bottom-border-color:                            		lighten($sidebar-menu-divider-border-color, 0%) !default;
+$sidebar-search-full-border-color:                              		lighten($sidebar-menu-divider-border-color, 0%) !default;
+$sidebar-search-input-font-color:                               		lighten($sidebar-menu-divider-border-color, 8%) !default;
+$sidebar-search-input-placeholder-font-color:                   		lighten($sidebar-menu-divider-border-color, 8%) !default;
 
 // Footer
 $footer-default-font-color:                                     		lighten($bg-color, 40%) !default;
@@ -174,8 +134,8 @@ $footer-fixed-bg-color: 												darken($bg-color, 7%) !default;
 
 $section-bottom-bg-color: rgb(57, 59, 99) !default;
 
-$section-bottom-bg:                                                     content-bg(5, false) !default;
+$section-bottom-bg:                                                     #292929 !default; //content-bg(5, false) !default;
 //Boxed layout
-$for-min-992px-page-boxed-page-container-bg-color:              		$sidebar-menu-devider-border-color !default;
+$for-min-992px-page-boxed-page-container-bg-color: $sidebar-menu-divider-border-color !default;
 $for-min-992px-page-boxed-bg-color:                             		darken($bg-color, 3%) !default;
-$for-min-992px-page-boxed-sidebar-fixed-border-color:           		$sidebar-menu-devider-border-color !default;
+$for-min-992px-page-boxed-sidebar-fixed-border-color: $sidebar-menu-divider-border-color !default;
