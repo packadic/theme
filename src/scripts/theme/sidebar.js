@@ -15,6 +15,12 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
 
 
         var oldMargin = $('main').css('margin');
+
+
+        /**
+         * Sidebar functions
+         * @exports theme/sidebar
+         */
         var sidebar = {
             options: {
                 hidden           : true,
@@ -126,18 +132,28 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
             });
         };
 
+        /**
+         * Checks if the sidebar is fixed
+         * @returns {boolean}
+         */
         sidebar.isFixed = function () {
             return $body.hasClass('sidebar-nav-fixed')
         };
 
-
-
+        /**
+         * Checks if the sidebar is closed
+         * @returns {boolean}
+         */
         sidebar.isClosed = function () {
             return $body.hasClass('sidebar-nav-closed')
         };
 
         sidebar.openCloseInProgress = false;
 
+        /**
+         * Closes/retracts the sidebar (does not hide it)
+         * @param callback
+         */
         sidebar.close = function (callback) {
             var $main = $('main');
 
@@ -214,6 +230,10 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
             })
         };
 
+        /**
+         * Expand/opens the sidebar (if it was closed/retracted)
+         * @param callback
+         */
         sidebar.open = function (callback) {
             var $main = $('main');
             if ( sidebar.openCloseInProgress || ! sidebar.isClosed() ) {
@@ -281,6 +301,9 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
             })
         };
 
+        /**
+         * Hides the sidebar
+         */
         sidebar.hide = function () {
 
             if ( sidebar.hidden ) {
@@ -298,6 +321,9 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
             //$('main').css('margin-left', '0px');
         };
 
+        /**
+         * Shows the sidebar(if it were hidden)
+         */
         sidebar.show = function () {
             sidebar.hidden = false;
             $body.removeClass('sidebar-nav-closed')
@@ -467,6 +493,10 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
             }
         };
 
+        /**
+         * Initializes the sidebar
+         * @param {Object} opts Options
+         */
         sidebar.init = function (opts) {
             if ( ! defined(opts) ) {
                 opts = {};

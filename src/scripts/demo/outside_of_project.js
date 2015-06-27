@@ -10,7 +10,7 @@
         console.warn('(' + packadic.getElapsedTime() + 's) PRE-BOOT');
     }).onBoot(function () {
         console.warn('(' + packadic.getElapsedTime() + 's) BOOTING');
-    }).onBooted(['jquery', 'theme', 'theme/sidebar', 'autoload'], function ($, theme, sidebar, autoload) {
+    }).onBooted(['jquery', 'theme', 'theme/sidebar', 'autoload', 'jq/box'], function ($, theme, sidebar, autoload) {
         console.warn('(' + packadic.getElapsedTime() + 's) BOOTED');
         theme.init();
         sidebar.init({hidden: false, items: packadic.site.data.navigation.sidebar});
@@ -21,7 +21,6 @@
                     packadic.removePageLoader();
                 }
             });
-
         });
     }).onStart(function () {
         console.warn('(' + packadic.getElapsedTime() + 's) STARTING');
@@ -29,8 +28,11 @@
         console.warn('(' + packadic.getElapsedTime() + 's) STARTED');
     });
 
-    packadic.onStart(['jquery', 'theme', 'fn/cre', 'flot', 'flot.pie'], function ($, theme, cre) {
-
+    packadic.onStart(['jquery', 'jq/box'], function ($, theme, cre) {
+        $(function() {
+            var tb = $('.test-box');
+            tb.box();
+        });
     });
     // Create layout settings editor for demo
     packadic.onStart(['jquery', 'theme/settings-editor', 'theme', 'storage', 'fn/cre'], function ($, SettingsEditor, theme, storage, cre) {

@@ -19,11 +19,12 @@ mixin box-body(scrollerHeight)
     - scrollerHeight = scrollerHeight || false;
     if scrollerHeight
         - var style = 'height: ' + scrollerHeight + 'px;'
-        section(style=style).scrollable&attributes(attributes)
+        section.scrollable(style=style)&attributes(attributes)
             block
     else
         section&attributes(attributes)
             block
+
 
 
 

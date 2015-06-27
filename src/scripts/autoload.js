@@ -4,6 +4,12 @@ define([
     "use strict";
 
     var packadic = (window.packadic = window.packadic || {});
+
+
+    /**
+     * Scans the DOM for autoloading plugins/modules
+     * @exports autoload
+     */
     var autoload = {};
 
     autoload._plugins = [];
@@ -167,6 +173,14 @@ define([
                         });
                     });
                 }
+            })
+
+            .addCustom(function($el){
+                var $scrollable = $el.find('.scrollable');
+                require(['theme'], function(theme){
+                    theme.destroySlimScroll($scrollable);
+                    theme.initSlimScroll($scrollable);
+                });
             });
 
 
@@ -181,6 +195,8 @@ define([
             //.add('mCustomScrollbar', '.scrollable', [ 'plugins/mscrollbar' ], 'mCS', {theme: 'dark'}, function( $el ){
             //    $el.addClass('mCustomScrollbar');
             //})
+
+            //.add('box', '.box', ['jq/box'], 'packadicBox')
 
             // TOOLTIP
             .add('tooltip', '[data-toggle="tooltip"]', ['plugins/bootstrap'], 'bs.tooltip', {container: 'body'})

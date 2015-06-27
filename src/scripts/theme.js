@@ -18,6 +18,11 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             'section-top'   : 'normal'
         };
 
+
+        /**
+         * The theme module provides required stuff for the theme
+         * @exports theme
+         */
         var theme = {
             $hidden       : cre().addClass('hide'),
             options       : storage.get('theme.options', {
@@ -203,7 +208,11 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             });
         };
 
-
+        /**
+         * Get the value of an option
+         * @param {string} opt The option name
+         * @returns {*}
+         */
         theme.get = function (opt) {
             if ( ! defined(theme.options[opt]) ) {
                 console.error('theme.get failed on ', opt);
@@ -213,6 +222,13 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         };
 
 
+        /**
+         * Set the value of an option
+         * @param {string} opt The name of the option
+         * @param {*} value The new value
+         * @param {boolean} refresh If true, the theme layout will be refreshed
+         * @param {boolean} save If true, the change will be persistent (uses localStorage)
+         */
         theme.set = function (opt, value, refresh, save) {
             if ( ! defined(theme.options[opt]) || ! defined(value) ) return;
             refresh = defined(refresh) ? refresh : true;
@@ -223,10 +239,17 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             if ( refresh ) theme.applyLayout();
         };
 
+        /**
+         * Saves the current theme options making all changes to it persistent
+         */
         theme.save = function () {
             storage.set('theme.options', theme.options, {json: true});
         };
 
+        /**
+         * Resets the theme options to default
+         * @param save
+         */
         theme.reset = function (save) {
             if ( ! defined(save) || save === true ) {
                 storage.del('theme.options');
@@ -237,6 +260,10 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
 
 
+        /**
+         * Returns the debug boolean
+         * @returns {boolean}
+         */
         theme.isDebug = function () {
             return packadic.config.debug;
         };
@@ -278,11 +305,18 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         };
 
         theme.getTemplate = function (name, cb) {
-            //   logDebug('getting template', name, cb);
+            if(!defined(cb)) {
+                var deferred = Q.defer();
+            }
             require(['templates/' + name], function (template) {
-                //      logDebug('gott template', name, template);
                 cb(template);
+                if(!defined(cb)) {
+                    deferred.resolve(template);
+                }
             });
+            if(!defined(cb)) {
+                return deferred.promise;
+            }
         };
 
         theme.getViewPort = function () {
@@ -299,6 +333,10 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             };
         };
 
+        /**
+         * Checks if the current device is a touch device
+         * @returns {boolean}
+         */
         theme.isTouchDevice = function () {
             try {
                 document.createEvent("TouchEvent");
@@ -308,6 +346,11 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             }
         };
 
+        /**
+         * Generates a random ID
+         * @param {Number} length
+         * @returns {string}
+         */
         theme.getRandomId = function (length) {
             if ( ! _.isNumber(length) ) {
                 length = 15;
@@ -320,6 +363,11 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             return text;
         };
 
+        /**
+         * Returns the breakpoint, as set in the stylesheet
+         * @param {string} which Can be xs, sm, md or lg
+         * @returns {Number}
+         */
         theme.getBreakpoint = function (which) {
             return parseInt(packadic.config.scss.breakpoints['screen-' + which + '-min'].replace('px', ''));
         };
@@ -363,67 +411,6 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             theme._initResizeEvent();
         };
 
-        theme.initBoxes = function () {
-            var $boxes = $('body').find('.box');
-
-            $boxes.find('section.scrollable').each(function () {
-                theme.initSlimScroll($(this), {alwaysVisible: true});
-            });
-
-            var ensureControlContainer = function ($boxEl) {
-                var $controls = $boxEl.children('header').first().find('.controls');
-                if ( $controls.length == 0 ) {
-                    $controls = cre().addClass('controls');
-                    $boxEl.children('header').first().append($controls)
-                }
-                return $controls;
-            };
-
-
-            $boxes.filter('.box-closable').each(function () {
-                var $controls = ensureControlContainer($(this));
-                if ( $controls.find('a[data-control="closable"]').length == 0 ) {
-                    var $i = cre('i').addClass('fa fa-chevron-down');
-                    var $a = cre('a')
-                        .attr('data-control', 'closable')
-                        .append($i)
-                        .attr('href', '#').on('click', function () {
-                            var $sec = $(this).closest('.box').children('section').first();
-                            if ( $i.hasClass('fa-chevron-down') ) {
-                                $sec.slideUp();
-                                $i.removeClass('fa-chevron-down').addClass('fa-chevron-up');
-                            } else {
-                                $sec.slideDown();
-                                $i.removeClass('fa-chevron-up').addClass('fa-chevron-down');
-                            }
-                        });
-                    $controls.append($a);
-                }
-            });
-
-            $boxes.filter('.box-draggable').each(function () {
-
-            })
-            // draggable boxes init
-            var $boxesDraggable = $('body').find('.box-draggable');
-            if ( $boxesDraggable.length > 0 ) {
-                require(['jquery-ui/draggable'], function () {
-                    $boxesDraggable.each(function () {
-
-                        var $controls = ensureControlContainer($(this));
-                        if ( $controls.find('a[data-control="draggable"]').length == 0 ) {
-                            var $i = cre('i').addClass('fa fa-arrows-alt');
-                            var $a = cre('a')
-                                .attr('data-control', 'draggable')
-                                .append($i);
-                            $controls.append($a);
-                        }
-
-                        $(this).draggable({handle: $controls.find('a[data-control="draggable"]')});
-                    });
-                });
-            }
-        };
 
 
         theme.initSlimScroll = function (el, opts) {
@@ -510,6 +497,12 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
 
 
+        /**
+         * Spawns a 'toastr' notification
+         * @param {string} fnName error, success, warning or info
+         * @param {string} message
+         * @param {string} title
+         */
         theme.toastr = function (fnName, message, title) {
             require(['plugins/toastr'], function (toastr) {
                 toastr[fnName].apply(toastr, [message, title]);
@@ -625,7 +618,6 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             theme.initEvents();
             theme.initHeaderSearchForm();
             theme.initSettingsEditor();
-            theme.initBoxes();
 
             $([
                 ".btn:not(.btn-link)",

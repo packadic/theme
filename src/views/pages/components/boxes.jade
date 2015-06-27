@@ -15,19 +15,25 @@ block content
             +box("Boxes", "list", false, 'box-style-light box-draggable box-removable box-closable')
                 | box-style-light box-draggable box-removable box-closable
         .col-lg-4
-            +box("Boxes", "list", false, 'box-style-solid')
-                | box-style-solid
+            +box.test-box.box-style-solid(data-box-controls="close,minimize,move")
+                +box-header("Boxes", "list")
+                +box-body
+                    p lorem ipsum lala
+                    p lorem ipsum lala
+                    p lorem ipsum lala
+                    p lorem ipsum lala
+                    p lorem ipsum lala
     .row
         .col-lg-6
             +box("Boxes", "list", false, 'box-draggable box-removable box-closable')
                 | box-draggable box-removable box-closable
         .col-lg-6
-            +box
+            +box.test-box(data-box-controls="close,move")
                 +box-header("Box with actions", "list", true)
                     +a(data-toggle='modal', data-target='#exampleModal').btn.btn-success Ok
                     +a.btn.btn-info Info
                     +a.btn.btn-warning Close
-                +box-body(350)
+                +box-body
                     p lorem ipsum lala
                     p lorem ipsum lala
                     p lorem ipsum lala

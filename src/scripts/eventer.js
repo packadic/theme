@@ -30,6 +30,10 @@ define([ 'jquery', 'plugins/events' ], function( $, EventEmitter ){
     };
 
 
+    /**
+     * A wrapper to add event system to an object
+     * @exports eventer
+     */
     function eventer( name, obj, prop ){
         return make(name, obj, prop);
     }

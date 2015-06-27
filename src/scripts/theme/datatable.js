@@ -33,9 +33,9 @@ define([ 'jquery', '../fn/defined', '../fn/default', '../fn/cre', '../theme', 'Q
             dt.create = function(datatableVars, templateVars){
                 var defer = Q.defer();
                 theme.table(def(templateVars, null)).then(function($table){
-                    $table.appendTo($('body')).dataTable(datatableVars);
+                    $table.appendTo(theme.$hidden).dataTable(datatableVars);
                     var $wrapper = $table.parents('.dataTables_wrapper').first();
-                    $table.show().find('.dataTables_length select').select2();
+                    $wrapper.find('.dataTables_length select').select2();
                     $wrapper.$table = $table;
                     defer.resolve($wrapper);
                 });

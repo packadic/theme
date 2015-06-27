@@ -10,8 +10,19 @@ block header
 block content
     .row
         .col-md-12
-            +box("Datatable", "list")
-                #demo-datatable
+            +box
+                +box-header("Datatable", "list", true)
+                    button.btn.grey.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false') Tools &nbsp;
+                        span.caret
+                    ul.dropdown-menu.pull-right(role='menu')
+                        li
+                            a(href='#') Export to PDF
+                        li
+                            a(href='#') Export to CSV
+                        li
+                            a(href='#') Email
+                +box-body
+                    #demo-datatable
 
 block scripts-pre-boot
     script.
@@ -39,9 +50,9 @@ block scripts-pre-boot
                     });
 
                     datatable.create(datatableVars).then(function ($wrapper) {
+                        $wrapper.find('table.table').removeClass('table-light');
                         $('#demo-datatable').append($wrapper);
                     });
-                    console.log(dt);
 
 
                     /*

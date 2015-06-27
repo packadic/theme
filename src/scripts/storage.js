@@ -1,5 +1,9 @@
 define([ 'json', 'fn/defined' ], function( json, defined ){
 
+    /**
+     * A wrapper around the localStorage, allows expiration settings and JSON in/output
+     * @exports storage
+     */
     var storage = {};
 
     storage.on = function( callback ){

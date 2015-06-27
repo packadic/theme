@@ -12,7 +12,7 @@
 
     packadic.fireEvent('booting'); // Fire "booting" event
 
-    require([ 'module', 'jquery',  'autoload', 'string', 'jade', 'storage', 'code-mirror', 'plugins/cookie' ],
+    require([ 'module', 'jquery',  'autoload', 'string', 'jade', 'storage', 'code-mirror', 'plugins/cookie', 'jq/general' ],
         function( module, $, autoload, _s, jade, storage){
 
 

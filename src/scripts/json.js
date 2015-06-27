@@ -1,5 +1,9 @@
 define( function(){
 
+    /**
+     * JSON extensions primarily to support functions
+     * @exports json
+     */
     var json = {};
     json.stringify = function (obj) {
 
