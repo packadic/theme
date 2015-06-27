@@ -27,7 +27,9 @@
         baseUrl: packadic.config.paths.scripts,
         map    : {
             '*': {
-                'css': 'plugins/require-css/css'
+                'css': 'plugins/require-css/css',
+                'd3': 'plugins/d3',
+                'topojson': 'plugins/topojson'
             }
         },
 
@@ -90,11 +92,14 @@
             'flot.orderBars'           : 'plugins/flotcharts/jquery.flot.orderBars',
 
             'plugins/chartjs'            : 'plugins/chartjs/Chart.min',
-            'plugins/easypiechart'     : 'vendor/jquery.easypiechart',
+            'plugins/easypiechart'       : 'vendor/jquery.easypiechart',
             'plugins/sparkline'          : 'plugins/jquery-sparkline/dist/jquery.sparkline.min',
-
-
-
+            'plugins/highcharts'         : 'plugins/highcharts',
+            'plugins/d3'                 : 'plugins/d3/d3.min',
+            'plugins/nvd3'               : 'plugins/nvd3/build/nv.d3.min',
+            'plugins/rickshaw'               : 'plugins/rickshaw/rickshaw.min',
+            'plugins/vega'               : 'plugins/vega/vega.min',
+            'plugins/topojson'               : 'plugins/topojson/topojson',
 
             // bootstrap
             'plugins/bs-datepicker'      : 'plugins/bootstrap-datepicker/js/bootstrap-datepicker',
@@ -144,6 +149,7 @@
             'plugins/github-api': {exports: 'Github'},
             'plugins/oauth2'    : {exports: 'oauth2'},
             'plugins/oauth-io'  : {exports: 'OAuth'},
+            'plugins/d3': {exports: 'd3'},
 
             // jquery
             'jquery'            : {
@@ -177,9 +183,11 @@
             'flot.stackpercent': ['jquery', 'flot'],
             'flot.time'        : ['jquery', 'flot'],
 
-            'plugins/easypiechart'  : ['jquery'],
+            'plugins/easypiechart'    : ['jquery'],
             'plugins/sparkline'       : ['jquery'],
-
+            'plugins/nvd3': {exports: 'nv', deps: ['plugins/d3']},
+            'plugins/vega': {exports: 'vg', deps: ['plugins/d3', 'plugins/topojson']},
+            'plugins/rickshaw': {exports: 'Rickshaw', deps: ['plugins/d3']},
 
             // misc
             'plugins/gsap/lite'       : ['plugins/gsap/scroll'],

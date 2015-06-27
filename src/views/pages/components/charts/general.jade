@@ -1,24 +1,15 @@
-extends ../../layouts/default
+extends ../../../layouts/default
 
 block header
-    +page-title("Charts n Graphs", "Grafix wauw")
+    +page-title("Charts", "General")
     +page-breadcrumbs
         +breadcrumb("Components", "/components")
-        +breadcrumb("Modals", "/components/modals", true)
+        +breadcrumb("Charts", "/components/charts/general")
+        +breadcrumb("General", "/components/charts/general", true)
 
 
 block content
     #charts-demo
-        .row
-            .col-md-4
-                +box("Vega")
-                    .demo-charts-vega(data-spec='arc')
-            .col-md-4
-                +box("Vega")
-                    .demo-charts-vega(data-spec='bar')
-            .col-md-4
-                +box("Vega")
-                    .demo-charts-vega(data-spec='jobs')
         .row
             .col-md-4
                 +box("Line Chart")

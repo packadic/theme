@@ -1,0 +1,27 @@
+extends ../../../layouts/default
+
+block header
+    +page-title("Charts", "Vega")
+    +page-breadcrumbs
+        +breadcrumb("Components", "/components")
+        +breadcrumb("Charts", "/components/charts/general")
+        +breadcrumb("Vega", "/components/charts/vega", true)
+
+mixin vgdemo(spec, span)
+    - span = span || '4';
+    div(class='col-md-' + span)
+        +box("Vega")
+            .demo-charts-vega(data-spec=spec)
+
+block content
+    #charts-demo
+        .row
+            +vgdemo('arc', 4)
+            +vgdemo('area', 4)
+            +vgdemo('bar', 4)
+        .row
+            +vgdemo('choropleth', 12)
+        .row
+            +vgdemo('grouped_bar', 4)
+            +vgdemo('error', 4)
+            +vgdemo('force', 4)
