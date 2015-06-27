@@ -32,7 +32,7 @@ mixin box(title, icon, scrollerHeight, boxClasses)
     - title = title || false;
     - boxClasses = boxClasses || '';
     if title
-        .box(class=boxClasses)
+        .box.box-style-light(class=boxClasses)
             header
                 if icon
                     i(class="fa fa-" + icon)
@@ -40,5 +40,5 @@ mixin box(title, icon, scrollerHeight, boxClasses)
             +box-body(scrollerHeight)&attributes(attributes)
                 block
     else
-        .box&attributes(attributes)
+        .box.box-style-light&attributes(attributes)
             block

@@ -51,22 +51,23 @@ sidebar:
       - name: Widgets
         href: <%= target.nav.pre %>/components/widgets<%= target.nav.ext %>
 
-      - name: Charts
-        href: <%= target.nav.pre %>/components/charts<%= target.nav.ext %>
-        children:
-          - name: General
-            href: <%= target.nav.pre %>/components/charts/general<%= target.nav.ext %>
-          - name: Flot
-            href: <%= target.nav.pre %>/components/charts/flot<%= target.nav.ext %>
-          - name: ChartJS
-            href: <%= target.nav.pre %>/components/charts/chartjs<%= target.nav.ext %>
-          - name: Vega
-            href: <%= target.nav.pre %>/components/charts/vega<%= target.nav.ext %>
-          - name: Rickshaw
-            href: <%= target.nav.pre %>/components/charts/rickshaw<%= target.nav.ext %>
+  - name: Charts
+    href: <%= target.nav.pre %>/components/charts<%= target.nav.ext %>
+    icon: fa fa-bar-chart
+    children:
+      - name: General
+        href: <%= target.nav.pre %>/components/charts/general<%= target.nav.ext %>
+      - name: Flot
+        href: <%= target.nav.pre %>/components/charts/flot<%= target.nav.ext %>
+      - name: ChartJS
+        href: <%= target.nav.pre %>/components/charts/chartjs<%= target.nav.ext %>
+      - name: Vega
+        href: <%= target.nav.pre %>/components/charts/vega<%= target.nav.ext %>
+      - name: Rickshaw
+        href: <%= target.nav.pre %>/components/charts/rickshaw<%= target.nav.ext %>
 
   - name: Forms
-    #icon: fa fa-pencil
+    icon: fa fa-pencil
     children:
       - name: Layouts
         href: <%= target.nav.pre %>/components/forms/layouts<%= target.nav.ext %>
@@ -85,7 +86,7 @@ sidebar:
 
 
   - name: Tables
-    #icon: fa fa-table
+    icon: fa fa-table
     children:
       - name: Basic
         href: <%= target.nav.pre %>/components/tables/basic<%= target.nav.ext %>
