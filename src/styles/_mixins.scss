@@ -1,3 +1,28 @@
+/// no compass replace
+@function image_url($url){
+    @return url('/assets/images/' + $url);
+}
+@mixin text-shadow($shadow...){
+    text-shadow: $shadow;
+}
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+}
+@mixin background-size($size...) {
+    -webkit-background-size: $size;
+    -moz-background-size: $size;
+    background-size: $size;
+}
+
+
+
+
+
+
+
 @mixin bg-img($name){
     background: url($image-path + '/images/bg/' + $name + '.png') repeat #404040;
 }

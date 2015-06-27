@@ -1,7 +1,7 @@
 
 // 1.0 MY functions that: 1. do NOT use any default variables (like default parameter variables) -- 2.
 @import "variables/override_compass_variables";
-@import "compass";
+@import "../plugins/bourbon/app/assets/stylesheets/bourbon";
 @import "functions/chroma";
 
 

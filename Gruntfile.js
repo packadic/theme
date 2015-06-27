@@ -8,8 +8,7 @@ var radic  = require('radic'),
     _s     = require('underscore.string'),
     jsyaml = require('js-yaml'),
     fs     = require('fs-extra'),
-    path   = require('path'),
-    lib    = require('./lib');
+    path   = require('path');
 
 var grunt;
 
@@ -162,7 +161,7 @@ var init = module.exports = function (grunts) {
             }
         },
         sass            : {
-            options: { compass: true, bundleExec: true, sourcemap: 'file' },
+            options: { compass: true, bundleExec: true, sourcemap: 'file', trace: true },
             dev    : {
                 //files: [{expand: true, cwd: 'src/styles', src: ['**/*.scss', '!stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
                 files: [{expand: true, cwd: 'src/styles', src: ['components/select2.scss', 'themes/theme-default.scss', 'stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
@@ -177,6 +176,24 @@ var init = module.exports = function (grunts) {
             nav    : {
                 options: {loadPath: 'src/styles'},
                 files  : [{expand: true, cwd: 'src/styles', src: 'nav.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
+            },
+            stylesheet_dev    : {
+                files: [{expand: true, cwd: 'src/styles', src: 'stylesheet.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
+            },
+            theme_dev    : {
+                files: [{expand: true, cwd: 'src/styles', src: 'themes/theme-default.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
+            },
+            json    : {
+                files: [{expand: true, cwd: 'src/styles', src: 'json.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
+            }
+        },
+        sassc: {
+            options: {
+                sourceMap: true,
+                lineNumbers: true
+            },
+            dev: {
+                files: [{expand: true, cwd: 'src/styles', src: ['components/select2.scss', 'themes/theme-default.scss', 'stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             }
         },
         bootlint        : {
@@ -188,22 +205,6 @@ var init = module.exports = function (grunts) {
                 ]
             },
             files  : ['<%= target.dest %>/*/*.html', '<%= target.dest %>/*.html']
-        },
-        changelog       : {
-            make: {
-                options: {
-                    logArguments: ['--pretty=[%ad](https://github.com/packadic/theme/commit/%H): %s', '--no-merges', '--date=short'],
-                    dest        : 'CHANGELOG.md',
-                    template    : '\n\n{{> features}}',
-                    after       : 'v0.1.0',
-                    fileHeader  : '# Changelog',
-                    featureRegex: /^(.*)$/gim,
-                    partials    : {
-                        features: '{{#if features}}{{#each features}}{{> feature}}{{/each}}{{else}}{{> empty}}{{/if}}\n',
-                        feature : '- {{this}}  \n'
-                    }
-                }
-            }
         },
         availabletasks  : {
             tasks: {
@@ -285,8 +286,12 @@ var init = module.exports = function (grunts) {
             },*/
             styles       : {
                 files: ['src/styles/**'], // '!src/styles/fast/**', '!src/styles/fast.scss', '!src/styles/nav.scss', '!src/styles/components/_header-dropdown.scss'],
-                tasks: ['clean:styles', 'sass:<%= target.name %>']
+                tasks: [ 'sassc:dev'] //'sass:<%= target.name %>']
             },
+            style_json: {
+                files: ['src/styles/json.scss', 'src/styles/variables/**'],
+                tasks: ['sass:json']
+            },/*
             style_fast   : {
                 files: ['src/styles/fast/**', 'src/styles/fast.scss', 'src/styles/components/_header-dropdown.scss'],
                 tasks: ['sass:fast']
@@ -294,7 +299,7 @@ var init = module.exports = function (grunts) {
             style_nav    : {
                 files: ['src/styles/bs.scss', 'src/styles/nav.scss'],
                 tasks: ['sass:nav']
-            },
+            },*/
             scripts_watch: {
                 files: ['src/scripts/**', '!src/scripts/init.js'],
                 tasks: ['copy:scripts_watch']

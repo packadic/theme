@@ -14,10 +14,14 @@
         console.warn('(' + packadic.getElapsedTime() + 's) BOOTED');
         theme.init();
         sidebar.init({hidden: false, items: packadic.site.data.navigation.sidebar});
-        autoload.scan($('body'), function () {
-            if ( packadic.config.pageLoadedOnAutoloaded === true ) {
-                packadic.removePageLoader();
-            }
+
+        $(function(){
+            autoload.scan($('body'), function () {
+                if ( packadic.config.pageLoadedOnAutoloaded === true ) {
+                    packadic.removePageLoader();
+                }
+            });
+
         });
     }).onStart(function () {
         console.warn('(' + packadic.getElapsedTime() + 's) STARTING');

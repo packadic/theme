@@ -10,6 +10,7 @@ require([
     $(function () {
 
         var initCharts = function () {
+            return;
             var charts = $('.percentage');
             var barColors = ['amber-dark', 'green', 'teal', 'cyan'];
             charts.each(function (i) {

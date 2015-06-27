@@ -48,26 +48,10 @@ block content
 
                 +box("Stats", "info")
                     .piedemo.clearfix
-                        .chart
-                            .percentage(data-percent='55')
-                                span 55
-                                | %
-                            .label New visitors
-                        .chart
-                            .percentage(data-percent='21')
-                                span 21
-                                | %
-                            .label Bounce rate
-                        .chart
-                            .percentage(data-percent='66')
-                                span 66
-                                | %
-                            .label CPU Usage
-                        .chart
-                            .percentage(data-percent='11')
-                                span 11
-                                | %
-                            .label Bandwidth
+                        .easy-pie-chart(data-percent='33', data-label='New visitors', data-bar-color='teal')
+                        .easy-pie-chart(data-percent='21', data-label='Bounce rate', data-bar-color='red-dark')
+                        .easy-pie-chart(data-percent='66', data-label='CPU Usage', data-bar-color='orange')
+                        .easy-pie-chart(data-percent='11', data-label='Bandwidth', data-bar-color='blue')
 
 
 

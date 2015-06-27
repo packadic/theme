@@ -32,7 +32,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             breakpoints   : packadic.config.scss.breakpoints
         };
 
-        $.each(theme.fonts, function(k, v){
+        $.each(theme.fonts, function (k, v) {
             theme.fonts[k] = v.join(', ');
         });
         console.log(theme.fonts);

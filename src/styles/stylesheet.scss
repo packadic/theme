@@ -112,42 +112,6 @@ body.page-loading {
 
 
 
-@import 'SassyJSON';
-
-
-$jsonmap : (
-    breakpoints: (
-
-        screen-xs-min: $screen-xs-min,
-        screen-sm-min: $screen-sm-min,
-        screen-md-min: $screen-md-min,
-        screen-lg-min: $screen-lg-min,
-        screen-lg-med: $screen-lg-med,
-        screen-xs-max: $screen-xs-max,
-        screen-sm-max: $screen-sm-max,
-        screen-md-max: $screen-md-max
-    ),
-    fonts: (
-        base: $font-family-base,
-        heading: $font-family-heading,
-        subheading: $font-family-sub-heading
-
-    )
-
-);
-$_my_colors: ();
-@each $color-name, $color-variants in $material-colors {
-    $_my_colors: map-merge($_my_colors, (
-        $color-name + "-light": material-color($color-name, '200'),
-        $color-name: material-color($color-name, '500'),
-        $color-name + "-dark": material-color($color-name, '900'),
-    ))
-}
-$jsonmap: map-merge($jsonmap, (colors: $_my_colors));
-@include json-encode($jsonmap);
-
-//--- end of base file
-
 .slimScrollBar {
     border-radius: 0 !important;
 }
