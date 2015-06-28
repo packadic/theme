@@ -1,10 +1,9 @@
-require([
-    'jquery', '../fn/defined', '../fn/default', '../fn/cre',  'plugins/highlightjs', 'plugins/marked'
+define([
+    'jquery', 'fn/defined', 'fn/default', 'fn/cre',  'plugins/highlightjs', 'plugins/marked'
 ], function($, defined, def, cre, HJS, marked){
     "use strict";
 
     var highlighter = {};
-    'use strict';
 
     highlighter.HJS = HJS;
 

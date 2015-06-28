@@ -72,6 +72,9 @@ sidebar:
       - name: Layouts
         href: <%= target.nav.pre %>/components/forms/layouts<%= target.nav.ext %>
 
+      - name: Layouts 2
+        href: <%= target.nav.pre %>/components/forms/layouts2<%= target.nav.ext %>
+
       - name: Elements
         href: <%= target.nav.pre %>/components/forms/elements<%= target.nav.ext %>
 

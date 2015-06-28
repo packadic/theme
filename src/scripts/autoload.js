@@ -118,9 +118,10 @@ define([
     (function addCustoms() {
 
         autoload
-            // UNIFORM
+            // FORM STUFF
             .addCustom(function ($el) {
-                $el.find('form').not(".form-material").find("input[type='checkbox'], input[type='file'], input[type='radio']").not('.switch').each(function () {
+                $el.find('form').not(".form-material").find(" input[type='file']").not('.switch').not('.no-uniform').each(function () {
+                    return; // OFF
                     var $target = $(this);
                     if ( defined($target.data('uniformed')) ) {
                         return;
@@ -130,9 +131,24 @@ define([
                     })
                 });
 
+                $el.find('input[type="checkbox"], input[type="radio"]').not('.switch').not('.no-icheck').each(function(){
+                    var $target = $(this);
+                    if ( defined($target.data('iCheck')) ) {
+                        return;
+                    }
+                    require(['plugins/icheck'],function(){
+                        $target.iCheck({
+                            checkboxClass: 'icheckbox_square-blue',
+                            radioClass: 'iradio_square-blue',
+                            //increaseArea: '20%' // optional
+                        })
+                    })
+                });
+
                 if ( $el.find('form.form-material').length > 0 ) {
                     require(['plugins/bs-material'], function () {
-                        $.material.init({
+                        $.material.options = _.merge($.material.options, {
+                            "ripples": false,
                             "withRipples"         : [
                                 "a:not(.withoutripple)",
                                 "button:not(.withoutripple)",
@@ -149,6 +165,7 @@ define([
                             "togglebuttonElements": "form.form-material .togglebutton > label > input[type=checkbox]",
                             "radioElements"       : "form.form-material .radio > label > input[type=radio]"
                         });
+                        $.material.init();
                     })
                 }
 
@@ -220,6 +237,10 @@ define([
 
     (function addPlugins() {
         autoload
+            // BS SLIDER
+            .add('slider', 'input.slider', ['plugins/bs-slider'], 'slider')
+            // BS FILESTYLE
+            .add('filestyle', 'input[type="file"]', ['plugins/bs-filestyle'], 'filestyle')
             // SELECTPICKER
             .add('selectpicker', '.selectpicker', ['plugins/bs-select'], 'selectpicker')
 

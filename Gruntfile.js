@@ -125,7 +125,8 @@ var init = module.exports = function (grunts) {
             scripts      : {files: [{expand: true, cwd: 'src/scripts', src: '**', dest: '<%= target.dest %>/assets/scripts'}]},
             plugins      : {files: [{expand: true, cwd: 'src/plugins', src: '**', dest: '<%= target.dest %>/assets/scripts/plugins'}]},
             demo         : {files: [{expand: true, cwd: 'src/demo', src: '**', dest: '<%= target.dest %>/demo'}]},
-            misc         : {files: [{src: 'src/.htaccess', dest: '<%= target.dest %>/.htaccess'}]}
+            misc         : {files: [{src: 'src/.htaccess', dest: '<%= target.dest %>/.htaccess'}]},
+            favicon : {files: [{src: 'src/favicon-html5.ico', dest: '<%= target.dest %>/favicon.ico'}]}
         },
         jade            : {
             dev      : {

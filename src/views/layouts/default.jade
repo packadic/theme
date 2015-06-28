@@ -15,14 +15,11 @@ html(lang="en")
                 meta(charset="UTF-8")
                 meta(http-equiv="X-UA-Compatible", content="IE=edge")
             block styles
-                //+css-style("base-stylesheet.css")
-                //+css-style("plugins.css")
-                //+css-style("layout.css")
-                //+css-style("components.css")
-                //+css-style("fast.css")
                 +css-style("stylesheet.css")
                 +css-style("json.css")
                 +css-style("themes/theme-default.css")
+            block favicon
+                link(rel='icon', href='/favicon.ico')
     block body-tag
         body.page-loading.section-top-fixed
     block body
@@ -77,9 +74,9 @@ html(lang="en")
                 block footer
                     p Radicsss
 
-        #scroll-top
+        a#scroll-top(href='#')
             i.fa.fa-arrow-up
-            
+
         block body-end
             .settings-editor.panel.panel-default
                 button.btn.btn-primary.withoutripple

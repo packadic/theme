@@ -27,8 +27,8 @@
         baseUrl: packadic.config.paths.scripts,
         map    : {
             '*': {
-                'css': 'plugins/require-css/css',
-                'd3': 'plugins/d3',
+                'css'     : 'plugins/require-css/css',
+                'd3'      : 'plugins/d3',
                 'topojson': 'plugins/topojson'
             }
         },
@@ -67,7 +67,7 @@
             'plugins/md5'              : 'plugins/blueimp-md5/js/md5.min',
             'plugins/pace'             : 'plugins/pace/pace.min',
             'plugins/speakingurl'      : 'plugins/speakingurl/speakingurl.min',
-
+            'plugins/icheck'           : 'plugins/iCheck/icheck.min',
             // jquery
             'plugins/jquery-rest'      : 'plugins/jquery.rest/dist/1/jquery.rest.min',
             'plugins/jquery-migrate'   : 'plugins/jquery-migrate/jquery-migrate',
@@ -97,9 +97,9 @@
             'plugins/highcharts'         : 'plugins/highcharts',
             'plugins/d3'                 : 'plugins/d3/d3.min',
             'plugins/nvd3'               : 'plugins/nvd3/build/nv.d3.min',
-            'plugins/rickshaw'               : 'plugins/rickshaw/rickshaw.min',
+            'plugins/rickshaw'           : 'plugins/rickshaw/rickshaw.min',
             'plugins/vega'               : 'plugins/vega/vega.min',
-            'plugins/topojson'               : 'plugins/topojson/topojson',
+            'plugins/topojson'           : 'plugins/topojson/topojson',
 
             // bootstrap
             'plugins/bs-datepicker'      : 'plugins/bootstrap-datepicker/js/bootstrap-datepicker',
@@ -114,6 +114,8 @@
             'plugins/bs-material-ripples': 'plugins/bootstrap-material-design/scripts/ripples',
             'plugins/contextmenu'        : 'plugins/bootstrap-contextmenu/bootstrap-contextmenu',
             'plugins/gtreetable'         : "plugins/bootstrap-gtreetable/dist/bootstrap-gtreetable",
+            'plugins/bs-filestyle'       : 'plugins/bootstrap-filestyle/src/bootstrap-filestyle',
+            'plugins/bs-slider'          : 'plugins/bootstrap-slider/bootstrap-slider',
 
 
             // gsap
@@ -149,7 +151,7 @@
             'plugins/github-api': {exports: 'Github'},
             'plugins/oauth2'    : {exports: 'oauth2'},
             'plugins/oauth-io'  : {exports: 'OAuth'},
-            'plugins/d3': {exports: 'd3'},
+            'plugins/d3'        : {exports: 'd3'},
 
             // jquery
             'jquery'            : {
@@ -185,9 +187,9 @@
 
             'plugins/easypiechart'    : ['jquery'],
             'plugins/sparkline'       : ['jquery'],
-            'plugins/nvd3': {exports: 'nv', deps: ['plugins/d3']},
-            'plugins/vega': {exports: 'vg', deps: ['plugins/d3', 'plugins/topojson']},
-            'plugins/rickshaw': {exports: 'Rickshaw', deps: ['plugins/d3']},
+            'plugins/nvd3'            : {exports: 'nv', deps: ['plugins/d3']},
+            'plugins/vega'            : {exports: 'vg', deps: ['plugins/d3', 'plugins/topojson']},
+            'plugins/rickshaw'        : {exports: 'Rickshaw', deps: ['plugins/d3']},
 
             // misc
             'plugins/gsap/lite'       : ['plugins/gsap/scroll'],

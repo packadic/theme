@@ -39,11 +39,11 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             /**
              * @typedef ThemeOptions
              * @type {object}
-             * @property {string} [layout-option=fluid]     - fluid or boxed
-             * @property {string} sidebar-option    - default or fixed
-             * @property {string} sidebar-menu      - accordion or hover
-             * @property {string} section-top       - normal or fixed
-             * @property {string} section-bottom    - normal or fixed
+             * @property {string} [layout-option=fluid]         - fluid or boxed
+             * @property {string} [sidebar-option=default]      - default or fixed
+             * @property {string} [sidebar-menu=accordion]      - accordion or hover
+             * @property {string} [section-top=normal]          - normal or fixed
+             * @property {string} [section-bottom=fixed]        - normal or fixed
              */
             options       : storage.get('theme.options', {
                 json   : true,
@@ -488,7 +488,38 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             theme._initResizeEvent();
         };
 
+        function scrollTo(element, to, duration) {
+            if (duration < 0) return;
+            var difference = to - element.scrollTop;
+            var perTick = difference / duration * 10;
 
+            setTimeout(function() {
+                element.scrollTop = element.scrollTop + perTick;
+                if (element.scrollTop === to) return;
+                scrollTo(element, to, duration - 10);
+            }, 10);
+        }
+
+        /**
+         * Scroll to top button
+         * @todo put the duration into the config
+         * @private
+         */
+        theme._initScrollToTop = function(){
+            $('#scroll-top').off('click').on('click', function(e){
+                e.preventDefault();
+                scrollTo(document.body, 0, 600);
+            })
+        };
+
+        /**
+         * Ensures there is a scroll top top button
+         */
+        theme.ensureScrollToTop = function(){
+            if($('#scroll-top').length > 0) return;
+            $body.append(cre('a').attr('id', 'scroll-top').append(cre('i').addClass('fa fa-arrow-up')));
+            theme._initScrollToTop();
+        };
 
         theme.initSlimScroll = function (el, opts) {
             require(['plugins/jquery-slimscroll'], function () {
@@ -698,7 +729,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             theme._initEvents();
             theme._initHeaderSearchForm();
             theme._initSettingsEditor();
-
+            theme._initScrollToTop();
             $([
                 ".btn:not(.btn-link)",
                 ".card-image",
