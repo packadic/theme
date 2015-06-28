@@ -6,7 +6,7 @@
   "scripts": {
     "test2": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- -R spec",
     "test": "grunt --gruntfile Gruntfile.tests.js",
-      "jsdoc": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+    "jsdoc": "node_modules/.bin/jsdoc --package package.json --readme README.md --configure .jsdoc.json --verbose"
   },
   "repository": {
     "type": "git",
@@ -65,7 +65,8 @@
     "underscore.string": "~3.0.3",
     "grunt-preprocess": "~4.1.0",
     "typescript": "~1.4.1",
-    "grunt-typescript": "~0.6.1"
+    "grunt-typescript": "~0.6.1",
+    "qunitjs": "~1.18.0"
   },
   "dependencies": {
     "bootstrap-gtreetable": "git://github.com/gilek/bootstrap-gtreetable.git#v2.2.1-alpha",

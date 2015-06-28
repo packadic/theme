@@ -3,6 +3,10 @@
  * INIT
  */
 (function Init() {
+    /**
+     * @namespace packadic
+     * @type {{}|*|Window.packadic}
+     */
     var packadic = (window.packadic = window.packadic || {});
 
     if(!_.isObject(packadic.config)){
@@ -31,14 +35,42 @@
         return packadic;
     };
 
+    /**
+     * Attach an event handler to the pre-boot event
+     * @param {function} cb
+     * @returns {packadic}
+     */
     packadic.onPreBoot = function(cb){
         packadic.bindEventHandler('pre-boot', cb);
         return packadic;
     };
-    packadic.onBoot = function(req, cb){
+    /**
+     * Attach an event handler to the pre-boot event
+     * @param {function} cb
+     * @returns {packadic}
+     */
+    packadic.onBoot = function(cb){
         packadic.bindEventHandler('booting', cb);
         return packadic;
     };
+    /**
+     * Attach an event handler to the booted event
+     * @param {function|Array} req - Either the callback or an array containing requireJS modules
+     * @param {function} [cb]
+     * @returns {packadic}
+     * @example
+     * packadic.onBooted(function(){
+     *      console.log('yayy');
+     * });
+     * // or with dependencies
+     * packadic.onBooted(['jquery', 'theme', 'plugins/something'], function($, theme){
+     *      console.log('yay got dependencies aswell');
+     *      $('body').hide();
+     *      theme.on('resize', function(){
+     *          console.log('reeeeesizeee');
+     *      });
+     * });
+     */
     packadic.onBooted = function(req, cb){
         packadic.bindEventHandler('booted', function(){
             if(_.isFunction(req)){
@@ -49,6 +81,13 @@
         });
         return packadic;
     };
+
+    /**
+     * Attach an event handler to the starting event
+     * @param {function|Array} req - Either the callback or an array containing requireJS modules
+     * @param {function} [cb]
+     * @returns {packadic}
+     */
     packadic.onStart = function(req, cb){
         packadic.bindEventHandler('starting', function(){
             if(_.isFunction(req)){
@@ -59,6 +98,12 @@
         });
         return packadic;
     };
+    /**
+     * Attach an event handler to the started event
+     * @param {function|Array} req - Either the callback or an array containing requireJS modules
+     * @param {function} [cb]
+     * @returns {packadic}
+     */
     packadic.onStarted = function(req, cb){
         packadic.bindEventHandler('started', function(){
             if(_.isFunction(req)){
@@ -90,6 +135,11 @@
     packadic.log = function () {
     };
 
+    /**
+     * Adjusts the configuration by merging your object with the current. This should be done with onPreBoot, onBooted or before the boot.js file.
+     * @param {object} newConfig - The config object that will be merged with the current
+     * @returns {packadic}
+     */
     packadic.mergeConfig = function (newConfig) {
         packadic.config = _.merge(packadic.config, newConfig);
         return packadic;

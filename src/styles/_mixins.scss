@@ -1,10 +1,11 @@
 /// no compass replace
 @function image_url($url){
-    @return url('/assets/images/' + $url);
+    @return url('../images/' + $url);
 }
 @mixin text-shadow($shadow...){
     text-shadow: $shadow;
 }
+
 
 @mixin border-radius($radius) {
     -webkit-border-radius: $radius;

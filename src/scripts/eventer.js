@@ -6,7 +6,16 @@ define([ 'jquery', 'plugins/events' ], function( $, EventEmitter ){
         if( typeof prop !== 'string' ){
             prop = '_events';
         }
+        /**
+         * @mixin eventer
+         * @type {object}
+         */
         obj[ prop ] = new EventEmitter();
+        /**
+         * Listen to an event
+         * @param {string} eventName
+         * @param {function} callback
+         */
         obj.on = function(){
             obj[ prop ].on.apply(obj[ prop ], $.makeArray(arguments))
         };

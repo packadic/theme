@@ -1,10 +1,16 @@
 define( function(){
 
     /**
-     * JSON extensions primarily to support functions
+     * JSON extensions primarily to support function stringification and parsing
      * @exports json
      */
     var json = {};
+
+    /**
+     * Stringify a JSON object, supports functions
+     * @param {object} obj - The json object
+     * @returns {string}
+     */
     json.stringify = function (obj) {
 
         return JSON.stringify(obj, function (key, value) {
@@ -18,6 +24,12 @@ define( function(){
         });
     };
 
+    /**
+     * Parse a string into json, support functions
+     * @param {string} str - The string to parse
+     * @param date2obj - I forgot, sorry
+     * @returns {object}
+     */
     json.parse = function (str, date2obj) {
 
         var iso8061 = date2obj ? /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/ : false;
@@ -50,6 +62,12 @@ define( function(){
         });
     };
 
+    /**
+     * Clone an object
+     * @param {object} obj
+     * @param {boolean} date2obj
+     * @returns {Object}
+     */
     json.clone = function (obj, date2obj) {
         return json.parse(json.stringify(obj), date2obj);
     };

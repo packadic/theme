@@ -15,6 +15,19 @@ define([
     autoload._plugins = [];
     autoload._custom = [];
 
+    /**
+     * Add a autoloader to the stack.
+     * @param {string} fnName       - The plugin function name to call
+     * @param {string} selector     - The selector(s) to search for, if found, the plugin will be loaded into it
+     * @param {Array} requires      - If the plugin is found, before calling the function it will first requirejs the given modules
+     * @param {string} dataName     - The name of the jq data properties. Will be used to check if the plugin is already loaded on the element or not
+     * @param {object} [options]    - Plugin configuration options
+     * @param {function} [preInitFn] - Optional function can be passed, will be called before initialisation
+     * @returns {{}}
+     * @example
+     * autoload.add('tooltip', '[data-toggle="tooltip"]', ['plugins/bootstrap'], 'bs.tooltip', {container: 'body'});
+     * autoload.scan($('body'));
+     */
     autoload.add = function (fnName, selector, requires, dataName, options, preInitFn) {
         autoload._plugins.push({
             fnName   : fnName,
@@ -27,11 +40,30 @@ define([
         return autoload;
     };
 
+    /**
+     * Add a autoloader with custom logic
+     * @param customFn
+     * @returns {{}}
+     * @example
+     *  autoloader.addCustom(function ($el) {
+     *      var $charts = $el.find('.easy-pie-chart');
+     *      if ( $charts.length > 0 ) {
+     *          require(['jquery', 'plugins/easypiechart'], function ($) {
+     *              $el.easyPieChart();
+     *          });
+     *      }
+     *  });
+     */
     autoload.addCustom = function (customFn) {
         autoload._custom.push(customFn);
         return autoload;
     };
 
+    /**
+     * Scan the given element recursively and load any non-loaded plugins
+     * @param {object} $el - The jQuery element object
+     * @param {function} [callback] - The callback, will be executed after all operations are done
+     */
     autoload.scan = function ($el, callback) {
 
 

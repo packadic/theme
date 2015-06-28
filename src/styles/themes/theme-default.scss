@@ -2,6 +2,24 @@
 $theme-name: "default";
 
 @import "../base";
+@function image_url($url){
+    @return url('../../images/' + $url);
+}
+
+@function content-bg($nr: false, $light: false){
+    $img: 'content_bg';
+    @if $light {
+        $img: $img + '_light';
+    }
+    @if type_of($nr) == 'number' {
+        @if $nr > 0 {
+            $img: $img + '_' + $nr;
+        }
+    }
+    @return image_url('bg/' + $img + '.png') repeat;
+
+}
+$main-content-bg:                                                       content-bg(2, true) ;
 
 @import "theme-layout";
 @import "theme-box";

@@ -22,9 +22,29 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         /**
          * The theme module provides required stuff for the theme
          * @exports theme
+         * @mixes eventer
+         * @fires module:theme~init
+         * @fires module:theme~resize
+         * @fires module:theme~layout
+         * @fires module:theme~save
+         * @fires module:theme~reset
+         * @property {object} colors                    - Contains all colors, colorName -> hexCode
+         * @property {object} fonts                     - Contains the font families
+         * @property {object} breakpoints               - Contains the breakpoints
+         * @property {ThemeOptions} options                   - Theme options
          */
         var theme = {
             $hidden       : cre().addClass('hide'),
+
+            /**
+             * @typedef ThemeOptions
+             * @type {object}
+             * @property {string} [layout-option=fluid]     - fluid or boxed
+             * @property {string} sidebar-option    - default or fixed
+             * @property {string} sidebar-menu      - accordion or hover
+             * @property {string} section-top       - normal or fixed
+             * @property {string} section-bottom    - normal or fixed
+             */
             options       : storage.get('theme.options', {
                 json   : true,
                 default: defaultOptions
@@ -43,12 +63,17 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         console.log(theme.fonts);
 
         eventer('theme', theme);
+        theme._defineEvent('init');
+        theme._defineEvent('resize');
+        theme._defineEvent('layout');
+        theme._defineEvent('save');
+        theme._defineEvent('reset');
 
 
         var $body = $('body'),
             $sidebarNavMenu = $('.sidebar-nav-menu');
 
-        theme.initLayout = function () {
+        theme._initLayout = function () {
             theme.options = storage.get('theme.options', {
                 json   : true,
                 default: defaultOptions
@@ -56,6 +81,11 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
 
             theme.applyLayout();
+            /**
+             * @event module:theme~init
+             * @type {object}
+             */
+            theme._trigger('init', theme.options);
         };
 
         var resetLayout = function () {
@@ -205,6 +235,12 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             require(['theme/sidebar'], function (sidebar) {
                 sidebar.handleWithContent(); // fix content height
                 sidebar.handleFixed(); // reinitialize fixed sidebar
+                /**
+                 * Fires when the layout has been refreshed, which applies the theme options
+                 * @event module:theme~layout
+                 * @type {object}
+                 */
+                theme._trigger('layout', theme.options);
             });
         };
 
@@ -226,8 +262,8 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
          * Set the value of an option
          * @param {string} opt The name of the option
          * @param {*} value The new value
-         * @param {boolean} refresh If true, the theme layout will be refreshed
-         * @param {boolean} save If true, the change will be persistent (uses localStorage)
+         * @param {boolean} [refresh=true] If true, the theme layout will be refreshed
+         * @param {boolean} [save=true] If true, the change will be persistent (uses localStorage)
          */
         theme.set = function (opt, value, refresh, save) {
             if ( ! defined(theme.options[opt]) || ! defined(value) ) return;
@@ -235,7 +271,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             save = defined(save) ? save : true;
             console.log('doing ', opt, ' with:', value, ' refresh:', refresh, 'save', save);
             theme.options[opt] = value;
-            if ( save ) storage.set('theme.options', theme.options, {json: true});
+            if ( save ) theme.save();
             if ( refresh ) theme.applyLayout();
         };
 
@@ -244,11 +280,17 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
          */
         theme.save = function () {
             storage.set('theme.options', theme.options, {json: true});
+            /**
+             * Fires when the theme options are saved into the localStorage
+             * @event module:theme~save
+             * @type {object}
+             */
+            theme._trigger('save', theme.options);
         };
 
         /**
          * Resets the theme options to default
-         * @param save
+         * @param {boolean} [save=true] If true, the resetted options will be persistent
          */
         theme.reset = function (save) {
             if ( ! defined(save) || save === true ) {
@@ -256,6 +298,12 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             }
             theme.options = defaultOptions;
             theme.applyLayout();
+            /**
+             * Fires when the theme options have been resetted to default
+             * @event module:theme~reset
+             * @type {object} The current theme options
+             */
+            theme._trigger('reset', theme.options);
         };
 
 
@@ -268,6 +316,10 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             return packadic.config.debug;
         };
 
+        /**
+         * Checks if the sidebar is used
+         * @returns {boolean}
+         */
         theme.hasSidebar = function () {
             return $('nav.sidebar-nav').length > 0;
         };
@@ -304,6 +356,25 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             return cre().addClass('loader').addClass('loader-' + name)
         };
 
+        /**
+         * Loads a compiled jade template from scripts/template directory. Can be used multiple times
+         * @param {string} name - The filename (without extension) of the template
+         * @param {function} [cb] - Optional callback, omit if you rather use a promise
+         * @returns {promise.promise|jQuery.promise|jQuery.ready.promise}
+         * @example
+         * // Using the promise
+         * theme.getTemplate('template-name').then(function(template){
+         *     var html = template({
+         *         var1: 'Hello', var2: 'Bai'
+         *     });
+         * });
+         * // Using the callback
+         * theme.getTemplate('template-name', function(template){
+         *     var html = template({
+         *         var1: 'Hello', var2: 'Bai'
+         *     });
+         * });
+         */
         theme.getTemplate = function (name, cb) {
             if(!defined(cb)) {
                 var deferred = Q.defer();
@@ -319,6 +390,10 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             }
         };
 
+        /**
+         * Returns the view port
+         * @returns {{width: *, height: *}}
+         */
         theme.getViewPort = function () {
             var e = window,
                 a = 'inner';
@@ -374,7 +449,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
 
 
-        theme.initSettingsEditor = function () {
+        theme._initSettingsEditor = function () {
             var $el = $('.settings-editor');
             $el.find('> .btn').on('click', function (e) {
                 e.preventDefault();
@@ -382,7 +457,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             })
         };
 
-        theme.initHeaderSearchForm = function () {
+        theme._initHeaderSearchForm = function () {
             $('section#top').on('click', '.search-form', function (e) {
                 $(this).addClass("open");
                 $(this).find('.form-control')
@@ -399,15 +474,17 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         };
 
         theme._initResizeEvent = function () {
-            theme._defineEvent('resize');
             theme.$window.on('resize', function () {
                 setTimeout(function () {
+                    /**
+                     * @event module:theme~resize
+                     */
                     theme._trigger('resize');
                 }, 600); // delay the event a bit, otherwise it doesn't seem to work well in some cases
             });
         };
 
-        theme.initEvents = function () {
+        theme._initEvents = function () {
             theme._initResizeEvent();
         };
 
@@ -610,14 +687,17 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
 
 
+        /**
+         * Initializes the theme, should only be called once
+         */
         theme.init = function () {
 
             theme.$window = $(window);
             theme.$document = $(window.document);
 
-            theme.initEvents();
-            theme.initHeaderSearchForm();
-            theme.initSettingsEditor();
+            theme._initEvents();
+            theme._initHeaderSearchForm();
+            theme._initSettingsEditor();
 
             $([
                 ".btn:not(.btn-link)",
@@ -633,7 +713,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                 theme.scrollTo($(e.target));
             });
 
-            theme.initLayout();
+            theme._initLayout();
         };
 
 

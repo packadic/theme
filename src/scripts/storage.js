@@ -6,6 +6,10 @@ define([ 'json', 'fn/defined' ], function( json, defined ){
      */
     var storage = {};
 
+    /**
+     * Add a event listener for the 'onstorage' event
+     * @param {function} callback
+     */
     storage.on = function( callback ){
         if( window.addEventListener ){
             window.addEventListener("storage", callback, false);
@@ -14,6 +18,18 @@ define([ 'json', 'fn/defined' ], function( json, defined ){
         }
     };
 
+    /**
+     * @typedef StorageSetOptions
+     * @type {object}
+     * @property {boolean} [json=false] - Set to true if the value passed is a JSON object
+     * @property {number|boolean} [expires=false] - Minutes until expired
+     */
+    /**
+     * Save a value to the storage
+     * @param {string|number} key               - The unique id to save the data on
+     * @param {*} val                           - The value, can be any datatype. If it's an object, make sure to enable json in the options
+     * @param {StorageSetOptions} [options]     - Additional options, check the docs
+     */
     storage.set = function( key, val, options ){
         options = $.extend({json: false, expires: false}, options);
         if( options.json ){
@@ -26,6 +42,18 @@ define([ 'json', 'fn/defined' ], function( json, defined ){
         window[ 'localStorage' ].setItem(key, val);
     };
 
+    /**
+     * @typedef StorageGetOptions
+     * @type {object}
+     * @property {boolean} [json=false]     - Set to true if the value is a JSON object
+     * @property {*} [default=false]        - The default value to return if the requested key does not exist
+     */
+    /**
+     * Get a value from the storage
+     * @param key
+     * @param {StorageGetOptions} [options] - Optional options, check the docs
+     * @returns {*}
+     */
     storage.get = function( key, options ){
         options = $.extend({json: false, default: null}, options);
 
@@ -57,10 +85,17 @@ define([ 'json', 'fn/defined' ], function( json, defined ){
     };
 
 
+    /**
+     * Delete a value from the storage
+     * @param {string|number} key
+     */
     storage.del = function( key ){
         window[ 'localStorage' ].removeItem(key);
     };
 
+    /**
+     * Clear the storage, will clean all saved items
+     */
     storage.clear = function(){
         window.localStorage.clear();
     };
