@@ -334,6 +334,11 @@ var init = module.exports = function (grunts) {
                 options: {livereload: 35729},
                 files  : ['src/**/*']
             }
+        },
+        jsdoc: {
+            dev: {
+                options: { a: 'b'}
+            }
         }
     };
 

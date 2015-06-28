@@ -45,3 +45,11 @@ targets:
     nav:
       pre: ''
       ext: .html
+
+  docs:
+    dest: docs
+    type: dist
+    site: {}
+    nav:
+      pre: ''
+      ext: .html

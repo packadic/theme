@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test2": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- -R spec",
-    "test": "grunt --gruntfile Gruntfile.tests.js"
+    "test": "grunt --gruntfile Gruntfile.tests.js",
+      "jsdoc": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "repository": {
     "type": "git",
@@ -87,6 +88,7 @@
     "grunt-sass": "~1.0.0",
     "object-assign": "~3.0.0",
     "each-async": "~1.1.1",
-    "node-sass": "~3.2.0"
+    "node-sass": "~3.2.0",
+    "jsdoc": "~3.3.2"
   }
 }
