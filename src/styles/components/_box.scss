@@ -32,12 +32,16 @@
 
         // Deprecated. remove, please dont look
         .actions {
-            @extend .btn-group;
+            @extend .btn-toolbar;
 
             float: right;
             margin: 4px 0;
 
-            > .btn {
+            .btn,
+            .btn-group {
+                margin-left: 0;
+            }
+            .btn {
                 @include button-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-small, $line-height-small, $border-radius-small);
             }
             &.rounded {

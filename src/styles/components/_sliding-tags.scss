@@ -88,21 +88,24 @@ ul.tags {
         @include transition(.3s ease-out);
         @include transition-property(padding, max-width);
     }
-}
 
-@each $pair in $tagsColors {
-    .#{nth($pair, 1)} {
-        $color: nth($pair, 2);
 
-        li:after {
-            background: $color;
-            @include box-shadow(inset 1px 0 darken($color, 20%));
-        }
 
-        span {
-            background: $color;
-            border-color: darken($color, 8%) darken($color, 10%) darken($color, 12%);
-            @include linear-gradient(top, lighten($color, 5%), darken($color, 5%));
+    @each $pair in $tagsColors {
+        .#{nth($pair, 1)} {
+            $color: nth($pair, 2);
+
+            li:after {
+                background: $color;
+                @include box-shadow(inset 1px 0 darken($color, 20%));
+            }
+
+            span {
+                background: $color;
+                border-color: darken($color, 8%) darken($color, 10%) darken($color, 12%);
+                @include linear-gradient(top, lighten($color, 5%), darken($color, 5%));
+            }
         }
     }
+
 }

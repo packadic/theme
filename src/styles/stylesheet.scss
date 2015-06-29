@@ -55,12 +55,12 @@ form:not(.form-material) {
 
 
 // 10.0 MY components
-@import "components/type";
+@import "components/typography";
 @import "components/scroll-top";
 @import "components/buttons";
 @import "components/labels";
 @import "components/tabs";
-//@import "components/dropdown";
+@import "components/dropdown";
 //@import "components/header-dropdown";
 @import "components/tabs";
 @import "components/form_layouts";

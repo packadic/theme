@@ -8,8 +8,52 @@
 @include thumb-size(128);
 @include thumb-size(96);
 
+@each $pos-property in $util-pos-properties {
+    $property-name: map-get($pos-property, 'name');
+    $property-selector: map-get($pos-property, 'selector');
+    $property-base-value: map-get($pos-property, 'base-value');
 
-/* Padding */
+    @each $direction-selector in $util-pos-direction-selectors {
+
+        $direction-property: nth($util-pos-direction-properties, index($util-pos-direction-selectors, $direction-selector));
+
+        @if $direction-selector != '' {
+            $direction-property: '-' + $direction-property;
+        }
+
+        @each $size-selector in $util-pos-size-selectors {
+            $i: index($util-pos-size-selectors, $size-selector);
+
+            $selector-seperator: '';
+            @if $size-selector != '' {
+                $selector-seperator: $util-pos-selector-seperator;
+            }
+
+            $selector: $property-selector + $direction-selector + $selector-seperator + $size-selector;
+            $property: $property-name + $direction-property;
+            $size: $property-base-value * ($i - 1);
+
+            @if $size > 0 { // if size = 0, the px suffix should be ommited according to css rules.
+                $size: #{$size}px;
+            }
+
+            .#{$selector} {
+                &:not(.n) {
+                    #{$property}: $size !important;
+                }
+                &.n {
+                    @if $size != 0 {
+                        #{$property}: -$size !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+/* deprecated, remove soon from this line until... */
 .with-padding {
     padding: 20px !important;
 }
@@ -59,6 +103,8 @@
     @include position-utility($attr, 'extra-large', 60px);
     @include position-utility($attr, 'super-large', 90px);
 }
+/* this line. end deprecated stuff */
+
 
 /* Absolute positioning */
 .relative {

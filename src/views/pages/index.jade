@@ -73,34 +73,44 @@ block content
                                 | 1 Minute ago
 
             .col-md-6
-                +box("Timeline", "clock-o", 250)
-                    ul.small-timeline
-                        +timeline-item('lime', '4 min')
-                            a.name(href='#/') Steve Berkham
-                            |  donated $1354,22
-                            a(href='#/') &nbsp;For the right cause
-                        +timeline-item('orange', '6 min')
-                            a.name(href='#/') Kimberly Tiller
-                            |  created document
-                            a.name(href='#/') &nbsp;How to live poor?
-                            |  in category
-                            a(href='#/') &nbsp;Poor mans story's
-                        +timeline-item('cyan', '15 min')
-                            +a-name Josh Mathman
-                            |  calculated some crazy stuff like
-                            +a-name &nbsp;Pie
-                            |  and
-                            +a-name &nbsp;Apples on Pies
-                        +timeline-item('amber', '30 min')
-                            +a-name Amber Mit
-                            |  posted a new topic
-                            a(href='#') &nbsp;Plz help me
-                            |  in
-                            a(href='#') &nbsp;Requests
-                        +timeline-item('grey', '33 min')
-                            | A serious error occurd while doing something
-                        +timeline-item('red', '2 hours')
-                            | Booting the system
+                +box
+                    +box-header("Timeline", "clock-o", true)
+                        .btn-group
+                            button.btn.blue.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+                                | Actions&nbsp;
+                                span.caret
+                            ul.dropdown-menu.pull-right(role='menu')
+                                li
+                                    a(href="#") First
+                        button.btn.teal Clear
+                    +box-body(250)
+                        ul.small-timeline
+                            +timeline-item('lime', '4 min')
+                                a.name(href='#/') Steve Berkham
+                                |  donated $1354,22
+                                a(href='#/') &nbsp;For the right cause
+                            +timeline-item('orange', '6 min')
+                                a.name(href='#/') Kimberly Tiller
+                                |  created document
+                                a.name(href='#/') &nbsp;How to live poor?
+                                |  in category
+                                a(href='#/') &nbsp;Poor mans story's
+                            +timeline-item('cyan', '15 min')
+                                +a-name Josh Mathman
+                                |  calculated some crazy stuff like
+                                +a-name &nbsp;Pie
+                                |  and
+                                +a-name &nbsp;Apples on Pies
+                            +timeline-item('amber', '30 min')
+                                +a-name Amber Mit
+                                |  posted a new topic
+                                a(href='#') &nbsp;Plz help me
+                                |  in
+                                a(href='#') &nbsp;Requests
+                            +timeline-item('grey', '33 min')
+                                | A serious error occurd while doing something
+                            +timeline-item('red', '2 hours')
+                                | Booting the system
         .row
             .col-md-6
                 +box("Alerts", "info")

@@ -1,13 +1,4 @@
 include ../base
-mixin dropdown-task(title, percent)
-    li
-        a(href='#')
-            .task
-                span=title
-                span.percent=percent+"%"
-            .progress
-                .progress-bar(role='progressbar', aria-valuenow=percent, aria-valuemin='0', aria-valuemax='100', style='width: ' + percent + '%')&attributes(attributes)
-                    span.sr-only #{percent}% Complete (warning)
 
 ul.nav.navbar-nav
     li
