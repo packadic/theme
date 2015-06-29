@@ -2,6 +2,18 @@ extends ../layouts/default
 block header
     +page-title("Home", "Welcome!")
 
+mixin timeline-item(color, timeAgo)
+    li(class=color)
+        .timeline-icon
+        .timeline-body
+            .timeline-content
+                block
+                span.time
+                    i.fa.fa-clock-o
+                    | #{timeAgo} ago
+mixin a-name()
+    a.name(href='#')
+        block
 
 block content
     #dashboard-demo
@@ -34,16 +46,66 @@ block content
                     .details
                         h3 1354,22
                         p Donated
+        .row
+            .col-md-6
+                +box("Recent comments").no-padding
+                    ul.list-group.text-grey
+                        li.list-group-item
+                            p
+                                a.text-info(href="#") @Kevin Hopland
+                                | &nbsp; Lorem ipsum tralalal with the left of the right and the both inside
+                            small.block.text-muted
+                                i.fa.fa-clock-o
+                                | 1 Minute ago
+                        li.list-group-item
+                            p
+                                a.text-info(href="#") @Marcy Stevens
+                                | &nbsp; Lorem ipsum tralalal with the left of the right and the both inside. Lorem ipsum tralalal with the left of the right and the both inside.
+                            small.block.text-muted
+                                i.fa.fa-clock-o
+                                | 1 Minute ago
+                        li.list-group-item
+                            p
+                                a.text-info(href="#") @Marcy Stevens
+                                | &nbsp; Lorem ipsum tralalal with the left of the right and the both inside
+                            small.block.text-muted
+                                i.fa.fa-clock-o
+                                | 1 Minute ago
 
-
+            .col-md-6
+                +box("Timeline", "clock-o", 250)
+                    ul.small-timeline
+                        +timeline-item('lime', '4 min')
+                            a.name(href='#/') Steve Berkham
+                            |  donated $1354,22
+                            a(href='#/') &nbsp;For the right cause
+                        +timeline-item('orange', '6 min')
+                            a.name(href='#/') Kimberly Tiller
+                            |  created document
+                            a.name(href='#/') &nbsp;How to live poor?
+                            |  in category
+                            a(href='#/') &nbsp;Poor mans story's
+                        +timeline-item('cyan', '15 min')
+                            +a-name Josh Mathman
+                            |  calculated some crazy stuff like
+                            +a-name &nbsp;Pie
+                            |  and
+                            +a-name &nbsp;Apples on Pies
+                        +timeline-item('amber', '30 min')
+                            +a-name Amber Mit
+                            |  posted a new topic
+                            a(href='#') &nbsp;Plz help me
+                            |  in
+                            a(href='#') &nbsp;Requests
+                        +timeline-item('grey', '33 min')
+                            | A serious error occurd while doing something
+                        +timeline-item('red', '2 hours')
+                            | Booting the system
         .row
             .col-md-6
                 +box("Alerts", "info")
                     +alert("success", "Woot this is ok") You successfully read this important alert message.
-                    //+alert("success", "Woot ok", true) You successfully read this important alert message.
                     +alert("info") This alert needs your attention, but it's not super important.
-                    //+alert("warning", true) This is not looking good
-                    //+alert("danger") Change a few things up and try submitting again.
                     +alert("danger", true) Change a few things up and try submitting again.
 
                 +box("Stats", "info")
@@ -56,6 +118,8 @@ block content
 
 
             .col-md-6
+                +box("Real time monitor", "chart")
+                    #dashboard-rtm.chart(style='width:100%;height:150px;')
                 +box("Users", "users").no-padding
                     table.table.table-hover.table-light.no-margin
                         thead
@@ -76,4 +140,5 @@ block content
                                         a(href="#").btn.btn-xs.btn-danger
                                             i.fa.fa-remove
                                             |  Delete
+
 

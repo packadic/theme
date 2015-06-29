@@ -230,3 +230,26 @@
         text-decoration: none;
     }
 }
+
+
+ul.list-group {
+
+    .list-group-item {
+        background-color: inherit;
+        border: 1px solid #e7eaec;
+        display: block;
+        margin-bottom: -1px;
+        padding: 10px 15px;
+        position: relative;
+        font-size: 13px;
+    }
+}
+.no-padding .list-group { margin-bottom: 0; }
+.no-padding .list-group-item{
+    border-left: none !important;
+    border-right: none !important;;
+    border-bottom: none !important;;
+    &:first-child {
+        border-top: none !important;;
+    }
+}

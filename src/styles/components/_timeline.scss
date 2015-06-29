@@ -1,0 +1,263 @@
+
+.timeline-month {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    width: 120px;
+    text-align: center;
+    position: relative;
+    left: 6%;
+    margin-left: -55px;
+}
+.timeline-month span {
+    display: block;
+}
+.timeline-month .month {
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.timeline-month .year {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.timeline {
+    padding-left: 0;
+    list-style: none;
+    position: relative;
+    margin: 0;
+}
+.timeline li:last-child .timeline-body {
+    border-bottom: 0 !important;
+}
+.timeline:before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    bottom: 0;
+    width: 2px;
+    background: #eeeeee;
+    left: 6%;
+    margin-left: 2px;
+}
+.timeline > li {
+    position: relative;
+}
+.timeline > li .timeline-header {
+    padding: 0;
+    color: #bdbdbd;
+}
+.timeline > li .timeline-header span.date {
+    float: left;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+}
+.timeline > li .timeline-header span.author {
+    float: right;
+    font-size: 12px;
+    display: none;
+}
+.timeline > li .timeline-header + p {
+    padding-top: 10px;
+}
+.timeline > li .timeline-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+    line-height: 48px;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    color: #9e9e9e;
+    background: #eeeeee;
+    border-radius: 50%;
+    text-align: center;
+    left: 6%;
+    top: 0;
+    margin: 0 0 0 -22px;
+    padding: 0;
+}
+.timeline > li .timeline-icon i {
+    color: #ffffff;
+}
+.timeline > li .timeline-body {
+    margin: 0 0 32px 14%;
+    padding: 0 0 32px;
+    position: relative;
+    border-width: 0;
+    border-style: solid;
+    border-bottom: 1px solid #eeeeee !important;
+    background-color: #fff;
+}
+.timeline > li .timeline-body .timeline-content ul {
+    margin: 0;
+}
+.timeline > li .timeline-body .timeline-content ul li {
+    padding-left: 0;
+    padding-right: 8px;
+}
+.timeline > li .timeline-body .timeline-content p {
+    margin-bottom: 0;
+}
+.timeline > li .timeline-body .timeline-content p + p {
+    margin-top: 10px;
+}
+.timeline > li .timeline-body img {
+    margin: 0;
+}
+.timeline > li .timeline-footer {
+    padding-top: 20px;
+    color: #fff;
+}
+@media (max-width: 991px) {
+    .timeline-month {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+        left: 0;
+    }
+    .timeline:before {
+        width: 0;
+        left: 0;
+    }
+    .timeline > li {
+        margin-top: 20px;
+    }
+    .timeline > li:first-child {
+        margin-top: 0;
+    }
+    .timeline > li .timeline-body {
+        margin: 0 !important;
+    }
+    .timeline > li .timeline-body:after {
+        border-width: 0;
+    }
+    .timeline > li .timeline-icon {
+        width: 40px;
+        height: 40px;
+        z-index: 1;
+        line-height: 40px;
+        font-size: 16px;
+        margin: 0;
+        position: absolute;
+        right: 0;
+        left: inherit;
+    }
+}
+.small-timeline {
+    padding-left: 0;
+    list-style: none;
+    position: relative;
+    margin: 0;
+}
+.small-timeline li:last-child .timeline-body {
+    border-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+.small-timeline:before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    bottom: 0;
+    width: 2px;
+    background: #eeeeee;
+    left: 8px;
+}
+.small-timeline > li {
+    position: relative;
+}
+.small-timeline > li .timeline-icon {
+    position: absolute;
+    border-radius: 50%;
+    left: 3px;
+    top: 3px;
+    margin: 0;
+    padding: 0;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border: 2px solid #333;
+}
+.small-timeline > li .timeline-body {
+    margin: 0 0px 20px 32px;
+    padding: 0;
+    position: relative;
+    background-color: #fff;
+}
+.small-timeline > li .timeline-body .timeline-content {
+    color: #9e9e9e;
+}
+.small-timeline > li .timeline-body .timeline-content ul {
+    margin: 0;
+}
+.small-timeline > li .timeline-body .timeline-content ul li {
+    padding-left: 0;
+    padding-right: 8px;
+}
+.small-timeline > li .timeline-body .timeline-content a.name {
+    color: #616161;
+    font-weight: bold;
+}
+.small-timeline > li .timeline-body img {
+    margin: 0;
+}
+.small-timeline > li .time {
+    color: #bdbdbd;
+    display: block;
+    font-size: 12px;
+    line-height: 1.35;
+}
+.small-timeline > li .time > i {
+    margin-right: 5px;
+}
+.small-timeline > li:last-child:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 2px;
+    background: #eeeeee;
+    background-image: -webkit-linear-gradient(top, #eeeeee 0%, #ffffff 100%);
+    background-image: -o-linear-gradient(top, #eeeeee 0%, #ffffff 100%);
+    background-image: linear-gradient(to bottom, #eeeeee 0%, #ffffff 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffffffff', GradientType=0);
+    left: 8px;
+    height: 24px;
+}
+
+
+@mixin make-timeline-icon-variant($color-name) {
+    $light: material-color($color-name, '200');
+    $normal: material-color($color-name, '500');
+    $dark: material-color($color-name, '900');
+
+    .timeline {
+        li.#{$color-name + '-light'} .timeline-icon {
+            background: $light !important;
+        }
+        li.#{$color-name} .timeline-icon {
+            background: $normal !important;
+        }
+        li.#{$color-name + '-dark'} .timeline-icon {
+            background: $dark !important;
+        }
+    }
+    .small-timeline {
+        li.#{$color-name + '-light'} .timeline-icon {
+            border-color: $light !important;
+        }
+        li.#{$color-name} .timeline-icon {
+            border-color: $normal !important;
+        }
+        li.#{$color-name + '-dark'} .timeline-icon {
+            border-color: $dark !important;
+        }
+    }
+
+}
+
+@each $color-name, $color-variants in $material-colors {
+    @include make-timeline-icon-variant($color-name);
+}
