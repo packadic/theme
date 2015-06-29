@@ -4,11 +4,21 @@ mixin demo-dropdown-w-header-submenu()
     ul.dropdown-menu.pull-right(role='menu')&attributes(attributes)
         li.header
             h3 Options
-        +lia First
-        +lia Later
+        +lia
+            i.fa.fa-user
+            | First
+            span.badge.green 13
+        +lia
+            i.fa.fa-cog
+            | Later
+            span.badge.blue 2
         li.submenu
-            a(href="#") Submenu 1
+            a(href="#")
+                i
+                | Submenu 1
             ul.dropdown-menu
+                li.header
+                    h3 Submenu 1
                 +lia First
                 +lia Later
                 li.submenu
@@ -16,13 +26,24 @@ mixin demo-dropdown-w-header-submenu()
                     ul.dropdown-menu
                         +lia First
                         +lia Later
+                        li.footer
+                            a(href='#') View
+                            a(href='#') Cancel
                 +lia Last
         li.header
             h3 Extras
-        +lia Mister
-        +lia Alea
+        +lia
+            i.fa.fa-user
+            | Mister
+            span.label.red invalid
+        +lia
+            i.fa.fa-list
+            | Alea
+            span.label.green valid
         li.submenu
-            a(href="#") Submenu 2
+            a(href="#")
+                i.fa.fa-puzzle-piece
+                | Submenu 2
             ul.dropdown-menu
                 li.header
                     h3 Submenu 2
@@ -34,7 +55,78 @@ mixin demo-dropdown-w-header-submenu()
                         +lia First
                         +lia Later
                 +lia Last
-        +lia Alea
+        +lia
+            i.fa.fa-bolt
+            | Events
+            span.badge.orange 3
+        li.footer
+            a(href='#') View all
+mixin demo-dropdown-buttons
+    // TASKS
+    .btn-group
+        button.btn.blue.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+            | Tasks Wide&nbsp;
+            span.caret
+        ul(role="menu").dropdown-menu.dropdown-wide.dropdown-task-list
+            li.header
+                h3
+                    | You have
+                    strong &nbsp;3 new&nbsp;
+                    | tasks
+                a(href="#") View all
+            +dropdown-task("Update progress", 30).progress-bar-warning
+            +dropdown-task("User migration", 65).progress-bar-primary
+            +dropdown-task("Important process", 40).progress-bar-info
+            +dropdown-task("New stuff", 85).progress-bar-danger
+            +dropdown-task("My progress", 20).progress-bar-primary
+            li.footer
+                a(href='#') View all
+                a(href='#') Cancel all
+                a(href='#') More
+    // TASKS INVERSE
+    .btn-group
+        button.btn.blue-dark.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+            | Tasks Inverse&nbsp;
+            span.caret
+        ul(role="menu").dropdown-menu.dropdown-menu-inverse.dropdown-task-list
+            li.header
+                h3
+                    | You have
+                    strong &nbsp;3 new&nbsp;
+                    | tasks
+                a(href="#") View all
+            +dropdown-task("Update progress", 30).progress-bar-warning
+            +dropdown-task("User migration", 65).progress-bar-primary
+            +dropdown-task("Important process and other stuff", 40).progress-bar-info
+            +dropdown-task("New stuff", 85).progress-bar-danger
+            +dropdown-task("My progress", 20).progress-bar-primary
+            li.footer
+                a(href='#') View all
+                a(href='#') Cancel all
+                a(href='#') More
+    // DROPDOWN
+    .btn-group
+        button.btn.cyan-dark.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+            | Dropdown&nbsp;
+            span.caret
+        ul.dropdown-menu.pull-right(role='menu')
+            +lia First
+            +lia Later
+            +lia Faster
+            +lia Mister
+            +lia Alea
+    // DROPDOWN (header + submenus)
+    .btn-group
+        button.btn.blue-grey.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+            | Advanced Dropdown&nbsp;
+            span.caret
+        +demo-dropdown-w-header-submenu
+    // DROPDOWN inverse (header + submenus)
+    .btn-group
+        button.btn.green-dark.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+            | Advanced Dropdown Inverse&nbsp;
+            span.caret
+        +demo-dropdown-w-header-submenu.dropdown-menu-inverse
 
 block header
     +page-title("Boxes", "Boxes")
@@ -47,67 +139,12 @@ block content
         .col-lg-8
             +box
                 +box-header("Box actions", "bolt", true)
-                    // TASKS
-                    .btn-group
-                        button.btn.blue.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
-                            | Tasks&nbsp;
-                            span.caret
-                        ul(role="menu").dropdown-menu.dropdown-wide.dropdown-task-list
-                            li.header
-                                h3
-                                    | You have
-                                    strong &nbsp;3 new&nbsp;
-                                    | tasks
-                                a(href="#") View all
-                            +dropdown-task("Update progress", 30).progress-bar-warning
-                            +dropdown-task("User migration", 65).progress-bar-primary
-                            +dropdown-task("Important process", 40).progress-bar-info
-                            +dropdown-task("New stuff", 85).progress-bar-danger
-                            +dropdown-task("My progress", 20).progress-bar-primary
-                    // BTN
-                    button.btn.teal Clear
-                    // TASKS INVERSE
-                    .btn-group
-                        button.btn.blue.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
-                            | Tasks&nbsp;
-                            span.caret
-                        ul(role="menu").dropdown-menu.dropdown-menu-inverse.dropdown-task-list
-                            li.header
-                                h3
-                                    | You have
-                                    strong &nbsp;3 new&nbsp;
-                                    | tasks
-                                a(href="#") View all
-                            +dropdown-task("Update progress", 30).progress-bar-warning
-                            +dropdown-task("User migration", 65).progress-bar-primary
-                            +dropdown-task("Important process", 40).progress-bar-info
-                            +dropdown-task("New stuff", 85).progress-bar-danger
-                            +dropdown-task("My progress", 20).progress-bar-primary
-                    // DROPDOWN
-                    .btn-group
-                        button.btn.blue.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
-                            | Options&nbsp;
-                            span.caret
-                        ul.dropdown-menu.pull-right(role='menu')
-                            +lia First
-                            +lia Later
-                            +lia Faster
-                            +lia Mister
-                            +lia Alea
-                    // DROPDOWN (header + submenus)
-                    .btn-group
-                        button.btn.blue-grey.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
-                            | Advanced&nbsp;
-                            span.caret
-                        +demo-dropdown-w-header-submenu
-                    // DROPDOWN inverse (header + submenus)
-                    .btn-group
-                        button.btn.green-dark.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
-                            | Advanced inverse&nbsp;
-                            span.caret
-                        +demo-dropdown-w-header-submenu.dropdown-menu-inverse
+                    +demo-dropdown-buttons
                 +box-body
                     | box-style-light box-draggable box-removable box-closable
+                    .btn-toolbar
+                        +demo-dropdown-buttons
+
         .col-lg-4
             +box.test-box.box-style-solid(data-box-controls="close,minimize,move")
                 +box-header("Boxes", "list")

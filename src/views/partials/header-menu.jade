@@ -3,19 +3,19 @@ include ../base
 ul.nav.navbar-nav
     li
         a(data-toggle="dropdown").dropdown-toggle Dropmenu
-        ul(role="menu").dropdown-menu
+        ul(role="menu").dropdown-menu.dropdown-menu-inverse
             +lia Hello2
             +lia Hello3
     li
         a(data-toggle="dropdown").dropdown-toggle Dropmenu
-        ul(role="menu").dropdown-menu
+        ul(role="menu").dropdown-menu.dropdown-menu-inverse
             +lia Hello2
             +lia Hello3
 ul.nav.navbar-nav.pull-right
     li
         a(data-toggle="dropdown").dropdown-toggle
             i.fa.fa-list
-        ul(role="menu").dropdown-menu.dropdown-wide.dropdown-task-list
+        ul(role="menu").dropdown-menu.dropdown-menu-inverse.dropdown-wide.dropdown-task-list
             li.header
                 h3
                     | You have
@@ -30,6 +30,24 @@ ul.nav.navbar-nav.pull-right
     li
         a(data-toggle="dropdown").dropdown-toggle
             i.fa.fa-user
-        ul(role="menu").dropdown-menu
-            +lia Hello2
-            +lia Hello3
+        ul(role="menu").dropdown-menu.dropdown-menu-inverse.dropdown-wide
+            li.header
+                h3 Overview
+            +lia
+                i.fa.fa-user
+                | View profile
+            +lia
+                i.fa.fa-envelope
+                | Messages
+                span.badge.green 3
+            +lia
+                i.fa.fa-users
+                | Contacts
+            li.header
+                h3 Options
+            +lia
+                i.fa.fa-pencil
+                | Change profile
+            +lia
+                i.fa.fa-key
+                | Logout
