@@ -2,7 +2,13 @@
  *  BOOTING UP SHIT
  */
 
-(function Boot(){
+(function Boot() {
+    App.boot();
+
+}.call());
+
+
+(function BootOLD(){
 
     var packadic = (window.packadic = window.packadic || {});
 
@@ -76,4 +82,4 @@
 
             });
         });
-}.call());
+});

@@ -6,7 +6,7 @@ define([ 'jquery' ],
         }
 
         /**
-         * @returns {Packadic}
+         * @returns {packadic}
          */
         function getEl(){
             if( typeof window.packadic_show_class === 'undefined' ){

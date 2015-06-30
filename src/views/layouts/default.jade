@@ -90,9 +90,12 @@ html(lang="en")
         block script
         block scripts
             +js-script('init.js')
+
+            //+js-script('init.js')
             // The place to include custom logic, a small demo
             block scripts-outside-of-project
-            +js-script('demo/outside_of_project.js')
+            //+js-script('demo/outside_of_project.js')
             block scripts-pre-boot
-            +js-script('boot.js')
+                +js-script('boot.js')
+
         block after

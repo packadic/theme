@@ -49,7 +49,14 @@ module.exports = function( grunt ){
         var appendScripts = grunt.config('init_script.append_scripts');
         var initScript = '';
         prependScripts.forEach(function(scriptPath){
-            initScript += " \n ; " + readScript(scriptPath);
+            if(scriptPath == 'packadic.js'){
+                initScript += " \n ; (function(){";
+                initScript += " \n ; " + readScript(scriptPath);
+                initScript += " \n ; }.call(this))";
+            } else {
+                initScript += " \n ; " + readScript(scriptPath);
+            }
+
         });
         initScript += " \n ; " + initJsContent;
         appendScripts.forEach(function(scriptPath){

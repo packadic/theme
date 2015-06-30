@@ -237,8 +237,9 @@ var init = module.exports = function (grunts) {
             dest           : "/assets/scripts/init.js",
             prepend_scripts: [
                 'plugins/lodash.custom.js',
+                'plugins/eventemitter2/lib/eventemitter2.js',
                 'plugins/require.js',
-                'vendor/mootools-1.5.1-custom.js'
+                'packadic.js'
             ],
             append_scripts: [
                 'config.js'
@@ -303,12 +304,12 @@ var init = module.exports = function (grunts) {
                 tasks: ['sass:nav']
             },*/
             scripts_watch: {
-                files: ['src/scripts/**', '!src/scripts/init.js'],
+                files: ['src/scripts/**/*.js', '!src/scripts/init.js', '!src/scripts/packadic.js'],
                 tasks: ['copy:scripts_watch']
             },
             initscripts  : {
-                files: ['src/scripts/init.js','src/scripts/config.js'],
-                tasks: ['create_init_script'] //'jsbuild:lodash', 'copy:scripts', 'uglify:dev',
+                files: ['src/scripts/init.js','src/scripts/config.js', 'src/scripts/packadic.js'],
+                tasks: ['copy:scripts_watch', 'create_init_script'] //'jsbuild:lodash', 'copy:scripts', 'uglify:dev',
             },
             views        : {
                 files: ['src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**'],
@@ -369,8 +370,8 @@ var init = module.exports = function (grunts) {
 
 
     grunt.registerTask('clean:scripts', function () {
-        grunt.log.writeln(grunt.config.get('target.dest'));
-        require('globule').find([grunt.config.get('target.dest') + '/assets/scripts/**', '!' + grunt.config.get('target.dest') + '/assets/scripts/plugins/**', grunt.config.get('target.dest') + '/assets/scripts/plugins/*/**']).forEach(function (delPath) {
+        grunt.log.writeln(App.config.get('target.dest'));
+        require('globule').find([App.config.get('target.dest') + '/assets/scripts/**', '!' + App.config.get('target.dest') + '/assets/scripts/plugins/**', App.config.get('target.dest') + '/assets/scripts/plugins/*/**']).forEach(function (delPath) {
             if (fs.statSync(delPath).isFile()) {
                 fs.unlinkSync(delPath);
             }
