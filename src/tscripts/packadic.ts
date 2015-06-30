@@ -1,21 +1,8 @@
-///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_eventemitter2_eventemitter2.d.ts"/>
-///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_lodash_lodash.d.ts"/>
-///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_requirejs_require.d.ts"/>
-///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_jquery_jquery.d.ts"/>
-///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_underscore.string_underscore.string.d.ts"/>
-
-
-
-interface MyWindow extends Window {
-    jade: any;
-    _s: any;
-    location: any;
-}
+///<reference path="definitions.d.ts"/>
+import autoloader = require('autoloader');
 
 
 module packadic {
-    declare var window:MyWindow;
-
     export class Util {
         public static kindsOf:any = {};
 
@@ -308,31 +295,26 @@ module packadic {
     }
 
     export enum ThemeAction {
-        refresh, reset
+        init, refresh, reset
     }
 
     export enum SidebarAction {
-        toggle, hide, show, open, close, refresh
+        init, toggle, hide, show, open, close, refresh
     }
 
     export interface ITheme extends Function {
         applyLayout();
         reset();
-        createLoader();
         toastr();
         alert();
-        getTemplate();
-        getViewPort();
-        getBreakpoint(which:any);
         initSlimScroll(el:any, opts?:any);
         destroySlimScroll(el:any);
         ensureScrollToTop();
+        getTemplate();
         init();
-
     }
 
     export interface ISidebar extends Function {
-        init(opts?:any);
         isFixed():boolean;
         isClosed():boolean;
         close(callback?:Function);
@@ -341,19 +323,27 @@ module packadic {
         show();
         toggle();
         refresh();
+        init();
     }
 
+
     export class App extends EventEmitter2 {
+
         private _startTime:number;
         private _config:IConfig;
         private _defaultConfig:Object;
         private _state:AppState;
         private _jade:Object;
         private _s:UnderscoreStringStaticExports;
-        public config:IConfigProperty;
         private _theme:ITheme;
         private _sidebar:ISidebar;
+        private $:JQueryStatic;
+
+
+        public config:IConfigProperty;
         public packadic:any;
+        public autoload:autoloader.Autoload;
+
 
         constructor() {
             var conf:EventEmitter2Configuration = {
@@ -366,62 +356,40 @@ module packadic {
             var self:App = this;
             this._startTime = new Date().getTime();
             this._state = AppState.init;
-            this.on('sidebar:init', function(sidebar){
-                console.log('App sidebar:init', sidebar);
-                if(!this._sidebar) {
-                    self._sidebar = sidebar;
-                }
-            });
 
         }
 
+        //
+        // PROPS
         public get colors():any {
-            if(this._state >= AppState.prestart) {
+            if (this._state >= AppState.prestart) {
                 return this.config('scss.colors');
             } else {
                 throw new Error('Cannot get colors, App state needs to be prestart or beyond')
             }
         }
+
         public get fonts():any {
-            if(this._state >= AppState.prestart) {
+            if (this._state >= AppState.prestart) {
                 return this.config('scss.fonts');
             } else {
                 throw new Error('Cannot get fonts, App state needs to be prestart or beyond')
             }
         }
+
         public get breakpoints():any {
-            if(this._state >= AppState.prestart) {
+            if (this._state >= AppState.prestart) {
                 return this.config('scss.breakpoints');
             } else {
                 throw new Error('Cannot get breakpoints, App state needs to be prestart or beyond')
             }
         }
 
-        public isDebug():boolean {
-            return this.config('debug') == true;
-        }
-
         public get defaults():Object {
             return this._defaultConfig;
         }
 
-        public getElapsedTime():number {
-            return (Date.now() - this._startTime) / 1000;
-        }
-
-        public getStartTime():number {
-            return this._startTime / 1000;
-        }
-
-        public getState():AppState {
-            return this._state;
-        }
-
-        public removePageLoader():App {
-            $('body').removeClass('page-loading');
-            return this;
-        }
-
+        // STARTUP
         public init(config:Object) {
             this._defaultConfig = Util.copyObject(config);
             this._config = new Config(config);
@@ -429,24 +397,24 @@ module packadic {
             this.setState(AppState.preboot);
         }
 
-        private setState(state:AppState):App {
-            this._state = state;
-            this.emit('state:' + AppState[state], AppState[state], state);
-            return this;
-        }
-
         public boot() {
+
             var self:App = this;
             if (this._state == AppState.init) {
                 throw new Error('Cannot boot, still in init mote. Init first man');
             }
             this.setState(AppState.booting);
             require.config(this.config.get('requireJS'));
-            require(['module', 'jquery', 'autoload', 'string', 'jade', 'storage', 'code-mirror', 'plugins/cookie', 'jq/general'],
-                function (module, $, autoload, _s, jade, storage) {
 
+            require(['module', 'jquery', 'autoloader', 'string', 'jade', 'storage', 'code-mirror', 'plugins/cookie', 'jq/general'],
+                function (module, $, autoloader, _s, jade, storage) {
+                    self.$ = $;
+
+                    self.autoload = new autoloader.Autoload();
                     self._jade = jade;
                     self._s = _s;
+
+                    self.autoload.addDefaultDefinitions();
 
                     // SCSS Json
                     var scss:any = _s.unquote($('head').css('font-family'), "'");
@@ -474,66 +442,243 @@ module packadic {
                         }
                         $('#debug-enable').on('click', function () {
                             $.cookie('debug', '1');
-                            window.location.refresh();
+                            window.location.reload();
+
                         });
                         self.config.set('debug', isDebug);
                     }
 
                     // Startup, figure out what modules to load
-                    var load = ['theme'];
+                    var load:Array<string> = ['theme'];
+                    var argMap:any = {theme: 1};
+                    if (self.config.get('theme.sidebarDisabled') !== true) {
+                        argMap['theme/sidebar'] = load.push('theme/sidebar');
+                    }
                     if (self.config.get('debug') === true) {
-                        load.push('debug');
+                        argMap['debug'] = load.push('debug');
                     }
                     if (self.config.get('demo') === true) {
-                        load.push('demo');
+                        argMap['demo'] = load.push('demo');
                     }
+
+
 
 
                     // EVENT: booted
                     self.setState(AppState.prestart);
 
-                    require(load, function (theme, debug, demo) {
-                        self._theme = theme;
+                    require(load, function () {
+                        var args = $.makeArray(arguments);
+                        var getArg = (name)=> {
+                            return args[argMap[name] - 1];
+                        };
+
+                        self._theme = getArg('theme');
+                        if (argMap['theme/sidebar']) {
+                            self._sidebar = getArg('theme/sidebar');
+                        }
 
                         // EVENT: starting
                         self.setState(AppState.starting);
 
-                        if (self.config.get('demo') === true && _.isObject(demo)) {
-                            demo.init();
-                        }
-                        theme.init();
-
+                        $(function () {
+                            if (argMap.demo) {
+                                getArg('demo').init();
+                            }
+                            self.theme(ThemeAction.init);
+                            self.setState(AppState.started);
+                        });
                         // EVENT: started
-                        self.setState(AppState.started);
 
                     });
                 });
         }
 
+        public defer():any {
+            return this.$.Deferred();
+        }
+
+        public isDebug():boolean {
+            return this.config('debug') == true;
+        }
+
+        public getElapsedTime():number {
+            return (Date.now() - this._startTime) / 1000;
+        }
+
+        public getStartTime():number {
+            return this._startTime / 1000;
+        }
+
+        public getState():AppState {
+            return this._state;
+        }
+
+
+        private setState(state:AppState):App {
+            this._state = state;
+            this.emit('state:' + AppState[state], AppState[state], state);
+            return this;
+        }
+
+        // TOP LEVEL API
         public box(action:BoxAction, args?:any):App {
             var actionName:string = BoxAction[action];
-            if(args && Util.kindOf(args) !== 'array') args = [args];
+            if (args && Util.kindOf(args) !== 'array') args = [args];
             this._theme.apply(action, args);
             return this;
         }
-        public theme(action:ThemeAction, args?:any):App {
+
+
+        public theme(action:ThemeAction, args?:any):JQueryPromise<any> {
+            var self:App = this;
+            var defer:any = this.defer();
             var actionName:any = typeof(action) == 'string' ? action : ThemeAction[action];
-            if(args && Util.kindOf(args) !== 'array') args = [args];
-            this._theme[actionName].apply(this._sidebar, args);
+            if (args && Util.kindOf(args) !== 'array') args = [args];
+            if (_.isUndefined(this._theme)) {
+                require(['theme'], function (theme) {
+                    self._theme = theme;
+                    var returned = self._theme[actionName].apply(self._theme, args);
+                    defer.resolve(returned);
+                })
+            } else {
+                var returned = this._theme[actionName].apply(this._theme, args);
+                defer.resolve(returned);
+            }
+            return defer.promise();
+        }
+
+        public sidebar(action:SidebarAction, args?:any):JQueryPromise<any> {
+            var self:App = this;
+            var defer:any = this.defer();
+            var actionName:any = typeof(action) == 'string' ? action : SidebarAction[action];
+            if (args && Util.kindOf(args) !== 'array') args = [args];
+            if (_.isUndefined(this._sidebar)) {
+                require(['theme/sidebar'], function (sidebar) {
+                    self._sidebar = sidebar;
+                    var returned = self._sidebar[actionName].apply(self._sidebar, args);
+                    defer.resolve(returned);
+                })
+            } else {
+                var returned = this._sidebar[actionName].apply(this._sidebar, args);
+                defer.resolve(returned);
+            }
+            return defer.promise();
+        }
+
+
+        //
+        /* HELPERS */
+        //
+        public removePageLoader():App {
+            $('body').removeClass('page-loading');
             return this;
         }
-        public sidebar(action:SidebarAction, args?:any):App {
-            var actionName:any = typeof(action) == 'string' ? action : SidebarAction[action];
-            if(args && Util.kindOf(args) !== 'array') args = [args];
-            this._sidebar[actionName].apply(this._sidebar, args);
-            return this;
+
+
+        public colorizeDataOption(dataObj:Object, keys:Array<any>):Object {
+            var self:App = this;
+            if (typeof(keys) === 'string') {
+                keys = (new Array()).concat([keys]);
+            }
+            $.each(keys, function (i, name) {
+                if (!_.isUndefined(dataObj[name])) {
+                    dataObj[name] = self.colors[dataObj[name]];
+                }
+            });
+            return dataObj;
+        }
+
+        public isSupported(propertyName:string):boolean {
+            var elm = document.createElement('div');
+            propertyName = propertyName.toLowerCase();
+
+            if (elm.style[propertyName] != undefined) {
+                return true;
+            }
+
+            var propertyNameCapital = propertyName.charAt(0).toUpperCase() + propertyName.substr(1),
+                domPrefixes = 'Webkit Moz ms O'.split(' ');
+
+            for (var i = 0; i < domPrefixes.length; i++) {
+                if (elm.style[domPrefixes[i] + propertyNameCapital] != undefined) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public getTemplate(name:string, callback?:Function):App {
+            return this._theme.getTemplate.apply(this._theme, arguments);
+        }
+
+        /**
+         * Returns the view port
+         * @returns {{width: *, height: *}}
+         */
+        public getViewPort() {
+            var e:any = window,
+                a:any = 'inner';
+            if (!('innerWidth' in window)) {
+                a = 'client';
+                e = document.documentElement || document.body;
+            }
+
+            return {
+                width: e[a + 'Width'],
+                height: e[a + 'Height']
+            };
+        }
+
+        /**
+         * Checks if the current device is a touch device
+         * @returns {boolean}
+         */
+        public isTouchDevice() {
+            try {
+                document.createEvent("TouchEvent");
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        /**
+         * Generates a random ID
+         * @param {Number} length
+         * @returns {string}
+         */
+        public getRandomId(length?:number) {
+            if (!_.isNumber(length)) {
+                length = 15;
+            }
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for (var i = 0; i < length; i++) {
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            return text;
+        }
+
+        public getBreakpoint(which:string) {
+            return parseInt(this.breakpoints['screen-' + which + '-min'].replace('px', ''));
+        }
+
+        public scrollTo(element:Element, to:number, duration:number) {
+            if (duration < 0) return;
+            var difference = to - element.scrollTop;
+            var perTick = difference / duration * 10;
+            var self:App = this;
+            setTimeout(function () {
+                element.scrollTop = element.scrollTop + perTick;
+                if (element.scrollTop === to) return;
+                self.scrollTo(element, to, duration - 10);
+            }, 10);
         }
 
     }
-
 }
-/**
- * @type {packadic.App}
- */
+
+
 window['App'] = new packadic.App();
-window['App'].packadic = packadic;

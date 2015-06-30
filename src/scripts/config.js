@@ -9,6 +9,46 @@
     var config = {
         debug                 : false,
         pageLoadedOnAutoloaded: true,
+        plugins               : {
+            confirmation: {
+                container     : 'body',
+                btnCancelIcon : 'fa fa-remove',
+                btnOkIcon     : 'fa fa-check',
+                btnOkClass    : 'btn-xs btn-info',
+                btnCancelClass: 'btn-xs btn-primary'
+            },
+            iCheck      : {
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass   : 'iradio_square-blue',
+                //increaseArea: '20%' // optional
+            },
+            material    : {
+                "ripples"             : false,
+                autofill              : true,
+                "inputElements"       : "form.form-material input.form-control, form.form-material textarea.form-control, form.form-material select.form-control",
+                "checkboxElements"    : "form.form-material .checkbox > label > input[type=checkbox]",
+                "togglebuttonElements": "form.form-material .togglebutton > label > input[type=checkbox]",
+                "radioElements"       : "form.form-material .radio > label > input[type=radio]"
+            },
+            easyPieChart: {
+                animate: 1000,
+                size   : 85
+            },
+            tooltip     : {container: 'body'},
+            popover     : {container: 'body'},
+            slimScroll  : {
+                allowPageScroll: true,
+                size           : '6px',
+                color          : '#000',
+                wrapperClass   : 'slimScrollDiv',
+                railColor      : '#222',
+                position       : 'right',
+                height         : '200px',
+                alwaysVisible  : false,
+                railVisible    : true,
+                disableFadeOut : true
+            }
+        },
         paths                 : {
             assets : '/assets',
             images : '/assets/images',
@@ -16,15 +56,16 @@
             fonts  : '/assets/fonts',
             styles : '/assets/styles'
         },
-        scss: {},
-        theme: {
-            'layout-option' : 'fluid',
-            'sidebar-option': 'default',
+        scss                  : {},
+        theme                 : {
+            sidebarDisabled     : false,
+            'layout-option'     : 'fluid',
+            'sidebar-option'    : 'default',
             'sidebar-menu'      : 'accordion',
             'sidebar-pos-option': 'left',
             'sidebar-style'     : 'default',
-            'section-bottom': 'fixed',
-            'section-top'   : 'normal'
+            'section-bottom'    : 'fixed',
+            'section-top'       : 'normal'
         },
         requireJS             : {
             baseUrl: '<%= paths.scripts %>',
@@ -37,6 +78,8 @@
             },
 
             paths: {
+                'cjs'                      : 'plugins/cjs/cjs',
+                'amd-loader'               : 'plugins/amd-loader/amd-loader',
                 // custom build with jsbuild
                 'jquery'                   : 'plugins/jquery/dist/jquery.min',
                 'plugins/bootstrap'        : 'plugins/bootstrap.custom.min',
@@ -208,10 +251,12 @@
                 // packadic scripts
                 'config'             : ['jquery'],
                 'eventer'            : ['jquery', 'plugins/events'],
-                'autoload'           : ['jquery'],
+                //'autoload'           : ['jquery'],
                 'theme'              : ['plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events'],
-                'demo'               : ['theme']
+                'demo'               : ['theme'],
+                'autoloader'         : {exports: 'autoloader', deps: ['jquery']}
             },
+
 
 
             waitSeconds: 5,

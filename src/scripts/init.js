@@ -1,8 +1,3 @@
-// here comes require.js and lodash.custom.js after build task
 /*
- * INIT
+ * init placeholder file. Nothing special, move along
  */
-(function Init() {
-
-}.call());
-

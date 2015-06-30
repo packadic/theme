@@ -6,29 +6,28 @@
         oauth_io: 'UpFevf23G2O93iSlMOQ5PRL4zq0'
     });
     App.on('state:*', function(){
-        console.log('state event', arguments);
+        console.log('event', this.event, arguments, this);
     });
     App.on('theme:*', function(){
-        console.log('theme event', arguments);
+        console.log('event', this.event, arguments, this);
     });
     App.on('sidebar:*', function(){
-        console.log('sidebar event', arguments);
+        console.log('event', this.event, arguments, this);
     });
+
     App.on('state:preboot', function () {
         console.warn('(' + App.getElapsedTime() + 's) PRE-BOOT');
     }).on('state:booting', function () {
         console.warn('(' + App.getElapsedTime() + 's) BOOTING');
     }).on('state:starting', function () {
         console.warn('(' + App.getElapsedTime() + 's) STARTING');
-        require(['jquery', 'theme', 'theme/sidebar', 'autoload', 'jq/box'], function ($, theme, sidebar, autoload) {
+        require(['jquery',  'jq/box'], function ($) {
             console.warn('(' + App.getElapsedTime() + 's) BOOTED');
 
-
-            sidebar.init({hidden: false, items: packadic.site.data.navigation.sidebar});
-
             $(function () {
-                autoload.scan($('body'), function () {
-                    if ( App.config.get('pageLoadedOnAutoloaded') === true ) {
+                App.sidebar('init', {hidden: false, items: packadic.site.data.navigation.sidebar});
+                App.autoload.scan($('body'), function () {
+                    if ( App.config('pageLoadedOnAutoloaded') === true ) {
                         App.removePageLoader();
                     }
                 });

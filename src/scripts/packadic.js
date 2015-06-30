@@ -1,8 +1,3 @@
-///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_eventemitter2_eventemitter2.d.ts"/>
-///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_lodash_lodash.d.ts"/>
-///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_requirejs_require.d.ts"/>
-///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_jquery_jquery.d.ts"/>
-///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_underscore.string_underscore.string.d.ts"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -256,17 +251,19 @@ var packadic;
     })(packadic.BoxAction || (packadic.BoxAction = {}));
     var BoxAction = packadic.BoxAction;
     (function (ThemeAction) {
-        ThemeAction[ThemeAction["refresh"] = 0] = "refresh";
-        ThemeAction[ThemeAction["reset"] = 1] = "reset";
+        ThemeAction[ThemeAction["init"] = 0] = "init";
+        ThemeAction[ThemeAction["refresh"] = 1] = "refresh";
+        ThemeAction[ThemeAction["reset"] = 2] = "reset";
     })(packadic.ThemeAction || (packadic.ThemeAction = {}));
     var ThemeAction = packadic.ThemeAction;
     (function (SidebarAction) {
-        SidebarAction[SidebarAction["toggle"] = 0] = "toggle";
-        SidebarAction[SidebarAction["hide"] = 1] = "hide";
-        SidebarAction[SidebarAction["show"] = 2] = "show";
-        SidebarAction[SidebarAction["open"] = 3] = "open";
-        SidebarAction[SidebarAction["close"] = 4] = "close";
-        SidebarAction[SidebarAction["refresh"] = 5] = "refresh";
+        SidebarAction[SidebarAction["init"] = 0] = "init";
+        SidebarAction[SidebarAction["toggle"] = 1] = "toggle";
+        SidebarAction[SidebarAction["hide"] = 2] = "hide";
+        SidebarAction[SidebarAction["show"] = 3] = "show";
+        SidebarAction[SidebarAction["open"] = 4] = "open";
+        SidebarAction[SidebarAction["close"] = 5] = "close";
+        SidebarAction[SidebarAction["refresh"] = 6] = "refresh";
     })(packadic.SidebarAction || (packadic.SidebarAction = {}));
     var SidebarAction = packadic.SidebarAction;
     var App = (function (_super) {
@@ -282,14 +279,10 @@ var packadic;
             var self = this;
             this._startTime = new Date().getTime();
             this._state = AppState.init;
-            this.on('sidebar:init', function (sidebar) {
-                console.log('App sidebar:init', sidebar);
-                if (!this._sidebar) {
-                    self._sidebar = sidebar;
-                }
-            });
         }
         Object.defineProperty(App.prototype, "colors", {
+            //
+            // PROPS
             get: function () {
                 if (this._state >= AppState.prestart) {
                     return this.config('scss.colors');
@@ -325,9 +318,6 @@ var packadic;
             enumerable: true,
             configurable: true
         });
-        App.prototype.isDebug = function () {
-            return this.config('debug') == true;
-        };
         Object.defineProperty(App.prototype, "defaults", {
             get: function () {
                 return this._defaultConfig;
@@ -335,29 +325,12 @@ var packadic;
             enumerable: true,
             configurable: true
         });
-        App.prototype.getElapsedTime = function () {
-            return (Date.now() - this._startTime) / 1000;
-        };
-        App.prototype.getStartTime = function () {
-            return this._startTime / 1000;
-        };
-        App.prototype.getState = function () {
-            return this._state;
-        };
-        App.prototype.removePageLoader = function () {
-            $('body').removeClass('page-loading');
-            return this;
-        };
+        // STARTUP
         App.prototype.init = function (config) {
             this._defaultConfig = Util.copyObject(config);
             this._config = new Config(config);
             this.config = Config.makeProperty(this._config);
             this.setState(AppState.preboot);
-        };
-        App.prototype.setState = function (state) {
-            this._state = state;
-            this.emit('state:' + AppState[state], AppState[state], state);
-            return this;
         };
         App.prototype.boot = function () {
             var self = this;
@@ -366,9 +339,12 @@ var packadic;
             }
             this.setState(AppState.booting);
             require.config(this.config.get('requireJS'));
-            require(['module', 'jquery', 'autoload', 'string', 'jade', 'storage', 'code-mirror', 'plugins/cookie', 'jq/general'], function (module, $, autoload, _s, jade, storage) {
+            require(['module', 'jquery', 'autoloader', 'string', 'jade', 'storage', 'code-mirror', 'plugins/cookie', 'jq/general'], function (module, $, autoloader, _s, jade, storage) {
+                self.$ = $;
+                self.autoload = new autoloader.Autoload();
                 self._jade = jade;
                 self._s = _s;
+                self.autoload.addDefaultDefinitions();
                 // SCSS Json
                 var scss = _s.unquote($('head').css('font-family'), "'");
                 while (typeof scss !== 'object') {
@@ -393,33 +369,67 @@ var packadic;
                     }
                     $('#debug-enable').on('click', function () {
                         $.cookie('debug', '1');
-                        window.location.refresh();
+                        window.location.reload();
                     });
                     self.config.set('debug', isDebug);
                 }
                 // Startup, figure out what modules to load
                 var load = ['theme'];
+                var argMap = { theme: 1 };
+                if (self.config.get('theme.sidebarDisabled') !== true) {
+                    argMap['theme/sidebar'] = load.push('theme/sidebar');
+                }
                 if (self.config.get('debug') === true) {
-                    load.push('debug');
+                    argMap['debug'] = load.push('debug');
                 }
                 if (self.config.get('demo') === true) {
-                    load.push('demo');
+                    argMap['demo'] = load.push('demo');
                 }
                 // EVENT: booted
                 self.setState(AppState.prestart);
-                require(load, function (theme, debug, demo) {
-                    self._theme = theme;
+                require(load, function () {
+                    var args = $.makeArray(arguments);
+                    var getArg = function (name) {
+                        return args[argMap[name] - 1];
+                    };
+                    self._theme = getArg('theme');
+                    if (argMap['theme/sidebar']) {
+                        self._sidebar = getArg('theme/sidebar');
+                    }
                     // EVENT: starting
                     self.setState(AppState.starting);
-                    if (self.config.get('demo') === true && _.isObject(demo)) {
-                        demo.init();
-                    }
-                    theme.init();
+                    $(function () {
+                        if (argMap.demo) {
+                            getArg('demo').init();
+                        }
+                        self.theme(ThemeAction.init);
+                        self.setState(AppState.started);
+                    });
                     // EVENT: started
-                    self.setState(AppState.started);
                 });
             });
         };
+        App.prototype.defer = function () {
+            return this.$.Deferred();
+        };
+        App.prototype.isDebug = function () {
+            return this.config('debug') == true;
+        };
+        App.prototype.getElapsedTime = function () {
+            return (Date.now() - this._startTime) / 1000;
+        };
+        App.prototype.getStartTime = function () {
+            return this._startTime / 1000;
+        };
+        App.prototype.getState = function () {
+            return this._state;
+        };
+        App.prototype.setState = function (state) {
+            this._state = state;
+            this.emit('state:' + AppState[state], AppState[state], state);
+            return this;
+        };
+        // TOP LEVEL API
         App.prototype.box = function (action, args) {
             var actionName = BoxAction[action];
             if (args && Util.kindOf(args) !== 'array')
@@ -428,25 +438,141 @@ var packadic;
             return this;
         };
         App.prototype.theme = function (action, args) {
+            var self = this;
+            var defer = this.defer();
             var actionName = typeof (action) == 'string' ? action : ThemeAction[action];
             if (args && Util.kindOf(args) !== 'array')
                 args = [args];
-            this._theme[actionName].apply(this._sidebar, args);
-            return this;
+            if (_.isUndefined(this._theme)) {
+                require(['theme'], function (theme) {
+                    self._theme = theme;
+                    var returned = self._theme[actionName].apply(self._theme, args);
+                    defer.resolve(returned);
+                });
+            }
+            else {
+                var returned = this._theme[actionName].apply(this._theme, args);
+                defer.resolve(returned);
+            }
+            return defer.promise();
         };
         App.prototype.sidebar = function (action, args) {
+            var self = this;
+            var defer = this.defer();
             var actionName = typeof (action) == 'string' ? action : SidebarAction[action];
             if (args && Util.kindOf(args) !== 'array')
                 args = [args];
-            this._sidebar[actionName].apply(this._sidebar, args);
+            if (_.isUndefined(this._sidebar)) {
+                require(['theme/sidebar'], function (sidebar) {
+                    self._sidebar = sidebar;
+                    var returned = self._sidebar[actionName].apply(self._sidebar, args);
+                    defer.resolve(returned);
+                });
+            }
+            else {
+                var returned = this._sidebar[actionName].apply(this._sidebar, args);
+                defer.resolve(returned);
+            }
+            return defer.promise();
+        };
+        //
+        /* HELPERS */
+        //
+        App.prototype.removePageLoader = function () {
+            $('body').removeClass('page-loading');
             return this;
+        };
+        App.prototype.colorizeDataOption = function (dataObj, keys) {
+            var self = this;
+            if (typeof (keys) === 'string') {
+                keys = (new Array()).concat([keys]);
+            }
+            $.each(keys, function (i, name) {
+                if (!_.isUndefined(dataObj[name])) {
+                    dataObj[name] = self.colors[dataObj[name]];
+                }
+            });
+            return dataObj;
+        };
+        App.prototype.isSupported = function (propertyName) {
+            var elm = document.createElement('div');
+            propertyName = propertyName.toLowerCase();
+            if (elm.style[propertyName] != undefined) {
+                return true;
+            }
+            var propertyNameCapital = propertyName.charAt(0).toUpperCase() + propertyName.substr(1), domPrefixes = 'Webkit Moz ms O'.split(' ');
+            for (var i = 0; i < domPrefixes.length; i++) {
+                if (elm.style[domPrefixes[i] + propertyNameCapital] != undefined) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        App.prototype.getTemplate = function (name, callback) {
+            return this._theme.getTemplate.apply(this._theme, arguments);
+        };
+        /**
+         * Returns the view port
+         * @returns {{width: *, height: *}}
+         */
+        App.prototype.getViewPort = function () {
+            var e = window, a = 'inner';
+            if (!('innerWidth' in window)) {
+                a = 'client';
+                e = document.documentElement || document.body;
+            }
+            return {
+                width: e[a + 'Width'],
+                height: e[a + 'Height']
+            };
+        };
+        /**
+         * Checks if the current device is a touch device
+         * @returns {boolean}
+         */
+        App.prototype.isTouchDevice = function () {
+            try {
+                document.createEvent("TouchEvent");
+                return true;
+            }
+            catch (e) {
+                return false;
+            }
+        };
+        /**
+         * Generates a random ID
+         * @param {Number} length
+         * @returns {string}
+         */
+        App.prototype.getRandomId = function (length) {
+            if (!_.isNumber(length)) {
+                length = 15;
+            }
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for (var i = 0; i < length; i++) {
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            return text;
+        };
+        App.prototype.getBreakpoint = function (which) {
+            return parseInt(this.breakpoints['screen-' + which + '-min'].replace('px', ''));
+        };
+        App.prototype.scrollTo = function (element, to, duration) {
+            if (duration < 0)
+                return;
+            var difference = to - element.scrollTop;
+            var perTick = difference / duration * 10;
+            var self = this;
+            setTimeout(function () {
+                element.scrollTop = element.scrollTop + perTick;
+                if (element.scrollTop === to)
+                    return;
+                self.scrollTo(element, to, duration - 10);
+            }, 10);
         };
         return App;
     })(EventEmitter2);
     packadic.App = App;
 })(packadic || (packadic = {}));
-/**
- * @type {packadic.App}
- */
 window['App'] = new packadic.App();
-window['App'].packadic = packadic;

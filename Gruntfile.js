@@ -7,7 +7,8 @@ var radic  = require('radic'),
     util   = require('util'),
     _s     = require('underscore.string'),
     jsyaml = require('js-yaml'),
-    fs     = require('fs-extra'),
+    fs     = require('fs'),
+    globule = require('globule'),
     path   = require('path');
 
 var grunt;
@@ -72,6 +73,10 @@ var init = module.exports = function (grunts) {
         '<%= target.dest %>/assets/scripts/plugins/mscrollbar.js': ['src/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js'],
         '<%= target.dest %>/assets/scripts/plugins/require.js'   : ['src/plugins/requirejs/require.js']
     };
+    var tsAutoGenFiles = globule.find(path.join(process.cwd(), 'src/tscripts/amd/*.js')).map(path.basename);
+    var tsAutoGenFilesIgnore = tsAutoGenFiles.map(function(val){
+        return '!src/scripts/' + val;
+    });
 
 
     var gruntConfig = {
@@ -126,7 +131,10 @@ var init = module.exports = function (grunts) {
             plugins      : {files: [{expand: true, cwd: 'src/plugins', src: '**', dest: '<%= target.dest %>/assets/scripts/plugins'}]},
             demo         : {files: [{expand: true, cwd: 'src/demo', src: '**', dest: '<%= target.dest %>/demo'}]},
             misc         : {files: [{src: 'src/.htaccess', dest: '<%= target.dest %>/.htaccess'}]},
-            favicon : {files: [{src: 'src/favicon-html5.ico', dest: '<%= target.dest %>/favicon.ico'}]}
+            favicon : {files: [{src: 'src/favicon-html5.ico', dest: '<%= target.dest %>/favicon.ico'}]},
+            tsdefs: {files: [{expand: true, cwd: '<%= target.dest %>/assets/scripts', src: '**/*.d.ts', dest: 'src/tscripts/definitions'}]},
+            ts_commonjs         : {files: [{expand: true, cwd: 'src/tscripts/commonjs', src: 'packadic.js', dest: 'src/scripts'}]},
+            ts_amd         : {files: [{expand: true, cwd: 'src/tscripts/amd', src: ['*.js', '!packadic.js'], dest: 'src/scripts'}]}
         },
         jade            : {
             dev      : {
@@ -304,11 +312,11 @@ var init = module.exports = function (grunts) {
                 tasks: ['sass:nav']
             },*/
             scripts_watch: {
-                files: ['src/scripts/**/*.js', '!src/scripts/init.js', '!src/scripts/packadic.js'],
+                files: ['src/scripts/**/*.js', '!src/scripts/init.js'],
                 tasks: ['copy:scripts_watch']
             },
             initscripts  : {
-                files: ['src/scripts/init.js','src/scripts/config.js', 'src/scripts/packadic.js'],
+                files: ['src/scripts/init.js','src/scripts/config.js'],
                 tasks: ['copy:scripts_watch', 'create_init_script'] //'jsbuild:lodash', 'copy:scripts', 'uglify:dev',
             },
             views        : {
@@ -335,11 +343,39 @@ var init = module.exports = function (grunts) {
             livereload: {
                 options: {livereload: 35729},
                 files  : ['src/**/*']
+            },
+            typescript: {
+                files: ['src/tscripts/**/*.ts', '!src/tscripts/**/*.d.ts'],
+                tasks: ['dots:both']
+            },
+            /*typescript_packadic: {
+                files: ['src/tscripts/packadic.ts'],
+                tasks: ['typescript:packadic']
             }
+            */
         },
         jsdoc: {
             dev: {
                 options: { a: 'b'}
+            }
+        },
+        typescript: {
+            options: {
+                target: 'es5',
+                rootDir: 'src/tscripts',
+                sourceMap: false,
+                declaration: true,
+                module: 'amd'
+            },
+            commonjs: {
+                src: ['src/tscripts/**/*.ts','!src/tscripts/**/*.d.ts'],
+                dest: 'src/tscripts/commonjs',
+                options: { module: 'commonjs' }
+            },
+            amd: {
+                src: ['src/tscripts/**/*.ts','!src/tscripts/**/*.d.ts'],
+                dest: 'src/tscripts/amd',
+                options: { module: 'amd' }
             }
         }
     };
@@ -391,4 +427,44 @@ var init = module.exports = function (grunts) {
         debug('task event', a);
     });
 
+    grunt.registerTask('phpstorm:definitions', '', function(){
+        var found = globule.find('/home/radic/.WebIde80/system/extLibs/*.d.ts');
+
+        var copied = 0;
+        found.forEach(function(filePath){
+            var fileName = path.basename(filePath).replace('http_github.com_borisyankov_DefinitelyTyped_raw_master_','');
+            var name = path.basename(fileName, '.d.ts');
+            var segments = name.split('_');
+            var newName = fileName;
+            if(segments[0] == segments[1]) {
+                newName = newName.replace(segments[0] + '_', '');
+            }
+            var dest = path.join(process.cwd(), 'src/tscripts/definitions', newName);
+            if(fs.existsSync(dest)) return;
+            fs.writeFileSync(dest, fs.readFileSync(filePath, 'UTF-8'));
+            copied++;
+            //grunt.verbose.writeln('Copied definition: ' + newName);
+        });
+        grunt.log.ok('Copied and renamed ' + copied + ' definitions.');
+
+
+    })
+
+    grunt.registerTask('dots', function(target) {
+        var packadic = ['typescript:commonjs', 'copy:ts_commonjs', 'copy:scripts_watch', 'create_init_script'];
+        var other = ['typescript:amd', 'copy:ts_amd'];
+        if(target === 'packadic'){
+            grunt.task.run(packadic);
+        } else if(target === 'other') {
+            grunt.task.run(other)
+        } else if(target === 'both') {
+            grunt.task.run(other.concat(packadic));
+        }
+
+    });
+
+
+    grunt.registerTask('kill', function() {
+        process.exit(1);
+    });
 };

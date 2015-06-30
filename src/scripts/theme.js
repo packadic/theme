@@ -1,21 +1,7 @@
-define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', 'Q', 'storage',
+define(['jquery', 'fn/defined', 'fn/default', 'fn/cre',   'Q', 'storage',
         'plugins/cookie', 'plugins/bs-material-ripples'],
-    function ($, defined, def, cre, eventer, autoload, Q, storage) {
+    function ($, defined, def, cre,  Q, storage) {
         'use strict';
-
-
-
-
-        var defaultOptions = {
-            'layout-option' : 'fluid',
-            'sidebar-option': 'default',
-            'sidebar-menu'      : 'accordion',
-            'sidebar-pos-option': 'left',
-            'sidebar-style'     : 'default',
-            'section-bottom': 'fixed',
-            'section-top'   : 'normal'
-        };
-
 
 
         /**
@@ -33,7 +19,6 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
          */
         var theme = {
             $hidden       : cre().addClass('hide'),
-
             /**
              * @typedef ThemeOptions
              * @type {object}
@@ -48,14 +33,10 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                 default: App.config('theme')
             }),
             defaultOptions: App.config('theme'),
-
-            // import the SCSS exported values. We'll use those often enough
             colors        : App.colors,
             fonts         : App.fonts,
             breakpoints   : App.breakpoints
         };
-
-        console.log(theme.fonts);
 
 
         var $body = $('body'),
@@ -66,8 +47,6 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                 json   : true,
                 default: App.config('theme')
             });
-
-
             theme.applyLayout();
         };
 
@@ -295,9 +274,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
          * Returns the debug boolean
          * @returns {boolean}
          */
-        theme.isDebug = function () {
-            return App.config('debug') == true;
-        };
+        theme.isDebug = App.isDebug.bind(App);
 
         /**
          * Checks if the sidebar is used
@@ -305,33 +282,6 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
          */
         theme.hasSidebar = function () {
             return $('nav.sidebar-nav').length > 0;
-        };
-
-        /**
-         * checks is a property is supported on the browser
-         * @param propertyName
-         * @returns {boolean}
-         * @example
-         * var supported = theme.isSupported('animation')
-         */
-        theme.isSupported = function (propertyName) {
-            var elm = document.createElement('div');
-            propertyName = propertyName.toLowerCase();
-
-            if ( elm.style[propertyName] != undefined ) {
-                return true;
-            }
-
-            var propertyNameCapital = propertyName.charAt(0).toUpperCase() + propertyName.substr(1),
-                domPrefixes = 'Webkit Moz ms O'.split(' ');
-
-            for (var i = 0; i < domPrefixes.length; i ++) {
-                if ( elm.style[domPrefixes[i] + propertyNameCapital] != undefined ) {
-                    return true;
-                }
-            }
-
-            return false;
         };
 
         theme.createLoader = function (name) {
@@ -360,76 +310,24 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
          */
         theme.getTemplate = function (name, cb) {
             if(!defined(cb)) {
-                var deferred = Q.defer();
+                var defer = App.defer();
             }
             require(['templates/' + name], function (template) {
                 cb(template);
                 if(!defined(cb)) {
-                    deferred.resolve(template);
+                    defer.resolve(template);
                 }
             });
             if(!defined(cb)) {
-                return deferred.promise;
+                return defer.promise();
             }
         };
 
-        /**
-         * Returns the view port
-         * @returns {{width: *, height: *}}
-         */
-        theme.getViewPort = function () {
-            var e = window,
-                a = 'inner';
-            if ( ! ('innerWidth' in window) ) {
-                a = 'client';
-                e = document.documentElement || document.body;
-            }
-
-            return {
-                width : e[a + 'Width'],
-                height: e[a + 'Height']
-            };
-        };
-
-        /**
-         * Checks if the current device is a touch device
-         * @returns {boolean}
-         */
-        theme.isTouchDevice = function () {
-            try {
-                document.createEvent("TouchEvent");
-                return true;
-            } catch (e) {
-                return false;
-            }
-        };
-
-        /**
-         * Generates a random ID
-         * @param {Number} length
-         * @returns {string}
-         */
-        theme.getRandomId = function (length) {
-            if ( ! _.isNumber(length) ) {
-                length = 15;
-            }
-            var text = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for (var i = 0; i < length; i ++) {
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-            }
-            return text;
-        };
-
-        /**
-         * Returns the breakpoint, as set in the stylesheet
-         * @param {string} which Can be xs, sm, md or lg
-         * @returns {Number}
-         */
-        theme.getBreakpoint = function (which) {
-            return parseInt(App.breakpoints['screen-' + which + '-min'].replace('px', ''));
-        };
-
+        theme.isSupported = App.isSupported.bind(App);
+        theme.getViewPort = App.getViewPort.bind(App);
+        theme.isTouchDevice = App.isTouchDevice.bind(App);
+        theme.getRandomId = App.getRandomId.bind(App);
+        theme.getBreakpoint = App.getBreakpoint.bind(App);
 
 
         theme._initSettingsEditor = function () {
@@ -462,7 +360,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                     /**
                      * @event module:theme~resize
                      */
-                    App.emit('theme:resize');
+                    App.emit('theme:resize', theme, 'resize');
                 }, 600); // delay the event a bit, otherwise it doesn't seem to work well in some cases
             });
         };
@@ -470,19 +368,6 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         theme._initEvents = function () {
             theme._initResizeEvent();
         };
-
-        function scrollTo(element, to, duration) {
-            if (duration < 0) return;
-            var difference = to - element.scrollTop;
-            var perTick = difference / duration * 10;
-
-            setTimeout(function() {
-                element.scrollTop = element.scrollTop + perTick;
-                if (element.scrollTop === to) return;
-                scrollTo(element, to, duration - 10);
-            }, 10);
-        }
-
         /**
          * Scroll to top button
          * @todo put the duration into the config
@@ -491,7 +376,8 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         theme._initScrollToTop = function(){
             $('#scroll-top').off('click').on('click', function(e){
                 e.preventDefault();
-                scrollTo(document.body, 0, 600);
+                App.emit('theme:scrolltop');
+                App.scrollTo(document.body, 0, 600);
             })
         };
 
@@ -510,26 +396,12 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                     if ( $(this).attr("data-initialized") ) {
                         return; // exit
                     }
-
                     var height = $(this).attr("data-height") ? $(this).attr("data-height") : $(this).css('height');
-
                     if ( ! defined(opts) ) {
                         opts = {};
                     }
-
-                    $(this).slimScroll(_.merge({
-                        allowPageScroll: true, // allow page scroll when the element scroll is ended
-                        size           : '6px',
-                        color          : ($(this).attr("data-handle-color") ? $(this).attr("data-handle-color") : '#000'),
-                        wrapperClass   : ($(this).attr("data-wrapper-class") ? $(this).attr("data-wrapper-class") : 'slimScrollDiv'),
-                        railColor      : ($(this).attr("data-rail-color") ? $(this).attr("data-rail-color") : '#222'),
-                        position       : 'right',
-                        height         : height,
-                        alwaysVisible  : ($(this).attr("data-always-visible") == "1" ? true : false),
-                        railVisible    : ($(this).attr("data-rail-visible") == "1" ? true : false),
-                        disableFadeOut : true
-                    }, opts));
-
+                    var data = _.merge(App.config('plugins.slimScroll'), $(this).data());
+                    $(this).slimScroll(_.merge(data, opts));
                     $(this).attr("data-initialized", "1");
                 });
             });

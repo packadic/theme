@@ -113,7 +113,8 @@
     "vega": "~1.5.0",
     "topojson": "~1.6.19",
     "bootstrap-filestyle": "~1.1.2",
-    "bootstrap-slider": "*"
+    "bootstrap-slider": "*",
+    "cjs": "*"
   },
   "resolutions": {
     "datatables": "~1.10.6"

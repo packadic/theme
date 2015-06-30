@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+tscriptsDir=/home/radic/theme/src/tscripts
+
+function jsdoc() {
+    watchdir=/home/radic/theme/src/tscripts
+    execdir=/home/radic/theme
+    watchfiles="${watchdir}/*.ts"
+    cd $watchdir
+    while res=$(inotifywait -r -e modify $watchfiles --format %f .); do
+        cd $watchdir
+        tsc -t ES5 -outDir "$watchdir/commonjs"
+        cd $watchdir
+    done
+}
+
+function killScreenByName () {
+    local name="${1}"
+    echo "Gonna kill ${name} "
+    kill `screen -ls | grep $name | awk {'print $1'} | cut -c 1-5`
+    screen -wipe
+}
+
+
+function commonjs() {
+    tsc -t ES5 --module commonjs --outDir "${tscriptsDir}/commonjs" --watch ${tscriptsDir}/packadic.ts
+}
+
+function amd() {
+    #screen -dmS screenamd
+    #screen -S screenamd -X
+    tsc -t ES5 --module amd --outDir "${tscriptsDir}/amd" --declaration --watch ${tscriptsDir}/*.ts
+}
+
+$*
