@@ -16,6 +16,16 @@
             fonts  : '/assets/fonts',
             styles : '/assets/styles'
         },
+        scss: {},
+        theme: {
+            'layout-option' : 'fluid',
+            'sidebar-option': 'default',
+            'sidebar-menu'      : 'accordion',
+            'sidebar-pos-option': 'left',
+            'sidebar-style'     : 'default',
+            'section-bottom': 'fixed',
+            'section-top'   : 'normal'
+        },
         requireJS             : {
             baseUrl: '<%= paths.scripts %>',
             map    : {

@@ -3,26 +3,24 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
     function ($, defined, def, cre, eventer, autoload, Q, storage) {
         'use strict';
 
-        var packadic = (window.packadic = window.packadic || {});
+
+
 
         var defaultOptions = {
             'layout-option' : 'fluid',
             'sidebar-option': 'default',
-
-
             'sidebar-menu'      : 'accordion',
             'sidebar-pos-option': 'left',
             'sidebar-style'     : 'default',
-
             'section-bottom': 'fixed',
             'section-top'   : 'normal'
         };
 
 
+
         /**
          * The theme module provides required stuff for the theme
          * @exports theme
-         * @mixes eventer
          * @fires module:theme~init
          * @fires module:theme~resize
          * @fires module:theme~layout
@@ -47,27 +45,17 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
              */
             options       : storage.get('theme.options', {
                 json   : true,
-                default: defaultOptions
+                default: App.config('theme')
             }),
-            defaultOptions: defaultOptions,
+            defaultOptions: App.config('theme'),
 
             // import the SCSS exported values. We'll use those often enough
-            colors        : packadic.config.scss.colors,
-            fonts         : packadic.config.scss.fonts,
-            breakpoints   : packadic.config.scss.breakpoints
+            colors        : App.colors,
+            fonts         : App.fonts,
+            breakpoints   : App.breakpoints
         };
 
-        $.each(theme.fonts, function (k, v) {
-            theme.fonts[k] = v.join(', ');
-        });
         console.log(theme.fonts);
-
-        eventer('theme', theme);
-        theme._defineEvent('init');
-        theme._defineEvent('resize');
-        theme._defineEvent('layout');
-        theme._defineEvent('save');
-        theme._defineEvent('reset');
 
 
         var $body = $('body'),
@@ -76,16 +64,11 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
         theme._initLayout = function () {
             theme.options = storage.get('theme.options', {
                 json   : true,
-                default: defaultOptions
+                default: App.config('theme')
             });
 
 
             theme.applyLayout();
-            /**
-             * @event module:theme~init
-             * @type {object}
-             */
-            theme._trigger('init', theme.options);
         };
 
         var resetLayout = function () {
@@ -159,7 +142,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
 
             if ( lastSelectedLayout != layoutOption ) {
                 //layout changed, run responsive handler:
-                theme._trigger('resize');
+                App.emit('theme:resize');
             }
             lastSelectedLayout = layoutOption;
 
@@ -240,7 +223,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                  * @event module:theme~layout
                  * @type {object}
                  */
-                theme._trigger('layout', theme.options);
+                App.emit('theme:layout', theme.options);
             });
         };
 
@@ -285,7 +268,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
              * @event module:theme~save
              * @type {object}
              */
-            theme._trigger('save', theme.options);
+            App.emit('theme:save', theme.options);
         };
 
         /**
@@ -296,14 +279,14 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             if ( ! defined(save) || save === true ) {
                 storage.del('theme.options');
             }
-            theme.options = defaultOptions;
+            theme.options = App.config('theme');
             theme.applyLayout();
             /**
              * Fires when the theme options have been resetted to default
              * @event module:theme~reset
              * @type {object} The current theme options
              */
-            theme._trigger('reset', theme.options);
+            App.emit('theme:reset', theme.options);
         };
 
 
@@ -313,7 +296,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
          * @returns {boolean}
          */
         theme.isDebug = function () {
-            return packadic.config.debug;
+            return App.config('debug') == true;
         };
 
         /**
@@ -444,7 +427,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
          * @returns {Number}
          */
         theme.getBreakpoint = function (which) {
-            return parseInt(packadic.config.scss.breakpoints['screen-' + which + '-min'].replace('px', ''));
+            return parseInt(App.breakpoints['screen-' + which + '-min'].replace('px', ''));
         };
 
 
@@ -479,7 +462,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
                     /**
                      * @event module:theme~resize
                      */
-                    theme._trigger('resize');
+                    App.emit('theme:resize');
                 }, 600); // delay the event a bit, otherwise it doesn't seem to work well in some cases
             });
         };
@@ -722,6 +705,11 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
          * Initializes the theme, should only be called once
          */
         theme.init = function () {
+            /**
+             * @event App#theme:init
+             * @type {object}
+             */
+            App.emit('theme:init', theme);
 
             theme.$window = $(window);
             theme.$document = $(window.document);
@@ -745,15 +733,12 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'eventer', 'autoload', '
             });
 
             theme._initLayout();
+            /**
+             * @event App#theme:ready
+             * @type {object}
+             */
+            App.emit('theme:ready', theme);
         };
-
-
-
-        if ( theme.isDebug() ) { // usefull for easy browser console access
-            packadic.theme = theme;
-        }
-
-
 
         return theme;
     });

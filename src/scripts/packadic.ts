@@ -2,12 +2,16 @@
 ///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_lodash_lodash.d.ts"/>
 ///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_requirejs_require.d.ts"/>
 ///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_jquery_jquery.d.ts"/>
+///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_underscore.string_underscore.string.d.ts"/>
+
+
 
 interface MyWindow extends Window {
     jade: any;
     _s: any;
     location: any;
 }
+
 
 module packadic {
     declare var window:MyWindow;
@@ -16,7 +20,7 @@ module packadic {
         public static kindsOf:any = {};
 
         private static getParts(str):any {
-            return str.replace(/\\\./g, '\uffff').split('.').map(function(s) {
+            return str.replace(/\\\./g, '\uffff').split('.').map(function (s) {
                 return s.replace(/\uffff/g, '.');
             });
         }
@@ -105,12 +109,24 @@ module packadic {
 
             return recurse(value, fn, fnContinue, {objs: [], path: ''});
         }
+
+        public static copyObject<T> (object:T):T {
+            var objectCopy = <T>{};
+
+            for (var key in object) {
+                if (object.hasOwnProperty(key)) {
+                    objectCopy[key] = object[key];
+                }
+            }
+
+            return objectCopy;
+        }
     }
 
     'Number String Boolean Function RegExp Array Date Error'.split(' ').forEach(function (k) {
         Util.kindsOf['[object ' + k + ']'] = k.toLowerCase();
     });
-
+    declare var Obj:Object;
     export enum AppState {
         init,
         preboot,
@@ -133,12 +149,26 @@ module packadic {
         closer?: string;
         lodash?: IDelimiterLodash;
     }
-    export class Config {
+
+    export interface IConfig {
+        get(prop?:any): any;
+        set(prop:string, value:any): IConfig;
+        merge(obj:Object): IConfig;
+        raw(prop?:any): any;
+        process(raw:any): any;
+    }
+    export interface IConfigProperty extends IConfig {
+        (args?:any): any;
+
+    }
+
+    export class Config implements IConfig {
         private data:Object;
         private allDelimiters:IDelimitersCollection;
         private static propStringTmplRe:RegExp = /^<%=\s*([a-z0-9_$]+(?:\.[a-z0-9_$]+)*)\s*%>$/i;
 
-        constructor(obj?:any) {
+
+        constructor(obj?:Object) {
             this.allDelimiters = {};
             this.addDelimiters('config', '<%', '%>');
             this.data = obj || {}
@@ -153,19 +183,19 @@ module packadic {
             return str.replace(/\./g, '\\.');
         }
 
-        public static makeProperty(config:Config):any {
+        public static makeProperty(config:IConfig):IConfigProperty {
             var cf:any = function (prop?:any):any {
                 return config.get(prop);
             };
             cf.get = config.get.bind(config);
             cf.set = config.set.bind(config);
             cf.merge = config.merge.bind(config);
-            cf.raw = config.getRaw.bind(config);
+            cf.raw = config.raw.bind(config);
             cf.process = config.process.bind(config);
             return cf;
         }
 
-        public getRaw(prop?:any):any {
+        public raw(prop?:any):any {
             if (prop) {
                 return Util.objectGet(this.data, Config.getPropString(prop));
             } else {
@@ -174,15 +204,15 @@ module packadic {
         }
 
         public get(prop?:any):any {
-            return this.process(this.getRaw(prop));
+            return this.process(this.raw(prop));
         }
 
-        public set(prop:string, value:any):Config {
+        public set(prop:string, value:any):IConfig {
             Util.objectSet(this.data, Config.getPropString(prop), value);
             return this;
         }
 
-        public merge(obj:Object):Config {
+        public merge(obj:Object):IConfig {
             this.data = _.merge(this.data, obj);
             return this;
         }
@@ -273,14 +303,57 @@ module packadic {
         }
     }
 
+    export enum BoxAction {
+        toggle, hide, show, fullscreen, normal, close, open, loading
+    }
+
+    export enum ThemeAction {
+        refresh, reset
+    }
+
+    export enum SidebarAction {
+        toggle, hide, show, open, close, refresh
+    }
+
+    export interface ITheme extends Function {
+        applyLayout();
+        reset();
+        createLoader();
+        toastr();
+        alert();
+        getTemplate();
+        getViewPort();
+        getBreakpoint(which:any);
+        initSlimScroll(el:any, opts?:any);
+        destroySlimScroll(el:any);
+        ensureScrollToTop();
+        init();
+
+    }
+
+    export interface ISidebar extends Function {
+        init(opts?:any);
+        isFixed():boolean;
+        isClosed():boolean;
+        close(callback?:Function);
+        open(callback?:Function);
+        hide();
+        show();
+        toggle();
+        refresh();
+    }
 
     export class App extends EventEmitter2 {
-        private startTime:number;
-        private _config:Config;
-        private state:AppState;
-        private jade:any;
-        private _s:any;
-        public config:any;
+        private _startTime:number;
+        private _config:IConfig;
+        private _defaultConfig:Object;
+        private _state:AppState;
+        private _jade:Object;
+        private _s:UnderscoreStringStaticExports;
+        public config:IConfigProperty;
+        private _theme:ITheme;
+        private _sidebar:ISidebar;
+        public packadic:any;
 
         constructor() {
             var conf:EventEmitter2Configuration = {
@@ -290,20 +363,58 @@ module packadic {
                 maxListeners: 0
             };
             super(conf);
-            this.startTime = new Date().getTime();
-            this.state = AppState.init;
+            var self:App = this;
+            this._startTime = new Date().getTime();
+            this._state = AppState.init;
+            this.on('sidebar:init', function(sidebar){
+                console.log('App sidebar:init', sidebar);
+                if(!this._sidebar) {
+                    self._sidebar = sidebar;
+                }
+            });
+
+        }
+
+        public get colors():any {
+            if(this._state >= AppState.prestart) {
+                return this.config('scss.colors');
+            } else {
+                throw new Error('Cannot get colors, App state needs to be prestart or beyond')
+            }
+        }
+        public get fonts():any {
+            if(this._state >= AppState.prestart) {
+                return this.config('scss.fonts');
+            } else {
+                throw new Error('Cannot get fonts, App state needs to be prestart or beyond')
+            }
+        }
+        public get breakpoints():any {
+            if(this._state >= AppState.prestart) {
+                return this.config('scss.breakpoints');
+            } else {
+                throw new Error('Cannot get breakpoints, App state needs to be prestart or beyond')
+            }
+        }
+
+        public isDebug():boolean {
+            return this.config('debug') == true;
+        }
+
+        public get defaults():Object {
+            return this._defaultConfig;
         }
 
         public getElapsedTime():number {
-            return (Date.now() - this.startTime) / 1000;
+            return (Date.now() - this._startTime) / 1000;
         }
 
         public getStartTime():number {
-            return this.startTime / 1000;
+            return this._startTime / 1000;
         }
 
         public getState():AppState {
-            return this.state;
+            return this._state;
         }
 
         public removePageLoader():App {
@@ -311,22 +422,22 @@ module packadic {
             return this;
         }
 
-        public init(config?:any) {
+        public init(config:Object) {
+            this._defaultConfig = Util.copyObject(config);
             this._config = new Config(config);
             this.config = Config.makeProperty(this._config);
             this.setState(AppState.preboot);
         }
 
         private setState(state:AppState):App {
-            this.state = state;
+            this._state = state;
             this.emit('state:' + AppState[state], AppState[state], state);
             return this;
         }
 
-
         public boot() {
             var self:App = this;
-            if(this.state == AppState.init){
+            if (this._state == AppState.init) {
                 throw new Error('Cannot boot, still in init mote. Init first man');
             }
             this.setState(AppState.booting);
@@ -334,21 +445,24 @@ module packadic {
             require(['module', 'jquery', 'autoload', 'string', 'jade', 'storage', 'code-mirror', 'plugins/cookie', 'jq/general'],
                 function (module, $, autoload, _s, jade, storage) {
 
-                    self.jade = jade;
+                    self._jade = jade;
                     self._s = _s;
 
                     // SCSS Json
-                    var scss = _s.unquote($('head').css('font-family'), "'");
+                    var scss:any = _s.unquote($('head').css('font-family'), "'");
                     while (typeof scss !== 'object') {
                         scss = JSON.parse(scss);
                     }
+                    $.each(scss.fonts, function (k, v) {
+                        scss.fonts[k] = v.join(', ');
+                    });
                     self.config.set('scss', scss);
 
                     self.config.merge({
                         chartjsGlobal: {
-                            tooltipTitleFontFamily: scss.fonts.subheading.join(', '),
-                            tooltipFontFamily: scss.fonts.base.join(', '),
-                            scaleFontFamily: scss.fonts.heading.join(', ')
+                            tooltipTitleFontFamily: scss.fonts.subheading,
+                            tooltipFontFamily: scss.fonts.base,
+                            scaleFontFamily: scss.fonts.heading
                         }
                     });
 
@@ -367,10 +481,10 @@ module packadic {
 
                     // Startup, figure out what modules to load
                     var load = ['theme'];
-                    if (self.config('debug') === true) {
+                    if (self.config.get('debug') === true) {
                         load.push('debug');
                     }
-                    if (self.config('demo') === true) {
+                    if (self.config.get('demo') === true) {
                         load.push('demo');
                     }
 
@@ -379,6 +493,7 @@ module packadic {
                     self.setState(AppState.prestart);
 
                     require(load, function (theme, debug, demo) {
+                        self._theme = theme;
 
                         // EVENT: starting
                         self.setState(AppState.starting);
@@ -386,6 +501,7 @@ module packadic {
                         if (self.config.get('demo') === true && _.isObject(demo)) {
                             demo.init();
                         }
+                        theme.init();
 
                         // EVENT: started
                         self.setState(AppState.started);
@@ -393,6 +509,26 @@ module packadic {
                     });
                 });
         }
+
+        public box(action:BoxAction, args?:any):App {
+            var actionName:string = BoxAction[action];
+            if(args && Util.kindOf(args) !== 'array') args = [args];
+            this._theme.apply(action, args);
+            return this;
+        }
+        public theme(action:ThemeAction, args?:any):App {
+            var actionName:any = typeof(action) == 'string' ? action : ThemeAction[action];
+            if(args && Util.kindOf(args) !== 'array') args = [args];
+            this._theme[actionName].apply(this._sidebar, args);
+            return this;
+        }
+        public sidebar(action:SidebarAction, args?:any):App {
+            var actionName:any = typeof(action) == 'string' ? action : SidebarAction[action];
+            if(args && Util.kindOf(args) !== 'array') args = [args];
+            this._sidebar[actionName].apply(this._sidebar, args);
+            return this;
+        }
+
     }
 
 }
@@ -400,3 +536,4 @@ module packadic {
  * @type {packadic.App}
  */
 window['App'] = new packadic.App();
+window['App'].packadic = packadic;

@@ -2,7 +2,7 @@ define([ 'jquery', 'console', 'module', 'plugins/contextmenu' ],
     function( $, Console, module ){
         'use strict';
 
-        var packadic = (window.packadic = window.packadic || {});
+
 
         var debug = {};
 
@@ -21,7 +21,7 @@ define([ 'jquery', 'console', 'module', 'plugins/contextmenu' ],
         }
 
 
-        if( packadic.config.debug === true ){
+        if( App.isDebug() === true ){
 
             Console.styles.register({
                 font_scp   : 'font-family: \'Source Code Pro\', monospace;',

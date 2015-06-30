@@ -2,6 +2,7 @@
 ///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_lodash_lodash.d.ts"/>
 ///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_requirejs_require.d.ts"/>
 ///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_jquery_jquery.d.ts"/>
+///<reference path="../../../.WebIde80/system/extLibs/http_github.com_borisyankov_DefinitelyTyped_raw_master_underscore.string_underscore.string.d.ts"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -94,6 +95,15 @@ var packadic;
             }
             return recurse(value, fn, fnContinue, { objs: [], path: '' });
         };
+        Util.copyObject = function (object) {
+            var objectCopy = {};
+            for (var key in object) {
+                if (object.hasOwnProperty(key)) {
+                    objectCopy[key] = object[key];
+                }
+            }
+            return objectCopy;
+        };
         Util.kindsOf = {};
         return Util;
     })();
@@ -129,11 +139,11 @@ var packadic;
             cf.get = config.get.bind(config);
             cf.set = config.set.bind(config);
             cf.merge = config.merge.bind(config);
-            cf.raw = config.getRaw.bind(config);
+            cf.raw = config.raw.bind(config);
             cf.process = config.process.bind(config);
             return cf;
         };
-        Config.prototype.getRaw = function (prop) {
+        Config.prototype.raw = function (prop) {
             if (prop) {
                 return Util.objectGet(this.data, Config.getPropString(prop));
             }
@@ -142,7 +152,7 @@ var packadic;
             }
         };
         Config.prototype.get = function (prop) {
-            return this.process(this.getRaw(prop));
+            return this.process(this.raw(prop));
         };
         Config.prototype.set = function (prop, value) {
             Util.objectSet(this.data, Config.getPropString(prop), value);
@@ -234,6 +244,31 @@ var packadic;
         return Config;
     })();
     packadic.Config = Config;
+    (function (BoxAction) {
+        BoxAction[BoxAction["toggle"] = 0] = "toggle";
+        BoxAction[BoxAction["hide"] = 1] = "hide";
+        BoxAction[BoxAction["show"] = 2] = "show";
+        BoxAction[BoxAction["fullscreen"] = 3] = "fullscreen";
+        BoxAction[BoxAction["normal"] = 4] = "normal";
+        BoxAction[BoxAction["close"] = 5] = "close";
+        BoxAction[BoxAction["open"] = 6] = "open";
+        BoxAction[BoxAction["loading"] = 7] = "loading";
+    })(packadic.BoxAction || (packadic.BoxAction = {}));
+    var BoxAction = packadic.BoxAction;
+    (function (ThemeAction) {
+        ThemeAction[ThemeAction["refresh"] = 0] = "refresh";
+        ThemeAction[ThemeAction["reset"] = 1] = "reset";
+    })(packadic.ThemeAction || (packadic.ThemeAction = {}));
+    var ThemeAction = packadic.ThemeAction;
+    (function (SidebarAction) {
+        SidebarAction[SidebarAction["toggle"] = 0] = "toggle";
+        SidebarAction[SidebarAction["hide"] = 1] = "hide";
+        SidebarAction[SidebarAction["show"] = 2] = "show";
+        SidebarAction[SidebarAction["open"] = 3] = "open";
+        SidebarAction[SidebarAction["close"] = 4] = "close";
+        SidebarAction[SidebarAction["refresh"] = 5] = "refresh";
+    })(packadic.SidebarAction || (packadic.SidebarAction = {}));
+    var SidebarAction = packadic.SidebarAction;
     var App = (function (_super) {
         __extends(App, _super);
         function App() {
@@ -244,53 +279,110 @@ var packadic;
                 maxListeners: 0
             };
             _super.call(this, conf);
-            this.startTime = new Date().getTime();
-            this.state = AppState.init;
+            var self = this;
+            this._startTime = new Date().getTime();
+            this._state = AppState.init;
+            this.on('sidebar:init', function (sidebar) {
+                console.log('App sidebar:init', sidebar);
+                if (!this._sidebar) {
+                    self._sidebar = sidebar;
+                }
+            });
         }
+        Object.defineProperty(App.prototype, "colors", {
+            get: function () {
+                if (this._state >= AppState.prestart) {
+                    return this.config('scss.colors');
+                }
+                else {
+                    throw new Error('Cannot get colors, App state needs to be prestart or beyond');
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(App.prototype, "fonts", {
+            get: function () {
+                if (this._state >= AppState.prestart) {
+                    return this.config('scss.fonts');
+                }
+                else {
+                    throw new Error('Cannot get fonts, App state needs to be prestart or beyond');
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(App.prototype, "breakpoints", {
+            get: function () {
+                if (this._state >= AppState.prestart) {
+                    return this.config('scss.breakpoints');
+                }
+                else {
+                    throw new Error('Cannot get breakpoints, App state needs to be prestart or beyond');
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        App.prototype.isDebug = function () {
+            return this.config('debug') == true;
+        };
+        Object.defineProperty(App.prototype, "defaults", {
+            get: function () {
+                return this._defaultConfig;
+            },
+            enumerable: true,
+            configurable: true
+        });
         App.prototype.getElapsedTime = function () {
-            return (Date.now() - this.startTime) / 1000;
+            return (Date.now() - this._startTime) / 1000;
         };
         App.prototype.getStartTime = function () {
-            return this.startTime / 1000;
+            return this._startTime / 1000;
         };
         App.prototype.getState = function () {
-            return this.state;
+            return this._state;
         };
         App.prototype.removePageLoader = function () {
             $('body').removeClass('page-loading');
             return this;
         };
         App.prototype.init = function (config) {
+            this._defaultConfig = Util.copyObject(config);
             this._config = new Config(config);
             this.config = Config.makeProperty(this._config);
             this.setState(AppState.preboot);
         };
         App.prototype.setState = function (state) {
-            this.state = state;
+            this._state = state;
             this.emit('state:' + AppState[state], AppState[state], state);
             return this;
         };
         App.prototype.boot = function () {
             var self = this;
-            if (this.state == AppState.init) {
+            if (this._state == AppState.init) {
                 throw new Error('Cannot boot, still in init mote. Init first man');
             }
             this.setState(AppState.booting);
             require.config(this.config.get('requireJS'));
             require(['module', 'jquery', 'autoload', 'string', 'jade', 'storage', 'code-mirror', 'plugins/cookie', 'jq/general'], function (module, $, autoload, _s, jade, storage) {
-                self.jade = jade;
+                self._jade = jade;
                 self._s = _s;
                 // SCSS Json
                 var scss = _s.unquote($('head').css('font-family'), "'");
                 while (typeof scss !== 'object') {
                     scss = JSON.parse(scss);
                 }
+                $.each(scss.fonts, function (k, v) {
+                    scss.fonts[k] = v.join(', ');
+                });
                 self.config.set('scss', scss);
                 self.config.merge({
                     chartjsGlobal: {
-                        tooltipTitleFontFamily: scss.fonts.subheading.join(', '),
-                        tooltipFontFamily: scss.fonts.base.join(', '),
-                        scaleFontFamily: scss.fonts.heading.join(', ')
+                        tooltipTitleFontFamily: scss.fonts.subheading,
+                        tooltipFontFamily: scss.fonts.base,
+                        scaleFontFamily: scss.fonts.heading
                     }
                 });
                 // Debug
@@ -307,24 +399,47 @@ var packadic;
                 }
                 // Startup, figure out what modules to load
                 var load = ['theme'];
-                if (self.config('debug') === true) {
+                if (self.config.get('debug') === true) {
                     load.push('debug');
                 }
-                if (self.config('demo') === true) {
+                if (self.config.get('demo') === true) {
                     load.push('demo');
                 }
                 // EVENT: booted
                 self.setState(AppState.prestart);
                 require(load, function (theme, debug, demo) {
+                    self._theme = theme;
                     // EVENT: starting
                     self.setState(AppState.starting);
                     if (self.config.get('demo') === true && _.isObject(demo)) {
                         demo.init();
                     }
+                    theme.init();
                     // EVENT: started
                     self.setState(AppState.started);
                 });
             });
+        };
+        App.prototype.box = function (action, args) {
+            var actionName = BoxAction[action];
+            if (args && Util.kindOf(args) !== 'array')
+                args = [args];
+            this._theme.apply(action, args);
+            return this;
+        };
+        App.prototype.theme = function (action, args) {
+            var actionName = typeof (action) == 'string' ? action : ThemeAction[action];
+            if (args && Util.kindOf(args) !== 'array')
+                args = [args];
+            this._theme[actionName].apply(this._sidebar, args);
+            return this;
+        };
+        App.prototype.sidebar = function (action, args) {
+            var actionName = typeof (action) == 'string' ? action : SidebarAction[action];
+            if (args && Util.kindOf(args) !== 'array')
+                args = [args];
+            this._sidebar[actionName].apply(this._sidebar, args);
+            return this;
         };
         return App;
     })(EventEmitter2);
@@ -334,3 +449,4 @@ var packadic;
  * @type {packadic.App}
  */
 window['App'] = new packadic.App();
+window['App'].packadic = packadic;

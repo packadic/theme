@@ -6,9 +6,6 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
         // @todo sidebar-collapsed sub-menu :hover
         // @todo sidebar sub menu @media xs/sm views
 
-
-        var packadic = (window.packadic = window.packadic || {});
-
         var $sidebarNavMenu = $('ul.sidebar-nav-menu');
         var $sidebarNav = $sidebarNavMenu.parent();
         var $body = $('body');
@@ -46,22 +43,15 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
         };
 
 
-        eventer('sidebar', sidebar);
-        sidebar._defineEvent('init');
-        sidebar._defineEvent('generate');
-        sidebar._defineEvent('generated');
-        sidebar._defineEvent('loader:show');
-        sidebar._defineEvent('loader:hide');
-
 
         (sidebar.showLoader = function () {
-            sidebar._trigger('loader:show');
+            App.emit('sidebar:loader:show');
             $sidebarNavMenu.hide();
             $sidebarNav.find('.loader.loader-light').show();
         }).call();
 
         sidebar.hideLoader = function () {
-            sidebar._trigger('loader:hide');
+            App.emit('sidebar:loader:hide');
             $sidebarNav.find('.loader.loader-light').hide();
             $sidebarNavMenu.show();
         };
@@ -111,7 +101,7 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
         };
 
         sidebar.generateFromTemplate = function (menuItems, templateName, callback) {
-            sidebar._trigger('sidebar:generate');
+            App.emit('sidebar:sidebar:generate');
             if ( _.isFunction(templateName) ) {
                 callback = templateName;
             }
@@ -125,7 +115,7 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
                 //  logDebug('got template');
                 var html = template({items: menuItems});
                 $('ul.sidebar-nav-menu').html('').html(html);
-                sidebar._trigger('sidebar:generated');
+                App.emit('sidebar:sidebar:generated');
                 if ( _.isFunction(callback) ) {
                     callback();
                 }
@@ -493,6 +483,34 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
             }
         };
 
+
+        var init = function () {
+            /**
+             * @event App#sidebar:init
+             * @type {object}
+             */
+            App.emit('sidebar:init', sidebar);
+            sidebar.handleFixed();
+            sidebar.handle();
+            sidebar.handleToggler();
+            App.on('theme:resize', function () {
+                if ( sidebar.hidden ) {
+                    return;
+                }
+                sidebar.handleFixed();
+            });
+            sidebar.resolveActiveLink();
+            sidebar.hideLoader();
+            if ( sidebar.options.hidden ) {
+                sidebar.hide();
+            }
+            /**
+             * @event App#sidebar:ready
+             * @type {object}
+             */
+            App.emit('sidebar:ready', sidebar);
+        };
+
         /**
          * Initializes the sidebar
          * @param {Object} opts Options
@@ -503,23 +521,6 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
             }
             $.extend(sidebar.options, opts);
             console.log('sidebar opts', opts);
-            var init = function () {
-                sidebar._trigger('init');
-                sidebar.handleFixed();
-                sidebar.handle();
-                sidebar.handleToggler();
-                theme.on('resize', function () {
-                    if ( sidebar.hidden ) {
-                        return;
-                    }
-                    sidebar.handleFixed();
-                });
-                sidebar.resolveActiveLink();
-                sidebar.hideLoader();
-                if ( sidebar.options.hidden ) {
-                    sidebar.hide();
-                }
-            };
             if ( _.isObject(sidebar.options.items) ) {
                 sidebar.generateFromTemplate(sidebar.options.items, init);
             } else {

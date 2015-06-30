@@ -174,7 +174,7 @@ define([
             .addCustom(function ($el) {
                 var $charts = $el.find('.easy-pie-chart');
                 if ( $charts.length > 0 ) {
-                    require(['theme', 'jq/remove-attributes', 'plugins/easypiechart'], function (theme) {
+                    require(['theme', 'jq/general', 'plugins/easypiechart'], function (theme) {
                         $charts.each(function () {
                             var $chart = $(this);
                             var classes = $chart.get(0).classList;
