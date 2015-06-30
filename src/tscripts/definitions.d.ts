@@ -25,3 +25,6 @@ interface JQuery {
     iCheck(sel?:any, arg1?:any, arg2?:any, arg3?:any):JQuery;
     easyPieChart(sel?:any, arg1?:any, arg2?:any, arg3?:any):JQuery;
 }
+declare module 'jquery-ui/widget' {
+
+}
