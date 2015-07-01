@@ -24,7 +24,14 @@ interface JQueryStatic {
 interface JQuery {
     iCheck(sel?:any, arg1?:any, arg2?:any, arg3?:any):JQuery;
     easyPieChart(sel?:any, arg1?:any, arg2?:any, arg3?:any):JQuery;
+    slideUp(num:number, fun:Function):JQuery;
+    slideDown(num:number, fun:Function):JQuery;
+    prefixedData(prefix:string):Object;
+    $i?:JQuery;
 }
 declare module 'jquery-ui/widget' {
+
+}
+declare module 'jquery-ui/draggable' {
 
 }

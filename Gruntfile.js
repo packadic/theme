@@ -364,18 +364,18 @@ var init = module.exports = function (grunts) {
                 target: 'es5',
                 rootDir: 'src/tscripts',
                 sourceMap: false,
-                declaration: true,
+                declaration: false,
                 module: 'amd'
             },
             commonjs: {
-                src: ['src/tscripts/**/*.ts','!src/tscripts/**/*.d.ts'],
+                src: ['src/tscripts/packadic.ts'], //,'!src/tscripts/**/*.d.ts'],
                 dest: 'src/tscripts/commonjs',
                 options: { module: 'commonjs' }
             },
             amd: {
                 src: ['src/tscripts/**/*.ts','!src/tscripts/**/*.d.ts'],
                 dest: 'src/tscripts/amd',
-                options: { module: 'amd' }
+                options: { module: 'amd', declaration: false }
             }
         }
     };

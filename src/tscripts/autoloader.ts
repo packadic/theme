@@ -184,11 +184,11 @@ module autoloader {
                         }
 
                         // allow strings, will be transformed to array
-                        var requires:Array<any> = typeof data.requires !== 'array' ? [data.requires] : data.requires;
+                        //var requires:Array<any> = typeof data.requires !== 'array' ? [data.requires] : data.requires;
 
                         detected.push(function (cb) {
                             // require the plugin
-                            require(requires, function () {
+                            require(data.requires, function () {
                                 // If defined, call the pre init function that allows altering the target before initialisation
                                 if (typeof data.preInitFn === 'function') {
                                     var retval = data.preInitFn($target, data);
@@ -202,23 +202,26 @@ module autoloader {
                         });
                     });
                 });
-            });
 
-            $.each(this._custom, function (index:number, customFn:Function) {
-                customFn($el);
-            });
-
-            if (detected.length > 0) {
-                async.parallel(detected, function (err:any, results:Object) {
+                $.each(self._custom, function (index:number, customFn:Function) {
+                    detected.push(function(cb){
+                        customFn($el);
+                        cb();
+                    })
+                });
+                if (detected.length > 0) {
+                    async.parallel(detected, function (err:any, results:Object) {
+                        if (defined(callback)) {
+                            callback(err, results);
+                        }
+                    })
+                } else {
                     if (defined(callback)) {
-                        callback(err, results);
+                        callback(null, {});
                     }
-                })
-            } else {
-                if (defined(callback)) {
-                    callback(null, {});
                 }
-            }
+            });
+
         }
     }
 }

@@ -28,12 +28,6 @@
         console.warn('(' + packadic.getElapsedTime() + 's) STARTED');
     });
 
-    packadic.onStart(['jquery', 'jq/box'], function ($, theme, cre) {
-        $(function() {
-            var tb = $('.test-box');
-            tb.box();
-        });
-    });
     // Create layout settings editor for demo
     packadic.onStart(['jquery', 'theme/settings-editor', 'theme', 'storage', 'fn/cre'], function ($, SettingsEditor, theme, storage, cre) {
 

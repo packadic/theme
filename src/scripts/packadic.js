@@ -508,8 +508,40 @@ var packadic;
             }
             return false;
         };
+        /**
+         * Loads a compiled jade template from scripts/template directory. Can be used multiple times
+         * @param {string} name - The filename (without extension) of the template
+         * @param {function} [cb] - Optional callback, omit if you rather use a promise
+         * @returns {promise.promise|jQuery.promise|jQuery.ready.promise}
+         * @example
+         * // Using the promise
+         * theme.getTemplate('template-name').then(function(template){
+         *     var html = template({
+         *         var1: 'Hello', var2: 'Bai'
+         *     });
+         * });
+         * // Using the callback
+         * theme.getTemplate('template-name', function(template){
+         *     var html = template({
+         *         var1: 'Hello', var2: 'Bai'
+         *     });
+         * });
+         */
         App.prototype.getTemplate = function (name, callback) {
-            return this._theme.getTemplate.apply(this._theme, arguments);
+            if (_.isUndefined(callback)) {
+                var defer = this.defer();
+            }
+            require(['templates/' + name], function (template) {
+                if (_.isUndefined(callback)) {
+                    defer.resolve(template);
+                }
+                else {
+                    callback(template);
+                }
+            });
+            if (_.isUndefined(callback)) {
+                return defer.promise();
+            }
         };
         /**
          * Returns the view port

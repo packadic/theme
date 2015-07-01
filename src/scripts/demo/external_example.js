@@ -21,16 +21,17 @@
         console.warn('(' + App.getElapsedTime() + 's) BOOTING');
     }).on('state:starting', function () {
         console.warn('(' + App.getElapsedTime() + 's) STARTING');
-        require(['jquery',  'jq/box'], function ($) {
+        require(['jquery'], function ($) {
             console.warn('(' + App.getElapsedTime() + 's) BOOTED');
+            ///$('.test-box').box();
+            App.sidebar('init', {hidden: false, items: packadic.site.data.navigation.sidebar});
+            App.autoload.scan($('body'), function () {
+                if ( App.config('pageLoadedOnAutoloaded') === true ) {
+                    App.removePageLoader();
+                }
+            })
 
-            $(function () {
-                App.sidebar('init', {hidden: false, items: packadic.site.data.navigation.sidebar});
-                App.autoload.scan($('body'), function () {
-                    if ( App.config('pageLoadedOnAutoloaded') === true ) {
-                        App.removePageLoader();
-                    }
-                });
+            $(function () {;
             });
         });
     }).on('state:prestart', function () {
@@ -39,14 +40,7 @@
         console.warn('(' + App.getElapsedTime() + 's) STARTED');
     });
 
-    App.on('state:starting', function () {
-        require(['jquery', 'jq/box'], function ($, theme, cre) {
-            $(function () {
-                var tb = $('.test-box');
-                tb.box();
-            });
-        });
-    });
+
 
     App.on('state:starting', function () {
         require(['jquery', 'theme/settings-editor', 'theme', 'storage', 'fn/cre'], function ($, SettingsEditor, theme, storage, cre) {

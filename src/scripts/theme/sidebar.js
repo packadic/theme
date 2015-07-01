@@ -1,5 +1,5 @@
-define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
-    function ($, theme, eventer, s, async, defined) {
+define(['jquery', 'theme', 'string', 'plugins/async', 'fn/defined'],
+    function ($, theme, s, async, defined) {
 
         // @todo sidebar-toggle
         // @todo sidebar sub-menu hover title right (.sub-menu-title)
@@ -57,7 +57,7 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
         };
 
         var calculateFixedHeight = function () {
-            var sidebarHeight = theme.getViewPort().height - $('section#top').outerHeight();
+            var sidebarHeight = App.getViewPort().height - $('section#top').outerHeight();
             if ( $('body').hasClass("section-bottom-fixed") ) {
                 sidebarHeight = sidebarHeight - $('section#bottom').outerHeight();
             }
@@ -67,8 +67,8 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
 
         sidebar.resolveActiveLink = function () {
             var currentPath = s.trim(location.pathname.toLowerCase(), '/');
-            var md = theme.getBreakpoint('md');
-            if ( theme.getViewPort().width < md ) {
+            var md = App.getBreakpoint('md');
+            if ( App.getViewPort().width < md ) {
                 return; // not gonna do this for small devices
             }
             $sidebarNavMenu.find('a').each(function () {
@@ -325,7 +325,7 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
 
 
         sidebar.handleToggler = function () {
-            if ( $.cookie && $.cookie('sidebar_closed') === '1' && theme.getViewPort().width >= theme.getBreakpoint('md') ) {
+            if ( $.cookie && $.cookie('sidebar_closed') === '1' && App.getViewPort().width >= App.getBreakpoint('md') ) {
                 $body.addClass('sidebar-nav-closed');
                 $sidebarNavMenu.addClass('sidebar-nav-menu-closed');
             }
@@ -352,7 +352,7 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
 
         sidebar.handle = function () {
 
-            var breakpointMd = theme.getBreakpoint('md');
+            var breakpointMd = App.getBreakpoint('md');
 
             $sidebarNavMenu.find('li > .sub-menu').filter(function (i) {
                 result = $(this).css('caption-side') == 'bottom' || $(this).children('ul').first().hasClass('sub-menu-hover');
@@ -368,12 +368,12 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
             $sidebarNavMenu.on('click', 'li > a', function (e) {
                 var hasSubMenu = $(this).next().hasClass('sub-menu');
 
-                if ( theme.getViewPort().width >= breakpointMd && $(this).parents('.sidebar-nav-menu-hover-submenu').length === 1 ) { // exit of hover sidebar menu
+                if ( App.getViewPort().width >= breakpointMd && $(this).parents('.sidebar-nav-menu-hover-submenu').length === 1 ) { // exit of hover sidebar menu
                     return;
                 }
 
                 if ( hasSubMenu === false ) {
-                    if ( theme.getViewPort().width < breakpointMd && $('.sidebar-nav').hasClass("in") ) { // close the menu on mobile view while laoding a page
+                    if ( App.getViewPort().width < breakpointMd && $('.sidebar-nav').hasClass("in") ) { // close the menu on mobile view while laoding a page
                         $('section#top .responsive-toggler').click();
                     }
                     return;
@@ -413,8 +413,8 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
 
             theme.destroySlimScroll($sidebarNavMenu);
 
-            var width = theme.getViewPort().width;
-            var breakpointMd = theme.getBreakpoint('md');
+            var width = App.getViewPort().width;
+            var breakpointMd = App.getBreakpoint('md');
 
             if ( width < breakpointMd && ! $sidebarNav.hasClass('collapse') ) {
                 $sidebarNav.addClass('collapse');
@@ -433,14 +433,14 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
         };
 
         sidebar.handleWithContent = function () {
-            var breakpointMd = theme.getBreakpoint('md');
+            var breakpointMd = App.getBreakpoint('md');
             var content = $('main');
 
 
             var height;
 
             if ( $body.hasClass("section-bottom-fixed") === true && sidebar.isFixed() === false ) {
-                var available_height = theme.getViewPort().height - $('section#bottom').outerHeight() - $('section#top').outerHeight();
+                var available_height = App.getViewPort().height - $('section#bottom').outerHeight() - $('section#top').outerHeight();
                 if ( content.height() < available_height ) {
                     content.attr('style', 'min-height:' + available_height + 'px');
                 }
@@ -454,14 +454,14 @@ define(['jquery', 'theme', 'eventer', 'string', 'plugins/async', 'fn/defined'],
                     var headerHeight = $('section#top').outerHeight();
                     var footerHeight = $('section#bottom').outerHeight();
 
-                    if ( theme.getViewPort().width < breakpointMd ) {
-                        height = theme.getViewPort().height - headerHeight - footerHeight;
+                    if ( App.getViewPort().width < breakpointMd ) {
+                        height = App.getViewPort().height - headerHeight - footerHeight;
                     } else {
                         height = $sidebarNavMenu.height() + 20;
                     }
 
-                    if ( (height + headerHeight + footerHeight) <= theme.getViewPort().height ) {
-                        height = theme.getViewPort().height - headerHeight - footerHeight;
+                    if ( (height + headerHeight + footerHeight) <= App.getViewPort().height ) {
+                        height = App.getViewPort().height - headerHeight - footerHeight;
                     }
                 }
                 content.attr('style', 'min-height:' + height + 'px');

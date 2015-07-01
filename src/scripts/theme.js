@@ -1,6 +1,6 @@
-define(['jquery', 'fn/defined', 'fn/default', 'fn/cre',   'Q', 'storage',
+define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
         'plugins/cookie', 'plugins/bs-material-ripples'],
-    function ($, defined, def, cre,  Q, storage) {
+    function ($, defined, def, cre, storage) {
         'use strict';
 
 
@@ -289,40 +289,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre',   'Q', 'storage',
             return cre().addClass('loader').addClass('loader-' + name)
         };
 
-        /**
-         * Loads a compiled jade template from scripts/template directory. Can be used multiple times
-         * @param {string} name - The filename (without extension) of the template
-         * @param {function} [cb] - Optional callback, omit if you rather use a promise
-         * @returns {promise.promise|jQuery.promise|jQuery.ready.promise}
-         * @example
-         * // Using the promise
-         * theme.getTemplate('template-name').then(function(template){
-         *     var html = template({
-         *         var1: 'Hello', var2: 'Bai'
-         *     });
-         * });
-         * // Using the callback
-         * theme.getTemplate('template-name', function(template){
-         *     var html = template({
-         *         var1: 'Hello', var2: 'Bai'
-         *     });
-         * });
-         */
-        theme.getTemplate = function (name, cb) {
-            if(!defined(cb)) {
-                var defer = App.defer();
-            }
-            require(['templates/' + name], function (template) {
-                cb(template);
-                if(!defined(cb)) {
-                    defer.resolve(template);
-                }
-            });
-            if(!defined(cb)) {
-                return defer.promise();
-            }
-        };
-
+        theme.getTemplate = App.getTemplate.bind(App);
         theme.isSupported = App.isSupported.bind(App);
         theme.getViewPort = App.getViewPort.bind(App);
         theme.isTouchDevice = App.isTouchDevice.bind(App);
@@ -509,7 +476,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre',   'Q', 'storage',
 
 
         theme.box = function (title, icon, actions) {
-            var deferred = Q.defer();
+            var deferred = App.defer();
             actions = defined(actions) ? actions : false;
             theme.getTemplate('box', function (template) {
                 var $box = $(template({
@@ -534,7 +501,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre',   'Q', 'storage',
                 theme.$hidden.append($box);
                 deferred.resolve($box);
             });
-            return deferred.promise;
+            return deferred.promise();
         };
 
         theme.button = function (name, size, classes, type, href) {
@@ -557,7 +524,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre',   'Q', 'storage',
         };
 
         theme.table = function (cols, rows, classes) {
-            var deferred = Q.defer();
+            var deferred = App.defer();
             theme.getTemplate('table', function (template) {
                 var $table = $(template({
                     table: {
@@ -568,7 +535,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre',   'Q', 'storage',
                 }));
                 deferred.resolve($table);
             });
-            return deferred.promise;
+            return deferred.promise();
         };
 
 
