@@ -30,12 +30,12 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
              */
             options       : storage.get('theme.options', {
                 json   : true,
-                default: App.config('theme')
+                default: Application.config('theme')
             }),
-            defaultOptions: App.config('theme'),
-            colors        : App.colors,
-            fonts         : App.fonts,
-            breakpoints   : App.breakpoints
+            defaultOptions: Application.config('theme'),
+            colors        : Application.colors,
+            fonts         : Application.fonts,
+            breakpoints   : Application.breakpoints
         };
 
 
@@ -45,7 +45,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
         theme._initLayout = function () {
             theme.options = storage.get('theme.options', {
                 json   : true,
-                default: App.config('theme')
+                default: Application.config('theme')
             });
             theme.applyLayout();
         };
@@ -121,7 +121,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
 
             if ( lastSelectedLayout != layoutOption ) {
                 //layout changed, run responsive handler:
-                App.emit('theme:resize');
+                Application.emit('theme:resize');
             }
             lastSelectedLayout = layoutOption;
 
@@ -202,7 +202,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
                  * @event module:theme~layout
                  * @type {object}
                  */
-                App.emit('theme:layout', theme.options);
+                Application.emit('theme:layout', theme.options);
             });
         };
 
@@ -247,7 +247,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
              * @event module:theme~save
              * @type {object}
              */
-            App.emit('theme:save', theme.options);
+            Application.emit('theme:save', theme.options);
         };
 
         /**
@@ -258,14 +258,14 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
             if ( ! defined(save) || save === true ) {
                 storage.del('theme.options');
             }
-            theme.options = App.config('theme');
+            theme.options = Application.config('theme');
             theme.applyLayout();
             /**
              * Fires when the theme options have been resetted to default
              * @event module:theme~reset
              * @type {object} The current theme options
              */
-            App.emit('theme:reset', theme.options);
+            Application.emit('theme:reset', theme.options);
         };
 
 
@@ -274,7 +274,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
          * Returns the debug boolean
          * @returns {boolean}
          */
-        theme.isDebug = App.isDebug.bind(App);
+        theme.isDebug = Application.isDebug.bind(Application);
 
         /**
          * Checks if the sidebar is used
@@ -289,12 +289,12 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
             return cre().addClass('loader').addClass('loader-' + name)
         };
 
-        theme.getTemplate = App.getTemplate.bind(App);
-        theme.isSupported = App.isSupported.bind(App);
-        theme.getViewPort = App.getViewPort.bind(App);
-        theme.isTouchDevice = App.isTouchDevice.bind(App);
-        theme.getRandomId = App.getRandomId.bind(App);
-        theme.getBreakpoint = App.getBreakpoint.bind(App);
+        theme.getTemplate = Application.getTemplate.bind(Application);
+        theme.isSupported = Application.isSupported.bind(Application);
+        theme.getViewPort = Application.getViewPort.bind(Application);
+        theme.isTouchDevice = Application.isTouchDevice.bind(Application);
+        theme.getRandomId = Application.getRandomId.bind(Application);
+        theme.getBreakpoint = Application.getBreakpoint.bind(Application);
 
 
         theme._initSettingsEditor = function () {
@@ -327,7 +327,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
                     /**
                      * @event module:theme~resize
                      */
-                    App.emit('theme:resize', theme, 'resize');
+                    Application.emit('theme:resize', theme, 'resize');
                 }, 600); // delay the event a bit, otherwise it doesn't seem to work well in some cases
             });
         };
@@ -343,8 +343,8 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
         theme._initScrollToTop = function(){
             $('#scroll-top').off('click').on('click', function(e){
                 e.preventDefault();
-                App.emit('theme:scrolltop');
-                App.scrollTo(document.body, 0, 600);
+                Application.emit('theme:scrolltop');
+                Application.scrollTo(document.body, 0, 600);
             })
         };
 
@@ -367,7 +367,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
                     if ( ! defined(opts) ) {
                         opts = {};
                     }
-                    var data = _.merge(App.config('plugins.slimScroll'), $(this).data());
+                    var data = _.merge(Application.config('plugins.slimScroll'), $(this).data());
                     $(this).slimScroll(_.merge(data, opts));
                     $(this).attr("data-initialized", "1");
                 });
@@ -476,7 +476,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
 
 
         theme.box = function (title, icon, actions) {
-            var deferred = App.defer();
+            var deferred = Application.defer();
             actions = defined(actions) ? actions : false;
             theme.getTemplate('box', function (template) {
                 var $box = $(template({
@@ -524,7 +524,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
         };
 
         theme.table = function (cols, rows, classes) {
-            var deferred = App.defer();
+            var deferred = Application.defer();
             theme.getTemplate('table', function (template) {
                 var $table = $(template({
                     table: {
@@ -548,7 +548,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
              * @event App#theme:init
              * @type {object}
              */
-            App.emit('theme:init', theme);
+            Application.emit('theme:init', theme);
 
             theme.$window = $(window);
             theme.$document = $(window.document);
@@ -576,7 +576,7 @@ define(['jquery', 'fn/defined', 'fn/default', 'fn/cre', 'storage',
              * @event App#theme:ready
              * @type {object}
              */
-            App.emit('theme:ready', theme);
+            Application.emit('theme:ready', theme);
         };
 
         return theme;

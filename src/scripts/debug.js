@@ -21,7 +21,7 @@ define([ 'jquery', 'console', 'module', 'plugins/contextmenu' ],
         }
 
 
-        if( App.isDebug() === true ){
+        if( Application.isDebug() === true ){
 
             Console.styles.register({
                 font_scp   : 'font-family: \'Source Code Pro\', monospace;',

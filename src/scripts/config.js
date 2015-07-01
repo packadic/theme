@@ -429,5 +429,5 @@
 
 
 
-    App.init(config);
+    Application.init(config);
 }.call());

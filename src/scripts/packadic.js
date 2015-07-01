@@ -4,6 +4,8 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
+function asd(name) {
+}
 var packadic;
 (function (packadic) {
     var Util = (function () {
@@ -607,4 +609,4 @@ var packadic;
     })(EventEmitter2);
     packadic.App = App;
 })(packadic || (packadic = {}));
-window['App'] = new packadic.App();
+window['Application'] = new packadic.App();

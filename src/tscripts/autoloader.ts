@@ -1,14 +1,13 @@
-///<reference path="definitions.d.ts"/>
-import def = require('fn/default');
-import defined = require('fn/defined');
-import cre = require('fn/cre');
-import async = require('plugins/async');
+///<reference path="types.d.ts"/>
+import {def, defined, cre} from 'core/util'
+import {Application} from 'core/application'
+import async = require('async');
 
-var App = window['App'];
-module autoloader {
 
+export function getDefaultDefinitions(App:Application):any {
     var defaultDefinitions:any = {
         simple: [
+            ['box', '.box', ['widgets'], 'packadicBox'],
             // BS SLIDER
             ['slider', 'input.slider', ['plugins/bs-slider'], 'slider'],
             // BS FILESTYLE
@@ -19,7 +18,7 @@ module autoloader {
             ['tooltip', '[data-toggle="tooltip"]', ['plugins/bootstrap'], 'bs.tooltip', App.config('plugins.tooltip')],
             // POPOVER
             ['popover', '[data-toggle="popover"]', ['plugins/bootstrap'], 'bs.popover', App.config('plugins.popover'), function ($el) {
-                $el.on('click', function (e) {
+                $el.on('click', function (e:JQueryEventObject) {
                     e.preventDefault();
                 });
             }],
@@ -60,6 +59,8 @@ module autoloader {
 
                 if ($el.find('form.form-material').length > 0) {
                     require(['plugins/bs-material'], function () {
+
+
                         $.material.options = _.merge($.material.options, App.config('plugins.material'));
                         $.material.init();
                     })
@@ -108,122 +109,121 @@ module autoloader {
             }
         ]
     };
+    return defaultDefinitions;
+}
 
-    export interface IAutoloaderDefinition {
-        fnName:string;
-        selector:string;
-        requires:Array<string>;
-        dataName?:string;
-        options?:Object;
-        preInitFn?:Function
+export interface IAutoloaderDefinition {
+    fnName:string;
+    selector:string;
+    requires:Array<string>;
+    dataName?:string;
+    options?:Object;
+    preInitFn?:Function
+}
+
+export class Autoload {
+
+    private _simple:Array<IAutoloaderDefinition>;
+    private _custom:Array<Object>;
+
+    constructor() {
+        this._simple = [];
+        this._custom = [];
     }
 
-    export class Autoload {
+    public add(fnName:string, selector:string, requires:Array<string>, dataName?:string, options?:Object, preInitFn?:Function):Autoload {
+        this._simple.push({
+            fnName: fnName,
+            selector: selector,
+            requires: requires,
+            dataName: def(dataName, fnName),
+            options: def(options, {}),
+            preInitFn: preInitFn
+        });
 
-        private _simple:Array<IAutoloaderDefinition>;
-        private _custom:Array<Object>;
+        return this;
+    }
 
-        constructor() {
-            this._simple = [];
-            this._custom = [];
+    public addSimple(definition:IAutoloaderDefinition):Autoload {
+        var args = [];
+        for (var o in definition) {
+            args.push(definition[o]);
         }
+        this.add.apply(this, args);
+        return this;
+    }
 
-        public add(fnName:string, selector:string, requires:Array<string>, dataName?:string, options?:Object, preInitFn?:Function):Autoload {
-            this._simple.push({
-                fnName: fnName,
-                selector: selector,
-                requires: requires,
-                dataName: def(dataName, fnName),
-                options: def(options, {}),
-                preInitFn: preInitFn
-            });
+    public addCustom(customFn:Function):Autoload {
+        this._custom.push(customFn);
+        return this
+    }
 
-            return this;
-        }
+    public addDefaultDefinitions(App:Application):Autoload {
 
-        public addSimple(definition:IAutoloaderDefinition):Autoload {
-            var args = [];
-            for (var o in definition) {
-                args.push(definition[o]);
-            }
-            this.add.apply(this, args);
-            return this;
-        }
+        var self:Autoload = this;
 
-        public addCustom(customFn:Function):Autoload {
-            this._custom.push(customFn);
-            return this
-        }
+        $.each(getDefaultDefinitions(App).simple, function (index:number, definition:IAutoloaderDefinition) {
+            self.addSimple(definition);
+        });
+        $.each(getDefaultDefinitions(App).custom, function (index:number, customFn:Function) {
+            self.addCustom(customFn);
+        });
+        return this;
+    }
 
-        public addDefaultDefinitions():Autoload {
+    public scan($el:JQuery, callback?:Function) {
 
-            var self:Autoload = this;
+        var self:Autoload = this;
+        var detected = [];
 
-            $.each(defaultDefinitions.simple, function (index:number, definition:IAutoloaderDefinition) {
-                self.addSimple(definition);
-            });
-            $.each(defaultDefinitions.custom, function (index:number, customFn:Function) {
-                self.addCustom(customFn);
-            });
-            return this;
-        }
+        require(['jquery'], function ($) {
+            $.each(self._simple, function (index, data) {
+                $el.find(data.selector).each(function () {
+                    var $target = $(this);
 
-        public scan($el:JQuery, callback?:Function) {
+                    // skip if already initialized
+                    if (defined($target.data(data.dataName))) {
+                        return;
+                    }
 
-            var self:Autoload = this;
-            var detected = [];
+                    // allow strings, will be transformed to array
+                    //var requires:Array<any> = typeof data.requires !== 'array' ? [data.requires] : data.requires;
 
-            require(['jquery'], function ($) {
-                $.each(self._simple, function (index, data) {
-                    $el.find(data.selector).each(function () {
-                        var $target = $(this);
+                    detected.push(function (cb) {
+                        // require the plugin
+                        require(data.requires, function () {
+                            // If defined, call the pre init function that allows altering the target before initialisation
+                            if (typeof data.preInitFn === 'function') {
+                                var retval = data.preInitFn($target, data);
+                                if (defined(retval)) data = retval;
+                            }
 
-                        // skip if already initialized
-                        if (defined($target.data(data.dataName))) {
-                            return;
-                        }
-
-                        // allow strings, will be transformed to array
-                        //var requires:Array<any> = typeof data.requires !== 'array' ? [data.requires] : data.requires;
-
-                        detected.push(function (cb) {
-                            // require the plugin
-                            require(data.requires, function () {
-                                // If defined, call the pre init function that allows altering the target before initialisation
-                                if (typeof data.preInitFn === 'function') {
-                                    var retval = data.preInitFn($target, data);
-                                    if (defined(retval)) data = retval;
-                                }
-
-                                // and initialize target element with the plugin
-                                $target[data.fnName](data.options);
-                                cb(null);
-                            });
+                            // and initialize target element with the plugin
+                            $target[data.fnName](data.options);
+                            cb(null);
                         });
                     });
                 });
-
-                $.each(self._custom, function (index:number, customFn:Function) {
-                    detected.push(function(cb){
-                        customFn($el);
-                        cb();
-                    })
-                });
-                if (detected.length > 0) {
-                    async.parallel(detected, function (err:any, results:Object) {
-                        if (defined(callback)) {
-                            callback(err, results);
-                        }
-                    })
-                } else {
-                    if (defined(callback)) {
-                        callback(null, {});
-                    }
-                }
             });
 
-        }
+            $.each(self._custom, function (index:number, customFn:Function) {
+                detected.push(function (cb) {
+                    customFn($el);
+                    cb();
+                })
+            });
+            if (detected.length > 0) {
+                async.parallel(detected, function (err:any, results:Object) {
+                    if (defined(callback)) {
+                        callback(err, results);
+                    }
+                })
+            } else {
+                if (defined(callback)) {
+                    callback(null, {});
+                }
+            }
+        });
+
     }
 }
-
-export = autoloader

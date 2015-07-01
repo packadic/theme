@@ -368,7 +368,7 @@ var init = module.exports = function (grunts) {
                 module: 'amd'
             },
             commonjs: {
-                src: ['src/tscripts/packadic.ts'], //,'!src/tscripts/**/*.d.ts'],
+                src: ['src/tscripts/**/*.ts','!src/tscripts/**/*.d.ts'],
                 dest: 'src/tscripts/commonjs',
                 options: { module: 'commonjs' }
             },

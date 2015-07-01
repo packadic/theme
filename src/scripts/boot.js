@@ -1,3 +1,3 @@
 (function() {
-    window['App'].boot();
+    window['Application'].boot();
 }.call());

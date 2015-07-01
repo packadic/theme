@@ -1,0 +1,32 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "src/tscripts/typings",
+  "bundle": "src/tscripts/typings/tsd.d.ts",
+  "installed": {
+    "jquery/jquery.d.ts": {
+      "commit": "c7b1128cc9a8f5797bade826e7632b36b06a856c"
+    },
+    "lodash/lodash.d.ts": {
+      "commit": "c7b1128cc9a8f5797bade826e7632b36b06a856c"
+    },
+    "requirejs/require.d.ts": {
+      "commit": "c7b1128cc9a8f5797bade826e7632b36b06a856c"
+    },
+    "eventemitter2/eventemitter2.d.ts": {
+      "commit": "c7b1128cc9a8f5797bade826e7632b36b06a856c"
+    },
+    "jqueryui/jqueryui.d.ts": {
+      "commit": "c7b1128cc9a8f5797bade826e7632b36b06a856c"
+    },
+    "async/async.d.ts": {
+      "commit": "c7b1128cc9a8f5797bade826e7632b36b06a856c"
+    },
+    "icheck/icheck.d.ts": {
+      "commit": "c7b1128cc9a8f5797bade826e7632b36b06a856c"
+    },
+    "chartjs/chart.d.ts": {
+      "commit": "c7b1128cc9a8f5797bade826e7632b36b06a856c"
+    }
+}

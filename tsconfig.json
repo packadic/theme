@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "amd",
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "declaration": false,
+        "outDir": "./src/compiled/loose",
+        "sourceMap": false,
+        "target": "ES5"
+    },
+    "files": [
+        "./src/tscripts/packadic.ts"
+    ]
+}

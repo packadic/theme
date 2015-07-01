@@ -4,6 +4,7 @@ define(["require", "exports", 'fn/default', 'fn/defined', 'fn/cre', 'plugins/asy
     (function (autoloader) {
         var defaultDefinitions = {
             simple: [
+                ['box', '.box', ['widgets'], 'packadicBox'],
                 // BS SLIDER
                 ['slider', 'input.slider', ['plugins/bs-slider'], 'slider'],
                 // BS FILESTYLE

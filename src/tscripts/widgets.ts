@@ -1,5 +1,4 @@
-///<reference path="definitions.d.ts"/>
-
+///<reference path="typings/tsd.d.ts"/>
 import $ = require('jquery');
 import def = require('fn/default');
 import defined = require('fn/defined');
@@ -13,7 +12,7 @@ _$draggable; // typescript otherwise omits the modules....
 
 
 
-var App = window['App'];
+var App = window['Application'];
 module widgets {
     var $body:any = $('body');
 

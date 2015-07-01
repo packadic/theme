@@ -1,33 +1,33 @@
 (function () {
 
-    App.config.merge({
+    Application.config.merge({
         debug   : true,
         demo    : true,
         oauth_io: 'UpFevf23G2O93iSlMOQ5PRL4zq0'
     });
-    App.on('state:*', function(){
+    Application.on('state:*', function(){
         console.log('event', this.event, arguments, this);
     });
-    App.on('theme:*', function(){
+    Application.on('theme:*', function(){
         console.log('event', this.event, arguments, this);
     });
-    App.on('sidebar:*', function(){
+    Application.on('sidebar:*', function(){
         console.log('event', this.event, arguments, this);
     });
 
-    App.on('state:preboot', function () {
-        console.warn('(' + App.getElapsedTime() + 's) PRE-BOOT');
+    Application.on('state:preboot', function () {
+        console.warn('(' + Application.getElapsedTime() + 's) PRE-BOOT');
     }).on('state:booting', function () {
-        console.warn('(' + App.getElapsedTime() + 's) BOOTING');
+        console.warn('(' + Application.getElapsedTime() + 's) BOOTING');
     }).on('state:starting', function () {
-        console.warn('(' + App.getElapsedTime() + 's) STARTING');
+        console.warn('(' + Application.getElapsedTime() + 's) STARTING');
         require(['jquery'], function ($) {
-            console.warn('(' + App.getElapsedTime() + 's) BOOTED');
+            console.warn('(' + Application.getElapsedTime() + 's) BOOTED');
             ///$('.test-box').box();
-            App.sidebar('init', {hidden: false, items: packadic.site.data.navigation.sidebar});
-            App.autoload.scan($('body'), function () {
-                if ( App.config('pageLoadedOnAutoloaded') === true ) {
-                    App.removePageLoader();
+            Application.sidebar('init', {hidden: false, items: packadic.site.data.navigation.sidebar});
+            Application.autoload.scan($('body'), function () {
+                if ( Application.config('pageLoadedOnAutoloaded') === true ) {
+                    Application.removePageLoader();
                 }
             })
 
@@ -35,14 +35,14 @@
             });
         });
     }).on('state:prestart', function () {
-        console.warn('(' + App.getElapsedTime() + 's) PRESTART');
+        console.warn('(' + Application.getElapsedTime() + 's) PRESTART');
     }).on('state:started', function () {
-        console.warn('(' + App.getElapsedTime() + 's) STARTED');
+        console.warn('(' + Application.getElapsedTime() + 's) STARTED');
     });
 
 
 
-    App.on('state:starting', function () {
+    Application.on('state:starting', function () {
         require(['jquery', 'theme/settings-editor', 'theme', 'storage', 'fn/cre'], function ($, SettingsEditor, theme, storage, cre) {
 
 
