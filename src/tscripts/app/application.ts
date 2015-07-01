@@ -1,8 +1,21 @@
 ///<reference path="../types.d.ts"/>
-import {copyObject,kindOf} from 'core/util'
-import {Config} from 'core/config'
-import {Autoload} from 'autoloader'
+import {copyObject,kindOf} from 'app/util'
+import {Config} from 'app/config'
+import {Autoload} from 'app/autoloader'
 import EventEmitter2 = require("eventemitter2");
+
+
+export enum BoxAction {
+    toggle, hide, show, fullscreen, normal, close, open, loading
+}
+
+export enum ThemeAction {
+    init, refresh, reset
+}
+
+export enum SidebarAction {
+    init, toggle, hide, show, open, close, refresh
+}
 
 
 export enum AppState {
@@ -44,7 +57,8 @@ export class Application extends EventEmitter2 {
         var self:Application = this;
         this._startTime = new Date().getTime();
         this._state = AppState.init;
-
+        this.autoload = new Autoload();
+        this.autoload.addDefaultDefinitions(this);
     }
 
     //
@@ -92,13 +106,11 @@ export class Application extends EventEmitter2 {
             throw new Error('Cannot boot, still in init mote. Init first man');
         }
         this.setState(AppState.booting);
-        require.config(this.config.get('requireJS'));
+        requirejs.config(this.config.get('requireJS'));
 
-        require(['module', 'jquery', 'autoloader', 'string', 'jade', 'storage', 'code-mirror', 'plugins/cookie', 'jq/general'],
-            function (module, $, autoloader, _s, jade, storage) {
+        requirejs(['module', 'jquery', 'string', 'jade', 'storage', 'code-mirror', 'plugins/cookie', 'jq/general'],
+            function (module, $,  _s, jade, storage) {
                 self.$ = $;
-
-                self.autoload = new autoloader.Autoload();
                 self._jade = jade;
                 self._s = _s;
 
@@ -168,11 +180,11 @@ export class Application extends EventEmitter2 {
                     self.setState(AppState.starting);
 
                     $(function () {
+                        self.theme(ThemeAction.init);
+                        self.setState(AppState.started);
                         if (argMap.demo) {
                             getArg('demo').init();
                         }
-                        self.theme(ThemeAction.init);
-                        self.setState(AppState.started);
                     });
                     // EVENT: started
 

@@ -64,11 +64,19 @@ interface ISidebar extends Function {
 
 interface JQueryStatic {
     material:any;
+    cookie?:any;
 }
 
 interface JQuery {
     easyPieChart(...args:any[]);
+    prefixedData(prefix:string);
+    $i?:any;
 }
+
+interface Window {
+    attachEvent(name:string, handler?:Function);
+}
+declare var window:Window;
 
 /** EventEmitter2 fix to require and extend properly */
 interface EventEmitter2Configuration {
@@ -96,4 +104,11 @@ declare class EventEmitter2 {
 }
 declare module "eventemitter2" {
     export = EventEmitter2;
+}
+
+declare module "jquery-ui/widget" {
+    export = {}
+}
+declare module "jquery-ui/draggable" {
+    export = {}
 }

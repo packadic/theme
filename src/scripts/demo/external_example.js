@@ -1,48 +1,47 @@
-(function () {
+App.ready(function () {
 
-    Application.config.merge({
+
+    App.config.merge({
         debug   : true,
         demo    : true,
         oauth_io: 'UpFevf23G2O93iSlMOQ5PRL4zq0'
     });
-    Application.on('state:*', function(){
+    App.on('state:*', function(){
         console.log('event', this.event, arguments, this);
     });
-    Application.on('theme:*', function(){
+    App.on('theme:*', function(){
         console.log('event', this.event, arguments, this);
     });
-    Application.on('sidebar:*', function(){
+    App.on('sidebar:*', function(){
         console.log('event', this.event, arguments, this);
     });
 
-    Application.on('state:preboot', function () {
-        console.warn('(' + Application.getElapsedTime() + 's) PRE-BOOT');
+    App.on('state:preboot', function () {
+        console.warn('(' + App.getElapsedTime() + 's) PRE-BOOT');
     }).on('state:booting', function () {
-        console.warn('(' + Application.getElapsedTime() + 's) BOOTING');
+        console.warn('(' + App.getElapsedTime() + 's) BOOTING');
     }).on('state:starting', function () {
-        console.warn('(' + Application.getElapsedTime() + 's) STARTING');
+        console.warn('(' + App.getElapsedTime() + 's) STARTING');
         require(['jquery'], function ($) {
-            console.warn('(' + Application.getElapsedTime() + 's) BOOTED');
+            console.warn('(' + App.getElapsedTime() + 's) BOOTED');
             ///$('.test-box').box();
-            Application.sidebar('init', {hidden: false, items: packadic.site.data.navigation.sidebar});
-            Application.autoload.scan($('body'), function () {
-                if ( Application.config('pageLoadedOnAutoloaded') === true ) {
-                    Application.removePageLoader();
+            App.sidebar('init', {hidden: false, items: packadic.site.data.navigation.sidebar});
+            App.autoload.scan($('body'), function () {
+                if ( App.config('pageLoadedOnAutoloaded') === true ) {
+                    App.removePageLoader();
                 }
             })
 
-            $(function () {;
-            });
         });
     }).on('state:prestart', function () {
-        console.warn('(' + Application.getElapsedTime() + 's) PRESTART');
+        console.warn('(' + App.getElapsedTime() + 's) PRESTART');
     }).on('state:started', function () {
-        console.warn('(' + Application.getElapsedTime() + 's) STARTED');
+        console.warn('(' + App.getElapsedTime() + 's) STARTED');
     });
 
 
 
-    Application.on('state:starting', function () {
+    App.on('state:starting', function () {
         require(['jquery', 'theme/settings-editor', 'theme', 'storage', 'fn/cre'], function ($, SettingsEditor, theme, storage, cre) {
 
 
@@ -145,5 +144,5 @@
             }.call();
         });
     });
-}.call());
+});
 

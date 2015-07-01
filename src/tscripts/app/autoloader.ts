@@ -1,6 +1,6 @@
-///<reference path="types.d.ts"/>
-import {def, defined, cre} from 'core/util'
-import {Application} from 'core/application'
+///<reference path="../types.d.ts"/>
+import {def, defined, cre} from 'app/util'
+import {Application} from 'app/application'
 import async = require('async');
 
 
@@ -102,13 +102,14 @@ export function getDefaultDefinitions(App:Application):any {
             },
             function ($el) {
                 var $scrollable = $el.find('.scrollable');
-                require(['theme'], function (theme) {
+                require(['theme', 'plugins/jquery-slimscroll'], function (theme) {
                     theme.destroySlimScroll($scrollable);
                     theme.initSlimScroll($scrollable);
                 });
             }
         ]
     };
+
     return defaultDefinitions;
 }
 
@@ -161,12 +162,13 @@ export class Autoload {
     public addDefaultDefinitions(App:Application):Autoload {
 
         var self:Autoload = this;
-
-        $.each(getDefaultDefinitions(App).simple, function (index:number, definition:IAutoloaderDefinition) {
-            self.addSimple(definition);
-        });
-        $.each(getDefaultDefinitions(App).custom, function (index:number, customFn:Function) {
-            self.addCustom(customFn);
+        require(['jquery'], function ($) {
+            $.each(getDefaultDefinitions(App).simple, function (index:number, definition:IAutoloaderDefinition) {
+                self.addSimple(definition);
+            });
+            $.each(getDefaultDefinitions(App).custom, function (index:number, customFn:Function) {
+                self.addCustom(customFn);
+            });
         });
         return this;
     }

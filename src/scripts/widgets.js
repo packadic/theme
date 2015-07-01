@@ -1,14 +1,13 @@
-///<reference path="definitions.d.ts"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", 'jquery', 'fn/defined', 'fn/cre', 'jquery-ui/widget', 'jquery-ui/draggable'], function (require, exports, $, defined, cre, _$widget, _$draggable) {
+define(["require", "exports", 'jquery', 'app/util', 'jquery-ui/widget', 'jquery-ui/draggable'], function (require, exports, $, util_1, _$widget, _$draggable) {
     _$widget; // fake using it for forcing it to load with requirejs
     _$draggable; // typescript otherwise omits the modules....
-    var App = window['App'];
+    var App = window['Application'];
     var widgets;
     (function (widgets) {
         var $body = $('body');
@@ -96,7 +95,7 @@ define(["require", "exports", 'jquery', 'fn/defined', 'fn/cre', 'jquery-ui/widge
             }
             PackadicBoxWidget.prototype._getDataAttributes = function () {
                 var data = this.element.prefixedData('box');
-                if (defined(data.controls)) {
+                if (util_1.defined(data.controls)) {
                     data.controls = data.controls.split(',');
                 }
                 return data;
@@ -120,8 +119,8 @@ define(["require", "exports", 'jquery', 'fn/defined', 'fn/cre', 'jquery-ui/widge
                     $a.$i = $a.find('> i');
                 }
                 else {
-                    var $i = cre('i').addClass(iconClass);
-                    $a = cre('a')
+                    var $i = util_1.cre('i').addClass(iconClass);
+                    $a = util_1.cre('a')
                         .attr('data-box-control', typeName)
                         .append($i)
                         .attr('href', '#');
@@ -199,7 +198,7 @@ define(["require", "exports", 'jquery', 'fn/defined', 'fn/cre', 'jquery-ui/widge
                 var $actions = this.$header.find('> .actions');
                 var $controls = this.$header.find('> .controls');
                 if ($controls.length == 0) {
-                    $controls = cre().addClass('controls');
+                    $controls = util_1.cre().addClass('controls');
                     if ($actions.length > 0) {
                         $actions.before($controls);
                     }

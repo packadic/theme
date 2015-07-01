@@ -1,5 +1,5 @@
 ///<reference path="../types.d.ts"/>
-import {objectGet, objectSet, recurse} from 'core/util'
+import {objectGet, objectSet, recurse} from 'app/util'
 
 
 

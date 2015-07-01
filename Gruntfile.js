@@ -2,14 +2,14 @@
 
 'use strict';
 
-var radic  = require('radic'),
-    _      = require('lodash'),
-    util   = require('util'),
-    _s     = require('underscore.string'),
-    jsyaml = require('js-yaml'),
-    fs     = require('fs'),
+var radic   = require('radic'),
+    _       = require('lodash'),
+    util    = require('util'),
+    _s      = require('underscore.string'),
+    jsyaml  = require('js-yaml'),
+    fs      = require('fs'),
     globule = require('globule'),
-    path   = require('path');
+    path    = require('path');
 
 var grunt;
 
@@ -48,7 +48,7 @@ var init = module.exports = function (grunts) {
         target, type;
 
     function mergeConfigFrom(configPath) {
-        if (!_s.endsWith(configPath, '.yml')) {
+        if ( ! _s.endsWith(configPath, '.yml') ) {
             configPath = path.resolve(configPath, 'config.yml');
         }
         ok('Merging config from: ' + configPath)
@@ -62,7 +62,7 @@ var init = module.exports = function (grunts) {
     mergeConfigFrom(__dirname);
 //    mergeConfigFrom(process.cwd());
     var externalConfig = grunt.option('config');
-    if (externalConfig) {
+    if ( externalConfig ) {
         mergeConfigFrom(externalConfig);
     }
 
@@ -74,7 +74,7 @@ var init = module.exports = function (grunts) {
         '<%= target.dest %>/assets/scripts/plugins/require.js'   : ['src/plugins/requirejs/require.js']
     };
     var tsAutoGenFiles = globule.find(path.join(process.cwd(), 'src/tscripts/amd/*.js')).map(path.basename);
-    var tsAutoGenFilesIgnore = tsAutoGenFiles.map(function(val){
+    var tsAutoGenFilesIgnore = tsAutoGenFiles.map(function (val) {
         return '!src/scripts/' + val;
     });
 
@@ -113,7 +113,7 @@ var init = module.exports = function (grunts) {
             plugins  : {src: '<%= target.dest %>/assets/scripts/plugins'},
             templates: {src: '<%= target.dest %>/assets/scripts/templates'},
             demo     : {src: '<%= target.dest %>/demo'},
-            tmp     : {src: '<%= target.dest %>/.tmp'},
+            tmp      : {src: '<%= target.dest %>/.tmp'},
             views    : {src: '<%= target.dest %>/**/*.html'}
         },
         copy            : {
@@ -131,10 +131,7 @@ var init = module.exports = function (grunts) {
             plugins      : {files: [{expand: true, cwd: 'src/plugins', src: '**', dest: '<%= target.dest %>/assets/scripts/plugins'}]},
             demo         : {files: [{expand: true, cwd: 'src/demo', src: '**', dest: '<%= target.dest %>/demo'}]},
             misc         : {files: [{src: 'src/.htaccess', dest: '<%= target.dest %>/.htaccess'}]},
-            favicon : {files: [{src: 'src/favicon-html5.ico', dest: '<%= target.dest %>/favicon.ico'}]},
-            tsdefs: {files: [{expand: true, cwd: '<%= target.dest %>/assets/scripts', src: '**/*.d.ts', dest: 'src/tscripts/definitions'}]},
-            ts_commonjs         : {files: [{expand: true, cwd: 'src/tscripts/commonjs', src: 'packadic.js', dest: 'src/scripts'}]},
-            ts_amd         : {files: [{expand: true, cwd: 'src/tscripts/amd', src: ['*.js', '!packadic.js'], dest: 'src/scripts'}]}
+            favicon      : {files: [{src: 'src/favicon-html5.ico', dest: '<%= target.dest %>/favicon.ico'}]},
         },
         jade            : {
             dev      : {
@@ -170,38 +167,38 @@ var init = module.exports = function (grunts) {
             }
         },
         sass            : {
-            options: { compass: true, bundleExec: true, sourcemap: 'file', trace: true },
-            dev    : {
+            options       : {compass: true, bundleExec: true, sourcemap: 'file', trace: true},
+            dev           : {
                 //files: [{expand: true, cwd: 'src/styles', src: ['**/*.scss', '!stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
                 files: [{expand: true, cwd: 'src/styles', src: ['components/select2.scss', 'themes/theme-default.scss', 'stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             },
-            dist   : {
-                options: { style: 'compressed', sourcemap: 'none' },
-                files: [{expand: true, cwd: 'src/styles', src: ['components/select2.scss', 'themes/theme-default.scss', 'stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
+            dist          : {
+                options: {style: 'compressed', sourcemap: 'none'},
+                files  : [{expand: true, cwd: 'src/styles', src: ['components/select2.scss', 'themes/theme-default.scss', 'stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             },
-            fast   : {
+            fast          : {
                 files: [{expand: true, cwd: 'src/styles', src: 'fast.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             },
-            nav    : {
+            nav           : {
                 options: {loadPath: 'src/styles'},
                 files  : [{expand: true, cwd: 'src/styles', src: 'nav.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             },
-            stylesheet_dev    : {
+            stylesheet_dev: {
                 files: [{expand: true, cwd: 'src/styles', src: 'stylesheet.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             },
-            theme_dev    : {
+            theme_dev     : {
                 files: [{expand: true, cwd: 'src/styles', src: 'themes/theme-default.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             },
-            json    : {
+            json          : {
                 files: [{expand: true, cwd: 'src/styles', src: 'json.scss', ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             }
         },
-        sassc: {
+        sassc           : {
             options: {
-                sourceMap: true,
+                sourceMap  : true,
                 lineNumbers: true
             },
-            dev: {
+            dev    : {
                 files: [{expand: true, cwd: 'src/styles', src: ['components/select2.scss', 'themes/theme-default.scss', 'stylesheet.scss'], ext: '.css', dest: '<%= target.dest %>/assets/styles'}]
             }
         },
@@ -240,85 +237,32 @@ var init = module.exports = function (grunts) {
                 }
             }
         },
-        init_script     : {
-            src            : "<%= target.dest %>/assets/scripts",
-            dest           : "/assets/scripts/init.js",
-            prepend_scripts: [
-                'plugins/lodash.custom.js',
-                'plugins/eventemitter2/lib/eventemitter2.js',
-                'plugins/require.js',
-                'packadic.js'
-            ],
-            append_scripts: [
-                'config.js'
-            ]
-        },
         concurrent      : {
             options: {
                 logConcurrentOutput: true
             },
             watch  : ['devtools', 'watch']
         },
-        pcscripts       : {
-            modules                   : [
-                {name: "vendor/ace-editor"},
-                {
-                    name: 'boot', include: [
-                    'jquery', 'plugins/async', 'autoload', 'string', 'jade', 'code-mirror',
-                    'plugins/cookie', 'theme', 'theme/sidebar',
-                    'templates/sidebar', 'templates/alert', 'templates/box', 'templates/table',
-                    'eventer', 'plugins/bs-material-ripples', 'storage', 'json',
-                    'fn/defined', 'fn/default', 'fn/cre', 'Q'
-                ]
-                },
-                {
-                    name   : 'demo',
-                    exclude: ['boot'],
-                    include: ['demo/show-html', 'demo/show-class', 'demo/forms', 'demo/button-icon-showcase', 'demo/component-editor']
-                }
-            ],
-            baseUrl                   : "<%= target.dest %>/assets/scripts-staged", // from
-            dir                       : "<%= target.dest %>/assets/scripts",          // to
-            optimizeCss               : false,
-            uglify                    : "uglify",
-            //allowSourceOverwrites: true,
-            skipDirOptimize           : true,
-            preserveLicenseComments   : false,
-            removeCombined            : true,
-            optimizeAllPluginResources: true
-        },
         watch           : {
             options: {livereload: true}, //, nospawn: true},
-
-        /*plugins      : {
-                files: ['src/plugins/**'],
-                tasks: ['copy:plugins']
-            },*/
             styles       : {
                 files: ['src/styles/**'], // '!src/styles/fast/**', '!src/styles/fast.scss', '!src/styles/nav.scss', '!src/styles/components/_header-dropdown.scss'],
-                tasks: [ 'sassc:dev'] //'sass:<%= target.name %>']
+                tasks: ['sassc:dev'] //'sass:<%= target.name %>']
             },
-            //style_json: {
-            //    files: ['src/styles/json.scss', 'src/styles/variables/**'],
-            //    tasks: ['sass:json']
-            //},
-            /*
-            style_fast   : {
-                files: ['src/styles/fast/**', 'src/styles/fast.scss', 'src/styles/components/_header-dropdown.scss'],
-                tasks: ['sass:fast']
-            },
-            style_nav    : {
-                files: ['src/styles/bs.scss', 'src/styles/nav.scss'],
-                tasks: ['sass:nav']
-            },*/
+
             scripts_watch: {
-                files: ['src/scripts/**/*.js', '!src/scripts/init.js'],
+                files: ['src/scripts/**/*.js', '!src/scripts/init.js', '!src/scripts/wrap-close.js', '!src/scripts/wrap-open.js'],
                 tasks: ['copy:scripts_watch']
             },
-            initscripts  : {
-                files: ['src/scripts/init.js','src/scripts/config.js'],
-                tasks: ['copy:scripts_watch', 'create_init_script'] //'jsbuild:lodash', 'copy:scripts', 'uglify:dev',
+            typescript: {
+                files    : ['src/tscripts/**/*.ts', '!src/tscripts/app/**/*.ts', '!src/tscripts/packadic.ts', '!src/tscripts/**/*.d.ts'],
+                tasks: ['typescript:amd']
             },
+            initscripts  : {
+                files: ['src/tscripts/app/**/*.ts', 'src/tscripts/packadic.ts', 'src/scripts/init.js', 'src/scripts/config.js', 'src/scripts/wrap-close.js', 'src/scripts/wrap-open.js'],
+                tasks: ['tsbundler:packadic', 'copy:scripts_watch', 'create_init_script'] //'jsbuild:lodash', 'copy:scripts', 'uglify:dev',
+            },
+
             views        : {
                 files: ['src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**'],
                 tasks: ['views'] //, 'bootlint' ]
@@ -344,38 +288,61 @@ var init = module.exports = function (grunts) {
                 options: {livereload: 35729},
                 files  : ['src/**/*']
             },
-            typescript: {
-                files: ['src/tscripts/**/*.ts', '!src/tscripts/**/*.d.ts'],
-                tasks: ['dots:both']
-            },
-            /*typescript_packadic: {
-                files: ['src/tscripts/packadic.ts'],
-                tasks: ['typescript:packadic']
-            }
-            */
         },
-        jsdoc: {
+        jsdoc           : {
             dev: {
-                options: { a: 'b'}
+                options: {a: 'b'}
             }
         },
-        typescript: {
-            options: {
-                target: 'es5',
-                rootDir: 'src/tscripts',
-                sourceMap: false,
+        init_script     : {
+            src            : "<%= target.dest %>/assets/scripts",
+            dest           : "/assets/scripts/init.js",
+            prepend_scripts: [
+                'plugins/lodash.custom.js',
+                'plugins/require.js',
+                //'plugins/eventemitter2/lib/eventemitter2.js',
+                //'before.js',
+                'packadic.js'
+            ],
+            append_scripts : [
+                'config.js'
+            ]
+        },
+        typescript      : {
+            options : {
+                target     : 'es5',
+                rootDir    : 'src/tscripts',
+                sourceMap  : false,
                 declaration: false,
-                module: 'amd'
+                module     : 'amd'
             },
-            commonjs: {
-                src: ['src/tscripts/**/*.ts','!src/tscripts/**/*.d.ts'],
-                dest: 'src/tscripts/commonjs',
-                options: { module: 'commonjs' }
+            amd     : {
+                src    : ['src/tscripts/**/*.ts', '!src/tscripts/app/**/*.ts', '!src/tscripts/packadic.ts', '!src/tscripts/**/*.d.ts'],
+                dest   : '<%= target.dest %>/assets/scripts',
+                options: {module: 'amd', declaration: false}
             },
-            amd: {
-                src: ['src/tscripts/**/*.ts','!src/tscripts/**/*.d.ts'],
-                dest: 'src/tscripts/amd',
-                options: { module: 'amd', declaration: false }
+            before: {
+                src: ['src/tscripts/before.ts'],
+                dest: 'src/scripts/before.js',
+                options: { module: 'commonjs', removeComments: true }
+
+            }
+        },
+        tsbundler       : {
+            packadic: {
+                options: {
+                    name     : 'packadic',
+                    dest     : '<%= target.dest %>/assets/scripts/packadic.js',
+                    paths    : {
+                        'async'        : 'src/plugins/async/lib/async',
+                        'eventemitter2': 'src/plugins/eventemitter2/lib/eventemitter2'
+                    },
+                    modules  : [ 'app/application', 'app/autoloader', 'app/config', 'app/util', 'async','eventemitter2'],
+                    startFile: "src/scripts/wrap-open.js",
+                    endFile  : "src/scripts/wrap-close.js",
+                    optimize : "none",
+                    target   : 'ES5'
+                }
             }
         }
     };
@@ -386,14 +353,13 @@ var init = module.exports = function (grunts) {
     require('load-grunt-tasks')(grunt);
     require('time-grunt')(grunt);
 
-    grunt.registerTask('tscript', ['clean:tmp', 'typescript:base', 'browserify:dist', 'clean:tmp']);
 
     grunt.registerTask('rm', ['clean:all']);
     grunt.registerTask('templates', ['clean:templates', 'jade:templates', 'string-replace:templates', 'uglify:templates']);
 
     grunt.registerTask('cp', ['copy:images', 'copy:fonts', 'copy:misc', 'copy:demo']);
 
-    grunt.registerTask('scripts', ['copy:scripts', 'uglify:' + type, 'jsbuild', 'create_init_script']);
+    grunt.registerTask('scripts', ['typescript:amd', 'tsbundler:packadic', 'copy:scripts', 'uglify:' + type, 'jsbuild', 'create_init_script']);
     grunt.registerTask('assets', ['clean:assets', 'cp', 'copy:plugins', 'sass:' + type, 'templates', 'scripts']);
     grunt.registerTask('views', ['clean:views', 'jade_config:' + type, 'jade:' + type]);
 
@@ -408,7 +374,7 @@ var init = module.exports = function (grunts) {
     grunt.registerTask('clean:scripts', function () {
         grunt.log.writeln(App.config.get('target.dest'));
         require('globule').find([App.config.get('target.dest') + '/assets/scripts/**', '!' + App.config.get('target.dest') + '/assets/scripts/plugins/**', App.config.get('target.dest') + '/assets/scripts/plugins/*/**']).forEach(function (delPath) {
-            if (fs.statSync(delPath).isFile()) {
+            if ( fs.statSync(delPath).isFile() ) {
                 fs.unlinkSync(delPath);
             }
         });
@@ -427,44 +393,9 @@ var init = module.exports = function (grunts) {
         debug('task event', a);
     });
 
-    grunt.registerTask('phpstorm:definitions', '', function(){
-        var found = globule.find('/home/radic/.WebIde80/system/extLibs/*.d.ts');
-
-        var copied = 0;
-        found.forEach(function(filePath){
-            var fileName = path.basename(filePath).replace('http_github.com_borisyankov_DefinitelyTyped_raw_master_','');
-            var name = path.basename(fileName, '.d.ts');
-            var segments = name.split('_');
-            var newName = fileName;
-            if(segments[0] == segments[1]) {
-                newName = newName.replace(segments[0] + '_', '');
-            }
-            var dest = path.join(process.cwd(), 'src/tscripts/definitions', newName);
-            if(fs.existsSync(dest)) return;
-            fs.writeFileSync(dest, fs.readFileSync(filePath, 'UTF-8'));
-            copied++;
-            //grunt.verbose.writeln('Copied definition: ' + newName);
-        });
-        grunt.log.ok('Copied and renamed ' + copied + ' definitions.');
 
 
-    })
-
-    grunt.registerTask('dots', function(target) {
-        var packadic = ['typescript:commonjs', 'copy:ts_commonjs', 'copy:scripts_watch', 'create_init_script'];
-        var other = ['typescript:amd', 'copy:ts_amd'];
-        if(target === 'packadic'){
-            grunt.task.run(packadic);
-        } else if(target === 'other') {
-            grunt.task.run(other)
-        } else if(target === 'both') {
-            grunt.task.run(other.concat(packadic));
-        }
-
-    });
-
-
-    grunt.registerTask('kill', function() {
+    grunt.registerTask('kill', function () {
         process.exit(1);
     });
 };

@@ -1,3 +1,3 @@
-(function() {
-    window['Application'].boot();
-}.call());
+App.ready(function() {
+    App.boot();
+});

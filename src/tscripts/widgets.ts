@@ -1,9 +1,6 @@
-///<reference path="typings/tsd.d.ts"/>
+///<reference path="types.d.ts"/>
 import $ = require('jquery');
-import def = require('fn/default');
-import defined = require('fn/defined');
-import cre = require('fn/cre');
-
+import {def, defined, cre} from 'app/util';
 
 import _$widget = require('jquery-ui/widget');
 import _$draggable = require('jquery-ui/draggable');
@@ -11,8 +8,7 @@ _$widget; // fake using it for forcing it to load with requirejs
 _$draggable; // typescript otherwise omits the modules....
 
 
-
-var App = window['Application'];
+var App = window['App'];
 module widgets {
     var $body:any = $('body');
 
