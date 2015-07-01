@@ -17,7 +17,7 @@ export function on( callback ){
     } else {
         window.attachEvent("onstorage", callback);
     }
-};
+}
 
 /**
  * @typedef StorageSetOptions
@@ -41,7 +41,7 @@ export function set( key:any, val:any, options?:any ){
         window[ 'localStorage' ].setItem(key + ':expire', now + options.expires);
     }
     window[ 'localStorage' ].setItem(key, val);
-};
+}
 
 /**
  * @typedef StorageGetOptions
@@ -83,7 +83,7 @@ export function get( key:any, options?:any ){
         return jsonParse(val);
     }
     return val;
-};
+}
 
 
 /**
@@ -92,14 +92,14 @@ export function get( key:any, options?:any ){
  */
 export function del( key ){
     window[ 'localStorage' ].removeItem(key);
-};
+}
 
 /**
  * Clear the storage, will clean all saved items
  */
 export function clear(){
     window.localStorage.clear();
-};
+}
 
 
 /**
@@ -119,4 +119,4 @@ export function getSize( key ){
         }
         return total.toFixed(2);
     }
-};
+}

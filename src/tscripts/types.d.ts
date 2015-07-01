@@ -112,3 +112,8 @@ declare module "jquery-ui/widget" {
 declare module "jquery-ui/draggable" {
     export = {}
 }
+
+interface IWidget {
+    _create():any;
+    _destroy():any;
+}

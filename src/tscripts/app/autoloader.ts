@@ -7,7 +7,7 @@ import async = require('async');
 export function getDefaultDefinitions(App:Application):any {
     var defaultDefinitions:any = {
         simple: [
-            ['box', '.box', ['widgets'], 'packadicBox'],
+            ['box', '.box', ['widgets/box'], 'packadicBox'],
             // BS SLIDER
             ['slider', 'input.slider', ['plugins/bs-slider'], 'slider'],
             // BS FILESTYLE
@@ -172,6 +172,7 @@ export class Autoload {
         });
         return this;
     }
+
 
     public scan($el:JQuery, callback?:Function) {
 
