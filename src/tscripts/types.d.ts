@@ -20,6 +20,11 @@ interface IConfig {
     merge(obj:Object): IConfig;
     raw(prop?:any): any;
     process(raw:any): any;
+    save(prop?:string): IConfig;
+    load(prop?:string):IConfig;
+    allowSaveOn(prop:string):IConfig;
+    denySaveOn(prop:string):IConfig;
+    canSaveOn(prop:string):boolean;
 }
 interface IConfigProperty extends IConfig {
     (args?:any): any;
@@ -65,12 +70,20 @@ interface ISidebar extends Function {
 interface JQueryStatic {
     material:any;
     cookie?:any;
+    mCustomScrollbar?:any;
+    ripples?:any;
+    slimScroll?:any;
 }
 
 interface JQuery {
     easyPieChart(...args:any[]);
     prefixedData(prefix:string);
     $i?:any;
+    mCustomScrollbar(args?:any):JQuery;
+    ripples(args?:any):JQuery;
+    slimScroll(args?:any):JQuery;
+    size():number;
+    tooltip(args?:any):JQuery;
 }
 
 interface Window {

@@ -337,7 +337,7 @@ var init = module.exports = function (grunts) {
                         'async'        : 'src/plugins/async/lib/async',
                         'eventemitter2': 'src/plugins/eventemitter2/lib/eventemitter2'
                     },
-                    modules  : [ 'app/application', 'app/autoloader', 'app/config', 'app/util', 'async','eventemitter2'],
+                    modules  : [ 'app/application', 'app/autoloader', 'app/config', 'app/util', 'app/storage', 'async','eventemitter2'],
                     startFile: "src/scripts/wrap-open.js",
                     endFile  : "src/scripts/wrap-close.js",
                     optimize : "none",

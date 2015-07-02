@@ -58,14 +58,14 @@
         },
         scss                  : {},
         theme                 : {
-            sidebarDisabled     : false,
-            'layout-option'     : 'fluid',
-            'sidebar-option'    : 'default',
-            'sidebar-menu'      : 'accordion',
-            'sidebar-pos-option': 'left',
-            'sidebar-style'     : 'default',
-            'section-bottom'    : 'fixed',
-            'section-top'       : 'normal'
+            sidebarDisabled: false,
+            layout     : 'fluid',
+            sidebarOption  : 'default',
+            sidebarTraverse: 'accordion',
+            sidebarPosition: 'left',
+            sidebarStyle   : 'default',
+            bottom         : 'fixed', // normal, hidden, fixed
+            top            : 'normal'
         },
         requireJS             : {
             baseUrl: '<%= paths.scripts %>',
@@ -422,13 +422,24 @@
         }
     };
 
-
+    /*
+     {
+     sidebarDisabled     : false,
+     'layout-option'     : 'fluid',
+     'sidebar-option'    : 'default',
+     'sidebar-menu'      : 'accordion',
+     'sidebar-pos-option': 'left',
+     'sidebar-style'     : 'default',
+     'section-bottom'    : 'fixed',
+     'section-top'       : 'normal'
+     }
+     */
     jqui.forEach(function (name) {
         config.requireJS.paths['plugins/jquery-ui/' + name] = 'plugins/jquery-ui/ui/minified/' + name + '.min'
     });
 
 
-    App.ready(function(){
+    App.ready(function () {
         App.init(config);
     });
 

@@ -1,19 +1,84 @@
 ///<reference path="../types.d.ts"/>
 import {objectGet, objectSet, recurse} from 'app/util'
-
-
-
+import {storage} from 'app/storage';
 
 export class Config implements IConfig {
     private data:Object;
     private allDelimiters:IDelimitersCollection;
     private static propStringTmplRe:RegExp = /^<%=\s*([a-z0-9_$]+(?:\.[a-z0-9_$]+)*)\s*%>$/i;
 
+    private saveableProperties:Object;
 
     constructor(obj?:Object) {
         this.allDelimiters = {};
         this.addDelimiters('config', '<%', '%>');
-        this.data = obj || {}
+        this.data = obj || {};
+        this.saveableProperties = {};
+    }
+
+    public allowSaveOn(prop:string):IConfig {
+        if (!this.canSaveOn(prop)) {
+            this.saveableProperties[prop] = true;
+        }
+        return this;
+    }
+
+    public denySaveOn(prop:string):IConfig {
+        if (this.canSaveOn(prop)) {
+            delete this.saveableProperties[prop];
+        }
+        return this;
+    }
+
+    public canSaveOn(prop:string):boolean {
+        return this.saveableProperties[prop] == true;
+    }
+
+    public getSavableProperties():string[] {
+        return Object.keys(this.saveableProperties);
+    }
+
+    private saveProperty(prop:string){
+        if(!this.canSaveOn(prop)){
+            return;
+        }
+        storage.set(prop, this.raw(prop), {
+            json: true
+        });
+    }
+    public save(prop?:string):IConfig {
+        var self:Config = this;
+        if(prop){
+            this.saveProperty(prop);
+        } else {
+            _.each(this.saveableProperties, function (prop:string, i) {
+                self.saveProperty(prop)
+            });
+        }
+        return this;
+    }
+
+    private loadProperty(prop:string){
+        if(!this.canSaveOn(prop)){
+            return;
+        }
+        var data = storage.set(prop, this.raw(prop), {
+            json: true,
+            'default': this.raw(prop)
+        });
+        this.set(prop, data);
+    }
+
+    public load(prop?:string):IConfig {
+        var self:Config = this;
+        if(prop){
+            this.loadProperty(prop);
+        } else {
+            _.each(this.getSavableProperties(), function (prop:string, i) {
+                self.loadProperty(prop);
+            });
+        }
+        return this;
     }
 
 
@@ -34,6 +99,11 @@ export class Config implements IConfig {
         cf.merge = config.merge.bind(config);
         cf.raw = config.raw.bind(config);
         cf.process = config.process.bind(config);
+        cf.save = config.save.bind(config);
+        cf.load = config.load.bind(config);
+        cf.allowSaveOn = config.allowSaveOn.bind(config);
+        cf.denySaveOn = config.denySaveOn.bind(config);
+        cf.canSaveOn = config.canSaveOn.bind(config);
         return cf;
     }
 

@@ -3,7 +3,7 @@ import {copyObject,kindOf} from 'app/util'
 import {Config} from 'app/config'
 import {Autoload} from 'app/autoloader'
 import EventEmitter2 = require("eventemitter2");
-
+import {storage} from 'app/storage';
 
 export enum BoxAction {
     toggle, hide, show, fullscreen, normal, close, open, loading
@@ -40,7 +40,7 @@ export class Application extends EventEmitter2 {
     private _sidebar:ISidebar;
     private $:JQueryStatic;
 
-
+    public storage:any;
     public config:IConfigProperty;
     public packadic:any;
     public autoload:Autoload;
@@ -55,6 +55,7 @@ export class Application extends EventEmitter2 {
         };
         super(conf);
         var self:Application = this;
+        this.storage = storage;
         this._startTime = new Date().getTime();
         this._state = AppState.init;
         this.autoload = new Autoload();

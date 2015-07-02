@@ -1,4 +1,4 @@
-///<reference path="types.d.ts"/>
+///<reference path="../types.d.ts"/>
 import {jsonStringify, defined,jsonParse} from 'app/util'
 
 /**
@@ -120,3 +120,11 @@ export function getSize( key ){
         return total.toFixed(2);
     }
 }
+
+export var storage:any = {
+    get: get,
+    set: set,
+    del: del,
+    clear: clear,
+    size: getSize,
+};
