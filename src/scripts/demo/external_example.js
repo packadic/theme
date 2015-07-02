@@ -60,60 +60,60 @@ App.ready(function () {
                         }
                     }
                 }, {
-                    id: 'top', name: 'Top', 'default': theme.get('section-top'), type: 'select', options: {
+                    id: 'top', name: 'Top', 'default': theme.get('top'), type: 'select', options: {
                         choices : {
                             'hidden': {name: 'Hidden'},
                             'normal': {name: 'Normal'},
                             fixed   : {name: 'Fixed'}
                         },
                         onChange: function ($el) {
-                            theme.set('section-top', $el.val(), true, shouldSave())
+                            theme.set('top', $el.val(), true, shouldSave())
                         }
                     }
                 }, {
                     id: 'page-boxed', name: 'Boxed Layout', 'default': false, type: 'switch', options: {
                         isEnabled: function () {
-                            return theme.get('layout-option') === 'boxed'
+                            return theme.get('layout') === 'boxed'
                         },
                         toggle   : function (event, val) {
-                            theme.set('layout-option', val ? 'boxed' : 'fluid', true, shouldSave());
+                            theme.set('layout', val ? 'boxed' : 'fluid', true, shouldSave());
                         }
                     }
                 }, {
                     id: 'footer-fixed', name: 'Fixed Bottom', 'default': true, type: 'switch', options: {
                         isEnabled: function () {
-                            return theme.get('section-bottom') === 'fixed'
+                            return theme.get('bottom') === 'fixed'
                         },
                         toggle   : function (event, val) {
-                            theme.set('section-bottom', val ? 'fixed' : 'default', true, shouldSave());
+                            theme.set('bottom', val ? 'fixed' : 'default', true, shouldSave());
                         }
                     }
                 }, {
                     id: 'sidebar-fixed', name: 'Fixed Sidebar', 'default': false, type: 'switch', options: {
                         isEnabled: function () {
-                            return theme.get('sidebar-option') === 'fixed'
+                            return theme.get('sidebarOption') === 'fixed'
                         },
                         toggle   : function (event, val) {
-                            theme.set('sidebar-option', val ? 'fixed' : 'default', true, shouldSave());
+                            theme.set('sidebarOption', val ? 'fixed' : 'default', true, shouldSave());
                         }
                     }
                 }, {
                     id: 'sidebar-style', name: 'Light Sidebar', 'default': false, type: 'switch', options: {
                         isEnabled: function () {
-                            return theme.get('sidebar-option') === 'light'
+                            return theme.get('sidebarStyle') === 'light'
                         },
                         toggle   : function (event, val) {
-                            theme.set('sidebar-style', val ? 'light' : 'default', true, shouldSave());
+                            theme.set('sidebarStyle', val ? 'light' : 'default', true, shouldSave());
                         }
                     }
 
                 }, {
                     id: 'sidebar-menu', name: 'Sidebar Hover', 'default': false, type: 'switch', options: {
                         isEnabled: function () {
-                            return theme.get('sidebar-menu') === 'hover'
+                            return theme.get('sidebarTraverse') === 'hover'
                         },
                         toggle   : function (event, val) {
-                            theme.set('sidebar-menu', val ? 'hover' : 'default', true, shouldSave());
+                            theme.set('sidebarTraverse', val ? 'hover' : 'default', true, shouldSave());
                         }
                     }
                 }, {

@@ -62,7 +62,7 @@ export class Config implements IConfig {
         if(!this.canSaveOn(prop)){
             return;
         }
-        var data = storage.set(prop, this.raw(prop), {
+        var data = storage.get(prop, {
             json: true,
             'default': this.raw(prop)
         });

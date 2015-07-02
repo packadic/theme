@@ -20,7 +20,7 @@ require([
                     onStep  : function (value) {
                         this.$el.find('span').text(~ ~ value);
                     },
-                    barColor: theme.colors[barColors[i]],
+                    barColor: App.colors[barColors[i]],
                     size    : 85
                 }).css({'margin': '0px 15px'});
             });
@@ -93,7 +93,7 @@ require([
                 xaxis : {
                     show: false,
                 },
-                colors: [theme.colors['amber'], theme.colors['teal']],
+                colors: [App.colors['amber'], App.colors['teal']],
                 grid  : {
                     tickColor  : "#eee",
                     borderWidth: 0,

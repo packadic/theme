@@ -115,6 +115,13 @@ declare class EventEmitter2 {
     listenersAny(): Function[];
     emit(event: string, ...args: any[]);
 }
+
+interface IWidget {
+    _create():any;
+    _destroy():any;
+}
+
+
 declare module "eventemitter2" {
     export = EventEmitter2;
 }
@@ -125,8 +132,9 @@ declare module "jquery-ui/widget" {
 declare module "jquery-ui/draggable" {
     export = {}
 }
-
-interface IWidget {
-    _create():any;
-    _destroy():any;
+declare module "plugins/cookie" {
+    export = {}
+}
+declare module "plugins/bs-material-ripples" {
+    export = {}
 }

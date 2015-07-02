@@ -3,10 +3,13 @@ import $ = require('jquery');
 import {defined, def, cre} from 'app/util';
 import {Config} from 'app/config';
 import storage = require('app/storage');
-var _$cookie = require('plugins/cookie');
+import spawner = require('spawner');
+
+import _$cookie = require('plugins/cookie');
 _$cookie;
-var _$ripples = require('plugins/bs-material-ripples');
+import _$ripples = require('plugins/bs-material-ripples');
 _$ripples;
+
 
 var $body:JQuery = $('body'),
     $sidebarNavMenu:JQuery = $('.sidebar-nav-menu');
@@ -43,7 +46,7 @@ class Theme {
         return App.config('theme');
     }
 
-    get(opt) {
+    public get(opt) {
         if (!defined(this.config[opt])) {
             console.error('this.get failed on ', opt);
             return;
@@ -306,4 +309,5 @@ class Theme {
     }
 }
 
-export var theme:Theme = new Theme();
+var theme:Theme = new Theme();
+export = theme;

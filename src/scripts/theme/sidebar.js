@@ -1,5 +1,5 @@
-define(['jquery', 'theme', 'string', 'plugins/async', 'fn/defined'],
-    function ($, theme, s, async, defined) {
+define(['jquery', 'theme', 'string', 'plugins/async', 'fn/defined', 'spawner'],
+    function ($, theme, s, async, defined, spawner) {
 
         // @todo sidebar-toggle
         // @todo sidebar sub-menu hover title right (.sub-menu-title)
@@ -111,7 +111,7 @@ define(['jquery', 'theme', 'string', 'plugins/async', 'fn/defined'],
             }
 
             // logDebug('getting template', templateName, menuItems);
-            theme.getTemplate(templateName, function (template) {
+            App.getTemplate(templateName, function (template) {
                 //  logDebug('got template');
                 var html = template({items: menuItems});
                 $('ul.sidebar-nav-menu').html('').html(html);
@@ -411,7 +411,7 @@ define(['jquery', 'theme', 'string', 'plugins/async', 'fn/defined'],
 
         sidebar.handleFixed = function () {
 
-            theme.destroySlimScroll($sidebarNavMenu);
+            spawner.destroySlimScroll($sidebarNavMenu);
 
             var width = App.getViewPort().width;
             var breakpointMd = App.getBreakpoint('md');
@@ -427,7 +427,7 @@ define(['jquery', 'theme', 'string', 'plugins/async', 'fn/defined'],
 
             if ( width >= breakpointMd ) {
                 $sidebarNavMenu.attr("data-height", calculateFixedHeight());
-                theme.initSlimScroll($sidebarNavMenu, sidebar.options.scroller);
+                spawner.initSlimScroll($sidebarNavMenu, sidebar.options.scroller);
                 sidebar.handleWithContent();
             }
         };
