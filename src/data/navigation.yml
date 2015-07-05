@@ -72,17 +72,14 @@ sidebar:
       - name: Layouts
         href: <%= target.nav.pre %>/components/forms/layouts<%= target.nav.ext %>
 
-      - name: Layouts 2
-        href: <%= target.nav.pre %>/components/forms/layouts2<%= target.nav.ext %>
-
       - name: Elements
         href: <%= target.nav.pre %>/components/forms/elements<%= target.nav.ext %>
 
       - name: Validation
         href: <%= target.nav.pre %>/components/forms/validation<%= target.nav.ext %>
 
-      - name: Uploader
-        href: <%= target.nav.pre %>/components/forms/uploader<%= target.nav.ext %>
+      - name: Editors
+        href: <%= target.nav.pre %>/components/forms/editors<%= target.nav.ext %>
 
       - name: Wizard
         href: <%= target.nav.pre %>/components/forms/wizard<%= target.nav.ext %>

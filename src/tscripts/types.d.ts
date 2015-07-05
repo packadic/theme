@@ -84,6 +84,7 @@ interface JQuery {
     slimScroll(args?:any):JQuery;
     size():number;
     tooltip(args?:any):JQuery;
+    TouchSpin(args?:any):JQuery;
 }
 
 interface Window {

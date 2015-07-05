@@ -15,7 +15,7 @@ var $body:JQuery = $('body'),
     $sidebarNavMenu:JQuery = $('.sidebar-nav-menu');
 var App = window['App'];
 class Theme {
-    public static Theme:any  = Theme;
+    public static Theme:any = Theme;
     public $hidden:JQuery;
     public $window:JQuery;
     public $document:JQuery;
@@ -80,22 +80,26 @@ class Theme {
 
     public init() {
         App.config.load('theme');
-        this.initResizeEvent();
-        this.initHeaderSearchForm();
-        this.initSettingsEditor();
-        this.initScrollToTop();
+        $(function () {
 
-        $([
-            ".btn:not(.btn-link)",
-            ".card-image",
-            ".navbar a:not(.withoutripple)",
-            ".dropdown-menu a",
-            ".nav-tabs a:not(.withoutripple)",
-            ".withripple"
-        ].join(",")).addClass('withripple').ripples();
+            this.initResizeEvent();
+            this.initHeaderSearchForm();
+            this.initSettingsEditor();
+            this.initScrollToTop();
 
-        this.initLayout();
+            if(this.config.ripples === true) {
+                $([
+                    ".btn:not(.btn-link)",
+                    ".card-image",
+                    ".navbar a:not(.withoutripple)",
+                    ".dropdown-menu a",
+                    ".nav-tabs a:not(.withoutripple)",
+                    ".withripple"
+                ].join(",")).addClass('withripple').ripples();
+            }
+            this.initLayout();
 
+        }.bind(this));
     }
 
     initLayout() {

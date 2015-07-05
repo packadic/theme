@@ -1,5 +1,6 @@
-define([ 'jquery'       ,'plugins/select2', 'plugins/bs-datepicker', 'plugins/bs-maxlength' ],
+define([ 'jquery'       ,'plugins/select2', 'plugins/bs-datepicker', 'plugins/bs-maxlength', 'plugins/bs-touchspin' ],
     function( $ ){
+
         'use strict';
         var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
 
@@ -11,7 +12,7 @@ define([ 'jquery'       ,'plugins/select2', 'plugins/bs-datepicker', 'plugins/bs
 
         $('.form-demo-select2').select2({
             data: data
-        })
+        });
 
         $('.form-demo-datepicker-inline').datepicker({
             todayBtn: true,
@@ -23,4 +24,8 @@ define([ 'jquery'       ,'plugins/select2', 'plugins/bs-datepicker', 'plugins/bs
 
 
         $('.form-demo-maxlength').maxlength();
+
+        $('.form-demo-touchspin').TouchSpin({
+
+        });
     });

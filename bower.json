@@ -114,7 +114,10 @@
     "topojson": "~1.6.19",
     "bootstrap-filestyle": "~1.1.2",
     "bootstrap-slider": "*",
-    "cjs": "*"
+    "cjs": "*",
+    "bootstrap-touchspin": "~3.0.1",
+    "bootstrap-wysiwyg": "*",
+    "jQuery.Hotkeys": "~0.2.0"
   },
   "resolutions": {
     "datatables": "~1.10.6"

@@ -58,8 +58,9 @@
         },
         scss                  : {},
         theme                 : {
+            ripples: false,
             sidebarDisabled: false,
-            layout     : 'fluid',
+            layout         : 'fluid',
             sidebarOption  : 'default',
             sidebarTraverse: 'accordion',
             sidebarPosition: 'left',
@@ -125,6 +126,7 @@
                 'plugins/cookie'           : 'plugins/jquery-cookie/jquery.cookie',
                 'plugins/validation'       : 'plugins/jquery-form-validator/form-validator/jquery.form-validator.min',
                 'plugins/tag-it'           : 'plugins/tag-it/js/tag-it.min',
+                'plugins/jquery-hotkeys'   : 'plugins/jQuery.Hotkeys/jquery.hotkeys',
 
                 // flotcharts
                 'flot'             : 'plugins/flotcharts/jquery.flot',
@@ -162,7 +164,8 @@
                 'plugins/gtreetable'         : "plugins/bootstrap-gtreetable/dist/bootstrap-gtreetable",
                 'plugins/bs-filestyle'       : 'plugins/bootstrap-filestyle/src/bootstrap-filestyle',
                 'plugins/bs-slider'          : 'plugins/bootstrap-slider/bootstrap-slider',
-
+                'plugins/bs-touchspin'       : 'plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min',
+                'plugins/bs-wysiwyg'         : 'plugins/bootstrap-wysiwyg/bootstrap-wysiwyg',
 
                 // gsap
                 'plugins/gsap/lite'       : 'plugins/gsap/src/minified/TweenLite.min',
@@ -207,10 +210,12 @@
                     }
                 },
 
-                'plugins/jquery-migrate' : ['jquery'],
-                'jquery-ui'              : ['jquery'], //, 'jquery-migrate'],
-                'plugins/jquery-slugify' : ['jquery', 'plugins/speakingurl'],
-                'plugins/tag-it'         : ['jquery-ui/core', 'jquery-ui/widget', 'jquery-ui/position', 'jquery-ui/menu', 'jquery-ui/autocomplete'],
+                'plugins/jquery-migrate': ['jquery'],
+                'jquery-ui'             : ['jquery'], //, 'jquery-migrate'],
+                'plugins/jquery-slugify': ['jquery', 'plugins/speakingurl'],
+                'plugins/tag-it'        : ['jquery-ui/core', 'jquery-ui/widget', 'jquery-ui/position', 'jquery-ui/menu', 'jquery-ui/autocomplete'],
+                'plugins/jquery-hotkeys': ['jquery'],
+
                 // bootstrap
                 'plugins/bootstrap'      : ['jquery'],
                 'plugins/gtreetable'     : ['plugins/jquery-migrate', 'plugins/jquery-ui/core', 'plugins/jquery-ui/draggable', 'plugins/jquery-ui/droppable'],
@@ -218,7 +223,7 @@
                 'plugins/bs-modal'       : ['plugins/bootstrap', 'plugins/bs-modal-manager'],
                 'plugins/bs-material'    : ['plugins/bootstrap', 'plugins/bs-material-ripples'],
                 'plugins/bs-confirmation': ['plugins/bootstrap'],
-
+                'plugins/bs-wysiwyg'     : ['plugins/jquery-hotkeys'],
                 // flots
 
                 'flot'             : ['jquery'],

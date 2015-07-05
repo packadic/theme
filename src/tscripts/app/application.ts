@@ -182,10 +182,10 @@ export class Application extends EventEmitter2 {
 
                     $(function () {
                         self.theme(ThemeAction.init);
-                        self.setState(AppState.started);
                         if (argMap.demo) {
                             getArg('demo').init();
                         }
+                        self.setState(AppState.started);
                     });
                     // EVENT: started
 
@@ -215,8 +215,10 @@ export class Application extends EventEmitter2 {
 
 
     private setState(state:AppState):Application {
-        this._state = state;
-        this.emit('state:' + AppState[state], AppState[state], state);
+        if(state > this._state) {
+            this._state = state;
+            this.emit('state:' + AppState[state], AppState[state], state);
+        }
         return this;
     }
 

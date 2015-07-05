@@ -1,0 +1,107 @@
+extends ../../../layouts/default
+
+mixin form-box(name, icon)
+    .row
+        .col-lg-12
+            +box(name, icon)
+                form&attributes(attributes)
+                    block
+
+mixin form-light-line(large)
+    - large = typeof(large) == 'undefined' ? true : large
+    .line.line-dashed.b-b.pull-in(class=large ? 'line-lg' : '')
+
+block header
+    +page-title("Forms", "Editors")
+    +page-breadcrumbs
+        +breadcrumb("Components", "/components")
+        +breadcrumb("Forms")
+        +breadcrumb("Editors", "/components/forms/editors", true)
+
+
+block content
+    style.
+        #editor_1 {overflow:scroll; min-height: 200px; max-height:300px}
+    .row
+        .col-md-12
+            +form-box("Bootstrap wysiwyg", "list").form-light.form-horizontal
+                .form-group.p
+                    .btn-toolbar.mb-sm(data-role='editor-toolbar', data-target='#editor_1')
+                        .btn-group
+                            a.btn.btn-icon.grey-light.dropdown-toggle(data-toggle='dropdown', title='Font')
+                                i.fa.fa-font
+                                b.caret
+                            ul.dropdown-menu
+                        .btn-group
+                            a.btn.btn-icon.grey-light.dropdown-toggle(data-toggle='dropdown', title='Font Size')
+                                i.fa.fa-text-height
+                                b.caret
+                            ul.dropdown-menu
+                                li
+                                    a(data-edit='fontSize 5')
+                                        font(size='5') Huge
+                                li
+                                    a(data-edit='fontSize 3')
+                                        font(size='3') Normal
+                                li
+                                    a(data-edit='fontSize 1')
+                                        font(size='1') Small
+                        .btn-group
+                            a.btn.btn-icon.grey-light(data-edit='bold', title='Bold (Ctrl/Cmd+B)')
+                                i.fa.fa-bold
+                            a.btn.btn-icon.grey-light(data-edit='italic', title='Italic (Ctrl/Cmd+I)')
+                                i.fa.fa-italic
+                            a.btn.btn-icon.grey-light(data-edit='strikethrough', title='Strikethrough')
+                                i.fa.fa-strikethrough
+                            a.btn.btn-icon.grey-light(data-edit='underline', title='Underline (Ctrl/Cmd+U)')
+                                i.fa.fa-underline
+                        .btn-group
+                            a.btn.btn-icon.grey-light(data-edit='insertunorderedlist', title='Bullet list')
+                                i.fa.fa-list-ul
+                            a.btn.btn-icon.grey-light(data-edit='insertorderedlist', title='Number list')
+                                i.fa.fa-list-ol
+                            a.btn.btn-icon.grey-light(data-edit='outdent', title='Reduce indent (Shift+Tab)')
+                                i.fa.fa-indent
+                            a.btn.btn-icon.grey-light(data-edit='indent', title='Indent (Tab)')
+                                i.fa.fa-outdent
+                        .btn-group
+                            a.btn.btn-icon.grey-light(data-edit='justifyleft', title='Align Left (Ctrl/Cmd+L)')
+                                i.fa.fa-align-left
+                            a.btn.btn-icon.grey-light(data-edit='justifycenter', title='Center (Ctrl/Cmd+E)')
+                                i.fa.fa-align-center
+                            a.btn.btn-icon.grey-light(data-edit='justifyright', title='Align Right (Ctrl/Cmd+R)')
+                                i.fa.fa-align-right
+                            a.btn.btn-icon.grey-light(data-edit='justifyfull', title='Justify (Ctrl/Cmd+J)')
+                                i.fa.fa-align-justify
+                        .btn-group
+                            a.btn.btn-icon.grey-light.dropdown-toggle(data-toggle='dropdown', title='Hyperlink')
+                                i.fa.fa-link
+                            .dropdown-menu.input-append
+                                input.span2(placeholder='URL', type='text', data-edit='createLink')
+                                button.btn(type='button') Add
+                            a.btn.btn-icon.grey-light(data-edit='unlink', title='Remove Hyperlink')
+                                i.fa.fa-cut
+                        //.btn-group
+                            a#pictureBtn.btn(title='Insert picture (or just drag & drop)')
+                                i.fa.fa-picture
+                            input(type='file', data-role='magic-overlay', data-target='#pictureBtn', data-edit='insertImage')
+                        .btn-group
+                            a.btn.btn-icon.grey-light(data-edit='undo', title='Undo (Ctrl/Cmd+Z)')
+                                i.fa.fa-undo
+                            a.btn.btn-icon.grey-light(data-edit='redo', title='Redo (Ctrl/Cmd+Y)')
+                                i.fa.fa-repeat
+
+
+                    #editor_1.form-control
+
+block append scripts-outside-of-project
+    script.
+        (function () {
+            App.ready(function () {
+                App.on('state:starting', function () {
+                    require(['jquery', 'plugins/bs-wysiwyg'], function ($) {
+                        $('#editor_1').wysiwyg();
+                    });
+                });
+            });
+        }.call());

@@ -45,6 +45,13 @@ form {
 }
 
 form {
+    label {
+        font-weight: $base-font-weight;
+    }
+    .input-group-addon {
+        padding: 5px 14px;
+    }
+
     .help-block {
         font-size: 12px;
         color: #737373;
@@ -98,7 +105,7 @@ form {
     &.form-light {
         label {
             font-size: 13px;
-            font-weight: normal;
+            font-weight: $base-font-weight;
         }
     }
     &.form-light.form-horizontal {

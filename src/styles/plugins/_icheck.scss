@@ -58,3 +58,12 @@
         background-size: 240px 24px;
     }
 }
+
+form {
+    .input-group-addon {
+        .icheckbox_square-blue,
+        .iradio_square-blue {
+            margin-right: 0;
+        }
+    }
+}

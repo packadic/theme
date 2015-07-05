@@ -179,7 +179,9 @@ $icons: ('check', 0 0),
     ('settings', -36px 0),
     ('previous', -48px 0),
     ('next', -60px 0);
+// @todo: sort this out
 
+/*
 [class^="icon-"], [class*=" icon-"] {
     display: inline-block;
     vertical-align: -2px;
@@ -190,7 +192,7 @@ $icons: ('check', 0 0),
     background-repeat: no-repeat;
     @include hide-text;
 }
-
+*/
 @each $pair in $icons {
     .icon-#{nth($pair, 1)} {
         background-position: nth($pair, 2);
