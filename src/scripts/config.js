@@ -74,17 +74,6 @@
             styles : '/assets/styles'
         },
         scss                  : {},
-        theme                 : {
-            ripples        : false,
-            sidebarDisabled: false,
-            layout         : 'fluid',
-            sidebarOption  : 'default',
-            sidebarTraverse: 'accordion',
-            sidebarPosition: 'left',
-            sidebarStyle   : 'default',
-            bottom         : 'fixed', // normal, hidden, fixed
-            top            : 'normal',
-        },
         layout                : {
             mode   : 'fluid',// fluid, boxed
             bottom : 'fixed', // normal, hidden, fixed
@@ -97,6 +86,21 @@
                 fixed   : false // normal, fixed
             }
 
+        },
+        widgets: {
+            box: {},
+            sidebar: {
+                hidden: false,
+                items: null,
+                resolveActive: true,
+                openCloseDuration: 600,
+                openedWidth: 235,
+                closedWidth: 45,
+                autoScroll: true,
+                slideSpeed: 200,
+                keepExpanded: false,
+                toggler: '.sidebar-toggler'
+            }
         },
         requireJS             : {
             baseUrl: '<%= paths.scripts %>',

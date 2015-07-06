@@ -33,17 +33,14 @@
             $property: $property-name + $direction-property;
             $size: $property-base-value * ($i - 1);
 
-            @if $size > 0 { // if size = 0, the px suffix should be ommited according to css rules.
-                $size: #{$size}px;
-            }
 
             .#{$selector} {
                 &:not(.n) {
-                    #{$property}: $size !important;
+                    #{$property}: #{$size}px !important;
                 }
                 &.n {
                     @if $size != 0 {
-                        #{$property}: -$size !important;
+                        #{$property}: #{0-$size}px !important;
                     }
                 }
             }

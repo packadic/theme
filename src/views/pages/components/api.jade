@@ -1,0 +1,54 @@
+extends ../../layouts/default
+
+
+mixin demo-api(mode, text)
+    tr
+        td
+            a.btn.btn-xs.btn-block(href="#", data-api-action=mode)&attributes(attributes)
+                | #{text}
+        td: code=mode
+
+block content
+    .row
+        .col-md-6
+            +box("Layout API").box-table
+                p.m Usage:
+                    code App.layout(mode)
+                +table()('condensed', 'striped', 'light')#demo-api
+                    tr
+                        th(width="200") Example
+                        th Mode
+                    +demo-api('fluid', 'Fluid layout').btn-primary
+                    +demo-api('boxed', 'Boxed layout').btn-primary
+                    +demo-api('bottom_normal', 'Normal bottom').btn-warning
+                    +demo-api('bottom_hidden', 'Hidden bottom').btn-warning
+                    +demo-api('bottom_fixed', 'Fixed bottom').btn-warning
+        .col-md-6
+            +box("Events").box-table
+                p.m Usage:
+                    code App.on(event)
+                    code App.off(event)
+                    code App.emit(event)
+                +table()('condensed', 'striped', 'light')#demo-events
+                    tr
+                        th(width="200") Event
+                        th Description
+                    tr
+                        td: code state:booting
+                        td The application is booting
+                    tr
+                        td: code state:prestart
+                        td The application is about to start
+
+block append scripts
+    script.
+        App.ready(function(){
+            require(['jquery'], function($){
+                $(function () {
+                    $('#demo-api').find('a[data-api-action]').on('click', function(e){
+                        e.preventDefault();
+                        App.layout($(this).data('api-action'));
+                    });
+                });
+            });
+        });

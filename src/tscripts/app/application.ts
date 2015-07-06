@@ -10,12 +10,16 @@ export enum BoxAction {
     toggle, hide, show, fullscreen, normal, close, open, loading
 }
 
-export enum ThemeAction {
-    init, refresh, reset
-}
-
-export enum SidebarAction {
-    init, toggle, hide, show, open, close, refresh
+export enum LayoutAction {
+    reset,
+    fluid, boxed, // mode
+    bottom_normal, bottom_hidden, bottom_fixed, // section#bottom
+    top_normal, top_fixed,
+    sidebar_open, sidebar_close, // sidebar toggle
+    sidebar_hide, sidebar_show, // sidebar visibility
+    sidebar_left, sidebar_right, // sidebar position
+    sidebar_fixed, sidebar_normal, // sidebar fix
+    sidebar_accordion, sidebar_hover // sidebar mode
 }
 
 
@@ -36,7 +40,6 @@ export class Application extends EventEmitter2 {
     private _defaultConfig:Object;
     private _state:AppState;
     private _jade:Object;
-    private _s:any;
 
     private $:JQueryStatic;
     private _layout:Layout;
@@ -224,8 +227,32 @@ export class Application extends EventEmitter2 {
         return this;
     }
 
-    public initSidebar(opts:any={}, callback?:any):JQueryPromise<any> {
-        return this._layout.initSidebar(opts, callback);
+    public layout(action:LayoutAction|string, save:boolean=false):Application {
+        var actionName:string = typeof(action) === 'string' ? action.toString() : LayoutAction[action].toString();
+        switch(actionName){
+            case 'reset': this._layout.reset(); break;
+            case 'fluid': this._layout.set('mode', 'fluid'); break;
+            case 'boxed': this._layout.set('mode', 'boxed'); break;
+            case 'bottom_normal': this._layout.set('bottom', 'normal'); break;
+            case 'bottom_hidden': this._layout.set('bottom', 'hidden'); break;
+            case 'bottom_fixed': this._layout.set('bottom', 'fixed'); break;
+            case 'top_normal': this._layout.set('top', 'normal'); break;
+            case 'top_fixed': this._layout.set('top', 'fixed'); break;
+            case 'sidebar_open': this._layout.sidebar.open(); break;
+            case 'sidebar_close': this._layout.sidebar.close(); break;
+            case 'sidebar_hide': this._layout.sidebar.hide(); break;
+            case 'sidebar_show': this._layout.sidebar.show(); break;
+            case 'sidebar_left': this._layout.set('sidebar.position', 'left'); break;
+            case 'sidebar_right': this._layout.set('sidebar.position', 'right'); break;
+            case 'sidebar_normal': this._layout.set('sidebar.fixed', false); break;
+            case 'sidebar_fixed': this._layout.set('sidebar.fixed', true); break;
+            case 'sidebar_hover': this._layout.set('sidebar.mode', 'hover'); break;
+            case 'sidebar_accordion': this._layout.set('sidebar.mode', 'accordion'); break;
+        }
+        if(save){
+            this._layout.save();
+        }
+        return this;
     }
 
     public notify(fnName:string, message:string, title?:string, options?:any) {
@@ -252,6 +279,10 @@ export class Application extends EventEmitter2 {
                 toastr.remove();
             }
         });
+    }
+
+    public initSidebar(opts:any={}, callback?:any):JQueryPromise<any> {
+        return this._layout.initSidebar(opts, callback);
     }
 
     //

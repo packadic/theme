@@ -26,12 +26,15 @@ sidebar:
       - name: General
         href: <%= target.nav.pre %>/components/general<%= target.nav.ext %>
 
+      - name: Javascript API
+        href: <%= target.nav.pre %>/components/api<%= target.nav.ext %>
+
+
       - name: Typography
         href: <%= target.nav.pre %>/components/typography<%= target.nav.ext %>
 
       - name: Buttons
         href: <%= target.nav.pre %>/components/buttons<%= target.nav.ext %>
-        #href: <%= target.nav.pre %>/components/buttons/editor
 
       - name: Boxes
         href: <%= target.nav.pre %>/components/boxes<%= target.nav.ext %>
@@ -42,7 +45,10 @@ sidebar:
       #- name: Panels
       #  href: <%= target.nav.pre %>/components/panels<%= target.nav.ext %>
 
-      - name: Notifications n Modals
+      - name: Notifications
+        href: <%= target.nav.pre %>/components/notifications<%= target.nav.ext %>
+
+      - name: Modals
         href: <%= target.nav.pre %>/components/modals<%= target.nav.ext %>
 
       #- name: jQuery UI

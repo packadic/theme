@@ -9,7 +9,7 @@ declare var packadic:any;
 export class Layout {
 
     private _app:Application;
-    private _sidebar:widgets.PackadicSidebarWidget;
+    public sidebar:widgets.PackadicSidebarWidget;
 
     public $hidden:JQuery;
     public $window:JQuery;
@@ -66,8 +66,9 @@ export class Layout {
     public initSidebar(opts:any={}, callback?:any):JQueryPromise<any> {
         var defer = this._app.defer();
         require(['jquery', 'widgets/sidebar'], function($){
+            $.packadic.sidebar.prototype.defaults = this._app.config('widgets.sidebar');
             this.$sidebar.sidebar(opts);
-            this._sidebar = this.$sidebar.sidebar('instance');
+            this.sidebar = this.$sidebar.sidebar('instance');
             defer.resolve();
             if(callback) callback();
         }.bind(this));
@@ -82,17 +83,14 @@ export class Layout {
         return this._app.config.get('layout.' + opt);
     }
 
-    public set(opt?:string, value?:any, refresh?:boolean, save?:boolean) {
-        if (!defined(this.config[opt]) || !defined(value)) return;
-        refresh = defined(refresh) ? refresh : true;
-        save = defined(save) ? save : true;
+    public set(opt?:string, value?:any, refresh:boolean=true, save:boolean=false) {
         console.log('doing ', opt, ' with:', value, ' refresh:', refresh, 'save', save);
         this._app.config.set('layout.' + opt, value);
         if (save) this.save();
         if (refresh) this.applyLayout();
     }
 
-    save() {
+    public save() {
         this._app.config.save('layout');
         /**
          * Fires when the theme options are saved into the localStorage
@@ -102,16 +100,19 @@ export class Layout {
         this._app.emit('layout:save', this.config);
     }
 
-    load() {
+    public load() {
         this._app.config.load('layout');
     }
 
+    public reset(refresh?:boolean, save?:boolean){
 
-    initLayout() {
+    }
+
+    protected initLayout() {
         this.applyLayout();
     }
 
-    initSettingsEditor() {
+    protected initSettingsEditor() {
         var $el = $('.settings-editor');
         $el.find('> .btn').on('click', function (e) {
             e.preventDefault();
@@ -119,7 +120,7 @@ export class Layout {
         })
     }
 
-    initHeaderSearchForm() {
+    protected initHeaderSearchForm() {
         $('section#top').on('click', '.search-form', function (e) {
             $(this).addClass("open");
             $(this).find('.form-control')
@@ -135,7 +136,7 @@ export class Layout {
         });
     }
 
-    initResizeEvent() {
+    protected initResizeEvent() {
         var self:Layout = this;
         this.$window.on('resize', function () {
             setTimeout(function () {
@@ -147,16 +148,12 @@ export class Layout {
         });
     }
 
-    initScrollToTop() {
+    protected initScrollToTop() {
         $('#scroll-top').off('click').on('click', function (e) {
             e.preventDefault();
             this._app.emit('theme:scrolltop');
             this._app.scrollTo(document.body, 0, 600);
         })
-    }
-
-    reset(save) {
-
     }
 
     public hasSidebar() {
@@ -174,7 +171,7 @@ export class Layout {
         this.initScrollToTop();
     }
 
-    resetLayout() {
+    protected resetLayout() {
         $("body").
             removeClass("page-boxed").
             removeClass("section-bottom-fixed").
@@ -203,12 +200,23 @@ export class Layout {
 
     public applyLayout() {
         if (this.config.sidebar.fixed == true) {
-            this.set('top', 'fixed');
-            this.set('sidebar.fixed', true);
+            this.set('top', 'fixed', false, false);
+            this.set('sidebar.fixed', true, false, false);
         }
 
-        this.resetLayout(); // reset layout to default state
+        this.resetLayout();
+        this._applyLayoutMode();
+        this._applyLayoutTop();
+        this._applyLayoutBottom();
+        this._applyLayoutSidebar();
 
+        this.lastSelectedLayout = this.config;
+        if (this.lastSelectedLayout != this.config) {
+            this._app.emit('theme:resize');
+        }
+    }
+
+    protected _applyLayoutMode(){
         if (this.config.mode === "boxed") {
             this.$body.addClass("page-boxed");
 
@@ -226,14 +234,9 @@ export class Layout {
                 $('section#bottom').appendTo('body > .container');
             }
         }
+    }
 
-        if (this.lastSelectedLayout != this.config) {
-            //layout changed, run responsive handler:
-            this._app.emit('theme:resize');
-        }
-        this.lastSelectedLayout = this.config;
-
-        //header
+    protected _applyLayoutTop() {
         if (this.config.top === 'fixed') {
             this.$body.addClass("section-top-fixed");
             $("section#top").removeClass("navbar-static-top").addClass("navbar-fixed-top");
@@ -243,82 +246,76 @@ export class Layout {
         } else if (this.config.top === 'hidden') {
             this.$body.addClass('section-top-hidden');
         }
+    }
 
-        //footer
+    protected _applyLayoutBottom(){
         if (this.config.bottom === 'fixed') {
             this.$body.addClass("section-bottom-fixed");
         } else {
             this.$body.removeClass("section-bottom-fixed");
         }
+    }
 
-        //sidebar
-        if (this.config.sidebar.enabled === true) {
-            if (this.$body.hasClass('page-full-width') === false) {
-                if (this.config.sidebar.fixed === true) {
-                    this.$body.addClass("sidebar-nav-fixed");
-                    this.$sidebar.addClass("sidebar-nav-menu-fixed")
-                        .removeClass("sidebar-nav-menu-default");
+    protected _applyLayoutSidebar(){
 
-                    /*require(['theme/sidebar'], function (sidebar) {
-                        sidebar.handleFixedHover();
-                    });
-                    */
-                    //Layout.initFixedSidebarHoverEffect();
-                } else {
-                    this.$body.removeClass("sidebar-nav-fixed");
-                    this.$sidebar.addClass("sidebar-nav-menu-default")
-                        .removeClass("sidebar-nav-menu-fixed")
-                        .unbind('mouseenter')
-                        .unbind('mouseleave');
-                }
-            }
+        if (this.config.sidebar.enabled !== true) return;
 
-
-            //sidebar style
-            if (this.config.sidebar.style === 'light') {
-                this.$sidebar.addClass("sidebar-nav-menu-light");
-            } else {
-                this.$sidebar.removeClass("sidebar-nav-menu-light");
-            }
-
-            //sidebar menu
-            if (this.config.sidebar.mode === 'hover') {
-                if (this.config.sidebar.fixed == true) {
-                    this.set('sidebar.mode', 'accordion');
-                    alert("Hover Sidebar Menu is not compatible with Fixed Sidebar Mode. Select Default Sidebar Mode Instead.");
-                } else {
-                    this.$sidebar.addClass("sidebar-nav-menu-hover-submenu");
+        if (this.$body.hasClass('page-full-width') === false) {
+            if (this.config.sidebar.fixed === true) {
+                this.$body.addClass("sidebar-nav-fixed");
+                this.$sidebar.addClass("sidebar-nav-menu-fixed")
+                    .removeClass("sidebar-nav-menu-default");
+                if($.fn.sidebar) {
+                    this.sidebar._handleFixedHover();
                 }
             } else {
-                this.$sidebar.removeClass("sidebar-nav-menu-hover-submenu");
+                this.$body.removeClass("sidebar-nav-fixed");
+                this.$sidebar.addClass("sidebar-nav-menu-default")
+                    .removeClass("sidebar-nav-menu-fixed")
+                    .unbind('mouseenter')
+                    .unbind('mouseleave');
             }
+        }
 
-            if (this.config.sidebar.position === 'right') {
-                this.$body.addClass("sidebar-nav-reversed");
-                if($.fn.tooltip) {
-                    $('#frontend-link')['tooltip']('destroy')['tooltip']({
-                        placement: 'left'
-                    });
-                }
+
+        //sidebar style
+        if (this.config.sidebar.style === 'light') {
+            this.$sidebar.addClass("sidebar-nav-menu-light");
+        } else {
+            this.$sidebar.removeClass("sidebar-nav-menu-light");
+        }
+
+        //sidebar menu
+        if (this.config.sidebar.mode === 'hover') {
+            if (this.config.sidebar.fixed == true) {
+                this.set('sidebar.mode', 'accordion');
+                alert("Hover Sidebar Menu is not compatible with Fixed Sidebar Mode. Select Default Sidebar Mode Instead.");
             } else {
-                this.$body.removeClass("sidebar-nav-reversed");
-                if($.fn.tooltip) {
-                    $('#frontend-link')['tooltip']('destroy')['tooltip']({
-                        placement: 'right'
-                    });
-                }
+                this.$sidebar.addClass("sidebar-nav-menu-hover-submenu");
             }
+        } else {
+            this.$sidebar.removeClass("sidebar-nav-menu-hover-submenu");
+        }
 
-            /*require(['theme/sidebar'], function (sidebar) {
-                sidebar.handleWithContent(); // fix content height
-                sidebar.handleFixed(); // reinitialize fixed sidebar
-                /**
-                 * Fires when the layout has been refreshed, which applies the theme options
-                 * @event module:theme~layout
-                 * @type {object}
-                 *
-                this._app.emit('theme:layout', this);
-            }.bind(this));*/
+        // position
+        if (this.config.sidebar.position === 'right') {
+            this.$body.addClass("sidebar-nav-reversed");
+            if($.fn.tooltip) {
+                $('#frontend-link')['tooltip']('destroy')['tooltip']({
+                    placement: 'left'
+                });
+            }
+        } else {
+            this.$body.removeClass("sidebar-nav-reversed");
+            if($.fn.tooltip) {
+                $('#frontend-link')['tooltip']('destroy')['tooltip']({
+                    placement: 'right'
+                });
+            }
+        }
+
+        if($.fn.sidebar) {
+            this.sidebar._handleFixed();
         }
     }
 }

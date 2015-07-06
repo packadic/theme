@@ -51,7 +51,7 @@ export function alert(opt:any) {
 }
 
 
-export function initSlimScroll(el:any, opts?:any) {
+export function initSlimScroll(el:any, opts:any={}) {
     var $el:JQuery = typeof(el) === 'string' ? $(el) : el;
     require(['plugins/jquery-slimscroll'], function () {
         $el.each(function () {
@@ -59,10 +59,7 @@ export function initSlimScroll(el:any, opts?:any) {
                 return; // exit
             }
             var height = $(this).attr("data-height") ? $(this).attr("data-height") : $(this).css('height');
-            if (!defined(opts)) {
-                opts = {};
-            }
-            var data = _.merge(App.config('plugins.slimScroll'), $(this).data());
+            var data = _.merge(App.config('plugins.slimScroll'), $(this).data(), { height: height });
             $(this).slimScroll(_.merge(data, opts));
             $(this).attr("data-initialized", "1");
         });
@@ -107,4 +104,10 @@ export function destroySlimScroll(el) {
             });
         }
     });
+}
+
+export function initCustomScroll(){
+    require(['plugins/mscrollbar'], function(){
+
+    })
 }

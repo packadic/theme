@@ -37,7 +37,10 @@ export class PackadicSidebarWidget extends widgets.WidgetBase implements IWidget
         autoScroll: true,
         slideSpeed: 200,
         keepExpanded: false,
-        toggler: '.sidebar-toggler'
+        toggler: '.sidebar-toggler',
+        slimScroll: {
+            allowPageScroll: false
+        }
     };
 
     constructor() {
@@ -53,14 +56,14 @@ export class PackadicSidebarWidget extends widgets.WidgetBase implements IWidget
         return data;
     }
 
-    _onResize(){
+    protected _onResize(){
         if ( this.options.hidden ) {
             return;
         }
         this._handleFixed();
     }
 
-    _bind() {
+    protected _bind() {
         var self:PackadicSidebarWidget = this;
         self.bindings.unbind( this.eventNamespace );
         /**
@@ -86,7 +89,7 @@ export class PackadicSidebarWidget extends widgets.WidgetBase implements IWidget
     public  _create() {
         var self:PackadicSidebarWidget = this;
         this.$nav = this.element.parent();
-        this.options = $.extend(true, this.options,  this._getDataAttributes());
+        this.options = $.extend(true, this.options, this._getDataAttributes());
         this.options.openedWidth = $body.hasClass("sidebar-nav-closed") ? 235 : parseInt(this.$nav.css('width'));
 
         if (this.options.items) {
@@ -301,13 +304,13 @@ export class PackadicSidebarWidget extends widgets.WidgetBase implements IWidget
         $('header.top .sidebar-toggler').show();
     }
 
-    _getSubmenuParents():JQuery {
+    protected _getSubmenuParents():JQuery {
         return this.element.find('li > .sub-menu').filter(function (i) {
             return $(this).css('caption-side') == 'bottom' || $(this).children('ul').first().hasClass('sub-menu-hover');
         }).parent();
     }
 
-    _handle () {
+    protected _handle () {
         var self:PackadicSidebarWidget = this;
         var breakpointMd = App.getBreakpoint('md');
 
@@ -371,10 +374,16 @@ export class PackadicSidebarWidget extends widgets.WidgetBase implements IWidget
             }
         });
     }
+    protected _enableScrollbar(opts:any={}){
+        spawner.initSlimScroll(this.element, $.extend(true, this.options.slimScroll, opts));
+    }
+    protected _disableScrollbar(){
+        spawner.destroySlimScroll(this.element)
+    }
 
-    _handleFixed(){
+    protected _handleFixed(){
 
-        spawner.destroySlimScroll(this.element);
+        this._disableScrollbar();
 
         var width = App.getViewPort().width;
         var breakpointMd = App.getBreakpoint('md');
@@ -389,13 +398,13 @@ export class PackadicSidebarWidget extends widgets.WidgetBase implements IWidget
         }
 
         if ( width >= breakpointMd ) {
-            this.element.attr("data-height", calculateFixedHeight());
-            spawner.initSlimScroll(this.element); //, sidebar.options.scroller);
+            //this.element.attr("data-height", calculateFixedHeight());
+            this._enableScrollbar({ height: calculateFixedHeight() }); //, sidebar.options.scroller);
             this._handleWithContent();
         }
     }
 
-    _handleWithContent(){
+    protected _handleWithContent(){
         var breakpointMd = App.getBreakpoint('md');
         var content = $('main');
 
@@ -430,7 +439,7 @@ export class PackadicSidebarWidget extends widgets.WidgetBase implements IWidget
         }
     }
 
-    _handleFixedHover () {
+    protected _handleFixedHover () {
         var self:PackadicSidebarWidget = this;
         if ( self.isFixed() ) {
             self._on(self.$nav, {
@@ -448,7 +457,7 @@ export class PackadicSidebarWidget extends widgets.WidgetBase implements IWidget
         }
     }
 
-    _handleToggler() {
+    protected _handleToggler() {
         var self:PackadicSidebarWidget = this;
 
         if ( $.cookie && $.cookie('sidebar_closed') === '1' && App.getViewPort().width >= App.getBreakpoint('md') ) {
@@ -470,7 +479,7 @@ export class PackadicSidebarWidget extends widgets.WidgetBase implements IWidget
         });
     }
 
-    _resolveActiveLink() {
+    protected _resolveActiveLink() {
         if(this.options.resolveActive !== true) return;
         var currentPath = trim(location.pathname.toLowerCase(), '/');
         var md = App.getBreakpoint('md');
@@ -498,7 +507,7 @@ export class PackadicSidebarWidget extends widgets.WidgetBase implements IWidget
 
 
 
-    _generateFromTemplate(menuItems, templateName?:any, callback?:any):JQueryPromise<any> {
+    protected _generateFromTemplate(menuItems, templateName?:any, callback?:any):JQueryPromise<any> {
         var self:PackadicSidebarWidget = this;
         var defer = App.defer();
         this._trigger('generate');
