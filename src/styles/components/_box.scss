@@ -1,4 +1,6 @@
-
+body.fullscreen {
+    overflow: hidden;
+}
 .box {
     border: 1px solid transparent;
     border-radius: $box-radius;
@@ -118,6 +120,24 @@
 
     footer {
 
+    }
+}
+.box.box-fullscreen {
+    z-index: $zindex-box-fullscreen;
+    margin: 0;
+    position: fixed !important;
+    top:0;
+    left:0;
+    bottom:0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+
+
+    > section {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 100%;
     }
 }
 

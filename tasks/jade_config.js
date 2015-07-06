@@ -62,6 +62,9 @@ module.exports = function( grunt ){
         grunt.config('jade.' + target.type + '.options.filters', jadeFilters);
         grunt.config('jade.' + target.type + '.options.data', function(){
             data.assetPath = '/assets';
+            data._insp = function(val){
+                return require('util').inspect(val);
+            };
             return data;
         }.call());
 

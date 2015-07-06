@@ -9,7 +9,7 @@ App.ready(function () {
     App.on('state:*', function(){
         console.log('event', this.event, arguments, this);
     });
-    App.on('theme:*', function(){
+    App.on('layout:*', function(){
         console.log('event', this.event, arguments, this);
     });
     App.on('sidebar:*', function(){

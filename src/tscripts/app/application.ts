@@ -7,7 +7,10 @@ import {storage} from 'app/storage';
 import {Layout} from 'app/layout';
 
 export enum BoxAction {
-    toggle, hide, show, fullscreen, normal, close, open, loading
+    open, close,
+    minimize, maximize, toggle,
+    loader, loader_off,
+    fullscreen, fullscreen_off, fullscreen_toggle
 }
 
 export enum LayoutAction {
@@ -220,10 +223,31 @@ export class Application extends EventEmitter2 {
     }
 
     // TOP LEVEL API
-    public box(action:BoxAction, args?:any):Application {
-        var actionName:string = BoxAction[action];
-        if (args && kindOf(args) !== 'array') args = [args];
-        //this._theme.apply(action, args);
+    public box(box:JQuery|string, action:BoxAction|string, args?:any):Application {
+        require(['jquery', 'widgets/box'], function($){
+            var actionName:string = typeof(action) === 'string' ? action.toString() : LayoutAction[action].toString();
+            var $box:JQuery = typeof(box) === 'string' ? $(box) : box;
+
+            if(!$box.is( ":data('packadicBox')" )){
+                return;
+            }
+            if (args && kindOf(args) !== 'array') {
+                args = [args];
+            }
+
+            switch (actionName) {
+                case 'open': $box.box('open'); break;
+                case 'close': $box.box('close'); break;
+                case 'minimize': $box.box.apply($box, ['minimizeContent'].concat(args)); break;
+                case 'maximize': $box.box.apply($box, ['maximizeContent'].concat(args)); break;
+                case 'toggle': $box.box.apply($box, ['toggleContent'].concat(args)); break;
+                case 'loader': $box.box.apply($box, ['startLoader'].concat(args)); break;
+                case 'loader_off': $box.box.apply($box, ['stopLoader'].concat(args)); break;
+                case 'fullscreen': $box.box.apply($box, ['fullscreen'].concat(args)); break;
+                case 'fullscreen_off': $box.box.apply($box, ['exitFullscreen'].concat(args)); break;
+                case 'fullscreen_toggle': $box.box.apply($box, ['toggleFullscreen'].concat(args)); break;
+            }
+        });
         return this;
     }
 

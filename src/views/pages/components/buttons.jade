@@ -1,7 +1,7 @@
 extends ../../layouts/default
 
 mixin btn-group-demo(title, btnClass)
-    - btnClass = btnClass || 'btn-info';
+    - btnClass = btnClass || 'btn-primary';
     h4.box-heading= title
     .btn-group&attributes(attributes)
         +a.btn(class=btnClass) First
@@ -44,35 +44,16 @@ block header
 
 
 block content
-    #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
-        .modal-dialog
-            .modal-content
-                .modal-header
-                    button.close(type='button', data-dismiss='modal', aria-label='Close')
-                        span(aria-hidden='true') ×
-                    h4#exampleModalLabel.modal-title New message
-
-
-                .modal-body
-                    form
-                        .form-group
-                            label.control-label(for='recipient-name') Recipient:
-                            input#recipient-name.form-control(type='text')
-                        .form-group
-                            label.control-label(for='message-text') Message:
-                            textarea#message-text.form-control
-                .modal-footer
-                    button.btn.btn-default(type='button', data-dismiss='modal') Close
-                    button.btn.btn-primary(type='button') Send message
 
     .row
         .col-lg-4
+            // BUTTON COLORS
             +box.box-style-lights
                 +box-header("Buttons", "list", true)
                     +a(data-toggle='modal', data-target='#exampleModal').btn.btn-success Ok
                     +a.btn.btn-info Info
                     +a.btn.btn-warning Close
-                +box-body(350)
+                +box-body(400)
                     .row.small-margin-bottom
                         .col-md-12
                             .btn-group.btn-group-justified.btn-group-xs
@@ -89,9 +70,28 @@ block content
                                         | !{color}
                                     a(class="btn " + color + "-dark").show-class
                                         | !{color}-dark
-
+            // DROPDOWN BUTTONS
+            +box("Dropdown buttons", "info")
+                h4.box-heading Single button dropdowns
+                for state in site.data.theme.states
+                    - var text = capitalizeFirst(state);
+                    +btn-dropdown-demo(text)(class="btn-" + state).btn-xs
+                h4.box-heading Single button dropups
+                for state in site.data.theme.states
+                    - var text = capitalizeFirst(state);
+                    +btn-dropdown-demo(text, false, true)(class="btn-" + state).btn-xs
+                h4.box-heading Split button dropdowns
+                for state in site.data.theme.states
+                    - var text = capitalizeFirst(state);
+                    +btn-dropdown-demo(text, true)(class="btn-" + state).btn-xs
+                h4.box-heading Sizes
+                    +btn-dropdown-demo("xs", true).blue-dark.btn-xs
+                    +btn-dropdown-demo("sm", true).blue-dark.btn-sm
+                    +btn-dropdown-demo("md", true).blue-dark
+                    +btn-dropdown-demo("lg", true).blue-dark.btn-lg
 
         .col-lg-8
+            // BUTTON VARIANTS/TYPES
             +box("Button variants", "list").box-table
                 table.table.table-striped.table-hover.table-bordered
                     thead
@@ -104,18 +104,10 @@ block content
                     tbody
                         tr
                             td Striped
-                            td
-                                +a.btn.btn-xs.orange-light.orange-dark-stripe.show-class Striped
-                                +a.btn.btn-xs.teal-light.teal-dark-stripe.show-class Striped
-                            td
-                                +a.btn.btn-sm.red-light.red-dark-stripe.show-class Striped
-                                +a.btn.btn-sm.orange-light.orange-dark-stripe.show-class Striped
-                            td
-                                +a.btn.blue-light.blue-dark-stripe.show-class Striped
-                                +a.btn.red-light.red-dark-stripe.show-class Striped
-                            td
-                                +a.btn.btn-lg.green-light.green-dark-stripe.show-class Striped
-                                +a.btn.btn-lg.blue-light.blue-dark-stripe.show-class Striped
+                            each size, index in ['xs', 'sm', 'md', 'lg']
+                                td
+                                    +a.btn.orange-light.orange-dark-stripe.show-class(class='btn-' + size) Striped
+                                    +a.btn.teal-light.teal-dark-stripe.show-class(class='btn-' + size) Striped
                         tr
                             td Icon only
                             each size in site.data.theme.sizes
@@ -137,9 +129,8 @@ block content
                                         i.fa.fa-check
                                         |  Agree
 
-    .row
-        .col-lg-12
-            +box.demo-button-editor(data-editor="color,size,font-color,shape", data-editor-selector="section .btn.btn-icon", data-editor-color="grey-light", data-editor-size="btn-sm", data-editor-font-color="", data-editor-shape="")
+            // BUTTON ICON SHOWCASE
+            +box.demo-button-editor(data-box-controls="false", data-editor="color,size,font-color,shape", data-editor-selector="section .btn.btn-icon", data-editor-color="grey-light", data-editor-size="btn-sm", data-editor-font-color="", data-editor-shape="")
                 +box-header("Button icons showcase", "list")
                     .box-header-widgets
                         // color
@@ -168,59 +159,25 @@ block content
                             option(value="btn-rounded") Rounded
                             option(value="btn-circle") Circle
 
-                +box-body(350)
+                +box-body(200)
                     .row
                         .col-md-12
                             each icon in site.data.icons.icons
                                 +a.btn.btn-sm.btn-icon.grey-light.small-margin-right.small-margin-bottom.show-class
                                     i.fa(class="fa-" + icon)
 
-    .row
-        .col-lg-7
-            +box("Button grouping", "list", 350)
+            // BUTTON GROUPING
+            +box("Button grouping", "list")
                 .row
                     .col-md-4
                         +btn-group-demo("Default")
                         +btn-group-demo("Extra small").btn-group-xs
                         +btn-group-demo("Small").btn-group-sm
-                        //+btn-group-demo("Large").btn-group-lg
                     .col-md-4
                         +btn-group-demo("Rounded").btn-group-rounded
                         +btn-group-demo("Rounded xs").btn-group-xs.btn-group-rounded
                         +btn-group-demo("Rounded sm").btn-group-sm.btn-group-rounded
-                       // +btn-group-demo("Rounded lg").btn-group-lg.btn-group-rounded
                     .col-md-4
                         +btn-group-demo("Circle").btn-group-circle
                         +btn-group-demo("Circle xs").btn-group-xs.btn-group-circle
                         +btn-group-demo("Circle sm").btn-group-sm.btn-group-circle
-                       // +btn-group-demo("Circle lg").btn-group-lg.btn-group-circle
-
-        .col-md-5
-            +box("Dropdown buttons", "info")
-                h4.box-heading Single button dropdowns
-                for state in site.data.theme.states
-                    - var text = capitalizeFirst(state);
-                    +btn-dropdown-demo(text)(class="btn-" + state).btn-xs
-
-                h4.box-heading Single button dropups
-                for state in site.data.theme.states
-                    - var text = capitalizeFirst(state);
-                    +btn-dropdown-demo(text, false, true)(class="btn-" + state).btn-xs
-
-                h4.box-heading Split button dropdowns
-                for state in site.data.theme.states
-                    - var text = capitalizeFirst(state);
-                    +btn-dropdown-demo(text, true)(class="btn-" + state).btn-xs
-
-                h4.box-heading Sizes
-                    +btn-dropdown-demo("xs", true).blue-dark.btn-xs
-                    +btn-dropdown-demo("sm", true).blue-dark.btn-sm
-                    +btn-dropdown-demo("md", true).blue-dark
-                    +btn-dropdown-demo("lg", true).blue-dark.btn-lg
-    .row
-        .col-md-3
-            +box("Share buttons")
-                div(data-share-buttons="facebook,twitter,linkedin", data-share-buttons-class="share-btn-branded")
-        .col-md-4
-            +box("Breadcrumbs")
-                | adf

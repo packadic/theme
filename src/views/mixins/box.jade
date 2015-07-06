@@ -1,9 +1,6 @@
 
 
 mixin box-header(title, icon, actions)
-    - icon = icon || false;
-    - title = title || false;
-    - actions = actions || false;
     - var actionsClass = (typeof actions == 'string' ? actions : '');
     header&attributes(attributes)
         if icon
@@ -16,10 +13,9 @@ mixin box-header(title, icon, actions)
             block
 
 mixin box-body(scrollerHeight)
-    - scrollerHeight = scrollerHeight || false;
     if scrollerHeight
-        - var style = 'height: ' + scrollerHeight + 'px;'
-        section.scrollable(style=style)&attributes(attributes)
+        - attributes['data-height'] = scrollerHeight;
+        section.scrollable&attributes(attributes)
             block
     else
         section&attributes(attributes)
@@ -29,8 +25,6 @@ mixin box-body(scrollerHeight)
 
 
 mixin box(title, icon, scrollerHeight, boxClasses)
-    - icon = icon || false;
-    - title = title || false;
     - boxClasses = boxClasses || '';
     if title
         .box.box-style-light(class=boxClasses)

@@ -1,3 +1,16 @@
+events:
+  state:
+    booting: App booting
+    prestart: App pre start
+    starting: App starting
+    started: App started
+  layout:
+    resize: Layout resized
+  sidebar:
+    generate: Sidebar generating
+
+
+
 colors:
   - red
   - pink

@@ -358,7 +358,7 @@ var init = module.exports = function (grunts) {
     grunt.registerTask('rm', ['clean:all']);
     grunt.registerTask('templates', ['clean:templates', 'jade:templates', 'string-replace:templates', 'uglify:templates']);
 
-    grunt.registerTask('cp', ['copy:images', 'copy:fonts', 'copy:misc', 'copy:demo']);
+    grunt.registerTask('cp', ['copy:images', 'copy:fonts', 'copy:misc', 'copy:favicon', 'copy:demo']);
 
     grunt.registerTask('scripts', ['typescript:amd', 'tsbundler:packadic', 'copy:scripts', 'uglify:' + type, 'jsbuild', 'create_init_script']);
     grunt.registerTask('assets', ['clean:assets', 'cp', 'copy:plugins', 'sass:' + type, 'templates', 'scripts']);

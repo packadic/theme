@@ -143,7 +143,7 @@ export class Layout {
                 /**
                  * @event module:theme~resize
                  */
-                self._app.emit('theme:resize', self, 'resize');
+                self._app.emit('layout:resize', self, 'resize');
             }, 600); // delay the event a bit, otherwise it doesn't seem to work well in some cases
         });
     }
@@ -151,7 +151,7 @@ export class Layout {
     protected initScrollToTop() {
         $('#scroll-top').off('click').on('click', function (e) {
             e.preventDefault();
-            this._app.emit('theme:scrolltop');
+            this._app.emit('layout:scrolltop');
             this._app.scrollTo(document.body, 0, 600);
         })
     }
@@ -212,7 +212,7 @@ export class Layout {
 
         this.lastSelectedLayout = this.config;
         if (this.lastSelectedLayout != this.config) {
-            this._app.emit('theme:resize');
+            this._app.emit('layout:resize');
         }
     }
 

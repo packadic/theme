@@ -5,117 +5,13 @@ block header
     +page-breadcrumbs
         +breadcrumb("Components", "/components", true)
 
-mixin progress-bars-demo(title)
-    .col-md-4
-        +box(title, "cog")&attributes(attributes)
-            .progress
-                .progress-bar.progress-bar-success(role='progressbar', aria-valuenow='40', aria-valuemin='0', aria-valuemax='100', style='width: 40%')
-                    span.sr-only 40% Complete (success)
-            .progress
-                .progress-bar.progress-bar-info(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style='width: 20%')
-                    span.sr-only 20% Complete
-            .progress
-                .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='60', aria-valuemin='0', aria-valuemax='100', style='width: 60%')
-                    span.sr-only 60% Complete (warning)
-            .progress
-                .progress-bar.progress-bar-danger(role='progressbar', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100', style='width: 80%')
-                    span.sr-only 80% Complete (danger)
-    .col-md-4
-        +box(title + " striped", "cog")&attributes(attributes)
-            .progress
-                .progress-bar.progress-bar-success.progress-bar-striped(role='progressbar', aria-valuenow='40', aria-valuemin='0', aria-valuemax='100', style='width: 40%')
-                    span.sr-only 40% Complete (success)
-            .progress
-                .progress-bar.progress-bar-info.progress-bar-striped(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style='width: 20%')
-                    span.sr-only 20% Complete
-            .progress
-                .progress-bar.progress-bar-warning.progress-bar-striped(role='progressbar', aria-valuenow='60', aria-valuemin='0', aria-valuemax='100', style='width: 60%')
-                    span.sr-only 60% Complete (warning)
-            .progress
-                .progress-bar.progress-bar-danger.progress-bar-striped(role='progressbar', aria-valuenow='80', aria-valuemin='0', aria-valuemax='100', style='width: 80%')
-                    span.sr-only 80% Complete (danger)
-    .col-md-4
-        +box(title + " animated & stacked", "cog")&attributes(attributes)
-            .progress
-                .progress-bar.progress-bar-striped.active(role='progressbar', aria-valuenow='45', aria-valuemin='0', aria-valuemax='100', style='width: 45%')
-                    span.sr-only 45% Complete
-            .progress
-                .progress-bar.progress-bar-striped.progress-bar-danger.active(role='progressbar', aria-valuenow='65', aria-valuemin='0', aria-valuemax='100', style='width: 45%')
-                    span.sr-only 65% Complete
-            .progress
-                .progress-bar.progress-bar-success(style='width: 35%')
-                    span.sr-only 35% Complete (success)
-                .progress-bar.progress-bar-warning.progress-bar-striped(style='width: 20%')
-                    span.sr-only 20% Complete (warning)
-                .progress-bar.progress-bar-danger(style='width: 10%')
-                    span.sr-only 10% Complete (danger)
-
-
-mixin btn-group-demo(title, btnClass)
-    - btnClass = btnClass || 'btn-info';
-    h4.box-heading= title
-    .btn-group&attributes(attributes)
-        +a.btn(class=btnClass) First
-        +a.btn(class=btnClass) Second
-        +a.btn(class=btnClass) Last
-
-mixin btn-dropdown-demo(title, split, dropup)
-    - split = split || false;
-    - dropup = dropup || false;
-    .btn-group(class= dropup === true ? "dropup" : "")
-        if split
-            button.btn&attributes(attributes)= title
-            button.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')&attributes(attributes)
-                span.caret
-                span.sr-only Toggle dropdown
-        else
-            button.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')&attributes(attributes)
-                | !{title}
-                span.caret
-
-        ul.dropdown-menu(role='menu')
-            li
-                a(href='#') Action
-            li
-                a(href='#') Another action
-            li
-                a(href='#') Something else here
-            li.divider
-            li
-                a(href='#') Separated link
-
 block content
-
-    #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
-        .modal-dialog
-            .modal-content
-                .modal-header
-                    button.close(type='button', data-dismiss='modal', aria-label='Close')
-                        span(aria-hidden='true') ×
-                    h4#exampleModalLabel.modal-title New message
-                .modal-body
-                    form
-                        .form-group
-                            label.control-label(for='recipient-name') Recipient:
-                            input#recipient-name.form-control(type='text')
-                        .form-group
-                            label.control-label(for='message-text') Message:
-                            textarea#message-text.form-control
-                .modal-footer
-                    button.btn.btn-default(type='button', data-dismiss='modal') Close
-                    button.btn.btn-primary(type='button') Send message
-
 
     .row
         .col-md-6
-            +box("Alerts", "info", 260)
-                +alert("success", "Well done") You have done well, have a cookie
-                +alert("success", "Very good", true) You have done well, You may close this
-                +alert("info", "Did you know") There are a lot of scripts out there
-                +alert("info", "Also usefull", true) Those scripts can close this box
-                +alert("warning", "Check it out") There might be an issue with you
-                +alert("warning", "Warning", true) Your dog has not enough food
-                +alert("danger", "Error") The website could not do that thing
+            +box("Dropdowns", "info")
+                .btn-toolbar
+                    +demo-dropdown-buttons
 
         .col-md-3
             +box("Labels and badges", "cog", 260).box-table
@@ -174,25 +70,3 @@ block content
                     .list-group-separator
 
 
-    .row
-        +progress-bars-demo("Progress bars")
-
-    .row
-        +progress-bars-demo("BS Materials bars").bs-material
-
-
-    .row
-        .col-md-4
-        .col-md-4.bs-material
-            p asdf
-
-
-        .col-md-4.bs-material
-            p asdf
-    .row
-        .col-md-6
-            +box("Buttons", "cog")
-                a.btn.btn-primary Primary
-        .col-md-6
-            +box("Buttons", "cog")
-                | adf

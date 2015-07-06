@@ -1,8 +1,8 @@
 require([
-    'jquery', 'theme', 'fn/defined', 'fn/default', 'fn/cre', 'plugins/chartjs',
+    'jquery', 'fn/defined', 'fn/default', 'fn/cre', 'plugins/chartjs',
 
     'plugins/easypiechart', 'plugins/sparkline', 'flot', 'flot.pie'
-], function ($, theme, defined, def, cre, Chart) {
+], function ($, defined, def, cre, Chart) {
     "use strict";
     $.fn.sparkline.defaults.common.width = '100px';
     $.fn.sparkline.defaults.common.height = '100px';

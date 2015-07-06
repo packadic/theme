@@ -72,8 +72,8 @@ export class PackadicSidebarWidget extends widgets.WidgetBase implements IWidget
          */
         self._handleFixed();
         self._handle();
-        //this._handleToggler();
-        App.on('theme:resize', self._onResize.bind(self) );
+        self._handleToggler();
+        App.on('layout:resize', function(){ self._onResize(); });
         self._resolveActiveLink();
         self.hideLoader();
         if ( self.options.hidden ) {
@@ -280,7 +280,7 @@ export class PackadicSidebarWidget extends widgets.WidgetBase implements IWidget
             }
             defer.resolve();
         });
-        defer.promise();
+        return defer.promise();
     }
 
     public hide() {
@@ -466,17 +466,17 @@ export class PackadicSidebarWidget extends widgets.WidgetBase implements IWidget
         }
 
         // handle sidebar show/hide
-        this._on(this.document, {
-            'click .sidebar-toggler': function (e) {
-                if (self.openCloseInProgress) {
-                    return;
-                }
-                $(".sidebar-search", self).removeClass("open");
-                self[self.isClosed() ? 'open' : 'close']().then(function(){
-                    self.window.trigger('resize');
-                });
+        var handlers:any = {};
+        handlers['click ' + self.options.toggler] = function (e) {
+            if (self.openCloseInProgress) {
+                return;
             }
-        });
+            $(".sidebar-search", self).removeClass("open");
+            self[self.isClosed() ? 'open' : 'close']().done(function(){
+                self.window.trigger('resize');
+            });
+        };
+        this._on(this.document, handlers);
     }
 
     protected _resolveActiveLink() {

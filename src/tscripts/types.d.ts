@@ -42,37 +42,16 @@ declare enum ThemeAction {
 declare enum SidebarAction {
     init, toggle, hide, show, open, close, refresh
 }
-
-interface ITheme extends Function {
-    applyLayout();
-    reset();
-    toastr();
-    alert();
-    initSlimScroll(el:any, opts?:any);
-    destroySlimScroll(el:any);
-    ensureScrollToTop();
-    getTemplate();
-    init();
-}
-
-interface ISidebar extends Function {
-    isFixed():boolean;
-    isClosed():boolean;
-    close(callback?:Function);
-    open(callback?:Function);
-    hide();
-    show();
-    toggle();
-    refresh();
-    init();
-}
-
 interface JQueryStatic {
     material:any;
     cookie?:any;
     mCustomScrollbar?:any;
     ripples?:any;
     slimScroll?:any;
+    sidebar?:any;
+    box?:any;
+    unblockUI():any;
+    blockUI(...args:any[]):any;
 }
 
 interface JQuery {
@@ -85,7 +64,10 @@ interface JQuery {
     size():number;
     tooltip(args?:any):JQuery;
     TouchSpin(args?:any):JQuery;
-    sidebar(...args:any[]):JQuery
+    sidebar(...args:any[]):JQuery;
+    box(...args:any[]):JQuery;
+    block(...args:any[]):JQuery;
+    unblock(...args:any[]):JQuery;
 }
 
 interface Window {
@@ -223,3 +205,4 @@ declare module "plugins/cookie" {
 declare module "plugins/bs-material-ripples" {
     export = {}
 }
+declare module "plugins/blockui" {}

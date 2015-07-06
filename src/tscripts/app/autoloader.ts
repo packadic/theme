@@ -47,6 +47,19 @@ export function getDefaultDefinitions(App:Application):any {
         ],
         custom: [
             function ($el) {
+                $el.find('code.hljs').each(function(){
+                    var data = $(this).data();
+                    if(defined(data['hljsInitialized']) && data['hljsInitialized'] == true){
+                        return;
+                    }
+                    require(['plugins/highlightjs'], function(highlightjs){
+                        console.log(highlightjs);
+
+                    })
+
+                })
+            },
+            function ($el) {
                 $el.find('input[type="checkbox"], input[type="radio"]').not('.switch').not('.no-icheck').each(function () {
                     var $target = $(this);
                     if (defined($target.data('iCheck'))) {
@@ -103,8 +116,9 @@ export function getDefaultDefinitions(App:Application):any {
             function ($el) {
                 var $scrollable = $el.find('.scrollable');
                 require([ 'spawner', 'plugins/jquery-slimscroll'], function (spawner) {
-                    spawner.destroySlimScroll($scrollable);
-                    spawner.initSlimScroll($scrollable);
+                    if(!$(this).parent().hasClass('slimScrollDiv')) {
+                        spawner.initSlimScroll($scrollable);
+                    }
                 });
             }
         ]

@@ -10,6 +10,9 @@
         debug                 : false,
         pageLoadedOnAutoloaded: true,
         plugins               : {
+            blockUI: {
+                message: '<img src="<%= paths.images %>/loaders/spiffygif_104x104.gif" style="height: 30px; width: 30px;">'
+            },
             confirmation: {
                 container     : 'body',
                 btnCancelIcon : 'fa fa-remove',
@@ -68,10 +71,10 @@
         },
         paths                 : {
             assets : '/assets',
-            images : '/assets/images',
-            scripts: '/assets/scripts',
-            fonts  : '/assets/fonts',
-            styles : '/assets/styles'
+            images : '<%= paths.assets %>/images',
+            scripts: '<%= paths.assets %>/scripts',
+            fonts  : '<%= paths.assets %>/fonts',
+            styles : '<%= paths.assets %>/styles'
         },
         scss                  : {},
         layout                : {
@@ -149,6 +152,8 @@
                 'plugins/pace'             : 'plugins/pace/pace.min',
                 'plugins/speakingurl'      : 'plugins/speakingurl/speakingurl.min',
                 'plugins/icheck'           : 'plugins/iCheck/icheck.min',
+                'plugins/blockui': 'plugins/blockui/jquery.blockUI',
+
                 // jquery
                 'plugins/jquery-rest'      : 'plugins/jquery.rest/dist/1/jquery.rest.min',
                 'plugins/jquery-migrate'   : 'plugins/jquery-migrate/jquery-migrate',

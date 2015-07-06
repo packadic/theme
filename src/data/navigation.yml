@@ -39,6 +39,9 @@ sidebar:
       - name: Boxes
         href: <%= target.nav.pre %>/components/boxes<%= target.nav.ext %>
 
+      - name: Progress bars
+        href: <%= target.nav.pre %>/components/progressbars<%= target.nav.ext %>
+
       - name: Tabs n Navs
         href: <%= target.nav.pre %>/components/tabs<%= target.nav.ext %>
 
