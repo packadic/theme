@@ -134,6 +134,7 @@ var init = module.exports = function (grunts) {
             favicon      : {files: [{src: 'src/favicon-html5.ico', dest: '<%= target.dest %>/favicon.ico'}]},
         },
         jade            : {
+            options: {data: {}},
             dev      : {
                 options: {data: {}, filters: {}, pretty: true},
                 files  : [{expand: true, cwd: 'src/views/pages', src: ['**/*.jade', '!plugins/**'], ext: '.html', dest: '<%= target.dest %>'}]
@@ -337,7 +338,7 @@ var init = module.exports = function (grunts) {
                         'async'        : 'src/plugins/async/lib/async',
                         'eventemitter2': 'src/plugins/eventemitter2/lib/eventemitter2'
                     },
-                    modules  : [ 'app/application', 'app/autoloader', 'app/config', 'app/util', 'app/storage', 'async','eventemitter2'],
+                    modules  : [ 'app/application', 'app/autoloader', 'app/config', 'app/util', 'app/storage', 'app/layout', 'async','eventemitter2'],
                     startFile: "src/scripts/wrap-open.js",
                     endFile  : "src/scripts/wrap-close.js",
                     optimize : "none",

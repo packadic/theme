@@ -1,0 +1,10 @@
+extends ../layouts/default
+
+
+block content
+    +pc-alert('Test title')('info', 'dismissable') Content
+    +pc-alert('Test with icon', 'list')('success', 'dismissable') Should be an icon
+    +pc-alert('Test with block', 'list')('warning')
+        p.pt Should be a block
+        br
+        p.pt: +abtn()('warning') What now?

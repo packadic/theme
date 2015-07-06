@@ -55,9 +55,10 @@ module widgets {
             return undefined;
         }
 
-        public _on(element:JQuery, handlers:Object):any {
+        public _on(element:JQuery|string, handlers:Object):any {
             return undefined;
         }
+
 
         public _setOption(key:string, value:Object):any {
             return undefined;
@@ -71,10 +72,10 @@ module widgets {
             return undefined;
         }
 
-        public _super(arg:Object) {
+        public _super(...arg:any[]) {
         }
 
-        public _superApply(args:Array<any>) {
+        public _superApply(args:any) {
         }
 
         public _trigger(type:String, args?:any[], data?:Object):any {
@@ -109,6 +110,9 @@ module widgets {
         public widgetFullName:string;
         public widgetName:string;
         public window:JQuery;
+
+        protected bindings:JQuery;
+        protected eventNamespace:string;
 
         constructor() {
             // remove all members, they are only needed at compile time.

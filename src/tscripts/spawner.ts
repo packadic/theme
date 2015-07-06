@@ -51,9 +51,10 @@ export function alert(opt:any) {
 }
 
 
-export function initSlimScroll(el, opts) {
+export function initSlimScroll(el:any, opts?:any) {
+    var $el:JQuery = typeof(el) === 'string' ? $(el) : el;
     require(['plugins/jquery-slimscroll'], function () {
-        $(el).each(function () {
+        $el.each(function () {
             if ($(this).attr("data-initialized")) {
                 return; // exit
             }

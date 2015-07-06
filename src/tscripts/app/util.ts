@@ -5,6 +5,37 @@ var kindsOf:any = {};
 'Number String Boolean Function RegExp Array Date Error'.split(' ').forEach(function (k) {
     kindsOf['[object ' + k + ']'] = k.toLowerCase();
 });
+var nativeTrim = String.prototype.trim;
+
+
+
+export function makeString(object) {
+    if (object == null) return '';
+    return '' + object;
+}
+export function escapeRegExp(str) {
+    return makeString(str).replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1');
+}
+export function defaultToWhiteSpace(characters) {
+    if (characters == null)
+        return '\\s';
+    else if (characters.source)
+        return characters.source;
+    else
+        return '[' + escapeRegExp(characters) + ']';
+}
+export function trim(str:string, characters?:any):string {
+    str = makeString(str);
+    if (!characters && nativeTrim) return nativeTrim.call(str);
+    characters = defaultToWhiteSpace(characters);
+    return str.replace(new RegExp('^' + characters + '+|' + characters + '+$', 'g'), '');
+}
+export function unquote(str, quoteChar) {
+    quoteChar = quoteChar || '"';
+    if (str[0] === quoteChar && str[str.length - 1] === quoteChar)
+        return str.slice(1, str.length - 1);
+    else return str;
+}
 
 export function def( val, def ){
     return defined(val) ? val : def;

@@ -6,3 +6,20 @@ mixin search-form(action, method, inputName)
             span.input-group-btn
                 a.btn.submit(href='javascript:;')
                     i.fa.fa-search
+
+mixin pc-alert(title, icon)
+    - _addClassAttribute('info', 'alert-info', attributes)
+    - _addClassAttribute('success', 'alert-success', attributes)
+    - _addClassAttribute('warning', 'alert-warning', attributes)
+    - _addClassAttribute('danger', 'alert-danger', attributes)
+    - _addClassAttribute('error', 'alert-danger', attributes)
+    - _addClassAttribute('dismissable', 'alert-dismissable', attributes)
+    div.alert&attributes(attributes)
+        if _hasClassAttribute('dismissable', attributes)
+            button(type="button", class="close", data-dismiss="alert", aria-label="Close"): span(aria-hidden="true") &times;
+        if icon
+            i(class='fa fa-' + icon)
+            | &nbsp;
+        if title
+            strong !{title} &nbsp;
+        block

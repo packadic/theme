@@ -1,0 +1,39 @@
+extends ../../layouts/default
+
+
+mixin demo-alert-message(btnText)
+    p.pt Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores in eveniet sapiente error fuga tenetur ex ea dignissimos voluptas ab molestiae eos totam quo dolorem maxime illo neque quia itaque.
+    p.pt: +abtn()&attributes(attributes)=btnText
+
+
+block content
+    .row
+        .col-md-6
+            +box("Alerts")
+                p Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages
+                +pc-alert('Well done!', 'check')('dismissable', 'success') Lorem ipsum dolor sit amet consectetur adipisicing elit
+                +pc-alert('Heads up!', 'info')('dismissable', 'info') Lorem ipsum dolor sit amet consectetur adipisicing elit
+                +pc-alert('Warning!', 'exclamation-triangle')('dismissable', 'warning') Lorem ipsum dolor sit amet consectetur adipisicing elit
+                +pc-alert('Oh snap!', 'times-circle')('dismissable', 'danger') Lorem ipsum dolor sit amet consectetur adipisicing elit
+
+            +box('Alert messages')
+                p Alerts can contain more than a line of messege. They can be extended with to focus on a particular messege.
+                +pc-alert('Well done!', 'check')('dismissable', 'success')
+                    +demo-alert-message('Alright')('success')
+                +pc-alert('Heads up!', 'info')('dismissable', 'info')
+                    +demo-alert-message('Okay')('info')
+                +pc-alert('Warning!', 'exclamation-triangle')('dismissable', 'warning')
+                    +demo-alert-message('Remind me later')('warning')
+                +pc-alert('Oh snap!', 'times-circle')('dismissable', 'danger')
+                    +demo-alert-message('Fix it now')('danger')
+
+        .col-md-6
+            +box('Notifications')
+                p Notifications that appear at the desired position. Uses toastr.
+                .btn-group.btn-group-justified
+                    +abtn(onClick="App.notify('info', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Heads up!')")('info') Info
+                    +abtn(onClick="App.notify('success', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Well done!')")('success') Success
+                    +abtn(onClick="App.notify('warning', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Warning!')")('warning') Warning
+                    +abtn(onClick="App.notify('danger', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Oh snap!')")('danger') Danger
+
+            +box('Modals')

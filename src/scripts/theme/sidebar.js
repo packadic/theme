@@ -20,7 +20,7 @@ define(['jquery', 'theme', 'string', 'plugins/async', 'fn/defined', 'spawner'],
          */
         var sidebar = {
             options: {
-                hidden           : true,
+                hidden           : false,
                 items            : null,
                 openCloseDuration: 600,
                 openedWidth      : $body.hasClass("sidebar-nav-closed") ? 235 : parseInt($sidebarNav.css('width')),

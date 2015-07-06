@@ -21,24 +21,8 @@
     include metalshark/navs
     include metalshark/responsive-images
     include metalshark/responsive-utilities
-    include metalshark/tables
+
+include metalshark/buttons
+include metalshark/tables
 include metalshark/typography
 include metalshark/viewports
-
-//- Helpers
-- function _addClass(classes, attributes) {
--     attributes.class = (attributes.class === undefined) ? classes : attributes.class + ' ' + classes
--}
-- function _addClassAttribute(name, classes, attributes) {
--     if (attributes[name]) {
--         _addClass(classes, attributes)
--         attributes[name] = null
--     }
-- }
-- function _unlessClassAttribute(name, classes, attributes) {
--     if (attributes[name]) {
--         attributes[name] = null
--     } else {
--         _addClass(classes, attributes)
--     }
-- }

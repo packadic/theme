@@ -32,7 +32,7 @@ export function on( callback ){
  * @param {StorageSetOptions} [options]     - Additional options, check the docs
  */
 export function set( key:any, val:any, options?:any ){
-    var options:any = $.extend({json: false, expires: false}, options);
+    var options:any = _.merge({json: false, expires: false}, options);
     if( options.json ){
         val = jsonStringify(val);
     }
@@ -56,7 +56,7 @@ export function set( key:any, val:any, options?:any ){
  * @returns {*}
  */
 export function get( key:any, options?:any ){
-    var options:any = $.extend({json: false, default: null}, options);
+    var options:any = _.merge({json: false, default: null}, options);
 
     if( !defined(key) ){
         return options.default;

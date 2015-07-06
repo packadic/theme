@@ -47,6 +47,23 @@
                 alwaysVisible  : false,
                 railVisible    : true,
                 disableFadeOut : true
+            },
+            toastr      : {
+                "closeButton"      : true,
+                "debug"            : false,
+                "newestOnTop"      : false,
+                "progressBar"      : true,
+                "positionClass"    : "toast-top-right",
+                "preventDuplicates": false,
+                "onclick"          : null,
+                "showDuration"     : "300",
+                "hideDuration"     : "1000",
+                "timeOut"          : "5000",
+                "extendedTimeOut"  : "1000",
+                "showEasing"       : "swing",
+                "hideEasing"       : "linear",
+                "showMethod"       : "fadeIn",
+                "hideMethod"       : "fadeOut"
             }
         },
         paths                 : {
@@ -58,7 +75,7 @@
         },
         scss                  : {},
         theme                 : {
-            ripples: false,
+            ripples        : false,
             sidebarDisabled: false,
             layout         : 'fluid',
             sidebarOption  : 'default',
@@ -66,7 +83,20 @@
             sidebarPosition: 'left',
             sidebarStyle   : 'default',
             bottom         : 'fixed', // normal, hidden, fixed
-            top            : 'normal'
+            top            : 'normal',
+        },
+        layout                : {
+            mode   : 'fluid',// fluid, boxed
+            bottom : 'fixed', // normal, hidden, fixed
+            top    : 'normal', // normal, fixed
+            sidebar: {
+                enabled : true,
+                mode    : 'accordion', // accordion, hover
+                position: 'left',
+                style: 'dark',
+                fixed   : false // normal, fixed
+            }
+
         },
         requireJS             : {
             baseUrl: '<%= paths.scripts %>',
@@ -257,8 +287,8 @@
                 'config'    : ['jquery'],
                 'eventer'   : ['jquery', 'plugins/events'],
                 //'autoload'           : ['jquery'],
-                'theme'     : ['plugins/bootstrap', 'jade', 'plugins/cookie', 'plugins/events'],
-                'demo'      : ['theme'],
+                'packadic'     : ['plugins/bootstrap'], //, 'plugins/events'],
+                'demo'      : ['packadic'],
                 'autoloader': {exports: 'autoloader', deps: ['jquery']}
             },
 

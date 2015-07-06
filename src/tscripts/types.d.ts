@@ -85,6 +85,7 @@ interface JQuery {
     size():number;
     tooltip(args?:any):JQuery;
     TouchSpin(args?:any):JQuery;
+    sidebar(...args:any[]):JQuery
 }
 
 interface Window {
@@ -122,6 +123,89 @@ interface IWidget {
     _destroy():any;
 }
 
+declare module widgets {
+    class WidgetBase {
+        _create(): any;
+        _destroy(): void;
+        _init(): any;
+        _delay(fn: any, delay: number): number;
+        _focusable(element: JQuery): any;
+        _getCreateEventData(): Object;
+        _getCreateOptions(): Object;
+        _hide(element: JQuery, option: Object, callback: Function): any;
+        _hoverable(element: JQuery): any;
+        _off(element: JQuery, eventName: string): any;
+        _on(element: JQuery | string, handlers: Object): any;
+        _setOption(key: string, value: Object): any;
+        _setOptions(options: Object): any;
+        _show(element: JQuery, option: Object, callback: Function): any;
+        _super(...arg: any[]): void;
+        _superApply(args: any): void;
+        _trigger(type: String, args?: any[], data?: Object): any;
+        destroy(): void;
+        disable(): void;
+        enable(): void;
+        instance(): Object;
+        option(arg: any): any;
+        element: JQuery;
+        document: JQuery;
+        namespace: string;
+        options: any;
+        uuid: number;
+        version: string;
+        widgetEventPrefix: string;
+        widgetFullName: string;
+        widgetName: string;
+        window: JQuery;
+        protected bindings: JQuery;
+        protected eventNamespace: string;
+        constructor();
+    }
+    function make(name: string, proto: IWidget): void;
+    function extend(name: string, parent: any, proto: IWidget): void;
+    class PackadicSidebarWidget extends WidgetBase implements IWidget {
+        version: string;
+        widgetEventPrefix: string;
+        openCloseInProgress: boolean;
+        $nav: JQuery;
+        options: any;
+        defaults: any;
+        constructor();
+        _getDataAttributes(): any;
+        _onResize(): void;
+        _bind(): void;
+        _create(): void;
+        showLoader(): void;
+        hideLoader(): void;
+        /**
+         * Checks if the sidebar is fixed
+         * @returns {boolean}
+         */
+        isFixed(): boolean;
+        /**
+         * Checks if the sidebar is closed
+         * @returns {boolean}
+         */
+        isClosed(): boolean;
+        close(callback?: any): JQueryPromise<any>;
+        open(callback?: any): JQueryPromise<any>;
+        hide(): void;
+        show(): void;
+        _getSubmenuParents(): JQuery;
+        _handle(): void;
+        _handleFixed(): void;
+        _handleWithContent(): void;
+        _handleFixedHover(): void;
+        _handleToggler(): void;
+        _resolveActiveLink(): void;
+        _generateFromTemplate(menuItems: any, templateName?: any, callback?: any): JQueryPromise<any>;
+        _trigger(type: String, args?: any[], data?: Object): any;
+        _destroy(): void;
+        _init(): any;
+        _setOption(key: string, value: any): any;
+    }
+
+}
 
 declare module "eventemitter2" {
     export = EventEmitter2;

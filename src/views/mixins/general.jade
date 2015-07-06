@@ -48,3 +48,6 @@ mixin lia
     li
         +a&attributes(attributes)
             block
+
+mixin pc-dump(val)
+    pre: code=_DUMPER(val)

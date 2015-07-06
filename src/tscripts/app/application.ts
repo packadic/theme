@@ -1,9 +1,10 @@
 ///<reference path="../types.d.ts"/>
-import {copyObject,kindOf} from 'app/util'
+import {copyObject,kindOf,unquote,defined} from 'app/util'
 import {Config} from 'app/config'
 import {Autoload} from 'app/autoloader'
 import EventEmitter2 = require("eventemitter2");
 import {storage} from 'app/storage';
+import {Layout} from 'app/layout';
 
 export enum BoxAction {
     toggle, hide, show, fullscreen, normal, close, open, loading
@@ -36,9 +37,9 @@ export class Application extends EventEmitter2 {
     private _state:AppState;
     private _jade:Object;
     private _s:any;
-    private _theme:ITheme;
-    private _sidebar:ISidebar;
+
     private $:JQueryStatic;
+    private _layout:Layout;
 
     public storage:any;
     public config:IConfigProperty;
@@ -108,17 +109,18 @@ export class Application extends EventEmitter2 {
         }
         this.setState(AppState.booting);
         requirejs.config(this.config.get('requireJS'));
+        self._layout = new Layout(this);
 
-        requirejs(['module', 'jquery', 'string', 'jade', 'storage', 'code-mirror', 'plugins/cookie', 'jq/general'],
-            function (module, $,  _s, jade, storage) {
+        requirejs(['module', 'jquery', 'jade',  'code-mirror', 'plugins/cookie', 'jq/general'],
+            function (module, $, jade) {
                 self.$ = $;
                 self._jade = jade;
-                self._s = _s;
+                //self._theme = theme;
 
                 //self.autoload.addDefaultDefinitions();
 
                 // SCSS Json
-                var scss:any = _s.unquote($('head').css('font-family'), "'");
+                var scss:any = unquote($('head').css('font-family'), "'");
                 while (typeof scss !== 'object') {
                     scss = JSON.parse(scss);
                 }
@@ -150,11 +152,8 @@ export class Application extends EventEmitter2 {
                 }
 
                 // Startup, figure out what modules to load
-                var load:Array<string> = ['theme'];
-                var argMap:any = {theme: 1};
-                if (self.config.get('theme.sidebarDisabled') !== true) {
-                    argMap['theme/sidebar'] = load.push('theme/sidebar');
-                }
+                var load:Array<string> = [];
+                var argMap:any = {};
                 if (self.config.get('debug') === true) {
                     argMap['debug'] = load.push('debug');
                 }
@@ -172,16 +171,11 @@ export class Application extends EventEmitter2 {
                         return args[argMap[name] - 1];
                     };
 
-                    self._theme = getArg('theme');
-                    if (argMap['theme/sidebar']) {
-                        self._sidebar = getArg('theme/sidebar');
-                    }
-
                     // EVENT: starting
                     self.setState(AppState.starting);
 
                     $(function () {
-                        self.theme(ThemeAction.init);
+                       // self._theme.init();
                         if (argMap.demo) {
                             getArg('demo').init();
                         }
@@ -193,7 +187,7 @@ export class Application extends EventEmitter2 {
             });
     }
 
-    public defer():any {
+    public defer():JQueryDeferred<any> {
         return this.$.Deferred();
     }
 
@@ -215,7 +209,7 @@ export class Application extends EventEmitter2 {
 
 
     private setState(state:AppState):Application {
-        if(state > this._state) {
+        if (state > this._state) {
             this._state = state;
             this.emit('state:' + AppState[state], AppState[state], state);
         }
@@ -226,47 +220,39 @@ export class Application extends EventEmitter2 {
     public box(action:BoxAction, args?:any):Application {
         var actionName:string = BoxAction[action];
         if (args && kindOf(args) !== 'array') args = [args];
-        this._theme.apply(action, args);
+        //this._theme.apply(action, args);
         return this;
     }
 
-
-    public theme(action:ThemeAction, args?:any):JQueryPromise<any> {
-        var self:Application = this;
-        var defer:any = this.defer();
-        var actionName:any = typeof(action) == 'string' ? action : ThemeAction[action];
-        if (args && kindOf(args) !== 'array') args = [args];
-        if (_.isUndefined(this._theme)) {
-            require(['theme'], function (theme) {
-                self._theme = theme;
-                var returned = self._theme[actionName].apply(self._theme, args);
-                defer.resolve(returned);
-            })
-        } else {
-            var returned = this._theme[actionName].apply(this._theme, args);
-            defer.resolve(returned);
-        }
-        return defer.promise();
+    public initSidebar(opts:any={}, callback?:any):JQueryPromise<any> {
+        return this._layout.initSidebar(opts, callback);
     }
 
-    public sidebar(action:SidebarAction, args?:any):JQueryPromise<any> {
+    public notify(fnName:string, message:string, title?:string, options?:any) {
         var self:Application = this;
-        var defer:any = this.defer();
-        var actionName:any = typeof(action) == 'string' ? action : SidebarAction[action];
-        if (args && kindOf(args) !== 'array') args = [args];
-        if (_.isUndefined(this._sidebar)) {
-            require(['theme/sidebar'], function (sidebar) {
-                self._sidebar = sidebar;
-                var returned = self._sidebar[actionName].apply(self._sidebar, args);
-                defer.resolve(returned);
-            })
-        } else {
-            var returned = this._sidebar[actionName].apply(this._sidebar, args);
-            defer.resolve(returned);
-        }
-        return defer.promise();
+        if(fnName === 'danger') fnName = 'error';
+        require(['plugins/toastr'], function (toastr:any) {
+            var args = [message];
+            if (title) {
+                args.push(title);
+            }
+            if (options) {
+                args.push(options);
+            }
+            toastr.options = self.config.get('plugins.toastr');
+            toastr[fnName].apply(toastr, args);
+        });
     }
 
+    public clearNotify(useAnimation:boolean = true) {
+        require(['plugins/toastr'], function (toastr) {
+            if (useAnimation) {
+                toastr.clear();
+            } else {
+                toastr.remove();
+            }
+        });
+    }
 
     //
     /* HELPERS */
@@ -329,7 +315,7 @@ export class Application extends EventEmitter2 {
          *     });
          * });
      */
-    public getTemplate(name:string, callback?:Function):Application {
+    public getTemplate(name:string, callback?:Function):JQueryPromise<any> {
         if (_.isUndefined(callback)) {
             var defer = this.defer();
         }

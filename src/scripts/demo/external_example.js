@@ -25,7 +25,7 @@ App.ready(function () {
         require(['jquery'], function ($) {
             console.warn('(' + App.getElapsedTime() + 's) BOOTED');
             ///$('.test-box').box();
-            App.sidebar('init', {hidden: false, items: packadic.site.data.navigation.sidebar});
+            App.initSidebar({ items: packadic.site.data.navigation.sidebar });
             App.autoload.scan($('body'), function () {
                 if ( App.config('pageLoadedOnAutoloaded') === true ) {
                     App.removePageLoader();
@@ -42,6 +42,7 @@ App.ready(function () {
 
 
     App.on('state:starting', function () {
+        return;
         require(['jquery', 'theme/settings-editor', 'theme', 'storage', 'fn/cre'], function ($, SettingsEditor, theme, storage, cre) {
 
 

@@ -33,8 +33,6 @@ class Theme {
         this.$window = $(window);
         this.$document = $(window.document);
 
-        this.init();
-
         /**
          * @event App#theme:ready
          * @type {object}
@@ -80,26 +78,24 @@ class Theme {
 
     public init() {
         App.config.load('theme');
-        $(function () {
 
-            this.initResizeEvent();
-            this.initHeaderSearchForm();
-            this.initSettingsEditor();
-            this.initScrollToTop();
+        this.initResizeEvent();
+        this.initHeaderSearchForm();
+        this.initSettingsEditor();
+        this.initScrollToTop();
 
-            if(this.config.ripples === true) {
-                $([
-                    ".btn:not(.btn-link)",
-                    ".card-image",
-                    ".navbar a:not(.withoutripple)",
-                    ".dropdown-menu a",
-                    ".nav-tabs a:not(.withoutripple)",
-                    ".withripple"
-                ].join(",")).addClass('withripple').ripples();
-            }
-            this.initLayout();
+        if(this.config.ripples === true) {
+            $([
+                ".btn:not(.btn-link)",
+                ".card-image",
+                ".navbar a:not(.withoutripple)",
+                ".dropdown-menu a",
+                ".nav-tabs a:not(.withoutripple)",
+                ".withripple"
+            ].join(",")).addClass('withripple').ripples();
+        }
+        this.initLayout();
 
-        }.bind(this));
     }
 
     initLayout() {

@@ -102,7 +102,7 @@ export function getDefaultDefinitions(App:Application):any {
             },
             function ($el) {
                 var $scrollable = $el.find('.scrollable');
-                require(['theme', 'spawner', 'plugins/jquery-slimscroll'], function (theme, spawner) {
+                require([ 'spawner', 'plugins/jquery-slimscroll'], function (spawner) {
                     spawner.destroySlimScroll($scrollable);
                     spawner.initSlimScroll($scrollable);
                 });

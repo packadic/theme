@@ -22,6 +22,11 @@ block header
 block content
     style.
         #editor_1 {overflow:scroll; min-height: 200px; max-height:300px}
+
+    .row
+        .col-md-12
+            +table()('bordered', 'condensed')
+                | ...
     .row
         .col-md-12
             +form-box("Bootstrap wysiwyg", "list").form-light.form-horizontal
