@@ -226,7 +226,7 @@
 
                 // stylesheets
                 'plugins/select2css'    : '../styles/components/select2',
-                'plugins/highlightjscss': 'plugins/highlightjs/styles/zenburn'
+                'plugins/highlightjscss': 'plugins/highlightjs/styles/github'
             },
 
 

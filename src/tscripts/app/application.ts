@@ -183,7 +183,7 @@ export class Application extends EventEmitter2 {
                     $(function () {
                        // self._theme.init();
                         if (argMap.demo) {
-                            getArg('demo').init();
+                            getArg('demo').init(self);
                         }
                         self.setState(AppState.started);
                     });

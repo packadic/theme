@@ -19,10 +19,10 @@ block content
     .row
         .col-md-8
             +box("Box API").box-table
-                p.m Usage:
-                    code App.box(box_id, mode)
-                    | or
-                    code App.box($('selector'), mode)
+                pre.no-border.m-n.p-xs
+                    code.hljs.lang-js
+                        | App.box('#selector', 'mode')
+                        | App.box($('#selector'), 'mode')
                 +table()('condensed', 'striped', 'light')#demo-api
                     tr
                         th(width="200") Example

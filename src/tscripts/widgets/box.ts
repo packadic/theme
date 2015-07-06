@@ -49,7 +49,7 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
         },
 
         draggable: {
-            handle: this.$move
+            handle: null // if null then handle is automaticly set to this.$move
         }
     };
 
@@ -339,6 +339,9 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
         console.log('_createControlMove');
         this.$move = this._createControl('move', 'fa fa-arrows', 'Move');
         this.$controls.append(this.$move);
+        if(this.options.draggable.handle === null) {
+            this.options.draggable.handle = this.$move;
+        }
         this.initMove();
     }
 

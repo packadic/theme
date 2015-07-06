@@ -1,5 +1,9 @@
 extends ../../layouts/default
 
+mixin demo-event(event, text)
+    tr
+        td: code=event
+        td=text
 
 mixin demo-api(mode, text)
     tr
@@ -12,8 +16,7 @@ block content
     .row
         .col-md-6
             +box("Layout API").box-table
-                p.m Usage:
-                    code App.layout(mode)
+                pre.no-border.m-n.p-xs: code.hljs.lang-js App.layout('mode')
                 +table()('condensed', 'striped', 'light')#demo-api
                     tr
                         th(width="200") Example
@@ -37,20 +40,25 @@ block content
                     +demo-api('sidebar_accordion', 'Accordion sidebar').btn-success
         .col-md-6
             +box("Events").box-table
-                p.m Usage:
-                    code App.on(event)
-                    code App.off(event)
-                    code App.emit(event)
+                pre.no-border.m-n.p-xs
+                    code.hljs.lang-js
+                        | App.on('event:name', handlerFunction)
+                        | App.on('event:*', handlerFunction)
+                        | App.off('event:name', handlerFunction)
+                        | App.emit('event:name', args)
                 +table()('condensed', 'striped', 'light')#demo-events
                     tr
                         th(width="200") Event
                         th Description
-                    tr
-                        td: code state:booting
-                        td The application is booting
-                    tr
-                        td: code state:prestart
-                        td The application is about to start
+                    +demo-event('state:booting', 'The application is booting')
+                    +demo-event('state:prestart', 'The application is waiting to start')
+                    +demo-event('state:starting', 'The application is starting')
+                    +demo-event('state:started', 'The application has started')
+                    +demo-event('layout:resize', 'The layout has resized')
+                    +demo-event('layout:ready', 'The layout is ready')
+                    +demo-event('sidebar:generate', 'The sidebar is generating')
+                    +demo-event('sidebar:generated', 'The sidebar is generated')
+                    +demo-event('sidebar:created', 'The sidebar is created')
 
 block append scripts
     script.

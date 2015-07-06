@@ -47,16 +47,31 @@ export function getDefaultDefinitions(App:Application):any {
         ],
         custom: [
             function ($el) {
-                $el.find('code.hljs').each(function(){
-                    var data = $(this).data();
-                    if(defined(data['hljsInitialized']) && data['hljsInitialized'] == true){
+                $el.find('code.hljs').each(function () {
+                    var that:HTMLElement = this;
+                    var $this:JQuery = $(this);
+                    var data:any = $this.data();
+                    if (defined(data['hljsInitialized']) && data['hljsInitialized'] == true) {
                         return;
                     }
-                    require(['plugins/highlightjs'], function(highlightjs){
-                        console.log(highlightjs);
+                    require(['plugins/highlightjs'], function (highlightjs:HighlightJS) {
+                        var classes = that.classList;
+                        var lang = null;
+                        $.each(classes, function (i, className) {
+                            if (className.indexOf("lang-") !== -1) {
+                                lang = className.replace('lang-', '');
+                            }
+                        });
+                        var highlighted;
+                        if(lang !== null && highlightjs.listLanguages().indexOf(lang) !== -1) {
+                            highlighted = highlightjs.highlight(lang, that.textContent).value;
+                        } else {
+                            highlighted = highlightjs.highlightAuto(that.textContent).value;
+                        }
 
+                        $this.html(highlighted);
+                        $this.attr('data-hljs-initialized', 'true');
                     })
-
                 })
             },
             function ($el) {
@@ -115,8 +130,8 @@ export function getDefaultDefinitions(App:Application):any {
             },
             function ($el) {
                 var $scrollable = $el.find('.scrollable');
-                require([ 'spawner', 'plugins/jquery-slimscroll'], function (spawner) {
-                    if(!$(this).parent().hasClass('slimScrollDiv')) {
+                require(['spawner', 'plugins/jquery-slimscroll'], function (spawner) {
+                    if (!$(this).parent().hasClass('slimScrollDiv')) {
                         spawner.initSlimScroll($scrollable);
                     }
                 });
