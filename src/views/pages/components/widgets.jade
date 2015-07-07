@@ -84,27 +84,23 @@ block content
                             a(href="#", data-toggle="tooltip", title="Go to disk overview").bg-icon
                                 i.fa.fa-database
                             p Disk space 'n icon link
-                            .progress
-                                .progress-bar(role='progressbar', aria-valuemin='0', aria-valuemax='200', data-transitiongoal='83', data-display-text="center")
+                            +progressbar(0, 200, 83, 'center', '{value}gb used ({percent}%)')
                     .col-md-3
                         +box.widget.widget-progress.brown
                             h3 83Gb
                             p Disk space usage
-                            .progress
-                                .progress-bar(role='progressbar', aria-valuemin='0', aria-valuemax='200', data-transitiongoal='83', data-display-text="center")
+                            +progressbar(0, 200, 83, 'center','{value}gb in use / {value}gb remaining')
                     .col-md-3
                         +box.widget.widget-progress.orange
                             .bg-icon
                                 i.fa.fa-clock-o
                             p Evaluation period
-                            .progress
-                                .progress-bar(role='progressbar', aria-valuemin='0', aria-valuemax='30', data-transitiongoal='25', data-display-text="center")
+                            +progressbar(0, 30, 25, 'center')
                     .col-md-3
                         +box.widget.widget-progress.cyan
                             h3 5 days
                             p Evaluation period
-                            .progress
-                                .progress-bar(role='progressbar', aria-valuemin='0', aria-valuemax='30', data-transitiongoal='25', data-display-text="center")
+                            +progressbar(0, 30, 25, 'center')
 
 
             #widgets-userprofile(role="tabpanel").tab-pane.fade

@@ -310,7 +310,7 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
             this._on($a, {
                 'mouseleave': function(event){
                     this._hideTooltips();
-                }
+                }.bind(this)
             });
         }
         return $a;
