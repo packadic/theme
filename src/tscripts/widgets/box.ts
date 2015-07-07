@@ -50,7 +50,8 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
         },
 
         draggable: {
-            handle: null // if null then handle is automaticly set to this.$move
+            handle: null, // if null then handle is automaticly set to this.$move
+            stop: this._hideTooltips
         }
     };
 
@@ -142,6 +143,7 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
         var self:PackadicBoxWidget = this;
         if (!this.isFullscreen()) {
             this.maximizeContent();
+            this._hideTooltips();
             this.disableMove();
             this.element.addClass('box-fullscreen');
             $body.addClass('fullscreen');
@@ -155,6 +157,7 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
     public exitFullscreen():PackadicBoxWidget {
         var self:PackadicBoxWidget = this;
         if (this.isFullscreen()) {
+            this._hideTooltips();
             this.element.removeClass('box-fullscreen');
             $body.removeClass('fullscreen');
             this.enableMove();
@@ -304,6 +307,11 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
                 'data-toggle': 'tooltip',
                 title: tooltip
             });
+            this._on($a, {
+                'mouseleave': function(event){
+                    this._hideTooltips();
+                }
+            });
         }
         return $a;
     }
@@ -374,6 +382,10 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
             this.$headerRight.append($controls)
         }
         this.$controls = $controls;
+    }
+
+    public _hideTooltips(){
+        $(":data('bs.tooltip')").tooltip('hide');
     }
 
     public _destroy() {

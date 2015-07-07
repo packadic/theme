@@ -1,3 +1,11 @@
+mixin popover-btn-demo(side)
+    - var sideLcase = side.toLowerCase();
+    +a.btn.btn-primary(data-toggle="popover", tabindex="0", role="button", data-trigger="focus", data-container="body", data-placement=sideLcase, title="Popover title", data-content="And here's some amazing content. It's very engaging. Right?")=side
+mixin tooltip-btn-demo(side)
+    - var sideLcase = side.toLowerCase();
+    +a.btn.btn-primary(data-toggle="tooltip", data-container="body", data-placement=sideLcase, title="Tooltip on " + sideLcase)=side
+
+
 mixin demo-dropdown-w-header-submenu()
     ul.dropdown-menu.pull-right(role='menu')&attributes(attributes)
         li.header

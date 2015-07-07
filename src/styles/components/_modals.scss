@@ -1,8 +1,10 @@
 @import "../vendor/bootstrap-modal-bs3patch";
 @import "../vendor/bootstrap-modal";
+
 .modal {
     border-radius: 0;
     width: auto;
+    z-index: $zindex-modal;
     .modal-header {
         color: $widget-header-color;
         padding: 5px 10px;

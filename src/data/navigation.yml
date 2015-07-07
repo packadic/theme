@@ -51,9 +51,6 @@ sidebar:
       - name: Notifications
         href: <%= target.nav.pre %>/components/notifications<%= target.nav.ext %>
 
-      - name: Modals
-        href: <%= target.nav.pre %>/components/modals<%= target.nav.ext %>
-
       #- name: jQuery UI
       #  href: <%= target.nav.pre %>/components/jquery-ui<%= target.nav.ext %>
 

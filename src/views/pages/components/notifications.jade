@@ -8,15 +8,41 @@ mixin demo-alert-message(btnText)
 
 block content
     .row
-        .col-md-6
-            +box("Alerts")
+        .col-md-7
+            +box("Default modals", "list")
+                .btn-group.btn-group-justified
+                    a.btn.btn-primary(data-toggle="modal", href='#responsive') Responsive
+                    a.btn.btn-primary(data-toggle="modal", href='#full-width') Full width
+                    a.btn.btn-primary(data-toggle="modal", href='#long') Long
+                    a.btn.btn-primary(data-toggle="modal", href='#notlong') Not long
+                    a.btn.btn-primary(data-toggle="modal", href='#verylong') Very long
+
+            .row
+                .col-md-6
+                    +box('Toastr notifications', 'bullhorn')
+                        .btn-group.btn-group-justified
+                            +abtn(onClick="App.notify('info', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Heads up!')", info) Info
+                            +abtn(onClick="App.notify('success', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Well done!')", success) Success
+                            +abtn(onClick="App.notify('warning', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Warning!')", warning) Warning
+                            +abtn(onClick="App.notify('danger', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Oh snap!')", danger) Danger
+                .col-md-6
+                    +box("Bootbox modals", "list")
+                        .btn-group.btn-group-justified
+                            +a(data-demo-modal="info").btn.btn-info.demo-modal Info
+                            +a(data-demo-modal="success").btn.btn-success.demo-modal Success
+                            +a(data-demo-modal="warning").btn.btn-warning.demo-modal Warning
+                            +a(data-demo-modal="error").btn.btn-danger.demo-modal Error
+
+            +box("Alerts", 'exclamation-triangle')
                 p Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages
                 +pc-alert('Well done!', 'check')('dismissable', 'success') Lorem ipsum dolor sit amet consectetur adipisicing elit
                 +pc-alert('Heads up!', 'info')('dismissable', 'info') Lorem ipsum dolor sit amet consectetur adipisicing elit
                 +pc-alert('Warning!', 'exclamation-triangle')('dismissable', 'warning') Lorem ipsum dolor sit amet consectetur adipisicing elit
                 +pc-alert('Oh snap!', 'times-circle')('dismissable', 'danger') Lorem ipsum dolor sit amet consectetur adipisicing elit
 
-            +box('Alert messages')
+
+        .col-md-5
+            +box('Alert messages', 'exclamation-triangle')
                 p Alerts can contain more than a line of messege. They can be extended with to focus on a particular messege.
                 +pc-alert('Well done!', 'check')('dismissable', 'success')
                     +demo-alert-message('Alright')('success')
@@ -27,13 +53,129 @@ block content
                 +pc-alert('Oh snap!', 'times-circle')('dismissable', 'danger')
                     +demo-alert-message('Fix it now')('danger')
 
-        .col-md-6
-            +box('Notifications')
-                p Notifications that appear at the desired position. Uses toastr.
-                .btn-group.btn-group-justified
-                    +abtn(onClick="App.notify('info', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Heads up!')")('info') Info
-                    +abtn(onClick="App.notify('success', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Well done!')")('success') Success
-                    +abtn(onClick="App.notify('warning', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Warning!')")('warning') Warning
-                    +abtn(onClick="App.notify('danger', 'Lorem ipsum dolor sit amet consectetur adipisicing elit', 'Oh snap!')")('danger') Danger
 
-            +box('Modals')
+block append after
+    #full-width.modal.container.fade(tabindex='-1', style='display: none;')
+        .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title Full Width
+        .modal-body
+            p This modal will resize itself to the same dimensions as the container class.
+            p
+                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin ipsum ac ante fermentum suscipit. In ac augue non purus accumsan lobortis id sed nibh. Nunc egestas hendrerit ipsum, et porttitor augue volutpat non. Aliquam erat volutpat. Vestibulum scelerisque lobortis pulvinar. Aenean hendrerit risus neque, eget tincidunt leo. Vestibulum est tortor, commodo nec cursus nec, vestibulum vel nibh. Morbi elit magna, ornare placerat euismod semper, dignissim vel odio. Phasellus elementum quam eu ipsum euismod pretium.
+        .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+            button.btn.btn-primary(type='button') Save changes
+    #stack1.modal.fade(tabindex='-1', data-focus-on='input:first', style='display: none;')
+        .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title Stack One
+        .modal-body
+            p One fine body…
+            p One fine body…
+            p One fine body…
+            input.form-control(type='text', data-tabindex='1')
+            input.form-control(type='text', data-tabindex='2')
+            button.btn.btn-default(data-toggle='modal', href='#stack2') Launch modal
+        .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+            button.btn.btn-primary(type='button') Ok
+    #stack2.modal.fade(tabindex='-1', data-focus-on='input:first', style='display: none;')
+        .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title Stack Two
+        .modal-body
+            p One fine body…
+            p One fine body…
+            input.form-control(type='text', data-tabindex='1')
+            input.form-control(type='text', data-tabindex='2')
+            button.btn.btn-default(data-toggle='modal', href='#stack3') Launch modal
+        .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+            button.btn.btn-primary(type='button') Ok
+    #stack3.modal.fade(tabindex='-1', data-focus-on='input:first', style='display: none;')
+        .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title Stack Three
+        .modal-body
+            p One fine body…
+            input.form-control(type='text', data-tabindex='1')
+            input.form-control(type='text', data-tabindex='2')
+        .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+            button.btn.btn-primary(type='button') Ok
+    #static.modal.fade(tabindex='-1', data-backdrop='static', data-keyboard='false', style='display: none;')
+        .modal-body
+            p Would you like to continue with some arbitrary task?
+        .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+            button.btn.btn-primary(type='button', data-dismiss='modal') Continue Task
+    #long.modal.fade(tabindex='-1', data-replace='true', style='display: none;')
+        .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title A Fairly Long Modal
+        .modal-body
+            button.btn.btn-default(data-toggle='modal', href='#notlong', style='position: absolute; top: 50%; right: 12px') Not So Long Modal
+            img(style='height: 800px', src='http://i.imgur.com/KwPYo.jpg')
+        .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+    #notlong.modal.fade(tabindex='-1', data-replace='true', style='display: none;')
+        .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title Not That Long
+        .modal-body
+            button.btn.btn-default(data-toggle='modal', href='#verylong', style='position: absolute; top: 50%; right: 12px') Very Long Modal
+            div(style='height: 400px; overflow: hidden;')
+                img(style='height: 800px', src='http://i.imgur.com/KwPYo.jpg')
+        .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+    #verylong.modal.fade(tabindex='-1', data-replace='true', style='display: none;')
+        .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title A Very Long
+        .modal-body
+            div(style='height: 1000px; overflow: hidden;')
+                img(style='height: 800px', src='http://i.imgur.com/KwPYo.jpg')
+        .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+    #responsive.modal.fade(tabindex='-1', data-width='50%', data-height='250', style='display: none;')
+        .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+            h4.modal-title Responsive
+        .modal-body.scrollable(data-height='250')
+            .row
+                .col-md-6
+                    h4 Some Input
+                    p
+                        input.form-control(type='text')
+                    p
+                        input.form-control(type='text')
+                    p
+                        input.form-control(type='text')
+                    p
+                        input.form-control(type='text')
+                    p
+                        input.form-control(type='text')
+                    p
+                        input.form-control(type='text')
+                    p
+                        input.form-control(type='text')
+                .col-md-6
+                    h4 Some More Input
+                    p
+                        input.form-control(type='text')
+                    p
+                        input.form-control(type='text')
+                    p
+                        input.form-control(type='text')
+                    p
+                        input.form-control(type='text')
+                    p
+                        input.form-control(type='text')
+                    p
+                        input.form-control(type='text')
+                    p
+                        input.form-control(type='text')
+        .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+            button.btn.btn-primary(type='button') Save changes

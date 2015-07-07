@@ -4,6 +4,4 @@ mixin dropdown-task(title, percent)
             .task
                 span=title
                 span.percent=percent+"%"
-            .progress
-                .progress-bar(role='progressbar', aria-valuenow=percent, aria-valuemin='0', aria-valuemax='100', style='width: ' + percent + '%')&attributes(attributes)
-                    span.sr-only #{percent}% Complete (warning)
+            +progressbar(0, 100, percent)&attributes(attributes)
