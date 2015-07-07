@@ -50,6 +50,7 @@ export class PackadicProgressbarWidget extends widgets.WidgetBase implements IWi
         return this.options.textFormat
             .replace(/\{value\}/g, val)
             .replace(/\{percent\}/g, percent)
+            .replace(/\{remaining\}/g, max - val)
             .replace(/\{max\}/g, max)
             .replace(/\{min\}/g, min);
     }

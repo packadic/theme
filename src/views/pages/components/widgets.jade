@@ -84,12 +84,12 @@ block content
                             a(href="#", data-toggle="tooltip", title="Go to disk overview").bg-icon
                                 i.fa.fa-database
                             p Disk space 'n icon link
-                            +progressbar(0, 200, 83, 'center', '{value}gb used ({percent}%)')
+                            +progressbar(0, 200, 83, 'center', '{value}gb ({percent}%)')
                     .col-md-3
                         +box.widget.widget-progress.brown
                             h3 83Gb
                             p Disk space usage
-                            +progressbar(0, 200, 83, 'center','{value}gb in use / {value}gb remaining')
+                            +progressbar(0, 200, 83, 'center','{remaining}gb remaining')
                     .col-md-3
                         +box.widget.widget-progress.orange
                             .bg-icon

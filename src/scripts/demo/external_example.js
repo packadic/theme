@@ -42,8 +42,7 @@ App.ready(function () {
 
 
     App.on('state:starting', function () {
-        return;
-        require(['jquery', 'theme/settings-editor', 'theme', 'storage', 'fn/cre'], function ($, SettingsEditor, theme, storage, cre) {
+        require(['jquery', 'theme/settings-editor', 'storage', 'fn/cre'], function ($, SettingsEditor, storage, cre) {
 
 
 
@@ -61,66 +60,66 @@ App.ready(function () {
                         }
                     }
                 }, {
-                    id: 'top', name: 'Top', 'default': theme.get('top'), type: 'select', options: {
+                    id: 'top', name: 'Top', 'default': App._layout.get('top'), type: 'select', options: {
                         choices : {
                             'hidden': {name: 'Hidden'},
                             'normal': {name: 'Normal'},
                             fixed   : {name: 'Fixed'}
                         },
                         onChange: function ($el) {
-                            theme.set('top', $el.val(), true, shouldSave())
+                            App._layout.set('top', $el.val(), true, shouldSave())
                         }
                     }
                 }, {
                     id: 'page-boxed', name: 'Boxed Layout', 'default': false, type: 'switch', options: {
                         isEnabled: function () {
-                            return theme.get('layout') === 'boxed'
+                            return App._layout.get('mode') === 'boxed'
                         },
                         toggle   : function (event, val) {
-                            theme.set('layout', val ? 'boxed' : 'fluid', true, shouldSave());
+                            App._layout.set('mode', val ? 'boxed' : 'fluid', true, shouldSave());
                         }
                     }
                 }, {
                     id: 'footer-fixed', name: 'Fixed Bottom', 'default': true, type: 'switch', options: {
                         isEnabled: function () {
-                            return theme.get('bottom') === 'fixed'
+                            return App._layout.get('bottom') === 'fixed'
                         },
                         toggle   : function (event, val) {
-                            theme.set('bottom', val ? 'fixed' : 'default', true, shouldSave());
+                            App._layout.set('bottom', val ? 'fixed' : 'default', true, shouldSave());
                         }
                     }
                 }, {
                     id: 'sidebar-fixed', name: 'Fixed Sidebar', 'default': false, type: 'switch', options: {
                         isEnabled: function () {
-                            return theme.get('sidebarOption') === 'fixed'
+                            return App._layout.get('sidebar.fixed') === true
                         },
                         toggle   : function (event, val) {
-                            theme.set('sidebarOption', val ? 'fixed' : 'default', true, shouldSave());
+                            App._layout.set('sidebar.fixed', val ? true : false, true, shouldSave());
                         }
                     }
                 }, {
                     id: 'sidebar-style', name: 'Light Sidebar', 'default': false, type: 'switch', options: {
                         isEnabled: function () {
-                            return theme.get('sidebarStyle') === 'light'
+                            return App._layout.get('sidebar.style') === 'light'
                         },
                         toggle   : function (event, val) {
-                            theme.set('sidebarStyle', val ? 'light' : 'default', true, shouldSave());
+                            App._layout.set('sidebar.style', val ? 'light' : 'default', true, shouldSave());
                         }
                     }
 
                 }, {
                     id: 'sidebar-menu', name: 'Sidebar Hover', 'default': false, type: 'switch', options: {
                         isEnabled: function () {
-                            return theme.get('sidebarTraverse') === 'hover'
+                            return App._layout.get('sidebar.mode') === 'hover'
                         },
                         toggle   : function (event, val) {
-                            theme.set('sidebarTraverse', val ? 'hover' : 'default', true, shouldSave());
+                            App._layout.set('sidebar.mode', val ? 'hover' : 'accordion', true, shouldSave());
                         }
                     }
                 }, {
                     id: 'layout-reset-default', name: 'Reset to defaults', type: 'button', options: {
                         click: function () {
-                            theme.reset(shouldSave());
+                            App._layout.reset(shouldSave());
                             window.location.reload();
                         }
                     }

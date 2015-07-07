@@ -7,3 +7,5 @@
 /// <reference path="requirejs/require.d.ts" />
 /// <reference path="highlightjs/highlightjs.d.ts" />
 /// <reference path="flot/jquery.flot.d.ts" />
+/// <reference path="amcharts/AmCharts.d.ts" />
+/// <reference path="gapi/gapi.d.ts" />

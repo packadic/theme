@@ -6,71 +6,75 @@ mixin form-box(name, icon)
             +box(name, icon)
                 form.show-class&attributes(attributes)
                     block
-mixin form-demo-content(label)
+mixin form-light-line(large)
+    - large = typeof(large) == 'undefined' ? true : large
+    .line.line-dashed.b-b.pull-in(class=large ? 'line-lg' : '')
+
+mixin form-demo-control(id, labelText, opts)
+    - var horizontal = opts && opts.horizontal && opts.horizontal === true
+    - var light = opts && opts.light && opts.light === true
+    .form-group
+        if horizontal
+            label(for=id).col-sm-3.control-label=labelText
+            .col-sm-9
+                block
+        else
+            if labelText
+                label(for=id).control-label=labelText
+            block
+    if light
+        +form-light-line
+
+mixin form-demo-title(opts)
+    - var horizontal = opts && opts.horizontal && opts.horizontal === true
+    - var light = opts && opts.light && opts.light === true
+    .form-title
+        if horizontal
+            .col-sm-offset-3.col-sm-9.pl-n
+                h4
+                    block
+        else
+            h4
+                block
+    if light
+        +form-light-line
+
+
+mixin form-demo-controls(opts)
     - var rnd = Math.random()
-    .form-title
-        h4 Credentials
-    .form-group
-        if(label)
-            label(for=rnd + "email").control-label Email
-        input.form-control(id=rnd + "email", type='email', placeholder='Email', data-hint='Enter a valid email address')&attributes(attributes)
-    .form-group
-        if(label)
-            label(for=rnd + "password").control-label Password
+    - var horizontal = opts && opts.horizontal && opts.horizontal === true
+    - var light = opts && opts.light && opts.light === true
+    +form-demo-title(opts) Credentials
+    +form-demo-control(rnd + 'email', 'Email', opts)
+        input.form-control(id=rnd + 'email', type='email', placeholder='Email', data-hint='Enter a valid email address')&attributes(attributes)
+    +form-demo-control(rnd + 'password', 'Password', opts)
         input.form-control(id=rnd + "password", type='password', placeholder='Password', data-hint='Enter a password that is safe')&attributes(attributes)
-    .form-title
-        h4 Personal information
-    .form-group
-        if(label)
-            label(for=rnd + "first_name").control-label First name
+    +form-demo-title(opts) Personal information
+    +form-demo-control(rnd + 'first_name', 'First name', opts)
         input.form-control(id=rnd + "first_name", type='text', placeholder='First name')&attributes(attributes)
-    .form-group
-        if(label)
-            label(for=rnd + "last_name").control-label Last name
+    +form-demo-control(rnd + 'last_name', 'Last name', opts)
         input.form-control(id=rnd + "last_name", type='text', placeholder='Last name', data-hint='Help block')&attributes(attributes)
-    .form-group
-        if(label)
-            label(for=rnd + "file") Avatar
+    +form-demo-control(rnd + 'file', 'Avatar', opts)
         input.form-control(id=rnd + "file", type='file')&attributes(attributes)
         p.help-block Example block-level help text here.
-    .checkbox
-        label(for=rnd + "checkbox")
-            input(id=rnd + "checkbox", type='checkbox')
-            |  Check me out
-    button.btn.btn-default(type='submit') Submit
-
-
-mixin form-horizontal-demo-content()
-    - var rnd = Math.random()
-    .form-title
-        h4 Credentials
-    .form-group
-        label(for=rnd + "email").col-sm-3.control-label Email
-        .col-sm-9
-            input.form-control(id=rnd + "email",type='email', placeholder='Email', data-hint='Enter a valid email address')&attributes(attributes)
-    .form-group
-        label(for=rnd + "password").col-sm-3.control-label Password
-        .col-sm-9
-            input.form-control(id=rnd + "password",type='password', placeholder='Password', data-hint='Enter a password that is safe')&attributes(attributes)
-    .form-title
-        h4 Personal information
-    .form-group
-        label(for=rnd + "first-name").col-sm-3.control-label First name
-        .col-sm-9
-            input.form-control(id=rnd + "first-name",type='text', placeholder='First name')&attributes(attributes)
-    .form-group
-        label(for=rnd + "last-name").col-sm-3.control-label Last name
-        .col-sm-9
-            input.form-control(id=rnd + "last-name",type='text', placeholder='Last name')&attributes(attributes)
-    .form-group
-        .col-sm-offset-3.col-sm-9
-            .checkbox
-                label
-                    input(type='checkbox')
-                    |  Remember me
-    .form-actions
-        .col-sm-offset-3.col-sm-9
-            button.btn.btn-default(type='submit') Sign in
+    if horizontal
+        .form-group
+            .col-sm-offset-3.col-sm-9
+                .checkbox
+                    label
+                        input(type='checkbox')
+                        |  Remember me
+        if light
+            +form-light-line
+        .form-actions
+            .col-sm-offset-3.col-sm-9
+                button.btn.btn-default(type='submit') Sign in
+    else
+        .checkbox
+            label(for=rnd + "checkbox")
+                input(id=rnd + "checkbox", type='checkbox')
+                |  Check me out
+        button.btn.btn-default(type='submit') Submit
 
 block header
     +page-title("Forms", "Layouts")
@@ -82,7 +86,33 @@ block header
 
 block content
     #demo-forms
+        .row
+            .col-md-12
+                +box
+                    +box-header("Layouts", "picture")
+                        +tabs-nav
+                            +tabs-nav-item('layouts-default').active Default
+                            +tabs-nav-item('layouts-horizontal') Horizontal
+                            +tabs-nav-item('layouts-bordered-horizontal') Bordered Horizontal
+                            +tabs-nav-item('layouts-light-horizontal') Light Horizontal
+                    +box-body
+                        +tabs-content
+                            +tabs-panel('layouts-default').active
+                                form.show-class
+                                    +form-demo-controls
 
+                            +tabs-panel('layouts-horizontal')
+                                form.show-class.form-horizontal
+                                    +form-demo-controls({horizontal: true})
+
+                            +tabs-panel('layouts-bordered-horizontal')
+                                form.show-class.form-horizontal.form-bordered
+                                    +form-demo-controls({horizontal: true})
+
+                            +tabs-panel('layouts-light-horizontal')
+                                form.show-class.form-light.form-horizontal
+                                    +form-demo-controls({horizontal: true,light:true})
+//
     .row
         .col-md-6
             +form-box("Default", "list")

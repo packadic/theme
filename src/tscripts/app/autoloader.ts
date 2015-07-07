@@ -102,7 +102,7 @@ export function getDefaultDefinitions(App:Application):any {
                                 animate: 1000,
                                 size: 85,
                                 onStep: function (value) {
-                                    $(this).find('span').textFormat(~~value);
+                                    $(this).find('span').text(~~value);
                                 },
                                 barColor: App.colors['blue']
                             }, $chart.data());

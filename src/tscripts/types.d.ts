@@ -252,6 +252,10 @@ declare module widgets {
 
 }
 
+declare module AmCharts {
+    function makeChart(id:any, opts:any): any
+}
+
 declare module "eventemitter2" {
     export = EventEmitter2;
 }
@@ -275,6 +279,13 @@ declare module "plugins/sparkline" {
 declare module "flot" {
 }
 declare module "flot.pie" {
+}
+declare module 'amcharts/amcharts' {
+    export = AmCharts;
+}
+declare module 'amcharts/serial' {
+}
+declare module 'amcharts/themes/light' {
 }
 
 interface HighlightJS {

@@ -113,10 +113,13 @@ block content
                                 | Booting the system
         .row
             .col-md-6
-                +box("Alerts", "info")
-                    +alert("success", "Woot this is ok") You successfully read this important alert message.
-                    +alert("info") This alert needs your attention, but it's not super important.
-                    +alert("danger", true) Change a few things up and try submitting again.
+                +box("AmChart", "info")
+                    style.
+                        #demo-amchart {
+                            width: 100%;
+                            height: 300px;
+                        }
+                    #demo-amchart
 
                 +box("Stats", "info")
                     .piedemo.clearfix

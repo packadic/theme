@@ -99,8 +99,8 @@ block content
 
 block append scripts-outside-of-project
     script.
-        (function(){
-            window.packadic.bindEventHandler('booted', function(){
+        App.ready(function(){
+            App.on('state:starting', function(){
                 require(['jquery', 'plugins/validation'], function($){
                     $.validate({
                         form: '#validate-form',
@@ -111,4 +111,4 @@ block append scripts-outside-of-project
                     });
                 });
             });
-        }.call());
+        });

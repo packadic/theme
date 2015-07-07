@@ -31,6 +31,12 @@
         },
         "flot/jquery.flot.d.ts": {
             "commit": "2fe8a6fda29c3340a5e5672b1809a84c88729a30"
+        },
+        "amcharts/AmCharts.d.ts": {
+            "commit": "304a25197990aeabf8e9fd030ad927ed011b9e83"
+        },
+        "gapi/gapi.d.ts": {
+            "commit": "304a25197990aeabf8e9fd030ad927ed011b9e83"
         }
     }
 }

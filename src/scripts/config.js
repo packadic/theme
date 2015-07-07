@@ -10,7 +10,7 @@
         debug                 : false,
         pageLoadedOnAutoloaded: true,
         plugins               : {
-            blockUI: {
+            blockUI     : {
                 message: '<img src="<%= paths.images %>/loaders/spiffygif_104x104.gif" style="height: 30px; width: 30px;">'
             },
             confirmation: {
@@ -85,24 +85,24 @@
                 enabled : true,
                 mode    : 'accordion', // accordion, hover
                 position: 'left',
-                style: 'dark',
+                style   : 'dark',
                 fixed   : false // normal, fixed
             }
 
         },
-        widgets: {
-            box: {},
+        widgets               : {
+            box    : {},
             sidebar: {
-                hidden: false,
-                items: null,
-                resolveActive: true,
+                hidden           : false,
+                items            : null,
+                resolveActive    : true,
                 openCloseDuration: 600,
-                openedWidth: 235,
-                closedWidth: 45,
-                autoScroll: true,
-                slideSpeed: 200,
-                keepExpanded: false,
-                toggler: '.sidebar-toggler'
+                openedWidth      : 235,
+                closedWidth      : 45,
+                autoScroll       : true,
+                slideSpeed       : 200,
+                keepExpanded     : false,
+                toggler          : '.sidebar-toggler'
             }
         },
         requireJS             : {
@@ -130,29 +130,31 @@
                 'ace'        : 'plugins/ace/lib/ace',
                 'Q'          : 'plugins/q/q',
 
+                'jsonp': 'plugins/browser-jsonp/lib/jsonp.min',
+
                 // custom uglified and moved
                 'plugins/bootbox'   : 'plugins/bootbox',
                 'plugins/modernizr' : 'plugins/modernizr',
                 'plugins/mscrollbar': 'plugins/mscrollbar',
 
                 // default vendor paths
-                'plugins/async'            : 'plugins/async/lib/async',
-                'plugins/svg'              : 'plugins/svg.js/dist/svg',
-                'plugins/moment'           : 'plugins/moment/moment/min/moment.min',
-                'plugins/select2'          : 'plugins/select2/select2.min',
-                'plugins/marked'           : 'plugins/marked/marked.min',
-                'plugins/highlightjs'      : 'plugins/highlightjs/highlight.pack',
-                'plugins/cryptojs'         : 'plugins/cryptojslib/components',
-                'plugins/toastr'           : 'plugins/toastr/toastr',
-                'plugins/events'           : 'plugins/eventEmitter/EventEmitter.min',
-                'plugins/github-api'       : 'plugins/github-api/github',
-                'plugins/oauth2'           : 'plugins/javascript-oauth2/oauth2/oauth2',
-                'plugins/oauth-io'         : 'plugins/oauth.io/dist/oauth.min',
-                'plugins/md5'              : 'plugins/blueimp-md5/js/md5.min',
-                'plugins/pace'             : 'plugins/pace/pace.min',
-                'plugins/speakingurl'      : 'plugins/speakingurl/speakingurl.min',
-                'plugins/icheck'           : 'plugins/iCheck/icheck.min',
-                'plugins/blockui': 'plugins/blockui/jquery.blockUI',
+                'plugins/async'      : 'plugins/async/lib/async',
+                'plugins/svg'        : 'plugins/svg.js/dist/svg',
+                'plugins/moment'     : 'plugins/moment/moment/min/moment.min',
+                'plugins/select2'    : 'plugins/select2/select2.min',
+                'plugins/marked'     : 'plugins/marked/marked.min',
+                'plugins/highlightjs': 'plugins/highlightjs/highlight.pack',
+                'plugins/cryptojs'   : 'plugins/cryptojslib/components',
+                'plugins/toastr'     : 'plugins/toastr/toastr',
+                'plugins/events'     : 'plugins/eventEmitter/EventEmitter.min',
+                'plugins/github-api' : 'plugins/github-api/github',
+                'plugins/oauth2'     : 'plugins/javascript-oauth2/oauth2/oauth2',
+                'plugins/oauth-io'   : 'plugins/oauth.io/dist/oauth.min',
+                'plugins/md5'        : 'plugins/blueimp-md5/js/md5.min',
+                'plugins/pace'       : 'plugins/pace/pace.min',
+                'plugins/speakingurl': 'plugins/speakingurl/speakingurl.min',
+                'plugins/icheck'     : 'plugins/iCheck/icheck.min',
+                'plugins/blockui'    : 'plugins/blockui/jquery.blockUI',
 
                 // jquery
                 'plugins/jquery-rest'      : 'plugins/jquery.rest/dist/1/jquery.rest.min',
@@ -187,6 +189,7 @@
                 'plugins/rickshaw'    : 'plugins/rickshaw/rickshaw.min',
                 'plugins/vega'        : 'plugins/vega/vega.min',
                 'plugins/topojson'    : 'plugins/topojson/topojson',
+                'amcharts'            : 'plugins/amcharts/dist/amcharts',
 
                 // bootstrap
                 'plugins/bs-datepicker'      : 'plugins/bootstrap-datepicker/js/bootstrap-datepicker',
@@ -205,6 +208,7 @@
                 'plugins/bs-slider'          : 'plugins/bootstrap-slider/bootstrap-slider',
                 'plugins/bs-touchspin'       : 'plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min',
                 'plugins/bs-wysiwyg'         : 'plugins/bootstrap-wysiwyg/bootstrap-wysiwyg',
+                'plugins/bs-markdown-editor'         : 'plugins/bootstrap-markdown-editor/dist/js/bootstrap-markdown-editor',
 
                 // gsap
                 'plugins/gsap/lite'       : 'plugins/gsap/src/minified/TweenLite.min',
@@ -233,13 +237,16 @@
 
             shim: {
                 // stand-alone and exports
-                'plugins/svg'       : {exports: 'SVG'},
-                'jade'              : {exports: 'jade'},
-                'string'            : {exports: '_s'},
-                'plugins/github-api': {exports: 'Github'},
-                'plugins/oauth2'    : {exports: 'oauth2'},
-                'plugins/oauth-io'  : {exports: 'OAuth'},
-                'plugins/d3'        : {exports: 'd3'},
+                'plugins/svg'         : {exports: 'SVG'},
+                'jade'                : {exports: 'jade'},
+                'string'              : {exports: '_s'},
+                'plugins/github-api'  : {exports: 'Github'},
+                'plugins/oauth2'      : {exports: 'oauth2'},
+                'plugins/oauth-io'    : {exports: 'OAuth'},
+                'plugins/d3'          : {exports: 'd3'},
+                'amcharts/amcharts'   : {exports: 'AmCharts'},
+                'amcharts/serial'     : ['amcharts/amcharts'],
+                'amcharts/themes/light': ['amcharts/amcharts'],
 
                 // jquery
                 'jquery': {
@@ -296,7 +303,7 @@
                 'config'    : ['jquery'],
                 'eventer'   : ['jquery', 'plugins/events'],
                 //'autoload'           : ['jquery'],
-                'packadic'     : ['plugins/bootstrap'], //, 'plugins/events'],
+                'packadic'  : ['plugins/bootstrap'], //, 'plugins/events'],
                 'demo'      : ['packadic'],
                 'autoloader': {exports: 'autoloader', deps: ['jquery']}
             },
