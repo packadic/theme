@@ -308,7 +308,7 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
     }
 
     protected _createControlClose() {
-        console.log('_createControlClose');
+        //console.log('_createControlClose');
         var self:PackadicBoxWidget = this;
         this.$close = this._createControl('close', 'fa fa-times', 'Close');
         this.$controls.append(this.$close);
@@ -322,7 +322,7 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
     }
 
     protected _createControlMinimize() {
-        console.log('_createControlMinimize');
+        //console.log('_createControlMinimize');
         var self:PackadicBoxWidget = this;
         this.$minimize = this._createControl('minimize', 'fa ' + this.options.iconMinimize, 'Toggle content');
         this.$controls.append(this.$minimize);
@@ -336,7 +336,7 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
     }
 
     protected _createControlMove() {
-        console.log('_createControlMove');
+        //console.log('_createControlMove');
         this.$move = this._createControl('move', 'fa fa-arrows', 'Move');
         this.$controls.append(this.$move);
         if(this.options.draggable.handle === null) {
@@ -346,7 +346,7 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
     }
 
     protected _createControlFullscreen() {
-        console.log('_createControlFullscreen');
+        //console.log('_createControlFullscreen');
         var self:PackadicBoxWidget = this;
         this.$fullscreen = this._createControl('fullscreen', 'fa fa-expand', 'Toggle fullscreen');
         this.$controls.append(this.$fullscreen);

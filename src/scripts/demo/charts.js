@@ -59,10 +59,10 @@ require([
                 }
                 spec.height = 300;
                 vg.parse.spec(spec, function (chart) {
-                    chart({el: "#" + elId}).update();
+                    chart({el: "#" + elId})._update();
                 });
             });
-            $el.closest('.box').find('> header > h3').text(spec);
+            $el.closest('.box').find('> header > h3').textFormat(spec);
         });
     }
 
@@ -109,7 +109,7 @@ require([
             chart.chart.height = $(chart.chart.canvas).closest('section').innerHeight();
             chart.resize();
             chart.reflow();
-            chart.update();
+            chart._update();
         })
     }
 

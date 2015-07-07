@@ -29,7 +29,7 @@ define([ 'jquery', 'string' ], function( $, s ){
         $a.append(
             $si.addClass('share-btn-icon')
         ).append(
-            $st.addClass('share-btn-text').text(s.capitalize(site.toLowerCase()))
+            $st.addClass('share-btn-text').textFormat(s.capitalize(site.toLowerCase()))
         );
 
         $a.addClass('share-btn')

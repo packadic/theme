@@ -94,17 +94,36 @@ class DashboardDemo {
             }
         };
 
-        var updateInterval = 30;
-        var plot = $.plot($rtm, [getRandomData()], options);
-        console.log('plot dashboard-rtm');
-        function checkSize(){
+        var updateInterval:number = 30;
+        var plot:jquery.flot.plot = $.plot($rtm, [getRandomData()], options);
+        var $rtmParent:JQuery = $rtm.parent();
+        var checkSizeIntervalId:number;
 
+        console.log('plot dashboard-rtm');
+
+        function checkSize(){
+            console.log('plot dashboard-rtm checkSize');
+            var minimalWidth:number = $rtmParent.width() - ($rtmParent.outerWidth() - $rtmParent.width());
+            if(plot.width() < minimalWidth){
+                plot.resize();
+                plot.setupGrid();
+                clearInterval(checkSizeIntervalId);
+                console.log('plot dashboard-rtm checkSize clearInterval');
+            }
         }
+
         function update() {
             plot.setData([getRandomData()]);
             plot.draw();
             setTimeout(update, updateInterval);
         }
+
+        checkSizeIntervalId = setInterval(checkSize, 100);
+
+        this.app.on('layout:resize', function(){
+            plot.resize();
+            plot.setupGrid();
+        });
 
         update();
     }

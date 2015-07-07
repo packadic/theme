@@ -23,3 +23,26 @@ mixin pc-alert(title, icon)
         if title
             strong !{title} &nbsp;
         block
+
+mixin progressbar(min, max, val, textDisplay, format)
+    - if(textDisplay){
+    -   attributes['data-bar-text-display'] = textDisplay;
+    - }
+    - if(format) {
+    -   attributes['data-bar-text-format'] = format;
+    - }
+    -     if (attributes.primary) {
+    -         _addClassAttribute('primary', 'progress-bar-primary', attributes)
+    -     } else if (attributes.success) {
+    -         _addClassAttribute('success', 'progress-bar-success', attributes)
+    -     } else if (attributes.info) {
+    -         _addClassAttribute('info', 'progress-bar-info', attributes)
+    -     } else if (attributes.warning) {
+    -         _addClassAttribute('warning', 'progress-bar-warning', attributes)
+    -     } else if (attributes.danger) {
+    -         _addClassAttribute('danger', 'progress-bar-danger', attributes)
+    -     }
+    - _addClassAttribute('striped', 'progress-bar-striped', attributes)
+    - _addClassAttribute('active', 'active', attributes)
+    .progress
+        .progress-bar(role='progressbar', aria-valuemin=min, aria-valuemax=max, data-bar-value=val)&attributes(attributes)

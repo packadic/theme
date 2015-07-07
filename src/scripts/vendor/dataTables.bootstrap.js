@@ -133,7 +133,7 @@ if ($.fn.DataTable.TableTools) {
             }
         },
         "print": {
-            "info": "DTTT_Print_Info"  
+            "info": "DTTT_Print_Info"
         },
         "select": {
             "row": "active"
@@ -243,7 +243,7 @@ $.extend($.fn.dataTableExt.oPagination, {
                         .insertBefore($('li.next:first', an[i])[0])
                         .bind('click', function (e) {
                             e.preventDefault();
-                            oSettings._iDisplayStart = (parseInt($('a', this).text(), 10) - 1) * oPaging.iLength;
+                            oSettings._iDisplayStart = (parseInt($('a', this).textFormat(), 10) - 1) * oPaging.iLength;
                             fnDraw(oSettings);
                         });
                 }
@@ -374,7 +374,7 @@ $.extend($.fn.dataTableExt.oPagination, {
                         .insertBefore($('li.next:first', an[i])[0])
                         .bind('click', function (e) {
                             e.preventDefault();
-                            oSettings._iDisplayStart = (parseInt($('a', this).text(), 10) - 1) * oPaging.iLength;
+                            oSettings._iDisplayStart = (parseInt($('a', this).textFormat(), 10) - 1) * oPaging.iLength;
                             fnDraw(oSettings);
                         });
                 }

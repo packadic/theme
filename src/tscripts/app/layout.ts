@@ -149,10 +149,11 @@ export class Layout {
     }
 
     protected initScrollToTop() {
+        var self:Layout = this;
         $('#scroll-top').off('click').on('click', function (e) {
             e.preventDefault();
-            this._app.emit('layout:scrolltop');
-            this._app.scrollTo(document.body, 0, 600);
+            self._app.emit('layout:scrolltop');
+            self._app.scrollTo(document.body, 0, 600);
         })
     }
 

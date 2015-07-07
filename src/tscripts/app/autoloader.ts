@@ -23,11 +23,7 @@ export function getDefaultDefinitions(App:Application):any {
                 });
             }],
             // PROGRESSBAR
-            ['progressbar', '.progress .progress-bar', ['plugins/bs-progressbar'], 'bs.progressbar', {}, function ($el, data) {
-                data.options.display_text = $el.data('display-text') || 'none';
-                data.options.use_percentage = $el.data('use-percentage') || false;
-                return data;
-            }],
+            ['progressbar', '.progress .progress-bar', ['widgets/progressbar'], 'packadic.progressbar', {}],
             // CONFIRMATION
             ['confirmation', '[data-toggle="confirmation"]', ['plugins/bs-confirmation'], 'bs.confirmation', App.config('plugins.confirmation')],
             // SELECT 2
@@ -100,12 +96,13 @@ export function getDefaultDefinitions(App:Application):any {
                     require(['jquery', 'jq/general', 'plugins/easypiechart'], function ($) {
                         $charts.each(function () {
                             var $chart = $(this);
+                            if($chart.find('> .easyPieChart').length !== 0) return;
                             var classes = $chart.get(0).classList;
                             var data = _.merge({
                                 animate: 1000,
                                 size: 85,
                                 onStep: function (value) {
-                                    $(this).find('span').text(~~value);
+                                    $(this).find('span').textFormat(~~value);
                                 },
                                 barColor: App.colors['blue']
                             }, $chart.data());

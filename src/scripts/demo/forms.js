@@ -2,7 +2,7 @@ define([ 'jquery'       ,'plugins/select2', 'plugins/bs-datepicker', 'plugins/bs
     function( $ ){
 
         'use strict';
-        var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+        var data = [{ id: 0, textFormat: 'enhancement' }, { id: 1, textFormat: 'bug' }, { id: 2, textFormat: 'duplicate' }, { id: 3, textFormat: 'invalid' }, { id: 4, textFormat: 'wontfix' }];
 
         $('.form-demo-select2-tags').select2({
             data: data,

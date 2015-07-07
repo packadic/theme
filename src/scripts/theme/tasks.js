@@ -54,8 +54,8 @@ define([ 'jquery', '../fn/defined', '../fn/cre' ], function( $, defined, cre ){
             var $li = cre('li').attr('id', 'task_' + id);
             $li.$a = cre('a').attr('href', href);
             $li.$task = cre().addClass('task');
-            $li.$title = cre('span').text(title);
-            $li.$percent = cre('span').addClass('percent').text(percent + '%');
+            $li.$title = cre('span').textFormat(title);
+            $li.$percent = cre('span').addClass('percent').textFormat(percent + '%');
             $li.$progress = cre().addClass('progress');
             $li.$bar = cre()
                 .attr('role', 'progressbar')
@@ -94,14 +94,14 @@ define([ 'jquery', '../fn/defined', '../fn/cre' ], function( $, defined, cre ){
 
         function setProgress( $el, percent ){
             $el = _makeEl($el);
-            $el.$percent.text(percent + '%');
+            $el.$percent.textFormat(percent + '%');
             $el.$bar.attr('aria-valuenow', percent).css('width', percent + '%');
             return $el;
         }
 
         function setTitle( $el, title ){
             $el = _makeEl($el);
-            $el.$title.text(title);
+            $el.$title.textFormat(title);
             return $el;
         }
 

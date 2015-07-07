@@ -10,7 +10,7 @@ define(['jquery', '../fn/defined', '../fn/cre', 'plugins/bs-switch'],
                         class: 'btn btn-primary btn-xs',
                         href: '#'
                     })
-                    .text(editable.name)
+                    .textFormat(editable.name)
                     .on('click', function(){
                         editable.options.click.apply(editable.options);
                     });
@@ -24,7 +24,7 @@ define(['jquery', '../fn/defined', '../fn/cre', 'plugins/bs-switch'],
                 // Populate the select
 
                 $.each(editable.options.choices, function (key, option) {
-                    var opt = cre('option').attr('value', key).text(option.name);
+                    var opt = cre('option').attr('value', key).textFormat(option.name);
                     if (editable.default === key) {
                         opt.attr('selected', 'selected');
                     }
@@ -144,7 +144,7 @@ define(['jquery', '../fn/defined', '../fn/cre', 'plugins/bs-switch'],
                         $body = cre().addClass(o.controlWrapClass).appendTo($box);
                     var $label = cre('label')
                         .addClass(self.options.labelClass)
-                        .text(editable.name)
+                        .textFormat(editable.name)
                         .attr('for', editable.id)
                         .appendTo($title);
 

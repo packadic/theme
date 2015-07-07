@@ -16,10 +16,10 @@ define([ 'jquery',  'gfm' ],
                 var $target = $doc.find('.plugin-doc-generated');
 
                 if($body.length > 0){
-                    $target.append(gfm($body.text()))
+                    $target.append(gfm($body.textFormat()))
                 }
                 if($toc.length > 0){
-                    var toc = gfm($toc.text());
+                    var toc = gfm($toc.textFormat());
                     $target.find('h1').first().after(toc);
                 }
                 //$body.find('h1').after();
