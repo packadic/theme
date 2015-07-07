@@ -6,11 +6,12 @@ mixin box-header(title, icon, actions)
         if icon
             i(class="fa fa-" + icon)
         h3= title
-        if actions
-            .actions(class=actionsClass)
+        .right
+            if actions
+                .actions(class=actionsClass)
+                    block
+            else
                 block
-        else
-            block
 
 mixin box-body(scrollerHeight)
     if scrollerHeight

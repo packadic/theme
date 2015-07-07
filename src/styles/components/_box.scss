@@ -7,6 +7,7 @@ body.fullscreen {
     margin-bottom: 25px;
 
     header {
+        position: relative;
         padding: 3px 15px;
         border-bottom: 1px solid;
         line-height: 30px;
@@ -23,21 +24,42 @@ body.fullscreen {
             margin-right: 5px;
         }
 
-        .box-header-widgets {
-            @extend .pull-right;
 
-            .box-header-widget {
-
-            }
-
+        .right {
+            //@extend .pull-right;
+            position: absolute;
+            top: 3px;
+            right: 20px;
         }
 
-        // Deprecated. remove, please dont look
+        .nav-tabs {
+            float: left;
+            margin-top: -4px;
+            li {
+            }
+            a {
+                padding: 8px 15px;
+                border: 1px solid #ddd;
+                margin-right: 0;
+            }
+            li:not(:first-child) a {
+                border-left: none;
+            }
+            li.active:not(:first-child) a {
+                border-left-color: transparent;
+            }
+            li.active a {
+                border-bottom-color: transparent;
+            }
+        }
+
+
         .actions {
             @extend .btn-toolbar;
 
-            float: right;
-            margin: 4px 0;
+
+            float: left;
+            margin: 5px 10px;
 
             .btn,
             .btn-group {
@@ -55,10 +77,10 @@ body.fullscreen {
         }
 
         .controls {
-            float: right;
-            border-left: 1px solid #ABABAB;
+            float: left;
+            //border-left: 1px solid #ABABAB;
             padding-left: 10px;
-            margin-left: 10px;
+            //margin-left: 10px;
             margin-right: -10px;
             a {
                 margin-right: 5px;

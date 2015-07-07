@@ -1,17 +1,3 @@
 extends ../layouts/default
 
 block content
-    +pc-alert('Test title')('info', 'dismissable') Content
-    +pc-alert('Test with icon', 'list')('success', 'dismissable') Should be an icon
-    +pc-alert('Test with block', 'list')('warning')
-        p.pt Should be a block
-        br
-        p.pt: +abtn()('warning') What now?
-    +progressbar(0, 55, 36, 'center', '{value} of {max}')('primary')
-    +progressbar(0, 355, 226)('success', 'striped', 'active')
-    +progressbar(0, 75, 45, 'center', '{value} / {max}. Thats {value} of the {max} man. In percent: {percent}% of 100')('info')
-    +progressbar(0, 44, 15, 'center')('warning')
-    +progressbar(0, 55, 36, 'center', '{value} of {max}')('warning', 'striped')
-    +progressbar(0, 355, 226)('danger')
-    +progressbar(0, 75, 45, 'center', '{value} / {max}. Thats {value} of the {max} man. In percent: {percent}% of 100')
-    +progressbar(0, 44, 15, 'center')

@@ -16,6 +16,7 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
 
     public $section:JQuery;
     public $header:JQuery;
+    public $headerRight:JQuery;
     public $controls:JQuery;
     public $close:JQuery;
     public $minimize:JQuery;
@@ -360,15 +361,17 @@ export class PackadicBoxWidget extends widgets.WidgetBase implements IWidget {
     }
 
     protected _ensureControlsContainer() {
-        var $actions = this.$header.find('> .actions');
-        var $controls = this.$header.find('> .controls');
+        var $headerRight:JQuery = this.$header.find('> .right');
+        if($headerRight.length == 0){
+            $headerRight = cre().addClass('right').appendTo(this.$header);
+        }
+        this.$headerRight = $headerRight;
+
+        var $actions = this.$headerRight.find('.actions');
+        var $controls = this.$headerRight.find('.controls');
         if ($controls.length == 0) {
             $controls = cre().addClass('controls');
-            if ($actions.length > 0) {
-                $actions.before($controls);
-            } else {
-                this.$header.append($controls)
-            }
+            this.$headerRight.append($controls)
         }
         this.$controls = $controls;
     }

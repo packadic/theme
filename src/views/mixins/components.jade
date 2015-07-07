@@ -46,3 +46,22 @@ mixin progressbar(min, max, val, textDisplay, format)
     - _addClassAttribute('active', 'active', attributes)
     .progress
         .progress-bar(role='progressbar', aria-valuemin=min, aria-valuemax=max, data-bar-value=val)&attributes(attributes)
+
+//- Tabs
+mixin tab-list(tabs,active)
+    ul.nav.nav-tabs(role="tablist")&attributes(attributes)
+        each item,index in tabs
+            if index === active
+                li.active
+                    a(href="#tab#{item}",role="tab",data-toggle="tab")= item
+            else
+                li
+                    a(href="#tab#{item}",role="tab",data-toggle="tab")= item
+//- Tab pane
+mixin tab(id,active)
+    if active
+        .tab-pane.active(id="tab#{id}")
+            block
+    else
+        .tab-pane(id="tab#{id}")
+            block

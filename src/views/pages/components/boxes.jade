@@ -17,7 +17,7 @@ block header
 
 block content
     .row
-        .col-md-8
+        .col-md-5
             +box("Box API").box-table
                 pre.no-border.m-n.p-xs
                     code.hljs.lang-js
@@ -37,17 +37,26 @@ block content
                     +demo-api('fullscreen', 'Fullscreen box').btn-warning
                     +demo-api('fullscreen_off', 'Exit fullscreen box').btn-warning
                     +demo-api('fullscreen_toggle', 'Toggle fullscreen box').btn-warning
-        .col-lg-4
+        .col-lg-7
             +box#preview-box
-                +box-header("Preview box")
-                +box-body
-                    p lorem ipsum lala
-                    p lorem ipsum lala
-                    p lorem ipsum lala
-                    p lorem ipsum lala
-                    p lorem ipsum lala
-    .row
-        .col-lg-12
+                +box-header('Preview box', 'bolt')
+                    .actions
+                        +abtn()('success') Continue
+                        +abtn()('danger') Cancel
+                    +tab-list(['First', 'Second', 'Third'], 0)
+                +box-body.tab-content
+                    +tab('First', true)
+                        p This box has actions, tabs and controls in the header.
+                        p lorem ipsum lala
+                        p lorem ipsum lala
+                        p lorem ipsum lala
+                        p lorem ipsum lala
+                    +tab('Second')
+                        p Second tab
+                    +tab('Third')
+                        p Third tab
+
+
 
 
 block append scripts
