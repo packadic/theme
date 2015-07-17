@@ -1,3 +1,13 @@
+mixin demo-dropdown-button(text, color, size)
+    - color = color || 'btn-primary';
+    - size = size || 'xs';
+    .btn-group
+        button.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false', class=color + ' btn-' + size)
+            | #{text}&nbsp;
+            span.caret
+        +dropdown-menu&attributes(attributes)
+            block
+
 // DROPDOWN NOTIFICATIONS
 mixin _demo-dropdown-notifications
     +dropdown-notification('5 mins', 'bolt', 'danger') Serious error occured

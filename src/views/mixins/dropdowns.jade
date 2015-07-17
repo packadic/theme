@@ -1,3 +1,12 @@
+mixin dropdown-menu()
+    - _addClassAttribute('wide', 'dropdown-wide', attributes)
+    - _addClassAttribute('inverse', 'dropdown-menu-inverse', attributes)
+    - _addClassAttribute('notifications', 'dropdown-notifications', attributes)
+    - _addClassAttribute('tasks', 'dropdown-task-list', attributes)
+    ul(role="menu").dropdown-menu&attributes(attributes)
+        block
+
+
 mixin dropdown-task(title, percent)
     li
         a(href='#')

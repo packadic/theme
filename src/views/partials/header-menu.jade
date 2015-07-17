@@ -33,31 +33,23 @@ ul.nav.navbar-nav.pull-right
     li
         a(data-toggle="dropdown").dropdown-toggle
             i.fa.fa-envelope
-        ul(role="menu").dropdown-menu.dropdown-wide.dropdown-notifications
-            li.header
-                h3 Notifications
-            +dropdown-notification('5 mins', 'bolt', 'label-danger') Serious error occured
-            +dropdown-notification('2 hours', 'info', 'label-info') Logged something cool
-            +dropdown-notification('1 day', 'puzzle-piece', 'label-warning') Module could not load, please refer to the documentation
-            +dropdown-notification('2 days', 'cog', 'label-primary') A falsis, gabalium gratis burgus.
-            +dropdown-notification('3 days', 'list', 'light-green') The heavens of love is full of courage.
-            li.footer
-                a(href='#') View all
+        +dropdown-menu()('wide', 'inverse', 'notifications')
+            li.header: h3
+                strong &nbsp;3&nbsp;
+                | Notifications
+            +demo-dropdown-notifications('200px')
+            li.footer: +a View All
 
     li
         a(data-toggle="dropdown").dropdown-toggle
             i.fa.fa-list
-        ul(role="menu").dropdown-menu.dropdown-menu-inverse.dropdown-wide.dropdown-task-list
-            li.header
-                h3
-                    | You have
-                    strong &nbsp;3 new&nbsp;
-                    | tasks
-            +dropdown-task("Update progress", 30).progress-bar-warning
-            +dropdown-task("User migration", 65).progress-bar-primary
-            +dropdown-task("Important process", 40).progress-bar-info
-            +dropdown-task("New stuff", 85).progress-bar-danger
-            +dropdown-task("My progress", 20).progress-bar-primary
+        +dropdown-menu()('wide', 'inverse', 'tasks')
+            li.header: h3
+                | You have
+                strong &nbsp;3 new&nbsp;
+                | tasks
+            +demo-dropdown-tasks('200px')
+            li.footer: +a View All
 
     li
         a(data-toggle="dropdown").dropdown-toggle
