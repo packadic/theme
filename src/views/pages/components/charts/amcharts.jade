@@ -1,0 +1,26 @@
+extends ../../../layouts/default
+
+block header
+    +page-title("Charts", "amCharts")
+    +page-breadcrumbs
+        +breadcrumb("Components", "/components")
+        +breadcrumb("Charts", "/components/charts/general")
+        +breadcrumb("amCharts", "/components/charts/amcharts", true)
+
+
+block content
+    #demo-charts-amcharts
+        .row
+            .col-md-6
+                +box("Line Chart")
+                    #demo-chart1
+            .col-md-6
+                +box("Bar Chart")
+                    #demo-chart2
+
+block append styles
+    style.
+        #demo-chart1, #demo-chart2, #demo-chart3 {
+            width: 100%;
+            height: 400px;
+        }

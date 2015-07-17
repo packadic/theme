@@ -23,6 +23,7 @@ class Demo {
         this.present('#charts-demo', 'charts');
         this.demoClass('#dashboard-demo', 'dashboard');
         this.demoClass('#demo-forms-editors', 'forms-editors');
+        this.demoClass('#demo-charts-amcharts', 'charts-amcharts');
     }
 
     protected demoClass(selector, module) {

@@ -89,7 +89,7 @@ module.exports = function( grunt ){
         };
 
         opts.lodashAutobuild[name] = {
-            src    : [ 'src/scripts/**/*.js', 'src/plugins/github-api/github.js' ],
+            src    : [ 'src/scripts/**/*.js','src/tscripts/**/*.ts','!src/tscripts/**/*.d.ts', 'src/plugins/github-api/github.js' ],
             options: {
                 lodashConfigPath: 'lodash.' + name + '.options.include',
                 lodashObjects   : [ '_' ],

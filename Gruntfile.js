@@ -305,7 +305,8 @@ var init = module.exports = function (grunts) {
             src            : "<%= target.dest %>/assets/scripts",
             dest           : "/assets/scripts/init.js",
             prepend_scripts: [
-                'plugins/lodash.custom.js',
+                //'plugins/lodash.custom.js',
+                'plugins/lodash/lodash.js',
                 'plugins/require.js',
                 //'plugins/eventemitter2/lib/eventemitter2.js',
                 //'before.js',

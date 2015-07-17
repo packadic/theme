@@ -1,0 +1,356 @@
+{
+    "kind": "analytics#gaData",
+    "id": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:100626870&dimensions=ga:month,ga:day&metrics=ga:pageviews,ga:sessions,ga:bounces,ga:timeOnPage,ga:exits&start-date=30daysAgo&end-date=today",
+    "query": {
+        "start-date": "30daysAgo",
+        "end-date": "today",
+        "ids": "ga:100626870",
+        "dimensions": "ga:month,ga:day",
+        "metrics": [
+            "ga:pageviews",
+            "ga:sessions",
+            "ga:bounces",
+            "ga:timeOnPage",
+            "ga:exits"
+        ],
+        "start-index": 1,
+        "max-results": 1000
+    },
+    "itemsPerPage": 1000,
+    "totalResults": 31,
+    "selfLink": "https://www.googleapis.com/analytics/v3/data/ga?ids=ga:100626870&dimensions=ga:month,ga:day&metrics=ga:pageviews,ga:sessions,ga:bounces,ga:timeOnPage,ga:exits&start-date=30daysAgo&end-date=today",
+    "profileInfo": {
+        "profileId": "100626870",
+        "accountId": "61717911",
+        "webPropertyId": "UA-61717911-1",
+        "internalWebPropertyId": "96482905",
+        "profileName": "All Web Site Data",
+        "tableId": "ga:100626870"
+    },
+    "containsSampledData": false,
+    "columnHeaders": [
+        {
+            "name": "ga:month",
+            "columnType": "DIMENSION",
+            "dataType": "STRING"
+        },
+        {
+            "name": "ga:day",
+            "columnType": "DIMENSION",
+            "dataType": "STRING"
+        },
+        {
+            "name": "ga:pageviews",
+            "columnType": "METRIC",
+            "dataType": "INTEGER"
+        },
+        {
+            "name": "ga:sessions",
+            "columnType": "METRIC",
+            "dataType": "INTEGER"
+        },
+        {
+            "name": "ga:bounces",
+            "columnType": "METRIC",
+            "dataType": "INTEGER"
+        },
+        {
+            "name": "ga:timeOnPage",
+            "columnType": "METRIC",
+            "dataType": "TIME"
+        },
+        {
+            "name": "ga:exits",
+            "columnType": "METRIC",
+            "dataType": "INTEGER"
+        }
+    ],
+    "totalsForAllResults": {
+        "ga:pageviews": "735",
+        "ga:sessions": "633",
+        "ga:bounces": "514",
+        "ga:timeOnPage": "12978.0",
+        "ga:exits": "614"
+    },
+    "rows": [
+        [
+            "06",
+            "18",
+            "0",
+            "3",
+            "0",
+            "0.0",
+            "0"
+        ],
+        [
+            "06",
+            "19",
+            "59",
+            "60",
+            "59",
+            "0.0",
+            "59"
+        ],
+        [
+            "06",
+            "20",
+            "4",
+            "2",
+            "1",
+            "30.0",
+            "2"
+        ],
+        [
+            "06",
+            "21",
+            "16",
+            "17",
+            "16",
+            "0.0",
+            "16"
+        ],
+        [
+            "06",
+            "22",
+            "21",
+            "23",
+            "21",
+            "0.0",
+            "21"
+        ],
+        [
+            "06",
+            "23",
+            "0",
+            "0",
+            "0",
+            "0.0",
+            "0"
+        ],
+        [
+            "06",
+            "24",
+            "36",
+            "36",
+            "36",
+            "0.0",
+            "36"
+        ],
+        [
+            "06",
+            "25",
+            "28",
+            "29",
+            "28",
+            "0.0",
+            "28"
+        ],
+        [
+            "06",
+            "26",
+            "3",
+            "1",
+            "0",
+            "105.0",
+            "1"
+        ],
+        [
+            "06",
+            "27",
+            "37",
+            "37",
+            "37",
+            "0.0",
+            "37"
+        ],
+        [
+            "06",
+            "28",
+            "28",
+            "24",
+            "23",
+            "21.0",
+            "24"
+        ],
+        [
+            "06",
+            "29",
+            "10",
+            "10",
+            "10",
+            "0.0",
+            "10"
+        ],
+        [
+            "06",
+            "30",
+            "33",
+            "36",
+            "33",
+            "0.0",
+            "33"
+        ],
+        [
+            "07",
+            "01",
+            "58",
+            "29",
+            "0",
+            "1370.0",
+            "29"
+        ],
+        [
+            "07",
+            "02",
+            "0",
+            "0",
+            "0",
+            "0.0",
+            "0"
+        ],
+        [
+            "07",
+            "03",
+            "16",
+            "17",
+            "16",
+            "0.0",
+            "16"
+        ],
+        [
+            "07",
+            "04",
+            "109",
+            "65",
+            "19",
+            "1900.0",
+            "64"
+        ],
+        [
+            "07",
+            "05",
+            "26",
+            "25",
+            "22",
+            "800.0",
+            "24"
+        ],
+        [
+            "07",
+            "06",
+            "0",
+            "0",
+            "0",
+            "0.0",
+            "0"
+        ],
+        [
+            "07",
+            "07",
+            "0",
+            "0",
+            "0",
+            "0.0",
+            "0"
+        ],
+        [
+            "07",
+            "08",
+            "44",
+            "42",
+            "38",
+            "1800.0",
+            "41"
+        ],
+        [
+            "07",
+            "09",
+            "74",
+            "67",
+            "58",
+            "3900.0",
+            "66"
+        ],
+        [
+            "07",
+            "10",
+            "0",
+            "0",
+            "0",
+            "0.0",
+            "0"
+        ],
+        [
+            "07",
+            "11",
+            "25",
+            "24",
+            "23",
+            "500.0",
+            "24"
+        ],
+        [
+            "07",
+            "12",
+            "31",
+            "18",
+            "15",
+            "1010.0",
+            "18"
+        ],
+        [
+            "07",
+            "13",
+            "12",
+            "12",
+            "12",
+            "0.0",
+            "12"
+        ],
+        [
+            "07",
+            "14",
+            "35",
+            "34",
+            "29",
+            "1000.0",
+            "32"
+        ],
+        [
+            "07",
+            "15",
+            "1",
+            "1",
+            "1",
+            "0.0",
+            "1"
+        ],
+        [
+            "07",
+            "16",
+            "8",
+            "2",
+            "1",
+            "42.0",
+            "2"
+        ],
+        [
+            "07",
+            "17",
+            "21",
+            "19",
+            "16",
+            "500.0",
+            "18"
+        ],
+        [
+            "07",
+            "18",
+            "0",
+            "0",
+            "0",
+            "0.0",
+            "0"
+        ]
+    ]
+}

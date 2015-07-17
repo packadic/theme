@@ -65,6 +65,8 @@ sidebar:
         href: <%= target.nav.pre %>/components/charts/general<%= target.nav.ext %>
       - name: Flot
         href: <%= target.nav.pre %>/components/charts/flot<%= target.nav.ext %>
+      - name: amCharts
+        href: <%= target.nav.pre %>/components/charts/amcharts<%= target.nav.ext %>
       - name: ChartJS
         href: <%= target.nav.pre %>/components/charts/chartjs<%= target.nav.ext %>
       - name: Vega
