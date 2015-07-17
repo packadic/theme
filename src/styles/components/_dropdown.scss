@@ -52,6 +52,8 @@ $dropdown-inverse-tasklist-task-color: #b3b3b3;
 $dropdown-inverse-tasklist-progress-bg: #c8c8c8;
 $dropdown-inverse-tasklist-item-border-color: #484848;
 
+$dropdown-notifications-icon-color: #fff;
+$dropdown-inverse-notifications-icon-color: #D8D1D1;
 
 // position
 .dropdown-menu {
@@ -295,6 +297,35 @@ $dropdown-inverse-tasklist-item-border-color: #484848;
 }
 
 // position
+.dropdown-menu.dropdown-notifications {
+    > li:not(.header):not(.footer) {
+        a {
+            padding: 10px 15px;
+            width: 100%;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        .label {
+            float: left;
+            text-align: center;
+            width: 35px;
+            font-size: 20px;
+            padding: 5px 0;
+        }
+        .details {
+            margin-left: 50px;
+            word-wrap: break-word;
+            white-space: normal;
+        }
+        .details .time {
+            display: block;
+            font-size: 11px;
+        }
+        @include clearfix;
+    }
+}
+
 .dropdown-menu.dropdown-task-list {
 
     li.header + li:not(.header) {
@@ -368,6 +399,19 @@ $dropdown-inverse-tasklist-item-border-color: #484848;
         }
     }
 }
+
+
+.dropdown-menu.dropdown-notifications {
+    > li:not(.header):not(.footer) > a .label > i.fa {
+        color: $dropdown-notifications-icon-color;
+    }
+}
+.dropdown-menu.dropdown-notifications.dropdown-menu-inverse {
+    > li:not(.header):not(.footer) > a .label > i.fa {
+        color: $dropdown-inverse-notifications-icon-color;
+    }
+}
+
 
 // @todo sort out
 .dropdown-large {

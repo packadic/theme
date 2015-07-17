@@ -1,5 +1,7 @@
 
 extends ../../layouts/default
+
+
 block header
     +page-title("Components", "General bootstrap components")
     +page-breadcrumbs
@@ -10,8 +12,38 @@ block content
     .row
         .col-md-6
             +box("Dropdowns", "info")
-                .btn-toolbar
+                .btn-toolbar.btn-toolbar-xs
                     +demo-dropdown-buttons
+
+                    .btn-group
+                        button.btn.blue-grey.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+                            | Notifications&nbsp;
+                            span.caret
+                        ul(role="menu").dropdown-menu.dropdown-wide.dropdown-notifications
+                            li.header
+                                h3 Notifications
+                            +dropdown-notification('5 mins', 'bolt', 'label-danger') Serious error occured
+                            +dropdown-notification('2 hours', 'info', 'label-info') Logged something cool
+                            +dropdown-notification('1 day', 'puzzle-piece', 'label-warning') Module could not load, please refer to the documentation
+                            +dropdown-notification('2 days', 'cog', 'label-primary') A falsis, gabalium gratis burgus.
+                            +dropdown-notification('3 days', 'list', 'light-green') The heavens of love is full of courage.
+                            li.footer
+                                a(href='#') View all
+
+                    .btn-group
+                        button.btn.amber.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+                            | Notifications Inverse&nbsp;
+                            span.caret
+                        ul(role="menu").dropdown-menu.dropdown-wide.dropdown-notifications.dropdown-menu-inverse
+                            li.header
+                                h3 Notifications
+                            +dropdown-notification('5 mins', 'bolt', 'label-danger') Serious error occured
+                            +dropdown-notification('2 hours', 'info', 'label-info') Logged something cool
+                            +dropdown-notification('1 day', 'puzzle-piece', 'label-warning') Module could not load, please refer to the documentation
+                            +dropdown-notification('2 days', 'cog', 'label-primary') A falsis, gabalium gratis burgus.
+                            +dropdown-notification('3 days', 'list', 'light-green') The heavens of love is full of courage.
+                            li.footer
+                                a(href='#') View all
             .row
                 .col-md-6
                     +box("Tooltips", "cog")

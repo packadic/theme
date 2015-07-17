@@ -93,3 +93,7 @@
 @include button-radius-variant("circle", 25px);
 @include button-radius-variant("rounded", 4px);
 
+
+.btn-toolbar-xs > .btn-group > .btn { @extend .btn-xs; }
+.btn-toolbar-sm > .btn-group > .btn { @extend .btn-sm; }
+.btn-toolbar-lg > .btn-group > .btn { @extend .btn-lg; }

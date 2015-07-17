@@ -5,3 +5,11 @@ mixin dropdown-task(title, percent)
                 span=title
                 span.percent=percent+"%"
             +progressbar(0, 100, percent)&attributes(attributes)
+
+mixin dropdown-notification(time, icon, iconBg)
+    +lia
+        .label(class=iconBg)
+            i(class='fa fa-' + icon)
+        .details
+            block
+            span.time=time + ' ago'

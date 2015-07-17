@@ -32,3 +32,10 @@ $util-pos-direction-properties: '', 'top', 'right', 'bottom', 'left';
 $util-pos-size-selectors: 'n', 'xs', 'sm', '', 'md', 'lg', 'xl', 'xxl';
 $util-pos-selector-seperator: '-';
 
+
+$color-default:         			#c6c6c6 !default;
+$color-primary:         		 	#426DB0 !default;
+$color-success:         		 	#8BC34A !default;
+$color-info:            		 	#89C4F4 !default;
+$color-warning:         		 	#F7B34D !default;
+$color-danger:          		 	#F3565D !default;
