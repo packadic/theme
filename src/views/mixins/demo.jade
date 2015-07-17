@@ -1,6 +1,37 @@
+// DROPDOWN NOTIFICATIONS
+mixin _demo-dropdown-notifications
+    +dropdown-notification('5 mins', 'bolt', 'danger') Serious error occured
+    +dropdown-notification('2 hours', 'info', 'info') Logged something cool
+    +dropdown-notification('1 day', 'puzzle-piece', 'warning') Module could not load, please refer to the documentation
+    +dropdown-notification('2 days', 'cog', 'primary') A falsis, gabalium gratis burgus.
+    +dropdown-notification('3 days', 'list', 'light-green') The heavens of love is full of courage.
+mixin demo-dropdown-notifications(scrollHeight)
+    if scrollHeight
+        ul.scrollable.dropdown-notifications(data-height=scrollHeight)&attributes(attributes)
+            +_demo-dropdown-notifications
+    else
+        +_demo-dropdown-notifications
+
+// DROPDOWN TASKS
+mixin _demo-dropdown-tasks
+    +dropdown-task("Update progress", 30).progress-bar-warning
+    +dropdown-task("User migration", 65).progress-bar-primary
+    +dropdown-task("Important process and other stuff", 40).progress-bar-info
+    +dropdown-task("New stuff", 85).progress-bar-danger
+    +dropdown-task("My progress", 20).progress-bar-primary
+mixin demo-dropdown-tasks(scrollHeight)
+    if scrollHeight
+        ul.scrollable.dropdown-task-list(data-height=scrollHeight)&attributes(attributes)
+            +_demo-dropdown-tasks
+    else
+        +_demo-dropdown-tasks
+
+// POPOVER BUTTON
 mixin popover-btn-demo(side)
     - var sideLcase = side.toLowerCase();
     +a.btn.btn-primary(data-toggle="popover", tabindex="0", role="button", data-trigger="focus", data-container="body", data-placement=sideLcase, title="Popover title", data-content="And here's some amazing content. It's very engaging. Right?")=side
+
+// TOOLTIP BUTTON
 mixin tooltip-btn-demo(side)
     - var sideLcase = side.toLowerCase();
     +a.btn.btn-primary(data-toggle="tooltip", data-container="body", data-placement=sideLcase, title="Tooltip on " + sideLcase)=side
@@ -132,3 +163,4 @@ mixin demo-dropdown-buttons(size)
             | Advanced Dropdown Inverse&nbsp;
             span.caret
         +demo-dropdown-w-header-submenu.dropdown-menu-inverse
+

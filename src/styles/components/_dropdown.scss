@@ -19,7 +19,7 @@ $dropdown-item-bg-hover: #f5f5f5;
 $dropdown-item-color: #888888;
 $dropdown-item-color-hover: $dropdown-item-color;
 $dropdown-item-arrow-color: #cccccc;
-$dropdown-footer-bg: #F2F0F0;
+$dropdown-footer-bg: #f2f0f0;
 $dropdown-footer-color: #888888;
 $dropdown-footer-bg-hover: darken($dropdown-footer-bg, 5);
 $dropdown-footer-color-hover: $dropdown-footer-color;
@@ -39,7 +39,7 @@ $dropdown-inverse-item-color-hover: $dropdown-inverse-item-color;
 $dropdown-inverse-item-arrow-color: #cccccc;
 $dropdown-inverse-footer-bg: #454545;
 $dropdown-inverse-footer-bg-hover: lighten($dropdown-inverse-footer-bg, 5);
-$dropdown-inverse-footer-color: #888;
+$dropdown-inverse-footer-color: #888888;
 $dropdown-inverse-footer-color-hover: $dropdown-inverse-footer-color;
 $dropdown-inverse-footer-border-color: lighten($dropdown-inverse-footer-bg, 5);
 
@@ -52,8 +52,10 @@ $dropdown-inverse-tasklist-task-color: #b3b3b3;
 $dropdown-inverse-tasklist-progress-bg: #c8c8c8;
 $dropdown-inverse-tasklist-item-border-color: #484848;
 
-$dropdown-notifications-icon-color: #fff;
-$dropdown-inverse-notifications-icon-color: #D8D1D1;
+$dropdown-notifications-icon-color: #ffffff;
+$dropdown-notifications-item-border-color: #e4e4e4;
+$dropdown-inverse-notifications-icon-color: #d8d1d1;
+$dropdown-inverse-notifications-item-border-color: #484848;
 
 // position
 .dropdown-menu {
@@ -126,13 +128,6 @@ $dropdown-inverse-notifications-icon-color: #D8D1D1;
         }
     }
 
-    /*li.header + li:not(.header) {
-        margin-top: 5px;
-    }
-    li:not(.header) + li.header {
-        margin-top: 5px;
-    }*/
-
     > li.submenu {
         position: relative;
         > a {
@@ -196,6 +191,7 @@ $dropdown-inverse-notifications-icon-color: #D8D1D1;
     }
 }
 
+
 // theme
 .dropdown-menu {
 
@@ -246,7 +242,9 @@ $dropdown-inverse-notifications-icon-color: #D8D1D1;
 
     }
 }
-.dropdown-menu.dropdown-menu-inverse,
+.dropdown-menu-inverse,
+.dropdown-menu-inverse ul[class^="dropdown-"].scrollable:not(.dropdown-menu),
+.dropdown-menu-inverse ul[class*=" dropdown-"].scrollable:not(.dropdown-menu),
 .dropdown-menu.dropdown-menu-inverse li.submenu > .dropdown-menu {
     background: $dropdown-inverse-bg;
     @include box-shadow($dropdown-box-shadow-size $dropdown-box-shadow-size $dropdown-inverse-box-shadow-color);
@@ -296,8 +294,9 @@ $dropdown-inverse-notifications-icon-color: #D8D1D1;
     }
 }
 
-// position
-.dropdown-menu.dropdown-notifications {
+
+// dropdown widgets
+.dropdown-notifications {
     > li:not(.header):not(.footer) {
         a {
             padding: 10px 15px;
@@ -306,7 +305,7 @@ $dropdown-inverse-notifications-icon-color: #D8D1D1;
                 text-decoration: none;
             }
         }
-        .label {
+        .ico {
             float: left;
             text-align: center;
             width: 35px;
@@ -324,17 +323,16 @@ $dropdown-inverse-notifications-icon-color: #D8D1D1;
         }
         @include clearfix;
     }
+
 }
-
-.dropdown-menu.dropdown-task-list {
-
-    li.header + li:not(.header) {
+.dropdown-task-list {
+    > li.header + li:not(.header) {
         margin-top: 0 !important;
     }
-    li:not(.header) + li.header {
+    > li:not(.header) + li.header {
         margin-top: 0 !important;
     }
-    li:not(.header):not(.footer) {
+    > li:not(.header):not(.footer) {
         a {
             display: block;
             padding: 5px 15px;
@@ -359,11 +357,11 @@ $dropdown-inverse-notifications-icon-color: #D8D1D1;
         }
         .progress {
             clear: left;
-            margin-top: 10px;
+            margin: 10px 0;
             height: 8px;
             border-radius: 0;
             box-shadow: none;
-            margin-bottom: 10px;
+
             .progress-bar {
                 box-shadow: none;
             }
@@ -371,13 +369,32 @@ $dropdown-inverse-notifications-icon-color: #D8D1D1;
     }
 }
 
-// theme
-.dropdown-menu.dropdown-task-list {
+// scrollable
+ul[class^="dropdown-"].scrollable:not(.dropdown-menu),
+ul[class*=" dropdown-"].scrollable:not(.dropdown-menu) {
+    @extend .dropdown-menu;
+    display: block;
+    //position: inherit;
+    z-index: 80;
+    top: 0;
+    left: 0;
+    padding-left: 0;
+    list-style: none;
+    border: none;
+    box-shadow: none;
+    width: 100% !important;
 
-    li:not(.header) + li:not(.header) {
-        border-top-color: $dropdown-tasklist-item-border-color;
+    > li:not(.header) + li:not(.header) {
+        border-top: 1px solid transparent;
     }
-    li:not(.header) {
+}
+
+// theme
+.dropdown-task-list {
+    > li:not(.header) + li:not(.header) {
+        border-top-color: $dropdown-tasklist-item-border-color !important;
+    }
+    > li:not(.header) {
         .task {
             color: $dropdown-tasklist-task-color;
         }
@@ -386,11 +403,12 @@ $dropdown-inverse-notifications-icon-color: #D8D1D1;
         }
     }
 }
-.dropdown-menu.dropdown-task-list.dropdown-menu-inverse {
-    li:not(.header) + li:not(.header) {
-        border-top-color: $dropdown-inverse-tasklist-item-border-color;
+.dropdown-task-list.dropdown-menu-inverse,
+.dropdown-menu-inverse .dropdown-task-list{
+    > li:not(.header) + li:not(.header) {
+        border-top-color: $dropdown-inverse-tasklist-item-border-color !important;
     }
-    li:not(.header) {
+    > li:not(.header) {
         .task {
             color: $dropdown-inverse-tasklist-task-color;
         }
@@ -400,17 +418,26 @@ $dropdown-inverse-notifications-icon-color: #D8D1D1;
     }
 }
 
+.dropdown-notifications {
+    > li:not(.header) + li:not(.header) {
+        border-top-color: $dropdown-notifications-item-border-color !important;
+        > a > .ico > i.fa {
+            color: $dropdown-notifications-icon-color;
+        }
+    }
+}
+.dropdown-notifications.dropdown-menu-inverse,
+.dropdown-menu-inverse .dropdown-notifications {
+    li:not(.header) + li:not(.header) {
+        border-top-color: $dropdown-inverse-notifications-item-border-color !important;
+        > a > .ico > i.fa {
+            color: $dropdown-inverse-notifications-icon-color;
+        }
+    }
+}
 
-.dropdown-menu.dropdown-notifications {
-    > li:not(.header):not(.footer) > a .label > i.fa {
-        color: $dropdown-notifications-icon-color;
-    }
-}
-.dropdown-menu.dropdown-notifications.dropdown-menu-inverse {
-    > li:not(.header):not(.footer) > a .label > i.fa {
-        color: $dropdown-inverse-notifications-icon-color;
-    }
-}
+
+
 
 
 // @todo sort out

@@ -8,7 +8,7 @@ mixin dropdown-task(title, percent)
 
 mixin dropdown-notification(time, icon, iconBg)
     +lia
-        .label(class=iconBg)
+        .ico(class='bg-' + iconBg)
             i(class='fa fa-' + icon)
         .details
             block

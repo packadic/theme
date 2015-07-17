@@ -2,15 +2,33 @@ include ../base
 
 ul.nav.navbar-nav
     li
-        a(data-toggle="dropdown").dropdown-toggle Dropmenu
+        a(data-toggle="dropdown").dropdown-toggle Colors
         ul(role="menu").dropdown-menu.dropdown-menu-inverse
-            +lia Hello2
-            +lia Hello3
-    li
-        a(data-toggle="dropdown").dropdown-toggle Dropmenu
-        ul(role="menu").dropdown-menu.dropdown-menu-inverse
-            +lia Hello2
-            +lia Hello3
+            li.header: h3 Colors
+            li
+                ul.scrollable.dropdown-wide(data-height='300px')
+                    for color in site.data.theme.colors
+                        for variant in ['-light', '', '-dark']
+                            +lia.fs-11.pt-n.pb-n.pl-xs
+                                .pull-left.mr-xs.pl.pr(class="bg-" + color + variant) &nbsp;
+                                | !{color}!{variant}
+
+
+
+    each selector, name in { 'margin': 'm', 'padding': 'p'}
+        li
+            a(data-toggle="dropdown").dropdown-toggle=name
+            ul(role="menu").dropdown-menu.dropdown-wide.dropdown-menu-inverse
+                for direction in ['', 't', 'r', 'b', 'l']
+                    - var dirName = direction.replace('t', '-top').replace('r', '-right').replace('b', '-bottom').replace('l', '-left');
+                    li.header: h3=name + dirName
+                    li
+                        each size, sizeIndex in ['n', 'xs', 'sm', '', 'md', 'lg', 'xl', 'xxl']
+                            +lia.fs-11.pt-n.pb-n.pl-xs
+                                .pull-left.mr-xs.text-left(class="bg-light-gray", style="width: 40px")=selector + direction + (size.length > 0 ? '-' + size : '')
+                                code(style="background: none !important;")
+                                    | !{name + dirName}: !{(sizeIndex * 4)}px
+
 ul.nav.navbar-nav.pull-right
     li
         a(data-toggle="dropdown").dropdown-toggle

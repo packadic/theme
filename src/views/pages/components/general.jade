@@ -1,6 +1,23 @@
 
 extends ../../layouts/default
 
+mixin dropdown-menu()
+    - _addClassAttribute('wide', 'dropdown-wide', attributes)
+    - _addClassAttribute('inverse', 'dropdown-inverse', attributes)
+    - _addClassAttribute('notifications', 'dropdown-notifications', attributes)
+    - _addClassAttribute('tasks', 'dropdown-task-list', attributes)
+    ul(role="menu").dropdown-menu&attributes(attributes)
+        block
+
+mixin demo-dropdown-button(text, color, size)
+    - color = color || 'btn-primary';
+    - size = size || 'xs';
+    .btn-group
+        button.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false', class=color + ' btn-' + size)
+            | #{text}&nbsp;
+            span.caret
+        +dropdown-menu&attributes(attributes)
+            block
 
 block header
     +page-title("Components", "General bootstrap components")
@@ -12,38 +29,41 @@ block content
     .row
         .col-md-6
             +box("Dropdowns", "info")
+                .btn-toolbar.mb-xs
+
+                    +demo-dropdown-button('Notifications', 'btn-info')('wide', 'notifications')
+                        li.header: h3 Notifications
+                        +demo-dropdown-notifications
+                        li.footer: +a View All
+
+                    +demo-dropdown-button('Notifications inversed', 'btn-info')('wide', 'notifications', 'inverse')
+                        li.header: h3 Notifications
+                        +demo-dropdown-notifications
+                        li.footer: +a View All
+
+                    +demo-dropdown-button('Notifications /w scroll', 'btn-info')('wide')
+                        li.header: h3 Notifications
+                        +demo-dropdown-notifications('200px')
+                        li.footer: +a View All
+
+                .btn-toolbar
+                    +demo-dropdown-button('Tasks', 'btn-info')('wide', 'tasks')
+                        li.header: h3 Tasks
+                        +demo-dropdown-tasks
+                        li.footer: +a View All
+                    +demo-dropdown-button('Tasks inversed', 'btn-info')('wide', 'tasks', 'inverse')
+                        li.header: h3 Tasks
+                        +demo-dropdown-tasks
+                        li.footer: +a View All
+                    +demo-dropdown-button('Tasks /w scroll', 'btn-info')('wide')
+                        li.header: h3 Tasks
+                        +demo-dropdown-tasks('200px')
+                        li.footer: +a View All
+
+
                 .btn-toolbar.btn-toolbar-xs
                     +demo-dropdown-buttons
 
-                    .btn-group
-                        button.btn.blue-grey.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
-                            | Notifications&nbsp;
-                            span.caret
-                        ul(role="menu").dropdown-menu.dropdown-wide.dropdown-notifications
-                            li.header
-                                h3 Notifications
-                            +dropdown-notification('5 mins', 'bolt', 'label-danger') Serious error occured
-                            +dropdown-notification('2 hours', 'info', 'label-info') Logged something cool
-                            +dropdown-notification('1 day', 'puzzle-piece', 'label-warning') Module could not load, please refer to the documentation
-                            +dropdown-notification('2 days', 'cog', 'label-primary') A falsis, gabalium gratis burgus.
-                            +dropdown-notification('3 days', 'list', 'light-green') The heavens of love is full of courage.
-                            li.footer
-                                a(href='#') View all
-
-                    .btn-group
-                        button.btn.amber.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
-                            | Notifications Inverse&nbsp;
-                            span.caret
-                        ul(role="menu").dropdown-menu.dropdown-wide.dropdown-notifications.dropdown-menu-inverse
-                            li.header
-                                h3 Notifications
-                            +dropdown-notification('5 mins', 'bolt', 'label-danger') Serious error occured
-                            +dropdown-notification('2 hours', 'info', 'label-info') Logged something cool
-                            +dropdown-notification('1 day', 'puzzle-piece', 'label-warning') Module could not load, please refer to the documentation
-                            +dropdown-notification('2 days', 'cog', 'label-primary') A falsis, gabalium gratis burgus.
-                            +dropdown-notification('3 days', 'list', 'light-green') The heavens of love is full of courage.
-                            li.footer
-                                a(href='#') View all
             .row
                 .col-md-6
                     +box("Tooltips", "cog")
