@@ -67,6 +67,13 @@
                 "hideEasing"       : "linear",
                 "showMethod"       : "fadeIn",
                 "hideMethod"       : "fadeOut"
+            },
+            summernote: { // http://summernote.org/jsduck/source/settings.html#settings-property-options
+                defaultFontName: 'Verdana',
+                tabsize: 4,
+                codemirror: {
+                    theme: 'monokai'
+                }
             }
         },
         paths                 : {
@@ -107,13 +114,6 @@
         },
         requireJS             : {
             baseUrl: '<%= paths.scripts %>',
-            map    : {
-                '*': {
-                    'css'     : 'plugins/require-css/css',
-                    'd3'      : 'plugins/d3',
-                    'topojson': 'plugins/topojson'
-                }
-            },
 
             paths: {
                 'cjs'              : 'plugins/cjs/cjs',
@@ -128,6 +128,7 @@
                 'string'     : 'plugins/underscore.string/dist/underscore.string.min',
                 'code-mirror': 'plugins/requirejs-codemirror/src/code-mirror',
                 'ace'        : 'plugins/ace/lib/ace',
+                'ace-build'  : 'plugins/ace-builds/src-min',
                 'Q'          : 'plugins/q/q',
 
                 'jsonp': 'plugins/browser-jsonp/lib/jsonp.min',
@@ -192,23 +193,26 @@
                 'amcharts'            : 'plugins/amcharts/dist/amcharts',
 
                 // bootstrap
-                'plugins/bs-datepicker'      : 'plugins/bootstrap-datepicker/js/bootstrap-datepicker',
-                'plugins/bs-progressbar'     : 'plugins/bootstrap-progressbar/bootstrap-progressbar',
-                'plugins/bs-modal'           : 'plugins/bootstrap-modal/js/bootstrap-modal',
-                'plugins/bs-modal-manager'   : 'plugins/bootstrap-modal/js/bootstrap-modalmanager',
-                'plugins/bs-switch'          : 'plugins/bootstrap-switch/dist/js/bootstrap-switch.min',
-                'plugins/bs-select'          : 'plugins/bootstrap-select/dist/js/bootstrap-select.min',
-                'plugins/bs-confirmation'    : 'plugins/bootstrap-confirmation2/bootstrap-confirmation',
-                'plugins/bs-maxlength'       : 'plugins/bootstrap-maxlength/bootstrap-maxlength.min',
-                'plugins/bs-material'        : 'vendor/material',
-                'plugins/bs-material-ripples': 'plugins/bootstrap-material-design/scripts/ripples',
-                'plugins/contextmenu'        : 'plugins/bootstrap-contextmenu/bootstrap-contextmenu',
-                'plugins/gtreetable'         : "plugins/bootstrap-gtreetable/dist/bootstrap-gtreetable",
-                'plugins/bs-filestyle'       : 'plugins/bootstrap-filestyle/src/bootstrap-filestyle',
-                'plugins/bs-slider'          : 'plugins/bootstrap-slider/bootstrap-slider',
-                'plugins/bs-touchspin'       : 'plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min',
-                'plugins/bs-wysiwyg'         : 'plugins/bootstrap-wysiwyg/bootstrap-wysiwyg',
-                'plugins/bs-markdown-editor'         : 'plugins/bootstrap-markdown-editor/dist/js/bootstrap-markdown-editor',
+                'plugins/bs-datepicker'        : 'plugins/bootstrap-datepicker/js/bootstrap-datepicker',
+                'plugins/bs-progressbar'       : 'plugins/bootstrap-progressbar/bootstrap-progressbar',
+                'plugins/bs-modal'             : 'plugins/bootstrap-modal/js/bootstrap-modal',
+                'plugins/bs-modal-manager'     : 'plugins/bootstrap-modal/js/bootstrap-modalmanager',
+                'plugins/bs-switch'            : 'plugins/bootstrap-switch/dist/js/bootstrap-switch.min',
+                'plugins/bs-select'            : 'plugins/bootstrap-select/dist/js/bootstrap-select.min',
+                'plugins/bs-confirmation'      : 'plugins/bootstrap-confirmation2/bootstrap-confirmation',
+                'plugins/bs-maxlength'         : 'plugins/bootstrap-maxlength/bootstrap-maxlength.min',
+                'plugins/bs-material'          : 'vendor/material',
+                'plugins/bs-material-ripples'  : 'plugins/bootstrap-material-design/scripts/ripples',
+                'plugins/contextmenu'          : 'plugins/bootstrap-contextmenu/bootstrap-contextmenu',
+                'plugins/gtreetable'           : "plugins/bootstrap-gtreetable/dist/bootstrap-gtreetable",
+                'plugins/bs-filestyle'         : 'plugins/bootstrap-filestyle/src/bootstrap-filestyle',
+                'plugins/bs-slider'            : 'plugins/bootstrap-slider/bootstrap-slider',
+                'plugins/bs-touchspin'         : 'plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min',
+                'plugins/bs-wysiwyg'           : 'plugins/bootstrap-wysiwyg/bootstrap-wysiwyg',
+                'plugins/bs-markdown-editor'   : 'plugins/bootstrap-markdown-editor/dist/js/bootstrap-markdown-editor',
+                'plugins/summernote'           : 'plugins/summernote/dist/summernote',
+                'plugins/summernote-codemirror': 'plugins/summernote/dist/summernote',
+                'plugins/medium-editor'        : 'plugins/medium-editor/dist/js/medium-editor.min',
 
                 // gsap
                 'plugins/gsap/lite'       : 'plugins/gsap/src/minified/TweenLite.min',
@@ -234,19 +238,41 @@
             },
 
 
+            map: {
+                '*': {
+                    'css'       : 'plugins/require-css/css',
+                    'd3'        : 'plugins/d3',
+                    'topojson'  : 'plugins/topojson',
+                    'CodeMirror': 'code-mirror!htmlmixed'
+                }
+            },
+
 
             shim: {
                 // stand-alone and exports
-                'plugins/svg'         : {exports: 'SVG'},
-                'jade'                : {exports: 'jade'},
-                'string'              : {exports: '_s'},
-                'plugins/github-api'  : {exports: 'Github'},
-                'plugins/oauth2'      : {exports: 'oauth2'},
-                'plugins/oauth-io'    : {exports: 'OAuth'},
-                'plugins/d3'          : {exports: 'd3'},
-                'amcharts/amcharts'   : {exports: 'AmCharts'},
-                'amcharts/serial'     : ['amcharts/amcharts'],
+                'plugins/svg'       : {exports: 'SVG'},
+                'jade'              : {exports: 'jade'},
+                'string'            : {exports: '_s'},
+                'plugins/github-api': {exports: 'Github'},
+                'plugins/oauth2'    : {exports: 'oauth2'},
+                'plugins/oauth-io'  : {exports: 'OAuth'},
+                'plugins/d3'        : {exports: 'd3'},
+                'CodeMirror'        : {exports: 'CodeMirror'},
+                'code-mirror'       : {exports: 'CodeMirror'},
+                'plugins/medium-editor': {exports: 'MediumEditor' },
+                'plugins/summernote-codemirror': {
+                    deps: ['CodeMirror'],
+                    init: function(){
+                        this.jQuery.summernote.options = this.App.config('plugins.summernote')
+                    }
+                },
+
+                'amcharts/amcharts'    : {exports: 'AmCharts'},
+                'amcharts/serial'      : ['amcharts/amcharts'],
                 'amcharts/themes/light': ['amcharts/amcharts'],
+
+
+                // 'ace-build/ace': {exports: 'ace'},
 
                 // jquery
                 'jquery': {
@@ -263,13 +289,15 @@
                 'plugins/jquery-hotkeys': ['jquery'],
 
                 // bootstrap
-                'plugins/bootstrap'      : ['jquery'],
-                'plugins/gtreetable'     : ['plugins/jquery-migrate', 'plugins/jquery-ui/core', 'plugins/jquery-ui/draggable', 'plugins/jquery-ui/droppable'],
-                'plugins/mscrollbar'     : ['plugins/bootstrap', 'plugins/mousewheel'],
-                'plugins/bs-modal'       : ['plugins/bootstrap', 'plugins/bs-modal-manager'],
-                'plugins/bs-material'    : ['plugins/bootstrap', 'plugins/bs-material-ripples'],
-                'plugins/bs-confirmation': ['plugins/bootstrap'],
-                'plugins/bs-wysiwyg'     : ['plugins/jquery-hotkeys'],
+                'plugins/bootstrap'         : ['jquery'],
+                'plugins/gtreetable'        : ['plugins/jquery-migrate', 'plugins/jquery-ui/core', 'plugins/jquery-ui/draggable', 'plugins/jquery-ui/droppable'],
+                'plugins/mscrollbar'        : ['plugins/bootstrap', 'plugins/mousewheel'],
+                'plugins/bs-modal'          : ['plugins/bootstrap', 'plugins/bs-modal-manager'],
+                'plugins/bs-material'       : ['plugins/bootstrap', 'plugins/bs-material-ripples'],
+                'plugins/bs-confirmation'   : ['plugins/bootstrap'],
+                'plugins/bs-wysiwyg'        : ['plugins/jquery-hotkeys'],
+                'plugins/bs-markdown-editor': ['ace-build/ace', 'jquery', 'plugins/bootstrap'],
+
                 // flots
 
                 'flot'             : ['jquery'],
@@ -325,9 +353,10 @@
                 css    : '<%= paths.scripts %>/plugins/codemirror/lib/codemirror.css',
                 // define themes
                 themes : {
-                    monokai : '/path/to/theme/monokai.css',
-                    ambiance: '/path/to/theme/ambiance.css',
-                    eclipse : '/path/to/theme/eclipse.css'
+                    monokai : '<%= paths.scripts %>/plugins/codemirror/theme/monokai.css',
+                    ambiance: '<%= paths.scripts %>/plugins/codemirror/theme/ambiance.css',
+                    zenburn : '<%= paths.scripts %>/plugins/codemirror/theme/zenburn.css',
+                    eclipse : '<%= paths.scripts %>/plugins/codemirror/theme/eclipse.css'
                 },
                 modes  : {
                     // modes dir structure

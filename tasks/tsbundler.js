@@ -73,8 +73,8 @@ module.exports = function (grunt) {
                     optimize                  : opts.optimize,
                     dir                       : "", //tmp dir / subdir,
                     wrap                      : {
-                        startFile: path.join(cwd, opts.startFile),
-                        endFile  : path.join(cwd, opts.endFile)
+                        startFile: opts.startFile,
+                        endFile  : opts.endFile
                     },
                     allowSourceOverwrites     : false,
                     skipDirOptimize           : true,

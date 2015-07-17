@@ -252,7 +252,10 @@ var init = module.exports = function (grunts) {
             },
 
             scripts_watch: {
-                files: ['src/scripts/**/*.js', '!src/scripts/init.js', '!src/scripts/wrap-close.js', '!src/scripts/wrap-open.js'],
+                files: [
+                    'src/scripts/**/*.js', '!src/scripts/init.js', '!src/scripts/config.js',
+                    '!src/scripts/wrap-close.js', '!src/scripts/wrap-open.js', '!src/scripts/wrap-open-script.js'
+                ],
                 tasks: ['copy:scripts_watch']
             },
             typescript: {
@@ -260,7 +263,10 @@ var init = module.exports = function (grunts) {
                 tasks: ['typescript:amd']
             },
             initscripts  : {
-                files: ['src/tscripts/app/**/*.ts', 'src/tscripts/packadic.ts', 'src/scripts/init.js', 'src/scripts/config.js', 'src/scripts/wrap-close.js', 'src/scripts/wrap-open.js'],
+                files: [
+                    'src/tscripts/app/**/*.ts', 'src/tscripts/packadic.ts', 'src/scripts/init.js', 'src/scripts/config.js',
+                    'src/scripts/wrap-close.js', 'src/scripts/wrap-open.js', 'src/scripts/wrap-open-script.js'
+                ],
                 tasks: ['tsbundler:packadic', 'copy:scripts_watch', 'create_init_script'] //'jsbuild:lodash', 'copy:scripts', 'uglify:dev',
             },
 
@@ -339,7 +345,7 @@ var init = module.exports = function (grunts) {
                         'eventemitter2': 'src/plugins/eventemitter2/lib/eventemitter2'
                     },
                     modules  : [ 'app/application', 'app/autoloader', 'app/config', 'app/util', 'app/storage', 'app/layout', 'async','eventemitter2'],
-                    startFile: "src/scripts/wrap-open.js",
+                    startFile: ["src/scripts/wrap-open.js", "src/scripts/wrap-open-script.js"],
                     endFile  : "src/scripts/wrap-close.js",
                     optimize : "none",
                     target   : 'ES5'

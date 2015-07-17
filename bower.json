@@ -120,7 +120,9 @@
     "jQuery.Hotkeys": "~0.2.0",
     "browser-jsonp": "~1.0.8",
     "amcharts": "~3.14.3",
-    "bootstrap-markdown-editor": "~1.1.1"
+    "bootstrap-markdown-editor": "~1.1.1",
+    "medium-editor": "~5.4.0",
+    "summernote": "~0.6.10"
   },
   "resolutions": {
     "datatables": "~1.10.6"

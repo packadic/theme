@@ -1,6 +1,7 @@
-///<reference path="typings/tsd.d.ts"/>
+///<reference path="types.d.ts"/>
 import $ = require('jquery');
 import {Application} from 'app/application';
+
 
 class Demo {
     protected app:Application;
@@ -21,6 +22,7 @@ class Demo {
         this.present('#charts-demo', 'flots');
         this.present('#charts-demo', 'charts');
         this.demoClass('#dashboard-demo', 'dashboard');
+        this.demoClass('#demo-forms-editors', 'forms-editors');
     }
 
     protected demoClass(selector, module) {

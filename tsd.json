@@ -37,6 +37,15 @@
         },
         "gapi/gapi.d.ts": {
             "commit": "304a25197990aeabf8e9fd030ad927ed011b9e83"
+        },
+        "ace/ace.d.ts": {
+            "commit": "76e1dedf0bada455c0b75abeec3206d3aa5bd892"
+        },
+        "marked/marked.d.ts": {
+            "commit": "76e1dedf0bada455c0b75abeec3206d3aa5bd892"
+        },
+        "codemirror/codemirror.d.ts": {
+            "commit": "76e1dedf0bada455c0b75abeec3206d3aa5bd892"
         }
     }
 }

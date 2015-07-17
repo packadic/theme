@@ -42,33 +42,6 @@ declare enum ThemeAction {
 declare enum SidebarAction {
     init, toggle, hide, show, open, close, refresh
 }
-interface JQueryStatic {
-    material:any;
-    cookie?:any;
-    mCustomScrollbar?:any;
-    ripples?:any;
-    slimScroll?:any;
-    sidebar?:any;
-    box?:any;
-    unblockUI():any;
-    blockUI(...args:any[]):any;
-}
-
-interface JQuery {
-    easyPieChart(...args:any[]);
-    prefixedData(prefix:string);
-    $i?:any;
-    mCustomScrollbar(args?:any):JQuery;
-    ripples(args?:any):JQuery;
-    slimScroll(args?:any):JQuery;
-    size():number;
-    tooltip(args?:any):JQuery;
-    TouchSpin(args?:any):JQuery;
-    sidebar(...args:any[]):JQuery;
-    box(...args:any[]):JQuery;
-    block(...args:any[]):JQuery;
-    unblock(...args:any[]):JQuery;
-}
 
 interface Window {
     attachEvent(name:string, handler?:Function);
@@ -118,6 +91,18 @@ interface IWidget {
     _destroy():any;
 }
 
+interface HighlightJS {
+    highlight(name:string, value:string, ignore_illegals?:boolean, continuation?:boolean) : any;
+    highlightAuto(value:string, languageSubset?:string[]) : any;
+    fixMarkup(value:string) : string;
+    highlightBlock(block:Node) : void;
+    configure(options:any): void;
+    initHighlighting(): void;
+    initHighlightingOnLoad(): void;
+    registerLanguage(name:string, language:(hljs?:any) => any): void;
+    listLanguages(): string[];
+    getLanguage(name:string): any;
+}
 declare module widgets {
     class WidgetBase {
         _create():any;
@@ -287,16 +272,65 @@ declare module 'amcharts/serial' {
 }
 declare module 'amcharts/themes/light' {
 }
+declare module "plugins/marked" {
+    var marked:MarkedStatic;
+    export = marked;
+}
 
-interface HighlightJS {
-    highlight(name:string, value:string, ignore_illegals?:boolean, continuation?:boolean) : any;
-    highlightAuto(value:string, languageSubset?:string[]) : any;
-    fixMarkup(value:string) : string;
-    highlightBlock(block:Node) : void;
-    configure(options:any): void;
-    initHighlighting(): void;
-    initHighlightingOnLoad(): void;
-    registerLanguage(name:string, language:(hljs?:any) => any): void;
-    listLanguages(): string[];
-    getLanguage(name:string): any;
+declare module "plugins/highlightjs" {
+    var hljs: HighlightJS;
+    export = hljs;
+}
+
+declare module "plugins/bs-wysiwyg" {
+}
+declare module "plugins/bs-markdown-editor" {
+}
+declare module "ace-build/ace" {
+}
+declare module "code-mirror!htmlmixed:monokai" {
+    export = CodeMirror;
+}
+
+interface MediumEditorStatic {
+    destroy();
+    setup();
+
+}
+
+declare module "plugins/medium-editor" {
+    var me:any;
+    export = me;
+}
+
+interface JQueryStatic {
+    material:any;
+    cookie?:any;
+    mCustomScrollbar?:any;
+    ripples?:any;
+    slimScroll?:any;
+    sidebar?:any;
+    box?:any;
+    unblockUI():any;
+    blockUI(...args:any[]):any;
+    summernote?:any;
+}
+
+interface JQuery {
+    easyPieChart(...args:any[]);
+    prefixedData(prefix:string);
+    $i?:any;
+    mCustomScrollbar(args?:any):JQuery;
+    ripples(args?:any):JQuery;
+    slimScroll(args?:any):JQuery;
+    size():number;
+    tooltip(args?:any):JQuery;
+    TouchSpin(args?:any):JQuery;
+    sidebar(...args:any[]):JQuery;
+    box(...args:any[]):JQuery;
+    block(...args:any[]):JQuery;
+    unblock(...args:any[]):JQuery;
+    markdownEditor(...args:any[]):JQuery;
+    wysiwyg(...args:any[]):JQuery;
+    summernote(...args:any[]):JQuery;
 }

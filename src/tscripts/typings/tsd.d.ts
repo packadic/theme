@@ -9,3 +9,6 @@
 /// <reference path="flot/jquery.flot.d.ts" />
 /// <reference path="amcharts/AmCharts.d.ts" />
 /// <reference path="gapi/gapi.d.ts" />
+/// <reference path="ace/ace.d.ts" />
+/// <reference path="marked/marked.d.ts" />
+/// <reference path="codemirror/codemirror.d.ts" />

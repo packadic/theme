@@ -1,3 +1,3 @@
-App.ready(function() {
+App.ready(function () {
     App.boot();
 });
