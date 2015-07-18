@@ -1,4 +1,4 @@
-var radic  = require('radic'),
+var
     _      = require('lodash'),
     jsyaml = require('js-yaml'),
     fs     = require('fs-extra'),

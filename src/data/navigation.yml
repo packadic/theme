@@ -57,22 +57,8 @@ sidebar:
       - name: Widgets
         href: <%= target.nav.pre %>/components/widgets<%= target.nav.ext %>
 
-  - name: Charts
-    href: <%= target.nav.pre %>/components/charts<%= target.nav.ext %>
-    icon: fa fa-bar-chart
-    children:
-      - name: General
+      - name: Charts
         href: <%= target.nav.pre %>/components/charts/general<%= target.nav.ext %>
-      - name: Flot
-        href: <%= target.nav.pre %>/components/charts/flot<%= target.nav.ext %>
-      - name: amCharts
-        href: <%= target.nav.pre %>/components/charts/amcharts<%= target.nav.ext %>
-      - name: ChartJS
-        href: <%= target.nav.pre %>/components/charts/chartjs<%= target.nav.ext %>
-      - name: Vega
-        href: <%= target.nav.pre %>/components/charts/vega<%= target.nav.ext %>
-      - name: Rickshaw
-        href: <%= target.nav.pre %>/components/charts/rickshaw<%= target.nav.ext %>
 
   - name: Forms
     icon: fa fa-pencil
@@ -112,17 +98,13 @@ sidebar:
         href: <%= target.nav.pre %>/components/tables/datatables<%= target.nav.ext %>
 
 
-  - name: Documentation
-    icon: fa fa-book
+  - name: Pages
+    icon: fa fa-file-o
     children:
-      - name: API
-        children:
-          - name: General
-            href: <%= target.nav.pre %>/documentation/api/general<%= target.nav.ext %>
-      - name: CSS
-        children:
-          - name: Utility classes
-            href: <%= target.nav.pre %>/documentation/css/utility-classes<%= target.nav.ext %>
+      - name: Login
+        href: <%= target.nav.pre %>/pages/login<%= target.nav.ext %>
+      - name: Profile
+        href: <%= target.nav.pre %>/pages/profile<%= target.nav.ext %>
 
 
   - name: Multi-level icon menu

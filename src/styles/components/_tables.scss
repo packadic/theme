@@ -265,6 +265,7 @@ Custom tables
 }
 
 
+
 /***
 Light Table
 ***/
@@ -285,10 +286,10 @@ Light Table
             }
 
             > th {
-                font-weight: 600;
+                font-weight: 400;
+                font-family: $font-family-sub-heading;
                 font-size: 13px;
                 color: darken(#B5BFC4, 5%);
-                font-family: $font-family-primary;
                 border: 0;
                 border-bottom:1px solid #F2F5F8;
             }

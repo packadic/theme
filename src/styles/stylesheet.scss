@@ -80,9 +80,10 @@ form:not(.form-material) {
 @import "components/loader";
 @import "components/share-buttons";
 @import "components/widgets";
+@import "components/list-group";
 
 @import "components/sliding-tags";
-@import "components/tabbed-widget";
+//@import "components/tabbed-widget";
 @import "components/task-list";
 @import "components/to-do-list";
 @import "components/settings-editor";
@@ -93,6 +94,9 @@ form:not(.form-material) {
 
 
 @import "components/bootstrap-material";
+
+
+@import "pages/pages";
 
 blockquote {
     border-left: 5px solid #33336E;

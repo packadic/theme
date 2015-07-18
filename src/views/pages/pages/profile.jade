@@ -1,0 +1,121 @@
+
+extends ../../layouts/default
+
+
+block header
+    +page-title("Profile", "Pages")
+    +page-breadcrumbs
+        +breadcrumb("Pages", "/pages")
+        +breadcrumb("Pages", "/pages/profile", true)
+
+block content
+
+
+    .row
+        .col-md-3
+            +box.widget.widget-user-overview.mb-lg
+                .picture(style="background-image: url('/assets/images/wallpaper1.jpg')")
+                    img.img-thumbnail.img-circle.thumb128(src="/assets/images/users/steven-hallam.jpg", alt="Image")
+                    h3 Steven Hallam
+                    p #steven-hallam
+                .link-bar.bg-cyan-dark
+                    .col-xs-4
+                        a(href="#").text-grey-light
+                            i.fa.fa-twitter.fa-2x
+                    .col-xs-4
+                        a(href="#").text-grey-light
+                            i.fa.fa-facebook.fa-2x
+                    .col-xs-4
+                        a(href="#").text-grey-light
+                            i.fa.fa-comments.fa-2x
+
+            +box('Information', 'info').p-n
+                .link-list
+                    a(href="#")
+                        span.label.label-primary.pull-right 15
+                        i.fa.fa-fw.fa-clock-o.text-muted
+                        | Recent Activity
+                    a(href="#")
+                        span.label.label-primary.pull-right 1523
+                        i.fa.fa-fw.fa-users.text-muted
+                        | Following
+                    a(href="#")
+                        span.label.label-primary.pull-right 312
+                        i.fa.fa-fw.fa-camera.text-muted
+                        | Photos
+        .col-md-9
+            +box('About', 'user')
+                .about-area
+                    h4.alt Bio
+                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores in eveniet sapiente error fuga tenetur ex ea dignissimos voluptas ab molestiae eos totam quo dolorem maxime illo neque quia itaque.
+                    p Asperiores in eveniet sapiente error fuga tenetur ex ea dignissimos voluptas ab molestiae eos totam quo dolorem maxime illo neque quia itaque.
+                .about-area
+                    h4.alt Basic Information
+                    .table-responsive
+                        table.table
+                            tbody
+                                tr
+                                    th Web
+                                    td
+                                        a(href='#') www.steveftw.com
+                                tr
+                                    th Email
+                                    td
+                                        a(href='#') steve@ftw.com
+                                tr
+                                    th Phone
+                                    td +21 684764284
+                                tr
+                                    th Position
+                                    td 69
+                                tr
+                                    th Status
+                                    td Busy
+                                tr
+                                    th Social
+                                    td
+                                        ul.list-inline.m-n
+                                            li
+                                                a(href='#')
+                                                    i.fa.fa-pinterest
+                                            li
+                                                a(href='#')
+                                                    i.fa.fa-twitter
+                                            li
+                                                a(href='#')
+                                                    i.fa.fa-google
+                                            li
+                                                a(href='#')
+                                                    i.fa.fa-linkedin
+                                            li
+                                                a(href='#')
+                                                    i.fa.fa-dribbble
+                                            li
+                                                a(href='#')
+                                                    i.fa.fa-facebook
+                .about-area
+                    h4.alt Personal Information
+                    .table-responsive
+                        table.table.about-table
+                            tbody
+                                tr
+                                    th Full Name
+                                    td Jonathan Davison Smith
+                                tr
+                                    th Birth Date
+                                    td 1 January
+                                tr
+                                    th Birth Year
+                                    td 1980
+                                tr
+                                    th Gender
+                                    td Male
+                                tr
+                                    th Languages
+                                    td English
+                                tr
+                                    th City
+                                    td Canbera
+                                tr
+                                    th Country
+                                    td Australia

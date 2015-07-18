@@ -1,6 +1,5 @@
-var radic     = require('radic'),
+var util     = require('util'),
     async     = require('async'),
-    util      = radic.util,
     _         = require('lodash'),
     jsyaml    = require('js-yaml'),
     fse       = require('fs-extra'),

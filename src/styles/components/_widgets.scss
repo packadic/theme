@@ -74,28 +74,6 @@
             font-weight: 400;
         }
     }
-    .link-list {
-        > a {
-            font-family: $font-family-sub-heading;
-            font-weight: 400;
-            padding: 10px;
-            position: relative;
-            display: block;
-            margin-bottom: -1px;
-            background-color: rgba(#ccc, 0.1);
-            border: 1px solid #e4eaec;
-            color: #555555;
-            border-width: 1px 0;
-            border-top: 0;
-            &:hover {
-                text-decoration: none;
-                background-color: rgba(#ccc, 0.3);
-            }
-        }
-        i {
-            margin-right: 10px;
-        }
-    }
 }
 
 .widget.widget-progress {

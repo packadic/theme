@@ -2,7 +2,7 @@
 
 'use strict';
 
-var radic   = require('radic'),
+var
     _       = require('lodash'),
     util    = require('util'),
     _s      = require('underscore.string'),
