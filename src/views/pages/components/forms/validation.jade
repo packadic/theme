@@ -45,37 +45,6 @@ mixin form-demo-content(label, horizontal)
         button.btn.btn-default(type='submit') Submit
 
 
-mixin form-horizontal-demo-content()
-    - var rnd = Math.random()
-    .form-title
-        h4 Credentials
-    .form-group.has-success
-        label(for=rnd + "email").col-sm-3.control-label Email
-        .col-sm-9
-            input.form-control(id=rnd + "email",type='email', placeholder='Email', data-hint='Enter a valid email address')&attributes(attributes)
-    .form-group.has-error
-        label(for=rnd + "password").col-sm-3.control-label Password
-        .col-sm-9
-            input.form-control(id=rnd + "password",type='password', placeholder='Password', data-hint='Enter a password that is safe')&attributes(attributes)
-    .form-title
-        h4 Personal information
-    .form-group.has-warning
-        label(for=rnd + "first-name").col-sm-3.control-label First name
-        .col-sm-9
-            input.form-control(id=rnd + "first-name",type='text', placeholder='First name')&attributes(attributes)
-    .form-group
-        label(for=rnd + "last-name").col-sm-3.control-label Last name
-        .col-sm-9
-            input.form-control(id=rnd + "last-name",type='text', placeholder='Last name')&attributes(attributes)
-    .form-group
-        .col-sm-offset-3.col-sm-9
-            .checkbox
-                label
-                    input(type='checkbox')
-                    |  Remember me
-    .form-actions
-        .col-sm-offset-3.col-sm-9
-            button.btn.btn-default(type='submit') Sign in
 
 
 block header
@@ -87,21 +56,80 @@ block header
 
 
 block content
-    #demo-forms
+    .row#demo-forms
+        .col-md-12
+            +form-box("Default", "list")#validate-form.form-light.form-horizontal
+                .form-group-seperator
+                .form-group
+                    label(for="email").col-sm-3.control-label Email
+                    .col-sm-9
+                        input.form-control(id="email",name="email",type='email', placeholder='Email', data-hint='Enter a valid email address')
+                .form-group-seperator
+                .form-group
+                    label(for="password").col-sm-3.control-label Password
+                    .col-sm-9
+                        input.form-control(id="password",name="password",type='password', placeholder='Password', data-hint='Enter a password that is safe')
+                .form-group-seperator
+                .form-group
+                    label(for="first-name").col-sm-3.control-label First name
+                    .col-sm-9
+                        input.form-control(id="first-name",name="first-name",type='text', placeholder='First name')
+                .form-group-seperator
+                .form-group
+                    label(for="last-name").col-sm-3.control-label Last name
+                    .col-sm-9
+                        input.form-control(id="last-name",name="last-name",type='text', placeholder='Last name')
+                .form-group-seperator
+                .form-group
+                    .col-sm-offset-3.col-sm-9
+                        .checkbox
+                            label
+                                input(type='checkbox')
+                                |  Remember me
+                .form-actions
+                    .col-sm-offset-3.col-sm-9
+                        button.btn.btn-default(type='submit') Sign in
 
-    .row
-        .col-md-6
-            +form-box("Default", "list")#validate-form
-                +form-demo-content(true)
-        .col-md-6
-            +form-box("Validation states", "list").form-horizontal
-                +form-horizontal-demo-content
 
 block append scripts-outside-of-project
     script.
-        App.ready(function(){
-            App.on('state:starting', function(){
-                require(['jquery', 'plugins/validation'], function($){
+        App.when('state:starting', ['jquery', 'plugins/jquery-validate'], function($){
+            var form = $('#validate-form');
+
+            form.validate({
+                errorElement  : 'span',
+                errorClass    : 'help-block help-block-error',
+                focusInvalid  : false,
+                highlight     : function (element) {
+                    $(element).closest('.form-group').addClass('has-error');
+                },
+                unhighlight   : function (element) {
+                    $(element).closest('.form-group').removeClass('has-error');
+                },
+                success       : function (label) {
+                    label.closest('.form-group').removeClass('has-error');
+                },
+                rules: {
+                    email: {
+                        email: true,
+                        required: true
+                    },
+                    password: {
+                        min:6,
+                        max:30,
+                        required: true
+                    },
+                    'first-name': {
+                        min:3,
+                        max:30
+                    },
+                    'last-name': {
+                        min:3,
+                        max:30
+                    }
+                }
+            })
+            /*
                     $.validate({
                         form: '#validate-form',
                         modules: 'date, security, html5',
@@ -109,6 +137,5 @@ block append scripts-outside-of-project
                         errorElementClass: '',
                         addValidClassOnAll: false
                     });
-                });
-            });
+                    */
         });

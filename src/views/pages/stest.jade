@@ -1,0 +1,14 @@
+extends ../layouts/default
+block header
+    +page-title("Sterst", "Welcome!")
+
+
+block content
+    .row
+        .col-md-12
+            +box("A")
+
+block prepend scripts-pre-boot
+    script.
+        App.when('state:started', ['stest'], function(stest){
+        });
