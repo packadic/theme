@@ -9,30 +9,6 @@ mixin tab-content(name)
 
 
 
-mixin tabber-nav(prefix)
-    ul.nav.nav-tabs(role="tablist")&attributes(attributes)
-        li(role="presentation").active
-            a(href="##{prefix}home", aria-controls="#{prefix}home", role="tab", data-toggle="tab") Home
-        li(role="presentation")
-            a(href="##{prefix}profile", aria-controls="#{prefix}profile", role="tab", data-toggle="tab") Profile
-
-mixin tabber-content(prefix, withBlock)
-    - withBlock = withBlock || false;
-    .tab-content&attributes(attributes)
-        .tab-pane.active.fade.in(role="tabpanel", id="#{prefix}home")
-            if withBlock
-                block
-            else
-                +tab-content("home of " + prefix)
-        .tab-pane.fade(role="tabpanel", id="#{prefix}profile")
-            +tab-content("profile of " + prefix)
-
-mixin tabber(prefix)
-    .tabber(role="tabpanel")&attributes(attributes)
-        +tabber-nav(prefix)
-        +tabber-content(prefix)
-
-
 mixin list-item(name, href, active)
     - href = href || '#'
     - active = active || false
@@ -45,93 +21,88 @@ mixin list-items()
     +list-item("Then this")
     +list-item("This too")
 
+
+mixin demo-tabbable-sides-tablist(side)
+    ul.nav.nav-tabs
+        li.active: a(data-toggle='tab', href='#tabNerota' + side, aria-expanded='true')
+            i.text-green.tab-icon.fa.fa-pencil-square-o
+            |  Nerota
+        li: a(data-toggle='tab', href='#tabDomesticus' + side, aria-expanded='false')
+            i.text-purple.tab-icon.fa.fa-cog
+            |  Domesticus
+        li: a(data-toggle='tab', href='#tabSkiffjack' + side, aria-expanded='false')
+            i.text-blue.tab-icon.fa.fa-key
+            |  Skiffjack
 block content
     .content-tabbed
         ul(role="tablist").nav.nav-tabs.nav-tabs-content
             li(role="presentation").active
-                a(href="#without-box", aria-controls="without-box", role="tab", data-toggle="tab") Tabs
+                a(href="#tabs", aria-controls="tabs", role="tab", data-toggle="tab") Tabs
 
             li(role="presentation")
-                a(href="#with-box", aria-controls="with-box", role="tab", data-toggle="tab") Boxed Tabs
+                a(href="#navs", aria-controls="navs", role="tab", data-toggle="tab") Navs
 
-            li(role="presentation")
-                a(href="#tabs-bottom", aria-controls="tabs-bottom", role="tab", data-toggle="tab") Tabs bottom
-
-            li(role="presentation")
-                a(href="#box-tabs-bottom", aria-controls="box-tabs-bottom", role="tab", data-toggle="tab") Boxed Tabs bottom
-
-            li(role="presentation")
-                a(href="#navs-pane", aria-controls="navs-pane", role="tab", data-toggle="tab") Navs
+            //
+                li(role="presentation")
+                    a(href="#tabs-bottom", aria-controls="tabs-bottom", role="tab", data-toggle="tab") Tabs bottom
+                li(role="presentation")
+                    a(href="#box-tabs-bottom", aria-controls="box-tabs-bottom", role="tab", data-toggle="tab") Boxed Tabs bottom
+                li(role="presentation")
+                    a(href="#navs-pane", aria-controls="navs-pane", role="tab", data-toggle="tab") Navs
 
         .tab-content
-            #without-box(role="tabpanel").tab-pane.active.fade.in
+
+            #tabs(role='tabpanel').tab-pane.fade.active.in
+                .row
+                    .col-md-6
+                        +box
+                            +box-header('Box with tabs', 'bolt')
+                                .actions
+                                +tab-list(['Left', 'Below', 'Right'], 0)
+                            +box-body.tab-content.p-n
+                                for side in ['Left', 'Below', 'Right']
+                                    +tab(side, (side === 'Left')).fade(class=(side === 'Left' ? 'in' : false))
+                                        .tabbable.tabs-boxed(class='tabs-' + side.toLowerCase())
+                                            if side != 'Below'
+                                                +demo-tabbable-sides-tablist(side)
+                                            .tab-content
+                                                +tab('Nerota'+side, true).fade.in
+                                                    h5 Nerota!
+                                                    p Taste me skiff, ye undead jack!
+                                                    p Grow and you will be invented agreeable.
+                                                +tab('Domesticus'+side).fade
+                                                    h5 Domesticus!
+                                                    p All those vogons consume spheroid, apocalyptic pathways.
+                                                    p Ubi est camerarius nuptia?
+                                                +tab('Skiffjack'+side).fade
+                                                    h5 Skiffjack!
+                                                    p Grow and you will be invented agreeable.
+                                                    p Press nine onions, lettuce, and brown sugar in a large sauté pan over.
+                                            if side == 'Below'
+                                                +demo-tabbable-sides-tablist(side)
+
+                    .col-md-6
+                        .tabbable
+                            ul.nav.nav-tabs
+                                li.active: a(data-toggle='tab', href='#light1', aria-expanded='true')
+                                    i.text-green.tab-icon.fa.fa-pencil-square-o
+                                    |  Basic Info
+                                li: a(data-toggle='tab', href='#light2', aria-expanded='false')
+                                    i.text-purple.tab-icon.fa.fa-cog
+                                    |  Settings
+                                li: a(data-toggle='tab', href='#light3', aria-expanded='false')
+                                    i.text-blue.tab-icon.fa.fa-key
+                                    |  Password
+                            .tab-content
+                                #light1.tab-pane.active.fade.in
+                                    p Cum eleates crescere, omnes lixaes vitare alter, camerarius fluctuses.
+                                #light2.tab-pane.fade
+                                    p Sagas mori, tanquam varius fluctui. Cum eleates crescere, omnes lixaes vitare alter, camerarius fluctuses.
+                                #light3.tab-pane.fade
+                                    p Raptus lubas ducunt ad habitio. Cum eleates crescere, omnes lixaes vitare alter, camerarius fluctuses.
+
+
+            #navs(role="tabpanel").tab-pane.fade
                 .row
                     .col-md-4
-                        +tabber("first")
-                    .col-md-4
-                        +tabber("sec").tabber-grey
-                    .col-md-4
-                        +tabber("ttt").tabber-grey
-
-            #with-box(role="tabpanel").tab-pane.fade
-                .row
-                    .col-md-4
-                        +box("Tabs and nav nav-pill", "list").box-tabber
-                            +tabber("tatt")
-                    .col-md-4
-                        +box("Tabs and nav nav-pill nav-stacked", "list").box-tabber
-                            +tabber("tatt33")
-                    .col-md-4
-                        +box("Tabs in box", "list").box-tabber
-                            +tabber("tattfat")
-
-            #tabs-bottom(role="tabpanel").tab-pane.fade
-                .row.margin-top
-                    .col-md-4
-                        .tabber.tabs-bottom(role="tabpanel")
-                            +tabber-content("sec2sec")
-                            +tabber-nav("sec2sec")
-                    .col-md-4
-                        .tabber.tabber-grey.tabs-bottom(role="tabpanel")
-                            +tabber-content("secsec")
-                            +tabber-nav("secsec")
-                    .col-md-4
-                        .tabber.tabber-grey.tabs-bottom(role="tabpanel")
-                            +tabber-content("asdfasdf")
-                            +tabber-nav("asdfasdf")
-            #box-tabs-bottom(role="tabpanel").tab-pane.fade
-                .row.margin-top
-                    .col-md-4
-                        .tabber.tabs-bottom(role="tabpanel")
-                            +tabber-content("sec2sec")
-                            +tabber-nav("sec2sec")
-                    .col-md-4
-                        .tabber.tabber-grey.tabs-bottom(role="tabpanel")
-                            +tabber-content("secsec")
-                            +tabber-nav("secsec")
-                    .col-md-4
-                        .tabber.tabber-grey.tabs-bottom(role="tabpanel")
-                            +tabber-content("asdfasdf")
-                            +tabber-nav("asdfasdf")
-
-            #navs-pane(role="tabpanel").tab-pane.fade
-                .row
-                    .col-md-4
-                        +box("Tabs and nav nav-pill", "list").box-tabber
-                            .tabber(role="tabpanel")
-                                +tabber-nav("tatt")
-                                +tabber-content("tatt", true)
-                                    ul.nav.nav-pills.nav-stacked
-                                        +list-items
-                    .col-md-4
-                        +box("Tabs and nav nav-pill nav-stacked", "list").box-tabber
-                            .tabber(role="tabpanel").tabber-grey
-                                +tabber-nav("tatt33")
-                                +tabber-content("tatt33", true)
-                                    ul.nav.nav-pills
-                                        +list-items
-                    .col-md-4
-                        +box("Tabs in box", "list").box-tabber
-                            .tabber.tabs-bottom(role="tabpanel")
-                                +tabber-content("tsdfatt")
-                                +tabber-nav("tsdfatt")
+                        h1 navs

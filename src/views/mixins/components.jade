@@ -60,8 +60,8 @@ mixin tab-list(tabs,active)
 //- Tab pane
 mixin tab(id,active)
     if active
-        .tab-pane.active(id="tab#{id}")
+        .tab-pane.active(id="tab#{id}")&attributes(attributes)
             block
     else
-        .tab-pane(id="tab#{id}")
+        .tab-pane(id="tab#{id}")&attributes(attributes)
             block

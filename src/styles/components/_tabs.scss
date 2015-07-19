@@ -16,7 +16,7 @@ $general-border-radius: 0;
                 }
                 &.active > a {
                     border-top: none;
-                    border-bottom:  5px solid $color;
+                    border-bottom: 5px solid $color;
                 }
             }
         }
@@ -27,7 +27,7 @@ $general-border-radius: 0;
     }
 }
 
-$tabber-tab-active-color: #222;
+$tabber-tab-active-color: #222222;
 
 .tabber {
     > .nav-tabs {
@@ -64,16 +64,13 @@ $tabber-tab-active-color: #222;
 .tabber.tabber-grey {
     > .nav-tabs > li.active > a {
         @include content-bg(4, true);
-        border-top: 5px solid #D8D8D8;
+        border-top: 5px solid #d8d8d8;
     }
     > .tab-content {
         @include content-bg(4, true);
     }
-    @include tabber-tabs-bottom(#D8D8D8);
+    @include tabber-tabs-bottom(#d8d8d8);
 }
-
-
-
 
 @mixin old() {
     .nav-tabs,
