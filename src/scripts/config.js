@@ -68,10 +68,10 @@
                 "showMethod"       : "fadeIn",
                 "hideMethod"       : "fadeOut"
             },
-            summernote: { // http://summernote.org/jsduck/source/settings.html#settings-property-options
+            summernote  : { // http://summernote.org/jsduck/source/settings.html#settings-property-options
                 defaultFontName: 'Verdana',
-                tabsize: 4,
-                codemirror: {
+                tabsize        : 4,
+                codemirror     : {
                     theme: 'monokai'
                 }
             }
@@ -141,7 +141,7 @@
                 // default vendor paths
                 'plugins/async'      : 'plugins/async/lib/async',
                 'plugins/svg'        : 'plugins/svg.js/dist/svg',
-                'plugins/moment'     : 'plugins/moment/moment/min/moment.min',
+                'plugins/moment'     : 'plugins/moment/min/moment.min',
                 'plugins/select2'    : 'plugins/select2/select2.min',
                 'plugins/marked'     : 'plugins/marked/marked.min',
                 'plugins/highlightjs': 'plugins/highlightjs/highlight.pack',
@@ -169,6 +169,7 @@
                 'plugins/validation'       : 'plugins/jquery-form-validator/form-validator/jquery.form-validator.min',
                 'plugins/tag-it'           : 'plugins/tag-it/js/tag-it.min',
                 'plugins/jquery-hotkeys'   : 'plugins/jQuery.Hotkeys/jquery.hotkeys',
+                'plugins/jquery-mockjax'   : 'plugins/jquery-mockajax/dist/jquery.mockjax.min',
 
                 // flotcharts
                 'flot'             : 'plugins/flotcharts/jquery.flot',
@@ -213,6 +214,7 @@
                 'plugins/summernote'           : 'plugins/summernote/dist/summernote',
                 'plugins/summernote-codemirror': 'plugins/summernote/dist/summernote',
                 'plugins/medium-editor'        : 'plugins/medium-editor/dist/js/medium-editor.min',
+                'plugins/x-editable'           : 'plugins/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min',
 
                 // gsap
                 'plugins/gsap/lite'       : 'plugins/gsap/src/minified/TweenLite.min',
@@ -233,6 +235,7 @@
                 'datatables/bs-plugins': 'plugins/datatables-plugins',
 
                 // stylesheets
+                'plugins/x-editablecss' : 'plugins/x-editable/dist/bootstrap3-editable/css/bootstrap-editable',
                 'plugins/select2css'    : '../styles/components/select2',
                 'plugins/highlightjscss': 'plugins/highlightjs/styles/github'
             },
@@ -250,19 +253,19 @@
 
             shim: {
                 // stand-alone and exports
-                'plugins/svg'       : {exports: 'SVG'},
-                'jade'              : {exports: 'jade'},
-                'string'            : {exports: '_s'},
-                'plugins/github-api': {exports: 'Github'},
-                'plugins/oauth2'    : {exports: 'oauth2'},
-                'plugins/oauth-io'  : {exports: 'OAuth'},
-                'plugins/d3'        : {exports: 'd3'},
-                'CodeMirror'        : {exports: 'CodeMirror'},
-                'code-mirror'       : {exports: 'CodeMirror'},
-                'plugins/medium-editor': {exports: 'MediumEditor' },
+                'plugins/svg'                  : {exports: 'SVG'},
+                'jade'                         : {exports: 'jade'},
+                'string'                       : {exports: '_s'},
+                'plugins/github-api'           : {exports: 'Github'},
+                'plugins/oauth2'               : {exports: 'oauth2'},
+                'plugins/oauth-io'             : {exports: 'OAuth'},
+                'plugins/d3'                   : {exports: 'd3'},
+                'CodeMirror'                   : {exports: 'CodeMirror'},
+                'code-mirror'                  : {exports: 'CodeMirror'},
+                'plugins/medium-editor'        : {exports: 'MediumEditor'},
                 'plugins/summernote-codemirror': {
                     deps: ['CodeMirror'],
-                    init: function(){
+                    init: function () {
                         this.jQuery.summernote.options = this.App.config('plugins.summernote')
                     }
                 },
@@ -324,8 +327,10 @@
 
                 'vendor/dataTables.bootstrap': ['datatables'],
 
+                // style loading
                 'plugins/select2'    : ['css!plugins/select2css'],
                 'plugins/highlightjs': ['css!plugins/highlightjscss'],
+                'plugins/x-editable' : ['css!plugins/x-editablecss'],
 
                 // packadic scripts
                 'config'    : ['jquery'],

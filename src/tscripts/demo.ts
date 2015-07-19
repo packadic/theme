@@ -21,6 +21,8 @@ class Demo {
         this.present('#demo-forms', 'forms');
         this.present('#charts-demo', 'flots');
         this.present('#charts-demo', 'charts');
+        this.present('#demo-forms-xeditor', 'forms-xeditor');
+
         this.demoClass('#dashboard-demo', 'dashboard');
         this.demoClass('#demo-forms-editors', 'forms-editors');
         this.demoClass('#demo-charts-amcharts', 'charts-amcharts');

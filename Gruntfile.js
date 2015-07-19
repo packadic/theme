@@ -269,7 +269,10 @@ var init = module.exports = function (grunts) {
                 ],
                 tasks: ['tsbundler:packadic', 'copy:scripts_watch', 'create_init_script'] //'jsbuild:lodash', 'copy:scripts', 'uglify:dev',
             },
-
+            bower: {
+                files: ['bower.json'],
+                tasks: ['copy:plugins']
+            },
             views        : {
                 files: ['src/views/**/*.jade', '!src/views/tpls/**', 'src/data/**', '!src/views/pages/**'],
                 tasks: ['views'] //, 'bootlint' ]
