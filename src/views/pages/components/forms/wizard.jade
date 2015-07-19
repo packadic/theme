@@ -13,10 +13,13 @@ block content
 
     .row#demo-forms-wizard
         .col-md-12
-            +box('Wizard', 'magic')
-                #rootwizard
-                    .navbar: .navbar-inner: .container: ul
-                        li: a(href='#tab1', data-toggle='tab') First
+            +box('Wizard', 'magic').p-n
+                #rootwizard.tabbable.tabs-boxed
+                    ul.nav.nav-tabs
+                        li.active: a(data-toggle='tab', href='#tab1' , aria-expanded='true')
+                            i.text-green.tab-icon.fa.fa-pencil-square-o
+                            |  Nerota
+                        //li: a(href='#tab1', data-toggle='tab') First
                         li: a(href='#tab2', data-toggle='tab') Second
                         li: a(href='#tab3', data-toggle='tab') Third
                         li: a(href='#tab4', data-toggle='tab') Forth

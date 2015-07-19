@@ -45,7 +45,6 @@
 /config.rb.bak
 /lib
 /sassdoc
-import marked = require('plugins/marked');
 /tmp
 /logs
 /src/sass
