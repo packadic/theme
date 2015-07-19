@@ -1,0 +1,57 @@
+extends ../../layouts/default
+
+
+block content
+    .row#demo-treeview
+        .col-md-6
+            +box('tree')
+                #treeBasic
+                    ul
+                        li
+                            | Root Node
+                            ul
+                                li(data-jstree='{ "selected" : true }')
+                                    a(href='#') Selected Node
+                                li(data-jstree='{ "opened" : true }')
+                                    | Opened Node
+                                    ul
+                                        li(data-jstree='{ "disabled" : true }')
+                                            | Disabled Node
+                                        li(data-jstree='{ "type" : "file" }')
+                                            | Child Node
+                                li(data-jstree='{ "icon" : "fa fa-picture-o" }')
+                                    | Custom Icon
+                                li(data-jstree='{ "icon" : "assets/images/icon.png" }')
+                                    | Custom Icon Image
+                        li.colored
+                            | Colored
+                        li.colored-icon
+                            | Colored Icon Only
+                        li.folder
+                            | Folder Style
+        .col-md-6
+            +box('tree')
+                #treeCheckbox
+                    ul
+                        li
+                            | Root Node
+                            ul
+                                li(data-jstree='{ "selected" : true }')
+                                    a(href='#') Selected Node
+                                li(data-jstree='{ "opened" : true }')
+                                    | Opened Node
+                                    ul
+                                        li(data-jstree='{ "disabled" : true }')
+                                            | Disabled Node
+                                        li(data-jstree='{ "type" : "file" }')
+                                            | Child Node
+                                li(data-jstree='{ "icon" : "fa fa-picture-o" }')
+                                    | Custom Icon
+                                li(data-jstree='{ "icon" : "assets/images/icon.png" }')
+                                    | Custom Icon Image
+                        li.colored
+                            | Colored
+                        li.colored-icon
+                            | Colored Icon Only
+                        li.folder
+                            | Folder Style

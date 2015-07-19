@@ -14,3 +14,4 @@
 /// <reference path="codemirror/codemirror.d.ts" />
 /// <reference path="jquery.bootstrap.wizard/jquery.bootstrap.wizard.d.ts" />
 /// <reference path="jquery.validation/jquery.validation.d.ts" />
+/// <reference path="jstree/jstree.d.ts" />

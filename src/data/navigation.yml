@@ -60,6 +60,9 @@ sidebar:
       - name: Charts
         href: <%= target.nav.pre %>/components/charts/general<%= target.nav.ext %>
 
+      - name: Treeview
+        href: <%= target.nav.pre %>/components/treeview<%= target.nav.ext %>
+
   - name: Forms
     icon: fa fa-pencil
     children:

@@ -53,6 +53,8 @@ form:not(.form-material) {
 @import "plugins/bootstrap-markdown-editor";
 @import "plugins/summernote";
 @import "plugins/medium-editor";
+@import "plugins/bootstrap-wizard";
+@import "plugins/jstree";
 
 
 @import "vendor/jquery-ui";
@@ -73,7 +75,6 @@ form:not(.form-material) {
 
 @import "components/navs";
 @import "components/form_layouts";
-@import "components/form-wizard";
 @import "components/timeline";
 
 @import "components/box";

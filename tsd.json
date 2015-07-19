@@ -52,6 +52,9 @@
         },
         "jquery.validation/jquery.validation.d.ts": {
             "commit": "159b808f9b035ca971d19d93ac675030e87048d8"
+        },
+        "jstree/jstree.d.ts": {
+            "commit": "159b808f9b035ca971d19d93ac675030e87048d8"
         }
     }
 }
