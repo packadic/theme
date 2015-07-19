@@ -1,31 +1,6 @@
 // @todo: sort out the form seperator line properly. Remove form-light and think of something better
-.line {
-    width: 100%;
-    height: 2px;
-    margin: 10px 0;
-    overflow: hidden;
-    font-size: 0;
-}
 
-.line-dashed {
-    background-color: transparent;
-    border-style: dashed !important;
-    border-width: 0;
-}
 
-.b-b {
-    border-bottom: 1px solid #dee5e7;
-}
-
-.line-lg {
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-.pull-in {
-    margin-right: -15px;
-    margin-left: -15px;
-}
 
 form {
     .form-group {

@@ -30,7 +30,7 @@
             }
 
             $selector: $property-selector + $direction-selector + $selector-seperator + $size-selector;
-            $property: $property-name + $direction-property;
+            $property: str-replace($property-name, '(dir)', $direction-property);
             $size: $property-base-value * ($i - 1);
 
 
@@ -48,6 +48,32 @@
     }
 }
 
+.b-b { border-bottom: 1px solid #dee5e7; }
+.pull-in { margin-right: -15px; margin-left: -15px; }
+.show{visibility: visible;}
+.line {width: 100%;height: 2px;margin: 10px 0;font-size:0;overflow: hidden;}
+.line-xs{margin: 0}
+.line-lg{margin-top:15px;margin-bottom: 15px}
+.line-dashed{border-style: dashed !important;background-color: transparent;border-width:0;}
+.no-line{border-width: 0}
+.no-border, .no-borders{border-color:transparent;border-width:0}
+.no-radius{border-radius: 0}
+.block{display:block;}
+.block.hide{display: none;}
+.inline{display:inline-block !important;}
+.none{display: none;}
+.pull-none{float: none;}
+.rounded{border-radius: 500px;}
+.clear{display:block;overflow: hidden;}
+.no-bg{background-color: transparent; color: inherit;}
+.no-select{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 
 /* deprecated, remove soon from this line until... */

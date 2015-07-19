@@ -60,6 +60,8 @@ form:not(.form-material) {
 
 
 // 10.0 MY components
+@import "components/mixins/box";
+
 @import "components/typography";
 @import "components/code";
 @import "components/scroll-top";

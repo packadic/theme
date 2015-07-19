@@ -1,63 +1,11 @@
-// position variables
-$dropdown-box-shadow-size: 5px;
-$dropdown-wide-min-width: 300px;
-$dropdown-header-font-size: 13px;
-$dropdown-tasklist-task-font-size: 12px;
-$dropdown-footer-font-size: 12px;
 
-// theme variables
-// dropdown
-$dropdown-bg: #ffffff;
-$dropdown-box-shadow-color: rgba(#222, 0.2);
-$dropdown-header-bg: #e4e4e4;
-$dropdown-header-font: $font-family-sub-heading;
-$dropdown-header-color: #838383;
-$dropdown-header-link-color: #000000;
-$dropdown-header-link-color-hover: lighten($dropdown-header-link-color, 20);
-$dropdown-item-border-color: transparent;
-$dropdown-item-bg-hover: #f5f5f5;
-$dropdown-item-color: #888888;
-$dropdown-item-color-hover: $dropdown-item-color;
-$dropdown-item-arrow-color: #cccccc;
-$dropdown-footer-bg: #f2f0f0;
-$dropdown-footer-color: #888888;
-$dropdown-footer-bg-hover: darken($dropdown-footer-bg, 5);
-$dropdown-footer-color-hover: $dropdown-footer-color;
-$dropdown-footer-border-color: darken($dropdown-footer-bg, 5);
-
-// dropdown inverse (dark)
-$dropdown-inverse-bg: #333333;
-$dropdown-inverse-box-shadow-color: rgba(#000, 0.2);
-$dropdown-inverse-header-bg: #454545;
-$dropdown-inverse-header-color: #b3b3b3;
-$dropdown-inverse-header-link-color: #000000;
-$dropdown-inverse-header-link-color-hover: lighten($dropdown-inverse-header-link-color, 20);
-$dropdown-inverse-item-border-color: #484848;
-$dropdown-inverse-item-bg-hover: #222222;
-$dropdown-inverse-item-color: #888888;
-$dropdown-inverse-item-color-hover: $dropdown-inverse-item-color;
-$dropdown-inverse-item-arrow-color: #cccccc;
-$dropdown-inverse-footer-bg: #454545;
-$dropdown-inverse-footer-bg-hover: lighten($dropdown-inverse-footer-bg, 5);
-$dropdown-inverse-footer-color: #888888;
-$dropdown-inverse-footer-color-hover: $dropdown-inverse-footer-color;
-$dropdown-inverse-footer-border-color: lighten($dropdown-inverse-footer-bg, 5);
-
-// dropdown task list
-$dropdown-tasklist-task-color: #888888;
-$dropdown-tasklist-progress-bg: #dfdfdf;
-$dropdown-tasklist-item-border-color: #e4e4e4;
-
-$dropdown-inverse-tasklist-task-color: #b3b3b3;
-$dropdown-inverse-tasklist-progress-bg: #c8c8c8;
-$dropdown-inverse-tasklist-item-border-color: #484848;
-
-$dropdown-notifications-icon-color: #ffffff;
-$dropdown-notifications-item-border-color: #e4e4e4;
-$dropdown-inverse-notifications-icon-color: #d8d1d1;
-$dropdown-inverse-notifications-item-border-color: #484848;
-
-// position
+/*
+dropdown-menu improvements:
+ - Headers
+ - Footers (with links)
+ - Infinite submenus, left and right positionable
+ - Icons, badges and labels integration
+*/
 .dropdown-menu {
     padding: 0;
 
@@ -192,110 +140,7 @@ $dropdown-inverse-notifications-item-border-color: #484848;
 }
 
 
-// theme
-.dropdown-menu {
-
-    background: $dropdown-bg;
-    @include box-shadow($dropdown-box-shadow-size $dropdown-box-shadow-size $dropdown-box-shadow-color);
-
-    li:not(.header) + li:not(.header) {
-        border-top-color: 1px solid $dropdown-item-border-color;
-    }
-    > li:not(.header):not(.footer) > a {
-        color: $dropdown-item-color;
-        &:hover {
-            background: $dropdown-item-bg-hover;
-            color: $dropdown-item-color-hover;
-        }
-    }
-
-    > li.header {
-        background: $dropdown-header-bg;
-        h1, h2, h3, h4, h5, h6 {
-            color: $dropdown-header-color;
-        }
-        a {
-            color: $dropdown-header-link-color;
-            &:hover {
-                color: $dropdown-header-link-color-hover;
-            }
-        }
-    }
-
-    > li.submenu > a:after {
-        border-left-color: $dropdown-item-arrow-color;
-        margin-top: 5px;
-        margin-right: -10px;
-    }
-
-    > li.footer a {
-        border-top-color: $dropdown-footer-border-color;
-        background: $dropdown-footer-bg;
-        color: $dropdown-footer-color;
-        &:hover {
-            background: $dropdown-footer-bg-hover;
-            color: $dropdown-footer-color-hover;
-        }
-        + a {
-            border-left-color: $dropdown-footer-border-color;
-        }
-
-    }
-}
-.dropdown-menu-inverse,
-.dropdown-menu-inverse ul[class^="dropdown-"].scrollable:not(.dropdown-menu),
-.dropdown-menu-inverse ul[class*=" dropdown-"].scrollable:not(.dropdown-menu),
-.dropdown-menu.dropdown-menu-inverse li.submenu > .dropdown-menu {
-    background: $dropdown-inverse-bg;
-    @include box-shadow($dropdown-box-shadow-size $dropdown-box-shadow-size $dropdown-inverse-box-shadow-color);
-
-    li:not(.header) + li:not(.header) {
-        border-top-color: $dropdown-inverse-item-border-color !important;
-    }
-
-    > li:not(.header):not(.footer) {
-        > a {
-            color: $dropdown-inverse-item-color;
-            &:hover {
-                background: $dropdown-inverse-item-bg-hover;
-                color: $dropdown-inverse-item-color-hover;
-            }
-        }
-    }
-
-    > li.header {
-        background: $dropdown-inverse-header-bg;
-
-        h1, h2, h3, h4, h5, h6 {
-            color: $dropdown-inverse-header-color;
-        }
-        a {
-            color: $dropdown-inverse-header-link-color;
-            &:hover {
-                color: $dropdown-inverse-header-link-color-hover;
-            }
-        }
-    }
-    > li.submenu > a:after {
-        border-left-color: $dropdown-inverse-item-arrow-color;
-    }
-
-    > li.footer a {
-        border-top-color: $dropdown-inverse-footer-border-color;
-        background: $dropdown-inverse-footer-bg;
-        color: $dropdown-inverse-footer-color;
-        &:hover {
-            background: $dropdown-inverse-footer-bg-hover;
-            color: $dropdown-inverse-footer-color-hover;
-        }
-        + a {
-            border-left-color: $dropdown-inverse-footer-border-color;
-        }
-    }
-}
-
-
-// dropdown widgets
+// NOTIFICATIONS
 .dropdown-notifications {
     > li:not(.header):not(.footer) {
         a {
@@ -325,6 +170,8 @@ $dropdown-inverse-notifications-item-border-color: #484848;
     }
 
 }
+
+// TASK LIST
 .dropdown-task-list {
     > li.header + li:not(.header) {
         margin-top: 0 !important;
@@ -369,7 +216,7 @@ $dropdown-inverse-notifications-item-border-color: #484848;
     }
 }
 
-// scrollable
+// SCROLLABLE
 ul[class^="dropdown-"].scrollable:not(.dropdown-menu),
 ul[class*=" dropdown-"].scrollable:not(.dropdown-menu) {
     @extend .dropdown-menu;
@@ -389,131 +236,14 @@ ul[class*=" dropdown-"].scrollable:not(.dropdown-menu) {
     }
 }
 
-// theme
-.dropdown-task-list {
-    > li:not(.header) + li:not(.header) {
-        border-top-color: $dropdown-tasklist-item-border-color !important;
-    }
-    > li:not(.header) {
-        .task {
-            color: $dropdown-tasklist-task-color;
-        }
-        .progress {
-            background: $dropdown-tasklist-progress-bg;
-        }
-    }
-}
-.dropdown-task-list.dropdown-menu-inverse,
-.dropdown-menu-inverse .dropdown-task-list{
-    > li:not(.header) + li:not(.header) {
-        border-top-color: $dropdown-inverse-tasklist-item-border-color !important;
-    }
-    > li:not(.header) {
-        .task {
-            color: $dropdown-inverse-tasklist-task-color;
-        }
-        .progress {
-            background: $dropdown-inverse-tasklist-progress-bg;
-        }
-    }
-}
 
-.dropdown-notifications {
-    > li:not(.header) + li:not(.header) {
-        border-top-color: $dropdown-notifications-item-border-color !important;
-        > a > .ico > i.fa {
-            color: $dropdown-notifications-icon-color;
-        }
-    }
-}
-.dropdown-notifications.dropdown-menu-inverse,
-.dropdown-menu-inverse .dropdown-notifications {
-    li:not(.header) + li:not(.header) {
-        border-top-color: $dropdown-inverse-notifications-item-border-color !important;
-        > a > .ico > i.fa {
-            color: $dropdown-inverse-notifications-icon-color;
-        }
-    }
-}
-
-
-
-
+// MISC DROPDOWN UTILITIES
 
 // @todo sort out
 .dropdown-large {
     position: static !important;
 }
 
-.dropdown-menu.dropdown-menu-large {
-    margin-left: 16px;
-    margin-right: 16px;
-    padding: 20px 0px;
-    > li {
-
-        > ul {
-            padding: 0;
-            margin: 0;
-            > li {
-                list-style: none;
-                > a {
-                    display: block;
-                    padding: 3px 20px;
-                    clear: both;
-                    font-weight: normal;
-                    line-height: 1.428571429;
-                    color: #333333;
-                    white-space: normal;
-                    &:hover, &:focus {
-                        text-decoration: none;
-                        color: #262626;
-                        background-color: #f5f5f5;
-                    }
-                }
-                &.disabled > a {
-                    color: #999999;
-                    &:hover, &:focus {
-                        color: #999999;
-                    }
-                    &:focus {
-                        text-decoration: none;
-                        background-color: transparent;
-                        background-image: none;
-                        filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-                        cursor: not-allowed;
-                    }
-                }
-            }
-        }
-    }
-    .dropdown-header {
-        color: #428bca;
-        font-size: 18px;
-    }
-}
-
 .dropdown-menu.dropdown-wide {
     min-width: $dropdown-wide-min-width !important;;
-}
-
-.dropdown-menu.dropdown-menu-list > li.external a {
-    background: none !important;
-    border: none !important;
-}
-
-@media (max-width: $screen-sm-max) {
-    .dropdown-menu-large {
-        margin-left: 0;
-        margin-right: 0;
-        .dropdown-header {
-            padding: 3px 15px !important;
-        }
-        > li {
-            margin-bottom: 30px;
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-
-    }
 }
