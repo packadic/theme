@@ -23,8 +23,10 @@ class Demo {
         this.present('#charts-demo', 'charts');
         this.present('#demo-forms-xeditor', 'forms-xeditor');
 
+
         this.demoClass('#dashboard-demo', 'dashboard');
         this.demoClass('#demo-forms-editors', 'forms-editors');
+        this.demoClass('#demo-forms-wizard', 'forms-wizard');
         this.demoClass('#demo-charts-amcharts', 'charts-amcharts');
     }
 

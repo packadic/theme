@@ -12,3 +12,4 @@
 /// <reference path="ace/ace.d.ts" />
 /// <reference path="marked/marked.d.ts" />
 /// <reference path="codemirror/codemirror.d.ts" />
+/// <reference path="jquery.bootstrap.wizard/jquery.bootstrap.wizard.d.ts" />

@@ -215,18 +215,19 @@
                 'plugins/summernote-codemirror': 'plugins/summernote/dist/summernote',
                 'plugins/medium-editor'        : 'plugins/medium-editor/dist/js/medium-editor.min',
                 'plugins/x-editable'           : 'plugins/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min',
+                'plugins/bs-wizard'            : 'plugins/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min',
 
                 // gsap
-                'plugins/gsap/lite'       : 'plugins/gsap/src/minified/TweenLite.min',
-                'plugins/gsap/max'        : 'plugins/gsap/src/minified/TweenMax.min',
-                'plugins/gsap/ease'       : 'plugins/gsap/src/minified/easing/EasePack.min',
-                'plugins/gsap/css'        : 'plugins/gsap/src/minified/plugins/CSSPlugin.min',
-                'plugins/gsap/attr'       : 'plugins/gsap/src/minified/plugins/AttrPlugin.min',
-                'plugins/gsap/color'      : 'plugins/gsap/src/minified/plugins/ColorPropsPlugin.min',
-                'plugins/gsap/scroll'     : 'plugins/gsap/src/minified/plugins/ScrollToPlugin.min',
-                'plugins/gsap/text'       : 'plugins/gsap/src/minified/plugins/TextPlugin.min',
-                'plugins/gsap/jquery-lite': 'plugins/gsap/src/minified/jquery.gsap.min',
-                'plugins/gsap/jquery-max' : 'plugins/gsap/src/minified/jquery.gsap.min',
+                'plugins/gsap/lite'            : 'plugins/gsap/src/minified/TweenLite.min',
+                'plugins/gsap/max'             : 'plugins/gsap/src/minified/TweenMax.min',
+                'plugins/gsap/ease'            : 'plugins/gsap/src/minified/easing/EasePack.min',
+                'plugins/gsap/css'             : 'plugins/gsap/src/minified/plugins/CSSPlugin.min',
+                'plugins/gsap/attr'            : 'plugins/gsap/src/minified/plugins/AttrPlugin.min',
+                'plugins/gsap/color'           : 'plugins/gsap/src/minified/plugins/ColorPropsPlugin.min',
+                'plugins/gsap/scroll'          : 'plugins/gsap/src/minified/plugins/ScrollToPlugin.min',
+                'plugins/gsap/text'            : 'plugins/gsap/src/minified/plugins/TextPlugin.min',
+                'plugins/gsap/jquery-lite'     : 'plugins/gsap/src/minified/jquery.gsap.min',
+                'plugins/gsap/jquery-max'      : 'plugins/gsap/src/minified/jquery.gsap.min',
 
 
                 // Datatables
