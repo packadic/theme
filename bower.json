@@ -122,7 +122,8 @@
     "amcharts": "~3.14.3",
     "bootstrap-markdown-editor": "~1.1.1",
     "medium-editor": "~5.4.0",
-    "summernote": "~0.6.10"
+    "summernote": "~0.6.10",
+    "x-editable": "~1.5.1"
   },
   "resolutions": {
     "datatables": "~1.10.6"

@@ -24,9 +24,9 @@ $base-font-weight: 300;
 
 // utility config
 $util-pos-properties:
-    (name: 'margin(dir)', selector: 'm', base-value: 4),
-    (name: 'padding(dir)', selector: 'p', base-value: 4),
-    (name: 'border(dir)-width', selector: 'bd', base-value: 1)
+    (name: 'margin(dir)', selector: 'm', base-value: 4, negatives: true),
+    (name: 'padding(dir)', selector: 'p', base-value: 4, negatives: true),
+    (name: 'border(dir)-width', selector: 'bd', base-value: 1, negatives: false)
 ;
 $util-pos-direction-selectors: '', 't', 'r', 'b', 'l';
 $util-pos-direction-properties: '', 'top', 'right', 'bottom', 'left';

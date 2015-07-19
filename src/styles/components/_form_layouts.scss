@@ -1,8 +1,14 @@
 // @todo: sort out the form seperator line properly. Remove form-light and think of something better
 
-
-
+.form-group-seperator {
+    @extend .line;
+    @extend .line-dashed;
+    @extend .b-b;
+    @extend .pull-in;
+    @extend .line-lg;
+}
 form {
+
     .form-group {
         //   @import "../../plugins/bootstrap-material-design/sass/inputs";
     }
