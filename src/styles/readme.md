@@ -14,3 +14,13 @@ Overriding and extending in SCSS is a bit backwards lol. bit confusing if not aw
 | `vendor` | **IGNORE** |
 
 The rest should be obv.
+
+
+# todo
+
+- Seperate, structure and re-locate all `custom mixins` to match Bootstrap-sass-official's way of doin it. Like the `box-variant` mixins etc.
+- Properly integrate `Bootstrap Material`, the current `components/_bootstrap-material.scss` implementation is messy
+
+# todo after that
+- move all in-file variables(eg: `components/_dropdown.scss`) to its appropriate location.
+- seperate visual/theme styles from positional/dimensional styles and put them into the theme file. While doing that, make variables wherever needed.

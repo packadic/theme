@@ -1,3 +1,4 @@
+// @todo sort out table font properties
 
 @mixin table-row-variant($state, $background, $text) {
     // Exact selectors below required to override `.table-striped` and prevent
