@@ -162,6 +162,7 @@
                 'plugins/jquery-migrate'   : 'plugins/jquery-migrate/jquery-migrate',
                 'plugins/jquery-slimscroll': 'plugins/jquery-slimscroll/jquery.slimscroll.min',
                 'plugins/jquery-slugify'   : 'plugins/jquery-slugify/dist/slugify.min',
+                'plugins/jquery-validate'   : 'plugins/jquery.validate/dist/jquery.validate.min',
                 'plugins/mousewheel'       : 'plugins/jquery-mousewheel/jquery.mousewheel.min',
                 'plugins/uniform'          : 'plugins/jquery.uniform/jquery.uniform.min',
                 'plugins/impromptu'        : 'plugins/jquery-impromptu/dist/jquery-impromptu.min',

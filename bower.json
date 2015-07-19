@@ -126,7 +126,8 @@
     "x-editable": "~1.5.1",
     "jquery-mockajax": "~2.0.1",
     "typeahead.js": "~0.11.1",
-    "twitter-bootstrap-wizard": "~1.0.0"
+    "twitter-bootstrap-wizard": "~1.0.0",
+    "jquery.validate": "~1.13.0"
   },
   "resolutions": {
     "datatables": "~1.10.6"

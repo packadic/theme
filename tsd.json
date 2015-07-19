@@ -49,6 +49,9 @@
         },
         "jquery.bootstrap.wizard/jquery.bootstrap.wizard.d.ts": {
             "commit": "8c9ede30fca2a095018e70940806cc9c8aa122f6"
+        },
+        "jquery.validation/jquery.validation.d.ts": {
+            "commit": "159b808f9b035ca971d19d93ac675030e87048d8"
         }
     }
 }

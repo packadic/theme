@@ -11,46 +11,205 @@ block header
 
 block content
 
-    .row#demo-forms-wizard
-        .col-md-12
-            +box('Wizard', 'magic').p-n
-                #rootwizard.tabbable.tabs-boxed
-                    ul.nav.nav-tabs
-                        li.active: a(data-toggle='tab', href='#tab1' , aria-expanded='true')
-                            i.text-green.tab-icon.fa.fa-pencil-square-o
-                            |  Nerota
-                        //li: a(href='#tab1', data-toggle='tab') First
-                        li: a(href='#tab2', data-toggle='tab') Second
-                        li: a(href='#tab3', data-toggle='tab') Third
-                        li: a(href='#tab4', data-toggle='tab') Forth
-                        li: a(href='#tab5', data-toggle='tab') Fifth
-                        li: a(href='#tab6', data-toggle='tab') Sixth
-                        li: a(href='#tab7', data-toggle='tab') Seventh
 
-                    #bar.progress.progress-striped.active
-                        .bar
+    .row#demo-forms-wizard
+        .col-md-6
+            +box('Wizard', 'magic').p-n
+
+                .wizard-tabs
+                    ul.wizard-steps
+                        li.active
+                            a.text-center(href='#w1-account', data-toggle='tab')
+                                span.badge.hidden-xs 1
+                                | 														Account
+                        li
+                            a.text-center(href='#w1-profile', data-toggle='tab')
+                                span.badge.hidden-xs 2
+                                | 														Profile
+                        li
+                            a.text-center(href='#w1-confirm', data-toggle='tab')
+                                span.badge.hidden-xs 3
+                                | 														Confirm
+                form.form-horizontal(novalidate='novalidate')
                     .tab-content
-                        #tab1.tab-pane
-                            | 1
-                        #tab2.tab-pane
-                            p
-                                input#name(type='text', name='name', placeholder='Enter Your Name')
-                        #tab3.tab-pane
-                            | 3
-                        #tab4.tab-pane
-                            | 4
-                        #tab5.tab-pane
-                            | 5
-                        #tab6.tab-pane
-                            | 6
-                        #tab7.tab-pane
-                            | 7
-                        ul.pager.wizard
-                            li.previous.first(style='display:none;')
-                                a(href='#') First
-                            li.previous
-                                a(href='#') Previous
-                            li.next.last(style='display:none;')
-                                a(href='#') Last
+                        #w1-account.tab-pane.active
+                            .form-group
+                                label.col-sm-4.control-label(for='w1-username') Username
+                                .col-sm-8
+                                    input#w1-username.form-control.input-sm(type='text', name='username', required='')
+                            .form-group
+                                label.col-sm-4.control-label(for='w1-password') Password
+                                .col-sm-8
+                                    input#w1-password.form-control.input-sm(type='password', name='password', minlength='6', required='')
+                        #w1-profile.tab-pane
+                            .form-group
+                                label.col-sm-4.control-label(for='w1-first-name') First Name
+                                .col-sm-8
+                                    input#w1-first-name.form-control.input-sm(type='text', name='first-name', required='')
+                            .form-group
+                                label.col-sm-4.control-label(for='w1-last-name') Last Name
+                                .col-sm-8
+                                    input#w1-last-name.form-control.input-sm(type='text', name='last-name', required='')
+                        #w1-confirm.tab-pane
+                            .form-group
+                                label.col-sm-4.control-label(for='w1-email') Email
+                                .col-sm-8
+                                    input#w1-email.form-control.input-sm(type='text', name='email', required='')
+                            .form-group
+                                .col-sm-2
+                                .col-sm-10
+                                    .checkbox-custom
+                                        input#w1-terms(type='checkbox', name='terms', required='')
+                                        label(for='w1-terms') I agree to the terms of service
+
+
+            +box('Wizard 2', 'magic').p-n
+                #w2.panel.form-wizard.m-n
+                    .tabs.tabbable.tabs-box.tabs-left
+                        ul.nav.nav-tabs.nav-justify
+                            li.active: a.text-center(href='#w2-account', data-toggle='tab') Account
+                            li: a.text-center(href='#w2-profile', data-toggle='tab') Profile
+                            li: a.text-center(href='#w2-confirm', data-toggle='tab') Confirm
+                        form.form-horizontal(novalidate='novalidate')
+                            .tab-content
+                                #w2-account.tab-pane.active
+                                    .form-group
+                                        label.col-sm-4.control-label(for='w2-username') Username
+                                        .col-sm-8
+                                            input#w2-username.form-control.input-sm(type='text', name='username', required='')
+                                    .form-group
+                                        label.col-sm-4.control-label(for='w2-password') Password
+                                        .col-sm-8
+                                            input#w2-password.form-control.input-sm(type='password', name='password', required='', minlength='6')
+                                #w2-profile.tab-pane
+                                    .form-group
+                                        label.col-sm-4.control-label(for='w2-first-name') First Name
+                                        .col-sm-8
+                                            input#w2-first-name.form-control.input-sm(type='text', name='first-name', required='')
+                                    .form-group
+                                        label.col-sm-4.control-label(for='w2-last-name') Last Name
+                                        .col-sm-8
+                                            input#w2-last-name.form-control.input-sm(type='text', name='last-name', required='')
+                                #w2-confirm.tab-pane
+                                    .form-group
+                                        label.col-sm-4.control-label(for='w2-email') Email
+                                        .col-sm-8
+                                            input#w2-email.form-control.input-sm(type='text', name='email', required='')
+                                    .form-group
+                                        .col-sm-2
+                                        .col-sm-10
+                                            .checkbox-custom
+                                                input#w2-terms(type='checkbox', name='terms', required='')
+                                                label(for='w2-terms') I agree to the terms of service
+                    .panel-footer
+                        ul.pager
+                            li.previous.disabled
+                                a
+                                    i.fa.fa-angle-left
+                                    |  Previous
+                            li.finish.hidden.pull-right
+                                a Finish
                             li.next
-                                a(href='#') Next
+                                a
+                                    | Next
+                                    i.fa.fa-angle-right
+
+        .col-md-6
+            +box('Widget', 'magic').p-n
+                section#w3.panel.form-wizard
+                    .wizard-progress
+                        .steps-progress
+                            .progress-indicator
+                        ul
+                            li.active
+                                a(href='#w3-account', data-toggle='tab')
+                                    span 1
+                                    | Account Info
+                            li
+                                a(href='#w3-profile', data-toggle='tab')
+                                    span 2
+                                    | Profile Info
+                            li
+                                a(href='#w3-billing', data-toggle='tab')
+                                    span 3
+                                    | Billing Info
+                            li
+                                a(href='#w3-confirm', data-toggle='tab')
+                                    span 4
+                                    | Confirmation
+                    form.form-horizontal(novalidate='novalidate')
+                        .tab-content
+                            #w3-account.tab-pane.active
+                                .form-group
+                                    label.col-sm-4.control-label(for='w3-username') Username
+                                    .col-sm-8
+                                        input#w3-username.form-control.input-sm(type='text', name='username', required='')
+                                .form-group
+                                    label.col-sm-4.control-label(for='w3-password') Password
+                                    .col-sm-8
+                                        input#w3-password.form-control.input-sm(type='password', name='password', minlength='6', required='')
+                            #w3-profile.tab-pane
+                                .form-group
+                                    label.col-sm-4.control-label(for='w3-first-name') First Name
+                                    .col-sm-8
+                                        input#w3-first-name.form-control.input-sm(type='text', name='first-name')
+                                .form-group
+                                    label.col-sm-4.control-label(for='w3-last-name') Last Name
+                                    .col-sm-8
+                                        input#w3-last-name.form-control.input-sm(type='text', name='last-name')
+                            #w3-billing.tab-pane
+                                .form-group
+                                    label.col-sm-4.control-label(for='w3-cc') Card Number
+                                    .col-sm-8
+                                        input#w3-cc.form-control.input-sm(type='text', name='cc-number', required='')
+                                .form-group
+                                    label.col-sm-4.control-label(for='inputSuccess') Expiration
+                                    .col-sm-4
+                                        select.form-control.input-sm(name='exp-month', required='')
+                                            option January
+                                            option February
+                                            option March
+                                            option April
+                                            option May
+                                            option June
+                                            option July
+                                            option August
+                                            option September
+                                            option October
+                                            option November
+                                            option December
+                                    .col-sm-4
+                                        select.form-control.input-sm(name='exp-year', required='')
+                                            option 2014
+                                            option 2015
+                                            option 2016
+                                            option 2017
+                                            option 2018
+                                            option 2019
+                                            option 2020
+                                            option 2021
+                                            option 2022
+                            #w3-confirm.tab-pane
+                                .form-group
+                                    label.col-sm-4.control-label(for='w3-email') Email
+                                    .col-sm-8
+                                        input#w3-email.form-control.input-sm(type='text', name='email', required='')
+                                .form-group
+                                    .col-sm-3
+                                    .col-sm-9
+                                        .checkbox-custom
+                                            input#w3-terms(type='checkbox', name='terms', required='')
+                                            label(for='w3-terms') I agree to the terms of service
+                .panel-footer
+                    ul.pager
+                        li.previous.disabled
+                            a
+                                i.fa.fa-angle-left
+                                |  Previous
+                        li.finish.hidden.pull-right
+                            a Finish
+                        li.next
+                            a
+                                | Next
+                                i.fa.fa-angle-right
+
