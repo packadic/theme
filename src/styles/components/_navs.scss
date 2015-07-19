@@ -194,59 +194,6 @@
         width: auto
     }
 
-    .nav-tabs[class*=tab-color-] > li > a, .nav-tabs[class*=tab-color-] > li > a:focus, .nav-tabs[class*=tab-color-] > li > a:hover {
-        color: #ffffff;
-        border-color: transparent;
-        margin-right: 3px
-    }
-    .nav-tabs[class*=tab-color-] > li > a > .badge {
-        border-radius: 2px
-    }
-    .nav-tabs[class*=tab-color-] > li:not(.active) > a:hover {
-        opacity: .85;
-        border-color: rgba(0, 0, 0, .15);
-        border-bottom-color: transparent
-    }
-    .nav-tabs[class*=tab-color-] > li:not(.active) > a > .tab-icon:first-child {
-        color: #ffffff !important
-    }
-    .nav-tabs[class*=tab-color-] > li:not(.active) > a > .badge {
-        color: rgba(0, 0, 0, .4) !important;
-        background-color: #ffffff !important;
-        border-radius: 2px
-    }
-    .nav-tabs.tab-color-blue > li > a, .nav-tabs.tab-color-blue > li > a:focus {
-        background-color: #7db4d8
-    }
-    .nav-tabs[class*=tab-color-] > li.active > a, .nav-tabs[class*=tab-color-] > li.active > a:focus, .nav-tabs[class*=tab-color-] > li.active > a:hover {
-        background-color: #ffffff;
-        color: #4f80a0;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important
-    }
-    .nav-tabs.tab-color-blue > li.active > a, .nav-tabs.tab-color-blue > li.active > a:focus, .nav-tabs.tab-color-blue > li.active > a:hover {
-        color: #4c718a;
-        border-color: #7db4d8 #7db4d8 transparent
-    }
-    &.tabs-below .nav-tabs.tab-color-blue > li.active > a {
-        border-color: transparent #7db4d8 #7db4d8
-    }
-    .nav-tabs.tab-color-blue {
-        border-bottom-color: #c5d0dc
-    }
-    .nav-tabs.background-blue {
-        padding-top: 6px;
-        background-color: #eff3f8;
-        border: 1px solid #c5d0dc
-    }
-    &.tabs-below .nav-tabs.background-blue {
-        padding-top: 0;
-        padding-bottom: 6px
-    }
-    &.tabs-below .nav-tabs.tab-color-blue {
-        border-top: none;
-        border-bottom-color: #c5d0dc
-    }
 
     &.tabs-boxed {
         &.tabs-left .nav-tabs li:first-child a, &.tabs-right .nav-tabs li:first-child a{
