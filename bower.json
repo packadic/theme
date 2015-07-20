@@ -128,7 +128,10 @@
     "typeahead.js": "~0.11.1",
     "twitter-bootstrap-wizard": "~1.0.0",
     "jquery.validate": "~1.13.0",
-    "jstree": "~3.1.1"
+    "jstree": "~3.1.1",
+    "jquery-serialize-object": "~2.5.0",
+    "pwstrength-bootstrap": "~1.2.7",
+    "jquery-form": "~3.46.0"
   },
   "resolutions": {
     "datatables": "~1.10.6"

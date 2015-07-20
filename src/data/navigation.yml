@@ -75,6 +75,9 @@ sidebar:
       - name: Validation
         href: <%= target.nav.pre %>/components/forms/validation<%= target.nav.ext %>
 
+      - name: Formulate
+        href: <%= target.nav.pre %>/components/forms/formulate<%= target.nav.ext %>
+
       - name: X-Editable
         href: <%= target.nav.pre %>/components/forms/x-editable<%= target.nav.ext %>
 

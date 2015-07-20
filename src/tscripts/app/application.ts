@@ -241,8 +241,8 @@ export class Application extends EventEmitter2 {
                 case 'minimize': $box.box.apply($box, ['minimizeContent'].concat(args)); break;
                 case 'maximize': $box.box.apply($box, ['maximizeContent'].concat(args)); break;
                 case 'toggle': $box.box.apply($box, ['toggleContent'].concat(args)); break;
-                case 'loader': $box.box.apply($box, ['startLoader'].concat(args)); break;
-                case 'loader_off': $box.box.apply($box, ['stopLoader'].concat(args)); break;
+                case 'block': $box.box.apply($box, ['startLoader'].concat(args)); break;
+                case 'unblock': $box.box.apply($box, ['stopLoader'].concat(args)); break;
                 case 'fullscreen': $box.box.apply($box, ['fullscreen'].concat(args)); break;
                 case 'fullscreen_off': $box.box.apply($box, ['exitFullscreen'].concat(args)); break;
                 case 'fullscreen_toggle': $box.box.apply($box, ['toggleFullscreen'].concat(args)); break;

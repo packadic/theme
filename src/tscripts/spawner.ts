@@ -51,7 +51,7 @@ export function alert(opt:any) {
 }
 
 
-export function initSlimScroll(el:any, opts:any={}) {
+export function initSlimScroll(el:any, opts:any = {}) {
     var $el:JQuery = typeof(el) === 'string' ? $(el) : el;
     require(['plugins/jquery-slimscroll'], function () {
         $el.each(function () {
@@ -59,7 +59,7 @@ export function initSlimScroll(el:any, opts:any={}) {
                 return; // exit
             }
             var height = $(this).attr("data-height") ? $(this).attr("data-height") : $(this).css('height');
-            var data = _.merge(App.config('plugins.slimScroll'), $(this).data(), { height: height });
+            var data = _.merge(App.config('plugins.slimScroll'), $(this).data(), {height: height});
             $(this).slimScroll(_.merge(data, opts));
             $(this).attr("data-initialized", "1");
         });
@@ -106,8 +106,45 @@ export function destroySlimScroll(el) {
     });
 }
 
-export function initCustomScroll(){
-    require(['plugins/mscrollbar'], function(){
+export function initCustomScroll() {
+    require(['plugins/mscrollbar'], function () {
 
     })
+}
+
+export function bootbox(type:string, message:any, callback?:any) {
+    require(['plugins/bootbox'], function (bootbox) {
+        if (type === 'dialog') {
+            message = _.merge({
+                title: 'Dialog',
+                buttons: {
+                    success: {
+                        label: "Ok",
+                        className: "btn-success"
+                    }
+                }
+            }, message);
+        }
+        bootbox[type](message, callback);
+    })
+}
+
+export function highlight(code:string, lang?:string, wrap:boolean = false, wrapPre:boolean = false):JQueryPromise<any> {
+    var defer:JQueryDeferred<any> = App.defer();
+    require(['plugins/highlightjs'], function (hljs:HighlightJS) {
+        var highlighted;
+        if (lang && hljs.getLanguage(lang)) {
+            highlighted = hljs.highlight(lang, code).value;
+        } else {
+            highlighted = hljs.highlightAuto(code).value;
+        }
+        if (wrap) {
+            highlighted = '<code class="hljs">' + highlighted + '</code>';
+        }
+        if (wrapPre) {
+            highlighted = '<pre>' + highlighted + '</pre>';
+        }
+        defer.resolve(highlighted);
+    });
+    return defer.promise();
 }

@@ -39,9 +39,69 @@ export function getDefaultDefinitions(App:Application):any {
             // DATEPICKER
             ['datepicker', '[data-toggle="datepicker"]', ['plugins/bs-datepicker'], 'datepicker'],
             // MAXLENGTH
-            ['maxlength', '.maxLength', ['plugins/bs-maxlength']] // has no data :<
+            ['maxlength', '.maxLength', ['plugins/bs-maxlength'], undefined, {placement: 'top'}],
+            // PASSWORD STRENGTH
+            ['pwstrength', '.pwstrength', ['widgets/progressbar', 'plugins/bs-pwstrength'], 'pwstrengthBootstrap', {}, function($target:JQuery, data:any){
+                $target.pwstrength({
+                    common: {
+                        onLoad: function(){
+                            $target.parent().find('.progress-bar').progressbar({
+                                textDisplay: 'center',
+                                textFormat: ''
+                            });
+                        },
+                        onKeyUp: function(event, data){
+                            var $bar = $(event.target).parent().find('.progress-bar');
+                            $bar.progressbar('option', 'textFormat', data.verdictText);
+                            $bar.progressbar('option', 'value', 100 / 150 * (data.score + 50));
+                            $bar.progressbar('update'); //console.log('keyp', event, data);
+                        }
+                    },
+                    ui: {
+                        showVerdicts: false
+                    }
+                })
+            }, true]
         ],
         custom: [
+            function ($el) {
+                var $forms = $el.find('form.validate-form');
+                if ($forms.size() < 1) return;
+                require(['jquery', 'plugins/jquery-validate'], function ($) {
+
+                    $forms.each(function () {
+                        var $form = $(this);
+                        if (defined($form.data('validator'))) {
+                            return;
+                        }
+
+                        var vrules = {};
+                        $form.find('*[data-rules]').each(function (i) {
+                            var el = this;
+                            var $el = $(this);
+
+                            var field = $el.attr('name') || $el.attr('id');
+                            var rules = $el.data('rules');
+
+                            vrules[field] = {};
+                            rules.split('|').forEach(function (rule) {
+                                if ( rule.indexOf(':') > - 1 ) {
+                                    rule = rule.split(':', 2);
+                                    vrules[field][rule[0]] = rule[1];
+                                } else {
+                                    vrules[field][rule] = true;
+                                }
+                            })
+                        });
+
+                        $form.validate(<any>_.merge(App.config('plugins.jquery-validate'), {
+                            rules: vrules
+                        }));
+
+                    });
+
+                })
+            },
             function ($el) {
                 $el.find('code.hljs').each(function () {
                     var that:HTMLElement = this;
@@ -59,7 +119,7 @@ export function getDefaultDefinitions(App:Application):any {
                             }
                         });
                         var highlighted;
-                        if(lang !== null && highlightjs.listLanguages().indexOf(lang) !== -1) {
+                        if (lang !== null && highlightjs.listLanguages().indexOf(lang) !== -1) {
                             highlighted = highlightjs.highlight(lang, that.textContent).value;
                         } else {
                             highlighted = highlightjs.highlightAuto(that.textContent).value;
@@ -96,7 +156,7 @@ export function getDefaultDefinitions(App:Application):any {
                     require(['jquery', 'jq/general', 'plugins/easypiechart'], function ($) {
                         $charts.each(function () {
                             var $chart = $(this);
-                            if($chart.find('> .easyPieChart').length !== 0) return;
+                            if ($chart.find('> .easyPieChart').length !== 0) return;
                             var classes = $chart.get(0).classList;
                             var data = _.merge({
                                 animate: 1000,
@@ -158,14 +218,15 @@ export class Autoload {
         this._custom = [];
     }
 
-    public add(fnName:string, selector:string, requires:Array<string>, dataName?:string, options?:Object, preInitFn?:Function):Autoload {
+    public add(fnName:string, selector:string, requires:Array<string>, dataName?:string, options?:Object, preInitFn?:Function, usePreInitFnAsCustom:boolean=false):Autoload {
         this._simple.push({
             fnName: fnName,
             selector: selector,
             requires: requires,
             dataName: def(dataName, fnName),
             options: def(options, {}),
-            preInitFn: preInitFn
+            preInitFn: preInitFn,
+            usePreInitFnAsCustom: usePreInitFnAsCustom
         });
 
         return this;
@@ -220,15 +281,20 @@ export class Autoload {
 
                     detected.push(function (cb) {
                         // require the plugin
-                        require(data.requires, function () {
+                        require(<any>data.requires, function () {
                             // If defined, call the pre init function that allows altering the target before initialisation
-                            if (typeof data.preInitFn === 'function') {
+                            if (typeof data.preInitFn === 'function' && !data.usePreInitFnAsCustom) {
                                 var retval = data.preInitFn($target, data);
                                 if (defined(retval)) data = retval;
                             }
 
-                            // and initialize target element with the plugin
-                            $target[data.fnName](data.options);
+                            if(data.usePreInitFnAsCustom){
+                                data.preInitFn($target, data);
+                            } else {
+                                // and initialize target element with the plugin
+                                $target[data.fnName](data.options);
+                            }
+
                             cb(null);
                         });
                     });

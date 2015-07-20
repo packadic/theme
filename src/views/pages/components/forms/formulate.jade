@@ -1,0 +1,132 @@
+extends elements
+
+
+mixin label
+    - _unlessClassAttribute('noControlLabel', 'control-label', attributes)
+    - _addClassAttribute('inline', 'sr-only', attributes)
+    - _colMeta(attributes)
+    label&attributes(attributes)
+        block
+
+
+mixin form-group(seperator)
+    if seperator
+        .form-group-seperator
+    .form-group&attributes(attributes)
+        block
+
+mixin form-label(forr, required)
+    +label(for=forr)&attributes(attributes)
+        block
+        if required
+            span.required  *
+
+mixin input(name, rules)
+    - _inputMeta(attributes)
+    - attributes.type = attributes.type || 'text'
+    - attributes.id = attributes.id || name;
+    input(name=name, data-rules=rules)&attributes(attributes)
+
+
+block header
+    +page-title("Forms", "Formulate")
+    +page-breadcrumbs
+        +breadcrumb("Components", "/components")
+        +breadcrumb("Forms")
+        +breadcrumb("Formulate", "/components/forms/validation", true)
+
+
+block content
+    .row
+        .col-md-9
+            +form-box("Formulate", "list").form-light.form-horizontal#formulate-form
+                +form-group
+                    +form-label('email', true)('md-3') Email
+                    .col-md-9
+                        +input('email', 'required|email')(placeholder='Enter your email address')
+
+                +form-group(true)
+                    +form-label('password', true)('md-3') Password
+                    .col-md-9
+                        +input('password', 'required|minlength:5|maxlength:30')(type='password', placeholder='Enter a safe password', maxlength=30).pwstrength.maxLength
+
+                +form-group(true)
+                    +form-label('password-confirm', true)('md-3') Confirm
+                    .col-md-9
+                        +input('password-confirm', 'equalTo:#password')(type='password', placeholder='Enter password again')
+
+                +form-group(true)
+                    .col-sm-offset-3.col-sm-9
+                        label
+                            input(id='accept',name='accept',type='checkbox', data-rules='required')
+                            |  I accept the Terms & Conditions
+
+                .form-group-seperator
+                .form-actions
+                    .col-sm-offset-3.col-sm-9
+                        .btn-group.btn-group-sm
+                            button.btn.btn-success(type='submit') Sign in
+                            a(data-toggle="confirmation", href="#", title="Are u sure?").btn.btn-primary Confirm
+
+        .col-md-3
+            +box('API', 'code')#formulate-api
+                p Formulate is a widget to simplify form construction and interaction
+                +abtn()('sm', 'block', data-action='serialize') Serialize to String
+                +abtn()('sm', 'block', data-action='serializeObject') Serialize to Object
+                +abtn()('sm', 'block', data-action='serializeJSON') Serialize to JSON
+                +abtn()('sm', 'block', data-action='reset') Reset form
+                +abtn()('sm', 'block', data-action='clear') Clear fields
+
+block append scripts-outside-of-project
+    script.
+        /** @var Application App */
+        App.when('state:starting', ['jquery', 'spawner', 'widgets/formulate'], function ($, spawner) {
+            var $form = $('#formulate-form');
+
+            $form.formulate({
+                validate: true,
+                validateOptions: {
+                },
+                plugins: {
+                    maxlength: ['email', 'password'],
+                    pwstrength: ['password']
+                }
+            })
+            var $api = $('#formulate-api');
+            var $box = $api.closest('.box');
+            $api.find('*[data-action]').on('click', function(){
+                var el = this, $el = $(this), action = $el.data('action');
+
+                App.box($box, 'block');
+
+                switch(action){
+                    case 'reset':
+                    case 'clear':
+                        $form.formulate(action);
+                        App.notify('success', 'Executed ' + action);
+                        App.box($box, 'unblock');
+                        break;
+
+                    case 'serialize':
+                        spawner.bootbox('dialog', {message: $form.formulate(action)});
+                        App.box($box, 'unblock');
+                        break;
+
+                    case 'serializeObject':
+                        console.log($form.formulate(action));
+                        App.notify('success', 'Serialized objected logged to console');
+                        App.box($box, 'unblock');
+                        break;
+
+                    case 'serializeJSON':
+                        var json = $form.formulate(action);
+                        console.log(json);
+                        var formatted = JSON.stringify(JSON.parse(json), null, 4);
+                        spawner.highlight(formatted, 'json', true, true).then(function (html) {
+                            spawner.bootbox('dialog', {message: html});
+                            App.box($box, 'unblock');
+                        });
+                        break;
+                }
+            })
+        });

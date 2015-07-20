@@ -10,22 +10,22 @@
         debug                 : false,
         pageLoadedOnAutoloaded: true,
         plugins               : {
-            blockUI     : {
+            blockUI          : {
                 message: '<img src="<%= paths.images %>/loaders/spiffygif_104x104.gif" style="height: 30px; width: 30px;">'
             },
-            confirmation: {
+            confirmation     : {
                 container     : 'body',
                 btnCancelIcon : 'fa fa-remove',
                 btnOkIcon     : 'fa fa-check',
                 btnOkClass    : 'btn-xs btn-info',
                 btnCancelClass: 'btn-xs btn-primary'
             },
-            iCheck      : {
+            iCheck           : {
                 checkboxClass: 'icheckbox_square-blue',
                 radioClass   : 'iradio_square-blue',
                 //increaseArea: '20%' // optional
             },
-            material    : {
+            material         : {
                 "ripples"             : false,
                 autofill              : true,
                 "inputElements"       : "form.form-material input.form-control, form.form-material textarea.form-control, form.form-material select.form-control",
@@ -33,13 +33,13 @@
                 "togglebuttonElements": "form.form-material .togglebutton > label > input[type=checkbox]",
                 "radioElements"       : "form.form-material .radio > label > input[type=radio]"
             },
-            easyPieChart: {
+            easyPieChart     : {
                 animate: 1000,
                 size   : 85
             },
-            tooltip     : {container: 'body'},
-            popover     : {container: 'body'},
-            slimScroll  : {
+            tooltip          : {container: 'body'},
+            popover          : {container: 'body'},
+            slimScroll       : {
                 allowPageScroll: true,
                 size           : '6px',
                 color          : '#000',
@@ -51,7 +51,7 @@
                 railVisible    : true,
                 disableFadeOut : true
             },
-            toastr      : {
+            toastr           : {
                 "closeButton"      : true,
                 "debug"            : false,
                 "newestOnTop"      : false,
@@ -68,11 +68,50 @@
                 "showMethod"       : "fadeIn",
                 "hideMethod"       : "fadeOut"
             },
-            summernote  : { // http://summernote.org/jsduck/source/settings.html#settings-property-options
+            summernote       : { // http://summernote.org/jsduck/source/settings.html#settings-property-options
                 defaultFontName: 'Verdana',
                 tabsize        : 4,
                 codemirror     : {
                     theme: 'monokai'
+                }
+            },
+            'jquery-validate': {
+                errorElement  : 'span',
+                errorClass    : 'help-block help-block-error',
+                focusInvalid  : false,
+                highlight     : function (element) {
+                    var $el = $(element);
+                    $el.closest(
+                        $el.parent(".input-group").size() > 0 ? '.input-group' : '.form-group'
+                    ).addClass('has-error');
+                },
+                unhighlight   : function (element) {
+                    var $el = $(element);
+                    $el.closest(
+                        $el.parent(".input-group").size() > 0 ? '.input-group' : '.form-group'
+                    ).removeClass('has-error');
+                },
+                success       : function (label) {
+                    label.closest('.form-group').removeClass('has-error');
+                },
+                errorPlacement: function (error, element) {
+                    if ( element.parent(".input-group").size() > 0 ) {
+                        $('<div>').addClass('has-error').insertAfter(element.parent(".input-group")).append(error);
+                    } else if ( element.attr("data-error-container") ) {
+                        error.appendTo(element.attr("data-error-container"));
+                    } else if ( element.parents('.radio-list').size() > 0 ) {
+                        error.appendTo(element.parents('.radio-list').attr("data-error-container"));
+                    } else if ( element.parents('.radio-inline').size() > 0 ) {
+                        error.appendTo(element.parents('.radio-inline').attr("data-error-container"));
+                    } else if ( element.parents('.checkbox-list').size() > 0 ) {
+                        error.appendTo(element.parents('.checkbox-list').attr("data-error-container"));
+                    } else if ( element.parents('.checkbox-inline').size() > 0 ) {
+                        error.appendTo(element.parents('.checkbox-inline').attr("data-error-container"));
+                    } else if(element.data('pwstrengthBootstrap')){
+                        error.appendTo(element.parent());
+                    } else {
+                        error.insertAfter(element); // for other inputs, just perform default behavior
+                    }
                 }
             }
         },
@@ -139,38 +178,40 @@
                 'plugins/mscrollbar': 'plugins/mscrollbar',
 
                 // default vendor paths
-                'plugins/async'            : 'plugins/async/lib/async',
-                'plugins/svg'              : 'plugins/svg.js/dist/svg',
-                'plugins/moment'           : 'plugins/moment/min/moment.min',
-                'plugins/select2'          : 'plugins/select2/select2.min',
-                'plugins/marked'           : 'plugins/marked/marked.min',
-                'plugins/highlightjs'      : 'plugins/highlightjs/highlight.pack',
-                'plugins/cryptojs'         : 'plugins/cryptojslib/components',
-                'plugins/toastr'           : 'plugins/toastr/toastr',
-                'plugins/events'           : 'plugins/eventEmitter/EventEmitter.min',
-                'plugins/github-api'       : 'plugins/github-api/github',
-                'plugins/oauth2'           : 'plugins/javascript-oauth2/oauth2/oauth2',
-                'plugins/oauth-io'         : 'plugins/oauth.io/dist/oauth.min',
-                'plugins/md5'              : 'plugins/blueimp-md5/js/md5.min',
-                'plugins/pace'             : 'plugins/pace/pace.min',
-                'plugins/speakingurl'      : 'plugins/speakingurl/speakingurl.min',
-                'plugins/icheck'           : 'plugins/iCheck/icheck.min',
-                'plugins/blockui'          : 'plugins/blockui/jquery.blockUI',
-                'plugins/jstree'           : 'plugins/jstree/dist/jstree.min',
+                'plugins/async'                  : 'plugins/async/lib/async',
+                'plugins/svg'                    : 'plugins/svg.js/dist/svg',
+                'plugins/moment'                 : 'plugins/moment/min/moment.min',
+                'plugins/select2'                : 'plugins/select2/select2.min',
+                'plugins/marked'                 : 'plugins/marked/marked.min',
+                'plugins/highlightjs'            : 'plugins/highlightjs/highlight.pack',
+                'plugins/cryptojs'               : 'plugins/cryptojslib/components',
+                'plugins/toastr'                 : 'plugins/toastr/toastr',
+                'plugins/events'                 : 'plugins/eventEmitter/EventEmitter.min',
+                'plugins/github-api'             : 'plugins/github-api/github',
+                'plugins/oauth2'                 : 'plugins/javascript-oauth2/oauth2/oauth2',
+                'plugins/oauth-io'               : 'plugins/oauth.io/dist/oauth.min',
+                'plugins/md5'                    : 'plugins/blueimp-md5/js/md5.min',
+                'plugins/pace'                   : 'plugins/pace/pace.min',
+                'plugins/speakingurl'            : 'plugins/speakingurl/speakingurl.min',
+                'plugins/icheck'                 : 'plugins/iCheck/icheck.min',
+                'plugins/blockui'                : 'plugins/blockui/jquery.blockUI',
+                'plugins/jstree'                 : 'plugins/jstree/dist/jstree.min',
                 // jquery
-                'plugins/jquery-rest'      : 'plugins/jquery.rest/dist/1/jquery.rest.min',
-                'plugins/jquery-migrate'   : 'plugins/jquery-migrate/jquery-migrate',
-                'plugins/jquery-slimscroll': 'plugins/jquery-slimscroll/jquery.slimscroll.min',
-                'plugins/jquery-slugify'   : 'plugins/jquery-slugify/dist/slugify.min',
-                'plugins/jquery-validate'  : 'plugins/jquery.validate/dist/jquery.validate.min',
-                'plugins/mousewheel'       : 'plugins/jquery-mousewheel/jquery.mousewheel.min',
-                'plugins/uniform'          : 'plugins/jquery.uniform/jquery.uniform.min',
-                'plugins/impromptu'        : 'plugins/jquery-impromptu/dist/jquery-impromptu.min',
-                'plugins/cookie'           : 'plugins/jquery-cookie/jquery.cookie',
-                'plugins/validation'       : 'plugins/jquery-form-validator/form-validator/jquery.form-validator.min',
-                'plugins/tag-it'           : 'plugins/tag-it/js/tag-it.min',
-                'plugins/jquery-hotkeys'   : 'plugins/jQuery.Hotkeys/jquery.hotkeys',
-                'plugins/jquery-mockjax'   : 'plugins/jquery-mockajax/dist/jquery.mockjax.min',
+                'plugins/jquery-rest'            : 'plugins/jquery.rest/dist/1/jquery.rest.min',
+                'plugins/jquery-migrate'         : 'plugins/jquery-migrate/jquery-migrate',
+                'plugins/jquery-slimscroll'      : 'plugins/jquery-slimscroll/jquery.slimscroll.min',
+                'plugins/jquery-slugify'         : 'plugins/jquery-slugify/dist/slugify.min',
+                'plugins/jquery-validate'        : 'plugins/jquery.validate/dist/jquery.validate.min',
+                'plugins/mousewheel'             : 'plugins/jquery-mousewheel/jquery.mousewheel.min',
+                'plugins/uniform'                : 'plugins/jquery.uniform/jquery.uniform.min',
+                'plugins/impromptu'              : 'plugins/jquery-impromptu/dist/jquery-impromptu.min',
+                'plugins/cookie'                 : 'plugins/jquery-cookie/jquery.cookie',
+                'plugins/validation'             : 'plugins/jquery-form-validator/form-validator/jquery.form-validator.min',
+                'plugins/tag-it'                 : 'plugins/tag-it/js/tag-it.min',
+                'plugins/jquery-hotkeys'         : 'plugins/jQuery.Hotkeys/jquery.hotkeys',
+                'plugins/jquery-mockjax'         : 'plugins/jquery-mockajax/dist/jquery.mockjax.min',
+                'plugins/jquery-serialize-object': 'plugins/jquery-serialize-object/dist/jquery.serialize-object.min',
+                'plugins/jquery-form': 'plugins/jquery-form/jquery.form',
 
                 // flotcharts
                 'flot'             : 'plugins/flotcharts/jquery.flot',
@@ -217,6 +258,7 @@
                 'plugins/medium-editor'        : 'plugins/medium-editor/dist/js/medium-editor.min',
                 'plugins/x-editable'           : 'plugins/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min',
                 'plugins/bs-wizard'            : 'plugins/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min',
+                'plugins/bs-pwstrength'        : 'plugins/pwstrength-bootstrap/dist/pwstrength-bootstrap-1.2.7.min',
 
                 // gsap
                 'plugins/gsap/lite'       : 'plugins/gsap/src/minified/TweenLite.min',
@@ -287,11 +329,12 @@
                     }
                 },
 
-                'plugins/jquery-migrate': ['jquery'],
-                'jquery-ui'             : ['jquery'], //, 'jquery-migrate'],
-                'plugins/jquery-slugify': ['jquery', 'plugins/speakingurl'],
-                'plugins/tag-it'        : ['jquery-ui/core', 'jquery-ui/widget', 'jquery-ui/position', 'jquery-ui/menu', 'jquery-ui/autocomplete'],
-                'plugins/jquery-hotkeys': ['jquery'],
+                'plugins/jquery-migrate'         : ['jquery'],
+                'jquery-ui'                      : ['jquery'], //, 'jquery-migrate'],
+                'plugins/jquery-slugify'         : ['jquery', 'plugins/speakingurl'],
+                'plugins/tag-it'                 : ['jquery-ui/core', 'jquery-ui/widget', 'jquery-ui/position', 'jquery-ui/menu', 'jquery-ui/autocomplete'],
+                'plugins/jquery-hotkeys'         : ['jquery'],
+                'plugins/jquery-serialize-object': ['jquery'],
 
                 // bootstrap
                 'plugins/bootstrap'         : ['jquery'],
@@ -302,6 +345,8 @@
                 'plugins/bs-confirmation'   : ['plugins/bootstrap'],
                 'plugins/bs-wysiwyg'        : ['plugins/jquery-hotkeys'],
                 'plugins/bs-markdown-editor': ['ace-build/ace', 'jquery', 'plugins/bootstrap'],
+                'plugins/bootbox'           : ['plugins/bs-modal'],
+                'plugins/bs-pwstrength'     : ['plugins/bootstrap'],
 
                 // flots
 

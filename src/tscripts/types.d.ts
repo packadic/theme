@@ -333,4 +333,10 @@ interface JQuery {
     markdownEditor(...args:any[]):JQuery;
     wysiwyg(...args:any[]):JQuery;
     summernote(...args:any[]):JQuery;
+    serializeObject(...args:any[]):JQuery;
+    serializeJSON(...args:any[]):JQuery;
+    maxlength(...args:any[]):JQuery;
+    datepicker(...args:any[]):JQuery;
+    pwstrength(...args:any[]):JQuery;
+    formulate(...args:any[]):JQuery;
 }

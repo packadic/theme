@@ -1,5 +1,6 @@
 include mixins/functions
 include mixins/metalshark
+include mixins/forms
 include mixins/general
 include mixins/page-header
 include mixins/portlets
@@ -8,35 +9,4 @@ include mixins/tabs
 include mixins/components
 include mixins/dropdowns
 include mixins/demo
-- var blocks = {};
-- var arguments=undefined
 //- Helpers
-- function _addClass(classes, attributes) {
--     attributes.class = (attributes.class === undefined) ? classes : attributes.class + ' ' + classes
--}
-- function _addClassAttribute(name, classes, attributes) {
--     if (attributes[name]) {
--         _addClass(classes, attributes)
--         attributes[name] = null
--     }
-- }
-- function _unlessClassAttribute(name, classes, attributes) {
--     if (attributes[name]) {
--         attributes[name] = null
--     } else {
--         _addClass(classes, attributes)
--     }
-- }
-- function _DUMPER(val){
--   var cache = [];
--   return JSON.stringify(val, function(key, value){
--       if (typeof value === 'object' && value !== null) {
--           if (cache.indexOf(value) !== -1) return;
--           cache.push(value);
--       }
--       return value;
--   }, 4);
-- }
-- function _hasClassAttribute(name, attributes){
--  return typeof(attributes[name]) === 'object';
-- }

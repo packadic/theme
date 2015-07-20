@@ -1,50 +1,4 @@
-extends ../../../layouts/default
-
-mixin form-box(name, icon)
-    .row
-        .col-lg-12
-            +box(name, icon)
-                form.show-class&attributes(attributes)
-                    block
-
-mixin form-control(rnd, name, type, label, horizontal)
-    - horizontal = horizontal || false;
-    .form-group
-        if(label)
-            label(for=rnd + "email", class=horizontal ? "col-md-3" : null).control-label=label
-        if(horizontal)
-            .col-md-9
-                input.form-control(data-validation="required", id=rnd + name, name=name type=type, placeholder=label)&attributes(attributes)
-        else
-            input.form-control(data-validation="required", id=rnd + name, name=name type=type, placeholder=label)&attributes(attributes)
-
-mixin form-demo-content(label, horizontal)
-    - var rnd = Math.random()
-    .form-title
-        h4 Credentials
-    +form-control(rnd, 'email', 'email', 'Email', horizontal)
-    +form-control(rnd, 'password', 'password', 'Password', horizontal)(data-validation="length", data-validation-length="10-20")
-    .form-title
-        h4 Personal information
-    +form-control(rnd, 'first_name', 'text', 'First name', horizontal)
-    +form-control(rnd, 'last_name', 'text', 'Last name', horizontal)
-    +form-control(rnd, 'age', 'number', 'Number', horizontal)
-    +form-control(rnd, 'website', 'url', 'Website', horizontal)
-    +form-control(rnd, 'phone', 'tel', 'Phone', horizontal)
-    +form-control(rnd, 'fav_color', 'color', 'Favourite color', horizontal)
-    .form-group
-        if(label)
-            label(for=rnd + "file") Avatar
-        input.form-control(id=rnd + "file", type='file')&attributes(attributes)
-        p.help-block Example block-level help text here.
-    .checkbox
-        label(for=rnd + "checkbox")
-            input(id=rnd + "checkbox", type='checkbox')
-            |  Check me out
-    .form-actions
-        button.btn.btn-default(type='submit') Submit
-
-
+extends elements
 
 
 block header
@@ -56,86 +10,16 @@ block header
 
 
 block content
+
     .row#demo-forms
         .col-md-12
-            +form-box("Default", "list")#validate-form.form-light.form-horizontal
-                .form-group-seperator
-                .form-group
-                    label(for="email").col-sm-3.control-label Email
-                    .col-sm-9
-                        input.form-control(id="email",name="email",type='email', placeholder='Email', data-hint='Enter a valid email address')
-                .form-group-seperator
-                .form-group
-                    label(for="password").col-sm-3.control-label Password
-                    .col-sm-9
-                        input.form-control(id="password",name="password",type='password', placeholder='Password', data-hint='Enter a password that is safe')
-                .form-group-seperator
-                .form-group
-                    label(for="first-name").col-sm-3.control-label First name
-                    .col-sm-9
-                        input.form-control(id="first-name",name="first-name",type='text', placeholder='First name')
-                .form-group-seperator
-                .form-group
-                    label(for="last-name").col-sm-3.control-label Last name
-                    .col-sm-9
-                        input.form-control(id="last-name",name="last-name",type='text', placeholder='Last name')
-                .form-group-seperator
-                .form-group
-                    .col-sm-offset-3.col-sm-9
-                        .checkbox
-                            label
-                                input(type='checkbox')
-                                |  Remember me
-                .form-actions
-                    .col-sm-offset-3.col-sm-9
-                        button.btn.btn-default(type='submit') Sign in
+            +form-box("Default", "list").form-light.form-horizontal.validate-form
+                +form-horizontal-demo-content('', true)
 
 
 block append scripts-outside-of-project
-    script.
-        App.when('state:starting', ['jquery', 'plugins/jquery-validate'], function($){
+    //script.
+        App.when('state:starting', ['jquery', 'plugins/jquery-validate'], function ($) {
             var form = $('#validate-form');
 
-            form.validate({
-                errorElement  : 'span',
-                errorClass    : 'help-block help-block-error',
-                focusInvalid  : false,
-                highlight     : function (element) {
-                    $(element).closest('.form-group').addClass('has-error');
-                },
-                unhighlight   : function (element) {
-                    $(element).closest('.form-group').removeClass('has-error');
-                },
-                success       : function (label) {
-                    label.closest('.form-group').removeClass('has-error');
-                },
-                rules: {
-                    email: {
-                        email: true,
-                        required: true
-                    },
-                    password: {
-                        min:6,
-                        max:30,
-                        required: true
-                    },
-                    'first-name': {
-                        min:3,
-                        max:30
-                    },
-                    'last-name': {
-                        min:3,
-                        max:30
-                    }
-                }
-            })
-            /*
-                    $.validate({
-                        form: '#validate-form',
-                        modules: 'date, security, html5',
-                        borderColorOnError: '#a94442',
-                        errorElementClass: '',
-                        addValidClassOnAll: false
-                    });
-                    */
         });

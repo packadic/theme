@@ -23,6 +23,36 @@ form {
         @include make-row();
     }
 
+    .form-group label span.required {
+        color: $color-danger;
+        margin-right: -10px;
+    }
+}
+
+.form-horizontal {
+
+    input.pwstrength + .progress {
+        margin: 0;
+        height: 15px;
+        margin-bottom: -15px;
+        background-color: transparent;
+        box-shadow: none;
+        visibility: hidden;
+    }
+    input.pwstrength:focus + .progress {
+        visibility: visible;
+    }
+    .has-error input.pwstrength + .progress {
+        visibility: hidden;
+    }
+
+    input.pwstrength + .progress .progressbar-back-text {
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: right;
+        right: 6px;
+    }
 }
 
 form {
@@ -37,6 +67,7 @@ form {
         font-size: 12px;
         color: #737373;
         margin-left: 5px;
+        margin-bottom: 0;
     }
 
     &.form-material {

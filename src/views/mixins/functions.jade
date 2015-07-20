@@ -1,3 +1,7 @@
+- var blocks = {};
+- var arguments=undefined
+
+
 - function _getRandomId(length){
 -   var text = ""
 -   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -19,4 +23,33 @@
 
 - function capitalizeFirst(str) {
 -    return str.substr(0, 1).toUpperCase() + str.substr(1);
+- }
+- function _addClass(classes, attributes) {
+-     attributes.class = (attributes.class === undefined) ? classes : attributes.class + ' ' + classes
+-}
+- function _addClassAttribute(name, classes, attributes) {
+-     if (attributes[name]) {
+-         _addClass(classes, attributes)
+-         attributes[name] = null
+-     }
+- }
+- function _unlessClassAttribute(name, classes, attributes) {
+-     if (attributes[name]) {
+-         attributes[name] = null
+-     } else {
+-         _addClass(classes, attributes)
+-     }
+- }
+- function _DUMPER(val){
+-   var cache = [];
+-   return JSON.stringify(val, function(key, value){
+-       if (typeof value === 'object' && value !== null) {
+-           if (cache.indexOf(value) !== -1) return;
+-           cache.push(value);
+-       }
+-       return value;
+-   }, 4);
+- }
+- function _hasClassAttribute(name, attributes){
+-  return typeof(attributes[name]) === 'object';
 - }

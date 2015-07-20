@@ -15,3 +15,4 @@
 /// <reference path="jquery.bootstrap.wizard/jquery.bootstrap.wizard.d.ts" />
 /// <reference path="jquery.validation/jquery.validation.d.ts" />
 /// <reference path="jstree/jstree.d.ts" />
+/// <reference path="jquery.form/jquery.form.d.ts" />

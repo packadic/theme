@@ -6,38 +6,46 @@ mixin form-box(name, icon)
             +box(name, icon)
                 form&attributes(attributes)
                     block
+
 mixin form-light-line(large)
     - large = typeof(large) == 'undefined' ? true : large
-    .line.line-dashed.b-b.pull-in(class=large ? 'line-lg' : '')
+    .form-group-seperator(class=large ? 'line-lg' : '')
 
-mixin form-horizontal-demo-content()
-    - var rnd = Math.random()
+mixin demo-label(forr, required)
+    label(for=forr).col-sm-3.control-label
+        block
+        if required
+            span.required  *
+
+
+mixin form-horizontal-demo-content(rnd, validation)
+    - rnd = rnd || ''
     .form-group
-        label(for=rnd + "email").col-sm-3.control-label Email
+        +demo-label(rnd + "email", validation) Email
         .col-sm-9
-            input.form-control(id=rnd + "email",type='email', placeholder='Email', data-hint='Enter a valid email address')&attributes(attributes)
+            input.form-control(id=rnd + "email",name='email',type='email', placeholder='Email', data-rules='required|email', data-hint='Enter a valid email address')&attributes(attributes)
     +form-light-line
     .form-group
-        label(for=rnd + "password").col-sm-3.control-label Password
+        +demo-label(rnd + 'password', validation) Password
         .col-sm-9
-            input.form-control(id=rnd + "password",type='password', placeholder='Password', data-hint='Enter a password that is safe')&attributes(attributes)
+            input.form-control(id=rnd + "password",name='password',type='password', placeholder='Password', data-rules='required|minlength:5|maxlength:30', data-hint='Enter a password that is safe')&attributes(attributes)
     +form-light-line
     .form-group
-        label(for=rnd + "first-name").col-sm-3.control-label First name
+        +demo-label(rnd + 'first-name', validation) First name
         .col-sm-9
-            input.form-control(id=rnd + "first-name",type='text', placeholder='First name', data-hint="a")&attributes(attributes)
+            input.form-control(id=rnd + "first-name",name='first-name', type='text', placeholder='First name', data-rules='minlength:2', data-hint="a")&attributes(attributes)
     +form-light-line
     .form-group
-        label(for=rnd + "last-name").col-sm-3.control-label Last name
+        +demo-label(rnd + 'last-name', validation) Last name
         .col-sm-9
-            input.form-control(id=rnd + "last-name",type='text', placeholder='Last name')&attributes(attributes)
+            input.form-control(id=rnd + "last-name", name='last-name', type='text', data-rules='minlength:2', placeholder='Last name')&attributes(attributes)
     +form-light-line
     .form-group
         label(for=rnd + "input-groups").col-sm-3.control-label Input groups
         .col-sm-9
             .input-group.mb
                 span.input-group-addon $
-                input.form-control(id=rnd + "input-groups",type='text', placeholder='With text')&attributes(attributes)
+                input.form-control(id=rnd + "input-groups",name="input-groups", data-rules='required|number', type='number', placeholder='Enter an amount')&attributes(attributes)
             .input-group.mb
                 span.input-group-addon.pl-sm.pr-sm
                     input(type="checkbox", value="None", id="input-group-check1" name="input-group-check1", checked)
@@ -199,13 +207,14 @@ mixin form-horizontal-demo-content()
     .form-group
         .col-sm-offset-3.col-sm-9
             label
-                input(type='checkbox')
+                input(id='remember',name='remember',type='checkbox')
                 |  Remember me
     +form-light-line
     .form-actions
         .col-sm-offset-3.col-sm-9
-            button.btn.btn-default(type='submit') Sign in
-            a(data-toggle="confirmation", href="#", title="Are u sure?").btn.btn-primary.btn-sm Confirmation popover
+            .btn-group.btn-group-sm
+                button.btn.btn-success(type='submit') Sign in
+                a(data-toggle="confirmation", href="#", title="Are u sure?").btn.btn-primary Confirm
 
 
 
