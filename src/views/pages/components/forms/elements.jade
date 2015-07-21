@@ -70,7 +70,7 @@ mixin form-horizontal-demo-content(rnd, validation)
         .col-sm-9
             .row
                 .col-md-6
-                    input(type="checkbox", value="None", id="checktest1" name="check", checked)
+                    input(type="checkbox", value="None", id="checktest1" name="check", data-rules='required', checked)
                     label(for='checktest1') Check
                     +form-light-line(false)
                     input(type="checkbox", value="None", id="checktest2" name="check", checked)
